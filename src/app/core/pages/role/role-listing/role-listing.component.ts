@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnDestroy, O
 import { NgForm } from '@angular/forms';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import {Observable, tap} from 'rxjs';
+import {Observable} from 'rxjs';
 import { SweetAlertOptions } from 'sweetalert2';
 import {RoleService} from "../../../../crm/services/access/role.service";
 import {Role} from "../../../../crm/models/access/role.model";
@@ -81,10 +81,10 @@ export class RoleListingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.roles$ = this.apiService.get();
+    /*this.roles$ = this.apiService.get();
     this.permissions$ = this.permissionService.afficherTous().pipe(
       map(resp => resp.data as Permission[])
-    );
+    );*/
   }
 
   delete(id: number) {
