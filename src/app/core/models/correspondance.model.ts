@@ -2,7 +2,6 @@ import {ResourceModel} from "../../crm/models/core/resource.model";
 import {Plan} from "./plan.model";
 import {Ib} from "./ib";
 
-
 export class Correspondance extends  ResourceModel<Correspondance>{
   numCompteComptable:string;
   plan:Plan;
@@ -12,6 +11,6 @@ export class Correspondance extends  ResourceModel<Correspondance>{
   libellePosition:string;
 
   constructor(model?: Partial<Correspondance>) {
-  super(model);
-}
+    super(model);
+  }
 }

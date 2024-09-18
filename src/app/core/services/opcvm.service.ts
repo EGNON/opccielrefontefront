@@ -7,14 +7,11 @@ import {environment} from "../../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class OpcvmService extends ResourceService<Opcvm> implements OnDestroy{
+export class OpcvmService extends ResourceService<Opcvm>{
 
   constructor(private http: HttpClient) {
     super(http, Opcvm, ``);
     this.API_URL = `${environment.apiUrl}/opcvms`;
-  }
-
-  ngOnDestroy(): void {
   }
 
   afficherTous(){

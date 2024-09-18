@@ -6,6 +6,6 @@ export class Typegarant extends  ResourceModel<Typegarant>{
   libelleTypeGarant: string;
 
   constructor(model?: Partial<Typegarant>) {
-  super(model);
-}
+    super(model);
+  }
 }

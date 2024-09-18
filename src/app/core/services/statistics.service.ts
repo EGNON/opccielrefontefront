@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {getCSSVariableValue} from "../../template/_metronic/kt/_utils";
 import {ResponseModel} from "../../crm/models/table.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";

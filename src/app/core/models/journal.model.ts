@@ -9,6 +9,6 @@ export class Journal extends  ResourceModel<Journal>{
   plan:Plan;
   compteComptable:Comptecomptable;
   constructor(model?: Partial<Journal>) {
-  super(model);
-}
+    super(model);
+  }
 }

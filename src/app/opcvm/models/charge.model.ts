@@ -1,9 +1,7 @@
 import {ResourceModel} from "../../crm/models/core/resource.model";
 import {Opcvm} from "../../core/models/opcvm";
-import {Personne} from "../../crm/models/personne/personne.model";
 import {TypeAmortissementModel} from "../../titresciel/models/type-amortissement.model";
 import {Natureoperation} from "../../core/models/natureoperation.model";
-
 
 export class Charge extends  ResourceModel<Charge>{
   idCharge:number;
@@ -26,6 +24,6 @@ export class Charge extends  ResourceModel<Charge>{
   numOrdre:number;
 
   constructor(model?: Partial<Charge>) {
-  super(model);
-}
+    super(model);
+  }
 }

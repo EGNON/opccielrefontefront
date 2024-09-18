@@ -9,6 +9,6 @@ export class Plan extends  ResourceModel<Plan>{
   numCompteResInsDistribution: string;
 
   constructor(model?: Partial<Plan>) {
-  super(model);
-}
+    super(model);
+  }
 }

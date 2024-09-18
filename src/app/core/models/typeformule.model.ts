@@ -4,6 +4,6 @@ export class Typeformule extends  ResourceModel<Typeformule>{
   codeTypeFormule: string;
 
   constructor(model?: Partial<Typeformule>) {
-  super(model);
-}
+    super(model);
+  }
 }

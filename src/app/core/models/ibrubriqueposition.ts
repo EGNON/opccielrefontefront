@@ -1,7 +1,5 @@
 import {ResourceModel} from "../../crm/models/core/resource.model";
-import {Typeib} from "./typeib";
 import {Ib} from "./ib";
-import {Typerubrique} from "./typerubrique";
 
 export class Ibrubriqueposition extends ResourceModel<Ibrubriqueposition>{
   codeRubrique: string;
