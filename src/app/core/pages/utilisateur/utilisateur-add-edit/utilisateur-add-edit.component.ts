@@ -101,8 +101,9 @@ export class UtilisateurAddEditComponent implements OnInit, AfterViewInit, OnDes
         filter(paramMap => paramMap.has('id')),
         map(paramMap => paramMap.get('id')!),
         tap((id) => this.id = +id),
-        switchMap(id => this.entityService.getRowById(id))
-      ).subscribe(entity => {
+        switchMap(id => this.entityService.getById(+id!))
+      ).subscribe(resp => {
+        const entity = resp.data;
         this.defaultUserRoles = entity.roles1;
         this.defaultUserPermissions = entity.permissions;
         this.loadFormValues(entity);
@@ -698,8 +699,8 @@ export class UtilisateurAddEditComponent implements OnInit, AfterViewInit, OnDes
       utilisateurRoles: null
     }
     return this.id
-      ? this.entityService.updateRow(entity)
-      : this.entityService.createRow(entity);
+      ? this.entityService.update(entity)
+      : this.entityService.create(entity);
   }
 
   page = 1;

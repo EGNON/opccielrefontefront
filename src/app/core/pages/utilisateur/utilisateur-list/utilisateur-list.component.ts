@@ -81,8 +81,10 @@ export class UtilisateurListComponent implements  OnInit, AfterViewInit, OnDestr
     this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
-        console.log("Params === ", dataTablesParameters);
-        this.userService.fetchRows(dataTablesParameters, callback);
+        const sb = this.userService.afficherTous(dataTablesParameters).subscribe(resp => {
+          callback(resp);
+        });
+        this.subscriptions.push(sb);
       },
       columns: [
         {
@@ -210,7 +212,7 @@ export class UtilisateurListComponent implements  OnInit, AfterViewInit, OnDestr
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteUtilisateurModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.userService.fetchRows(null), () => {});
+    modalRef.result.then(() => this.userService.afficherTous(null), () => {});
   }
 
   ngOnDestroy(): void {

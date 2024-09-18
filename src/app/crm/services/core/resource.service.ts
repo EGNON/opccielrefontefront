@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import {Observable, Subscription} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
 import {ResourceModel} from "../../models/core/resource.model";
 import {ResponseModel} from "../../models/table.model";
 import {environment} from "../../../../environments/environment";
@@ -82,8 +81,7 @@ export abstract class ResourceService<T extends ResourceModel<T>> {
   }
 
   public get(): Observable<ResponseModel<T[]>> {
-    return this.httpClient
-      .get<ResponseModel<T[]>>(`${this.API_URL}`);
+    return this.httpClient.get<ResponseModel<T[]>>(`${this.API_URL}`);
   }
 
   public getById(id: number): Observable<ResponseModel<T>> {
