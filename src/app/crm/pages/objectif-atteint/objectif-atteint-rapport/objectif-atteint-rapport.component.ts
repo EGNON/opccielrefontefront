@@ -25,7 +25,7 @@ export class ObjectifAtteintRapportComponent implements OnInit, AfterViewInit, O
   entity: any;
   entityForm: FormGroup;
   modeles: Array<any> = [];
-  personnels: Array<any> = [];
+  personnels: any;
   categories: Array<any> = [];
   _objectifAffectes: Array<any> = [];
   defaultPersonnel?: Personnel;
@@ -94,7 +94,6 @@ private subscriptions: Subscription[] = [];
 
   getModeleAll()
   {
-    this.modeleService.fetch();
     const sb = this.modeleService.afficherTous().subscribe(data => {
       this.modeles = data;
     });
@@ -103,11 +102,9 @@ private subscriptions: Subscription[] = [];
 
   getPersonnelAll()
   {
-    this.personnelService.fetch();
-    const sb = this.personnelService.items$.subscribe(data => {
-      this.personnels = data;
-    });
-    this.subscriptions.push(sb);
+    this.personnelService.afficherPersonnelListe().subscribe(
+      (data)=>{this.personnels=data} 
+    );
   }
 
   createItem(data: any): FormGroup {
@@ -177,8 +174,8 @@ private subscriptions: Subscription[] = [];
       dateSoumission: dateSoumission
     };
     return this.id
-      ? this.entityService.updateRow(entity)
-      : this.entityService.createRow(entity);
+      ? this.entityService.update(entity)
+      : this.entityService.create(entity);
   }
 
   ngAfterViewInit(): void {

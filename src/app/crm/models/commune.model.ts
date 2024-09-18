@@ -1,6 +1,11 @@
 import {BaseModel} from "./base.model";
+import { ResourceModel } from "./core/resource.model";
 
-export interface Commune extends BaseModel{
+export class Commune extends ResourceModel<Commune>{
   idCommune: number;
   libelleCommune: string;
+
+  constructor(model?: Partial<Commune>) {
+    super(model);
+  }
 }

@@ -39,7 +39,7 @@ export class QualiteAddEditComponent implements OnInit, OnDestroy {
 
     if (this.id) {
       this.pageInfo.updateTitle("Modification de qualité")
-      const sb = this.entityService.getItemById(this.id)
+      const sb = this.entityService.getById(this.id)
         .pipe(first())
         .subscribe(x => this.entityForm.patchValue(x));
       this.subscriptions.push(sb);

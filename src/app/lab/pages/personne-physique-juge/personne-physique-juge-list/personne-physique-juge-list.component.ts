@@ -164,7 +164,7 @@ export class PersonnePhysiqueJugeListComponent implements OnInit, OnDestroy, Aft
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeletePersonnePhysiqueJugeModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.personnePhysiqueService.fetch(), () => {});
+    //modalRef.result.then(() => this.personnePhysiqueService.fetch(), () => {});
   }
 
   ngAfterViewInit(): void {

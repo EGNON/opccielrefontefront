@@ -84,7 +84,7 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
   agentConcerne:AgentConcerne;
   agentConcerne$:AgentConcerne[];
   tableau:HTMLElement;
-  rdvDto:RDV;
+  rdvDto:any;
   typeDocuments$: Observable<Typedocument[]>;
   pieceJointes: PieceJointe[];
   pieceJointe: PieceJointe;
@@ -440,7 +440,7 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
               dateEnvoi:dateEnvoi,
               heureEnvoi:[dateEnvoi.getHours(),dateEnvoi.getMinutes(),dateEnvoi.getSeconds()].join(':')
             };
-            this.mailService.createRow(entity).subscribe(
+            this.mailService.create(entity).subscribe(
               (data)=>{
                 this.mailDto=data;
                 this.envoiMail=new class implements EnvoiMail {
@@ -605,9 +605,9 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
     }*/
 
     return this.id
-      ? this.rdvService.updateRow(entity)
-      : this.rdvService.createRow(entity);
-
+      ? this.rdvService.update(entity)
+      : this.rdvService.create(entity);
+ 
   }
 
   afficherPersonne() {

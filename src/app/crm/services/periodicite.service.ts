@@ -5,22 +5,23 @@ import {Periodicite} from "../models/periodicite.model";
 import {Affectation} from "../models/affectation.model";
 import {EntityService} from "./entity.service";
 import {DataTablesResponse} from "../models/data-tables.response.model";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PeriodiciteService extends EntityService<Periodicite> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class PeriodiciteService extends ResourceService<Periodicite> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,Periodicite,`${environment.apiUrl}/periodicites`);
     this.API_URL = `${environment.apiUrl}/periodicites`;
   }
   afficherTous()
   {
-    return this.http.get<Affectation[]>(`${this.API_URL}`);
+    return this.http.get<Periodicite[]>(`${this.API_URL}`);
   }
   afficherListe()
   {
-    return this.http.get<Affectation[]>(`${this.API_URL}/liste`);
+    return this.http.get<Periodicite[]>(`${this.API_URL}/liste`);
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach(sb => sb.unsubscribe());

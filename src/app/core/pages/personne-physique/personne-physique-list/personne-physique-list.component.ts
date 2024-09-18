@@ -283,6 +283,6 @@ export class PersonnePhysiqueListComponent implements OnInit, AfterViewInit, OnD
   supprimer(id: string) {
     const modalRef = this.modalService.open(DeletePersonnePhysiqueModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.entityService.fetch(), () => {});
+    //modalRef.result.then(() => this.entityService.fetch(), () => {});
   }
 }

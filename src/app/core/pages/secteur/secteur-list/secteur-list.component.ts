@@ -110,7 +110,7 @@ export class SecteurListComponent implements OnInit, OnDestroy, AfterViewInit{
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteSecteurModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.secteurService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.secteurService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

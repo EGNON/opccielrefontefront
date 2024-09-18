@@ -5,13 +5,14 @@ import {TableService} from "./table.sevice";
 import {Observable} from "rxjs";
 import {Mail} from "../models/mail.model";
 import {MailSender} from "../models/mailsender.model";
+import { ResourceService } from "./core/resource.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class MailSenderService extends TableService<Mail> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class MailSenderService extends ResourceService<MailSender> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,MailSender,`${environment.apiUrl}/mailsender`);
     this.API_URL = `${environment.apiUrl}/mailsender`;
   }
 

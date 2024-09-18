@@ -61,7 +61,7 @@ export class MailCreateComponent implements OnInit, OnDestroy{
   selectPersonne:any;
   idPersonneSelectionnee:any;
   tableau:HTMLElement;
-  mailDto:Mail;
+  mailDto:any;
   envoiMailTab:EnvoiMail[];
   documentsTab:Document[];
   pieceJointes:PieceJointe[];
@@ -475,8 +475,8 @@ export class MailCreateComponent implements OnInit, OnDestroy{
 
 
     return this.id
-      ? this.mailService.updateRow(entity)
-      : this.mailService.createRow(entity);
+      ? this.mailService.update(entity)
+      : this.mailService.create(entity);
 
   }
   afficherPersonne(){

@@ -3,13 +3,14 @@ import {environment} from "../../../environments/environment";
 import {TableService} from "./table.sevice";
 import {HttpClient} from "@angular/common/http";
 import {PieceJointe} from "../models/piece-jointe.model";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FileUploadService extends TableService<PieceJointe> implements OnDestroy {
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class FileUploadService extends ResourceService<PieceJointe> implements OnDestroy {
+  constructor(private http: HttpClient) {
+    super(http,PieceJointe,`${environment.apiUrl}/documents`);
     this.API_URL = `${environment.apiUrl}/documents`;
   }
 

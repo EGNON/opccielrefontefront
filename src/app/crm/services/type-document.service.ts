@@ -5,13 +5,14 @@ import {TypeDocument} from "../models/type-document.model";
 import {DataTablesResponse} from "../models/data-tables.response.model";
 import {Typedocument} from "../models/typedocument.model";
 import {EntityService} from "./entity.service";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TypeDocumentService extends EntityService<TypeDocument> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class TypeDocumentService extends ResourceService<TypeDocument> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,Typedocument,`${environment.apiUrl}/typedocuments`);
     this.API_URL = `${environment.apiUrl}/typedocuments`;
   }
 

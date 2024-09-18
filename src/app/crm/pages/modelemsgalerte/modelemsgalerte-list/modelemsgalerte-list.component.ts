@@ -132,7 +132,7 @@ export class ModelemsgalerteListComponent implements OnInit, OnDestroy, AfterVie
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteModalModelemsgalerteComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.modeleMsgAlerteService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.modeleMsgAlerteService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

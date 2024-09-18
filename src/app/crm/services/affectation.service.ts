@@ -6,13 +6,14 @@ import {DataTablesResponse} from "../models/data-tables.response.model";
 import {Compterendu} from "../models/compterendu.model";
 import {EntityService} from "./entity.service";
 import {environment} from "../../../environments/environment";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AffectationService extends EntityService<Affectation> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class AffectationService extends ResourceService<Affectation> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,Affectation,`${environment.apiUrl}/affectations`);
     this.API_URL = `${environment.apiUrl}/affectations`;
   }
 

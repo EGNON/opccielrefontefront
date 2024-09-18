@@ -6,14 +6,15 @@ import {DataTablesResponse} from "../models/data-tables.response.model";
 import {EntityService} from "./entity.service";
 import {BehaviorSubject} from "rxjs";
 import {Compterendu} from "../models/compterendu.model";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AlerteService extends EntityService<Alerte> implements OnDestroy{
+export class AlerteService extends ResourceService<Alerte> implements OnDestroy{
   currentCRSubject: BehaviorSubject<any>;
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+  constructor(private http: HttpClient) {
+    super(http,Alerte,`${environment.apiUrl}/alertes`);
     this.API_URL = `${environment.apiUrl}/alertes`;
     this.currentCRSubject = new BehaviorSubject<any>(null);
   }

@@ -5,13 +5,14 @@ import {environment} from "../../../environments/environment";
 import {TableService} from "./table.sevice";
 import {DataTablesResponse} from "../models/data-tables.response.model";
 import {ResponseModel} from "../models/table.model";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class QualiteService extends TableService<Qualite> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class QualiteService extends ResourceService<Qualite> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,Qualite,`${environment.apiUrl}/qualites`);
     this.API_URL = `${environment.apiUrl}/qualites`;
   }
 

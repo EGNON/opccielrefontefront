@@ -35,8 +35,8 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
   entity: any;
   entityForm: FormGroup;
   models: Array<any> = [];
-  personnels: Array<any> = [];
-  typePlanifications: Array<any> = [];
+  personnels: any;
+  typePlanifications: any;
   periodicites: Array<any> = [];
   jours$: Observable<Jour[]>;
   nbrJours$: Observable<NbrJour[]>;
@@ -277,10 +277,7 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
 
   getPeriodiciteAll()
   {
-    const sb = this.periodiciteService.isLoading$.subscribe((res: boolean) => this.isLoading = res);
-    this.subscriptions.push(sb);
-    this.periodiciteService.fetch();
-    const sb1 = this.periodiciteService.items$.subscribe(data => {
+    const sb1 = this.periodiciteService.afficherListe().subscribe(data => {
       this.periodicites = data;
       data.forEach((value, index, array) => {
         if(value.libelle.toLowerCase() === "quotidienne") {
@@ -295,10 +292,7 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
 
   getTypePlanificationAll()
   {
-    const sb = this.typePlanificationService.isLoading$.subscribe((res: boolean) => this.isLoading = res);
-    this.subscriptions.push(sb);
-    this.typePlanificationService.fetch();
-    const sb1 = this.typePlanificationService.items$.subscribe(data => {
+    const sb1 = this.typePlanificationService.afficherTous().subscribe(data => {
       this.typePlanifications = data;
       data.forEach((value, index, array) => {
         if(value.libelleTypePlanification.toLowerCase() === "périodique") {
@@ -336,13 +330,9 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
   }
   getPersonnelsAll()
   {
-    const sb = this.personnelService.isLoading$.subscribe((res: boolean) => this.isLoading = res);
-    this.subscriptions.push(sb);
-    this.personnelService.fetch();
-    const sb1 = this.personnelService.items$.subscribe(data => {
-      this.personnels = data;
-    });
-    this.subscriptions.push(sb1);
+    const sb = this.personnelService.afficherPersonnelListe().subscribe(
+      (res) =>{ this.personnels = res});
+
   }
 
   createItem(data: any): FormGroup {
@@ -609,8 +599,8 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
       entity.heureFin = entity.heureDebut;
     }
     return this.id
-      ? this.entityService.updateRow(entity)
-      : this.entityService.createRow(entity);
+      ? this.entityService.update(entity)
+      : this.entityService.create(entity);
   }
 
   public onFilterChange(item: any) {

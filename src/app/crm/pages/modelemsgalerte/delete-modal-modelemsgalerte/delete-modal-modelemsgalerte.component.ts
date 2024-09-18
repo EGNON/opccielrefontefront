@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./delete-modal-modelemsgalerte.component.scss']
 })
 export class DeleteModalModelemsgalerteComponent {
-  @Input() id: string;
+  @Input() id: number;
   isLoading = false;
   subscriptions: Subscription[] = [];
 
@@ -24,7 +24,7 @@ export class DeleteModalModelemsgalerteComponent {
 
   supprimerEntity() {
     this.isLoading = true;
-    const sb = this.modeleMsgAlerteService.deleteRow(this.id).pipe(
+    const sb = this.modeleMsgAlerteService.delete(this.id).pipe(
       delay(1000), // Remove it from your code (just for showing loading)
       tap(() => this.modal.close()),
       catchError((err) => {

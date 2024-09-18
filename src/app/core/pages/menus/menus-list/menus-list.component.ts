@@ -152,6 +152,6 @@ export class MenusListComponent implements OnInit, OnDestroy, AfterViewInit{
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteMenusModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.entityService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.entityService.fetchRows(null), () => {});
   }
 }

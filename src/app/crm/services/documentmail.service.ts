@@ -4,13 +4,14 @@ import {environment} from "../../../environments/environment";
 import {TableService} from "./table.sevice";
 import {Observable} from "rxjs";
 import {DocumentMail} from "../models/documentmail.model";
+import { ResourceService } from "./core/resource.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DocumentmailService extends TableService<DocumentMail> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class DocumentmailService extends ResourceService<DocumentMail> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,DocumentMail,`${environment.apiUrl}/documentmails`);
     this.API_URL = `${environment.apiUrl}/documentmails`;
   }
 

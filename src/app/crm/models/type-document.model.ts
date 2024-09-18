@@ -1,6 +1,11 @@
 import {BaseModel} from "./base.model";
+import { ResourceModel } from "./core/resource.model";
 
-export interface TypeDocument extends BaseModel{
+export class TypeDocument extends ResourceModel<TypeDocument>{
   idTypeDoc: number;
   libelleTypeDoc: string;
+
+  constructor(model?: Partial<TypeDocument>) {
+    super(model);
+  }
 }

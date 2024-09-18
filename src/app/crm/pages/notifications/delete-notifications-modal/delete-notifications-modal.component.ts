@@ -25,7 +25,7 @@ export class DeleteNotificationsModalComponent implements OnInit, OnDestroy{
 
   deleteEntity() {
     this.isLoading = true;
-    const sb = this.entityService.deleteRow(this.id).pipe(
+    const sb = this.entityService.delete(this.id).pipe(
       tap(() => this.modal.close()),
       catchError((err) => {
         this.modal.dismiss(err);

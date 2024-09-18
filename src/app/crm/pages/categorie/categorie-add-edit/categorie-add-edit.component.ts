@@ -77,7 +77,7 @@ export class CategorieAddEditComponent implements OnInit, OnDestroy{
       id: this.id ? this.id : null
     };
     return this.id
-      ? this.categorieService.updateRow(categorie)
-      : this.categorieService.createRow(categorie);
+      ? this.categorieService.update(categorie)
+      : this.categorieService.create(categorie);
   }
 }

@@ -5,13 +5,14 @@ import {PersonnePhysique} from "../../models/personne/personne.physique.model";
 import {Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {DataTablesResponse, ResponseModel} from "../../models/table.model";
+import { ResourceService } from '../core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonnePhysiqueService extends TableService<PersonnePhysique> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class PersonnePhysiqueService extends ResourceService<PersonnePhysique> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,PersonnePhysique,`${environment.apiUrl}/personnephysiques`);
     this.API_URL = `${environment.apiUrl}/personnephysiques`;
   }
 

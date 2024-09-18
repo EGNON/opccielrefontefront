@@ -24,7 +24,7 @@ export class DeleteTypedocumentModalComponent {
 
   supprimerEntity() {
     this.isLoading = true;
-    const sb = this.typeDocumentService.deleteRow(this.id).pipe(
+    const sb = this.typeDocumentService.delete(this.id).pipe(
       delay(1000), // Remove it from your code (just for showing loading)
       tap(() => this.modal.close()),
       catchError((err) => {

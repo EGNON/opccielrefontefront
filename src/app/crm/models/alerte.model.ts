@@ -8,8 +8,9 @@ import {TempsAlerte} from "./temps-alerte.model";
 import {NbreJoursAlerte} from "./nbr-jour-alerte.model";
 import {ProtoAlerte} from "./proto-alerte.model";
 import {Time} from "@angular/common";
+import { ResourceModel } from "./core/resource.model";
 
-export interface Alerte extends BaseModel{
+export class Alerte extends ResourceModel<Alerte>{
   idAlerte: number;
   dateDebut: Date;
   dateFin: Date;
@@ -26,4 +27,8 @@ export interface Alerte extends BaseModel{
   nbreJoursAlertes: NbreJoursAlerte[];
   protoAlertes: ProtoAlerte[];
   typeAlerte: string;
+
+  constructor(model?: Partial<Alerte>) {
+    super(model);
+  }
 }

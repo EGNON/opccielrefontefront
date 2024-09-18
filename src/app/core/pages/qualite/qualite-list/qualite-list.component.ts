@@ -131,7 +131,7 @@ export class QualiteListComponent implements OnInit, OnDestroy, AfterViewInit{
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteQualiteModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.entityService.fetch(), () => {});
+    //modalRef.result.then(() => this.entityService.fetch(), () => {});
   }
 
   ngAfterViewInit(): void {

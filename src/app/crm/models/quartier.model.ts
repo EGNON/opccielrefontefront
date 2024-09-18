@@ -1,6 +1,11 @@
 import {BaseModel} from "./base.model";
+import { ResourceModel } from "./core/resource.model";
 
-export interface Quartier extends BaseModel{
+export class Quartier extends ResourceModel<Quartier>{
   idQuartier: number;
   libelleQuartier: string;
+
+  constructor(model?: Partial<Quartier>) {
+    super(model);
+  }
 }

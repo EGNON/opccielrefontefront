@@ -96,7 +96,7 @@ export class AffectationAddEditComponent implements OnInit, AfterViewInit, OnDes
 
   getModeleAll()
   {
-    this.modeleService.fetch();
+    //this.modeleService.fetch();
     const sb = this.modeleService.afficherTous().subscribe(data => {
       this.modeles = data;
     });
@@ -166,8 +166,8 @@ export class AffectationAddEditComponent implements OnInit, AfterViewInit, OnDes
     };
 
     return this.id
-      ? this.entityService.updateRow({...entity})
-      : this.entityService.createRow({...entity, dateAffectation: new Date()});
+      ? this.entityService.update({...entity})
+      : this.entityService.create({...entity, dateAffectation: new Date()});
   }
 
   ngAfterViewInit(): void {

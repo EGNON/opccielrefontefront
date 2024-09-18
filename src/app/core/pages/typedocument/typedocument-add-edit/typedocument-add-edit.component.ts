@@ -81,7 +81,7 @@ export class TypedocumentAddEditComponent implements OnInit, OnDestroy {
       ...this.entityForm.value
     };
     return this.id
-      ? this.entityService.updateRow(entity)
-      : this.entityService.createRow(entity);
+      ? this.entityService.update(entity)
+      : this.entityService.create(entity);
   }
 }

@@ -78,7 +78,7 @@ export class MonnaieAddEditComponent implements OnInit, OnDestroy{
       id: this.id ? this.id : null
     };
     return this.id
-      ? this.monnaieService.updateRow(monnaie)
-      : this.monnaieService.createRow(monnaie);
+      ? this.monnaieService.update(monnaie)
+      : this.monnaieService.create(monnaie);
   }
 }

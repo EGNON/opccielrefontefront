@@ -6,13 +6,14 @@ import {Observable} from "rxjs";
 import {Mail} from "../models/mail.model";
 import {EntityService} from "./entity.service";
 import {DataTablesResponse} from "../models/data-tables.response.model";
+import { ResourceService } from "./core/resource.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class MailService extends EntityService<Mail> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class MailService extends ResourceService<Mail> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,Mail,`${environment.apiUrl}/mails`);
     this.API_URL = `${environment.apiUrl}/mails`;
   }
 

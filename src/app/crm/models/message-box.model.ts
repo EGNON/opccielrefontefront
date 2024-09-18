@@ -1,8 +1,9 @@
 import {BaseModel} from "./base.model";
 import {Personne} from "./personne/personne.model";
 import {Alerte} from "./alerte.model";
+import { ResourceModel } from "./core/resource.model";
 
-export interface MessageBox extends BaseModel{
+export class MessageBox extends ResourceModel<MessageBox>{
   idMsgBox: number;
   dateEnvoiMsg: Date;
   objet: string;
@@ -12,4 +13,8 @@ export interface MessageBox extends BaseModel{
   state: 'primary' | 'danger' | 'warning' | 'success' | 'info';
   destinataire: Personne;
   alerte: Alerte;
+
+  constructor(model?: Partial<MessageBox>) {
+    super(model);
+  }
 }

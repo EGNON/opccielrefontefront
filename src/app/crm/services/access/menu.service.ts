@@ -4,13 +4,14 @@ import {Menu} from "../../models/access/menu.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {DataTablesResponse} from "../../models/data-tables.response.model";
+import { ResourceService } from '../core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MenuService extends EntityService<Menu> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class MenuService extends ResourceService<Menu> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http, Menu, `${environment.apiUrl}/admin/menus`);
     this.API_URL = `${environment.apiUrl}/admin/menus`;
   }
 

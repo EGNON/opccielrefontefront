@@ -109,7 +109,7 @@ export class ProfessionListComponent implements OnInit, OnDestroy, AfterViewInit
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteProfessionModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.professionService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.professionService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

@@ -48,7 +48,7 @@ export class MenusAddEditComponent implements OnInit, OnDestroy{
         filter(paramMap => paramMap.has('id')),
         map(paramMap => paramMap.get('id')!),
         tap((id) => this.id = +id),
-        switchMap(id => this.entityService.getRowById(id))
+        switchMap(id => this.entityService.getById(Number.parseInt(id)))
       ).subscribe(entity => this.loadFormValues(entity));
     this.entityForm = this.fb.group(
       {
@@ -93,7 +93,7 @@ export class MenusAddEditComponent implements OnInit, OnDestroy{
               role: role != null && role.idRole ? role : null,
               parentMenu: parent != null && parent.idMenu ? parent : null
             };
-            return this.entityService.createRow(menu);
+            return this.entityService.create(menu);
           }),
           tap(menu => {
             // console.log("NewMenu = ", menu);
@@ -196,7 +196,7 @@ export class MenusAddEditComponent implements OnInit, OnDestroy{
 
   saveEntity() {
     return this.id
-      ? this.entityService.updateRow(this.entityForm.value)
-      : this.entityService.createRow(this.entityForm.value);
+      ? this.entityService.update(this.entityForm.value)
+      : this.entityService.create(this.entityForm.value);
   }
 }

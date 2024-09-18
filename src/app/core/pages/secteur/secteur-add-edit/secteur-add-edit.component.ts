@@ -88,7 +88,7 @@ export class SecteurAddEditComponent implements OnInit, OnDestroy{
       id: this.id ? this.id : null
     };
     return this.id
-      ? this.secteurService.updateRow(secteur)
-      : this.secteurService.createRow(secteur);
+      ? this.secteurService.update(secteur)
+      : this.secteurService.create(secteur);
   }
 }

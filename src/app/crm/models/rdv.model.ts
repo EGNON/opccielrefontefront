@@ -8,8 +8,9 @@ import {Commune} from "./commune.model";
 import {Personne} from "./personne/personne.model";
 import {ModeleMsgAlerte} from "./modelemsgalerte.model";
 import {AgentConcerne} from "./agentconcerne.model";
+import { ResourceModel } from "./core/resource.model";
 
-export interface RDV extends BaseModel{
+export class RDV extends ResourceModel<RDV>{
   idRdv: number;
   idPersonne: number;
   dateDebRdv: Date;
@@ -31,4 +32,8 @@ export interface RDV extends BaseModel{
   heureFinReelle:Time;
   modeleMsgAlerteDto:ModeleMsgAlerte;
   agentConcerneDtos:AgentConcerne[];
+
+  constructor(model?: Partial<RDV>) {
+    super(model);
+  }
 }

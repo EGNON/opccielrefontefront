@@ -114,7 +114,7 @@ import {Config} from "datatables.net";
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteCategorieModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.categorieService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.categorieService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

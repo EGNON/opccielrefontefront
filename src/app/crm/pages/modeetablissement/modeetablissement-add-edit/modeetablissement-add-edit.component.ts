@@ -88,8 +88,8 @@ export class ModeetablissementAddEditComponent  implements OnInit, OnDestroy{
       id: this.id ? this.id : null
     };
     return this.id
-      ? this.modeEtablissementService.updateRow(modeEtablissement)
-      : this.modeEtablissementService.createRow(modeEtablissement);
+      ? this.modeEtablissementService.update(modeEtablissement)
+      : this.modeEtablissementService.create(modeEtablissement);
   }
 }
 

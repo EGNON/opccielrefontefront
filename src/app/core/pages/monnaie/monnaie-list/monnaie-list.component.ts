@@ -115,7 +115,7 @@ export class MonnaieListComponent implements OnInit, OnDestroy, AfterViewInit{
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteMonnaieModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.monnaieService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.monnaieService.fetchR(null), () => {}); 
   }
 
   ngAfterViewInit(): void {

@@ -72,7 +72,7 @@ export class ModeleecritureListComponent implements OnInit, OnDestroy, AfterView
         },
         {
           title: 'Type titre', data: 'libelleTypeTitre', render: function (data, type, row) {
-            return row.typeTitre.libelleTypeTitre;
+            return row.typeTitre?.libelleTypeTitre;
           }
         },
       ],

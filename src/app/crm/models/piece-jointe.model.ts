@@ -3,8 +3,9 @@ import {Typedocument} from "./typedocument.model";
 import {Compterendu} from "./compterendu.model";
 import {Personne} from "./personne/personne.model";
 import {RDV} from "./rdv.model";
+import { ResourceModel } from "./core/resource.model";
 
-export interface PieceJointe extends BaseModel{
+export class PieceJointe extends ResourceModel<PieceJointe>{
   idDoc: number;
   dateValidite: Date;
   dateRattachement: Date;
@@ -17,4 +18,8 @@ export interface PieceJointe extends BaseModel{
   rdv:RDV;
   fToByte:any;
   file: any;
+
+  constructor(model?: Partial<PieceJointe>) {
+    super(model);
+  }
 }

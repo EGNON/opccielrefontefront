@@ -5,13 +5,14 @@ import {environment} from "../../../environments/environment";
 import {DataTablesResponse} from "../models/data-tables.response.model";
 import {ModeleMsgAlerte} from "../models/modelemsgalerte.model";
 import {EntityService} from "./entity.service";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ModeleObjectifService extends EntityService<ModeleObjectif> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class ModeleObjectifService extends ResourceService<ModeleObjectif> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,ModeleObjectif,`${environment.apiUrl}/modeleobjectifs`);
     this.API_URL = `${environment.apiUrl}/modeleobjectifs`;
   }
 

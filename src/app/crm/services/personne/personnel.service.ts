@@ -6,13 +6,14 @@ import {Personnel} from "../../models/personne/personnel.model";
 import {environment} from "../../../../environments/environment";
 import {ResponseModel} from "../../models/table.model";
 import {tap} from "rxjs/operators";
+import { ResourceService } from '../core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonnelService extends TableService<Personnel> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class PersonnelService extends ResourceService<Personnel> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,Personnel,`${environment.apiUrl}/personnels`);
     this.API_URL = `${environment.apiUrl}/personnels`;
   }
 
@@ -37,7 +38,7 @@ export class PersonnelService extends TableService<Personnel> implements OnDestr
     return this.http.get<Personnel>(environment.apiUrl + '/personnels/'+id);
   }
 
-  datatable(resource: any): Observable<ResponseModel<Personnel>> {
+  datatable_Personnel(resource: any): Observable<ResponseModel<Personnel>> {
     return this.http.post<ResponseModel<Personnel>>(`${this.API_URL}/datatable/list`, resource);
   }
 }
