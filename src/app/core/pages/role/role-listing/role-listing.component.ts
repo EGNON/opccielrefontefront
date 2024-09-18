@@ -81,10 +81,10 @@ export class RoleListingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    /*this.roles$ = this.apiService.get();
+    this.roles$ = this.apiService.get();
     this.permissions$ = this.permissionService.afficherTous().pipe(
       map(resp => resp.data as Permission[])
-    );*/
+    );
   }
 
   delete(id: number) {

@@ -5,6 +5,6 @@ export class Typeemetteur extends  ResourceModel<Typeemetteur>{
   libelleTypeEmetteur: string;
 
   constructor(model?: Partial<Typeemetteur>) {
-  super(model);
-}
+    super(model);
+  }
 }

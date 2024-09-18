@@ -15,5 +15,4 @@ export class LangueService extends ResourceService<Langue>{
   afficherTous(){
     return this.http.get<any>(`${this.API_URL}`)
   }
-
 }

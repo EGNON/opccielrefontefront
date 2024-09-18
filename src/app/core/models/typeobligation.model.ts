@@ -6,6 +6,6 @@ export class Typeobligation extends  ResourceModel<Typeobligation>{
   libelleTypeObligation: string;
 
   constructor(model?: Partial<Typeobligation>) {
-  super(model);
-}
+    super(model);
+  }
 }

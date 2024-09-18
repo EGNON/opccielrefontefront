@@ -1,8 +1,7 @@
 import {ResourceModel} from "../../crm/models/core/resource.model";
 import {Plan} from "./plan.model";
 
-
-export class Comptecomptable extends  ResourceModel<Comptecomptable>{
+export class Comptecomptable extends ResourceModel<Comptecomptable>{
   numCompteComptable:string;
   plan:Plan;
   libelleCompteComptable:string;
@@ -11,6 +10,6 @@ export class Comptecomptable extends  ResourceModel<Comptecomptable>{
   bilanHorsBilan:string;
   type:string;
   constructor(model?: Partial<Comptecomptable>) {
-  super(model);
-}
+    super(model);
+  }
 }

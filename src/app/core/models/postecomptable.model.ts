@@ -1,7 +1,7 @@
 import {ResourceModel} from "../../crm/models/core/resource.model";
 import {Plan} from "./plan.model";
 
-export class Postecomptable extends  ResourceModel<Postecomptable>{
+export class Postecomptable extends ResourceModel<Postecomptable>{
   codePosteComptable: string;
   libellePosteComptable: string;
   plan:Plan;

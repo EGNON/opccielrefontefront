@@ -5,6 +5,6 @@ export class Typetitre extends  ResourceModel<Typetitre>{
   libelleTypeTitre: string;
 
   constructor(model?: Partial<Typetitre>) {
-  super(model);
-}
+    super(model);
+  }
 }

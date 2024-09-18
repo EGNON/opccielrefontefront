@@ -5,6 +5,6 @@ export class Typeoperation extends  ResourceModel<Typeoperation>{
   libelleTypeOperation: string;
 
   constructor(model?: Partial<Typeoperation>) {
-  super(model);
-}
+    super(model);
+  }
 }

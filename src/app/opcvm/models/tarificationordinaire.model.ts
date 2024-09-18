@@ -1,10 +1,7 @@
 import {ResourceModel} from "../../crm/models/core/resource.model";
 import {Opcvm} from "../../core/models/opcvm";
 import {Personne} from "../../crm/models/personne/personne.model";
-import {Registraire} from "../../core/models/registraire";
 import {Place} from "../../core/models/place.model";
-import {PersonneMorale} from "../../crm/models/personne/personne.morale.model";
-
 
 export class Tarificationordinaire extends  ResourceModel<Tarificationordinaire>{
   idTarificationOrdinaire:number;
@@ -19,6 +16,6 @@ export class Tarificationordinaire extends  ResourceModel<Tarificationordinaire>
   forfait:number;
 
   constructor(model?: Partial<Tarificationordinaire>) {
-  super(model);
-}
+    super(model);
+  }
 }

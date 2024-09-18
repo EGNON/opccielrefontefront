@@ -1,6 +1,5 @@
 import {ResourceModel} from "../../../crm/models/core/resource.model";
 
-
 export class Typecompte extends  ResourceModel<Typecompte>{
   idTypeCompte: number;
   libelleTypeCompte: string;

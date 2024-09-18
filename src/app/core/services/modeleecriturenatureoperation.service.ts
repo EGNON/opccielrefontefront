@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {ResourceService} from "../../crm/services/core/resource.service";
-import {Modeleecriture} from "../models/modeleecriture.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Modeleecriturenatureoperation} from "../models/modeleecriturenatureoperation.model";

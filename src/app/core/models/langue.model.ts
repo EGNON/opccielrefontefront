@@ -10,6 +10,6 @@ export class Langue extends  ResourceModel<Langue>{
   libelleLangue: string;
   paysLangues:Payslangue[];
   constructor(model?: Partial<Langue>) {
-  super(model);
-}
+    super(model);
+  }
 }
