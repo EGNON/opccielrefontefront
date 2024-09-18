@@ -1,0 +1,54 @@
+<!--begin::Form-->
+<!--<form [formGroup]="form" enctype="multipart/form-data" class="form">-->
+  <div class="modal-header p-2">
+    <div class="modal-title h4">Date Cours</div>
+<!--    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>-->
+    <button type="button" title="Close">
+      <span aria-hidden="true">&times;</span>
+      <span class="d-none">Close</span>
+    </button>
+  </div>
+  <div class="modal-body p-lg-0">
+    <div class="card-body p-lg-5">
+      <!--begin::Layout-->
+      <div class="d-flex flex-column flex-lg-row mb-0">
+        <!--begin::Content-->
+        <div class="flex-lg-row-fluid me-0 me-lg-0">
+          <div class="table-responsive angular-bootstrap-table">
+            <app-entity-crud
+              [datatableConfig]="datatableConfig"
+              route=""
+              [reload]="reloadEvent"
+              [changeTable]="changeTableEvent">
+            </app-entity-crud>
+            <!--<table class="table align-middle table-scroll table-row-dashed table-bordered fs-6 gy-5 dataTable no-footer">
+              <thead class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+              <tr>
+                <th class="p-0 min-w-60px">N°</th>
+                <th class="p-0 min-w-150px">Date</th>
+              </tr>
+              </thead>
+              <tbody class="fw-semibold text-gray-600">
+                  <tr *ngFor="let ligne of coursTitres$|async; let i = index">
+                    <td class="p-0">{{ i + 1 }}</td>
+                    <td class="p-0">{{ ligne.dateCours | date: 'dd/MM/yyyy' }}</td>
+                  </tr>
+              </tbody>
+            </table>-->
+          </div>
+        </div>
+        <!--end::Content-->
+      </div>
+      <!--end::Layout-->
+    </div>
+  </div>
+  <div class="modal-footer d-flex justify-content-between p-2">
+    <!--begin::Action buttons-->
+    <div class="d-flex justify-content-start">
+      <button type="button" class="btn btn-sm btn-outline-dark me-3" (click)="modal.close('Close click')">Fermer
+      </button>
+    </div>
+    <!--end::Action buttons-->
+  </div>
+<!--</form>-->
+<!--end::Form-->

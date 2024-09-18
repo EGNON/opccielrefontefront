@@ -1,0 +1,165 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+          <!--begin::Col-->
+<!--          <div class="col-md-6 fv-row">-->
+            <!--begin::Label-->
+<!--            <label class="required fs-5 fw-semibold mb-2">Pays</label>-->
+<!--            &lt;!&ndash;end::Label&ndash;&gt;-->
+<!--            &lt;!&ndash;begin::Select&ndash;&gt;-->
+<!--            <select class="form-select form-select-sm mb-2" id="ComboPaysLab" formControlName="paysDto"-->
+<!--                    [ngClass]="{ 'is-invalid': submitted && f.paysDto.errors }" (change)="retournerPays()">-->
+<!--              <option selected>Sélectionnez un pays...</option>-->
+<!--              <option [defaultSelected]="true" [ngValue]="entity" [disabled]="true">-->
+<!--                {{ entity?.libelleFr }}-->
+<!--              </option>-->
+<!--              <option *ngFor="let item of pays$ | async" value="{{item.idPays}}">-->
+<!--                {{ item.libelleFr }}-->
+<!--              </option>-->
+<!--            </select>-->
+<!--            &lt;!&ndash;end::Select&ndash;&gt;-->
+<!--            <div *ngIf="submitted && f.paysDto.errors" class="invalid-feedback">-->
+<!--              <div *ngIf="f.paysDto.errors.required">Ce champs est obligatoire</div>-->
+<!--            </div>-->
+<!--          </div>-->
+          <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libellé Fr</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libelleFr" [readOnly]="true"
+                     [ngClass]="{ 'is-invalid': submitted && f.libelleFr.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libelleFr.errors" class="invalid-feedback">
+                <div *ngIf="f.libelleFr.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+<!--            <div class="col-md-6 fv-row">-->
+<!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
+<!--              <label class="required fs-5 fw-semibold mb-2">Libellé En</label>-->
+<!--              &lt;!&ndash;end::Label&ndash;&gt;-->
+<!--              &lt;!&ndash;begin::Input&ndash;&gt;-->
+<!--              <input type="text" class="form-control form-control-sm form-control-solid"-->
+<!--                     placeholder="" formControlName="libelleEn" [readOnly]="true"-->
+<!--                     [ngClass]="{ 'is-invalid': submitted && f.libelleEn.errors }"/>-->
+<!--              &lt;!&ndash;end::Input&ndash;&gt;-->
+<!--              <div *ngIf="submitted && f.libelleEn.errors" class="invalid-feedback">-->
+<!--                <div *ngIf="f.libelleEn.errors.required">Ce champs est obligatoire</div>-->
+<!--              </div>-->
+<!--            </div>-->
+            <!--end::Col-->
+<!--          </div>-->
+          <!--end::Input group-->
+          <!--begin::Input group-->
+<!--          <div class="row mb-5">-->
+            <!--begin::Col-->
+<!--            <div class="col-md-6 fv-row">-->
+<!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
+<!--              <label class="required fs-5 fw-semibold mb-2">Indicatif</label>-->
+<!--              &lt;!&ndash;end::Label&ndash;&gt;-->
+<!--              &lt;!&ndash;begin::Input&ndash;&gt;-->
+<!--              <input type="text" class="form-control form-control-sm form-control-solid"-->
+<!--                     placeholder="" formControlName="indicatif"-->
+<!--                     [ngClass]="{ 'is-invalid': submitted && f.indicatif.errors }" [readOnly]="true"/>-->
+<!--              &lt;!&ndash;end::Input&ndash;&gt;-->
+<!--              <div *ngIf="submitted && f.indicatif.errors" class="invalid-feedback">-->
+<!--                <div *ngIf="f.indicatif.errors.required">Ce champs est obligatoire</div>-->
+<!--              </div>-->
+<!--            </div>-->
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Monnaie</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="monnaieDto"
+                      [ngClass]="{ 'is-invalid': submitted && f.monnaieDto.errors }" >
+                <option selected>Sélectionnez une monnaie...</option>
+                <option [defaultSelected]="true" [ngValue]="entity?.monnaieDto" [disabled]="true">
+                  {{ entity?.monnaieDto?.nom }}
+                </option>
+                <option *ngFor="let item of monnaies$ | async" [ngValue]="item">
+                  {{ item.nom }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.monnaieDto.errors" class="invalid-feedback">
+                <div *ngIf="f.monnaieDto.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+<!--              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">-->
+<!--                <input type="radio" formControlName="ppe1" [value]="false"-->
+<!--                       class="form-check-input ng-untouched ng-pristine ng-valid">-->
+<!--                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Non</label>-->
+<!--              -->
+              <label class="required form-check-label text-gray-700 fw-bold text-nowrap" style="margin-top: 35px">
+                Pays déclarés non coopératif par la centif ou le GAFI
+              </label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="checkbox" class="form-check-input ng-untouched ng-pristine ng-valid"
+                     checked  [readOnly]="true" formControlName="estGafi" style="margin-top: 35px"
+                     [ngClass]="{ 'is-invalid': submitted && f.estGafi.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.estGafi.errors" class="invalid-feedback">
+                <div *ngIf="f.estGafi.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+<!--            </div>-->
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/lab/standard/parametre/pays" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

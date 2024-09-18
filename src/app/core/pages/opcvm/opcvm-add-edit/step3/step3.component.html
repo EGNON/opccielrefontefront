@@ -1,0 +1,145 @@
+<div class="pb-10 pb-lg-12">
+  <h2 class="fw-bolder text-gray-900">Adresse & Autres informations</h2>
+  <div class="text-gray-500 fw-bold fs-6">
+    Adresses de l'opcvm
+    <a href="#" class="link-primary fw-bolder">Help Page</a>.
+  </div>
+</div>
+<div [formGroup]="form">
+  <div class="row mb-10">
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="fw-bold small">Tel. Fixe</span>
+      </label>
+      <input appNumeroPositifValidators name="telephoneFixe" class="form-control form-control-sm" formControlName="telephoneFixe"/>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="fw-bold small">Tel. Modile</span>
+      </label>
+      <input appNumeroPositifValidators name="telephoneMobile" class="form-control form-control-sm" formControlName="telephoneMobile"/>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="fw-bold small">Fax</span>
+      </label>
+      <input appNumeroPositifValidators name="fax" class="form-control form-control-sm" formControlName="fax"/>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="fw-bold small">Boîte Postale</span>
+      </label>
+      <input name="boitePostale" class="form-control form-control-sm" formControlName="boitePostale"/>
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold required">Pays</span>
+      </label>
+      <select name="pays" class="form-select form-select-sm mb-2"
+              [ngClass]="{ 'is-invalid': (form.get('pays')?.dirty ||
+              form.get('pays')?.touched) && form.get('pays')?.invalid }"
+              formControlName="pays">
+        <option disabled selected [ngValue]="null">Sélectionnez un pays...</option>
+        <option *ngIf="defaultValues.pays" disabled [defaultSelected]="true"
+                [ngValue]="defaultValues.pays">
+          {{ defaultValues.pays.libelleFr }}
+        </option>
+        <option *ngFor="let item of pays$|async" [ngValue]="item">
+          {{ item.libelleFr }}
+        </option>
+      </select>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('pays')?.hasError('required') &&
+                      form.get('pays')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold required">Ville</span>
+      </label>
+      <select name="pays" class="form-select form-select-sm mb-2"
+              [ngClass]="{ 'is-invalid': (form.get('ville')?.dirty ||
+              form.get('ville')?.touched) && form.get('ville')?.invalid }"
+              formControlName="ville">
+        <option disabled selected [ngValue]="null">Sélectionnez une ville...</option>
+        <option *ngIf="defaultValues.ville" disabled [defaultSelected]="true"
+                [ngValue]="defaultValues.ville">
+          {{ defaultValues.ville.libelleVille }}
+        </option>
+        <option *ngFor="let item of villes$|async" [ngValue]="item">
+          {{ item.libelleVille }}
+        </option>
+      </select>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('ville')?.hasError('required') &&
+                      form.get('ville')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="fw-bold small">Skype</span>
+      </label>
+      <input name="codeSkype" class="form-control form-control-sm" formControlName="codeSkype"/>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="fw-bold small">Mail</span>
+      </label>
+      <input name="email" class="form-control form-control-sm" formControlName="email"/>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('email')?.hasError('email') && form.get('email')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col-md-6 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold">Adr. Comp.</span>
+      </label>
+      <input name="adresseComplete" class="form-control form-control-sm" formControlName="adresseComplete"/>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold">Site Web</span>
+      </label>
+      <input name="siteweb" class="form-control form-control-sm" formControlName="siteweb"/>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold">Capital</span>
+      </label>
+      <input appNombreDecimal name="capitalInitialOpcvm" class="form-control form-control-sm" formControlName="capitalInitialOpcvm"/>
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold">Vl. Origine</span>
+      </label>
+      <input appNombreDecimal name="valeurLiquidativeOrigine" class="form-control form-control-sm" formControlName="valeurLiquidativeOrigine"/>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold">Vl. Actuelle</span>
+      </label>
+      <input appNombreDecimal name="valeurLiquidativeActuelle" class="form-control form-control-sm" formControlName="valeurLiquidativeActuelle"/>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold">Part Deb. Exo.</span>
+      </label>
+      <input appNombreDecimal name="nbrePartDebutExercice" class="form-control form-control-sm" formControlName="nbrePartDebutExercice"/>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold">Part Initiale</span>
+      </label>
+      <input appNombreDecimal name="nbrePartInitial" class="form-control form-control-sm" formControlName="nbrePartInitial"/>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Code</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="codeTypeAction"
+                     [ngClass]="{ 'is-invalid': submitted && f.codeTypeAction.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.codeTypeAction.errors" class="invalid-feedback">
+                <div *ngIf="f.codeTypeAction.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libellé</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libelleTypeAction"
+                     [ngClass]="{ 'is-invalid': submitted && f.libelleTypeAction.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libelleTypeAction.errors" class="invalid-feedback">
+                <div *ngIf="f.libelleTypeAction.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/app/standard/parametre/instrumentfinancier/typeaction" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

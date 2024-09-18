@@ -1,0 +1,371 @@
+<!--begin::Careers - Apply-->
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" enctype="multipart/form-data" class="form mb-5">
+          <!--begin::Input-->
+          <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid" [value]="id" formControlName="id"/>
+          <!--end::Input-->
+          <div class="row mb-5" *ngIf="id">
+            <!--begin::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <!--begin::Label-->
+            <div class="d-flex justify-content-sm-start">
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="radio" checked="checked" formControlName="estExpose" [value]="true"
+                       class="form-check-input ng-untouched ng-pristine ng-valid"
+                       id="estExpose"  name="estExpose">
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est politiquement exposé</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-5" *ngIf="!id">
+            <!--begin::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <!--begin::Label-->
+            <div class="d-flex justify-content-sm-start">
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="radio" checked="checked" [value]="true"
+                       class="form-check-input ng-untouched ng-pristine ng-valid"
+                       id="nouvellePersonnePhysiqueExpose" name="etat" (change)="nouvellePersonneChange()">
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Nouvelle personne</label>
+              </div>
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="radio" [value]="false"
+                       class="form-check-input ng-untouched ng-pristine ng-valid"
+                       id="personnePhysiqueExposeExistante" name="etat" (change)="personneExistante()">
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Personne existante</label>
+              </div>
+            </div>
+            </div>
+
+          <div *ngIf="personneExiste">
+            <div class="col-md-12 fv-row">
+              <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Personne(s)</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select
+                class="form-select form-select-sm form-select-solid"
+                id="ComboPersonneExistante" (change)="retournerPersonne()">
+                <option selected>Sélectonnez une personne</option>
+                <option *ngFor="let personne of personnePhysique$"
+                        value="{{personne.idPersonne}}">{{personne.denomination}}</option>
+                <!--                <option>Tous</option>-->
+              </select>
+            </div>
+          </div>
+
+<!--            <div class="col-md-12 fv-row">-->
+<!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
+<!--              <label class="fs-5 fw-semibold mb-2">Autre(s) nationnalité(s)</label>-->
+<!--              &lt;!&ndash;end::Label&ndash;&gt;-->
+<!--              <ng-multiselect-dropdown-->
+<!--                [settings]="paysSettings"-->
+<!--                [placeholder]="'Sélectionnez un ou plusieurs nationnalité(s)'"-->
+<!--                formControlName="personnePhysiquePaysDtos2"-->
+<!--                [data]="pays"-->
+<!--                [disabled]="false"-->
+<!--                (onFilterChange)="onFilterChange($event)"-->
+<!--                (onDropDownClose)="onDropDownClose($event)"-->
+<!--                (onSelect)="onItemSelect($event)"-->
+<!--                (onDeSelect)="onDeSelect($event)"-->
+<!--                (onSelectAll)="onSelectAll($event)"-->
+<!--                (onDeSelectAll)="onDeSelectAll($event)">-->
+<!--              </ng-multiselect-dropdown>-->
+<!--            </div>-->
+<!--          </div>-->
+
+          <div *ngIf="nouvellePersonne">
+          <div class="border rounded-3 p-3">
+            <div class="row mb-5">
+            <legend class="float-none w-auto px-3">IDENTITE</legend>
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Civilité</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="civilite"
+                        [ngClass]="{ 'is-invalid': submitted && f.civilite.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez une civilité...</option>
+                  <option value="M.">M.</option>
+                  <option value="Mme.">Mme.</option>
+                  <option value="Mlle.">Mlle.</option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="f.civilite?.invalid" class="invalid-feedback">
+                  <div *ngIf="f.civilite?.errors?.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+<!--            </div>-->
+<!--            &lt;!&ndash;end::Input group&ndash;&gt;-->
+<!--            &lt;!&ndash;begin::Input group&ndash;&gt;-->
+<!--            <div class="row mb-5">-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Nom</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="" formControlName="nom" [ngClass]="{ 'is-invalid': submitted && f.nom.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                  <div *ngIf="f.nom.errors.required">Le nom est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Prénom(s)</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="" formControlName="prenom" [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback">
+                  <div *ngIf="f.prenom.errors.required">Le(s) prénom(s) est obligatoire(s)</div>
+                </div>
+              </div>
+              <!--end::Col-->
+<!--            </div>-->
+            <!--end::Input group-->
+<!--            <div class="row mb-5">-->
+            <!--begin::Input group-->
+<!--            <div class="row mb-6">-->
+<!--              &lt;!&ndash;begin::Col&ndash;&gt;-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Sexe</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="sexe"
+                        [ngClass]="{ 'is-invalid': submitted && f.sexe.errors }">
+                  <option disabled value="null">Sélectionnez un sexe...</option>
+                  <option ngValue="Masculin">Masculin</option>
+                  <option ngValue="Féminin">Féminin</option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.sexe.errors" class="invalid-feedback">
+                  <div *ngIf="f.sexe.errors.required">Le sexe est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Date de naissance</label>
+                <!--end::Label-->
+
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm form-control-solid"
+                         placeholder="dd-mm-yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date de naissance" aria-describedby="basic-addon6"
+                         formControlName="dateNaissance" [ngClass]="{ 'is-invalid': submitted && f.dateNaissance.errors }"/>
+                  <!--end::Input-->
+                  <span (click)="d.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+
+                <div *ngIf="submitted && f.dateNaissance.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateNaissance.errors.required">La date de naissance est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+<!--            </div>-->
+<!--            </div>-->
+            <!--end::Input group-->
+<!--              <div class="row mb-5">-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Lieu de naissance</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="" formControlName="lieuNaissance" [ngClass]="{ 'is-invalid': submitted && f.lieuNaissance.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.lieuNaissance.errors" class="invalid-feedback">
+                  <div *ngIf="f.lieuNaissance.errors.required">Le lieu de naisssance est obligatoire</div>
+                </div>
+              </div>
+
+              <!--begin::Input group-->
+<!--            <div class="row mb-5">-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Nationalité</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="paysNationalite"
+                        [ngClass]="{ 'is-invalid': submitted && f.paysNationalite.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez un pays...</option>
+                  <option *ngIf="entity?.paysNationalite" [defaultSelected]="true" [ngValue]="entity?.paysNationalite">
+                    {{ entity?.paysNationalite?.libelleFr }}
+                  </option>
+                  <option *ngFor="let item of payss$" [ngValue]="item">
+                    {{ item.libelleFr }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.paysNationalite.errors" class="invalid-feedback">
+                  <div *ngIf="f.paysNationalite.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Pays de résidence</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="paysResidence"
+                        [ngClass]="{ 'is-invalid': submitted && f.paysResidence.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez un pays...</option>
+                  <option *ngIf="entity?.paysResidence" [defaultSelected]="true" [ngValue]="entity?.paysResidence">
+                    {{ entity?.paysResidence?.libelleFr }}
+                  </option>
+                  <option *ngFor="let item of payss$" [ngValue]="item">
+                    {{ item.libelleFr }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.paysResidence.errors" class="invalid-feedback">
+                  <div *ngIf="f.paysResidence.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Autre(s) nationnalité(s)</label>
+              <!--end::Label-->
+              <ng-multiselect-dropdown
+                [settings]="paysSettings"
+                [placeholder]="'Sélectionnez un ou plusieurs nationnalité(s)'"
+                formControlName="personnePhysiquePaysDtos"
+                [data]="pays"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange($event)"
+                (onDropDownClose)="onDropDownClose($event)"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onDeSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                (onDeSelectAll)="onDeSelectAll($event)">
+              </ng-multiselect-dropdown>
+            </div>
+              <fieldset  class="border rounded-3 p-3">
+                <legend class="float-none w-auto px-3">PIECE</legend>
+                <div class="row mb-5">
+                  <div formArrayName="documents">
+                    <!--begin::Col-->
+                    <div *ngFor="let control of documents.controls; let i = index">
+                      <div [formGroupName]="i" class="row">
+                        <div class="col-md-6 fv-row">
+                          <label class="fs-5 fw-semibold mb-2">Nature pièce</label>
+                          <select  class="form-select form-select-sm mb-2" formControlName="typeDocument">
+                            <option disabled [defaultSelected]="true" [ngValue]="entity?.documents[i]?.typeDocument">
+                              {{ entity?.documents[i]?.typeDocument?.libelleTypeDoc }}
+                            </option>
+                            <option *ngFor="let item of typeDocuments$ | async" [ngValue]="item">
+                              {{ item.libelleTypeDoc }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="col-md-6 fv-row">
+                          <!--begin::Label-->
+                          <label class=" fs-5 fw-semibold mb-2">Numéro pièce</label>
+                          <!--end::Label-->
+                          <!--begin::Input-->
+                          <input type="text" class="form-control form-control-sm form-control-solid"
+                                 placeholder="" formControlName="numeroPiece" />
+                          <!--end::Input-->
+<!--                          <div *ngIf="submitted && f.numeroPiece.errors" class="invalid-feedback">-->
+<!--                            <div *ngIf="f.numeroPiece.errors.required">Le numéro pièce est obligatoire</div>-->
+<!--                          </div>-->
+                        </div>
+                        <div class="col-md-12 fv-row">
+                          <label class="fs-5 fw-semibold mb-2">Joindre une pièce</label>
+                          <div class="input-group mb-0">
+                            <input type="file" class="form-control form-control-sm form-control-solid d-none"
+                                   (change)="selectFiles(i, $event)" [id]="'file' + i"/>
+                            <input type="text" formControlName="nomDoc" class="form-control form-control-sm form-control-solid"
+                                   [value]="getFileName(selectedFiles['file' + i])" (click)="onClick('file' + i)"/>
+                            <input type="hidden" formControlName="extensionDoc" class="form-control form-control-sm form-control-solid"
+                                   [value]="getFileExtension(selectedFiles['file' + i])"/>
+                            <!--end::Input-->
+                            <span class="btn btn-sm btn-danger input-group-text" (click)="onDeleteFile(i)">
+                          <i class="ki-duotone ki-minus fs-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                      </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--end::Input group-->
+                <div class="row mb-5">
+                  <div class="col-md-12 fv-row">
+                    <button class="btn btn-sm btn-success input-group-text" (click)="onAddFile()">
+                      Ajouter
+                    </button>
+
+                  </div>
+                </div>
+              </fieldset>
+              <!--begin::Col-->
+           <!--end::Col-->
+<!--            </div>-->
+            <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/lab/standard/parametre/personne/physique/politiquementexpose" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary"
+                     (click)="onSaveEntity()">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

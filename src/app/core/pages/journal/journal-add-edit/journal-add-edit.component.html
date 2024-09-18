@@ -1,0 +1,128 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Code</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input [readOnly]="readOnly" type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="codeJournal"
+                     [ngClass]="{ 'is-invalid': submitted && f.codeJournal.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.codeJournal.errors" class="invalid-feedback">
+                <div *ngIf="f.codeJournal.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libellé</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libelleJournal"
+                     [ngClass]="{ 'is-invalid': submitted && f.libelleJournal.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libelleJournal.errors" class="invalid-feedback">
+                <div *ngIf="f.libelleJournal.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-5">
+            <div class="col-md-6 fv-row">
+            <label class="required fs-5 fw-semibold mb-2">Plan</label>
+            <!--end::Label-->
+            <!--begin::Select-->
+            <select class="form-select form-select-sm mb-2" formControlName="plan"
+                    [ngClass]="{ 'is-invalid': submitted && f.plan.errors }">
+              <option selected>Sélectionnez un plan...</option>
+              <option [defaultSelected]="true" [ngValue]="entity?.plan" [disabled]="true">
+                {{ entity?.plan?.codePlan }}
+              </option>
+              <option *ngFor="let item of plan$" [ngValue]="item">
+                {{ item.codePlan }}
+              </option>
+            </select>
+            <!--end::Select-->
+            <div *ngIf="submitted && f.plan.errors" class="invalid-feedback">
+              <div *ngIf="f.plan.errors.required">Ce champs est obligatoire</div>
+            </div>
+          </div>
+
+            <div class="col-md-3 fv-row">
+              <label class=" fs-5 fw-semibold mb-2">Compte</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="compteComptable"
+                      [ngClass]="{ 'is-invalid': submitted && f.compteComptable.errors }"
+                      id="compteComptable" (change)="compteComptableChange()">
+                <option selected>Sélectionnez un numéro...</option>
+                <option *ngFor="let item of compteComptable" [value]="item.numCompteComptable">
+                  {{ item.numCompteComptable }}-{{ item.libelleCompteComptable }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.compteComptable.errors" class="invalid-feedback">
+                <div *ngIf="f.compteComptable.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Numéro</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="numCompteComptable" [readOnly]="true"
+                     [ngClass]="{ 'is-invalid': submitted && f.numCompteComptable.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.numCompteComptable.errors" class="invalid-feedback">
+                <div *ngIf="f.numCompteComptable.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Operation buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/app/standard/parametre/comptabilite/journal" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Operation buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

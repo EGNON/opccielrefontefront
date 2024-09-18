@@ -1,0 +1,206 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <div *ngIf="qualite==='sgi'" class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">SGI</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="registraire"
+                      [ngClass]="{ 'is-invalid': submitted && f.registraire.errors }" >
+                <option selected>Sélectionnez une SGI...</option>
+                <option [defaultSelected]="true" [ngValue]="entity?.registraire" [disabled]="true">
+                  {{ entity?.registraire?.denomination }}
+                </option>
+                <option *ngFor="let item of personne$" [ngValue]="item">
+                  {{ item.denomination }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.registraire.errors" class="invalid-feedback">
+                <div *ngIf="f.registraire.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div *ngIf="qualite==='depositaire'" class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Dépositaire</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="depositaire"
+                      [ngClass]="{ 'is-invalid': submitted && f.depositaire.errors }" >
+                <option selected>Sélectionnez un dépositaire...</option>
+                <option [defaultSelected]="true" [ngValue]="entity?.depositaire" [disabled]="true">
+                  {{ entity?.depositaire?.denomination }}
+                </option>
+                <option *ngFor="let item of personne$" [ngValue]="item">
+                  {{ item.denomination }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.depositaire.errors" class="invalid-feedback">
+                <div *ngIf="f.depositaire.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div *ngIf="qualite==='place'" class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Place</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="place"
+                      [ngClass]="{ 'is-invalid': submitted && f.place.errors }" >
+                <option selected>Sélectionnez une place...</option>
+                <option [defaultSelected]="true" [ngValue]="entity?.place" [disabled]="true">
+                  {{ entity?.place?.libellePlace }}
+                </option>
+                <option *ngFor="let item of place$" [ngValue]="item">
+                  {{ item.libellePlace }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.place.errors" class="invalid-feedback">
+                <div *ngIf="f.place.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Classe titre</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="classeTitre"
+                      [ngClass]="{ 'is-invalid': submitted && f.classeTitre.errors }" >
+                <option selected>Sélectionnez une classe titre...</option>
+                <option [defaultSelected]="true" [ngValue]="entity?.classeTitre" [disabled]="true">
+                  {{ entity?.classeTitre?.libelleClasseTitre }}
+                </option>
+                <option *ngFor="let item of classeTitre$" [ngValue]="item">
+                  {{ item.libelleClasseTitre }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.classeTitre.errors" class="invalid-feedback">
+                <div *ngIf="f.classeTitre.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Role</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="codeRole"
+                      [ngClass]="{ 'is-invalid': submitted && f.codeRole.errors }">
+                <option disabled value="null">Sélectionnez un role...</option>
+                <option ngValue="ACHAT">ACHAT</option>
+                <option ngValue="VENTE">VENTE</option>
+                <option ngValue="SOUSCRIPTION">SOUSCRIPTION</option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.codeRole.errors" class="invalid-feedback">
+                <div *ngIf="f.codeRole.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+
+          <div class="row mb-5">
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Borne inférieur</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNombreDecimal type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="borneInferieur"
+                     [ngClass]="{ 'is-invalid': submitted && f.borneInferieur.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.borneInferieur.errors" class="invalid-feedback">
+                <div *ngIf="f.borneInferieur.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Borne supérieur</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNombreDecimal type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="borneSuperieur"
+                     [ngClass]="{ 'is-invalid': submitted && f.borneSuperieur.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.borneSuperieur.errors" class="invalid-feedback">
+                <div *ngIf="f.borneSuperieur.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <div class="row mb-5">
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Taux</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNombreDecimal type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="taux"
+                     [ngClass]="{ 'is-invalid': submitted && f.taux.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.taux.errors" class="invalid-feedback">
+                <div *ngIf="f.taux.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Forfait</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNombreDecimal type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="forfait"
+                     [ngClass]="{ 'is-invalid': submitted && f.forfait.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.forfait.errors" class="invalid-feedback">
+                <div *ngIf="f.forfait.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" [routerLink]="['/opcvm/standard/tarification', qualite]" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

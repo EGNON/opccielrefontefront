@@ -1,0 +1,67 @@
+<!--<app-pays-lists>-->
+<!--</app-pays-lists>-->
+<div class="card">
+  <div class="card-header border-0 pt-6">
+    <!--begin::Card title-->
+    <div class="card-title">
+      <!--begin::Search-->
+      <div class="d-flex align-items-center position-relative my-1">
+        <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+        <input type="text" data-action="filter" class="form-control form-control-sm form-control-solid w-250px ps-12"
+               placeholder="Rechercher un élément" id="estGele">
+      </div>
+      <!--end::Search-->
+    </div>
+    <!--begin::Card title-->
+
+    <!--begin::Card toolbar-->
+    <div class="card-toolbar">
+      <!--begin::Toolbar-->
+      <div class="d-flex justify-content-end">
+<!--        begin::Add user-->
+<!--          <button type="button" class="btn btn-primary" data-action="create">-->
+<!--            Exporter en excel-->
+<!--          </button>-->
+<!--        end::Add user-->
+      </div>
+      <!--end::Toolbar-->
+    </div>
+    <!--end::Card toolbar-->
+  </div>
+<!--  <div class="row mb-5">-->
+<!--    &lt;!&ndash;begin::Col&ndash;&gt;-->
+<!--    &lt;!&ndash;            <div class="col-md-12 fv-row">&ndash;&gt;-->
+<!--    &lt;!&ndash;begin::Label&ndash;&gt;-->
+<!--    <div class="d-flex justify-content-sm-start">-->
+<!--      <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">-->
+<!--        <input type="radio" checked="checked"  [value]="true"-->
+<!--               class="form-check-input ng-untouched ng-pristine ng-valid"-->
+<!--               id="compteGele"  name="etat" (change)="compteGeleChange()">-->
+<!--        <label class="form-check-label text-gray-700 fw-bold text-nowrap">Compte gelé</label>-->
+<!--      </div>-->
+<!--      <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">-->
+<!--        <input type="radio"  [value]="false"-->
+<!--               class="form-check-input ng-untouched ng-pristine ng-valid"-->
+<!--               id="compteNonGele"  name="etat" (change)="compteNonGeleChange()">-->
+<!--        <label class="form-check-label text-gray-700 fw-bold text-nowrap">Compte non gelé</label>-->
+<!--      </div>-->
+
+<!--      <button type="button" class="btn btn-sm btn-primary" (click)="afficherGelDegel()">-->
+<!--        Valider-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <div class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <app-entity-crud
+        [datatableConfig]="datatableConfig"
+        route="/lab/geldegel"
+        [reload]="reloadEvent">
+      </app-entity-crud>
+    </div>
+  </div>
+</div>
+
+<swal #noticeSwal [swalOptions]="swalOptions">
+</swal>

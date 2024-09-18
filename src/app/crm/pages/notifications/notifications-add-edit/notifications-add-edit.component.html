@@ -1,0 +1,348 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+<!--          <pre>{{ entityForm.value | json }}</pre>-->
+<!--          {{ uneFois }}-->
+<!--          {{ time | async | date: 'hh:mm:ss' }}-->
+<!--          <br/>-->
+          <div class="row mb-2">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Type d'alerte</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="typeAlerte"
+                      [ngClass]="{ 'is-invalid': submitted && f.typeAlerte.errors }">
+                <option value="Desktop">Desktop</option>
+                <option value="Sms">Sms</option>
+                <option value="Email">Email</option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.typeAlerte.errors" class="invalid-feedback">
+                <div *ngIf="f.typeAlerte.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Type de Planification</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="typePlanification"
+                      [ngClass]="{ 'is-invalid': submitted && f.typePlanification.errors }">
+                <option *ngFor="let item of typePlanifications" [ngValue]="item"
+                        [defaultSelected]="entity?.typePlanification == item">
+                  {{ item.libelleTypePlanification }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.typePlanification.errors" class="invalid-feedback">
+                <div *ngIf="f.typePlanification.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <ng-container *ngIf="!uneFois">
+            <div class="border rounded-3 p-3 mb-2">
+              <div class="row mb-5">
+                <!--begin::Col-->
+                <div class="col-md-12 fv-row">
+                  <!--begin::Label-->
+                  <label class="required fs-5 fw-semibold mb-2">Périodicité</label>
+                  <!--end::Label-->
+                  <!--begin::Select-->
+                  <select class="form-select form-select-sm mb-2" formControlName="periodicite"
+                          [ngClass]="{ 'is-invalid': submitted && f.periodicite.errors }">
+<!--                    <option [ngValue]="null" selected disabled>Sélectionnez une périodicité...</option>-->
+                    <option *ngFor="let item of periodicites" [ngValue]="item">
+                      {{ item.libelle }}
+                    </option>
+                  </select>
+                  <!--end::Select-->
+                  <div *ngIf="submitted && f.periodicite.errors" class="invalid-feedback">
+                    <div *ngIf="f.periodicite.errors.required">Ce champs est obligatoire</div>
+                  </div>
+                </div>
+                <!--end::Col-->
+              </div>
+              <div class="row mb-5">
+                <div class="col-md-3 mt-4">
+                  <span>Repétez tous les </span>
+                </div>
+                <ng-container *ngIf="periode == 'M'">
+                  <div *ngIf="nbrJours$ | async as nbrjours" class="col-md-2 fv-row">
+                    <div formArrayName="nbreJoursAlertes" *ngFor="let nbrjour of nbrJourAlertes.controls; let i = index">
+                      <div [formGroupName]="i">
+                        <!--begin::Select-->
+                        <select class="form-select form-select-sm mb-2" formControlName="nbreJours"
+                                [ngClass]="{ 'is-invalid': submitted && nbrjour.errors }">
+                          <option [ngValue]="null" selected disabled>Choisir un jour...</option>
+                          <option *ngFor="let item of nbrjours" [ngValue]="item">
+                            {{ item.idNbreJours }}
+                          </option>
+                        </select>
+                        <!--end::Select-->
+                        <div *ngIf="submitted && nbrjour.errors" class="invalid-feedback">
+                          <div *ngIf="nbrjour.errors.required">Ce champs est obligatoire</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                <div class="col-md-3">
+                  <!--begin::Input-->
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                         placeholder="" formControlName="frequence"
+                         [ngClass]="{ 'is-invalid': submitted && f.frequence.errors }"/>
+                  <!--end::Input-->
+                  <div *ngIf="submitted && f.frequence.errors" class="invalid-feedback">
+                    <div *ngIf="f.frequence.errors.required">Ce champs est obligatoire</div>
+                  </div>
+                </div>
+                <div class="col-md-3 mt-3">{{ periodeTitle }}</div>
+              </div>
+              <ng-container *ngIf="jours$ | async as jours">
+                <div *ngIf="!uneFois && periode == 'S'" class="row mb-5">
+                  <div formArrayName="joursAlertes" *ngFor="let control of jourAlertes.controls; let i = index"
+                       class="col-md-3 fv-row">
+                    <div [formGroupName]="i">
+                      <input type="checkbox" formControlName="etat" checked="" class="form-check-input me-3">
+                      <input type="hidden" formControlName="idJours" class="form-check-input me-3">
+                      <input type="hidden" formControlName="libelleJours" class="form-check-input me-3">
+                      <label class="fs-5 fw-semibold mb-2">{{ jours[i].libelleJours }}</label>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!uneFois">
+            <div *ngIf="temps$ | async as temps" class="border rounded-3 p-3 mb-5">
+              <div class="row mb-0">
+                <label class="col-lg-2 col-form-label fw-bold fs-6">Une fois</label>
+                <div class="col-lg-4 d-flex align-items-center">
+                  <div class="form-check form-check-solid form-switch fv-row">
+                    <input type="checkbox" (change)="onCheckBoxClick($event)" class="form-check-input w-45px h-30px">
+                    <label class="form-check-label"></label>
+                  </div>
+                </div>
+                <ng-container *ngIf="oneTimeFrequence">
+                  <label class="col-lg-2 col-form-label fw-bold fs-6">Heure</label>
+                  <div class="col-lg-4 d-flex align-items-end">
+                    <ngb-timepicker formControlName="heureDebut" [(ngModel)]="heureDebutGlobale"></ngb-timepicker>
+                  </div>
+                </ng-container>
+              </div>
+              <div formArrayName="tempsAlertes" *ngFor="let control of tempsAlertes.controls; let i = index">
+                <div [formGroupName]="i" class="row border rounded-3 p-3 m-2">
+                  <div class="col-md-3 fv-row">
+                    <!--begin::Label-->
+                    <label class="fs-5 fw-semibold mb-2">Fréquence</label>
+                    <!--end::Label-->
+                    <input appNumeroPositifValidators type="text" class="form-control form-control-sm form-control-solid"
+                           placeholder="" formControlName="frequence"/>
+                  </div>
+                  <div class="col-md-3 fv-row">
+                    <!--begin::Label-->
+                    <label class="fs-5 fw-semibold mb-2">Unité de temps</label>
+                    <!--end::Label-->
+                    <select class="form-select form-select-sm mb-2" formControlName="temps">
+                      <option [ngValue]="null" selected disabled>Sélectionnez une unité de temps...</option>
+                      <option *ngFor="let item of temps" [ngValue]="item">
+                        {{ item.libelle }}
+                      </option>
+                    </select>
+                    <div *ngIf="submitted && control.errors" class="invalid-feedback">
+                      <div *ngIf="control.errors.required">Ce champs est obligatoire</div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 fv-row">
+                    <!--begin::Label-->
+                    <label class="fs-5 fw-semibold mb-2">Heure Début</label>
+                    <!--end::Label-->
+                    <ngb-timepicker formControlName="heureDebut" [(ngModel)]="heureDebut"></ngb-timepicker>
+                  </div>
+                  <div class="col-md-3 fv-row">
+                    <!--begin::Label-->
+                    <label class="fs-5 fw-semibold mb-2">Heure Fin</label>
+                    <!--end::Label-->
+                    <ngb-timepicker formControlName="heureFin" [(ngModel)]="heureFin"></ngb-timepicker>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div class="border rounded-3 p-3 mb-2">
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div [ngClass]="!uneFois ? 'col-md-6 fv-row' : 'col-md-3 fv-row'">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Date Début</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm form-control-solid"
+                         placeholder="dd-mm-yyyy" ngbDatepicker #d1="ngbDatepicker"
+                         formControlName="dateDebut" [ngClass]="{ 'is-invalid': submitted && f.dateDebut.errors }"/>
+                  <!--end::Input-->
+                  <span (click)="d1.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                      </i>
+                  </span>
+                </div>
+                <div *ngIf="submitted && f.dateDebut.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateDebut.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div [ngClass]="!uneFois ? 'col-md-6 fv-row' : 'col-md-3 fv-row'">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date Fin</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm form-control-solid" [readOnly]="dateFinReadOnly"
+                         placeholder="dd-mm-yyyy" ngbDatepicker #d2="ngbDatepicker"
+                         formControlName="dateFin" [ngClass]="{ 'is-invalid': submitted && f.dateFin.errors }"/>
+                  <!--end::Input-->
+                  <span *ngIf="!uneFois" (click)="d2.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                      </i>
+                  </span>
+                </div>
+                <div *ngIf="submitted && f.dateFin.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateFin.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <ng-container *ngIf="uneFois">
+                <div class="col-md-3 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-5 fw-semibold mb-2">Heure Début</label>
+                  <!--end::Label-->
+                  <ngb-timepicker formControlName="heureDebut" (ngModelChange)="onHeureDebutChange($event)"
+                                  [(ngModel)]="heureDebutGlobale"></ngb-timepicker>
+                </div>
+                <div class="col-md-3 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-5 fw-semibold mb-2">Heure Fin</label>
+                  <!--end::Label-->
+                  <ngb-timepicker formControlName="heureFin" [(ngModel)]="heureFinGlobale"
+                                  [readonlyInputs]="uneFois"></ngb-timepicker>
+                </div>
+              </ng-container>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+          </div>
+          <div class="row m-0">
+            <div class="alert alert-primary p-1" role="alert">
+              <button class="btn btn-sm btn-info input-group-text" (click)="onAddProtoAlerte()">
+                Ajouter un modèle
+              </button>
+            </div>
+          </div>
+          <div formArrayName="protoAlertes" *ngFor="let control of protoAlertes.controls; let i = index">
+            <div class="mb-2">
+              <div [formGroupName]="i" class="row border rounded-3 p-3 m-0">
+                <div class="col-md-12 fv-row">
+                  <!--begin::Label-->
+                  <label class="required fs-5 fw-semibold mb-2">Modèle de message</label>
+                  <!--end::Label-->
+                  <select class="form-select form-select-sm mb-2" formControlName="modeleMsgAlerte"
+                  (change)="afficherContenu(i)">
+                    <option disabled selected value="null">Sélectionnez un modèle de message...</option>
+                    <option *ngFor="let item of models" [ngValue]="item">
+                      {{ item.objet }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-12 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-5 fw-semibold mb-2">Contenu</label>
+                  <!--end::Label-->
+                  <!--<textarea class="form-control form-control-sm form-control-solid mb-2"
+                            formControlName="contenu" rows="3"></textarea>-->
+                  <editor
+                    formControlName="contenu"
+                    [init]="{
+                       base_url: '/tinymce',
+                                suffix: '.min' ,
+                                height: 300,
+                                plugins:'wordcount',
+                                license_key: 'gpl',
+                                language:'fr_FR',
+                                entity_encoding : 'raw'
+                              }"
+
+                  ></editor>
+                </div>
+                <div class="col-md-12 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-5 fw-semibold mb-2">Destinataire(s)</label>
+                  <!--end::Label-->
+                  <ng-multiselect-dropdown
+                    [settings]="personnelSettings"
+                    [placeholder]="'Sélectionnez un ou plusieurs destinataire(s)'"
+                    formControlName="personnels"
+                    [data]="personnels"
+                    [disabled]="false"
+                    (onFilterChange)="onFilterChange($event)"
+                    (onDropDownClose)="onDropDownClose($event)"
+                    (onSelect)="onItemSelect($event)"
+                    (onDeSelect)="onDeSelect($event)"
+                    (onSelectAll)="onSelectAll($event)"
+                    (onDeSelectAll)="onDeSelectAll($event)">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/crm/notifications/alertes" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+              </span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

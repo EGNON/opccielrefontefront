@@ -1,0 +1,132 @@
+<!--<div class="card card-flush">-->
+<!--  &lt;!&ndash;begin::Card header&ndash;&gt;-->
+<!--  <div class="card-header align-items-center py-5 gap-2 gap-md-5">-->
+<!--    &lt;!&ndash;begin::Card title&ndash;&gt;-->
+<!--    <div class="card-title">-->
+<!--      &lt;!&ndash;begin::Search&ndash;&gt;-->
+<!--      <div class="d-flex align-items-center position-relative my-1">-->
+<!--        <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">-->
+<!--          <span class="path1"></span>-->
+<!--          <span class="path2"></span>-->
+<!--        </i>-->
+<!--        <input type="text" class="form-control form-control-solid w-250px ps-12"-->
+<!--               placeholder="Rechercher un pays" />-->
+<!--      </div>-->
+<!--      &lt;!&ndash;end::Search&ndash;&gt;-->
+<!--    </div>-->
+<!--    &lt;!&ndash;end::Card title&ndash;&gt;-->
+<!--    &lt;!&ndash;begin::Card toolbar&ndash;&gt;-->
+<!--    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">-->
+<!--      <a routerLink="new" class="btn btn-primary">Nouveau Pays</a>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;end::Card toolbar&ndash;&gt;-->
+<!--  </div>-->
+<!--  &lt;!&ndash;end::Card header&ndash;&gt;-->
+<!--  &lt;!&ndash;begin::Card body&ndash;&gt;-->
+<!--  <div class="card-body pt-0">-->
+<!--    &lt;!&ndash;begin::Table&ndash;&gt;-->
+<!--    <table class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">-->
+<!--      <thead>-->
+<!--      <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">-->
+<!--        <th class="w-10px pe-2">-->
+<!--          <div class="form-check form-check-sm form-check-custom form-check-solid me-3">-->
+<!--            <input class="form-check-input" type="checkbox" data-kt-check="true"-->
+<!--                   data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="1" />-->
+<!--          </div>-->
+<!--        </th>-->
+<!--        <th class="min-w-100px">LIBELLE FR</th>-->
+<!--        <th class="min-w-100px">LIBELLE EN</th>-->
+<!--        <th class="min-w-50px">INDICATIF</th>-->
+<!--        <th class="min-w-50px">MONNAIE</th>-->
+<!--        <th class="text-end min-w-70px">Actions</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody class="fw-semibold text-gray-600">-->
+<!--      <tr *ngFor="let item of entities$ | async">-->
+<!--        <td>-->
+<!--          <div class="form-check form-check-sm form-check-custom form-check-solid">-->
+<!--            <input class="form-check-input" type="checkbox" value="1" />-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            {{ item.libelleFr }}-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            {{ item.libelleEn }}-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            {{ item.indicatif }}-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            {{ item.monnaieDto.nom }}-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <div class="d-flex justify-content-end flex-shrink-0">-->
+<!--            &lt;!&ndash; edit &ndash;&gt;-->
+<!--            <a routerLink="edit/{{item.idPays}}" title="Modifier un pays" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">-->
+<!--              <app-keenicon name="pencil" class="fs-3"></app-keenicon>-->
+<!--            </a>-->
+<!--            &lt;!&ndash; delete &ndash;&gt;-->
+<!--            <a title="Supprimer un pays"-->
+<!--               class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" (click)="supprimer(item.idPays)">-->
+<!--              <app-keenicon name="trash" class="fs-3"></app-keenicon>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+<!--    &lt;!&ndash;end::Table&ndash;&gt;-->
+<!--  </div>-->
+<!--  &lt;!&ndash;end::Card body&ndash;&gt;-->
+<!--</div>-->
+<div class="card">
+  <div class="card-header border-0 pt-6">
+    <!--begin::Card title-->
+    <div class="card-title">
+      <!--begin::Search-->
+      <div class="d-flex align-items-center position-relative my-1">
+        <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+        <input type="text" data-action="filter" class="form-control form-control-sm form-control-solid w-250px ps-12"
+               placeholder="Rechercher un pays">
+      </div>
+      <!--end::Search-->
+    </div>
+    <!--begin::Card title-->
+
+    <!--begin::Card toolbar-->
+    <div class="card-toolbar">
+      <!--begin::Toolbar-->
+      <div class="d-flex justify-content-end">
+        <!--begin::Add user-->
+        <button type="button" class="btn btn-sm btn-primary" data-action="create">
+          Nouveau pays
+        </button>
+        <!--end::Add user-->
+      </div>
+      <!--end::Toolbar-->
+    </div>
+    <!--end::Card toolbar-->
+  </div>
+
+  <div class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <app-entity-crud
+        [datatableConfig]="datatableConfig"
+        route="/standard/parametre/pays"
+        [reload]="reloadEvent">
+      </app-entity-crud>
+    </div>
+  </div>
+</div>
+
+<swal #noticeSwal [swalOptions]="swalOptions">
+</swal>

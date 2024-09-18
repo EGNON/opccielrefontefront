@@ -1,0 +1,415 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="formData" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <div [hidden]="true" class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class=" fs-5 fw-semibold mb-2">Id modele msg alerte</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="idModeleMsgAlerte"
+
+              />
+              <!--end::Input-->
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date début</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="date" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="dateDebRdv"
+                     [ngClass]="{ 'is-invalid': submitted && f.dateDebRdv.errors }"
+              />
+              <!--end::Input-->
+              <div *ngIf="submitted && f.dateDebRdv.errors" class="invalid-feedback">
+                <div *ngIf="f.dateDebRdv.errors.required">La date début est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Objet</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="objetRdv"
+                     [ngClass]="{ 'is-invalid': submitted && f.objetRdv.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.objetRdv.errors" class="invalid-feedback">
+                <div *ngIf="f.objetRdv.errors.required">L'objet' est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date fin</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="date" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="dateFinRdv"
+                     [ngClass]="{ 'is-invalid': submitted && f.dateFinRdv.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.dateFinRdv.errors" class="invalid-feedback">
+                <div *ngIf="f.dateFinRdv.errors.required">La date fin est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Heure début</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="time" step="1" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="heureDebutRdv"
+                     [ngClass]="{ 'is-invalid': submitted && f.heureDebutRdv.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.heureDebutRdv.errors" class="invalid-feedback">
+                <div *ngIf="f.heureDebutRdv.errors.required">L'heure début est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Heure fin</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="time" step="1" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="heureFinRdv"
+                     [ngClass]="{ 'is-invalid': submitted && f.heureFinRdv.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.heureFinRdv.errors" class="invalid-feedback">
+                <div *ngIf="f.heureFinRdv.errors.required">L'heure fin est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Client/prospect</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+<!--              <div *ngIf="!id">-->
+              <select formControlName="personnePhysiqueMoraleDto"
+                      class="form-select form-select-sm form-select-solid"
+                      [ngClass]="{ 'is-invalid': submitted && f.personnePhysiqueMoraleDto.errors }"
+                      (change)="retournerEmail()">
+                <option selected>Sélectionnez un client</option>
+                <option [defaultSelected]="true"
+                        [ngValue]="entity?.personnePhysiqueMoraleDto" [disabled]="true">
+                  {{ entity?.personnePhysiqueMoraleDto?.denomination }}
+                </option>
+                <option *ngFor="let personne of personne$"
+                        [ngValue]="personne">{{personne.denomination}}</option>
+              </select>
+<!--                </div>-->
+                <!--<div *ngIf="id">
+                    <select formControlName="personnePhysiqueMoraleDto" id="comboPersonne2"
+                            class="form-select form-select-sm form-select-solid"
+                            [ngClass]="{ 'is-invalid': submitted && f.personnePhysiqueMoraleDto.errors }"
+                            (change)="retournerEmail()">
+                      <option selected>Sélectionnez un client</option>
+                      <option [defaultSelected]="true" *ngIf="afficherPersonneDansVue"
+                              [ngValue]="entity?.personnePhysiqueMoraleDto" [disabled]="true">
+                        {{ entity?.personnePhysiqueMoraleDto?.denomination }}
+                      </option>
+
+                      <option *ngFor="let personne of personne$"
+                          [ngValue]="personne">{{personne.denomination}}</option>
+                    </select>
+                </div>
+-->
+              <!--end::Input-->
+              <div *ngIf="submitted && f.personnePhysiqueMoraleDto.errors" class="invalid-feedback">
+                <div *ngIf="f.personnePhysiqueMoraleDto.errors.required">Le client est obligatoire</div>
+              </div>
+              <!--              <input type="text"  class="form-control form-control-sm form-control-solid"-->
+              <!--                     [ngModel]="email" [hidden]="true"/>-->
+            </div>
+            <!--end::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Pays</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select formControlName="paysDto" class="form-select form-select-sm form-select-solid"
+                      [ngClass]="{ 'is-invalid': submitted && f.paysDto.errors }">
+                <option selected>Sélectionnez un pays</option>
+                <option [defaultSelected]="true" [ngValue]="entity?.paysDto" [disabled]="true">
+                  {{ entity?.paysDto?.libelleFr }}
+                </option>
+                <option *ngFor="let pays of pays$"
+                        [ngValue]="pays">{{pays.libelleFr}}</option>
+              </select>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.paysDto.errors" class="invalid-feedback">
+                <div *ngIf="f.paysDto.errors.required">Le pays est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Ville</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select id="ComboVille" class="form-select form-select-sm form-select-solid"
+                      (change)="afficherQuartier()" formControlName="villeDto"
+                      [ngClass]="{ 'is-invalid': submitted && f.villeDto.errors }">
+                <option selected>Sélectionnez une ville</option>
+                <option [defaultSelected]="true" *ngIf="afficherVilleDansVue" [ngValue]="entity?.communeDto">
+                  {{ entity?.communeDto?.libelleCommune }}
+                </option>
+                <option *ngFor="let commune of commune$"
+                        value="{{commune.idCommune}}">{{commune.libelleCommune}}</option>
+              </select>
+              <div *ngIf="submitted && f.villeDto.errors" class="invalid-feedback">
+                <div *ngIf="f.villeDto.errors.required">La ville est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Adresse</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select formControlName="quartierDto" class="form-select form-select-sm form-select-solid"
+                      [ngClass]="{ 'is-invalid': submitted && f.quartierDto.errors }">
+                <option selected>Sélectionnez une adresse</option>
+                <option [defaultSelected]="true" [ngValue]="entity?.quartierDto" [disabled]="true">
+                  {{ entity?.quartierDto?.libelleQuartier }}
+                </option>
+                <option *ngFor="let quartier of quartier$"
+                        [ngValue]="quartier">{{quartier.libelleQuartier}}</option>
+              </select>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.quartierDto.errors" class="invalid-feedback">
+                <div *ngIf="f.quartierDto.errors.required">L'adresse est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--fieldSet-->
+          <fieldset class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">PIECE</legend>
+            <div class="row mb-5">
+              <div formArrayName="documents">
+                <!--begin::Col-->
+                <div *ngFor="let control of documents.controls; let i = index">
+                  <div [formGroupName]="i" class="row">
+                    <div class="col-md-4 fv-row">
+                      <label class="fs-5 fw-semibold mb-2">Type de pièce</label>
+                      <select class="form-select form-select-sm mb-2" formControlName="typeDocument">
+                        <option disabled [defaultSelected]="true" [ngValue]="entity?.documents[i]?.typeDocument">
+                          {{ entity?.documents[i]?.typeDocument?.libelleTypeDoc }}
+                        </option>
+                        <option *ngFor="let item of typeDocuments$ | async" [ngValue]="item">
+                          {{ item.libelleTypeDoc }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-8 fv-row">
+                      <!--                      <label class="fs-5 fw-semibold mb-2">Joindre une pièce</label>-->
+                      <!--                      <div class="input-group mb-0">-->
+                      <!--                        <input type="file" class="form-control form-control-sm form-control-solid d-none"-->
+                      <!--                               (change)="selectFiles(i, $event)" #file/>-->
+                      <!--                        <input type="text" formControlName="nomDoc" class="form-control form-control-sm form-control-solid"-->
+                      <!--                               [value]="getFileName(selectedFiles?.item(i))" (click)="file.click()"/>-->
+                      <!--                        <input type="hidden" formControlName="extensionDoc" class="form-control form-control-sm form-control-solid"-->
+                      <!--                               [value]="getFileExtension(selectedFiles?.item(i))"/>-->
+                      <!--                        &lt;!&ndash;end::Input&ndash;&gt;-->
+                      <!--                        <span class="btn btn-sm btn-danger input-group-text" (click)="onDeleteFile(i)">-->
+                      <!--                              <i class="ki-duotone ki-minus fs-4">-->
+                      <!--                                <span class="path1"></span>-->
+                      <!--                                <span class="path2"></span>-->
+                      <!--                              </i>-->
+                      <!--                          </span>-->
+                      <!--                      </div>-->
+                      <label class="fs-5 fw-semibold mb-2">Joindre une pièce</label>
+                      <div class="input-group mb-0">
+                        <input type="file" class="form-control form-control-sm form-control-solid d-none"
+                               (change)="selectFiles(i, $event)" [id]="'file' + i"/>
+                        <input type="text" formControlName="nomDoc"
+                               class="form-control form-control-sm form-control-solid"
+                               [value]="getFileName(selectedFiles['file' + i])" (click)="onClick('file' + i)"/>
+                        <input type="hidden" formControlName="extensionDoc"
+                               class="form-control form-control-sm form-control-solid"
+                               [value]="getFileExtension(selectedFiles['file' + i])"/>
+                        <!--end::Input-->
+                        <span class="btn btn-sm btn-danger input-group-text" (click)="onDeleteFile(i)">
+                          <i class="ki-duotone ki-minus fs-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                      </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end::Input group-->
+            <div class="row mb-5">
+              <div class="col-md-12 fv-row">
+                <button class="btn btn-sm btn-success input-group-text" (click)="onAddFile()">
+                  Ajouter
+                </button>
+
+              </div>
+            </div>
+          </fieldset>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->
+<form [formGroup]="formData" class="form mb-5">
+  <div class="card" style="margin-top:20px">
+    <!--begin::Body-->
+    <div class="card-body p-lg-5">
+      <!--begin::Layout-->
+      <div class="d-flex flex-column flex-lg-row mb-0">
+        <!--begin::Content-->
+        <div class="flex-lg-row-fluid me-0 me-lg-0">
+          <fieldset class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">CHARGES</legend>
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Chargé(s)</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <!--<select formControlName="personnePhysiqueDto"
+                      class="form-select form-select-sm form-select-solid"
+                      id="ComboPersonnel" (change)="retournerPersonne()">
+                <option selected>Sélectonnez un chargé</option>
+                <option *ngFor="let personnel of personnel$"
+                        value="{{personnel.idPersonne}}">{{personnel.nom + ' ' + personnel.prenom}}</option>
+              </select>
+              <button (click)="addRow('table_Charge')" title="Ajouter les chargés" style="margin-top:5px"
+                      class="btn btn-sm btn-success input-group-text">
+                &lt;!&ndash;          <app-keenicon name="add" class="fs-3"></app-keenicon>&ndash;&gt;
+                Ajouter
+              </button>-->
+              <ng-multiselect-dropdown
+                [settings]="personnelSettings"
+                [placeholder]="'Sélectionnez une ou plusieurs chargés'"
+                formControlName="agentConcerneDtos"
+                [data]="personnelMulti"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange($event)"
+                (onDropDownClose)="onDropDownClose($event)"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onDeSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                (onDeSelectAll)="onDeSelectAll($event)">
+              </ng-multiselect-dropdown>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Form-->
+            <!--<div class="table-responsive angular-bootstrap-table">
+              &lt;!&ndash;begin::Table&ndash;&gt;
+              <table id="table_Charge"
+                     class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5">
+                <thead>
+                <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                  <th class="min-w-200px" [hidden]="true">ID</th>
+                  <th class="min-w-200px">Chargé(s)</th>
+                  <th class="text-end min-w-70px">Actions</th>
+                </tr>
+                </thead>
+                <tbody class="fw-semibold text-gray-600">
+
+                </tbody>
+              </table>
+              &lt;!&ndash;end::Table&ndash;&gt;
+            </div>-->
+          </fieldset>
+          <fieldset  class="border rounded-3 p-3" style="margin-top: 5px">
+            <legend class="float-none w-auto px-3">MAIL</legend>
+            <!--end::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class=" fs-5 fw-semibold mb-2">Contenu</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <!--<textarea class="form-control form-control-sm form-control-solid"
+                        placeholder="" formControlName="msg"
+                        style="height: 150px"></textarea>-->
+              <editor
+                formControlName="msg"
+                readonly="true"
+                [init]="{
+                       base_url: '/tinymce',
+                                suffix: '.min' ,
+                                height: 300,
+                                plugins:'wordcount',
+                                license_key: 'gpl',
+                                language:'fr_FR',
+                                entity_encoding : 'raw'
+                              }"
+
+              ></editor>
+            </div>
+            <div class="col-md-12 fv-row">
+              <button type="submit" class="btn btn-sm btn-primary"
+                     (click)="afficherMessage()" >
+                <!--begin::Indicator label-->
+                <span class="indicator-label">{{buttonText}}</span>
+                <!--end::Indicator label-->
+              </button>
+            </div>
+
+            <!--end::Col-->
+          </fieldset>
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/crm/rendezvous/rdv" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveRdv()"
+                    [disabled]="formData.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+                                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

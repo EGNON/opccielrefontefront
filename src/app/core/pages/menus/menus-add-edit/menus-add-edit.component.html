@@ -1,0 +1,163 @@
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <div class="row mb-0">
+            <label class="col-lg-2 col-form-label fw-bold fs-6">Est actif ?</label>
+            <div class="col-lg-10 d-flex align-items-center">
+              <div class="form-check form-check-solid form-switch fv-row">
+                <input type="checkbox" formControlName="estActif" class="form-check-input w-45px h-30px">
+                <label class="form-check-label"></label>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Titre</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="Titre du menu" formControlName="title"
+                     [ngClass]="{ 'is-invalid': submitted && f.title.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                <div *ngIf="f.title.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Icône</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="Nom Icône" formControlName="icon"
+                     [ngClass]="{ 'is-invalid': submitted && f.icon.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.icon.errors" class="invalid-feedback">
+                <div *ngIf="f.icon.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Data Link</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="Data Link..." formControlName="dataLink"
+                     [ngClass]="{ 'is-invalid': submitted && f.dataLink.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.dataLink.errors" class="invalid-feedback">
+                <div *ngIf="f.dataLink.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Route</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="Chemin vers la route..." formControlName="page"
+                     [ngClass]="{ 'is-invalid': submitted && f.page.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.page.errors" class="invalid-feedback">
+                <div *ngIf="f.page.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Menu associé</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="parentMenu"
+                      [ngClass]="{ 'is-invalid': submitted && f.parentMenu.errors }">
+                <option [defaultSelected]="true" disabled [ngValue]="defaultParentMenu" *ngIf="defaultParentMenu">
+                  {{ defaultParentMenu.title }}</option>
+                <option *ngFor="let item of parentMenus$ | async" [ngValue]="item">
+                  {{ item.title }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.parentMenu.errors" class="invalid-feedback">
+                <div *ngIf="f.parentMenu.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Role</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="role"
+                      [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+                <option [defaultSelected]="true" disabled [ngValue]="defaultRole" *ngIf="defaultRole">
+                  {{ defaultRole.nom }}</option>
+                <option *ngFor="let item of roles$ | async" [ngValue]="item">
+                  {{ item.nom }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                <div *ngIf="f.role.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" [routerLink]="['menus']" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+							  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+              </span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>

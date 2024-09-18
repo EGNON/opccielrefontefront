@@ -1,0 +1,179 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="formData" class="form mb-5">
+          <!--begin::Input group-->
+          <!--end::Col-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Objet</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text"  class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="objet" [ngClass]="{ 'is-invalid': submitted && f.objet.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.objet.errors" class="invalid-feedback">
+                <div *ngIf="f.objet.errors.required">L'objet est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Contenu</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <!--<textarea   class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="msg" [ngClass]="{ 'is-invalid': submitted && f.msg.errors }"
+              style="height: 150px"></textarea>-->
+              <editor
+                formControlName="msg"
+                [init]="{
+                       base_url: '/tinymce',
+                                suffix: '.min' ,
+                                height: 300,
+                                plugins:'wordcount',
+                                license_key: 'gpl',
+                                language:'fr_FR',
+                                entity_encoding : 'raw'
+                              }"
+
+              ></editor>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.msg.errors" class="invalid-feedback">
+                <div *ngIf="f.msg.errors.required">Le contenu est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Destinataire(s)</label>
+              <ng-multiselect-dropdown
+                [settings]="personneSettings"
+                [placeholder]="'Sélectionnez une ou plusieurs destinataires'"
+                formControlName="personne"
+                [data]="personneMulti"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange($event)"
+                (onDropDownClose)="onDropDownClose($event)"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onDeSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                (onDeSelectAll)="onDeSelectAll($event)">
+              </ng-multiselect-dropdown>
+              <!--end::Select-->
+              <!--end::Label-->
+              <!--begin::Input-->
+             <!-- <select
+                      class="form-select form-select-sm mb-2 select2"
+                      id="ComboPersonne" (change)="retournerPersonne()">
+                <option selected>Sélectonnez un destinataire</option>
+                <option *ngFor="let personne of personne$"
+                        value="{{personne.idPersonne}}">{{personne.denomination}}</option>
+              </select>
+              <a (click)="addRow('table_Charge')" title="Ajouter" style="margin-top:5px"
+                 class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
+                &lt;!&ndash;          <app-keenicon name="add" class="fs-3"></app-keenicon>&ndash;&gt;
+                Ajouter
+              </a>-->
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+
+          </div>
+          <!--fieldSet-->
+          <fieldset  class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">PIECE</legend>
+            <div class="row mb-5">
+              <div formArrayName="documents">
+                <!--begin::Col-->
+                <div *ngFor="let control of documents.controls; let i = index">
+                  <div [formGroupName]="i" class="row">
+                    <div class="col-md-4 fv-row">
+                      <label class="fs-5 fw-semibold mb-2">Type de pièce</label>
+                      <select class="form-select form-select-sm mb-2" formControlName="typeDocument">
+                        <option disabled [defaultSelected]="true" [ngValue]="entity?.documents[i]?.typeDocument">
+                          {{ entity?.documents[i]?.typeDocument?.libelleTypeDoc }}
+                        </option>
+                        <option *ngFor="let item of typeDocuments$ | async" [ngValue]="item">
+                          {{ item.libelleTypeDoc }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-8 fv-row">
+                      <label class="fs-5 fw-semibold mb-2">Joindre une pièce</label>
+                      <div class="input-group mb-0">
+                        <input type="file" class="form-control form-control-sm form-control-solid d-none"
+                               (change)="selectFiles(i, $event)" [id]="'file' + i"/>
+                        <input type="text" formControlName="nomDoc" class="form-control form-control-sm form-control-solid"
+                               [value]="getFileName(selectedFiles['file' + i])" (click)="onClick('file' + i)"/>
+                        <input type="hidden" formControlName="extensionDoc" class="form-control form-control-sm form-control-solid"
+                               [value]="getFileExtension(selectedFiles['file' + i])"/>
+                        <!--end::Input-->
+                        <span class="btn btn-sm btn-danger input-group-text" (click)="onDeleteFile(i)">
+                          <i class="ki-duotone ki-minus fs-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                      </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end::Input group-->
+            <div class="row mb-5">
+              <div class="col-md-12 fv-row">
+                <button class="btn btn-sm btn-success input-group-text" (click)="onAddFile()">
+                  Ajouter
+                </button>
+
+              </div>
+            </div>
+          </fieldset>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/crm/notifications/mail" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveMail()"
+                    [disabled]="formData.invalid">
+              <!--begin::Indicator label-->
+              <ng-container *ngIf="submitting">
+                <span class="indicator-progress" [style.display]="'block'">
+                  Patientez svp...
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+              </ng-container>
+              <ng-container *ngIf="!submitting">
+                <span class="indicator-label">Enregistrer</span>
+              </ng-container>
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

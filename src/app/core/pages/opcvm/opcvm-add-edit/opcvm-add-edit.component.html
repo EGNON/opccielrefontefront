@@ -1,0 +1,69 @@
+<!--<ng-container *ngIf="opcvm$.value.idOpcvm !== 0">-->
+<audio id="notification" src="assets/audios/mixkit-urgent-simple-tone-loop-2976.wav" muted="false"></audio>
+<div class="card">
+  <div class="card-body">
+    <div class="stepper stepper-links d-flex flex-column pt-5">
+      <div class="stepper-nav mb-5">
+        <div class="stepper-item" [ngClass]="{ current: currentStep$.value === 1, completed: currentStep$.value > 1 }">
+          <h3 class="stepper-title">Infos(1)</h3>
+        </div>
+
+        <div class="stepper-item" [ngClass]="{ current: currentStep$.value === 2, completed: currentStep$.value > 2 }">
+          <h3 class="stepper-title">Infos(2)</h3>
+        </div>
+
+        <div class="stepper-item" [ngClass]="{ current: currentStep$.value === 3 }">
+          <h3 class="stepper-title">ADRESSE-AUTRES INFOS</h3>
+        </div>
+      </div>
+
+      <form class="mx-auto mw-1000px w-100 pt-5 pb-5" noValidate>
+        <div class="current">
+            <ng-container *ngIf="currentStep$.value === 1">
+              <app-step1 class="w-100" [updateParentModel]="updateOpcvm" [defaultValues]="opcvm$.value"></app-step1>
+            </ng-container>
+
+            <ng-container *ngIf="currentStep$.value === 2">
+              <app-step2 class="w-100" [updateParentModel]="updateOpcvm" [defaultValues]="opcvm$.value"></app-step2>
+            </ng-container>
+
+            <ng-container *ngIf="currentStep$.value === 3">
+              <app-step3 class="w-100" [updateParentModel]="updateOpcvm" [defaultValues]="opcvm$.value"></app-step3>
+            </ng-container>
+        </div>
+
+        <div class="d-flex flex-stack pt-5">
+          <div class="mr-2">
+            <ng-container *ngIf="currentStep$.value !== 1">
+              <!--{{ 'Etape = ' + currentStep$.value }}-->
+              <button type="button" class="btn btn-sm btn-light-primary me-3" (click)="prevStep()">
+                <app-keenicon name="arrow-left" class="fs-3 ms-4 me-1"></app-keenicon>
+                Retour
+              </button>
+            </ng-container>
+          </div>
+
+<!--          {{ 'Etape = ' + currentStep$.value }}
+          {{ 'Form = ' + formsCount }}-->
+          <ng-container *ngIf="currentStep$.value !== formsCount + 1">
+            <div>
+              <button #btn [type]="currentStep$.value === formsCount ? 'submit' : 'button'" class="btn btn-sm btn-primary me-3"
+                [disabled]="!isCurrentFormValid$.value" (click)="nextStep($event)">
+                <span class="indicator-label">
+                  <ng-container *ngIf="currentStep$.value < formsCount">
+                    Continuer {{ " " }}
+                    <app-keenicon name="arrow-right" class="fs-3 ms-2 me-0"></app-keenicon>
+                  </ng-container>
+                  <ng-container *ngIf="currentStep$.value === formsCount">
+                    Soumettre
+                  </ng-container>
+                </span>
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--</ng-container>-->

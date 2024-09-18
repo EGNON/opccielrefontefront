@@ -1,0 +1,40 @@
+<div class="d-flex flex-column bgi-no-repeat rounded-top"
+     [style.background-image]="'url(./assets/media/misc/menu-header-bg.jpg)'">
+  <h3 class="text-white fw-bold px-9 mt-10 mb-6">
+    Vous avez reçu <span class="fs-8 opacity-75 ps-3">{{ counter }} notifications</span>
+  </h3>
+</div>
+<ng-container *ngIf="alerts.length > 0; else noDataError">
+  <div class="scroll-y mh-325px my-5 px-8">
+    <div *ngFor="let alert of alerts" class="d-flex flex-stack py-4">
+      <div class="d-flex align-items-center">
+        <div class="symbol symbol-35px me-4">
+            <span class="symbol-label" [ngClass]="'bg-light-success'">
+              <span [inlineSVG]="'./assets/media/icons/duotune/finance/fin006.svg'" class="svg-icon fs-2"
+                    [ngClass]="'svg-icon-success'"></span>
+            </span>
+        </div>
+
+        <div class="mb-0 me-2">
+          <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bolder">
+            {{ alert.objet }}
+          </a>
+          <div class="text-gray-500 fs-7" [innerHTML]="alert.contenu | safeHtml"></div>
+<!--          <div class="text-gray-500 fs-7" [innerHtml]="alert.contenu">{{ alert.contenu }}</div>-->
+        </div>
+      </div>
+
+      <span class="badge badge-light fs-8">{{ alert.dateEnvoiMsg | dateAsAgo }}</span>
+    </div>
+  </div>
+  <div class="py-3 text-center border-top">
+    <a routerLink="/crafted/pages/profile" class="btn btn-color-gray-600 btn-active-color-primary">
+      Tout voir <app-keenicon name="arrow-right" class="fs-5"></app-keenicon>
+    </a>
+  </div>
+</ng-container>
+<ng-template #noDataError>
+  <div class="scroll-y mh-325px my-5 px-8">
+    <p>Aucune notification disponible...</p>
+  </div>
+</ng-template>

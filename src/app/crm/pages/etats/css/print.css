@@ -1,0 +1,9 @@
+.t1{
+  border: solid;
+  border-color: black;
+  border-collapse: collapse;
+}
+.t1 td{
+  border: solid;
+  border-color: black;
+}

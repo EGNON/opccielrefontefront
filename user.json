@@ -1,0 +1,4004 @@
+{
+  "id": 1,
+  "idPersonne": 1,
+  "nom": "GED",
+  "prenom": "UTILISATEUR1",
+  "sexe": "Masculin",
+  "dateNaissance": {
+    "year": 1970,
+    "month": 1,
+    "day": 1
+  },
+  "civilite": "Mme.",
+  "statutMatrimonial": "Célibataire",
+  "username": "admin",
+  "password": "admin1",
+  "profession": {
+    "idProf": 12,
+    "libelleProfession": "ANALYSTE PROGRAMMEUR",
+    "personneDtos": null
+  },
+  "paysNationalite": {
+    "idPays": 59,
+    "libelleFr": "Bénin",
+    "libelleEn": "Benin",
+    "indicatif": 229,
+    "estGafi": false,
+    "rdvDtos": [],
+    "personnePhysiquePaysDtos": null,
+    "monnaieDto": null
+  },
+  "mobile1": "22996577845",
+  "paysResidence": {
+    "idPays": 59,
+    "libelleFr": "Bénin",
+    "libelleEn": "Benin",
+    "indicatif": 229,
+    "estGafi": false,
+    "rdvDtos": [],
+    "personnePhysiquePaysDtos": null,
+    "monnaieDto": null
+  },
+  "mobile2": null,
+  "estActif": true,
+  "emailPro": "admin@soft.com",
+  "emailPerso": "admin@gmail.com",
+  "allRoles": [
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 22
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 22,
+        "idRole": 22,
+        "nom": "ROLE_UTILISATEUR"
+      },
+      "etat": true,
+      "permissions": [
+        {
+          "id": {
+            "idPermis": 3,
+            "idRole": 22,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 22,
+            "idRole": 22,
+            "nom": "ROLE_UTILISATEUR"
+          },
+          "permission": {
+            "id": 3,
+            "idPermis": 3,
+            "libellePermis": "Modification d'un élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 4,
+            "idRole": 22,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 22,
+            "idRole": 22,
+            "nom": "ROLE_UTILISATEUR"
+          },
+          "permission": {
+            "id": 4,
+            "idPermis": 4,
+            "libellePermis": "Suppression d'un élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 2,
+            "idRole": 22,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 22,
+            "idRole": 22,
+            "nom": "ROLE_UTILISATEUR"
+          },
+          "permission": {
+            "id": 2,
+            "idPermis": 2,
+            "libellePermis": "Consultation de liste"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 1,
+            "idRole": 22,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 22,
+            "idRole": 22,
+            "nom": "ROLE_UTILISATEUR"
+          },
+          "permission": {
+            "id": 1,
+            "idPermis": 1,
+            "libellePermis": "Ajout d'un nouvel élément"
+          },
+          "etat": false
+        }
+      ]
+    },
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 82
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 82,
+        "idRole": 82,
+        "nom": "ROLE_PHYSIQUE"
+      },
+      "etat": true,
+      "permissions": [
+        {
+          "id": {
+            "idPermis": 4,
+            "idRole": 82,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 82,
+            "idRole": 82,
+            "nom": "ROLE_PHYSIQUE"
+          },
+          "permission": {
+            "id": 4,
+            "idPermis": 4,
+            "libellePermis": "Suppression d'un élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 3,
+            "idRole": 82,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 82,
+            "idRole": 82,
+            "nom": "ROLE_PHYSIQUE"
+          },
+          "permission": {
+            "id": 3,
+            "idPermis": 3,
+            "libellePermis": "Modification d'un élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 2,
+            "idRole": 82,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 82,
+            "idRole": 82,
+            "nom": "ROLE_PHYSIQUE"
+          },
+          "permission": {
+            "id": 2,
+            "idPermis": 2,
+            "libellePermis": "Consultation de liste"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 1,
+            "idRole": 82,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 82,
+            "idRole": 82,
+            "nom": "ROLE_PHYSIQUE"
+          },
+          "permission": {
+            "id": 1,
+            "idPermis": 1,
+            "libellePermis": "Ajout d'un nouvel élément"
+          },
+          "etat": false
+        }
+      ]
+    },
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 96
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 96,
+        "idRole": 96,
+        "nom": "ROLE_POSTECOMPTABLE"
+      },
+      "etat": true,
+      "permissions": [
+        {
+          "id": {
+            "idPermis": 3,
+            "idRole": 96,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 96,
+            "idRole": 96,
+            "nom": "ROLE_POSTECOMPTABLE"
+          },
+          "permission": {
+            "id": 3,
+            "idPermis": 3,
+            "libellePermis": "Modification d'un élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 4,
+            "idRole": 96,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 96,
+            "idRole": 96,
+            "nom": "ROLE_POSTECOMPTABLE"
+          },
+          "permission": {
+            "id": 4,
+            "idPermis": 4,
+            "libellePermis": "Suppression d'un élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 1,
+            "idRole": 96,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 96,
+            "idRole": 96,
+            "nom": "ROLE_POSTECOMPTABLE"
+          },
+          "permission": {
+            "id": 1,
+            "idPermis": 1,
+            "libellePermis": "Ajout d'un nouvel élément"
+          },
+          "etat": false
+        },
+        {
+          "id": {
+            "idPermis": 2,
+            "idRole": 96,
+            "idUtilisateur": 1
+          },
+          "utilisateur": {
+            "id": 1,
+            "idPersonne": 1
+          },
+          "role": {
+            "id": 96,
+            "idRole": 96,
+            "nom": "ROLE_POSTECOMPTABLE"
+          },
+          "permission": {
+            "id": 2,
+            "idPermis": 2,
+            "libellePermis": "Consultation de liste"
+          },
+          "etat": true
+        }
+      ]
+    }
+  ],
+  "utilisateurRoles": [],
+  "roles1": [
+    {
+      "id": {
+        "idRole": 27,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 27,
+        "idRole": 27,
+        "nom": "ROLE_LISTE_PROSPECT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 66,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 66,
+        "idRole": 66,
+        "nom": "ROLE_ETAT_OPCVM"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 42,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 42,
+        "idRole": 42,
+        "nom": "ROLE_MORALE_ACTIONNAIRE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 41,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 41,
+        "idRole": 41,
+        "nom": "ROLE_MORALE_PROSPECT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 84,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 84,
+        "idRole": 84,
+        "nom": "ROLE_PLACE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 96,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 96,
+        "idRole": 96,
+        "nom": "ROLE_POSTECOMPTABLE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 90,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 90,
+        "idRole": 90,
+        "nom": "ROLE_NATUREOPERATION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 53,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 53,
+        "idRole": 53,
+        "nom": "ROLE_CLASSIFICATION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 22,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 22,
+        "idRole": 22,
+        "nom": "ROLE_UTILISATEUR"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 31,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 31,
+        "idRole": 31,
+        "nom": "ROLE_POINT_OBJECTIF_AFFECTE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 43,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 43,
+        "idRole": 43,
+        "nom": "ROLE_SUPER_ADMIN"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 87,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 87,
+        "idRole": 87,
+        "nom": "ROLE_MORALE_SANCTIONNEE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 72,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 72,
+        "idRole": 72,
+        "nom": "ROLE_NATUREEVENEMENT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 26,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 26,
+        "idRole": 26,
+        "nom": "ROLE_RDV_PLAN"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 24,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 24,
+        "idRole": 24,
+        "nom": "ROLE_PERMISSION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 14,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 14,
+        "idRole": 14,
+        "nom": "ROLE_PROFESSION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 78,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 78,
+        "idRole": 78,
+        "nom": "ROLE_TYPEEVENEMENT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 35,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 35,
+        "idRole": 35,
+        "nom": "ROLE_OBJECTIF_ATTEINT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 18,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 18,
+        "idRole": 18,
+        "nom": "ROLE_SECTEUR"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 77,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 77,
+        "idRole": 77,
+        "nom": "ROLE_OPCVM"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 34,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 34,
+        "idRole": 34,
+        "nom": "ROLE_OBJECTIF_A_AFFECTER"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 62,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 62,
+        "idRole": 62,
+        "nom": "ROLE_OPERATION_CONDITION_INHABITUELLE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 11,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 11,
+        "idRole": 11,
+        "nom": "ROLE_MONNAIE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 9,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 9,
+        "idRole": 9,
+        "nom": "ROLE_CATEGORIE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 21,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 21,
+        "idRole": 21,
+        "nom": "ROLE_ALERTE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 55,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 55,
+        "idRole": 55,
+        "nom": "ROLE_OPERATION_NOUVELLE_RELATION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 12,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 12,
+        "idRole": 12,
+        "nom": "ROLE_PAYS"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 23,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 23,
+        "idRole": 23,
+        "nom": "ROLE_ACCESS"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 2,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 2,
+        "idRole": 2,
+        "nom": "ROLE_BUILDER"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 5,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 5,
+        "idRole": 5,
+        "nom": "ROLE_COMMUNE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 75,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 75,
+        "idRole": 75,
+        "nom": "ROLE_TYPEEMETTEUR"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 85,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 85,
+        "idRole": 85,
+        "nom": "ROLE_BANQUE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 48,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 48,
+        "idRole": 48,
+        "nom": "ROLE_PERSONNEL"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 71,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 71,
+        "idRole": 71,
+        "nom": "ROLE_COMPARTIMENT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 15,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 15,
+        "idRole": 15,
+        "nom": "ROLE_PRODUIT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 36,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 36,
+        "idRole": 36,
+        "nom": "ROLE_PLANIFICATION_RDV"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 19,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 19,
+        "idRole": 19,
+        "nom": "ROLE_MODELE_MSG_ALERTE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 8,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 8,
+        "idRole": 8,
+        "nom": "ROLE_QUARTIER"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 60,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 60,
+        "idRole": 60,
+        "nom": "ROLE_REGISTRE_CONFIDENTIEL"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 13,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 13,
+        "idRole": 13,
+        "nom": "ROLE_PERIODICITE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 33,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 33,
+        "idRole": 33,
+        "nom": "ROLE_AFFECTATION_OBJECTIF"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 52,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 52,
+        "idRole": 52,
+        "nom": "ROLE_TYPEAFFECTATION_TITRE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 81,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 81,
+        "idRole": 81,
+        "nom": "ROLE_SECTEURBOURSIER"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 28,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 28,
+        "idRole": 28,
+        "nom": "ROLE_FICHE_KYC"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 17,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 17,
+        "idRole": 17,
+        "nom": "ROLE_QUALITE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 73,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 73,
+        "idRole": 73,
+        "nom": "ROLE_SOUSTYPEACTION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 45,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 45,
+        "idRole": 45,
+        "nom": "ROLE_PAYS_GAFI"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 83,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 83,
+        "idRole": 83,
+        "nom": "ROLE_MORALE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 65,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 65,
+        "idRole": 65,
+        "nom": "ROLE_ETAT_ALPHA"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 30,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 30,
+        "idRole": 30,
+        "nom": "ROLE_CLIENT_PORTEFEUILLE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 76,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 76,
+        "idRole": 76,
+        "nom": "ROLE_TYPEEMISSION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 38,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 38,
+        "idRole": 38,
+        "nom": "ROLE_AUTORISATION_CR"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 32,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 32,
+        "idRole": 32,
+        "nom": "ROLE_POINT_SOUSCRIPTION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 1,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 1,
+        "idRole": 1,
+        "nom": "ROLE_DASHBOARD"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 39,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 39,
+        "idRole": 39,
+        "nom": "ROLE_PHYSIQUE_PROSPECT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 44,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 44,
+        "idRole": 44,
+        "nom": "ROLE_SOCIETE_GESTION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 82,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 82,
+        "idRole": 82,
+        "nom": "ROLE_PHYSIQUE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 89,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 89,
+        "idRole": 89,
+        "nom": "ROLE_JOURNAL"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 37,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 37,
+        "idRole": 37,
+        "nom": "ROLE_COMPTE_RENDU"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 74,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 74,
+        "idRole": 74,
+        "nom": "ROLE_TYPEACTION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 20,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 20,
+        "idRole": 20,
+        "nom": "ROLE_MAIL"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 7,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 7,
+        "idRole": 7,
+        "nom": "ROLE_ARRONDISSEMENT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 50,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 50,
+        "idRole": 50,
+        "nom": "ROLE_DEPOT_RECENSE_ESPECE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 51,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 51,
+        "idRole": 51,
+        "nom": "ROLE_DEPOT_SUPERIEUR_A_CINQ_MILLIONS"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 67,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 67,
+        "idRole": 67,
+        "nom": "ROLE_OPCVM_DASHBOARD"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 69,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 69,
+        "idRole": 69,
+        "nom": "ROLE_FORMEJURIDIQUE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 64,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 64,
+        "idRole": 64,
+        "nom": "ROLE_ETAT_VOLATILITE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 63,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 63,
+        "idRole": 63,
+        "nom": "ROLE_OPERATION_CONDITION_NORMALE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 6,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 6,
+        "idRole": 6,
+        "nom": "ROLE_DEPARTEMENT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 68,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 68,
+        "idRole": 68,
+        "nom": "ROLE_SOUSCATEGORIE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 10,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 10,
+        "idRole": 10,
+        "nom": "ROLE_INDICATEUR"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 70,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 70,
+        "idRole": 70,
+        "nom": "ROLE_SYSTEMEDINFORMATION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 86,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 86,
+        "idRole": 86,
+        "nom": "ROLE_PHYSIQUE_SANCTIONNEE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 46,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 46,
+        "idRole": 46,
+        "nom": "ROLE_MORALE_DISTRIBUTEUR"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 47,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 47,
+        "idRole": 47,
+        "nom": "ROLE_PHYSIQUE_DISTRIBUTEUR"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 57,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 57,
+        "idRole": 57,
+        "nom": "ROLE_OPERATION_CLIENT_OCCASIONNEL"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 29,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 29,
+        "idRole": 29,
+        "nom": "ROLE_CLIENT_PAS_INVESTI"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 54,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 54,
+        "idRole": 54,
+        "nom": "ROLE_DEPOT_RECENSE_ANNEE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 58,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 58,
+        "idRole": 58,
+        "nom": "ROLE_TRANSACTION_SUSPECTE_INHABITUELLE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 25,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 25,
+        "idRole": 25,
+        "nom": "ROLE_LISTE_CR"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 4,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 4,
+        "idRole": 4,
+        "nom": "ROLE_MENU"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 49,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 49,
+        "idRole": 49,
+        "nom": "ROLE_MODE_ETABLISSEMENT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 80,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 80,
+        "idRole": 80,
+        "nom": "ROLE_TYPEOBLIGATION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 61,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 61,
+        "idRole": 61,
+        "nom": "ROLE_ALERTE_LAB"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 56,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 56,
+        "idRole": 56,
+        "nom": "ROLE_GELDEGEL"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 88,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 88,
+        "idRole": 88,
+        "nom": "ROLE_TYPEOPERATION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 59,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 59,
+        "idRole": 59,
+        "nom": "ROLE_SUIVI_CLIENT_SANCTION"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 79,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 79,
+        "idRole": 79,
+        "nom": "ROLE_TYPEGARANT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 16,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 16,
+        "idRole": 16,
+        "nom": "ROLE_TYPEDOCUMENT"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 3,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 3,
+        "idRole": 3,
+        "nom": "ROLE_DEGRE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    },
+    {
+      "id": {
+        "idRole": 40,
+        "idUtilisateur": 1
+      },
+      "role": {
+        "id": 40,
+        "idRole": 40,
+        "nom": "ROLE_PHYSIQUE_ACTIONNAIRE"
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "etat": true
+    }
+  ],
+  "permissions": [
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 22,
+        "idPermis": 3
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 22,
+        "idRole": 22,
+        "nom": "ROLE_UTILISATEUR"
+      },
+      "permission": {
+        "id": 3,
+        "idPermis": 3,
+        "libellePermis": "Modification d'un élément"
+      }
+    },
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 22,
+        "idPermis": 4
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 22,
+        "idRole": 22,
+        "nom": "ROLE_UTILISATEUR"
+      },
+      "permission": {
+        "id": 4,
+        "idPermis": 4,
+        "libellePermis": "Suppression d'un élément"
+      }
+    },
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 22,
+        "idPermis": 2
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 22,
+        "idRole": 22,
+        "nom": "ROLE_UTILISATEUR"
+      },
+      "permission": {
+        "id": 2,
+        "idPermis": 2,
+        "libellePermis": "Consultation de liste"
+      }
+    },
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 82,
+        "idPermis": 4
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 82,
+        "idRole": 82,
+        "nom": "ROLE_PHYSIQUE"
+      },
+      "permission": {
+        "id": 4,
+        "idPermis": 4,
+        "libellePermis": "Suppression d'un élément"
+      }
+    },
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 82,
+        "idPermis": 3
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 82,
+        "idRole": 82,
+        "nom": "ROLE_PHYSIQUE"
+      },
+      "permission": {
+        "id": 3,
+        "idPermis": 3,
+        "libellePermis": "Modification d'un élément"
+      }
+    },
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 82,
+        "idPermis": 2
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 82,
+        "idRole": 82,
+        "nom": "ROLE_PHYSIQUE"
+      },
+      "permission": {
+        "id": 2,
+        "idPermis": 2,
+        "libellePermis": "Consultation de liste"
+      }
+    },
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 96,
+        "idPermis": 3
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 96,
+        "idRole": 96,
+        "nom": "ROLE_POSTECOMPTABLE"
+      },
+      "permission": {
+        "id": 3,
+        "idPermis": 3,
+        "libellePermis": "Modification d'un élément"
+      }
+    },
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 96,
+        "idPermis": 4
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 96,
+        "idRole": 96,
+        "nom": "ROLE_POSTECOMPTABLE"
+      },
+      "permission": {
+        "id": 4,
+        "idPermis": 4,
+        "libellePermis": "Suppression d'un élément"
+      }
+    },
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 96,
+        "idPermis": 2
+      },
+      "utilisateur": {
+        "id": 1,
+        "idPersonne": 1
+      },
+      "role": {
+        "id": 96,
+        "idRole": 96,
+        "nom": "ROLE_POSTECOMPTABLE"
+      },
+      "permission": {
+        "id": 2,
+        "idPermis": 2,
+        "libellePermis": "Consultation de liste"
+      }
+    }
+  ],
+  "user": {
+    "idPersonne": 1,
+    "ifu": null,
+    "mobile1": "22996577845",
+    "mobile2": null,
+    "fixe1": null,
+    "fixe2": null,
+    "bp": null,
+    "emailPerso": "admin@gmail.com",
+    "emailPro": "admin@soft.com",
+    "domicile": null,
+    "numeroPiece": null,
+    "typePiece": null,
+    "dateExpirationPiece": null,
+    "modeEtablissement": null,
+    "modeEtablissementDto": null,
+    "estsgi": false,
+    "ppe1": false,
+    "ppe2": false,
+    "ppe3": false,
+    "ppe4": false,
+    "secteur": null,
+    "degre": null,
+    "distributeur": null,
+    "paysResidence": {
+      "idPays": 59,
+      "libelleFr": "Bénin",
+      "libelleEn": "Benin",
+      "indicatif": 229,
+      "estGafi": false,
+      "rdvDtos": [],
+      "personnePhysiquePaysDtos": null,
+      "monnaieDto": null
+    },
+    "denomination": "GED UTILISATEUR1",
+    "nomContact": null,
+    "prenomContact": null,
+    "telContact": null,
+    "emailContact": null,
+    "titreContact": null,
+    "numeroCpteDeposit": null,
+    "estConvertie": false,
+    "commune": null,
+    "documents": [],
+    "statutPersonnes": null,
+    "estExpose": false,
+    "estJuge": false,
+    "estGele": false,
+    "typePersonne": "U",
+    "nom": "GED",
+    "prenom": "UTILISATEUR1",
+    "sexe": "Masculin",
+    "dateNaissance": null,
+    "civilite": "Mme.",
+    "lieuTravail": null,
+    "autresRevenus": 0,
+    "periodicite": null,
+    "statutMatrimonial": "Célibataire",
+    "nbrEnfant": 0,
+    "nbrPersonneACharge": 0,
+    "nomEmployeur": null,
+    "adressePostaleEmp": null,
+    "adresseGeoEmp": null,
+    "telEmp": null,
+    "emailEmp": null,
+    "nomPere": null,
+    "prenomsPere": null,
+    "dateNaissancePere": null,
+    "nomMere": null,
+    "prenomsMere": null,
+    "dateNaissanceMere": null,
+    "nomConjoint": null,
+    "prenomConjoint": null,
+    "dateNaissanceConjoint": null,
+    "origineFonds": null,
+    "transactionEnvisagee": null,
+    "immobilier": null,
+    "autresBiens": null,
+    "surfaceTotale": 0,
+    "salaire": 0,
+    "profession": {
+      "idProf": 12,
+      "libelleProfession": "ANALYSTE PROGRAMMEUR",
+      "personneDtos": null
+    },
+    "paysPere": null,
+    "paysMere": null,
+    "paysConjoint": null,
+    "paysNationalite": {
+      "idPays": 59,
+      "libelleFr": "Bénin",
+      "libelleEn": "Benin",
+      "indicatif": 229,
+      "estGafi": false,
+      "rdvDtos": [],
+      "personnePhysiquePaysDtos": null,
+      "monnaieDto": null
+    },
+    "secteurEmp": null,
+    "personnePhysiquePaysDtos": [],
+    "lieuNaissance": null,
+    "teint": null,
+    "matricule": null,
+    "estCommercial": false,
+    "agentConcernes": [],
+    "affectations": [],
+    "id": 1,
+    "username": "admin",
+    "password1": null,
+    "password": "$2a$10$6mggABo0XTTIZuY423PcjeNgV88thDLrd58k.zfnPZ7qNN0aAnNgW",
+    "estActif": true,
+    "authToken": null,
+    "refreshToken": null,
+    "pic": null,
+    "tokens": [
+      {
+        "id": 8202,
+        "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNzYwNDA1OCwiZXhwIjoxNzE3NjkwNDU4fQ.feG5-KaFoaomvYzcAU950Ptl6k1Rnj1rs_JL5lSTN_s",
+        "tokenType": "BEARER",
+        "revoked": true,
+        "expired": true,
+        "user": null
+      },
+      {
+        "id": 8152,
+        "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNzU4ODU1MSwiZXhwIjoxNzE3Njc0OTUxfQ.wthWWwSZQvuJSWHW_VQGY13Aaj49b9oNTAig_zX41m8",
+        "tokenType": "BEARER",
+        "revoked": true,
+        "expired": true,
+        "user": null
+      },
+      {
+        "id": 5552,
+        "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNzE3MTYzNywiZXhwIjoxNzE3MjU4MDM3fQ.bqZ-sHvODP_Yzt3ARRLESqT2n8lXwUiwSNmqR8GlDiY",
+        "tokenType": "BEARER",
+        "revoked": true,
+        "expired": true,
+        "user": null
+      },
+      {
+        "id": 10652,
+        "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxODAwNzk2OCwiZXhwIjoxNzE4MDk0MzY4fQ.MriEwx5HSs0ZkDnsN1kdeHQ6xHOLyJv9GPFQzbUHJ3k",
+        "tokenType": "BEARER",
+        "revoked": true,
+        "expired": true,
+        "user": null
+      },
+      {
+        "id": 8203,
+        "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxNzY2NDU2NCwiZXhwIjoxNzE3NzUwOTY0fQ.t_FOlun8AVSDHMl9jtpPHmo39kCufYw7jA5OchMhPDg",
+        "tokenType": "BEARER",
+        "revoked": true,
+        "expired": true,
+        "user": null
+      },
+      {
+        "id": 11002,
+        "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTcxODc0MzcwNCwiZXhwIjoxNzE4ODMwMTA0fQ.z7eWAL2tbMy3yQrwT18FxTRTwvTPb_wUskDEIXxKOJQ",
+        "tokenType": "BEARER",
+        "revoked": false,
+        "expired": false,
+        "user": null
+      }
+    ],
+    "roles": null,
+    "roles1": [
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 27
+        },
+        "role": {
+          "idRole": 27,
+          "nom": "ROLE_LISTE_PROSPECT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 66
+        },
+        "role": {
+          "idRole": 66,
+          "nom": "ROLE_ETAT_OPCVM",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 42
+        },
+        "role": {
+          "idRole": 42,
+          "nom": "ROLE_MORALE_ACTIONNAIRE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 41
+        },
+        "role": {
+          "idRole": 41,
+          "nom": "ROLE_MORALE_PROSPECT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 84
+        },
+        "role": {
+          "idRole": 84,
+          "nom": "ROLE_PLACE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 96
+        },
+        "role": {
+          "idRole": 96,
+          "nom": "ROLE_POSTECOMPTABLE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": [
+            {
+              "id": {
+                "idRole": 96,
+                "idPermis": 4
+              },
+              "permission": {
+                "idPermis": 4,
+                "codePermis": null,
+                "estPrincipale": false,
+                "libellePermis": "Suppression d'un élément",
+                "id": 4
+              }
+            },
+            {
+              "id": {
+                "idRole": 96,
+                "idPermis": 3
+              },
+              "permission": {
+                "idPermis": 3,
+                "codePermis": null,
+                "estPrincipale": false,
+                "libellePermis": "Modification d'un élément",
+                "id": 3
+              }
+            },
+            {
+              "id": {
+                "idRole": 96,
+                "idPermis": 2
+              },
+              "permission": {
+                "idPermis": 2,
+                "codePermis": null,
+                "estPrincipale": true,
+                "libellePermis": "Consultation de liste",
+                "id": 2
+              }
+            },
+            {
+              "id": {
+                "idRole": 96,
+                "idPermis": 1
+              },
+              "permission": {
+                "idPermis": 1,
+                "codePermis": null,
+                "estPrincipale": false,
+                "libellePermis": "Ajout d'un nouvel élément",
+                "id": 1
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 90
+        },
+        "role": {
+          "idRole": 90,
+          "nom": "ROLE_NATUREOPERATION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 53
+        },
+        "role": {
+          "idRole": 53,
+          "nom": "ROLE_CLASSIFICATION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 22
+        },
+        "role": {
+          "idRole": 22,
+          "nom": "ROLE_UTILISATEUR",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": [
+            {
+              "id": {
+                "idRole": 22,
+                "idPermis": 1
+              },
+              "permission": {
+                "idPermis": 1,
+                "codePermis": null,
+                "estPrincipale": false,
+                "libellePermis": "Ajout d'un nouvel élément",
+                "id": 1
+              }
+            },
+            {
+              "id": {
+                "idRole": 22,
+                "idPermis": 3
+              },
+              "permission": {
+                "idPermis": 3,
+                "codePermis": null,
+                "estPrincipale": false,
+                "libellePermis": "Modification d'un élément",
+                "id": 3
+              }
+            },
+            {
+              "id": {
+                "idRole": 22,
+                "idPermis": 2
+              },
+              "permission": {
+                "idPermis": 2,
+                "codePermis": null,
+                "estPrincipale": true,
+                "libellePermis": "Consultation de liste",
+                "id": 2
+              }
+            },
+            {
+              "id": {
+                "idRole": 22,
+                "idPermis": 4
+              },
+              "permission": {
+                "idPermis": 4,
+                "codePermis": null,
+                "estPrincipale": false,
+                "libellePermis": "Suppression d'un élément",
+                "id": 4
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 31
+        },
+        "role": {
+          "idRole": 31,
+          "nom": "ROLE_POINT_OBJECTIF_AFFECTE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 43
+        },
+        "role": {
+          "idRole": 43,
+          "nom": "ROLE_SUPER_ADMIN",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 87
+        },
+        "role": {
+          "idRole": 87,
+          "nom": "ROLE_MORALE_SANCTIONNEE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 72
+        },
+        "role": {
+          "idRole": 72,
+          "nom": "ROLE_NATUREEVENEMENT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 26
+        },
+        "role": {
+          "idRole": 26,
+          "nom": "ROLE_RDV_PLAN",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 24
+        },
+        "role": {
+          "idRole": 24,
+          "nom": "ROLE_PERMISSION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 14
+        },
+        "role": {
+          "idRole": 14,
+          "nom": "ROLE_PROFESSION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 78
+        },
+        "role": {
+          "idRole": 78,
+          "nom": "ROLE_TYPEEVENEMENT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 35
+        },
+        "role": {
+          "idRole": 35,
+          "nom": "ROLE_OBJECTIF_ATTEINT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 18
+        },
+        "role": {
+          "idRole": 18,
+          "nom": "ROLE_SECTEUR",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 77
+        },
+        "role": {
+          "idRole": 77,
+          "nom": "ROLE_OPCVM",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 34
+        },
+        "role": {
+          "idRole": 34,
+          "nom": "ROLE_OBJECTIF_A_AFFECTER",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 62
+        },
+        "role": {
+          "idRole": 62,
+          "nom": "ROLE_OPERATION_CONDITION_INHABITUELLE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 11
+        },
+        "role": {
+          "idRole": 11,
+          "nom": "ROLE_MONNAIE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 9
+        },
+        "role": {
+          "idRole": 9,
+          "nom": "ROLE_CATEGORIE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 21
+        },
+        "role": {
+          "idRole": 21,
+          "nom": "ROLE_ALERTE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 55
+        },
+        "role": {
+          "idRole": 55,
+          "nom": "ROLE_OPERATION_NOUVELLE_RELATION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 12
+        },
+        "role": {
+          "idRole": 12,
+          "nom": "ROLE_PAYS",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 23
+        },
+        "role": {
+          "idRole": 23,
+          "nom": "ROLE_ACCESS",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 2
+        },
+        "role": {
+          "idRole": 2,
+          "nom": "ROLE_BUILDER",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 5
+        },
+        "role": {
+          "idRole": 5,
+          "nom": "ROLE_COMMUNE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 75
+        },
+        "role": {
+          "idRole": 75,
+          "nom": "ROLE_TYPEEMETTEUR",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 85
+        },
+        "role": {
+          "idRole": 85,
+          "nom": "ROLE_BANQUE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 48
+        },
+        "role": {
+          "idRole": 48,
+          "nom": "ROLE_PERSONNEL",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 71
+        },
+        "role": {
+          "idRole": 71,
+          "nom": "ROLE_COMPARTIMENT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 15
+        },
+        "role": {
+          "idRole": 15,
+          "nom": "ROLE_PRODUIT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 36
+        },
+        "role": {
+          "idRole": 36,
+          "nom": "ROLE_PLANIFICATION_RDV",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 19
+        },
+        "role": {
+          "idRole": 19,
+          "nom": "ROLE_MODELE_MSG_ALERTE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 8
+        },
+        "role": {
+          "idRole": 8,
+          "nom": "ROLE_QUARTIER",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 60
+        },
+        "role": {
+          "idRole": 60,
+          "nom": "ROLE_REGISTRE_CONFIDENTIEL",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 13
+        },
+        "role": {
+          "idRole": 13,
+          "nom": "ROLE_PERIODICITE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 33
+        },
+        "role": {
+          "idRole": 33,
+          "nom": "ROLE_AFFECTATION_OBJECTIF",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 52
+        },
+        "role": {
+          "idRole": 52,
+          "nom": "ROLE_TYPEAFFECTATION_TITRE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 81
+        },
+        "role": {
+          "idRole": 81,
+          "nom": "ROLE_SECTEURBOURSIER",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 28
+        },
+        "role": {
+          "idRole": 28,
+          "nom": "ROLE_FICHE_KYC",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 17
+        },
+        "role": {
+          "idRole": 17,
+          "nom": "ROLE_QUALITE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 73
+        },
+        "role": {
+          "idRole": 73,
+          "nom": "ROLE_SOUSTYPEACTION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 45
+        },
+        "role": {
+          "idRole": 45,
+          "nom": "ROLE_PAYS_GAFI",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 83
+        },
+        "role": {
+          "idRole": 83,
+          "nom": "ROLE_MORALE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 65
+        },
+        "role": {
+          "idRole": 65,
+          "nom": "ROLE_ETAT_ALPHA",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 30
+        },
+        "role": {
+          "idRole": 30,
+          "nom": "ROLE_CLIENT_PORTEFEUILLE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 76
+        },
+        "role": {
+          "idRole": 76,
+          "nom": "ROLE_TYPEEMISSION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 38
+        },
+        "role": {
+          "idRole": 38,
+          "nom": "ROLE_AUTORISATION_CR",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 32
+        },
+        "role": {
+          "idRole": 32,
+          "nom": "ROLE_POINT_SOUSCRIPTION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 1
+        },
+        "role": {
+          "idRole": 1,
+          "nom": "ROLE_DASHBOARD",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 39
+        },
+        "role": {
+          "idRole": 39,
+          "nom": "ROLE_PHYSIQUE_PROSPECT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 44
+        },
+        "role": {
+          "idRole": 44,
+          "nom": "ROLE_SOCIETE_GESTION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 82
+        },
+        "role": {
+          "idRole": 82,
+          "nom": "ROLE_PHYSIQUE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": [
+            {
+              "id": {
+                "idRole": 82,
+                "idPermis": 2
+              },
+              "permission": {
+                "idPermis": 2,
+                "codePermis": null,
+                "estPrincipale": true,
+                "libellePermis": "Consultation de liste",
+                "id": 2
+              }
+            },
+            {
+              "id": {
+                "idRole": 82,
+                "idPermis": 3
+              },
+              "permission": {
+                "idPermis": 3,
+                "codePermis": null,
+                "estPrincipale": false,
+                "libellePermis": "Modification d'un élément",
+                "id": 3
+              }
+            },
+            {
+              "id": {
+                "idRole": 82,
+                "idPermis": 1
+              },
+              "permission": {
+                "idPermis": 1,
+                "codePermis": null,
+                "estPrincipale": false,
+                "libellePermis": "Ajout d'un nouvel élément",
+                "id": 1
+              }
+            },
+            {
+              "id": {
+                "idRole": 82,
+                "idPermis": 4
+              },
+              "permission": {
+                "idPermis": 4,
+                "codePermis": null,
+                "estPrincipale": false,
+                "libellePermis": "Suppression d'un élément",
+                "id": 4
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 89
+        },
+        "role": {
+          "idRole": 89,
+          "nom": "ROLE_JOURNAL",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 37
+        },
+        "role": {
+          "idRole": 37,
+          "nom": "ROLE_COMPTE_RENDU",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 74
+        },
+        "role": {
+          "idRole": 74,
+          "nom": "ROLE_TYPEACTION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 20
+        },
+        "role": {
+          "idRole": 20,
+          "nom": "ROLE_MAIL",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 7
+        },
+        "role": {
+          "idRole": 7,
+          "nom": "ROLE_ARRONDISSEMENT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 50
+        },
+        "role": {
+          "idRole": 50,
+          "nom": "ROLE_DEPOT_RECENSE_ESPECE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 51
+        },
+        "role": {
+          "idRole": 51,
+          "nom": "ROLE_DEPOT_SUPERIEUR_A_CINQ_MILLIONS",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 67
+        },
+        "role": {
+          "idRole": 67,
+          "nom": "ROLE_OPCVM_DASHBOARD",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 69
+        },
+        "role": {
+          "idRole": 69,
+          "nom": "ROLE_FORMEJURIDIQUE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 64
+        },
+        "role": {
+          "idRole": 64,
+          "nom": "ROLE_ETAT_VOLATILITE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 63
+        },
+        "role": {
+          "idRole": 63,
+          "nom": "ROLE_OPERATION_CONDITION_NORMALE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 6
+        },
+        "role": {
+          "idRole": 6,
+          "nom": "ROLE_DEPARTEMENT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 68
+        },
+        "role": {
+          "idRole": 68,
+          "nom": "ROLE_SOUSCATEGORIE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 10
+        },
+        "role": {
+          "idRole": 10,
+          "nom": "ROLE_INDICATEUR",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 70
+        },
+        "role": {
+          "idRole": 70,
+          "nom": "ROLE_SYSTEMEDINFORMATION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 86
+        },
+        "role": {
+          "idRole": 86,
+          "nom": "ROLE_PHYSIQUE_SANCTIONNEE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 46
+        },
+        "role": {
+          "idRole": 46,
+          "nom": "ROLE_MORALE_DISTRIBUTEUR",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 47
+        },
+        "role": {
+          "idRole": 47,
+          "nom": "ROLE_PHYSIQUE_DISTRIBUTEUR",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 57
+        },
+        "role": {
+          "idRole": 57,
+          "nom": "ROLE_OPERATION_CLIENT_OCCASIONNEL",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 29
+        },
+        "role": {
+          "idRole": 29,
+          "nom": "ROLE_CLIENT_PAS_INVESTI",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 54
+        },
+        "role": {
+          "idRole": 54,
+          "nom": "ROLE_DEPOT_RECENSE_ANNEE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 58
+        },
+        "role": {
+          "idRole": 58,
+          "nom": "ROLE_TRANSACTION_SUSPECTE_INHABITUELLE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 25
+        },
+        "role": {
+          "idRole": 25,
+          "nom": "ROLE_LISTE_CR",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 4
+        },
+        "role": {
+          "idRole": 4,
+          "nom": "ROLE_MENU",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 49
+        },
+        "role": {
+          "idRole": 49,
+          "nom": "ROLE_MODE_ETABLISSEMENT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 80
+        },
+        "role": {
+          "idRole": 80,
+          "nom": "ROLE_TYPEOBLIGATION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 61
+        },
+        "role": {
+          "idRole": 61,
+          "nom": "ROLE_ALERTE_LAB",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 56
+        },
+        "role": {
+          "idRole": 56,
+          "nom": "ROLE_GELDEGEL",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 88
+        },
+        "role": {
+          "idRole": 88,
+          "nom": "ROLE_TYPEOPERATION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 59
+        },
+        "role": {
+          "idRole": 59,
+          "nom": "ROLE_SUIVI_CLIENT_SANCTION",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 79
+        },
+        "role": {
+          "idRole": 79,
+          "nom": "ROLE_TYPEGARANT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 16
+        },
+        "role": {
+          "idRole": 16,
+          "nom": "ROLE_TYPEDOCUMENT",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 3
+        },
+        "role": {
+          "idRole": 3,
+          "nom": "ROLE_DEGRE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      },
+      {
+        "id": {
+          "idUtilisateur": 1,
+          "idRole": 40
+        },
+        "role": {
+          "idRole": 40,
+          "nom": "ROLE_PHYSIQUE_ACTIONNAIRE",
+          "utilisateurs1": [],
+          "menus": [],
+          "permissions": []
+        }
+      }
+    ],
+    "permissions": [],
+    "exposeMotif": null
+  }
+},
+
+
+
+{
+  "id": null,
+  "idPersonne": null,
+  "nom": "ADJAGBO",
+  "prenom": "Maurice",
+  "sexe": "Masculin",
+  "dateNaissance": {
+    "year": 2024,
+    "month": 6,
+    "day": 10
+  },
+  "civilite": "M.",
+  "statutMatrimonial": "Célibataire",
+  "username": "maurice",
+  "password": "Alafia@12345",
+  "profession": {
+    "idProf": 111,
+    "libelleProfession": "TRADUCTRICE",
+    "personneDtos": null
+  },
+  "paysNationalite": {
+    "idPays": 59,
+    "libelleFr": "Bénin",
+    "libelleEn": "Benin",
+    "indicatif": 229,
+    "estGafi": false,
+    "rdvDtos": [],
+    "personnePhysiquePaysDtos": null,
+    "monnaieDto": {
+      "codeMonnaie": "XOF",
+      "nom": "FCFA",
+      "paysDtos": []
+    }
+  },
+  "mobile1": "97563214",
+  "paysResidence": {
+    "idPays": 59,
+    "libelleFr": "Bénin",
+    "libelleEn": "Benin",
+    "indicatif": 229,
+    "estGafi": false,
+    "rdvDtos": [],
+    "personnePhysiquePaysDtos": null,
+    "monnaieDto": {
+      "codeMonnaie": "XOF",
+      "nom": "FCFA",
+      "paysDtos": []
+    }
+  },
+  "mobile2": null,
+  "estActif": true,
+  "emailPro": null,
+  "emailPerso": null,
+  "allRoles": [
+    {
+      "id": {
+        "idRole": 22
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 22,
+        "idRole": 22
+      },
+      "etat": false,
+      "permissions": [
+        {
+          "id": {
+            "idPermis": 3,
+            "idRole": 22
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 22,
+            "idRole": 22,
+            "nom": "ROLE_UTILISATEUR"
+          },
+          "permission": {
+            "id": 3,
+            "idPermis": 3,
+            "libellePermis": "Modification d'un élément"
+          },
+          "etat": false
+        },
+        {
+          "id": {
+            "idPermis": 4,
+            "idRole": 22
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 22,
+            "idRole": 22,
+            "nom": "ROLE_UTILISATEUR"
+          },
+          "permission": {
+            "id": 4,
+            "idPermis": 4,
+            "libellePermis": "Suppression d'un élément"
+          },
+          "etat": false
+        },
+        {
+          "id": {
+            "idPermis": 2,
+            "idRole": 22
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 22,
+            "idRole": 22,
+            "nom": "ROLE_UTILISATEUR"
+          },
+          "permission": {
+            "id": 2,
+            "idPermis": 2,
+            "libellePermis": "Consultation de liste"
+          },
+          "etat": false
+        },
+        {
+          "id": {
+            "idPermis": 1,
+            "idRole": 22
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 22,
+            "idRole": 22,
+            "nom": "ROLE_UTILISATEUR"
+          },
+          "permission": {
+            "id": 1,
+            "idPermis": 1,
+            "libellePermis": "Ajout d'un nouvel élément"
+          },
+          "etat": false
+        }
+      ]
+    },
+    {
+      "id": {
+        "idRole": 82
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 82,
+        "idRole": 82
+      },
+      "etat": true,
+      "permissions": [
+        {
+          "id": {
+            "idPermis": 1,
+            "idRole": 82
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 82,
+            "idRole": 82,
+            "nom": "ROLE_PHYSIQUE"
+          },
+          "permission": {
+            "id": 1,
+            "idPermis": 1,
+            "libellePermis": "Ajout d'un nouvel élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 3,
+            "idRole": 82
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 82,
+            "idRole": 82,
+            "nom": "ROLE_PHYSIQUE"
+          },
+          "permission": {
+            "id": 3,
+            "idPermis": 3,
+            "libellePermis": "Modification d'un élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 2,
+            "idRole": 82
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 82,
+            "idRole": 82,
+            "nom": "ROLE_PHYSIQUE"
+          },
+          "permission": {
+            "id": 2,
+            "idPermis": 2,
+            "libellePermis": "Consultation de liste"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 4,
+            "idRole": 82
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 82,
+            "idRole": 82,
+            "nom": "ROLE_PHYSIQUE"
+          },
+          "permission": {
+            "id": 4,
+            "idPermis": 4,
+            "libellePermis": "Suppression d'un élément"
+          },
+          "etat": true
+        }
+      ]
+    },
+    {
+      "id": {
+        "idRole": 96
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 96,
+        "idRole": 96
+      },
+      "etat": true,
+      "permissions": [
+        {
+          "id": {
+            "idPermis": 3,
+            "idRole": 96
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 96,
+            "idRole": 96,
+            "nom": "ROLE_POSTECOMPTABLE"
+          },
+          "permission": {
+            "id": 3,
+            "idPermis": 3,
+            "libellePermis": "Modification d'un élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 1,
+            "idRole": 96
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 96,
+            "idRole": 96,
+            "nom": "ROLE_POSTECOMPTABLE"
+          },
+          "permission": {
+            "id": 1,
+            "idPermis": 1,
+            "libellePermis": "Ajout d'un nouvel élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 4,
+            "idRole": 96
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 96,
+            "idRole": 96,
+            "nom": "ROLE_POSTECOMPTABLE"
+          },
+          "permission": {
+            "id": 4,
+            "idPermis": 4,
+            "libellePermis": "Suppression d'un élément"
+          },
+          "etat": true
+        },
+        {
+          "id": {
+            "idPermis": 2,
+            "idRole": 96
+          },
+          "utilisateur": {},
+          "role": {
+            "id": 96,
+            "idRole": 96,
+            "nom": "ROLE_POSTECOMPTABLE"
+          },
+          "permission": {
+            "id": 2,
+            "idPermis": 2,
+            "libellePermis": "Consultation de liste"
+          },
+          "etat": true
+        }
+      ]
+    }
+  ],
+  "utilisateurRoles": [],
+  "roles1": [
+    {
+      "id": {
+        "idRole": 82
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 82,
+        "idRole": 82
+      }
+    },
+    {
+      "id": {
+        "idRole": 96
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 96,
+        "idRole": 96
+      }
+    }
+  ],
+  "permissions": [
+    {
+      "id": {
+        "idRole": 82,
+        "idPermis": 1
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 82,
+        "idRole": 82,
+        "nom": "ROLE_PHYSIQUE"
+      },
+      "permission": {
+        "id": 1,
+        "idPermis": 1,
+        "libellePermis": "Ajout d'un nouvel élément"
+      }
+    },
+    {
+      "id": {
+        "idRole": 82,
+        "idPermis": 3
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 82,
+        "idRole": 82,
+        "nom": "ROLE_PHYSIQUE"
+      },
+      "permission": {
+        "id": 3,
+        "idPermis": 3,
+        "libellePermis": "Modification d'un élément"
+      }
+    },
+    {
+      "id": {
+        "idRole": 82,
+        "idPermis": 2
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 82,
+        "idRole": 82,
+        "nom": "ROLE_PHYSIQUE"
+      },
+      "permission": {
+        "id": 2,
+        "idPermis": 2,
+        "libellePermis": "Consultation de liste"
+      }
+    },
+    {
+      "id": {
+        "idRole": 82,
+        "idPermis": 4
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 82,
+        "idRole": 82,
+        "nom": "ROLE_PHYSIQUE"
+      },
+      "permission": {
+        "id": 4,
+        "idPermis": 4,
+        "libellePermis": "Suppression d'un élément"
+      }
+    },
+    {
+      "id": {
+        "idRole": 96,
+        "idPermis": 3
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 96,
+        "idRole": 96,
+        "nom": "ROLE_POSTECOMPTABLE"
+      },
+      "permission": {
+        "id": 3,
+        "idPermis": 3,
+        "libellePermis": "Modification d'un élément"
+      }
+    },
+    {
+      "id": {
+        "idRole": 96,
+        "idPermis": 1
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 96,
+        "idRole": 96,
+        "nom": "ROLE_POSTECOMPTABLE"
+      },
+      "permission": {
+        "id": 1,
+        "idPermis": 1,
+        "libellePermis": "Ajout d'un nouvel élément"
+      }
+    },
+    {
+      "id": {
+        "idRole": 96,
+        "idPermis": 4
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 96,
+        "idRole": 96,
+        "nom": "ROLE_POSTECOMPTABLE"
+      },
+      "permission": {
+        "id": 4,
+        "idPermis": 4,
+        "libellePermis": "Suppression d'un élément"
+      }
+    },
+    {
+      "id": {
+        "idRole": 96,
+        "idPermis": 2
+      },
+      "utilisateur": {},
+      "role": {
+        "id": 96,
+        "idRole": 96,
+        "nom": "ROLE_POSTECOMPTABLE"
+      },
+      "permission": {
+        "id": 2,
+        "idPermis": 2,
+        "libellePermis": "Consultation de liste"
+      }
+    }
+  ],
+  "user": null
+}

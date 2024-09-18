@@ -1,0 +1,146 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">N° Compte</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNumeroPositifValidators type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="numCompteComptable"
+                     [ngClass]="{ 'is-invalid': submitted && f.numCompteComptable.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.numCompteComptable.errors" class="invalid-feedback">
+                <div *ngIf="f.numCompteComptable.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libellé</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libelleCompteComptable"
+                     [ngClass]="{ 'is-invalid': submitted && f.libelleCompteComptable.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libelleCompteComptable.errors" class="invalid-feedback">
+                <div *ngIf="f.libelleCompteComptable.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Mouvement</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="sensMvt"
+                      [ngClass]="{ 'is-invalid': submitted && f.sensMvt.errors }">
+                <option disabled value="null">Sélectionnez un mouvement...</option>
+                <option ngValue="D">D</option>
+                <option ngValue="C">C</option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.sensMvt.errors" class="invalid-feedback">
+                <div *ngIf="f.sensMvt.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+
+            <div class="col-md-3 fv-row">
+              <div class="form-group d-flex flex-stack">
+                <div class="d-flex justify-content-end">
+                  <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                    <input type="checkbox" checked="checked" formControlName="estMvt" [value]="true"
+                           class="form-check-input ng-untouched ng-pristine ng-valid">
+                    <label class="form-check-label text-gray-700 fw-bold text-nowrap">MVT?</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Bilan/Hors bilan</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="bilanHorsBilan"
+                      [ngClass]="{ 'is-invalid': submitted && f.bilanHorsBilan.errors }">
+                <option disabled value="null">Sélectionnez un élément...</option>
+                <option ngValue="BILAN">BILAN</option>
+                <option ngValue="HORS BILAN">HORS BILAN</option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.bilanHorsBilan.errors" class="invalid-feedback">
+                <div *ngIf="f.bilanHorsBilan.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Type</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="type"
+                      [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+                <option disabled value="null">Sélectionnez un type...</option>
+                <option ngValue="ANALYTIQUE">ANALYTIQUE</option>
+                <option ngValue="NON ANALYTIQUE">NON ANALYTIQUE</option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                <div *ngIf="f.type.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Emetteur buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" (click)="modal.dismiss()" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Emetteur buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

@@ -1,0 +1,58 @@
+<div class="card card-flush" *ngIf="mail$">
+    <!--begin::Card body-->
+    <div class="card-body py-3">
+        <!--begin::Table-->
+        <table class="table align-middle gs-0 gy-5">
+            <tbody class="fw-semibold text-gray-600">
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Id</th>
+                <td>{{ mail$.idMail }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Date d'envoi</th>
+                <td>{{ mail$.dateEnvoi |date:'dd/MM/yyyy hh:mm:ss'}}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Objet</th>
+                <td>{{ mail$.objet}}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Contenu</th>
+                <td [innerHTML]="mail$.msg"></td>
+            </tr>
+            </tbody>
+        </table>
+        <!--end::Table-->
+        <h1>Destinataire(s)</h1>
+        <!--Personne à contacter-->
+        <table class="table align-middle gs-0 gy-5">
+            <tbody class="fw-semibold text-gray-600">
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Nom</th>
+                <!--                <td>{{ entity.nomContact }}</td>-->
+            </tr>
+            <tr *ngFor="let envoiMail of envoiMail$" class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">{{envoiMail.personneDto.denomination}}</th>
+                <!--                <td>{{ entity.prenomContact }}</td>-->
+            </tr>
+            </tbody>
+        </table>
+
+      <h1>Document(s)</h1>
+      <!--Pièces jointes-->
+      <table class="table align-middle gs-0 gy-5">
+        <tbody class="fw-semibold text-gray-600">
+        <tr *ngFor="let documentMail of documentMail$" class="d-flex justify-content-between">
+          <th class="fw-bold fs-7 text-uppercase">{{documentMail.documentDto.nomDoc}}.{{documentMail.documentDto.extensionDoc}}</th>
+          <th [hidden]="true" class="fw-bold fs-7 text-uppercase">{{documentMail.documentDto.idDoc}}</th>
+          <button  class="btn btn-sm btn-success input-group-text" style="width: 100px;height: 40px"
+                   (click)="openFile(documentMail.documentDto.idDoc,
+                   documentMail.documentDto.nomDoc,documentMail.documentDto.extensionDoc)">Télécharger</button>
+          <!--                <td>{{ entity.prenomContact }}</td>-->
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <!--end::Card body-->
+</div>

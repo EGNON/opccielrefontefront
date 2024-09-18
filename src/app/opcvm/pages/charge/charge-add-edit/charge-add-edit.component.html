@@ -1,0 +1,147 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Type charge</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="typeCharge"
+                      [ngClass]="{ 'is-invalid': submitted && f.typeCharge.errors }"
+              (change)="appliquerTypeCharge()">
+                <option disabled value="null">Sélectionnez un type...</option>
+                <option ngValue="VARIABLE">VARIABLE</option>
+                <option ngValue="FIXE">FIXE</option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.typeCharge.errors" class="invalid-feedback">
+                <div *ngIf="f.typeCharge.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+
+            <div *ngIf="estVisibleAppliquerTypeCharge" class="col-md-6 fv-row">
+            <div class="d-flex justify-content-end">
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="radio" checked="checked" [value]="true"
+                       formControlName="appliquerSurActifNet" class="form-check-input ng-untouched ng-pristine ng-valid">
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Appliquer sur actif brut</label>
+              </div>
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="radio" [value]="false" formControlName="appliquerSurActifNet"
+                       class="form-check-input ng-untouched ng-pristine ng-valid">
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Appliquer sur portefeuille</label>
+              </div>
+            </div>
+          </div>
+            <!--end::Col-->
+          </div>
+          <div class="row mb-5">
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Code charge</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input  type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="codeCharge"
+                     [ngClass]="{ 'is-invalid': submitted && f.codeCharge.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.codeCharge.errors" class="invalid-feedback">
+                <div *ngIf="f.codeCharge.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Désignation</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input  type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="designation"
+                     [ngClass]="{ 'is-invalid': submitted && f.designation.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+                <div *ngIf="f.designation.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <div class="row mb-5">
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Modèle</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="natureOperation"
+                      [ngClass]="{ 'is-invalid': submitted && f.natureOperation.errors }" >
+                <option selected>Sélectionnez un modèle...</option>
+                <option [defaultSelected]="true" [ngValue]="entity?.natureOperation" [disabled]="true">
+                  {{ entity?.natureOperation?.libelleNatureOperation }}
+                </option>
+                <option *ngFor="let item of natureOperation$" [ngValue]="item">
+                  {{ item.libelleNatureOperation }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.natureOperation.errors" class="invalid-feedback">
+                <div *ngIf="f.natureOperation.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Taux/Montant</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input  type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="montant"
+                     [ngClass]="{ 'is-invalid': submitted && f.montant.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.montant.errors" class="invalid-feedback">
+                <div *ngIf="f.montant.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" [routerLink]="['/opcvm/standard/chargeaetaler']" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

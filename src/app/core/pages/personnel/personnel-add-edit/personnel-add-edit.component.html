@@ -1,0 +1,292 @@
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <div class="row mb-0">
+            <label class="col-lg-2 col-form-label fw-bold fs-6">Est un commercial ?</label>
+            <div class="col-lg-10 d-flex align-items-center">
+              <div class="form-check form-check-solid form-switch fv-row">
+                <input type="checkbox" formControlName="estCommercial" class="form-check-input w-45px h-30px">
+                <label class="form-check-label"></label>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Civilité</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="civilite"
+                      [ngClass]="{ 'is-invalid': submitted && f.civilite.errors }">
+                <option  disabled value="null">Sélectionnez une civilité...</option>
+                <option value="M.">M.</option>
+                <option value="Mme.">Mme.</option>
+                <option value="Mlle.">Mlle.</option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.civilite.errors" class="invalid-feedback">
+                <div *ngIf="f.civilite.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Statut matrimonial</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="statutMatrimonial"
+                      [ngClass]="{ 'is-invalid': submitted && f.statutMatrimonial.errors }">
+                <option  disabled value="null">Sélectionnez le statut matrimonial...</option>
+                <option value="Célibataire">Célibataire</option>
+                <option value="Célibataire avec enfant(s)">Célibataire avec enfant(s)</option>
+                <option value="Marié(e)">Marié(e)</option>
+                <option value="Veuf(ve)">Veuf(ve)</option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.statutMatrimonial.errors" class="invalid-feedback">
+                <div *ngIf="f.statutMatrimonial.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Nom</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="Nom" formControlName="nom"
+                     [ngClass]="{ 'is-invalid': submitted && f.nom.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                <div *ngIf="f.nom.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Prénom(s)</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="Prénom(s)" formControlName="prenom"
+                     [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback">
+                <div *ngIf="f.prenom.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Sexe</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="sexe"
+                      [ngClass]="{ 'is-invalid': submitted && f.sexe.errors }">
+                <option disabled value="null">Sélectionnez un sexe...</option>
+                <option ngValue="Masculin">Masculin</option>
+                <option ngValue="Féminin">Féminin</option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.sexe.errors" class="invalid-feedback">
+                <div *ngIf="f.sexe.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date de naissance</label>
+              <!--end::Label-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="dd-mm-yyyy" ngbDatepicker #d1="ngbDatepicker"
+                       formControlName="dateNaissance" [ngClass]="{ 'is-invalid': submitted && f.dateNaissance.errors }"/>
+                <!--end::Input-->
+                <span (click)="d1.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+
+              <div *ngIf="submitted && f.dateNaissance.errors" class="invalid-feedback">
+                <div *ngIf="f.dateNaissance.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Nationalité</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="paysNationalite"
+                      [ngClass]="{ 'is-invalid': submitted && f.paysNationalite.errors }">
+                <option [defaultSelected]="true" disabled [ngValue]="defaultPaysNationalite" *ngIf="defaultPaysNationalite">
+                  {{ defaultPaysNationalite.libelleFr }}</option>
+                <option *ngFor="let item of payss$" [ngValue]="item">
+                  {{ item.libelleFr }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.paysNationalite.errors" class="invalid-feedback">
+                <div *ngIf="f.paysNationalite.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Pays de résidence</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="paysResidence"
+                      [ngClass]="{ 'is-invalid': submitted && f.paysResidence.errors }">
+                <option [defaultSelected]="true" disabled [ngValue]="defaultPaysResidence"
+                        *ngIf="defaultPaysResidence">
+                  {{ defaultPaysResidence.libelleFr }}</option>
+                <option *ngFor="let item of payss$" [ngValue]="item">
+                  {{ item.libelleFr }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.paysResidence.errors" class="invalid-feedback">
+                <div *ngIf="f.paysResidence.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Profession</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="profession"
+                      [ngClass]="{ 'is-invalid': submitted && f.profession.errors }">
+                <option [defaultSelected]="true" disabled [ngValue]="defaultProfession"
+                        *ngIf="defaultProfession">
+                  {{ defaultProfession.libelleProfession }}</option>
+                <option *ngFor="let item of professions$" [ngValue]="item">
+                  {{ item.libelleProfession }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.paysNationalite.errors" class="invalid-feedback">
+                <div *ngIf="f.paysNationalite.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Mobile 1</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNumeroPositifValidators type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="Mobile 1" formControlName="mobile1"
+                     [ngClass]="{ 'is-invalid': submitted && f.mobile1.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.mobile1.errors" class="invalid-feedback">
+                <div *ngIf="f.mobile1.errors.required">Mobile 1 est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Email professionnel</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="Email professionnel" formControlName="emailPro"
+                     [ngClass]="{ 'is-invalid': submitted && f.emailPro.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.emailPro.errors" class="invalid-feedback">
+                <div *ngIf="f.emailPro.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Email personnel</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="Email personnel" formControlName="emailPerso"
+                     [ngClass]="{ 'is-invalid': submitted && f.emailPerso.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.emailPerso.errors" class="invalid-feedback">
+                <div *ngIf="f.emailPerso.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" [routerLink]="['/app/administration/personnels']" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+							  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+              </span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+

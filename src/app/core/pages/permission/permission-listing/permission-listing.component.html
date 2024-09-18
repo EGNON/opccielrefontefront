@@ -1,0 +1,103 @@
+<div class="card">
+    <div class="card-header border-0 pt-6">
+        <!--begin::Card title-->
+        <div class="card-title">
+            <!--begin::Search-->
+            <div class="d-flex align-items-center position-relative my-1">
+                <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                <input type="text" data-action="filter" class="form-control form-control-sm form-control-solid w-250px ps-12"
+                       placeholder="Rechercher une permission">
+            </div>
+            <!--end::Search-->
+        </div>
+        <!--begin::Card title-->
+
+        <!--begin::Card toolbar-->
+        <div class="card-toolbar">
+            <!--begin::Toolbar-->
+            <div class="d-flex justify-content-end">
+                <!--begin::Add permission-->
+                <button type="button" class="btn btn-sm btn-primary" data-action="create">
+                    Ajouter une permission
+                </button>
+                <!--end::Add permission-->
+            </div>
+            <!--end::Toolbar-->
+        </div>
+        <!--end::Card toolbar-->
+    </div>
+
+    <div class="card-body pt-0">
+        <app-crud
+          [datatableConfig]="datatableConfig"
+          route="/apps/users"
+          (deleteEvent)="delete($event)"
+          (editEvent)="edit($event)"
+          (createEvent)="create()"
+          [reload]="reloadEvent"
+          [modal]="formModal">
+        </app-crud>
+    </div>
+</div>
+
+<swal #noticeSwal [swalOptions]="swalOptions">
+</swal>
+
+<ng-template #formModal let-modal>
+    <form #myForm="ngForm" (ngSubmit)="onSubmit($event, myForm)">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Détails de la permission</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex flex-column scroll-y me-n7 pe-7 mw-650px" id="kt_modal_update_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
+             data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_customer_header" data-kt-scroll-wrappers="#kt_modal_update_customer_scroll"
+          data-kt-scroll-offset="300px">
+          <!--begin::User toggle-->
+          <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" role="button" (click)="collapse1.toggle()" [attr.aria-expanded]="!isCollapsed1" aria-controls="kt_modal_update_customer_user_info">
+            Information permission
+            <span class="ms-2 rotate-180">
+              <i class="ki-duotone ki-down fs-3" [ngClass]="{ 'ki-up': !isCollapsed1 }"></i>
+            </span>
+          </div>
+          <!--end::User toggle-->
+          <!--begin::User form-->
+          <div class="collapse show" #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed1">
+            <!--begin::Input group-->
+            <div class="fv-row mb-7">
+              <!--begin::Label-->
+              <label class="required fw-semibold fs-6 mb-2">Intitulé</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid" name="libellePermis" [(ngModel)]="permissionModel.libellePermis" #name="ngModel" required minlength="4" />
+              <div *ngIf="myForm.submitted && myForm.invalid" class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                <div *ngIf="name.errors?.['required']">La permission est requise</div>
+                <div *ngIf="name.errors?.['minlength']">La permission doit contenir au moins 4 caractères</div>
+              </div>
+              <!--end::Input-->
+            </div>
+            <!--end::Input group-->
+          </div>
+          <!--end::User form-->
+        </div>
+      </div>
+      <div class="modal-footer flex-center">
+        <!--begin::Button-->
+        <button type="reset" id="kt_modal_update_customer_cancel" class="btn btn-sm btn-light me-3" (click)="modal.dismiss('cancel')">
+          Annuler
+        </button>
+        <!--end::Button-->
+
+        <!--begin::Button-->
+        <button type="submit" id="kt_modal_update_customer_submit" class="btn btn-sm btn-primary" [attr.data-kt-indicator]="isLoading ? 'on' : 'off'">
+          <span class="indicator-label">
+            Enregistrer
+          </span>
+          <span class="indicator-progress">
+            Patientez svp... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+          </span>
+        </button>
+        <!--end::Button-->
+      </div>
+    </form>
+</ng-template>

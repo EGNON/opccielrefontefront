@@ -1,0 +1,32 @@
+@media print {
+  .t1 {
+    border: solid;
+    border-color: black;
+    border-collapse: collapse;
+    margin:0 auto;
+  }
+
+  .t1 td {
+    border: solid;
+    border-color: black;
+
+  }
+  .client1 {
+    display:inline-block;
+    width:12em;
+    margin-left: 10px;
+  }
+
+  .client2 {
+    display:inline-block;
+    width:15em;
+    margin-left: 10px;
+  }
+  .div1 {
+    display: inline-block;
+  }
+  p{
+  //display: inline-block;
+    margin-top: 0px;
+  }
+}

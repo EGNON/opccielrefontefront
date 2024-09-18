@@ -1,0 +1,66 @@
+<ng-container *ngIf="qualites$|async as qualites">
+  <ul class="nav nav-tabs" role="tablist">
+    <ng-container *ngFor="let qualite of qualites; let i = index">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" [ngClass]="{ active: i === 0}" id="simple-tab-{{i}}" data-bs-toggle="tab" href="#simple-tabpanel-{{i}}" [attr.data-id]="qualite.idQualite"
+           role="tab" [attr.aria-controls]="'simple-tabpanel-'+i" aria-selected="true" (click)="changerQualite(qualite, i)">{{ qualite.libelleQualite | uppercase }}</a>
+      </li>
+    </ng-container>
+  </ul>
+  <div class="tab-content pt-5" id="tab-content">
+    <div *ngFor="let qualite of qualites; let i = index" class="tab-pane" [ngClass]="{ active: i === 0}"
+         id="simple-tabpanel-{{i}}" role="tabpanel" [attr.aria-labelledby]="'simple-tab-' + i">
+      <ng-container *ngIf="showForm === 0">
+        <div class="card">
+          <div class="card-header border-0 pt-6">
+            <!--begin::Card title-->
+            <div class="card-title">
+              <!--begin::Search-->
+              <div class="d-flex align-items-center position-relative my-1">
+                <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12"
+                       [placeholder]="searchButtonTitle">
+              </div>
+              <!--end::Search-->
+            </div>
+            <!--begin::Card title-->
+
+            <!--begin::Card toolbar-->
+            <div class="card-toolbar">
+              <!--begin::Toolbar-->
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-sm btn-primary" data-action="create" [attr.data-qualite]="qualite">
+                  {{ newButtonTitle | titlecase }}
+                </button>
+              </div>
+              <!--end::Toolbar-->
+            </div>
+            <!--end::Card toolbar-->
+          </div>
+          <div class="card-body pt-0">
+            <div class="table-responsive angular-bootstrap-table">
+              <ng-container *ngIf="tabIndex === i">
+                <app-entity-crud
+                  [datatableConfig]="getDataTableConfig(qualite)"
+                  route="/standard/parametre/personne"
+                  [reload]="reloadEvent">
+                </app-entity-crud>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="showForm === 1">
+        <app-morale-details [id]="id$.value" (showForm)="retourAlaListe($event)">
+        </app-morale-details>
+      </ng-container>
+      <ng-container *ngIf="showForm === 2">
+        <app-morale-showing [id]="id$.value" (showForm)="retourAlaListe($event)">
+        </app-morale-showing>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+<swal #noticeSwal [swalOptions]="swalOptions">
+</swal>

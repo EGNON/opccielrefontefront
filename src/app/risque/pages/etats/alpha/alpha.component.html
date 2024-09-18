@@ -1,0 +1,77 @@
+<div class="card">
+    <form [formGroup]="form">
+        <div class="row mb-5">
+            <div class="col-md-3 fv-row">
+                <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Fonds</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <select
+                        class="form-select form-select-sm form-select-solid"
+                        id="ComboOpcvm" formControlName="denominationOpcvm" >
+                    <option selected>Sélectonnez un fonds</option>
+                  <option *ngFor="let opcvm of opcvm$"
+                          value="{{opcvm[0]}}">{{opcvm[21]}}</option>
+                  <!--                <option>Tous</option>-->
+                </select>
+            </div>
+
+            <div class="col-md-3 fv-row">
+                <label style="margin-top: 10px" class=" fs-5 fw-semibold mb-2">Année début</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="" id="anneeDebut" formControlName="anneeDebut"/>
+                <!--end::Input-->
+            </div>
+            <div class="col-md-3 fv-row">
+                <label style="margin-top: 10px" class=" fs-5 fw-semibold mb-2">Année fin</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="" id="anneeFin" formControlName="anneeFin"/>
+                <!--end::Input-->
+            </div>
+
+            <div class="col-md-2 fv-row">
+                <button  class="btn btn-sm btn-primary" style="margin-top: 40px" (click)="valider()" >
+                   Valider
+                </button>
+            </div>
+        </div>
+    </form>
+    <hr>
+<!--    <div class="card-body pt-0">-->
+<!--        <div class="table-responsive angular-bootstrap-table">-->
+<!--            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">-->
+<!--                <thead>-->
+<!--                <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">-->
+<!--                    <th>DATE .</th>-->
+<!--                    <th>VL</th>-->
+<!--                    <th>Dividende distribuée</th>-->
+<!--                    <th>Performance annuelle</th>-->
+<!--                    <th>Indice de référence</th>-->
+<!--                    <th>Alpha</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody class="fw-semibold text-gray-600">-->
+<!--                <tr *ngFor="let item of reportList">-->
+<!--                    <td>{{ item.dateOuverture | date:"dd MMMM yyyy 'à' hh:mm" }}</td>-->
+<!--                    <td>{{ item.vl |number}}</td>-->
+<!--                    <td>{{ item.dividendeDistribue |number}}</td>-->
+<!--                    <td>{{ item.performanceAnnuelle |number}}</td>-->
+<!--                    <td>{{ item.indiceReference |number}}</td>-->
+<!--                    <td>{{ item.alpha |number}}</td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+  <div class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table align-middle table-row-dashed fs-6 gy-5 no-footer" id="datatable_Alpha">
+
+      </table>
+    </div>
+  </div>
+</div>
+

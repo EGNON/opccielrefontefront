@@ -1,0 +1,11 @@
+.flex-input-container {
+  display: flex;
+}
+
+.flex-input-child {
+  flex: 1;
+}
+
+.flex-input-child:first-child {
+  margin-right: 5px;
+}

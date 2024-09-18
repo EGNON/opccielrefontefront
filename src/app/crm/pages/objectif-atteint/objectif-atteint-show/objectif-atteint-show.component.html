@@ -1,0 +1,51 @@
+<div class="card card-flush" *ngIf="affectation$">
+  <!--begin::Card body-->
+  <div class="card-body py-3">
+    <!--begin::Table-->
+    <table class="table align-middle gs-0 gy-5">
+      <tbody class="fw-semibold text-gray-600">
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Id</th>
+        <td>{{ affectation$.idAffectation }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Date affectation</th>
+        <td>{{ affectation$.dateAffectation|date:'dd/MM/yyyy'}}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Date soumission</th>
+        <td>{{ affectation$.dateSoumission|date:'dd/MM/yyyy'}}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Agent</th>
+        <td>{{ affectation$.personnel.denomination}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <!--end::Table-->
+    <h1>modèle(s)</h1>
+    <!--Personne à contacter-->
+    <!--    <table class="table align-middle gs-0 gy-5">-->
+    <table class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5">
+      <tbody class="fw-semibold text-gray-600">
+      <tr>
+        <th class="fw-bold fs-7 text-uppercase">Catégorie</th>
+        <th class="fw-bold fs-7 text-uppercase">Indicateur</th>
+        <th class="fw-bold fs-7 text-uppercase">Périodicité</th>
+        <th class="fw-bold fs-7 text-uppercase">Valeur affectée</th>
+        <th class="fw-bold fs-7 text-uppercase">Valeur réelle</th>
+        <!--                <td>{{ entity.nomContact }}</td>-->
+      </tr>
+      <tr *ngFor="let objectifAffecte of objectifAffecte$" >
+        <th class="fw-bold fs-7 text-uppercase">{{objectifAffecte.categoriePersonne.libelle}}</th>
+        <th class="fw-bold fs-7 text-uppercase">{{objectifAffecte.indicateur.libelle}}</th>
+        <th class="fw-bold fs-7 text-uppercase">{{objectifAffecte.periodicite.libelle}}</th>
+        <th class="fw-bold fs-7 text-uppercase">{{objectifAffecte.valeurAffecte}}</th>
+        <th class="fw-bold fs-7 text-uppercase">{{objectifAffecte.valeurReelle}}</th>
+        <!--                <td>{{ entity.prenomContact }}</td>-->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--end::Card body-->
+</div>

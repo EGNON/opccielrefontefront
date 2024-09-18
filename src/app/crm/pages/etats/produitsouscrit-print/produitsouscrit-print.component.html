@@ -1,0 +1,283 @@
+<!--&lt;!&ndash;begin::Products&ndash;&gt;-->
+<!--<div class="card card-flush">-->
+
+<!--  &lt;!&ndash;begin::Card header&ndash;&gt;-->
+<!--  <div class="card-header align-items-center py-5 gap-2 gap-md-5">-->
+<!--    <form [formGroup]="formData">-->
+<!--&lt;!&ndash;    &lt;!&ndash;end::Card title&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    &lt;!&ndash;begin::Card toolbar&ndash;&gt;&ndash;&gt;-->
+<!--    <div class="d-flex flex-column flex-lg-row mb-0">-->
+<!--&lt;!&ndash;      &lt;!&ndash;begin::Content&ndash;&gt;&ndash;&gt;-->
+<!--      <div class="flex-lg-row-fluid me-0 me-lg-0">-->
+<!--&lt;!&ndash;       &ndash;&gt;-->
+<!--        <div class="row mb-5">-->
+<!--          &lt;!&ndash;begin::Col&ndash;&gt;-->
+<!--          &lt;!&ndash;            <div class="col-md-12 fv-row">&ndash;&gt;-->
+<!--          &lt;!&ndash;begin::Label&ndash;&gt;-->
+
+<!--      <div class="col-md-6 fv-row">-->
+<!--          <label class="required fs-5 fw-semibold mb-2">Chargé(s)</label>-->
+<!--          &lt;!&ndash;end::Label&ndash;&gt;-->
+<!--          &lt;!&ndash;begin::Input&ndash;&gt;-->
+<!--          <select-->
+<!--            class="form-select form-select-sm form-select-solid"-->
+<!--            id="ComboPersonnel">-->
+<!--            <option selected>Sélectonnez un chargé</option>-->
+<!--            <option *ngFor="let personnel of personnel$.content"-->
+<!--                    value="{{personnel.idPersonne}}">{{personnel.denomination}}</option>-->
+<!--            <option>Tous</option>-->
+<!--          </select>-->
+<!--        </div>-->
+
+<!--          &lt;!&ndash;begin::Label&ndash;&gt;-->
+<!--      <div class="col-md-6 fv-row">-->
+<!--          <label class="required fs-5 fw-semibold mb-2">Début</label>-->
+<!--          &lt;!&ndash;end::Label&ndash;&gt;-->
+<!--          &lt;!&ndash;begin::Input&ndash;&gt;-->
+<!--          <input type="date"  class="form-control form-control-sm form-control-solid"-->
+<!--                 placeholder="" formControlName="dateDeb"/>-->
+<!--      </div>-->
+
+<!--          &lt;!&ndash;begin::Label&ndash;&gt;-->
+<!--          <div class="col-md-6 fv-row">-->
+<!--          <label class="required fs-5 fw-semibold mb-2">Fin</label>-->
+<!--          &lt;!&ndash;end::Label&ndash;&gt;-->
+<!--          &lt;!&ndash;begin::Input&ndash;&gt;-->
+<!--          <input type="date"  class="form-control form-control-sm form-control-solid"-->
+<!--                 placeholder="" formControlName="dateFin"/>-->
+<!--        </div>-->
+<!--          &lt;!&ndash;    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">&ndash;&gt;-->
+<!--          <div class="col-md-6 fv-row">-->
+<!--            &lt;!&ndash;begin::Add Monnaie&ndash;&gt;-->
+
+<!--            <a (click)="afficherProduitSouscrit()" style="margin-right: 5px;margin-top: 20px"  class="btn btn-primary">Valider</a>-->
+<!--            <button printTitle="Points des souscriptions du {{dateDeb.substring(0,10)}} au {{dateFin.substring(0,10)}}"-->
+<!--                    printSectionId="print-section"-->
+<!--                    ngxPrint-->
+<!--                    styleSheetFile="assets/css/print.css"-->
+<!--                    class="btn btn-primary"-->
+<!--                    style="margin-top: 20px">Imprimer</button>-->
+<!--            &lt;!&ndash;end::Add Monnaie&ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash;end::Card toolbar&ndash;&gt;-->
+
+<!--        </div>-->
+
+<!--    </div>-->
+
+<!--    </div>-->
+<!--  </form>-->
+<!--  </div>-->
+<!--  &lt;!&ndash;end::Card header&ndash;&gt;-->
+<!--  <div>-->
+<!--    <div class="card-body pt-0" id="print-section">-->
+<!--      <div class="table-responsive angular-bootstrap-table">-->
+<!--        &lt;!&ndash;begin::Table&ndash;&gt;-->
+<!--        <table class="t1 table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5">-->
+<!--          <thead>-->
+<!--          <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">-->
+<!--            &lt;!&ndash;          <th class="w-10px pe-2">&ndash;&gt;-->
+<!--            &lt;!&ndash;            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">&ndash;&gt;-->
+<!--            &lt;!&ndash;              <input class="form-check-input" type="checkbox" data-kt-check="true"&ndash;&gt;-->
+<!--            &lt;!&ndash;                     data-kt-check-target=".form-check-input" value="1" />&ndash;&gt;-->
+<!--            &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--            <th class="min-w-200px">Client</th>-->
+<!--            <th class="min-w-200px">Produit</th>-->
+<!--            <th class="min-w-200px">Réalisation</th>-->
+<!--            <th class="min-w-200px">Montant réalisation</th>-->
+<!--            &lt;!&ndash;          <th class="text-end min-w-70px">Actions</th>&ndash;&gt;-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody class="fw-semibold text-gray-600">-->
+<!--          <tr *ngFor="let item of compteRendu$" >-->
+<!--            &lt;!&ndash;          <td>&ndash;&gt;-->
+<!--            &lt;!&ndash;            <div class="form-check form-check-sm form-check-custom form-check-solid">&ndash;&gt;-->
+<!--            &lt;!&ndash;              <input class="form-check-input" type="checkbox" value="1" />&ndash;&gt;-->
+<!--            &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;          </td>&ndash;&gt;-->
+<!--            <td>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                {{ item.rdv.personnePhysiqueMoraleDto.denomination}}-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                {{ item.produitSouscrit.designation}}-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                {{ item.realisation}}-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                {{ item.montantRealisation | number}}-->
+<!--              </div>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--        &lt;!&ndash;end::Table&ndash;&gt;-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  &lt;!&ndash;end::Card body&ndash;&gt;-->
+<!--</div>-->
+<!--end::Products-->
+
+
+
+<div class="card card-flush">
+  <!--begin::Card header-->
+  <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+    <form [formGroup]="formData">
+      <!--    &lt;!&ndash;end::Card title&ndash;&gt;-->
+      <!--    &lt;!&ndash;begin::Card toolbar&ndash;&gt;-->
+      <div class="d-flex flex-column flex-lg-row mb-0">
+        <!--      &lt;!&ndash;begin::Content&ndash;&gt;-->
+        <div class="flex-lg-row-fluid me-0 me-lg-0">
+          <!--       -->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <!--begin::Label-->
+
+            <div class="col-md-5 fv-row">
+              <label class="required fs-5 fw-semibold mb-2">Chargé(s)</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select
+                class="form-select form-select-sm form-select-solid"
+                id="ComboPersonnel">
+                <option selected>Sélectonnez un chargé</option>
+                <option *ngFor="let personnel of personnel$"
+                        value="{{personnel.idPersonne}}">{{personnel.denomination}}</option>
+                <option>Tous</option>
+              </select>
+            </div>
+
+            <!--begin::Label-->
+            <div class="col-md-3 fv-row">
+              <label class="required fs-5 fw-semibold mb-2">Début</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="date"  class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="dateDeb"/>
+            </div>
+
+            <!--begin::Label-->
+            <div class="col-md-3 fv-row">
+              <label class="required fs-5 fw-semibold mb-2">Fin</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="date"  class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="dateFin"/>
+            </div>
+            <!--    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Add Monnaie-->
+              <a (click)="afficherProduitSouscrit()" style="margin-right: 5px;margin-top: 10px;margin-left: 5px"  class="btn btn-sm btn-primary">Valider</a>
+              <button  style="margin-top: 10px" class="btn btn-sm btn-primary" (click)="downloadPdf('reporting-produit-souscrit','alldata-produit-souscrit')">Imprimer</button>
+            </div>
+            <!--end::Card toolbar-->
+
+          </div>
+
+        </div>
+
+      </div>
+    </form>
+  </div>
+      <!--          </div>-->
+      <!--          <div class="col-md-12 fv-row">-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+    </div>
+<!--<div class="sheet-outer A4" id="reporting">-->
+<!--  <section class="sheet padding-2mm">-->
+<!--    <article>-->
+<!--begin::Card body-->
+<div>
+  <!--          <div class="table-responsive angular-bootstrap-table">-->
+  <!--begin::Table-->
+  <!--            <table class="t1 table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" style="overflow: visible !important;">-->
+  <ul class="list-group list-group-flush vert-scrollable-150" id="alldata-produit-souscrit">
+  <table class="order-details" id="reporting-produit-souscrit">
+    <thead>
+    <tr>
+      <th style="width: 20%" colspan="1">
+        <img src="assets/img/spahir2.jpg" />
+      </th>
+      <th style="width: 80%"  colspan="3" class="text-start company-data">
+        <li style="list-style-type:none;">Date: {{dateJour|date:'dd/MM/yyyy hh:mm:ss'}}</li> <br>
+        <li style="list-style-type:none;">SAPHIR ASSET MANAGEMENT</li> <br>
+        <li style="list-style-type:none;">Tél : +229 20 21 35 10/66 18 01 74</li> <br>
+        <li style="list-style-type:none;">Adresse: Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL,3ème étage de
+          l'immeuble de la SGI BENIN</li> <br>
+      </th>
+    </tr>
+    <tr>
+      <th style="width: 100%" colspan="4">
+        <h2 style="text-align: center">Point des souscriptions apportées</h2>
+      </th>
+    </tr>
+    <tr class="bg-blue">
+      <!--          <th class="w-10px pe-2">-->
+      <!--            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">-->
+      <!--              <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="1" />-->
+      <!--            </div>-->
+      <!--          </th>-->
+      <th width="30%">Client</th>
+      <th width="30%">Produit</th>
+      <th width="30%">Réalisation</th>
+      <th width="10%">Montant réalisation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of compteRendu$" >
+      <!--          <td>-->
+      <!--            <div class="form-check form-check-sm form-check-custom form-check-solid">-->
+      <!--              <input class="form-check-input" type="checkbox" value="1" />-->
+      <!--            </div>-->
+      <!--          </td>-->
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.rdv.personnePhysiqueMoraleDto.denomination}}
+        </div>
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.opcvmSouscrit.denominationOpcvm}}
+        </div>
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.realisation}}
+        </div>
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.montantRealisation | number}}
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <!--end::Table-->
+  </ul>
+</div>
+<!--        </div>-->
+<!--end::Card body-->
+<br>
+<p class="text-center">
+  Imprimer avec OPCCIEL 2.0
+</p>
+<!--    </article>-->
+<!--  </section>-->
+<!--<section class="sheet padding-5mm">-->
+<!--  <article>This is an A4 document.</article>-->
+<!--</section>-->
+<!--</div>-->

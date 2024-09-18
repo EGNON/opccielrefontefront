@@ -1,0 +1,1497 @@
+<!--begin::Careers - Apply-->
+<div class="card card-flush" *ngIf="_qualite">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
+          <!--begin::Input-->
+          <input *ngIf="id" type="hidden" class="form-control form-control-sm" [value]="id" formControlName="id"/>
+          <!--end::Input-->
+          <div class="border rounded-3 p-3">
+            <div class="row mb-5">
+              <div *ngIf="qualite == 'prospect'" class="col-md-4 fv-row">
+                <div class="form-group d-flex flex-stack">
+                  <div class="d-flex flex-column">
+                    <h4 class="fw-bold text-gray-900">SGI BENIN</h4>
+                    <div class="fs-7 fw-semibold text-muted">Connaissez-vous la SGI BENIN ?</div>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="radio" checked="checked" [value]="true"
+                             formControlName="estsgi" class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Oui</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="radio" [value]="false" formControlName="estsgi"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Non</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="qualite == 'prospect'" class="col-md-2"></div>
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row" [ngClass]="qualite == 'prospect' ? '' : 'col-md-12'">
+                <div style="display: flex; justify-content: space-between;">
+                  <!--begin::Label-->
+                  <label class="fs-5 fw-semibold mb-2">Mode d'établissement</label>
+                  <!--end::Label-->
+                  <div style="display: flex; align-items: center; justify-content: center;">
+                    <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callModeForm(null)"
+                            style="display: flex; align-items: center; justify-content: center;">
+                      <i class="fa fa-add"></i></button>
+                    <!--                    <button type="button" class="btn btn-sm btn-warning pt-2 pb-2 ps-2 pe-1 me-1"-->
+                    <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                    <!--                      <i class="fa fa-edit"></i>-->
+                    <!--                    </button>-->
+                    <!--                    <button type="button" class="btn btn-sm btn-danger pt-2 pb-2 ps-2 pe-1"-->
+                    <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                    <!--                      <i class="fa fa-minus"></i>-->
+                    <!--                    </button>-->
+                  </div>
+                </div>
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="modeEtablissementDto"
+                        [ngClass]="{ 'is-invalid': form.get('modeEtablissementDto')?.touched && f.modeEtablissementDto.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez un mode...</option>
+                  <option *ngIf="entity?.modeEtablissementDto" [defaultSelected]="true" disabled [ngValue]="entity?.modeEtablissementDto">
+                    {{ entity?.modeEtablissementDto?.libelle }}
+                  </option>
+                  <option *ngFor="let item of modeEtablissement$" [ngValue]="item">
+                    {{ item.libelle }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.modeEtablissementDto.errors" class="invalid-feedback">
+                  <div *ngIf="f.modeEtablissementDto.errors.required">Le mode d'établissement est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+          </div>
+          <fieldset class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">PPE</legend>
+            <div class="row mb-5">
+              <div class="col-md-6 fv-row">
+                <div class="form-group d-flex flex-stack">
+                  <div class="d-flex flex-column">
+                    <h4 class="fw-bold text-gray-900">1</h4>
+                    <div class="fs-7 fw-semibold text-muted">
+                      <p>Avez-vous au sein de votre structure (personnel, organe, dirigeant, etc),
+                        une personne exerçant actuellement d'importantes fonctions publiques au Bénin ou
+                        dans un état membre?</p>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="radio" checked="checked" formControlName="ppe1" [value]="true"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Oui</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="radio" formControlName="ppe1" [value]="false"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Non</label>
+                    </div>
+                    <!--                    <div class="form-check form-check-custom form-check-solid form-check-success form-switch">-->
+                    <!--                      <div class="form-check form-check-custom form-check-solid form-switch mb-2">-->
+                    <!--                        <input type="checkbox" formControlName="ppe1" class="form-check-input ng-valid ng-dirty ng-touched">-->
+                    <!--                      </div>-->
+                    <!--                    </div>-->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 fv-row">
+                <div class="form-group d-flex flex-stack">
+                  <div class="d-flex flex-column">
+                    <h4 class="fw-bold text-gray-900">2</h4>
+                    <div class="fs-7 fw-semibold text-muted">
+                      <p>Avez-vous au sein de votre structure une personne qui a exercé
+                        d'importantes fonctions publiques au Bénin ou dans un état membre, ces dernières 10 années ?</p>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="radio" checked="checked" formControlName="ppe2" [value]="true"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Oui</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="radio" formControlName="ppe2" [value]="false"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Non</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-6 fv-row">
+                <div class="form-group d-flex flex-stack">
+                  <div class="d-flex flex-column">
+                    <h4 class="fw-bold text-gray-900">3</h4>
+                    <div class="fs-7 fw-semibold text-muted">
+                      <p>Avez-vous au sein de votre structure, une personne ayant un lien de parenté avec une personne
+                        qui exerce ou qui a exercé d'importantes fonctions publiques au Bénin ou dans un état membre ?</p>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="radio" checked="checked" formControlName="ppe3" [value]="true"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Oui</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="radio" formControlName="ppe3" [value]="false"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Non</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 fv-row">
+                <div class="form-group d-flex flex-stack">
+                  <div class="d-flex flex-column">
+                    <h4 class="fw-bold text-gray-900">4</h4>
+                    <div class="fs-7 fw-semibold text-muted">
+                      <p>Avez-vous au sein de votre structure, une personne ayant un lien de parenté avec une personne
+                        qui exerce ou qui a exercé d'importantes fonctions au sein de ou pour le compte d'une organisation
+                        internationale ?</p>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="radio" checked="checked" formControlName="ppe4" [value]="true"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Oui</label>
+                    </div>
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="radio" formControlName="ppe4" [value]="false"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Non</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset *ngIf="statutPersonnes.controls" class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">CHARGE DE CLIENTELE</legend>
+            <div class="row mb-5">
+              <div formArrayName="statutPersonnes">
+                <!--begin::Col-->
+                <div *ngFor="let control of statutPersonnes.controls; let i = index">
+                  <div [formGroupName]="i" class="row" [ngClass]="!((control.value?.qualite?.libelleQualite|lowercase) == qualite) ? 'd-none' : ''">
+                    <div class="col-md-12 fv-row">
+                      <!--                      <label class="fs-5 fw-semibold mb-2">Chargé de clientèle</label>-->
+                      <select class="form-select form-select-sm mb-2" formControlName="personnel">
+                        <option disabled selected [ngValue]="null">Sélectionnez un chargé de clientèle...</option>
+                        <ng-container *ngIf="entity?.statutPersonnes[i] && entity?.statutPersonnes[i]?.personnel != null">
+                          <option *ngIf="entity?.statutPersonnes[i]" [defaultSelected]="true" disabled [ngValue]="entity?.statutPersonnes[i]?.personnel">
+                            {{ entity?.statutPersonnes[i]?.personnel?.denomination }}
+                          </option>
+                        </ng-container>
+                        <option *ngFor="let item of personnels$" [ngValue]="item">
+                          {{ item.denomination }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">IDENTITE</legend>
+            <!--begin::Input group-->
+            <div *ngIf="qualite != 'prospect'" class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <div style="display: flex; justify-content: space-between;">
+                  <!--begin::Label-->
+                  <label class="fs-5 fw-semibold mb-2">Distributeur</label>
+                  <!--end::Label-->
+                  <!--                  <div style="display: flex; align-items: center; justify-content: center;">-->
+                  <!--                    <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callDistribeurForm()"-->
+                  <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                  <!--                      <i class="fa fa-add"></i></button>-->
+                  <!--                    <button type="button" class="btn btn-sm btn-warning pt-2 pb-2 ps-2 pe-1 me-1"-->
+                  <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                  <!--                      <i class="fa fa-edit"></i>-->
+                  <!--                    </button>-->
+                  <!--                    <button type="button" class="btn btn-sm btn-danger pt-2 pb-2 ps-2 pe-1"-->
+                  <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                  <!--                      <i class="fa fa-minus"></i>-->
+                  <!--                    </button>-->
+                  <!--                  </div>-->
+                </div>
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="distributeur"
+                        [ngClass]="{ 'is-invalid': submitted && f.distributeur.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez un distributeur...</option>
+                  <option *ngIf="entity?.distributeur" disabled [defaultSelected]="true" [ngValue]="entity?.distributeur">
+                    {{ entity?.distributeur?.denomination }}
+                  </option>
+                  <option *ngFor="let item of distributeurs$ | async" [ngValue]="item">
+                    {{ item.denomination }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="f.distributeur?.invalid" class="invalid-feedback">
+                  <div *ngIf="f.distributeur?.errors?.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label [class]="qualite != 'prospect' ? 'required fs-5 fw-semibold mb-2' : 'fs-5 fw-semibold mb-2'">N° compte dépositaire</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="numeroCpteDeposit"
+                       [ngClass]="{ 'is-invalid': submitted && f.numeroCpteDeposit.errors }"/>
+                <!--end::Input-->
+                <div class="fv-plugins-message-container invalid-feedback"
+                     *ngIf="form.get('numeroCpteDeposit')?.hasError('uniqueCpte') &&
+                            form.get('numeroCpteDeposit')?.touched">
+                  Ce numéro existe déjà
+                </div>
+                <div *ngIf="submitted && f.numeroCpteDeposit.errors" class="invalid-feedback">
+                  <div *ngIf="f.numeroCpteDeposit.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Civilité</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="civilite"
+                        [ngClass]="{ 'is-invalid': submitted && f.civilite.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez une civilité...</option>
+                  <option value="M.">M.</option>
+                  <option value="Mme.">Mme.</option>
+                  <option value="Mlle.">Mlle.</option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="f.civilite?.invalid" class="invalid-feedback">
+                  <div *ngIf="f.civilite?.errors?.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Statut matrimonial</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="statutMatrimonial"
+                        [ngClass]="{ 'is-invalid': submitted && f.statutMatrimonial.errors }">
+                  <option  disabled value="null">Sélectionnez le statut matrimonial...</option>
+                  <option value="Célibataire">Célibataire</option>
+                  <option value="Célibataire avec enfant(s)">Célibataire avec enfant(s)</option>
+                  <option value="Marié(e)">Marié(e)</option>
+                  <option value="Veuf(ve)">Veuf(ve)</option>
+                </select>
+                <!--end::Select-->
+                <!--                <div *ngIf="f.statutMatrimonial?.invalid && f.statutMatrimonial?.touched">-->
+                <!--                  <div *ngIf="f.statutMatrimonial?.errors?.required">Ce champs est obligatoire</div>-->
+                <!--                </div>-->
+                <div *ngIf="submitted && f.statutMatrimonial?.invalid"
+                     class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                  <div *ngIf="f.statutMatrimonial.errors?.['required']">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Nom</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="nom" [ngClass]="{ 'is-invalid': submitted && f.nom.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                  <div *ngIf="f.nom.errors.required">Le nom est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Prénom(s)</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="prenom" [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback">
+                  <div *ngIf="f.prenom.errors.required">Le(s) prénom(s) est obligatoire(s)</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Sexe</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="sexe"
+                        [ngClass]="{ 'is-invalid': submitted && f.sexe.errors }">
+                  <option disabled value="null">Sélectionnez un sexe...</option>
+                  <option ngValue="Masculin">Masculin</option>
+                  <option ngValue="Féminin">Féminin</option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.sexe.errors" class="invalid-feedback">
+                  <div *ngIf="f.sexe.errors.required">Le sexe est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Date de naissance</label>
+                <!--end::Label-->
+
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm"
+                         placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date de naissance" aria-describedby="basic-addon6"
+                         formControlName="dateNaissance" [ngClass]="{ 'is-invalid': submitted && f.dateNaissance.errors }"/>
+                  <!--end::Input-->
+                  <span (click)="d.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+
+                <div *ngIf="submitted && f.dateNaissance.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateNaissance.errors.required">La date de naissance est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Nationalité</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="paysNationalite"
+                        [ngClass]="{ 'is-invalid': submitted && f.paysNationalite.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez une nationalité...</option>
+                  <option *ngIf="entity?.paysNationalite" disabled [defaultSelected]="true" [ngValue]="entity?.paysNationalite">
+                    {{ entity?.paysNationalite?.libelleFr }}
+                  </option>
+                  <option *ngFor="let item of payss$" [ngValue]="item">
+                    {{ item.libelleFr }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.paysNationalite.errors" class="invalid-feedback">
+                  <div *ngIf="f.paysNationalite.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Pays de résidence</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="paysResidence"
+                        [ngClass]="{ 'is-invalid': submitted && f.paysResidence.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez le pays de Résidence...</option>
+                  <option *ngIf="entity?.paysResidence" disabled [defaultSelected]="true" [ngValue]="entity?.paysResidence">
+                    {{ entity?.paysResidence?.libelleFr }}
+                  </option>
+                  <option *ngFor="let item of payss$" [ngValue]="item">
+                    {{ item.libelleFr }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.paysResidence.errors" class="invalid-feedback">
+                  <div *ngIf="f.paysResidence.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Email Professionnel</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="emailPro"
+                       [ngClass]="{ 'is-invalid': submitted && f.emailPro.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.emailPro.errors" class="invalid-feedback">
+                  <div *ngIf="f.emailPro.errors.required">Ce champs est obligatoire</div>
+                  <div *ngIf="f.emailPro.errors.email">Email n'est pas valide</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Email Personnel</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="emailPerso"
+                       [ngClass]="{ 'is-invalid': submitted && f.emailPerso.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.emailPerso.errors" class="invalid-feedback">
+                  <div *ngIf="f.emailPerso.errors.required">Ce champs est obligatoire</div>
+                  <div *ngIf="f.emailPerso.errors.email">Email n'est pas valide</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Domicile</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="domicile"
+                       [ngClass]="{ 'is-invalid': submitted && f.domicile.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.domicile.errors" class="invalid-feedback">
+                  <div *ngIf="f.domicile.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Boîte postale</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="bp" [ngClass]="{ 'is-invalid': submitted && f.bp.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.bp.errors" class="invalid-feedback">
+                  <div *ngIf="f.bp.errors.required">La boîte postale est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Lieu de travail</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="lieuTravail"
+                       [ngClass]="{ 'is-invalid': submitted && f.lieuTravail.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.lieuTravail.errors" class="invalid-feedback">
+                  <div *ngIf="f.lieuTravail.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div *ngIf="qualite == 'prospect'" class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Ifu</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="ifu"
+                       [ngClass]="{ 'is-invalid': submitted && f.ifu.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.ifu.errors" class="invalid-feedback">
+                  <div *ngIf="f.ifu.errors.required">Ifu est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div *ngIf="qualite != 'prospect'" class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Périodicité</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="periodicite"
+                       [ngClass]="{ 'is-invalid': submitted && f.periodicite.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.periodicite.errors" class="invalid-feedback">
+                  <div *ngIf="f.periodicite.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <div style="display: flex; justify-content: space-between;">
+                  <!--begin::Label-->
+                  <label class="required fs-5 fw-semibold mb-2">Profession</label>
+                  <!--end::Label-->
+                  <div style="display: flex; align-items: center; justify-content: center;">
+                    <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callProfessionForm(null)"
+                            style="display: flex; align-items: center; justify-content: center;">
+                      <i class="fa fa-add"></i></button>
+                    <!--                    <button type="button" class="btn btn-sm btn-warning pt-2 pb-2 ps-2 pe-1 me-1"-->
+                    <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                    <!--                      <i class="fa fa-edit"></i>-->
+                    <!--                    </button>-->
+                    <!--                    <button type="button" class="btn btn-sm btn-danger pt-2 pb-2 ps-2 pe-1"-->
+                    <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                    <!--                      <i class="fa fa-minus"></i>-->
+                    <!--                    </button>-->
+                  </div>
+                </div>
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="profession"
+                        [ngClass]="{ 'is-invalid': submitted && f.profession.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez une profession...</option>
+                  <option *ngIf="entity?.profession" disabled [defaultSelected]="true" [ngValue]="entity?.profession">
+                    {{ entity?.profession?.libelleProfession }}
+                  </option>
+                  <option *ngFor="let item of professions$" [ngValue]="item">
+                    {{ item.libelleProfession }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.profession.errors" class="invalid-feedback">
+                  <div *ngIf="f.profession.errors.required">Profession est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <div style="display: flex; justify-content: space-between;">
+                  <!--begin::Label-->
+                  <label class="fs-5 fw-semibold mb-2">Secteur d'activité</label>
+                  <!--end::Label-->
+                  <div style="display: flex; align-items: center; justify-content: center;">
+                    <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callSecteurForm(null)"
+                            style="display: flex; align-items: center; justify-content: center;">
+                      <i class="fa fa-add"></i></button>
+                    <!--                    <button type="button" class="btn btn-sm btn-warning pt-2 pb-2 ps-2 pe-1 me-1"-->
+                    <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                    <!--                      <i class="fa fa-edit"></i>-->
+                    <!--                    </button>-->
+                    <!--                    <button type="button" class="btn btn-sm btn-danger pt-2 pb-2 ps-2 pe-1"-->
+                    <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                    <!--                      <i class="fa fa-minus"></i>-->
+                    <!--                    </button>-->
+                  </div>
+                </div>
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="secteur"
+                        [ngClass]="{ 'is-invalid': submitted && f.secteur.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez un secteur...</option>
+                  <option *ngIf="entity?.secteur" disabled [defaultSelected]="true" [ngValue]="entity?.secteur">
+                    {{ entity?.secteur?.libelleSecteur }}
+                  </option>
+                  <option *ngFor="let item of secteurs$" [ngValue]="item">
+                    {{ item.libelleSecteur }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.secteur.errors" class="invalid-feedback">
+                  <div *ngIf="f.secteur.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <div style="display: flex; justify-content: space-between;">
+                  <!--begin::Label-->
+
+                  <label class="required fs-5 fw-semibold mb-2">Dégré de connaissance</label>
+                  <!--end::Label-->
+                  <div style="display: flex; align-items: center; justify-content: center;">
+                    <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callDegreForm(null)"
+                            style="display: flex; align-items: center; justify-content: center;">
+                      <i class="fa fa-add"></i></button>
+                    <!--                    <button type="button" class="btn btn-sm btn-warning pt-2 pb-2 ps-2 pe-1 me-1" (click)="callDegreForm(degreSelect.value, null)"-->
+                    <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                    <!--                      <i class="fa fa-edit"></i>-->
+                    <!--                    </button>-->
+                    <!--                    <button type="button" class="btn btn-sm btn-danger pt-2 pb-2 ps-2 pe-1"-->
+                    <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                    <!--                      <i class="fa fa-minus"></i>-->
+                    <!--                    </button>-->
+                  </div>
+                </div>
+                <!--begin::Select-->
+                <select #degreSelect class="form-select form-select-sm mb-2" formControlName="degre"
+                        [ngClass]="{ 'is-invalid': submitted && f.degre.errors }">
+                  <option  disabled selected [ngValue]="null">Sélectionnez un dégré de connaissance...</option>
+                  <option *ngIf="entity?.degre" disabled [defaultSelected]="true" [ngValue]="entity?.degre">
+                    {{ entity?.degre?.libelle }}
+                  </option>
+                  <option *ngFor="let item of (degres$ | async)?.data" [ngValue]="item">
+                    {{ item.libelle }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.degre.errors" class="invalid-feedback">
+                  <div *ngIf="f.degre.errors.required">Dégré est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Salaire</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="salaire"
+                       [ngClass]="{ 'is-invalid': submitted && f.salaire.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.salaire.errors" class="invalid-feedback">
+                  <div *ngIf="f.salaire.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div *ngIf="qualite != 'prospect'" class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Ifu</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="ifu"
+                       [ngClass]="{ 'is-invalid': submitted && f.ifu.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.ifu.errors" class="invalid-feedback">
+                  <div *ngIf="f.ifu.errors.required">Ifu est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <div class="row mb-5">
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Langue parlée</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="langue"
+                        [ngClass]="{ 'is-invalid': submitted && f.langue.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez une langue...</option>
+                  <option *ngIf="entity?.langue" disabled [defaultSelected]="true" [ngValue]="entity?.langue">
+                    {{ entity?.langue?.libelleLangue }}
+                  </option>
+                  <option *ngFor="let item of langue$" [ngValue]="item">
+                    {{ item.libelleLangue }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.langue.errors" class="invalid-feedback">
+                  <div *ngIf="f.langue.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Teint</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  type="text" class="form-control form-control-sm"
+                       placeholder="" formControlName="teint"
+                       [ngClass]="{ 'is-invalid': submitted && f.teint.errors }"/>
+                <!--end::Input-->
+<!--                <div *ngIf="submitted && f.ifu.errors" class="invalid-feedback">-->
+<!--                  <div *ngIf="f.ifu.errors.required">Ifu est obligatoire</div>-->
+<!--                </div>-->
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-12 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Exposé des motifs</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  type="text" class="form-control form-control-sm"
+                       placeholder="" formControlName="exposeMotif"
+                       [ngClass]="{ 'is-invalid': submitted && f.exposeMotif.errors }"/>
+                <!--end::Input-->
+                <!--                <div *ngIf="submitted && f.ifu.errors" class="invalid-feedback">-->
+                <!--                  <div *ngIf="f.ifu.errors.required">Ifu est obligatoire</div>-->
+                <!--                </div>-->
+              </div>
+            </div>
+            <!--end::Col-->
+            <div *ngIf="qualite!=='prospect'">
+              <!--begin::Input group-->
+              <div class="row mb-5">
+                <!--begin::Col-->
+                <div class="col-md-6 fv-row">
+                  <!--begin::Label-->
+                  <label class="required fs-5 fw-semibold mb-2">Catégorie client</label>
+                  <!--end::Label-->
+                  <!--begin::Select-->
+                  <select class="form-select form-select-sm mb-2" formControlName="categorieClient"
+                          [ngClass]="{ 'is-invalid': submitted && f.categorieClient.errors }">
+                    <option disabled selected [ngValue]="null">Sélectionnez une catégorie...</option>
+                    <option *ngIf="entity?.categorieClient" disabled [defaultSelected]="true" [ngValue]="entity?.categorieClient">
+                      {{ entity?.categorieClient?.codeCategorieClient }}-{{ entity?.categorieClient?.libelleCategorieClient }}
+                    </option>
+                    <option *ngFor="let item of categorieClient$" [ngValue]="item">
+                      {{ item.codeCategorieClient }}-{{ item.libelleCategorieClient }}
+                    </option>
+                  </select>
+                  <!--end::Select-->
+                  <div *ngIf="submitted && f.categorieClient.errors" class="invalid-feedback">
+                    <div *ngIf="f.categorieClient.errors.required">Ce champs est obligatoire</div>
+                  </div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-6 fv-row">
+                  <!--begin::Label-->
+                  <label class="required fs-5 fw-semibold mb-2">Sous type client</label>
+                  <!--end::Label-->
+                  <!--begin::Select-->
+                  <select class="form-select form-select-sm mb-2" formControlName="sousTypeClient"
+                          [ngClass]="{ 'is-invalid': submitted && f.sousTypeClient.errors }">
+                    <option disabled selected [ngValue]="null">Sélectionnez un sous type client...</option>
+                    <option *ngIf="entity?.sousTypeClient" disabled [defaultSelected]="true" [ngValue]="entity?.sousTypeClient">
+                      {{ entity?.sousTypeClient?.codeSousTypeClient }}-{{ entity?.sousTypeClient?.libelleSousTypeClient }}
+                    </option>
+                    <option *ngFor="let item of sousTypeClient$" [ngValue]="item">
+                      {{ item.codeSousTypeClient }}-{{ item.libelleSousTypeClient }}
+                    </option>
+                  </select>
+                  <!--end::Select-->
+                  <div *ngIf="submitted && f.sousTypeClient.errors" class="invalid-feedback">
+                    <div *ngIf="f.sousTypeClient.errors.required">Ce champs est obligatoire</div>
+                  </div>
+                </div>
+                <!--end::Col-->
+              </div>
+              <!--end::Input group-->
+            </div>
+          </fieldset>
+          <fieldset *ngIf="qualite !== 'prospect'" class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">REGIME</legend>
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nbr d'enfants</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="nbrEnfant"
+                       [ngClass]="{ 'is-invalid': submitted && f.nbrEnfant.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.nbrEnfant.errors" class="invalid-feedback">
+                  <div *ngIf="f.nbrEnfant.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nbr personnes à charge</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="nbrPersonneACharge"
+                       [ngClass]="{ 'is-invalid': submitted && f.nbrPersonneACharge.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.nbrPersonneACharge.errors" class="invalid-feedback">
+                  <div *ngIf="f.nbrPersonneACharge.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+          </fieldset>
+          <fieldset *ngIf="qualite != 'prospect'" class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">EMPLOYEUR</legend>
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nom de l'employeur</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="nomEmployeur"
+                       [ngClass]="{ 'is-invalid': submitted && f.nomEmployeur.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.nomEmployeur.errors" class="invalid-feedback">
+                  <div *ngIf="f.nomEmployeur.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Adresse postale employeur</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="adressePostaleEmp"
+                       [ngClass]="{ 'is-invalid': submitted && f.adressePostaleEmp.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.adressePostaleEmp.errors" class="invalid-feedback">
+                  <div *ngIf="f.adressePostaleEmp.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Adresse géographique de l'employeur</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="adresseGeoEmp"
+                       [ngClass]="{ 'is-invalid': submitted && f.adresseGeoEmp.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.adresseGeoEmp.errors" class="invalid-feedback">
+                  <div *ngIf="f.adresseGeoEmp.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Téléphone de l'employeur</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="telEmp"
+                       [ngClass]="{ 'is-invalid': submitted && f.telEmp.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.telEmp.errors" class="invalid-feedback">
+                  <div *ngIf="f.telEmp.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Secteur d'activité de l'employeur</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="secteurEmp"
+                        [ngClass]="{ 'is-invalid': submitted && f.secteurEmp.errors }">
+                  <option disabled [ngValue]="null">Sélectionnez un secteur...</option>
+                  <option *ngIf="entity?.secteurEmp" disabled [defaultSelected]="true" [ngValue]="entity?.secteurEmp">
+                    {{ entity?.secteurEmp?.libelleSecteur }}
+                  </option>
+                  <option *ngFor="let item of secteurs$" [ngValue]="item">
+                    {{ item.libelleSecteur }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.secteurEmp.errors" class="invalid-feedback">
+                  <div *ngIf="f.secteurEmp.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Email de l'employeur</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : employeur@gmail.com" formControlName="emailEmp"
+                       [ngClass]="{ 'is-invalid': submitted && f.emailEmp.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.emailEmp.errors" class="invalid-feedback">
+                  <div *ngIf="f.emailEmp.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+          </fieldset>
+          <fieldset *ngIf="qualite != 'prospect'" class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">PERE</legend>
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Nom du père</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="nomPere"
+                       [ngClass]="{ 'is-invalid': submitted && f.nomPere.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.nomPere.errors" class="invalid-feedback">
+                  <div *ngIf="f.nomPere.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Prénom(s) du père</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="prenomsPere"
+                       [ngClass]="{ 'is-invalid': submitted && f.prenomsPere.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.prenomsPere.errors" class="invalid-feedback">
+                  <div *ngIf="f.prenomsPere.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date de naissance du père</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm"
+                         placeholder="dd/mm/yyyy" ngbDatepicker #d1="ngbDatepicker"
+                         formControlName="dateNaissancePere" aria-describedby="basic-addon7"
+                         [ngClass]="{ 'is-invalid': submitted && f.dateNaissancePere.errors }"/>
+                  <!--end::Input-->
+                  <span (click)="d1.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                      <i class="ki-duotone ki-calendar fs-4">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                      </i>
+                  </span>
+                </div>
+
+                <div *ngIf="submitted && f.dateNaissancePere.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateNaissancePere.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nationalité du père</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="paysPere"
+                        [ngClass]="{ 'is-invalid': submitted && f.paysPere.errors }">
+                  <option [ngValue]="null" disabled>Sélectionnez une nationalité...</option>
+                  <option *ngIf="entity?.paysMere" disabled [defaultSelected]="true" [ngValue]="entity?.paysPere">
+                    {{ entity?.paysPere?.libelleFr }}
+                  </option>
+                  <option *ngFor="let item of payss$" [ngValue]="item">
+                    {{ item.libelleFr }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.paysPere.errors" class="invalid-feedback">
+                  <div *ngIf="f.paysPere.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+          </fieldset>
+          <fieldset *ngIf="qualite != 'prospect'" class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">MERE</legend>
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Nom de la mère</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="nomMere" [ngClass]="{ 'is-invalid': submitted && f.nomMere.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.nomMere.errors" class="invalid-feedback">
+                  <div *ngIf="f.nomMere.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Prénom(s) de la mère</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="prenomsMere" [ngClass]="{ 'is-invalid': submitted && f.prenomsMere.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.prenomsMere.errors" class="invalid-feedback">
+                  <div *ngIf="f.prenomsMere.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date de naissance de la mère</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm"
+                         placeholder="dd/mm/yyyy" ngbDatepicker #d2="ngbDatepicker"
+                         formControlName="dateNaissanceMere"
+                         [ngClass]="{ 'is-invalid': submitted && f.dateNaissanceMere.errors }"/>
+                  <!--end::Input-->
+                  <span (click)="d2.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                      </i>
+                  </span>
+                </div>
+                <div *ngIf="submitted && f.dateNaissanceMere.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateNaissanceMere.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nationalité de la mère</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="paysMere"
+                        [ngClass]="{ 'is-invalid': submitted && f.paysMere.errors }">
+                  <option disabled [ngValue]="null">Sélectionnez une nationalité...</option>
+                  <option *ngIf="entity?.paysMere" disabled [defaultSelected]="true" [ngValue]="entity?.paysMere">
+                    {{ entity?.paysMere?.libelleFr }}
+                  </option>
+                  <option *ngFor="let item of payss$" [ngValue]="item">
+                    {{ item.libelleFr }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.paysMere.errors" class="invalid-feedback">
+                  <div *ngIf="f.paysMere.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+          </fieldset>
+          <fieldset *ngIf="qualite != 'prospect'" class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">CONJOINT</legend>
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nom du conjoint</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="nomConjoint"
+                       [ngClass]="{ 'is-invalid': submitted && f.nomConjoint.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.nomConjoint.errors" class="invalid-feedback">
+                  <div *ngIf="f.nomConjoint.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Prénom(s) du conjoint</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="prenomConjoint"
+                       [ngClass]="{ 'is-invalid': submitted && f.prenomConjoint.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.prenomConjoint.errors" class="invalid-feedback">
+                  <div *ngIf="f.prenomConjoint.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date de naissance du conjoint</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm"
+                         placeholder="dd/mm/yyyy" ngbDatepicker #d3="ngbDatepicker"
+                         formControlName="dateNaissanceConjoint"
+                         [ngClass]="{ 'is-invalid': submitted && f.dateNaissanceConjoint.errors }"/>
+                  <!--end::Input-->
+                  <span (click)="d3.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                      </i>
+                  </span>
+                </div>
+                <div *ngIf="submitted && f.dateNaissanceConjoint.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateNaissanceConjoint.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nationalité du conjoint</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="paysConjoint"
+                        [ngClass]="{ 'is-invalid': submitted && f.paysConjoint.errors }">
+                  <option disabled [ngValue]="null">Sélectionnez une nationalité...</option>
+                  <option *ngIf="entity?.paysConjoint" disabled [defaultSelected]="true"
+                          [ngValue]="entity?.paysConjoint">
+                    {{ entity?.paysConjoint?.libelleFr }}
+                  </option>
+                  <option *ngFor="let item of payss$" [ngValue]="item">
+                    {{ item.libelleFr }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.paysConjoint.errors" class="invalid-feedback">
+                  <div *ngIf="f.paysConjoint.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+          </fieldset>
+          <fieldset *ngIf="qualite != 'prospect'" class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">ORIENTATION DE PLACEMENT</legend>
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Origin des fonds</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="origineFonds"
+                       [ngClass]="{ 'is-invalid': submitted && f.origineFonds.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.origineFonds.errors" class="invalid-feedback">
+                  <div *ngIf="f.origineFonds.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Transactions envisagées</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="transactionEnvisagee"
+                       [ngClass]="{ 'is-invalid': submitted && f.transactionEnvisagee.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.transactionEnvisagee.errors" class="invalid-feedback">
+                  <div *ngIf="f.transactionEnvisagee.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+          </fieldset>
+          <fieldset *ngIf="qualite != 'prospect'" class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">PATRIMOINE</legend>
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Immobilière(Situation/estimation/hypot.)</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="immobilier"
+                       [ngClass]="{ 'is-invalid': submitted && f.immobilier.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.immobilier.errors" class="invalid-feedback">
+                  <div *ngIf="f.immobilier.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Autres biens (Nature/estimation)</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="autresBiens"
+                       [ngClass]="{ 'is-invalid': submitted && f.autresBiens.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.autresBiens.errors" class="invalid-feedback">
+                  <div *ngIf="f.autresBiens.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Surface totale</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="surfaceTotale"
+                       [ngClass]="{ 'is-invalid': submitted && f.surfaceTotale.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.surfaceTotale.errors" class="invalid-feedback">
+                  <div *ngIf="f.surfaceTotale.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+          </fieldset>
+          <fieldset class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Téléphones</legend>
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Mobile 1</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="mobile1"
+                       [ngClass]="{ 'is-invalid': submitted && f.mobile1.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.mobile1.errors" class="invalid-feedback">
+                  <div *ngIf="f.mobile1.errors.required">Mobile 1 est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Mobile 2</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="mobile2" [ngClass]="{ 'is-invalid': submitted && f.mobile2.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.mobile2.errors" class="invalid-feedback">
+                  <div *ngIf="f.mobile2.errors.required">Mobile 2 est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Fixe 1</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="fixe1" [ngClass]="{ 'is-invalid': submitted && f.fixe1.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.fixe1.errors" class="invalid-feedback">
+                  <div *ngIf="f.fixe1.errors.required">Fixe 1 est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-6 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Fixe 2</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="fixe2"
+                       [ngClass]="{ 'is-invalid': submitted && f.fixe2.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.fixe2.errors" class="invalid-feedback">
+                  <div *ngIf="f.fixe2.errors.required">Fixe 2 est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+          </fieldset>
+          <fieldset *ngIf="qualite != 'prospect'" class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">PIECE</legend>
+            <div class="row mb-5">
+              <div class="border rounded-3 p-3" formArrayName="documents" *ngIf="documents.length > 0">
+                <!--begin::Col-->
+                <div *ngFor="let control of documents.controls; let i = index">
+                  <div [formGroupName]="i" class="row">
+                    <div class="col-md-6 fv-row">
+                      <label class="fs-5 fw-semibold mb-2">Type de pièce</label>
+                      <select class="form-select form-select-sm mb-2" formControlName="typeDocument">
+                        <option disabled [ngValue]="null">Sélectionnez un type de pièce...</option>
+                        <option *ngIf="entity?.documents[i]?.typeDocument" disabled [defaultSelected]="true"
+                                [ngValue]="entity?.documents[i]?.typeDocument">
+                          {{ entity?.documents[i]?.typeDocument?.libelleTypeDoc }}
+                        </option>
+                        <option *ngFor="let item of typeDocuments$ | async" [ngValue]="item">
+                          {{ item.libelleTypeDoc }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 fv-row">
+                      <!--begin::Label-->
+                      <label class="fs-5 fw-semibold mb-2">Numéro pièce</label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                      <input type="text" class="form-control form-control-sm"
+                             placeholder="" formControlName="numeroPiece"/>
+                      <!--end::Input-->
+<!--                      <div *ngIf="submitted && f.fixe1.errors" class="invalid-feedback">-->
+<!--                        <div *ngIf="f.fixe1.errors.required">Fixe 1 est obligatoire</div>-->
+<!--                      </div>-->
+                    </div>
+                    <div class="col-md-12 fv-row">
+                      <label class="fs-5 fw-semibold mb-2">Joindre une pièce</label>
+                      <div class="input-group mb-0">
+                        <input type="file" class="form-control form-control-sm d-none"
+                               (change)="selectFiles(i, $event)" [id]="'file' + i"/>
+                        <input type="text" formControlName="nomDoc" class="form-control form-control-sm"
+                               placeholder="Sélectionnez un fichier" [value]="getFileName(selectedFiles['file' + i])" (click)="onClick('file' + i)"/>
+                        <input type="hidden" formControlName="extensionDoc" class="form-control form-control-sm"
+                               [value]="getFileExtension(selectedFiles['file' + i])"/>
+                        <!--end::Input-->
+                        <span class="btn btn-sm btn-danger input-group-text" (click)="onDeleteFile(i)">
+                          <i class="ki-duotone ki-minus fs-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                      </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end::Input group-->
+            <div class="row mb-5">
+              <div class="col-md-12 fv-row">
+                <button class="btn btn-sm btn-success input-group-text" (click)="onAddFile()">
+                  Ajouter
+                </button>
+                <!--                {{ previews.length }}-->
+                <!--                <img *ngFor='let preview of previews' [src]="preview" class="rounded mb-3" width="180">-->
+              </div>
+            </div>
+          </fieldset>
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-start">
+              <!--begin::Button-->
+              <button type="button" class="btn btn-sm btn-warning me-3" (click)="retourAlaListe()">
+                Retour à la liste
+              </button>
+              <!--end::Button-->
+            </div>
+            <div class="d-flex justify-content-end">
+              <!--begin::Button-->
+              <a type="reset" [routerLink]="['/app/standard/parametre/personne/physique', qualite]" class="btn btn-sm btn-light me-3">
+                Annuler
+              </a>
+              <!--end::Button-->
+              <!--begin::Submit-->
+<!--              <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.valid" (click)="onSaveEntity()">-->
+              <button type="submit" class="btn btn-sm btn-primary" [disabled]="form.invalid" (click)="onSaveEntity()">
+                <ng-container *ngIf="submitting">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    Patientez svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="!submitting">
+                  <span class="indicator-label">Enregistrer</span>
+                </ng-container>
+              </button>
+              <!--end::Submit-->
+            </div>
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

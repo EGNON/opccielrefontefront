@@ -1,0 +1,218 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" class="form mb-5" enctype="multipart/form-data">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date début</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <div
+                style="display: flex; width: 100%; border-top-left-radius: 1px; border-bottom-left-radius: 1px;"
+                class="border">
+                <input
+                  style="flex: 3; border-bottom-right-radius: 0; border-top-right-radius: 0"
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="dd/mm/yyyy"
+                  formControlName="dateDebRdv"
+                  ngbDatepicker
+                  #d1="ngbDatepicker"
+                  [ngClass]="{ 'is-invalid': (f.dateDebRdv.dirty || f.dateDebRdv.touched) && f.dateDebRdv.invalid }"
+                />
+                <button style="flex: 0.5;" class="btn btn-sm btn-default" (click)="d1.toggle()" type="button">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
+              <!--end::Input-->
+              <div *ngIf="(f.dateDebRdv.dirty || f.dateDebRdv.touched) && f.dateDebRdv.invalid" class="invalid-feedback d-block">
+                <div *ngIf="f.dateDebRdv.errors?.['required']">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-3">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date Fin</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <div style="display: flex; width: 100%;" class="border">
+                <input
+                  style="flex: 3; border-bottom-right-radius: 0; border-top-right-radius: 0"
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="dd/mm/yyyy"
+                  formControlName="dateFinRdv"
+                  ngbDatepicker
+                  #d2="ngbDatepicker"
+                  [ngClass]="{ 'is-invalid': (f.dateFinRdv.dirty || f.dateFinRdv.touched) && f.dateFinRdv.invalid }"
+                />
+                <button style="flex: 0.5;" class="btn btn-sm btn-default" (click)="d2.toggle()" type="button">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
+              <!--end::Input-->
+              <div *ngIf="(f.dateFinRdv.dirty || f.dateFinRdv.touched) && f.dateFinRdv.invalid" class="invalid-feedback d-block">
+                <div *ngIf="f.dateFinRdv.errors?.['required']">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Heure Début</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input
+                type="text"
+                matInput
+                [ngxTimepicker]="picker"
+                [format]="24"
+                placeholder="hh:mm"
+                class="form-control form-control-sm"
+              />
+              <ngx-material-timepicker #picker></ngx-material-timepicker>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Heure Fin</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input
+                type="text"
+                matInput
+                [ngxTimepicker]="pickerFin"
+                [format]="24"
+                formControlName="heureFinRdv"
+                placeholder="hh:mm"
+                class="form-control form-control-sm"
+              />
+              <ngx-material-timepicker #pickerFin></ngx-material-timepicker>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-12">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Objet</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <!--              <editor apiKey="smzz3klhuszc27qjmj9686wdzmo66044qus29j9b6dslotck"-->
+              <!--                [init]="{-->
+              <!--                  plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',-->
+              <!--                  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',-->
+              <!--                  tinycomments_mode: 'embedded'-->
+              <!--                }"-->
+              <!--              ></editor>-->
+              <textarea
+                class="form-control form-control-sm"
+                placeholder=""
+                formControlName="objetRdv"
+                rows="3"
+                [ngClass]="{ 'is-invalid': (f.objetRdv.dirty || f.objetRdv.touched) && f.objetRdv.invalid }"
+              ></textarea>
+              <!--end::Input-->
+              <div *ngIf="(f.objetRdv.dirty || f.objetRdv.touched) && f.objetRdv.invalid" class="invalid-feedback">
+                <div *ngIf="f.objetRdv.errors?.required || f.objetRdv.errors?.['notOnlyWhitespace']">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Client/Prospect</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="personne"
+                      [ngClass]="{ 'is-invalid': (f.personne.dirty || f.personne.touched) && f.personne.invalid }">
+                <option disabled selected [ngValue]="null">Sélectionnez un client/prospect...</option>
+                <!--                <option *ngIf="entity?.paysNationalite" [defaultSelected]="true" [ngValue]="entity?.paysNationalite">-->
+                <!--                  {{ entity?.paysNationalite?.libelleFr }}-->
+                <!--                </option>-->
+                <option *ngFor="let item of personnes$ | async" [ngValue]="item">
+                  {{ item.denomination }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="(f.personne.dirty || f.personne.touched) && f.personne.invalid" class="invalid-feedback">
+                <div *ngIf="f.personne.errors?.['required']">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Pays</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="paysDto"
+                      [ngClass]="{ 'is-invalid': (f.paysDto.dirty || f.paysDto.touched) && f.paysDto.invalid }">
+                <option disabled selected [ngValue]="null">Sélectionnez un pays...</option>
+<!--                <option *ngIf="entity?.paysNationalite" [defaultSelected]="true" [ngValue]="entity?.paysNationalite">-->
+<!--                  {{ entity?.paysNationalite?.libelleFr }}-->
+<!--                </option>-->
+                <option *ngFor="let item of pays$" [ngValue]="item">
+                  {{ item.libelleFr }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="(f.paysDto.dirty || f.paysDto.touched) && f.paysDto.invalid" class="invalid-feedback">
+                <div *ngIf="f.paysDto.errors?.['required']">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/crm/rendezvous/rdv" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveForm()">
+              <ng-container *ngIf="submitting">
+                <span class="indicator-progress" [style.display]="'block'">
+                  Patientez svp...
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+              </ng-container>
+              <ng-container *ngIf="!submitting">
+                <span class="indicator-label">Enregistrer</span>
+              </ng-container>
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

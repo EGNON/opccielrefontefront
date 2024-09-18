@@ -1,0 +1,74 @@
+<!--begin::Menu wrapper-->
+<div class="scroll-y my-5 mx-3" data-kt-scroll="true" data-kt-scroll-activate="true"
+     data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
+     data-kt-scroll-height="auto" data-kt-scroll-offset="5px"
+     data-kt-scroll-save-state="true" data-kt-scroll-wrappers="#kt_app_sidebar_menu" id="kt_app_sidebar_menu_scroll">
+  <!--begin::Menu-->
+  <div #app_menu class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" data-kt-menu="true"
+       data-kt-menu-expand="false" id="#kt_app_sidebar_menu">
+    <ng-template #recursiveList let-list>
+      <ng-container *ngFor="let menu of list; let i = index">
+        <ng-container *ngIf="menu.allow">
+          <ng-container *ngIf="menu.children.length > 0">
+            <ng-container *ngIf="menu.hasOwnProperty('type')">
+              <div class="menu-item">
+                <div class="menu-content pt-8 pb-2">
+                  <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{ menu.title }}</span>
+                </div>
+              </div>
+              <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: menu.children }"></ng-container>
+            </ng-container>
+          </ng-container>
+<!--          <div [attr.data-kt-menu-trigger]="menu.children.length > 0 ? 'click' : ''"-->
+<!--               routerLinkActive="{{menu.children.length > 0 ? 'here show' : ''}}"-->
+<!--               [ngClass]="menu.children.length > 0 ? 'menu-accordion' : ''"-->
+<!--               class="menu-item">-->
+          <div [attr.data-kt-menu-trigger]="menu.children.length > 0 ? 'click' : ''"
+               [ngClass]="menu.children.length > 0 ? 'menu-accordion' : ''"
+               class="menu-item">
+            <ng-container *ngIf="menu.children.length > 0">
+              <ng-container *ngIf="!menu.hasOwnProperty('type')">
+                <span class="menu-link">
+                  <span [ngClass]="menu.icon != null && menu.icon.length > 0 ? 'menu-icon' : 'menu-bullet'"
+                        class="menu-icon">
+                    <app-keenicon *ngIf="menu.icon != null && menu.icon.length > 0" class="fs-2"
+                                  name="{{ menu.icon }}"></app-keenicon>
+                    <span *ngIf="menu.icon != null && menu.icon.length == 0" class="bullet bullet-dot"></span>
+                  </span>
+                  <span *ngIf="menu.translate" [attr.data-link]="menu.dataLink ? menu.dataLink : ''" class="menu-title"
+                        translate="{{ menu.translate }}"></span>
+                  <span *ngIf="!menu.translate" [attr.data-link]="menu.dataLink ? menu.dataLink : ''"
+                        class="menu-title">{{ menu.title }}</span>
+                  <span *ngIf="menu.children.length > 0" class="menu-arrow"></span>
+                </span>
+<!--                <div #sub class="menu-sub menu-sub-accordion" routerLinkActive="menu-active-bg">-->
+                <div #sub class="menu-sub menu-sub-accordion">
+                  <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: menu.children }"></ng-container>
+                </div>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="menu.children.length == 0">
+              <a #link *ngIf="!menu.hasOwnProperty('type')" class="menu-link without-sub" [ngClass]="isMenuItemActive(menu, link) ? 'active' : ''"
+                 [routerLink]="[menu.page]">
+                <span [ngClass]="menu.icon != null && menu.icon?.length > 0 ? 'menu-icon' : 'menu-bullet'"
+                    class="menu-icon">
+                  <app-keenicon *ngIf="menu.icon != null && menu.icon?.length > 0" class="fs-2"
+                                name="{{ menu.icon }}"></app-keenicon>
+                  <span *ngIf="menu.icon != null && menu.icon.length == 0" class="bullet bullet-dot"></span>
+                </span>
+                <span *ngIf="menu.translate" class="menu-title" translate="{{ menu.translate }}"></span>
+                <span *ngIf="!menu.translate" class="menu-title">{{ menu.title }}</span>
+              </a>
+              <div *ngIf="menu.hasOwnProperty('type')" class="menu-content pt-8 pb-2">
+                <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{ menu.title }}</span>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-template>
+    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: menus }"></ng-container>
+  </div>
+  <!--end::Menu-->
+</div>
+<!--end::Menu wrapper-->

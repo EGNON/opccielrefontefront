@@ -1,0 +1,75 @@
+<div class="card">
+  <form [formGroup]="form">
+    <div class="card-header border-0 pt-6">
+      <!--begin::Card title-->
+      <div class="card-title">
+        <div class="d-flex align-items-center mx-2">
+          <!--<app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>-->
+          <div class="input-group mb-0">
+            <input type="text" class="form-control form-control-sm form-control-solid w-200px"
+                   placeholder="dd/mm/yyyy" ngbDatepicker #d1="ngbDatepicker" aria-label="Date début" aria-describedby="basic-addon6"
+                   formControlName="startDate"/>
+            <span (click)="d1.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+            </span>
+          </div>
+        </div>
+        <div class="d-flex align-items-center mx-2">
+          <div class="input-group mb-0">
+            <input type="text" class="form-control form-control-sm form-control-solid w-200px"
+                   placeholder="dd/mm/yyyy" ngbDatepicker #d2="ngbDatepicker" aria-label="Date fin" aria-describedby="basic-addon7"
+                   formControlName="endDate"/>
+            <span (click)="d2.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!--begin::Card title-->
+
+      <!--begin::Card toolbar-->
+      <div class="card-toolbar">
+        <!--begin::Toolbar-->
+        <div class="d-flex justify-content-end">
+          <!--begin::Add user-->
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+            Appliquer
+          </button>
+          <!--end::Add user-->
+        </div>
+        <!--end::Toolbar-->
+      </div>
+      <!--end::Card toolbar-->
+    </div>
+  </form>
+  <hr>
+  <div class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <table #datatable class="table align-middle table-row-dashed fs-6 gy-5 no-footer" id="datatable">
+<!--        <thead>-->
+<!--        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">-->
+<!--          <th>Date</th>-->
+<!--          <th>Vl</th>-->
+<!--          <th>Performance</th>-->
+<!--          <th>Rentabilité Moyenne %</th>-->
+<!--          <th>Variance</th>-->
+<!--          <th>Ecart type (volatilité)</th>-->
+<!--          <th>Ecart type base de 100</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody class="fw-semibold text-gray-600">-->
+<!--        <tr *ngFor="let item of reportList">-->
+<!--          <td>{{ item[8] | date: "dd MMMM yyyy" }}</td>-->
+<!--          <td>{{ item[11] | number }}</td>-->
+<!--          <td>{{ item[13] | number }}</td>-->
+<!--          <td>{{ item[14] | number }}</td>-->
+<!--          <td>{{ item[15] | number }}</td>-->
+<!--          <td>{{ item[16] | number }}</td>-->
+<!--          <td>{{ item[17] | number }}</td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+      </table>
+    </div>
+  </div>
+</div>
+

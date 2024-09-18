@@ -1,0 +1,197 @@
+<!--begin::Careers - Apply-->
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" enctype="multipart/form-data" class="form mb-5">
+          <!--begin::Input-->
+          <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid" [value]="id" formControlName="id"/>
+          <!--end::Input-->
+          <div class="row mb-5" *ngIf="id">
+            <!--begin::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <!--begin::Label-->
+          </div>
+
+          <div>
+            <div class="border rounded-3 p-3">
+              <div class="row mb-5">
+                <legend class="float-none w-auto px-3">IDENTITE</legend>
+                <!--begin::Input group-->
+                <div class="row mb-5">
+                  <!--begin::Col-->
+                  <div class="col-md-6 fv-row">
+                    <!--begin::Label-->
+                    <label class="required fs-5 fw-semibold mb-2">Logiciel</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input type="text" class="form-control form-control-sm form-control-solid"
+                           placeholder="" formControlName="logiciel" [ngClass]="{ 'is-invalid': submitted && f.logiciel.errors }"/>
+                    <!--end::Input-->
+                    <div *ngIf="submitted && f.logiciel.errors" class="invalid-feedback">
+                      <div *ngIf="f.logiciel.errors.required">Le Champs est obligatoire</div>
+                    </div>
+                  </div>
+                  <!--begin::Col-->
+                  <div class="col-md-6 fv-row">
+                    <!--begin::Label-->
+                    <label class="required fs-5 fw-semibold mb-2">Date acquisition</label>
+                    <!--end::Label-->
+
+                    <div class="input-group mb-0">
+                      <!--begin::Input-->
+                      <input type="text" class="form-control form-control-sm form-control-solid"
+                             placeholder="dd-mm-yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date acquisition" aria-describedby="basic-addon6"
+                             formControlName="dateAcquisition" [ngClass]="{ 'is-invalid': submitted && f.dateAcquisition.errors }"/>
+                      <!--end::Input-->
+                      <span (click)="d.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                    </div>
+
+                    <div *ngIf="submitted && f.dateAcquisition.errors" class="invalid-feedback">
+                      <div *ngIf="f.dateAcquisition.errors.required">La date acquisition est obligatoire</div>
+                    </div>
+                  </div>
+
+                  <!--begin::Col-->
+                  <div class="col-md-6 fv-row">
+                    <!--begin::Label-->
+                    <label class="required fs-5 fw-semibold mb-2">Date Info AMF</label>
+                    <!--end::Label-->
+
+                    <div class="input-group mb-0">
+                      <!--begin::Input-->
+                      <input type="text" class="form-control form-control-sm form-control-solid"
+                             placeholder="dd-mm-yyyy" ngbDatepicker #d2="ngbDatepicker" aria-label="Date Info AMF" aria-describedby="basic-addon7"
+                             formControlName="dateInfoCREPMF" [ngClass]="{ 'is-invalid': submitted && f.dateInfoCREPMF.errors }"/>
+                      <!--end::Input-->
+                      <span (click)="d2.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                    </div>
+
+                    <div *ngIf="submitted && f.dateInfoCREPMF.errors" class="invalid-feedback">
+                      <div *ngIf="f.dateInfoCREPMF.errors.required">La date info AMF est obligatoire</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 fv-row">
+                    <!--begin::Label-->
+                    <label class="required fs-5 fw-semibold mb-2">Dénomination</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input type="text" class="form-control form-control-sm form-control-solid"
+                           placeholder="" formControlName="denomination" [ngClass]="{ 'is-invalid': submitted && f.denomination.errors }"/>
+                    <!--end::Input-->
+                    <div *ngIf="submitted && f.denomination.errors" class="invalid-feedback">
+                      <div *ngIf="f.denomination.errors.required">Le Champs est obligatoire</div>
+                    </div>
+                  </div>
+
+                  <!--begin::Col-->
+                  <div class="col-md-6 fv-row">
+                    <!--begin::Label-->
+                    <label class="required fs-5 fw-semibold mb-2">Date Début maintenance</label>
+                    <!--end::Label-->
+
+                    <div class="input-group mb-0">
+                      <!--begin::Input-->
+                      <input type="text" class="form-control form-control-sm form-control-solid"
+                             placeholder="dd-mm-yyyy" ngbDatepicker #d3="ngbDatepicker" aria-label="Date Info AMF" aria-describedby="basic-addon8"
+                             formControlName="dateDebutMaintenance" [ngClass]="{ 'is-invalid': submitted && f.dateDebutMaintenance.errors }"/>
+                      <!--end::Input-->
+                      <span (click)="d3.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon8">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                    </div>
+
+                    <div *ngIf="submitted && f.dateDebutMaintenance.errors" class="invalid-feedback">
+                      <div *ngIf="f.dateDebutMaintenance.errors.required">La date début maintenance est obligatoire</div>
+                    </div>
+                  </div>
+
+
+                  <!--begin::Col-->
+                  <div class="col-md-6 fv-row">
+                    <!--begin::Label-->
+                    <label class="required fs-5 fw-semibold mb-2">Date fin maintenance</label>
+                    <!--end::Label-->
+
+                    <div class="input-group mb-0">
+                      <!--begin::Input-->
+                      <input type="text" class="form-control form-control-sm form-control-solid"
+                             placeholder="dd-mm-yyyy" ngbDatepicker #d4="ngbDatepicker" aria-label="Date Fin Maintenance" aria-describedby="basic-addon9"
+                             formControlName="dateFinMaintenance" [ngClass]="{ 'is-invalid': submitted && f.dateFinMaintenance.errors }"/>
+                      <!--end::Input-->
+                      <span (click)="d4.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon9">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                    </div>
+
+                    <div *ngIf="submitted && f.dateFinMaintenance.errors" class="invalid-feedback">
+                      <div *ngIf="f.dateFinMaintenance.errors.required">La date fin maintenance est obligatoire</div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 fv-row">
+                    <!--begin::Label-->
+                    <label class="required fs-5 fw-semibold mb-2">Prinipale fonctionnalité</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input type="text" class="form-control form-control-sm form-control-solid"
+                           placeholder="" formControlName="principalFonctionnalite" [ngClass]="{ 'is-invalid': submitted && f.principalFonctionnalite.errors }"/>
+                    <!--end::Input-->
+                    <div *ngIf="submitted && f.principalFonctionnalite.errors" class="invalid-feedback">
+                      <div *ngIf="f.principalFonctionnalite.errors.required">Le Champs est obligatoire</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--begin::Col-->
+          <!--end::Col-->
+          <!--            </div>-->
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/app/standard/parametre/systemedinformation" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary"
+                    (click)="onSaveEntity()">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

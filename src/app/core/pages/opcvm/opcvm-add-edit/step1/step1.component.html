@@ -1,0 +1,250 @@
+<div class="pb-10 pb-lg-12">
+  <h2 class="fw-bolder text-gray-900">Détails de l'opcvm</h2>
+  <div class="text-gray-500 fw-bold fs-6">
+    Renseignez les informations d'identification de l'opcvm
+    <a href="#" class="link-primary fw-bolder">Help Page</a>.
+  </div>
+</div>
+<div [formGroup]="form">
+  <div class="row mb-10">
+    <!--begin::Col-->
+    <div class="col-md-6 fv-row">
+      <!--begin::Label-->
+      <label class="required fs-5 fw-semibold mb-2">Sigle</label>
+      <!--end::Label-->
+      <!--begin::Input-->
+      <input type="text" name="sigleOpcvm" class="form-control form-control-sm"
+             placeholder="Ex : XXXXXXXXX" formControlName="sigleOpcvm"/>
+      <!--end::Input-->
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('sigleOpcvm')?.hasError('required') &&
+        form.get('sigleOpcvm')?.touched">
+        Le sigle est obligatoire
+      </div>
+    </div>
+    <!--end::Col-->
+    <!--begin::Col-->
+    <div class="col-md-6 fv-row">
+      <!--begin::Label-->
+      <label class="required fs-5 fw-semibold mb-2">Dénomination</label>
+      <!--end::Label-->
+      <!--begin::Input-->
+      <input type="text" name="denominationOpcvm" class="form-control form-control-sm"
+             placeholder="Ex : XXXXXXXXX" formControlName="denominationOpcvm"/>
+      <!--end::Input-->
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('denominationOpcvm')?.hasError('required') &&
+        form.get('denominationOpcvm')?.touched">
+        La dénomination est obligatoire
+      </div>
+    </div>
+    <!--end::Col-->
+  </div>
+  <div class="row mb-10">
+    <div class="col-md-6 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="required">Régistre de commerce</span>
+      </label>
+      <input name="registreDeCommerce" class="form-control form-control-sm form-control-solid" formControlName="registreDeCommerce"/>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('registreDeCommerce')?.hasError('required') &&
+        form.get('registreDeCommerce')?.touched">
+        Le registre de commerce est obligatoire
+      </div>
+    </div>
+    <div class="col-md-6 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="required">N° Agrément</span>
+      </label>
+      <input name="agrement" class="form-control form-control-sm form-control-solid" formControlName="agrement"/>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('agrement')?.hasError('required') &&
+        form.get('agrement')?.touched">
+        Le numéro d'agrément est obligatoire
+      </div>
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col-md-6 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span>Date d'agrément</span>
+      </label>
+      <!--begin::Input-->
+      <div
+        style="display: flex; width: 100%; border-top-left-radius: 1px; border-bottom-left-radius: 1px;"
+        class="border">
+        <input
+          style="flex: 3; border-bottom-right-radius: 0; border-top-right-radius: 0"
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="dd/mm/yyyy"
+          name="dateAgrement"
+          formControlName="dateAgrement"
+          ngbDatepicker
+          #d1="ngbDatepicker"/>
+        <button style="flex: 0.5; padding: 0;" class="btn btn-sm btn-default" (click)="d1.toggle()" type="button">
+          <i class="fa fa-calendar"></i>
+        </button>
+      </div>
+      <!--end::Input-->
+    </div>
+    <div class="col-md-6 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span>Date Séance 0</span>
+      </label>
+      <!--begin::Input-->
+      <div
+        style="display: flex; width: 100%; border-top-left-radius: 1px; border-bottom-left-radius: 1px;"
+        class="border">
+        <input
+          style="flex: 3; border-bottom-right-radius: 0; border-top-right-radius: 0"
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="dd/mm/yyyy"
+          name="dateCreationOpcvm"
+          formControlName="dateCreationOpcvm"
+          ngbDatepicker
+          #d2="ngbDatepicker"/>
+        <button style="flex: 0.5; padding: 0;" class="btn btn-sm btn-default" (click)="d2.toggle()" type="button">
+          <i class="fa fa-calendar"></i>
+        </button>
+      </div>
+      <!--end::Input-->
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col-md-6 fv-row">
+      <label class="form-label required">Classification</label>
+      <select name="classification" class="form-select form-select-sm mb-2"
+              [ngClass]="{ 'is-invalid': (form.get('formeJuridiqueOpc')?.dirty || form.get('formeJuridiqueOpc')?.touched) && form.get('formeJuridiqueOpc')?.invalid }"
+              formControlName="classification">
+        <option disabled selected [ngValue]="null">Sélectionnez une classification...</option>
+        <option *ngIf="defaultValues.classification" disabled [defaultSelected]="true"
+                [ngValue]="defaultValues.classification">
+          {{ defaultValues.classification.libelleClassification }}
+        </option>
+        <option *ngFor="let item of classification$|async" [ngValue]="item">
+          {{ item.libelleClassification }}
+        </option>
+      </select>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('classification')?.hasError('required') &&
+                      form.get('classification')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+    <div class="col-md-6 fv-row">
+      <label class="form-label required">Forme Juridique</label>
+      <select name="formeJuridiqueOpc" class="form-select form-select-sm mb-2"
+              [ngClass]="{ 'is-invalid': (form.get('formeJuridiqueOpc')?.dirty || form.get('formeJuridiqueOpc')?.touched) && form.get('formeJuridiqueOpc')?.invalid }"
+              formControlName="formeJuridiqueOpc">
+        <option disabled selected [ngValue]="null">Sélectionnez une forme juridique...</option>
+        <option *ngIf="defaultValues.formeJuridiqueOpc" disabled [defaultSelected]="true"
+                [ngValue]="defaultValues.formeJuridiqueOpc">
+          {{ defaultValues.formeJuridiqueOpc.libelleFormeJuridiqueOpc }}
+        </option>
+        <option *ngFor="let item of formeJuridiqueOpc$|async" [ngValue]="item">
+          {{ item.libelleFormeJuridiqueOpc }}
+        </option>
+      </select>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('formeJuridiqueOpc')?.hasError('required') &&
+                      form.get('formeJuridiqueOpc')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col-md-6 fv-row">
+      <label class="form-label required">Emetteur</label>
+      <select name="personneEmetteur" class="form-select form-select-sm mb-2" formControlName="personneEmetteur"
+              [ngClass]="{ 'is-invalid': (form.get('personneEmetteur')?.dirty || form.get('personneEmetteur')?.touched) && form.get('personneEmetteur')?.invalid }">
+        <option disabled selected [ngValue]="null">Sélectionnez un emetteur...</option>
+        <option *ngIf="defaultValues.personneEmetteur" disabled [defaultSelected]="true"
+                [ngValue]="defaultValues.personneEmetteur">
+          {{ defaultValues.personneEmetteur.denomination }}
+        </option>
+        <option *ngFor="let item of emetteurs$|async" [ngValue]="item">
+          {{ item.denomination }}
+        </option>
+      </select>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('personneEmetteur')?.hasError('required') &&
+                      form.get('personneEmetteur')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+    <div class="col-md-6 fv-row">
+      <label class="form-label required">Dépositaire</label>
+      <select name="personneIntervenant" class="form-select form-select-sm mb-2" formControlName="personneIntervenant"
+              [ngClass]="{ 'is-invalid': (form.get('personneIntervenant')?.dirty || form.get('personneIntervenant')?.touched) && form.get('personneIntervenant')?.invalid }">
+        <option disabled selected [ngValue]="null">Sélectionnez un dépositaire...</option>
+        <option *ngIf="defaultValues.personneIntervenant" disabled [defaultSelected]="true"
+                [ngValue]="defaultValues.personneIntervenant">
+          {{ defaultValues.personneIntervenant.denomination }}
+        </option>
+        <option *ngFor="let item of depositaires$|async" [ngValue]="item">
+          {{ item.denomination }}
+        </option>
+      </select>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('personneIntervenant')?.hasError('required') &&
+                      form.get('personneIntervenant')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 fv-row">
+      <label class="form-label required">Gestionnaire</label>
+      <select name="personneGestionnaire" class="form-select form-select-sm mb-2" formControlName="personneGestionnaire"
+              [ngClass]="{ 'is-invalid': (form.get('personneGestionnaire')?.dirty || form.get('personneGestionnaire')?.touched) && form.get('personneGestionnaire')?.invalid }">
+        <option disabled selected [ngValue]="null">Sélectionnez un gestionnaire...</option>
+        <option *ngIf="defaultValues.personneGestionnaire" disabled [defaultSelected]="true"
+                [ngValue]="defaultValues.personneGestionnaire">
+          {{ defaultValues.personneGestionnaire.denomination }}
+        </option>
+        <option *ngFor="let item of gestionnaires$|async" [ngValue]="item">
+          {{ item.denomination }}
+        </option>
+      </select>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('personneGestionnaire')?.hasError('required') &&
+                      form.get('personneGestionnaire')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="form-label required">Cours Initial</label>
+      <!--begin::Select-->
+      <select name="coursInitial" class="form-select form-select-sm mb-2" formControlName="coursInitial"
+              [ngClass]="{ 'is-invalid': (form.get('coursInitial')?.dirty || form.get('coursInitial')?.touched) && form.get('coursInitial')?.invalid }">
+        <option disabled [ngValue]="null">Sélectionnez un cours...</option>
+        <option ngValue="CONNU">CONNU</option>
+        <option ngValue="INCONNU">INCONNU</option>
+      </select>
+      <!--end::Select-->
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('coursInitial')?.hasError('required') &&
+                      form.get('coursInitial')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="form-label required">Cours Actuel</label>
+      <!--begin::Select-->
+      <select name="coursActuel" class="form-select form-select-sm mb-2" formControlName="coursActuel"
+              [ngClass]="{ 'is-invalid': (form.get('coursActuel')?.dirty || form.get('coursActuel')?.touched) && form.get('coursActuel')?.invalid }">
+        <option disabled value="null">Sélectionnez un cours...</option>
+        <option ngValue="CONNU">CONNU</option>
+        <option ngValue="INCONNU">INCONNU</option>
+      </select>
+      <!--end::Select-->
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('coursActuel')?.hasError('required') &&
+                      form.get('coursActuel')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+  </div>
+</div>

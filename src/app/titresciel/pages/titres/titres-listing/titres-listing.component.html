@@ -1,0 +1,138 @@
+<ng-container *ngIf="qualites$|async as qualites">
+  <ul class="nav nav-tabs" role="tablist">
+    <ng-container *ngFor="let qualite of qualites; let i = index">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" [ngClass]="{ active: i === 0}" id="simple-tab-{{i}}" data-bs-toggle="tab" href="#simple-tabpanel-{{i}}" [attr.data-id]="qualite.idQualite"
+           [attr.data-class]="qualite.classeTitre?.codeClasseTitre"
+           role="tab" [attr.aria-controls]="'simple-tabpanel-'+i" aria-selected="true" (click)="changerQualite(qualite, i)">{{ qualite.libelleQualite | uppercase }}</a>
+      </li>
+    </ng-container>
+  </ul>
+  <div class="tab-content pt-5" id="tab-content">
+    <div class="tab-pane" [ngClass]="{ active: currentTabIndex$.value >= 0}" id="simple-tabpanel-{{currentTabIndex$.value}}"
+         role="tabpanel" [attr.aria-labelledby]="'simple-tab-' + currentTabIndex$.value">
+      <ng-container *ngIf="showForm.value === 0 && qualite != null">
+        <div class="card">
+          <div class="card-header border-0 pt-6">
+            <!--begin::Card title-->
+            <div class="card-title">
+              <!--begin::Search-->
+              <div class="d-flex align-items-center position-relative my-1">
+                <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12"
+                       [placeholder]="searchButtonTitle">
+              </div>
+              <!--end::Search-->
+            </div>
+            <!--begin::Card title-->
+
+            <!--begin::Card toolbar-->
+            <div class="card-toolbar">
+              <!--begin::Toolbar-->
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-sm btn-primary" data-action="create"
+                        [attr.data-qualite]="qualite.idQualite" hasPermission = "CAN_ADD">
+                  <ng-container *ngIf="showForm.value !== 0">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    Patientez svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                  </span>
+                  </ng-container>
+                  <ng-container *ngIf="showForm.value === 0">
+                    <span class="indicator-label">{{ newButtonTitle | titlecase }}</span>
+                  </ng-container>
+                </button>
+              </div>
+              <!--end::Toolbar-->
+            </div>
+            <!--end::Card toolbar-->
+          </div>
+          <div class="card-body pt-0">
+            <div class="table-responsive angular-bootstrap-table">
+              <app-entity-crud
+                [datatableConfig]="datatableConfig"
+                route="/standard/parametre/instrumentfinancier/titres"
+                [reload]="reloadEvent"
+                [changeTable]="changeTableEvent">
+              </app-entity-crud>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="showForm.value === 1">
+        <app-titres-details [id]="id$.value" (showForm)="retourAlaListe($event)">
+        </app-titres-details>
+      </ng-container>
+      <ng-container *ngIf="showForm.value === 2">
+        <!--<app-titres-showing [id]="id$.value" (showForm)="retourAlaListe($event)">
+        </app-titres-showing>-->
+      </ng-container>
+    </div>
+
+    <!--<div *ngFor="let qualite of qualites; let i = index" class="tab-pane" [ngClass]="{ active: i === 0}"
+         id="simple-tabpanel-{{i}}" role="tabpanel" [attr.aria-labelledby]="'simple-tab-' + i">
+      <ng-container *ngIf="showForm === 0">
+        <div class="card">
+          <div class="card-header border-0 pt-6">
+            &lt;!&ndash;begin::Card title&ndash;&gt;
+            <div class="card-title">
+              &lt;!&ndash;begin::Search&ndash;&gt;
+              <div class="d-flex align-items-center position-relative my-1">
+                <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12"
+                       [placeholder]="searchButtonTitle">
+              </div>
+              &lt;!&ndash;end::Search&ndash;&gt;
+            </div>
+            &lt;!&ndash;begin::Card title&ndash;&gt;
+
+            &lt;!&ndash;begin::Card toolbar&ndash;&gt;
+            <div class="card-toolbar">
+              &lt;!&ndash;begin::Toolbar&ndash;&gt;
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-sm btn-primary" data-action="create"
+                        [attr.data-qualite]="qualite.idQualite" hasPermission = "CAN_ADD">
+                  <ng-container *ngIf="showForm !== 0">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    Patientez svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                  </span>
+                  </ng-container>
+                  <ng-container *ngIf="showForm === 0">
+                    <span class="indicator-label">{{ newButtonTitle | titlecase }}</span>
+                  </ng-container>
+                </button>
+              </div>
+              &lt;!&ndash;end::Toolbar&ndash;&gt;
+            </div>
+            &lt;!&ndash;end::Card toolbar&ndash;&gt;
+          </div>
+          <div class="card-body pt-0">
+            <div class="table-responsive angular-bootstrap-table">
+              <ng-container *ngIf="tabIndex === i">
+                <app-entity-crud
+                  [datatableConfig]="getDataTableConfig(qualite)"
+                  route="/standard/parametre/instrumentfinancier/titres"
+                  [reload]="reloadEvent">
+                </app-entity-crud>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="showForm === 1">
+        <app-titres-details [id]="id$.value" (showForm)="retourAlaListe($event)">
+        </app-titres-details>
+      </ng-container>
+      <ng-container *ngIf="showForm === 2">
+        &lt;!&ndash;<app-titres-showing [id]="id$.value" (showForm)="retourAlaListe($event)">
+        </app-titres-showing>&ndash;&gt;
+      </ng-container>
+    </div>-->
+  </div>
+</ng-container>
+
+<swal #noticeSwal [swalOptions]="swalOptions">
+</swal>
+
+

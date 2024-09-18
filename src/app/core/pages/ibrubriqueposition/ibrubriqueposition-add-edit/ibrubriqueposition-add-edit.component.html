@@ -1,0 +1,215 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Code IB</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNumeroPositifValidators [readOnly]="enabled" type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="codeIB"
+                     [ngClass]="{ 'is-invalid': submitted && f.codeIB.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.codeIB.errors" class="invalid-feedback">
+                <div *ngIf="f.codeIB.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libellé IB</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libelleIb"
+                     [ngClass]="{ 'is-invalid': submitted && f.libelleIb.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libelleIb.errors" class="invalid-feedback">
+                <div *ngIf="f.libelleIb.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Type IB</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select class="form-select form-select-sm mb-2" formControlName="typeIb"
+                      [ngClass]="{ 'is-invalid': submitted && f.typeIb.errors }">
+                <option selected>Sélectionnez un type IB...</option>
+                <option [defaultSelected]="true" [ngValue]="entity?.typeIb" [disabled]="true">
+                  {{ entity?.typeIb?.libelleTypeIB }}
+                </option>
+                <option *ngFor="let item of Typeib$" [ngValue]="item">
+                  {{ item.libelleTypeIB }}
+                </option>
+              </select>
+          </div>
+
+            <div class="col-md-3 fv-row">
+                <div class="form-group d-flex flex-stack">
+                  <div class="d-flex justify-content-end">
+                    <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input style="margin-top: 30px" type="checkbox" checked="checked" formControlName="estIbSysteme" [value]="true"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label style="margin-top: 30px" class="form-check-label text-gray-700 fw-bold text-nowrap">SYSTEME?</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Code Rubrique</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNumeroPositifValidators [readOnly]="enabled" type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="codeRubrique"
+                     [ngClass]="{ 'is-invalid': submitted && f.codeRubrique.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.codeRubrique.errors" class="invalid-feedback">
+                <div *ngIf="f.codeRubrique.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libellé rubrique</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libelleRubrique"
+                     [ngClass]="{ 'is-invalid': submitted && f.libelleRubrique.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libelleRubrique.errors" class="invalid-feedback">
+                <div *ngIf="f.libelleRubrique.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Type rubrique</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select class="form-select form-select-sm mb-2" formControlName="typeRubrique"
+                      [ngClass]="{ 'is-invalid': submitted && f.typeRubrique.errors }">
+                <option selected>Sélectionnez un type rubrique...</option>
+                <option [defaultSelected]="true" [ngValue]="entityRubrique?.typeRubrique" [disabled]="true">
+                  {{ entityRubrique?.typeRubrique?.codeTypeRubrique }}
+                </option>
+                <option *ngFor="let item of Typerubrique$" [ngValue]="item">
+                  {{ item.codeTypeRubrique }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Code position</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNumeroPositifValidators [readOnly]="enabled"type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="codePosition"
+                     [ngClass]="{ 'is-invalid': submitted && f.codePosition.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.codePosition.errors" class="invalid-feedback">
+                <div *ngIf="f.codePosition.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libellé position</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libellePosition"
+                     [ngClass]="{ 'is-invalid': submitted && f.libellePosition.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libellePosition.errors" class="invalid-feedback">
+                <div *ngIf="f.libellePosition.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Type</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select class="form-select form-select-sm mb-2" formControlName="typeValeur"
+                      [ngClass]="{ 'is-invalid': submitted && f.typeValeur.errors }">
+                <option disabled value="null">Sélectionnez un type...</option>
+                <option ngValue="ESPECE">ESPECE</option>
+                <option ngValue="TITRE">TITRE</option>
+                <option ngValue="PART">PART</option>
+              </select>
+              <!--end::Select-->
+              <div *ngIf="submitted && f.typeValeur.errors" class="invalid-feedback">
+                <div *ngIf="f.typeValeur.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Operation buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/app/standard/parametre/comptabilite/ibrubriqueposition" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Operation buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

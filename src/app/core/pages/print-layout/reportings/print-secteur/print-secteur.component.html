@@ -1,0 +1,47 @@
+<!--
+<table>
+  <thead>
+  <tr class="bg-blue">
+    <th>TH 1</th>
+    <th>TH 2</th>
+    <th>TH 3</th>
+    <th>TH 4</th>
+    <th>TH 5</th>
+    <th>TH 6</th>
+    <th>TH 7</th>
+    <th>TH 8</th>
+    <th>TH 9</th>
+    <th>TH 10</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>TD 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci aliquid aperiam assumenda blanditiis dolorem eos expedita fugit, id itaque minima nam, non officia optio quae, quaerat sed vero voluptatem.</td>
+    <td>TD Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto cupiditate distinctio dolore dolorem illum, ipsa ipsum laboriosam libero minima, mollitia nostrum perferendis quaerat saepe sit suscipit tempora totam voluptate?</td>
+    <td>TD Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab assumenda consectetur consequuntur, cumque dolore esse expedita harum impedit libero magni mollitia nesciunt omnis quae reiciendis repudiandae voluptatem voluptates. Illum, vel.</td>
+    <td>TD Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, alias debitis dolores doloribus et facilis fugit minima molestiae molestias natus odio odit porro quisquam reiciendis sapiente sed suscipit ullam veniam.</td>
+    <td>TD Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, accusamus ad autem dicta ea earum eligendi et, ex illum nemo nihil nostrum odit omnis optio provident quaerat quasi repellendus tempore!</td>
+    <td>TD Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque delectus, deleniti dolore ex fugiat fugit hic illo in labore non nostrum quae quas quidem, reiciendis sunt temporibus voluptas voluptate!</td>
+    <td>TD Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea laboriosam nisi nobis quam! Accusamus autem delectus doloribus harum impedit laboriosam molestias nisi odit officia provident quae, quia quos reprehenderit sit.</td>
+    <td>TD Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam dolorem optio quod? Eveniet ex maiores molestiae numquam optio pariatur quas tempora tenetur vero voluptatibus? Corporis facere itaque odit quam!</td>
+    <td>TD 9 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab dolor illum iusto modi numquam! Eaque fuga nisi ratione. Aliquid explicabo hic nobis repellendus? Eaque laborum minus natus non tempora tenetur.</td>
+    <td>TD 10 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium aliquid, amet assumenda doloremque eius eveniet hic illo illum modi mollitia, nesciunt odio optio perferendis porro quae repellendus suscipit tempore.</td>
+  </tr>
+  </tbody>
+</table>
+-->
+
+<div class="card card-flush mb-3">
+  <!--begin::Card header-->
+  <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+    <!--begin::Card title-->
+    <div class="card-title">
+      <button class="btn btn-sm btn-primary" (click)="openPDF()">Imprimer</button>
+    </div>
+  </div>
+</div>
+<reportings-print-layout #report id="report"
+   title="Liste des secteurs"
+   [table]="true"
+    (reportSizeEvent)="getSize($event)">
+</reportings-print-layout>

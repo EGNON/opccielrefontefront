@@ -1,0 +1,63 @@
+<div class="card card-flush" *ngIf="entity">
+    <!--begin::Card body-->
+    <div class="card-body py-3">
+        <!--begin::Table-->
+        <table class="table align-middle gs-0 gy-5">
+            <tbody class="fw-semibold text-gray-600">
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Id</th>
+                <td>{{ entity.idPersonne }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Dénomination</th>
+                <td>{{ entity.civilite + ' ' + entity.denomination }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Sexe</th>
+                <td>{{entity.sexe }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Date de naissance</th>
+                <td>{{entity.dateNaissance|date:'dd/MM/yyyy' }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Nationalité</th>
+                <td>{{ entity.paysNationalite.libelleFr }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Pays de résidence</th>
+                <td>{{ entity.paysResidence.libelleFr }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">E-Mail perso</th>
+                <td>{{ entity.emailPerso }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">E-Mail pro</th>
+                <td>{{ entity.emailPro }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Statut matrimoniale</th>
+                <td>{{ entity.statutMatrimonial }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Mobile 1</th>
+                <td>{{ entity.mobile1 }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Profession</th>
+                <td>{{ entity.profession.libelleProfession }}</td>
+            </tr>
+            <!--        <tr class="d-flex justify-content-between">-->
+            <!--          <th class="fw-bold fs-7 text-uppercase">Documents</th>-->
+            <!--          <td></td>-->
+            <!--        </tr>-->
+            <!--        <tr *ngFor="let document of document$" class="d-flex justify-content-between">-->
+            <!--          <th class="fw-bold fs-7 text-uppercase">{{document.nomDoc}}.{{document.extensionDoc}}</th>-->
+            <!--        </tr>-->
+            </tbody>
+        </table>
+        <!--end::Table-->
+    </div>
+    <!--end::Card body-->
+</div>

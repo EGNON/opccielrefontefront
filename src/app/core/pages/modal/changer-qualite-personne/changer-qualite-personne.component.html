@@ -1,0 +1,152 @@
+<!--<div class="modal-header p-2">
+  <div class="modal-title h4">Attribution de qualités</div>
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
+&lt;!&ndash;begin::Form&ndash;&gt;
+<form [formGroup]="form" enctype="multipart/form-data" class="form">
+  &lt;!&ndash;begin::Careers - Apply&ndash;&gt;
+  <div [class]="'modal-body p-lg-2'">
+    &lt;!&ndash;begin::Body&ndash;&gt;
+    <div class="card-body p-lg-5">
+      &lt;!&ndash;begin::Layout&ndash;&gt;
+      <div class="d-flex flex-column flex-lg-row mb-0">
+        &lt;!&ndash;begin::Content&ndash;&gt;
+        <div class="flex-lg-row-fluid me-0 me-lg-0">
+            <div class="row mb-5">
+              &lt;!&ndash;begin::Col&ndash;&gt;
+              <div class="col-md-12 fv-row">
+                <div style="display: flex; justify-content: space-between;">
+                  &lt;!&ndash;begin::Label&ndash;&gt;
+                  <label class="fs-5 fw-semibold mb-2">Qualité</label>
+                  &lt;!&ndash;end::Label&ndash;&gt;
+                </div>
+                &lt;!&ndash;begin::Select&ndash;&gt;
+                <select name="qualite" class="form-select form-select-sm mb-2 select2" formControlName="qualite"
+                        [ngClass]="{ 'is-invalid': form.get('qualite')?.touched && form.get('qualite')?.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez une qualité...</option>
+                  <option *ngFor="let item of qualites$|async" [ngValue]="item">
+                    {{ item.libelleQualite }}
+                  </option>
+                </select>
+                &lt;!&ndash;end::Select&ndash;&gt;
+                <div class="fv-plugins-message-container invalid-feedback"
+                     *ngIf="form.get('qualite')?.hasError('required') &&
+                              form.get('qualite')?.touched">
+                  Ce champs est obligatoire
+                </div>
+              </div>
+              &lt;!&ndash;end::Col&ndash;&gt;
+            </div>
+            &lt;!&ndash;begin::Separator&ndash;&gt;
+            <div class="separator mb-5"></div>
+            &lt;!&ndash;end::Separator&ndash;&gt;
+            &lt;!&ndash;begin::Action buttons&ndash;&gt;
+            <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-start">
+                &lt;!&ndash;begin::Button&ndash;&gt;
+                <button type="button" class="btn btn-sm btn-warning me-3">
+                  Fermer
+                </button>
+                &lt;!&ndash;end::Button&ndash;&gt;
+              </div>
+              <div class="d-flex justify-content-end">
+                &lt;!&ndash;begin::Submit&ndash;&gt;
+                &lt;!&ndash;              <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.valid" (click)="onSaveEntity()">&ndash;&gt;
+                <button type="submit" class="btn btn-sm btn-primary" [disabled]="form.invalid" (click)="save()">
+                  <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                  </ng-container>
+                  <ng-container *ngIf="!submitting">
+                    <span class="indicator-label">Enregistrer</span>
+                  </ng-container>
+                </button>
+                &lt;!&ndash;end::Submit&ndash;&gt;
+              </div>
+            </div>
+            &lt;!&ndash;end::Action buttons&ndash;&gt;
+        </div>
+        &lt;!&ndash;end::Content&ndash;&gt;
+      </div>
+      &lt;!&ndash;end::Layout&ndash;&gt;
+    </div>
+    &lt;!&ndash;end::Body&ndash;&gt;
+  </div>
+  &lt;!&ndash;end::Careers - Apply&ndash;&gt;
+</form>
+&lt;!&ndash;end::Form&ndash;&gt;-->
+
+
+
+<!--begin::Form-->
+<form [formGroup]="form" enctype="multipart/form-data" class="form">
+  <div class="modal-header p-2">
+    <div class="modal-title h4">Attribution de qualités</div>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+<!--      <span aria-hidden="true">&times;</span>-->
+    </button>
+  </div>
+  <div class="modal-body p-lg-0">
+    <div class="card-body p-lg-5">
+      <!--begin::Layout-->
+      <div class="d-flex flex-column flex-lg-row mb-0">
+        <!--begin::Content-->
+        <div class="flex-lg-row-fluid me-0 me-lg-0">
+          <div class="row">
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+              <div style="display: flex; justify-content: space-between;">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Qualité</label>
+                <!--end::Label-->
+              </div>
+              <!--begin::Select-->
+              <select name="qualite" class="form-select form-select-sm mb-2 select2" formControlName="qualite"
+                      [ngClass]="{ 'is-invalid': form.get('qualite')?.touched && form.get('qualite')?.errors }">
+                <option selected [ngValue]="null">Sélectionnez une qualité...</option>
+                <option *ngFor="let item of qualites$|async" [ngValue]="item">
+                  {{ item.libelleQualite|uppercase }}
+                </option>
+              </select>
+              <!--end::Select-->
+              <div class="fv-plugins-message-container invalid-feedback"
+                   *ngIf="form.get('qualite')?.hasError('required') &&
+                              form.get('qualite')?.touched">
+                Ce champs est obligatoire
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+        </div>
+        <!--end::Content-->
+      </div>
+      <!--end::Layout-->
+    </div>
+  </div>
+  <div class="modal-footer d-flex justify-content-between p-2">
+    <!--begin::Action buttons-->
+    <div class="d-flex justify-content-start">
+      <button type="button" class="btn btn-sm btn-outline-dark me-3" (click)="modal.close('Close click')">Fermer</button>
+    </div>
+    <div class="d-flex justify-content-end">
+      <!--begin::Submit-->
+      <!--              <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.valid" (click)="onSaveEntity()">-->
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="form.invalid" (click)="save()">
+        <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+        </ng-container>
+        <ng-container *ngIf="!submitting">
+          <span class="indicator-label">Enregistrer</span>
+        </ng-container>
+      </button>
+      <!--end::Submit-->
+    </div>
+    <!--end::Action buttons-->
+  </div>
+</form>
+<!--end::Form-->

@@ -1,0 +1,145 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Personnel</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select class="form-select form-select-sm mb-2" formControlName="personnel">
+                <option [defaultSelected]="true" disabled [ngValue]="defaultPersonnel">
+                  {{ defaultPersonnel?.denomination }}
+                </option>
+                <option *ngFor="let item of personnels$" [ngValue]="item">
+                  {{ item.denomination }}
+                </option>
+              </select>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.personnel.errors" class="invalid-feedback">
+                <div *ngIf="f.personnel.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-12 fv-row">
+              <div class="alert alert-info d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                  <use xlink:href="#info-fill"/>
+                </svg>
+                Sélectionnez un modèle d'objectif afin de commencer l'affectation des valeurs
+              </div>
+            </div>
+          </div>
+          <ng-container *ngIf="id == null">
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-12 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Modèle</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="modeleObjectif">
+                  <option *ngFor="let item of modeles" [ngValue]="item">
+                    {{ item.nomModele }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.modeleObjectif.errors" class="invalid-feedback">
+                  <div *ngIf="f.modeleObjectif.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+          </ng-container>
+          <div formArrayName="objectifAffectes" *ngFor="let control of objectifAffectes.controls; let i = index">
+            <div class="mb-2">
+              <div [formGroupName]="i" class="row border rounded-3 p-3 m-0">
+                <div class="col-md-3 fv-row">
+                  <!--begin::Label-->
+                  <label class="required fs-5 fw-semibold mb-2">Catégorie</label>
+                  <!--end::Label-->
+                  <select class="form-select form-select-sm mb-2" formControlName="categoriePersonne">
+                    <option [defaultSelected]="true" disabled [ngValue]="_objectifAffectes[i]?.categoriePersonne">
+                      {{ _objectifAffectes[i]?.categoriePersonne?.libelle }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-3 fv-row">
+                  <!--begin::Label-->
+                  <label class="required fs-5 fw-semibold mb-2">Indicateur</label>
+                  <!--end::Label-->
+                  <select class="form-select form-select-sm mb-2" formControlName="indicateur">
+                    <option [defaultSelected]="true" disabled [ngValue]="_objectifAffectes[i]?.indicateur">
+                      {{ _objectifAffectes[i]?.indicateur?.libelle }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-3 fv-row">
+                  <!--begin::Label-->
+                  <label class="required fs-5 fw-semibold mb-2">Périodicité</label>
+                  <!--end::Label-->
+                  <select class="form-select form-select-sm mb-2" formControlName="periodicite">
+                    <option [defaultSelected]="true" disabled [ngValue]="_objectifAffectes[i]?.periodicite">
+                      {{ _objectifAffectes[i]?.periodicite?.libelle }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-3 fv-row">
+                  <!--begin::Label-->
+                  <label class="required fs-5 fw-semibold mb-2">Valeur</label>
+                  <!--end::Label-->
+                  <!--begin::Input-->
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm form-control-solid"
+                         placeholder="0" formControlName="valeurAffecte"/>
+                  <!--end::Input-->
+<!--                  <div *ngIf="submitted && f.valeurAffecte.errors" class="invalid-feedback">-->
+<!--                    <div *ngIf="f.valeurAffecte.errors.required">Ce champs est obligatoire</div>-->
+<!--                  </div>-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" [routerLink]="['../']" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+              </span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

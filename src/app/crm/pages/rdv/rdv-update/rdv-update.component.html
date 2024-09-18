@@ -1,0 +1,146 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="formData" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date début réelle</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="date"  class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="dateDebReelle" [ngClass]="{ 'is-invalid': submitted && f.dateDebReelle.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.dateDebReelle.errors" class="invalid-feedback">
+                <div *ngIf="f.dateDebReelle.errors.required">La date début réelle est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Heure début réelle</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="time" step="1" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="heureDebReelle" [ngClass]="{ 'is-invalid': submitted && f.heureDebReelle.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.heureDebReelle.errors" class="invalid-feedback">
+                <div *ngIf="f.heureDebReelle.errors.required">L'heure début réelle est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date fin réelle</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="date"  class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="dateFinReelle" [ngClass]="{ 'is-invalid': submitted && f.dateFinReelle.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.dateFinReelle.errors" class="invalid-feedback">
+                <div *ngIf="f.dateFinReelle.errors.required">La date fin est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Heure fin réelle</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="time" step="1" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="heureFinReelle" [ngClass]="{ 'is-invalid': submitted && f.heureFinReelle.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.heureFinReelle.errors" class="invalid-feedback">
+                <div *ngIf="f.heureFinReelle.errors.required">L'heure fin réelle est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--begin::Separator-->
+
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->
+<div class="card" style="margin-top:20px">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <div class="col-md-12 fv-row">
+          <!--begin::Label-->
+          <label class="required fs-5 fw-semibold mb-2">Chargé(s) présent(s) lors du rendez-vous</label>
+          <!--end::Label-->
+        </div>
+        <!--end::Col-->
+        <!--begin::Form-->
+        <form  [formGroup]="formData" class="form mb-5">
+          <div class="table-responsive angular-bootstrap-table">
+            <!--begin::Table-->
+            <table id="table_Charge" class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5">
+              <thead>
+              <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                <th class="min-w-200px" [hidden]="true">ID</th>
+                <th class="min-w-200px">Chargé(s)</th>
+                <th class="w-10px pe-2">
+                  <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                    <input class="form-check-input" type="checkbox" data-kt-check="true"
+                           data-kt-check-target=".form-check-input" value="1" />
+                  </div>
+                </th>
+<!--                <th class="text-end min-w-70px">Actions</th>-->
+              </tr>
+              </thead>
+              <tbody class="fw-semibold text-gray-600">
+
+              </tbody>
+            </table>
+            <!--end::Table-->
+          </div>
+<!--          <button type="button" (click)="col()" class="btn btn-sm btn-light me-3">-->
+<!--            Ajouter-->
+<!--          </button>-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/crm/rendezvous/rdv" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveRdv()"
+                    [disabled]="formData.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

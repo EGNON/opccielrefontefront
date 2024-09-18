@@ -1,0 +1,81 @@
+<div class="card card-flush" *ngIf="rdv$">
+    <!--begin::Card body-->
+    <div class="card-body py-3">
+        <!--begin::Table-->
+        <table class="table align-middle gs-0 gy-5">
+            <tbody class="fw-semibold text-gray-600">
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Id</th>
+                <td>{{ rdv$.idRdv }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Date début</th>
+                <td>{{ rdv$.dateDebRdv |date:'dd/MM/yyyy'}}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">heure début</th>
+                <td>{{ rdv$.heureDebutRdv}}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Objet</th>
+                <td>{{ rdv$.objetRdv }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Date fin</th>
+                <td>{{ rdv$.dateFinRdv |date:'dd/MM/yyyy'}}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">heure fin</th>
+                <td>{{ rdv$.heureFinRdv}}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Client/prospect</th>
+                <td>{{ rdv$.personnePhysiqueMoraleDto.denomination }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Ville</th>
+                <td>{{ rdv$.communeDto?.libelleCommune }}</td>
+            </tr>
+            <tr class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">Quartier</th>
+                <td>{{ rdv$.quartierDto?.libelleQuartier }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <!--end::Table-->
+        <h1>Chargé(s)</h1>
+        <!--Personne à contacter-->
+        <table class="table align-middle gs-0 gy-5">
+            <tbody class="fw-semibold text-gray-600">
+<!--            <tr class="d-flex justify-content-between">-->
+<!--                <th class="fw-bold fs-7 text-uppercase">Nom</th>-->
+<!--&lt;!&ndash;                <td>{{ entity.nomContact }}</td>&ndash;&gt;-->
+<!--            </tr>-->
+            <tr *ngFor="let agentConcerne of agentConcerne$" class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">{{agentConcerne.personnelDto.denomination}}</th>
+<!--                <td>{{ entity.prenomContact }}</td>-->
+            </tr>
+            </tbody>
+        </table>
+
+        <h1>Document(s)</h1>
+        <!--Pièces jointes-->
+        <table class="table align-middle gs-0 gy-5">
+            <tbody class="fw-semibold text-gray-600">
+<!--            <tr class="d-flex justify-content-between">-->
+<!--                <th class="fw-bold fs-7 text-uppercase">Fichier</th>-->
+<!--                <th [hidden]="true" class="fw-bold fs-7 text-uppercase">ID</th>-->
+<!--                &lt;!&ndash;                <td>{{ entity.nomContact }}</td>&ndash;&gt;-->
+<!--            </tr>-->
+            <tr *ngFor="let document of document$" class="d-flex justify-content-between">
+                <th class="fw-bold fs-7 text-uppercase">{{document.nomDoc}}.{{document.extensionDoc}}</th>
+                <th [hidden]="true" class="fw-bold fs-7 text-uppercase">{{document.idDoc}}</th>
+                <button  class="btn btn-sm btn-success input-group-text" style="width: 100px;height: 40px"
+                   (click)="openFile(document.idDoc,document.nomDoc,document.extensionDoc)">Télécharger</button>
+                <!--                <td>{{ entity.prenomContact }}</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--end::Card body-->
+</div>

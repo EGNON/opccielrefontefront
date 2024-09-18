@@ -1,0 +1,89 @@
+<div class="card card-flush" *ngIf="compteRendu$">
+  <!--begin::Card body-->
+  <div class="card-body py-3">
+    <!--begin::Table-->
+    <table class="table align-middle gs-0 gy-5">
+      <tbody class="fw-semibold text-gray-600">
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Id</th>
+        <td>{{ compteRendu$.idCR }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Date </th>
+        <td>{{ compteRendu$.dateCR |date:'dd/MM/yyyy'}}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">heure début</th>
+        <td>{{ compteRendu$.heureDebCR}}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">heure fin</th>
+        <td>{{ compteRendu$.heureFinCR}}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Objet</th>
+        <td>{{ compteRendu$.objetCR }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Date effective promesse</th>
+        <td>{{ compteRendu$.dateEffectivePromesse |date:'dd/MM/yyyy'}}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Date Prochain rendez-vous</th>
+        <td>{{ compteRendu$.dateProchainRDV |date:'dd/MM/yyyy'}}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Appréciation</th>
+        <td>{{ compteRendu$.appreciation}}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Description</th>
+        <td [innerHTML]="compteRendu$.description"></td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Promesse</th>
+        <td>{{ compteRendu$.promesse }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Montant promesse</th>
+        <td>{{ compteRendu$.montantPromesse|number }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Réalisation</th>
+        <td>{{ compteRendu$.realisation }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Montant réalisation</th>
+        <td>{{ compteRendu$.montantRealisation|number }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Produit à souscrire</th>
+        <td>{{ compteRendu$.opcvmASouscrire.denominationOpcvm }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Produit souscrit</th>
+        <td>{{ compteRendu$.opcvmSouscrit.denominationOpcvm}}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Rendez-vous</th>
+        <td>{{ compteRendu$.rdv.objetRdv }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <!--end::Table-->
+    <h1>Document(s)</h1>
+    <!--Pièces jointes-->
+    <table class="table align-middle gs-0 gy-5">
+      <tbody class="fw-semibold text-gray-600">
+      <tr *ngFor="let document of document$" class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">{{document.nomDoc}}.{{document.extensionDoc}}</th>
+        <th [hidden]="true" class="fw-bold fs-7 text-uppercase">{{document.idDoc}}</th>
+        <button  class="btn btn-sm btn-success input-group-text" style="width: 100px;height: 40px"
+             (click)="openFile(document.idDoc,document.nomDoc,document.extensionDoc)">Télécharger</button>
+        <!--                <td>{{ entity.prenomContact }}</td>-->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--end::Card body-->
+</div>

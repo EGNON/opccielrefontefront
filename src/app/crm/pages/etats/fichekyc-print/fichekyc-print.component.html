@@ -1,0 +1,337 @@
+<!--begin::Products-->
+<div class="card card-flush">
+  <!--begin::Card header-->
+  <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+    <form >
+      <!--    &lt;!&ndash;end::Card title&ndash;&gt;-->
+      <!--    &lt;!&ndash;begin::Card toolbar&ndash;&gt;-->
+      <div class="d-flex flex-column flex-lg-row mb-0">
+        <!--      &lt;!&ndash;begin::Content&ndash;&gt;-->
+        <div class="flex-lg-row-fluid me-0 me-lg-0">
+          <!--       -->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <!--begin::Label-->
+            <div class="col-md-4 fv-row">
+              <label class="required fs-5 fw-semibold mb-2">Client(s)</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select
+                class="form-select form-select-sm form-select-solid"
+                id="ComboClientFicheKyc">
+                <option selected>Sélectonnez un client</option>
+                <option *ngFor="let personne of personnes$"
+                        value="{{personne.idPersonne}}">{{personne.denomination}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 fv-row">
+<!--              <div class="card-toolbar flex-row-fluid justify-content-end gap-5">-->
+              <!--begin::Add Monnaie-->
+              <a (click)="afficherClientSelonIdQualite()" style="margin-right: 5px;margin-top: 30px"  class="btn btn-sm btn-primary">Valider</a>
+              <button printTitle="Fiche KYC"
+                      printSectionId="print-section"
+                      ngxPrint
+                      styleSheetFile="assets/css/print.css"
+                      class="btn btn-sm btn-primary"
+                      style="margin-top: 30px">Imprimer</button>
+              <!--end::Add Monnaie-->
+            </div>
+<!--            </div>-->
+            <!--end::Card toolbar-->
+            <!--begin::Body-->
+            <div class="card-body p-lg-5" id="print-section">
+              <!--begin::Layout-->
+              <div class="d-flex flex-column flex-lg-row mb-0">
+                <!--begin::Content-->
+                <div class="flex-lg-row-fluid me-0 me-lg-0">
+                  <!--begin::Form-->
+                  <form  [formGroup]="formData" enctype="multipart/form-data" class="form mb-5">
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="" style="display: inline-block">
+                          <!--begin::Label-->
+                          <p>
+                            <label class=""><strong>I/CLIENT</strong></label>
+                          </p>
+                          <p>
+                          <label class="client1">Autres revenus</label>
+                          <!--end::Label-->
+                          <input type="text" class="form-control-solid"
+                                 placeholder="" formControlName="autresRevenus"
+                          [readOnly]="true"/>
+                          </p>
+                          <p>
+                          <label class="client1" >Périodicité</label>
+                                <input type="text" class="form-control-solid"
+                                       placeholder="" formControlName="periodicite"
+                                       [readOnly]="true"/>
+                          </p>
+                          <p>
+                                <label class="client1">STATUT MATRIMONIAL</label>
+                                <input type="text" class="form-control-solid"
+                                       placeholder="" formControlName="statutMatrimonial"
+                                       [readOnly]="true"/>
+                                <!--end::Input-->
+                          </p>
+                          <p>
+                            <label class="" style="margin-left: 10px"><strong>REGIME</strong></label>
+                            <!--end::Label-->
+                          </p>
+                          <p>
+                            <label class="client2">Nbre d'enfants</label>
+                            <!--begin::Input-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="nbreEnfants"
+                            style="width: 75px" [readOnly]="true"/>
+                            <!--end::Input-->
+                          </p>
+                          <p>
+                            <label class="client2">Nbre de personnes à charge</label>
+                            <!--begin::Input-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="nbrePersonneCharge"
+                                   style="width: 75px" [readOnly]="true"/>
+                            <!--end::Input-->
+                          </p>
+
+                          <p>
+                            <label class=""><strong>II/EMPLOYEUR</strong></label>
+                          </p>
+                          <p>
+                            <label class="client2">Nom de l'employeur</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="nomEmployeur"
+                            style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Adresse postale employeur</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="adressePostaleEmployeur"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Adresse géographique</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="adresseGeographiqueEmployeur"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Secteur d'activité</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="secteurActivite"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Téléphone</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="telephone"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Email</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="email"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class=""><strong>III/PERE</strong></label>
+                          </p>
+                          <p>
+                            <label class="client2">Nom</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="nomPere"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Prénom</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="prenomPere"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Date de naissance</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="dateNaissancePere"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Nationalité</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="nationalitePere"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+                        </div>
+
+                        <div class="" style="display: inline-block;margin-left: 15px">
+                          <p>
+                            <label class=""><strong>IV/MERE</strong></label>
+                          </p>
+                          <p>
+                            <label class="client2">Nom</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="nomMere"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Prénom</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="prenomMere"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Date de naissance</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="dateNaissanceMere"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Nationalité</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="nationaliteMere"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class=""><strong>V/CONJOINT</strong></label>
+                          </p>
+                          <p>
+                            <label class="client2">Nom</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="nomConjoint"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Prénom</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="prenomConjoint"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Date de naissance</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="dateNaissanceConjoint"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Nationalité</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="nationaliteConjoint"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class=""><strong>VI/ORIENTATION DE PLACEMENT</strong></label>
+                          </p>
+                          <p>
+                            <label class="client2">Origine des fonds</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="origineFonds"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Transactions envisagées</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="transactionEnvisage"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class=""><strong>VII/PATRIMOINE</strong></label>
+                          </p>
+                          <p>
+                            <label class="client2">Immobilière(Situation/estimation/hypot)</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="immobiliere"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Autres biens(Nature/estimation)</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="autresBiens"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Surface totale</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="surfaceTotale"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+
+                          <p>
+                            <label class="client2">Salaire</label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control-solid"
+                                   placeholder="" formControlName="salaire"
+                                   style="width: 220px" [readOnly]="true"/>
+                          </p>
+                        </div>
+                  </form>
+                  <!--end::Form-->
+                </div>
+                <!--end::Content-->
+              </div>
+              <!--end::Layout-->
+<!--            </div>-->
+<!--            &lt;!&ndash;end::Body&ndash;&gt;-->
+<!--          </div>-->
+
+<!--        </div>-->
+
+      </div>
+<!--    </form>-->
+  </div>
+  <!--end::Card header-->
+  <div>
+<!--    <div class="card-body pt-0" id="print-section">-->
+
+    </div>
+    </div>
+    </div>
+      </form>
+  </div>
+<!--  &lt;!&ndash;end::Card body&ndash;&gt;-->
+</div>
+<!--end::Products-->

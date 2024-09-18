@@ -1,0 +1,96 @@
+<!--begin::Products-->
+<div class="card card-flush" [hidden]="true">
+  <!--begin::Card header-->
+  <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+    <!--begin::Card title-->
+    <!--end::Search-->
+  </div>
+  <!--end::Card title-->
+  <!--begin::Card toolbar-->
+  <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+    <div class="w-100 mw-150px">
+
+    </div>
+    <button type="button" style="margin-left: 5px" class="btn btn-sm btn-primary" (click)="downloadPdf()">
+      imprimer
+    </button>
+    <!--begin::Add product-->
+    <!--        <a routerLink="new" class="btn btn-primary">Nouvelle Catégorie</a>-->
+    <!--end::Add product-->
+  </div>
+  <!--end::Card toolbar-->
+</div>
+<!--end::Card header-->
+<!--begin::Card body-->
+<div class="card-body pt-0;d-loan" style="overflow: hidden; height: 0;" >
+  <!--begin::Table-->
+  <ul class="list-group list-group-flush vert-scrollable-150" id="alldata-condition-normale">
+    <table class="order-details" id="reporting-condition-normale" >
+      <thead>
+      <tr>
+        <th style="width: 20%" colspan="1">
+          <img src="assets/img/spahir2.jpg" />
+        </th>
+        <th style="width: 80%"  colspan="4" class="text-start company-data">
+          <li style="list-style-type:none;">Date: {{dateJour|date:'dd/MM/yyyy hh:mm:ss'}}</li> <br>
+          <li style="list-style-type:none;">SAPHIR ASSET MANAGEMENT</li> <br>
+          <li style="list-style-type:none;">Tél : +229 20 21 35 10/66 18 01 74</li> <br>
+          <li style="list-style-type:none;">Addresse: Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL,3ème étage de
+            l'immeuble de la SGI BENIN</li> <br>
+        </th>
+      </tr>
+      <tr>
+        <th style="width: 100%" colspan="5">
+          <h2 style="text-align: center">Point des transactions personnes physiques supérieures ou
+            égales à 50 000 000 effectuées dans les conditions normales sur l'année</h2>
+        </th>
+      </tr>
+      <tr class="bg-blue">
+        <th style="width: 50px">Date opération</th>
+        <th style="width: 25%">Actionnaire</th>
+        <th style="width: 10%">Montant dépôt</th>
+        <th style="width: 20%">Type de FCP</th>
+        <th style="width: 10%">Total</th>
+        <!--          <th style="width: 10%">Total</th>-->
+        <!--          <th style="width: 10%">Mode versement</th>-->
+      </tr>
+      </thead>
+      <tbody class="fw-semibold text-gray-600">
+      <tr *ngFor="let operationSouscriptionRachat of operationSouscriptionRachat$">
+        <td>
+          <div class="d-flex align-items-center">
+            {{ operationSouscriptionRachat.dateOperation|date:'dd/MM/yyyy' }}
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            {{ operationSouscriptionRachat.denomination }}
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            {{ operationSouscriptionRachat.montantDepose |number}}
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            {{ operationSouscriptionRachat.denominationOpcvm }}
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            {{ operationSouscriptionRachat.total |number}}
+          </div>
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </ul>
+  <!--end::Table-->
+</div>
+<!--end::Card body-->
+<!--  </div>-->
+<!--end::Products-->
+<!--</div>-->
+

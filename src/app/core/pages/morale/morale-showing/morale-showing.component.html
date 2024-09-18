@@ -1,0 +1,66 @@
+<div class="card card-flush" *ngIf="entity">
+  <!--begin::Card body-->
+  <div class="card-body py-3">
+    <!--begin::Table-->
+    <table class="table align-middle gs-0 gy-5">
+      <tbody class="fw-semibold text-gray-600">
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Id</th>
+        <td>{{ entity.idPersonne }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Ifu</th>
+        <td>{{ entity.ifu }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Dénomination</th>
+        <td>{{ entity.denomination }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Pays de résidence</th>
+        <td>{{ entity.paysResidence?.libelleFr }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Secteur</th>
+        <td>{{ entity.secteur?.libelleSecteur }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">E-Mail</th>
+        <td>{{ entity.emailPro }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Mobile 1</th>
+        <td>{{ entity.mobile1 }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <!--end::Table-->
+    <h1>Personne à contacter</h1>
+    <!--Personne à contacter-->
+    <table class="table align-middle gs-0 gy-5">
+      <tbody class="fw-semibold text-gray-600">
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Nom</th>
+        <td>{{ entity.nomContact }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Prénom(s)</th>
+        <td>{{ entity.prenomContact }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Téléphone</th>
+        <td>{{ entity.telContact }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">E-Mail</th>
+        <td>{{ entity.emailContact }}</td>
+      </tr>
+      <tr class="d-flex justify-content-between">
+        <th class="fw-bold fs-7 text-uppercase">Titre</th>
+        <td>{{ entity.titreContact }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--end::Card body-->
+</div>

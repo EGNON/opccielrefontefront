@@ -1,0 +1,278 @@
+<!--begin::Form-->
+<form [formGroup]="form" enctype="multipart/form-data" class="form">
+  <input *ngIf="id" type="hidden" class="form-control form-control-sm" [value]="id" formControlName="id"/>
+  <div class="modal-header p-2">
+    <div class="modal-title h4">Tableau d'amortissement provisoire</div>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <!--      <span aria-hidden="true">&times;</span>-->
+    </button>
+  </div>
+  <div class="modal-body p-lg-0">
+    <div class="card-body p-lg-5">
+      <!--begin::Layout-->
+      <div class="d-flex flex-column flex-lg-row mb-0">
+        <!--begin::Content-->
+        <div class="flex-lg-row-fluid me-0 me-lg-0">
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-start">
+              <!--begin::Button-->
+              <button type="button" class="btn btn-sm btn-success me-3" *ngIf="editable" (click)="modifierForm()">
+                Modifier
+              </button>
+              <!--<a type="reset" class="btn btn-sm btn-light me-3" *ngIf="!editable" (click)="modifierForm()">
+                Annuler
+              </a>-->
+              <!--end::Button-->
+            </div>
+            <div class="d-flex justify-content-end">
+              <!--begin::Submit-->
+              <ng-container *ngIf="editable">
+                <button type="button" class="btn btn-sm btn-primary" [disabled]="form.invalid">
+                  <ng-container *ngIf="exportable">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    Patientez svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                  </span>
+                  </ng-container>
+                  <ng-container *ngIf="!exportable">
+                    <span class="indicator-label">Exporter</span>
+                  </ng-container>
+                </button>
+              </ng-container>
+              <!--end::Submit-->
+            </div>
+          </div>
+          <!--end::Action buttons-->
+          <br>
+          <div class="table-responsive angular-bootstrap-table">
+            <table class="table align-middle table-scroll table-row-dashed table-bordered fs-6 gy-5 dataTable no-footer" formArrayName="tabAmortissements">
+              <thead class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+              <tr>
+                <th class="p-0 min-w-60px">N°</th>
+                <th class="p-0 min-w-150px">Date éch.</th>
+                <th class="p-0 min-w-100px">Taux Am.</th>
+                <th class="p-0 min-w-100px">Nbr Titres</th>
+                <th class="p-0 min-w-150px">Capital</th>
+                <th class="p-0 min-w-150px">Intérêt</th>
+                <th class="p-0 min-w-100px">Nbr Am.</th>
+                <th class="p-0 min-w-150px">Mt. Remb.</th>
+                <th class="p-0 min-w-150px">Annuité</th>
+                <th class="p-0 min-w-150px">Mt. Fin</th>
+              </tr>
+              </thead>
+              <tbody class="fw-semibold text-gray-600">
+              <ng-container *ngFor="let control of echeances.controls; let i = index">
+                <tr [formGroupName]="i">
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [readOnly]="true"
+                           placeholder="" formControlName="numeroEcheance"/>
+                  </td>
+                  <td formArrayName="idTabAmortissement">
+                    <div class="input-group mb-0">
+                      <!--begin::Input-->
+                      <input type="text" class="form-control form-control-sm"
+                             placeholder="dd/mm/yyyy" ngbDatepicker #d1="ngbDatepicker" [readOnly]="true"
+                             formControlName="dateEcheance" aria-describedby="basic-addon7"/>
+                      <!--end::Input-->
+                      <span (click)="d1.toggle()" class="btn btn-sm btn-outline-secondary input-group-text"
+                            id="basic-addon7">
+                          <i class="ki-duotone ki-calendar fs-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                      </span>
+                    </div>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [readOnly]="editable"
+                           placeholder="" formControlName="tauxAmortissement"/>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [readOnly]="editable"
+                           placeholder="" formControlName="nombreTitre"/>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control form-control-sm input-sm" [readOnly]="editable"
+                           placeholder="" formControlName="capital"/>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [readOnly]="editable"
+                           placeholder="" formControlName="interet"/>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [readOnly]="editable"
+                           placeholder="" formControlName="nombreTitreAmorti"/>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [readOnly]="editable"
+                           placeholder="" formControlName="montantRembourse"/>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [readOnly]="editable"
+                           placeholder="" formControlName="annuiteTotale"/>
+                  </td>
+                  <td>
+                    <input type="text" class="form-control form-control-sm" [readOnly]="editable"
+                           placeholder="" formControlName="montantFinPeriode"/>
+                  </td>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+          <!--<div class="row mb-5">
+            <div formArrayName="echeances">
+              &lt;!&ndash;begin::Col&ndash;&gt;
+              <div *ngFor="let control of echeances.controls; let i = index">
+                <div [formGroupName]="i" class="row">
+                  <div class="col-sm fv-row">
+                    &lt;!&ndash;begin::Label&ndash;&gt;
+                    <label class="fs-5 fw-semibold mb-2">N°</label>
+                    &lt;!&ndash;end::Label&ndash;&gt;
+                    &lt;!&ndash;begin::Input&ndash;&gt;
+                    <input type="text" class="form-control form-control-sm" [readOnly]="true"
+                           placeholder="" formControlName="numeroEcheance"/>
+                    &lt;!&ndash;end::Input&ndash;&gt;
+                  </div>
+                  &lt;!&ndash;begin::Col&ndash;&gt;
+                  <div class="col-sm-2 fv-row">
+                    &lt;!&ndash;begin::Label&ndash;&gt;
+                    <label class="fs-5 fw-semibold mb-2">Date éch.</label>
+                    &lt;!&ndash;end::Label&ndash;&gt;
+                    <div class="input-group mb-0">
+                      &lt;!&ndash;begin::Input&ndash;&gt;
+                      <input type="text" class="form-control form-control-sm"
+                             placeholder="dd/mm/yyyy" ngbDatepicker #d1="ngbDatepicker" [readOnly]="true"
+                             formControlName="dateEcheance" aria-describedby="basic-addon7"/>
+                      &lt;!&ndash;end::Input&ndash;&gt;
+                      <span (click)="d1.toggle()" class="btn btn-sm btn-outline-secondary input-group-text"
+                            id="basic-addon7">
+                          <i class="ki-duotone ki-calendar fs-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </i>
+                      </span>
+                    </div>
+                  </div>
+                  &lt;!&ndash;end::Col&ndash;&gt;
+                  <div class="col-sm fv-row">
+                    &lt;!&ndash;begin::Label&ndash;&gt;
+                    <label class="fs-5 fw-semibold mb-2">Taux Am.</label>
+                    &lt;!&ndash;end::Label&ndash;&gt;
+                    &lt;!&ndash;begin::Input&ndash;&gt;
+                    <input type="text" class="form-control form-control-sm" [readOnly]="true"
+                           placeholder="" formControlName="tauxAmortissement"/>
+                    &lt;!&ndash;end::Input&ndash;&gt;
+                  </div>
+                  <div class="col-sm fv-row">
+                    &lt;!&ndash;begin::Label&ndash;&gt;
+                    <label class="fs-5 fw-semibold mb-2">Nbr Titres</label>
+                    &lt;!&ndash;end::Label&ndash;&gt;
+                    &lt;!&ndash;begin::Input&ndash;&gt;
+                    <input type="text" class="form-control form-control-sm" [readOnly]="true"
+                           placeholder="" formControlName="nombreTitre"/>
+                    &lt;!&ndash;end::Input&ndash;&gt;
+                  </div>
+                  <div class="col-sm fv-row">
+                    &lt;!&ndash;begin::Label&ndash;&gt;
+                    <label class="fs-5 fw-semibold mb-2">Capital</label>
+                    &lt;!&ndash;end::Label&ndash;&gt;
+                    &lt;!&ndash;begin::Input&ndash;&gt;
+                    <input type="text" class="form-control form-control-sm input-sm" [readOnly]="true"
+                           placeholder="" formControlName="capital"/>
+                    &lt;!&ndash;end::Input&ndash;&gt;
+                  </div>
+                  <div class="col-sm fv-row">
+                    &lt;!&ndash;begin::Label&ndash;&gt;
+                    <label class="fs-5 fw-semibold mb-2">Intérêt</label>
+                    &lt;!&ndash;end::Label&ndash;&gt;
+                    &lt;!&ndash;begin::Input&ndash;&gt;
+                    <input type="text" class="form-control form-control-sm" [readOnly]="true"
+                           placeholder="" formControlName="interet"/>
+                    &lt;!&ndash;end::Input&ndash;&gt;
+                  </div>
+                  <div class="col-sm fv-row">
+                    &lt;!&ndash;begin::Label&ndash;&gt;
+                    <label class="fs-5 fw-semibold mb-2">Nbr Am.</label>
+                    &lt;!&ndash;end::Label&ndash;&gt;
+                    &lt;!&ndash;begin::Input&ndash;&gt;
+                    <input type="text" class="form-control form-control-sm" [readOnly]="true"
+                           placeholder="" formControlName="nombreTitreAmorti"/>
+                    &lt;!&ndash;end::Input&ndash;&gt;
+                  </div>
+                  <div class="col-sm fv-row">
+                    &lt;!&ndash;begin::Label&ndash;&gt;
+                    <label class="fs-5 fw-semibold mb-2">Mt. Remb.</label>
+                    &lt;!&ndash;end::Label&ndash;&gt;
+                    &lt;!&ndash;begin::Input&ndash;&gt;
+                    <input type="text" class="form-control form-control-sm" [readOnly]="true"
+                           placeholder="" formControlName="montantRembourse"/>
+                    &lt;!&ndash;end::Input&ndash;&gt;
+                  </div>
+                  <div class="col-sm fv-row">
+                    &lt;!&ndash;begin::Label&ndash;&gt;
+                    <label class="fs-5 fw-semibold mb-2">Annuité</label>
+                    &lt;!&ndash;end::Label&ndash;&gt;
+                    &lt;!&ndash;begin::Input&ndash;&gt;
+                    <input type="text" class="form-control form-control-sm" [readOnly]="true"
+                           placeholder="" formControlName="annuiteTotale"/>
+                    &lt;!&ndash;end::Input&ndash;&gt;
+                  </div>
+                  <div class="col-sm fv-row">
+                    &lt;!&ndash;begin::Label&ndash;&gt;
+                    <label class="fs-5 fw-semibold mb-2">Mt. Fin</label>
+                    &lt;!&ndash;end::Label&ndash;&gt;
+                    &lt;!&ndash;begin::Input&ndash;&gt;
+                    <input type="text" class="form-control form-control-sm" [readOnly]="true"
+                           placeholder="" formControlName="montantFinPeriode"/>
+                    &lt;!&ndash;end::Input&ndash;&gt;
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>-->
+        </div>
+        <!--end::Content-->
+      </div>
+      <!--end::Layout-->
+<!--      <pre>{{ form.value|json }}</pre>-->
+    </div>
+  </div>
+  <div class="modal-footer d-flex justify-content-between p-2">
+    <!--begin::Action buttons-->
+    <div class="d-flex justify-content-start">
+      <button type="button" class="btn btn-sm btn-outline-dark me-3" (click)="modal.close('Close click')">Fermer
+      </button>
+    </div>
+    <div class="d-flex justify-content-end">
+      <!--begin::Button-->
+      <a type="button" class="btn btn-sm btn-danger me-3" *ngIf="this.echeances.controls.length > 0 && canDelete"
+      (click)="supprimerEcheances()">
+        Supprimer
+      </a>
+      <a type="button" class="btn btn-sm btn-warning me-3" *ngIf="canCancel">
+        Annuler
+      </a>
+      <a type="button" class="btn btn-sm btn-info me-3" *ngIf="editable" (click)="genererTabAmortissements()">
+        Générer
+      </a>
+      <!--end::Button-->
+      <!--begin::Submit-->
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="form.invalid" (click)="save()" *ngIf="!editable">
+        <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+        </ng-container>
+        <ng-container *ngIf="!submitting">
+          <span class="indicator-label">Enregistrer</span>
+        </ng-container>
+      </button>
+      <!--end::Submit-->
+    </div>
+    <!--end::Action buttons-->
+  </div>
+</form>
+<!--end::Form-->

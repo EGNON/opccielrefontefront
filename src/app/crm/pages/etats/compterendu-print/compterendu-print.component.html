@@ -1,0 +1,240 @@
+<!--&lt;!&ndash;begin::Products&ndash;&gt;-->
+<!--<div class="card card-flush">-->
+<!--  &lt;!&ndash;begin::Card header&ndash;&gt;-->
+<!--  <div class="card-header align-items-center py-5 gap-2 gap-md-5">-->
+<!--    &lt;!&ndash;end::Card title&ndash;&gt;-->
+<!--    &lt;!&ndash;begin::Card toolbar&ndash;&gt;-->
+<!--    <div class="d-flex flex-column flex-lg-row mb-0">-->
+<!--      &lt;!&ndash;begin::Content&ndash;&gt;-->
+<!--      <div class="flex-lg-row-fluid me-0 me-lg-0">-->
+<!--        <div class="col-md-12 fv-row">-->
+<!--          &lt;!&ndash;begin::Label&ndash;&gt;-->
+<!--          <label class="required fs-5 fw-semibold mb-2">Chargé(s)</label>-->
+<!--          &lt;!&ndash;end::Label&ndash;&gt;-->
+<!--          &lt;!&ndash;begin::Input&ndash;&gt;-->
+<!--          <select-->
+<!--            class="form-select form-select-sm form-select-solid"-->
+<!--            id="ComboPersonnel">-->
+<!--            <option selected>Sélectonnez un chargé</option>-->
+<!--            <option *ngFor="let personnel of personnel$.content"-->
+<!--                    value="{{personnel.idPersonne}}">{{personnel.denomination}}</option>-->
+<!--            <option>Tous</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">-->
+<!--      <div class="w-100 mw-150px">-->
+
+<!--      </div>-->
+<!--      &lt;!&ndash;begin::Add Monnaie&ndash;&gt;-->
+<!--      <a (click)="afficherCompteRendu()" style="margin-right: 5px"  class="btn btn-primary">Valider</a>-->
+<!--      <button printTitle="Liste des comptes rendus"-->
+<!--              printSectionId="print-section"-->
+<!--              ngxPrint-->
+<!--              styleSheetFile="assets/css/print.css"-->
+<!--              class="btn btn-primary">Imprimer</button>-->
+<!--      &lt;!&ndash;end::Add Monnaie&ndash;&gt;-->
+<!--    </div>-->
+<!--    &lt;!&ndash;end::Card toolbar&ndash;&gt;-->
+<!--  </div>-->
+<!--  &lt;!&ndash;end::Card header&ndash;&gt;-->
+<!--  <div>-->
+<!--    <div class="card-body pt-0" id="print-section">-->
+<!--      <div class="table-responsive angular-bootstrap-table">-->
+<!--        &lt;!&ndash;begin::Table&ndash;&gt;-->
+<!--        <table class="t1 table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5">-->
+<!--          <thead>-->
+<!--          <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">-->
+<!--            <th class="min-w-200px">Objet</th>-->
+<!--            <th class="min-w-200px">Appréciation</th>-->
+<!--            <th class="min-w-200px">Description</th>-->
+<!--            <th class="min-w-200px">Heure début</th>-->
+<!--            <th class="min-w-200px">Heure fin</th>-->
+<!--            <th class="min-w-200px">Date prochain RDV</th>-->
+<!--            &lt;!&ndash;          <th class="text-end min-w-70px">Actions</th>&ndash;&gt;-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody class="fw-semibold text-gray-600">-->
+<!--          <tr *ngFor="let item of compteRendu$" >-->
+<!--            <td>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                {{ item.objetCR}}-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                {{ item.appreciation}}-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                {{ item.description}}-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                {{ item.heureDebCR}}-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                {{ item.heureFinCR}}-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <div class="d-flex align-items-center">-->
+<!--                {{ item.dateProchainRDV | date: 'dd/MM/yyyy'}}-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            &lt;!&ndash;          <td>&ndash;&gt;-->
+<!--            &lt;!&ndash;            <div class="d-flex justify-content-end flex-shrink-0">&ndash;&gt;-->
+<!--            &lt;!&ndash;              &lt;!&ndash; edit &ndash;&gt;&ndash;&gt;-->
+<!--            &lt;!&ndash;              <a routerLink="edit/{{item.idRdv}}" title="Modifier un rendez-vous"&ndash;&gt;-->
+<!--            &lt;!&ndash;                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <app-keenicon name="pencil" class="fs-3"></app-keenicon>&ndash;&gt;-->
+<!--            &lt;!&ndash;              </a>&ndash;&gt;-->
+<!--            &lt;!&ndash;              &lt;!&ndash; delete &ndash;&gt;&ndash;&gt;-->
+<!--            &lt;!&ndash;              <a title="Supprimer un rendez-vous"&ndash;&gt;-->
+<!--            &lt;!&ndash;                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" (click)="supprimer(item.idRdv)">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <app-keenicon name="trash" class="fs-3"></app-keenicon>&ndash;&gt;-->
+<!--            &lt;!&ndash;              </a>&ndash;&gt;-->
+<!--            &lt;!&ndash;              &lt;!&ndash; update &ndash;&gt;&ndash;&gt;-->
+<!--            &lt;!&ndash;              <a routerLink="update/{{item.idRdv}}" title="Mettre à jour les infos réelles"&ndash;&gt;-->
+<!--            &lt;!&ndash;                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <app-keenicon name="pencil" class="fs-3"></app-keenicon>&ndash;&gt;-->
+<!--            &lt;!&ndash;              </a>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;          </td>&ndash;&gt;-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--        &lt;!&ndash;end::Table&ndash;&gt;-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  &lt;!&ndash;end::Card body&ndash;&gt;-->
+<!--</div>-->
+<!--&lt;!&ndash;end::Products&ndash;&gt;-->
+
+
+
+
+<div class="card card-flush">-->
+  <!--begin::Card header-->
+  <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <div class="col-md-12 fv-row">
+          <!--begin::Label-->
+          <label class="required fs-5 fw-semibold mb-2">Chargé(s)</label>
+          <!--end::Label-->
+          <!--begin::Input-->
+          <select
+            class="form-select form-select-sm form-select-solid"
+            id="ComboPersonnelRendu">
+            <option selected>Sélectonnez un chargé</option>
+            <option *ngFor="let personnel of personnel$"
+                    value="{{personnel.idPersonne}}">{{personnel.denomination}}</option>
+            <option>Tous</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="card-toolbar flex-row-fluid  gap-5">
+      <!--begin::Add Monnaie-->
+      <a (click)="afficherCompteRendu()" style="margin-right: 5px;margin-left: 5px;margin-top: 25px"  class="btn btn-sm btn-primary">Valider</a>
+      <button   class="btn btn-sm btn-primary"
+               (click)="downloadPdf('reporting-cr','alldata-cr')"
+               style="margin-top: 25px">Imprimer</button>
+    </div>
+    <!--end::Card toolbar-->
+  </div>
+</div>
+<!--<div class="sheet-outer A4" id="reporting">-->
+<!--  <section class="sheet padding-2mm">-->
+<!--    <article>-->
+<!--begin::Card body-->
+<div >
+  <!--          <div class="table-responsive angular-bootstrap-table">-->
+  <!--begin::Table-->
+  <!--            <table class="t1 table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" style="overflow: visible !important;">-->
+  <ul class="list-group list-group-flush vert-scrollable-150" id="alldata-cr">
+  <table class="order-details" id="reporting-cr">
+    <thead>
+    <tr>
+      <th style="width: 20%" colspan="1">
+        <img src="assets/img/spahir2.jpg" />
+      </th>
+      <th style="width: 80%"  colspan="5" class="text-start company-data">
+        <li style="list-style-type:none;">Date: {{dateJour|date:'dd/MM/yyyy hh:mm:ss'}}</li> <br>
+        <li style="list-style-type:none;">SAPHIR ASSET MANAGEMENT</li> <br>
+        <li style="list-style-type:none;">Tél : +229 20 21 35 10/66 18 01 74</li> <br>
+        <li style="list-style-type:none;">Adresse: Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL,3ème étage de
+          l'immeuble de la SGI BENIN</li> <br>
+      </th>
+    </tr>
+    <tr>
+      <th style="width: 100%" colspan="6">
+        <h2 style="text-align: center">Liste des comptes rendus</h2>
+      </th>
+    </tr>
+    <tr class="bg-blue">
+      <th style="width: 20%">Objet</th>
+      <th style="width: 10%">Appréciation</th>
+      <th style="width: 40%">Description</th>
+      <th style="width: 10%">Heure début</th>
+      <th style="width: 10%">Heure fin</th>
+      <th style="width: 10%">Date prochain RDV</th>
+    </tr>
+    </thead>
+    <tbody class="fw-semibold text-gray-600">
+    <tr *ngFor="let item of compteRendu$" >
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.objetCR}}
+        </div>
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.appreciation}}
+        </div>
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.description}}
+        </div>
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.heureDebCR}}
+        </div>
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.heureFinCR}}
+        </div>
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.dateProchainRDV | date: 'dd/MM/yyyy'}}
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <!--end::Table-->
+  </ul>
+</div>
+<!--        </div>-->
+<!--end::Card body-->
+<br>
+<p class="text-center">
+  Imprimer avec OPCCIEL 2.0
+</p>
+<!--    </article>-->
+<!--  </section>-->
+<!--<section class="sheet padding-5mm">-->
+<!--  <article>This is an A4 document.</article>-->
+<!--</section>-->

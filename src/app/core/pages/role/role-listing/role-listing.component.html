@@ -1,0 +1,693 @@
+<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-5 g-xl-9">
+  <ng-container *ngIf="(roles$ | async) as roles">
+    <ng-container *ngFor="let role of roles.data">
+      <!--begin::Col-->
+      <div class="col-md-4">
+        <!--begin::Card-->
+        <div class="card card-flush h-md-100">
+          <!--begin::Card header-->
+          <div class="card-header">
+            <!--begin::Card title-->
+            <div class="card-title">
+              <h5>{{ role.nom | uppercase }}</h5>
+            </div>
+            <!--end::Card title-->
+          </div>
+          <!--end::Card header-->
+          <!--begin::Card body-->
+          <div class="card-body pt-1">
+            <!--begin::Description-->
+            <div class="fw-bold text-gray-600 mb-5">{{ role.description }}</div>
+            <!--end::Description-->
+            <!--begin::Users-->
+            <div class="fw-bold text-gray-600 mb-5">Nombre total d'utilisateurs ayant ce
+              role: {{ role.utilisateurs1.length }}</div>
+            <!--end::Users-->
+            <!--begin::Permissions-->
+            <div class="d-flex flex-column text-gray-600">
+              <ng-container *ngFor="let rolepermission of role.permissions.slice(0, 5); let i = index">
+                <div class="d-flex align-items-center py-2">
+                  <span class="bullet bg-primary me-3"></span>{{ rolepermission.permission.libellePermis }}
+                </div>
+              </ng-container>
+
+              <div *ngIf="role.permissions.length > 5 || role.permissions.length === 0"
+                   class='d-flex align-items-center py-2'>
+                <span class='bullet bg-primary me-3'></span>
+                <em>
+                  {{ role.permissions.length === 0 ? 'Aucune permission attribuée...' : 'et ' + (role.permissions.length - 5) + ' plus...' }}
+                </em>
+              </div>
+            </div>
+            <!--end::Permissions-->
+          </div>
+          <!--end::Card body-->
+          <!--begin::Card footer-->
+          <div class="card-footer flex-wrap pt-0">
+            <a [routerLink]="['/apps/roles', role.idRole]" class="btn btn-sm btn-light btn-active-primary my-1 me-2">Afficher
+              Role</a>
+            <button type="button" class="btn btn-sm btn-light btn-active-light-primary my-1"
+                    [attr.data-id]="role.idRole" data-action="edit">Modifier Role
+            </button>
+          </div>
+          <!--end::Card footer-->
+        </div>
+        <!--end::Card-->
+      </div>
+      <!--end::Col-->
+    </ng-container>
+  </ng-container>
+
+  <!--begin::Add new card-->
+  <div class="ol-md-4">
+    <!--begin::Card-->
+    <div class="card h-md-100">
+      <!--begin::Card body-->
+      <div class="card-body d-flex flex-center">
+        <!--begin::Button-->
+        <button type="button" class="btn btn-sm btn-clear d-flex flex-column flex-center" data-action="create">
+          <!--begin::Illustration-->
+          <img src="assets/media/illustrations/sketchy-1/4.png" alt="" class="mw-100 mh-150px mb-7"/>
+          <!--end::Illustration-->
+          <!--begin::Label-->
+          <div class="fw-bold fs-3 text-gray-600 text-hover-primary">Nouveau rôle</div>
+          <!--end::Label-->
+        </button>
+        <!--begin::Button-->
+      </div>
+      <!--begin::Card body-->
+    </div>
+    <!--begin::Card-->
+  </div>
+  <!--begin::Add new card-->
+</div>
+
+
+<swal #noticeSwal [swalOptions]="swalOptions">
+</swal>
+
+<ng-template #formModal let-modal>
+  <form #myForm="ngForm" (ngSubmit)="onSubmit($event, myForm)">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Détails Rôle</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <!--<div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_role_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_role_header" data-kt-scroll-wrappers="#kt_modal_update_role_scroll" data-kt-scroll-offset="300px" style="max-height: 395px;">
+        &lt;!&ndash;begin::Input group&ndash;&gt;
+        <div class="fv-row mb-10 fv-plugins-icon-container">
+          &lt;!&ndash;begin::Label&ndash;&gt;
+          <label class="fs-5 fw-bold form-label mb-2">
+            <span class="required">Role name</span>
+          </label>
+          &lt;!&ndash;end::Label&ndash;&gt;
+
+          &lt;!&ndash;begin::Input&ndash;&gt;
+          <input class="form-control form-control-solid" placeholder="Enter a role name" name="role_name" value="Developer" wfd-id="id50">
+          &lt;!&ndash;end::Input&ndash;&gt;
+          <div class="fv-plugins-message-container fv-plugins-message-container&#45;&#45;enabled invalid-feedback"></div></div>
+        &lt;!&ndash;end::Input group&ndash;&gt;
+
+        &lt;!&ndash;begin::Permissions&ndash;&gt;
+        <div class="fv-row">
+          &lt;!&ndash;begin::Label&ndash;&gt;
+          <label class="fs-5 fw-bold form-label mb-2">Role Permissions</label>
+          &lt;!&ndash;end::Label&ndash;&gt;
+
+          &lt;!&ndash;begin::Table wrapper&ndash;&gt;
+          <div class="table-responsive">
+            &lt;!&ndash;begin::Table&ndash;&gt;
+            <table class="table align-middle table-row-dashed fs-6 gy-5">
+              &lt;!&ndash;begin::Table body&ndash;&gt;
+              <tbody class="text-gray-600 fw-semibold">
+              &lt;!&ndash;begin::Table row&ndash;&gt;
+              <tr>
+                <td class="text-gray-800">
+                  Administrator Access
+
+
+                  <span class="ms-1" data-bs-toggle="tooltip" aria-label="Allows a full access to the system" data-bs-original-title="Allows a full access to the system" data-kt-initialized="1">
+<i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i></span>                                            </td>
+                <td>
+                  &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                  <label class="form-check form-check-sm form-check-custom form-check-solid me-9">
+                    <input class="form-check-input" type="checkbox" value="" id="kt_roles_select_all" wfd-id="id51">
+                    <span class="form-check-label" for="kt_roles_select_all">
+                                                      Select all
+                                                  </span>
+                  </label>
+                  &lt;!&ndash;end::Checkbox&ndash;&gt;
+                </td>
+              </tr>
+              &lt;!&ndash;end::Table row&ndash;&gt;
+              &lt;!&ndash;begin::Table row&ndash;&gt;
+              <tr>
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <td class="text-gray-800">User Management</td>
+                &lt;!&ndash;end::Label&ndash;&gt;
+
+                &lt;!&ndash;begin::Input group&ndash;&gt;
+                <td>
+                  &lt;!&ndash;begin::Wrapper&ndash;&gt;
+                  <div class="d-flex">
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="user_management_read" wfd-id="id52">
+                      <span class="form-check-label">
+                                                              Read
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="user_management_write" wfd-id="id53">
+                      <span class="form-check-label">
+                                                              Write
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="" name="user_management_create" wfd-id="id54">
+                      <span class="form-check-label">
+                                                              Create
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+                  </div>
+                  &lt;!&ndash;end::Wrapper&ndash;&gt;
+                </td>
+                &lt;!&ndash;end::Input group&ndash;&gt;
+              </tr>
+              &lt;!&ndash;end::Table row&ndash;&gt;
+              &lt;!&ndash;begin::Table row&ndash;&gt;
+              <tr>
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <td class="text-gray-800">Content Management</td>
+                &lt;!&ndash;end::Label&ndash;&gt;
+
+                &lt;!&ndash;begin::Input group&ndash;&gt;
+                <td>
+                  &lt;!&ndash;begin::Wrapper&ndash;&gt;
+                  <div class="d-flex">
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="content_management_read" wfd-id="id55">
+                      <span class="form-check-label">
+                                                              Read
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="content_management_write" wfd-id="id56">
+                      <span class="form-check-label">
+                                                              Write
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="" name="content_management_create" wfd-id="id57">
+                      <span class="form-check-label">
+                                                              Create
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+                  </div>
+                  &lt;!&ndash;end::Wrapper&ndash;&gt;
+                </td>
+                &lt;!&ndash;end::Input group&ndash;&gt;
+              </tr>
+              &lt;!&ndash;end::Table row&ndash;&gt;
+              &lt;!&ndash;begin::Table row&ndash;&gt;
+              <tr>
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <td class="text-gray-800">Financial Management</td>
+                &lt;!&ndash;end::Label&ndash;&gt;
+
+                &lt;!&ndash;begin::Input group&ndash;&gt;
+                <td>
+                  &lt;!&ndash;begin::Wrapper&ndash;&gt;
+                  <div class="d-flex">
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="financial_management_read" wfd-id="id58">
+                      <span class="form-check-label">
+                                                              Read
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="financial_management_write" wfd-id="id59">
+                      <span class="form-check-label">
+                                                              Write
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="" name="financial_management_create" wfd-id="id60">
+                      <span class="form-check-label">
+                                                              Create
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+                  </div>
+                  &lt;!&ndash;end::Wrapper&ndash;&gt;
+                </td>
+                &lt;!&ndash;end::Input group&ndash;&gt;
+              </tr>
+              &lt;!&ndash;end::Table row&ndash;&gt;
+              &lt;!&ndash;begin::Table row&ndash;&gt;
+              <tr>
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <td class="text-gray-800">Reporting</td>
+                &lt;!&ndash;end::Label&ndash;&gt;
+
+                &lt;!&ndash;begin::Input group&ndash;&gt;
+                <td>
+                  &lt;!&ndash;begin::Wrapper&ndash;&gt;
+                  <div class="d-flex">
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="reporting_read" wfd-id="id61">
+                      <span class="form-check-label">
+                                                              Read
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="reporting_write" wfd-id="id62">
+                      <span class="form-check-label">
+                                                              Write
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="" name="reporting_create" wfd-id="id63">
+                      <span class="form-check-label">
+                                                              Create
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+                  </div>
+                  &lt;!&ndash;end::Wrapper&ndash;&gt;
+                </td>
+                &lt;!&ndash;end::Input group&ndash;&gt;
+              </tr>
+              &lt;!&ndash;end::Table row&ndash;&gt;
+              &lt;!&ndash;begin::Table row&ndash;&gt;
+              <tr>
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <td class="text-gray-800">Payroll</td>
+                &lt;!&ndash;end::Label&ndash;&gt;
+
+                &lt;!&ndash;begin::Input group&ndash;&gt;
+                <td>
+                  &lt;!&ndash;begin::Wrapper&ndash;&gt;
+                  <div class="d-flex">
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="payroll_read" wfd-id="id64">
+                      <span class="form-check-label">
+                                                              Read
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="payroll_write" wfd-id="id65">
+                      <span class="form-check-label">
+                                                              Write
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="" name="payroll_create" wfd-id="id66">
+                      <span class="form-check-label">
+                                                              Create
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+                  </div>
+                  &lt;!&ndash;end::Wrapper&ndash;&gt;
+                </td>
+                &lt;!&ndash;end::Input group&ndash;&gt;
+              </tr>
+              &lt;!&ndash;end::Table row&ndash;&gt;
+              &lt;!&ndash;begin::Table row&ndash;&gt;
+              <tr>
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <td class="text-gray-800">Disputes Management</td>
+                &lt;!&ndash;end::Label&ndash;&gt;
+
+                &lt;!&ndash;begin::Input group&ndash;&gt;
+                <td>
+                  &lt;!&ndash;begin::Wrapper&ndash;&gt;
+                  <div class="d-flex">
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="disputes_management_read" wfd-id="id67">
+                      <span class="form-check-label">
+                                                              Read
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="disputes_management_write" wfd-id="id68">
+                      <span class="form-check-label">
+                                                              Write
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="" name="disputes_management_create" wfd-id="id69">
+                      <span class="form-check-label">
+                                                              Create
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+                  </div>
+                  &lt;!&ndash;end::Wrapper&ndash;&gt;
+                </td>
+                &lt;!&ndash;end::Input group&ndash;&gt;
+              </tr>
+              &lt;!&ndash;end::Table row&ndash;&gt;
+              &lt;!&ndash;begin::Table row&ndash;&gt;
+              <tr>
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <td class="text-gray-800">API Controls</td>
+                &lt;!&ndash;end::Label&ndash;&gt;
+
+                &lt;!&ndash;begin::Input group&ndash;&gt;
+                <td>
+                  &lt;!&ndash;begin::Wrapper&ndash;&gt;
+                  <div class="d-flex">
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="api_controls_read" wfd-id="id70">
+                      <span class="form-check-label">
+                                                              Read
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="api_controls_write" wfd-id="id71">
+                      <span class="form-check-label">
+                                                              Write
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="" name="api_controls_create" wfd-id="id72">
+                      <span class="form-check-label">
+                                                              Create
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+                  </div>
+                  &lt;!&ndash;end::Wrapper&ndash;&gt;
+                </td>
+                &lt;!&ndash;end::Input group&ndash;&gt;
+              </tr>
+              &lt;!&ndash;end::Table row&ndash;&gt;
+              &lt;!&ndash;begin::Table row&ndash;&gt;
+              <tr>
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <td class="text-gray-800">Database Management</td>
+                &lt;!&ndash;end::Label&ndash;&gt;
+
+                &lt;!&ndash;begin::Input group&ndash;&gt;
+                <td>
+                  &lt;!&ndash;begin::Wrapper&ndash;&gt;
+                  <div class="d-flex">
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="database_management_read" wfd-id="id73">
+                      <span class="form-check-label">
+                                                              Read
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="database_management_write" wfd-id="id74">
+                      <span class="form-check-label">
+                                                              Write
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="" name="database_management_create" wfd-id="id75">
+                      <span class="form-check-label">
+                                                              Create
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+                  </div>
+                  &lt;!&ndash;end::Wrapper&ndash;&gt;
+                </td>
+                &lt;!&ndash;end::Input group&ndash;&gt;
+              </tr>
+              &lt;!&ndash;end::Table row&ndash;&gt;
+              &lt;!&ndash;begin::Table row&ndash;&gt;
+              <tr>
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <td class="text-gray-800">Repository Management</td>
+                &lt;!&ndash;end::Label&ndash;&gt;
+
+                &lt;!&ndash;begin::Input group&ndash;&gt;
+                <td>
+                  &lt;!&ndash;begin::Wrapper&ndash;&gt;
+                  <div class="d-flex">
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="repository_management_read" wfd-id="id76">
+                      <span class="form-check-label">
+                                                              Read
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
+                      <input class="form-check-input" type="checkbox" value="" name="repository_management_write" wfd-id="id77">
+                      <span class="form-check-label">
+                                                              Write
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+
+                    &lt;!&ndash;begin::Checkbox&ndash;&gt;
+                    <label class="form-check form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="" name="repository_management_create" wfd-id="id78">
+                      <span class="form-check-label">
+                                                              Create
+                                                          </span>
+                    </label>
+                    &lt;!&ndash;end::Checkbox&ndash;&gt;
+                  </div>
+                  &lt;!&ndash;end::Wrapper&ndash;&gt;
+                </td>
+                &lt;!&ndash;end::Input group&ndash;&gt;
+              </tr>
+              &lt;!&ndash;end::Table row&ndash;&gt;
+              </tbody>
+              &lt;!&ndash;end::Table body&ndash;&gt;
+            </table>
+            &lt;!&ndash;end::Table&ndash;&gt;
+          </div>
+          &lt;!&ndash;end::Table wrapper&ndash;&gt;
+        </div>
+        &lt;!&ndash;end::Permissions&ndash;&gt;
+      </div>-->
+
+      <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_role_scroll" data-kt-scroll="true"
+           data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+           data-kt-scroll-dependencies="#kt_modal_update_role_header"
+           data-kt-scroll-wrappers="#kt_modal_update_role_scroll" data-kt-scroll-offset="300px"
+           style="max-height: 395px;">
+        <!--begin::User toggle-->
+        <div class="fw-bold fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" role="button"
+             (click)="collapse1.toggle()" [attr.aria-expanded]="!isCollapsed1"
+             aria-controls="kt_modal_update_customer_user_info">Information de l'utilisateur
+          <span class="ms-2 rotate-180">
+              <i class="ki-duotone ki-down fs-3" [ngClass]="{ 'ki-up': !isCollapsed1 }"></i>
+            </span>
+        </div>
+        <!--end::User toggle-->
+        <!--begin::User form-->
+        <div class="collapse show" #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed1">
+          <!--begin::Input group-->
+          <div class="fv-row mb-10 fv-plugins-icon-container">
+            <!--begin::Label-->
+            <label class="required fw-semibold fs-6 mb-2">Intitulé</label>
+            <!--end::Label-->
+            <!--begin::Input-->
+            <input type="text" class="form-control form-control-sm form-control-solid" name="nom"
+                   [(ngModel)]="roleModel.nom" #name="ngModel" required minlength="4"/>
+            <div *ngIf="myForm.submitted && myForm.invalid"
+                 class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+              <div *ngIf="name.errors?.['required']">L'intitulé du rôle est obligatoire</div>
+              <div *ngIf="name.errors?.['minlength']">L'intitulé doit contenir au moins 4 caractères</div>
+            </div>
+            <!--end::Input-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="d-flex flex-column mb-7 fv-row fv-plugins-icon-container">
+            <!--begin::Label-->
+            <label class="required fw-semibold fs-6 mb-2">Description</label>
+            <!--end::Label-->
+            <!--begin::Input-->
+            <input type="text" class="form-control form-control-sm form-control-solid" name="description"
+                   [(ngModel)]="roleModel.description" #description="ngModel" required minlength="4"/>
+            <div *ngIf="myForm.submitted && myForm.invalid"
+                 class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+              <div *ngIf="description.errors?.['required']">La description du rôle est obligatoire</div>
+              <div *ngIf="description.errors?.['minlength']">La description doit contenir au moins 4 caractères</div>
+            </div>
+            <!--end::Input-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Permissions-->
+          <div class="fv-row">
+            <!--begin::Label-->
+            <label class="fs-5 fw-bold form-label mb-2">Permissions du rôle</label>
+            <!--end::Label-->
+
+            <!--begin::Table wrapper-->
+            <div class="table-responsive">
+              <!--begin::Table-->
+              <table class="table align-middle table-row-dashed fs-6 gy-5">
+                <!--begin::Table body-->
+                <tbody class="text-gray-600 fw-semibold">
+                <!--begin::Table row-->
+                <tr>
+                  <td class="text-gray-800">
+                    Accès administrateur
+                    <span class="ms-1" data-bs-toggle="tooltip" aria-label="Allows a full access to the system"
+                          data-bs-original-title="Allows a full access to the system" data-kt-initialized="1">
+                      <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                        <span class="path3"></span>
+                      </i>
+                    </span>
+                  </td>
+                  <td>
+                    <!--begin::Checkbox-->
+                    <label class="form-check form-check-sm form-check-custom form-check-solid me-9">
+                      <input class="form-check-input" type="checkbox" value="" id="kt_roles_select_all">
+                      <span class="form-check-label">
+                          Tout sélectionner
+                      </span>
+                    </label>
+                    <!--end::Checkbox-->
+                  </td>
+                </tr>
+                <!--end::Table row-->
+                <!--begin::Table row-->
+                <tr *ngFor="let rolePermission of roleModel.permissions; let i = index">
+                  <!--begin::Label-->
+                  <td class="text-gray-800">{{ rolePermission.permission.libellePermis }}</td>
+                  <td>
+                    <!--begin::Wrapper-->
+                    <div class="d-flex">
+                      <!--begin::Checkbox-->
+                      <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                        <input class="form-check-input" type="checkbox" name="permissionsEtat" [(ngModel)]="rolePermission.permission.etat"
+                               (change)="onCheckChange($event, rolePermission.permission)">
+                        <span class="form-check-label">
+                            Autoriser ?
+                        </span>
+                      </label>
+                      <!--end::Checkbox-->
+                    </div>
+                    <!--end::Wrapper-->
+                  </td>
+                  <!--end::Label-->
+                </tr>
+                <!--end::Table row-->
+                <!--begin::Table row-->
+                <tr *ngFor="let permission of (permissions$|async); let i = index">
+                  <!--begin::Label-->
+                  <td class="text-gray-800">{{ permission.libellePermis }}</td>
+                  <td>
+                    <!--begin::Wrapper-->
+                    <div class="d-flex">
+                      <!--begin::Checkbox-->
+                      <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                        <input class="form-check-input" type="checkbox" name="permissionsEtat" [(ngModel)]="permission.etat"
+                               (change)="onCheckChange($event, permission)">
+                        <span class="form-check-label">
+                            Autoriser ?
+                        </span>
+                      </label>
+                      <!--end::Checkbox-->
+                    </div>
+                    <!--end::Wrapper-->
+                  </td>
+                  <!--end::Label-->
+                </tr>
+                <!--end::Table row-->
+                </tbody>
+                <!--end::Table body-->
+              </table>
+              <!--end::Table-->
+            </div>
+            <!--end::Table wrapper-->
+          </div>
+          <!--end::Permissions-->
+        </div>
+        <!--end::User form-->
+      </div>
+    </div>
+    <div class="modal-footer flex-center">
+      <!--begin::Button-->
+      <button type="reset" id="kt_modal_update_customer_cancel" class="btn btn-sm btn-light me-3"
+              (click)="modal.dismiss('cancel')">
+        Abandonner
+      </button>
+      <!--end::Button-->
+
+      <!--begin::Button-->
+      <button type="submit" id="kt_modal_update_customer_submit" class="btn btn-sm btn-primary"
+              [attr.data-kt-indicator]="isLoading ? 'on' : 'off'">
+          <span class="indicator-label">
+            Soumettre
+          </span>
+        <span class="indicator-progress">
+            Patientez svp... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+          </span>
+      </button>
+      <!--end::Button-->
+    </div>
+  </form>
+</ng-template>

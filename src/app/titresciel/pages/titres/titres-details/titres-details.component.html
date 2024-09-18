@@ -1,0 +1,1241 @@
+<!--begin::Careers - Apply-->
+<div class="card card-flush" *ngIf="_qualite && renderForm()">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
+<!--          <pre>{{ form.value | json }}</pre>-->
+          <!--begin::Input-->
+          <input *ngIf="id" type="hidden" class="form-control form-control-sm" [value]="id" formControlName="id"/>
+          <!--end::Input-->
+          <div class="row mb-5">
+            <label class="col-md-1 col-form-label d-flex align-items-center fw-bold small">Autorisé ?</label>
+            <div class="col-md-1 d-flex align-items-center">
+              <div class="form-check form-check-solid form-switch fv-row">
+                <input name="estReglementaire" type="checkbox" formControlName="appliqueFiscaliteLocale"
+                       class="form-check-input w-45px h-30px">
+                <label class="form-check-label"></label>
+              </div>
+            </div>
+          </div>
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Isin</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="codeIsin"/>
+              <!--end::Input-->
+              <!--<div *ngIf="submitted && f.symbolTitre.errors" class="invalid-feedback">
+                <div *ngIf="f.symbolTitre.errors.required">Le symbol est obligatoire</div>
+              </div>-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date émission</label>
+              <!--end::Label-->
+
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date émission" aria-describedby="basic-addon6"
+                       formControlName="dateEmission"/>
+                <!--end::Input-->
+                <span (click)="d.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date ouverture</label>
+              <!--end::Label-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #d1="ngbDatepicker" aria-label="Date ouverture" aria-describedby="basic-addon7" formControlName="dateOuverture"/>
+                <!--end::Input-->
+                <span (click)="d1.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date fermeture</label>
+              <!--end::Label-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="dd/mm/yyyy" ngbDatepicker #d2="ngbDatepicker" aria-label="Date fermeture" aria-describedby="basic-addon8"
+                       formControlName="dateCloture"/>
+                <!--end::Input-->
+                <span (click)="d2.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon8">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Symbole</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="symbolTitre"/>
+              <!--end::Input-->
+              <!--<div *ngIf="submitted && f.symbolTitre.errors" class="invalid-feedback">
+                <div *ngIf="f.symbolTitre.errors.required">Le symbol est obligatoire</div>
+              </div>-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Description</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="designationTitre"/>
+              <!--end::Input-->
+              <!--<div *ngIf="submitted && f.prenom.errors" class="invalid-feedback">
+                <div *ngIf="f.prenom.errors.required">Le(s) prénom(s) est obligatoire(s)</div>
+              </div>-->
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Cotation</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="libelleCotation">
+                <option disabled value="null">Sélectionnez une cotation</option>
+                <option ngValue="COTE">COTE</option>
+                <option ngValue="NON COTE">NON COTE</option>
+                <option ngValue="NON INSCRIT">NON INSCRIT</option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Nominal</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="nominal"/>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Pays</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="pays">
+                <option disabled selected [ngValue]="null">Sélectionnez un pays...</option>
+                <option *ngIf="entity?.pays" disabled [defaultSelected]="true" [ngValue]="entity?.pays">
+                  {{ entity?.pays?.libelleFr }}
+                </option>
+                <option *ngFor="let item of payss" [ngValue]="item">
+                  {{ item.libelleFr }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Lot Minimum</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="lotMinimum"/>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Type Titre</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="typeTitre">
+                <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
+                <option *ngIf="entity?.typeTitre" disabled [defaultSelected]="true" [ngValue]="entity?.typeTitre">
+                  {{ entity?.typeTitre?.libelleTypeTitre }}
+                </option>
+                <option *ngFor="let item of typeTitres" [ngValue]="item">
+                  {{ item.libelleTypeTitre }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Classe Bours.</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="compartiment">
+                <option disabled selected [ngValue]="null">Sélectionnez une classe...</option>
+                <option *ngIf="entity?.compartiment" disabled [defaultSelected]="true" [ngValue]="entity?.compartiment">
+                  {{ entity?.compartiment?.libelleCompartiment }}
+                </option>
+                <option *ngFor="let item of compartiments" [ngValue]="item">
+                  {{ item.libelleCompartiment }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Type d'émission</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="typeEmission">
+                <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
+                <option *ngIf="entity?.typeEmission" disabled [defaultSelected]="true" [ngValue]="entity?.typeEmission">
+                  {{ entity?.typeEmission?.libelleTypeEmission }}
+                </option>
+                <option *ngFor="let item of typeEmissions" [ngValue]="item">
+                  {{ item.libelleTypeEmission }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Secteur d'activité</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="secteur">
+                <option disabled selected [ngValue]="null">Sélectionnez un secteur...</option>
+                <option *ngIf="entity?.secteur" disabled [defaultSelected]="true" [ngValue]="entity?.secteur">
+                  {{ entity?.secteur?.libelleSecteur }}
+                </option>
+                <option *ngFor="let item of secteurs" [ngValue]="item">
+                  {{ item.libelleSecteur }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Emetteur</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="emetteur">
+                <option disabled selected [ngValue]="null">Sélectionnez un émetteur...</option>
+                <option *ngIf="entity?.emetteur" disabled [defaultSelected]="true" [ngValue]="entity?.emetteur">
+                  {{ entity?.emetteur?.denomination }}
+                </option>
+                <option *ngFor="let item of emetteurs$|async" [ngValue]="item">
+                  {{ item.denomination }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Régistraire</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="registraire">
+                <option disabled selected [ngValue]="null">Sélectionnez un régistraire...</option>
+                <option *ngIf="entity?.registraire" disabled [defaultSelected]="true" [ngValue]="entity?.registraire">
+                  {{ entity?.registraire?.denomination }}
+                </option>
+                <option *ngFor="let item of registraires$|async" [ngValue]="item">
+                  {{ item.denomination }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Place</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="place">
+                <option disabled selected [ngValue]="null">Sélectionnez une place...</option>
+                <option *ngIf="entity?.place" disabled [defaultSelected]="true" [ngValue]="entity?.place">
+                  {{ entity?.place?.libellePlace }}
+                </option>
+                <option *ngFor="let item of places" [ngValue]="item">
+                  {{ item.libellePlace }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Dépositaire</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="depositaire">
+                <option disabled selected [ngValue]="null">Sélectionnez un dépositaire...</option>
+                <option *ngIf="entity?.depositaire" disabled [defaultSelected]="true" [ngValue]="entity?.depositaire">
+                  {{ entity?.depositaire?.denomination }}
+                </option>
+                <option *ngFor="let item of depositaires$|async" [ngValue]="item">
+                  {{ item.denomination }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+          </div>
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Fisc. Pays</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxFiscalitePays"/>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Fisc. Locale</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxFiscaliteLocale"/>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <label class="col-md-1 col-form-label d-flex align-items-center fw-bold small">Fisc. Loc. ?</label>
+            <div class="col-md-1 d-flex align-items-center">
+              <div class="form-check form-check-solid form-switch fv-row">
+                <input name="appliqueFiscaliteLocale" type="checkbox" formControlName="appliqueFiscaliteLocale"
+                       class="form-check-input w-45px h-30px">
+                <label class="form-check-label"></label>
+              </div>
+            </div>
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Irvm</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="irvm"/>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Borne Inf. Fluc.</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="borneInferieurFluctuation"/>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Borne Sup. Fluc.</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="borneSuperieurFluctuation"/>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <!--<label class="col-md-1 col-form-label d-flex align-items-center fw-bold small">Assimilé ?</label>
+            <div class="col-md-2 d-flex align-items-center">
+              <div class="form-check form-check-solid form-switch fv-row">
+                <input name="assimile" type="checkbox" formControlName="assimile"
+                       class="form-check-input w-45px h-30px">
+                <label class="form-check-label"></label>
+              </div>
+            </div>-->
+          </div>
+          <hr>
+          <ng-container *ngIf="qualite === 'obligations' || qualite === 'tcn'">
+            <div class="row mb-5" *ngIf="qualite === 'obligations' || qualite === 'tcn'">
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Taux Brut</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxBrut"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Taux Net</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxNet"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date jouissance</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                         #dateJouissance="ngbDatepicker" aria-label="Date jouissance" formControlName="dateJouissance"/>
+                  <!--end::Input-->
+                  <span (click)="dateJouissance.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date 1er Paie.</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                         #datePremierPaiement="ngbDatepicker" aria-label="Date 1er Paiement" formControlName="datePremierPaiement"/>
+                  <!--end::Input-->
+                  <span (click)="datePremierPaiement.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date Dern. Paie.</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                         #dateDernierPaiement="ngbDatepicker" aria-label="Date dernier Paiement" formControlName="dateDernierPaiement"/>
+                  <!--end::Input-->
+                  <span (click)="dateDernierPaiement.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nombre Titres</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="" formControlName="nombreTitre"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+            </div>
+            <div class="row mb-5" *ngIf="qualite === 'obligations'">
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Type d'obligation</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="typeObligation">
+                  <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
+                  <option *ngIf="entity?.typeObligation" disabled [defaultSelected]="true" [ngValue]="entity?.typeObligation">
+                    {{ entity?.typeObligation?.libelleTypeObligation }}
+                  </option>
+                  <option *ngFor="let item of typeObligations" [ngValue]="item">
+                    {{ item.libelleTypeObligation }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <div class="col-md-2 fv-row">
+                <label class="fs-5 fw-semibold mb-2">Durée</label>
+                <div class="input-group input-group-sm mb-2">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="dureeNbre"/>
+                  <!--end::Input-->
+                  <div class="input-group-append">
+                    <!--begin::Select-->
+                    <select class="custom-select form-select form-select-sm" formControlName="dureeUnite">
+                      <option value="JOURS">JOURS</option>
+                      <option value="MOIS">MOIS</option>
+                      <option value="ANNEES">ANNEES.</option>
+                    </select>
+                    <!--end::Select-->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 fv-row">
+                <label class="fs-5 fw-semibold mb-2">Périodicité</label>
+                <div class="input-group input-group-sm mb-2">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteNbre"/>
+                  <!--end::Input-->
+                  <div class="input-group-append">
+                    <!--begin::Select-->
+                    <select class="custom-select form-select form-select-sm" formControlName="periodiciteUnite">
+                      <option value="JOURS">JOURS</option>
+                      <option value="MOIS">MOIS</option>
+                      <option value="ANNEES">ANNEES.</option>
+                    </select>
+                    <!--end::Select-->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 fv-row">
+                <label class="fs-5 fw-semibold mb-2">Différé</label>
+                <div class="input-group input-group-sm mb-2">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="differeNbre"/>
+                  <!--end::Input-->
+                  <div class="input-group-append">
+                    <!--begin::Select-->
+                    <select class="custom-select form-select form-select-sm" formControlName="differeUnite">
+                      <option value="JOURS">JOURS</option>
+                      <option value="MOIS">MOIS</option>
+                      <option value="ANNEES">ANNEES.</option>
+                    </select>
+                    <!--end::Select-->
+                  </div>
+                </div>
+              </div>
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Mode Amort.</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="modeAmortissement">
+                  <option disabled selected [ngValue]="null">Sélectionnez un mode...</option>
+                  <option *ngIf="entity?.modeAmortissement" disabled [defaultSelected]="true" [ngValue]="entity?.modeAmortissement">
+                    {{ entity?.modeAmortissement?.libelleModeAmortissement }}
+                  </option>
+                  <option *ngFor="let item of modeAmortissements" [ngValue]="item">
+                    {{ item.libelleModeAmortissement }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Type Amort.</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="typeAmortissement">
+                  <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
+                  <option *ngIf="entity?.typeAmortissement" disabled [defaultSelected]="true" [ngValue]="entity?.typeAmortissement">
+                    {{ entity?.typeAmortissement?.libelleTypeAmortissement }}
+                  </option>
+                  <option *ngFor="let item of typeAmortissements" [ngValue]="item">
+                    {{ item.libelleTypeAmortissement }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+            </div>
+            <div class="row mb-5" *ngIf="qualite === 'obligations'">
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Usance</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="0" formControlName="usance"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+            </div>
+          </ng-container>
+          <ng-container *ngIf="qualite === 'tcn'">
+            <div class="row mb-5">
+              <div class="col-md-2 fv-row">
+                <label class="fs-5 fw-semibold mb-2">Durée</label>
+                <div class="input-group input-group-sm mb-2">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="dureeNbre"/>
+                  <!--end::Input-->
+                  <div class="input-group-append">
+                    <!--begin::Select-->
+                    <select class="custom-select form-select form-select-sm" formControlName="dureeUnite">
+                      <option value="JOURS">JOURS</option>
+                      <option value="MOIS">MOIS</option>
+                      <option value="ANNEES">ANNEES.</option>
+                    </select>
+                    <!--end::Select-->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 fv-row">
+                <label class="fs-5 fw-semibold mb-2">Périodicité</label>
+                <div class="input-group input-group-sm mb-2">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteNbre"/>
+                  <!--end::Input-->
+                  <div class="input-group-append">
+                    <!--begin::Select-->
+                    <select class="custom-select form-select form-select-sm" formControlName="periodiciteUnite">
+                      <option value="JOURS">JOURS</option>
+                      <option value="MOIS">MOIS</option>
+                      <option value="ANNEES">ANNEES.</option>
+                    </select>
+                    <!--end::Select-->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 fv-row">
+                <label class="fs-5 fw-semibold mb-2">Différé</label>
+                <div class="input-group input-group-sm mb-2">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="differeNbre"/>
+                  <!--end::Input-->
+                  <div class="input-group-append">
+                    <!--begin::Select-->
+                    <select class="custom-select form-select form-select-sm" formControlName="differeUnite">
+                      <option value="JOURS">JOURS</option>
+                      <option value="MOIS">MOIS</option>
+                      <option value="ANNEES">ANNEES.</option>
+                    </select>
+                    <!--end::Select-->
+                  </div>
+                </div>
+              </div>
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Mode Amort.</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="modeAmortissement">
+                  <option disabled selected [ngValue]="null">Sélectionnez un mode...</option>
+                  <option *ngIf="entity?.modeAmortissement" disabled [defaultSelected]="true" [ngValue]="entity?.modeAmortissement">
+                    {{ entity?.modeAmortissement?.libelleModeAmortissement }}
+                  </option>
+                  <option *ngFor="let item of modeAmortissements" [ngValue]="item">
+                    {{ item.libelleModeAmortissement }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Type Amort.</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="typeAmortissement">
+                  <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
+                  <option *ngIf="entity?.typeAmortissement" disabled [defaultSelected]="true" [ngValue]="entity?.typeAmortissement">
+                    {{ entity?.typeAmortissement?.libelleTypeAmortissement }}
+                  </option>
+                  <option *ngFor="let item of typeAmortissements" [ngValue]="item">
+                    {{ item.libelleTypeAmortissement }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nature Tcn</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="natureTcn">
+                  <option disabled selected [ngValue]="null">Sélectionnez une nature...</option>
+                  <option *ngIf="entity?.natureTcn" disabled [defaultSelected]="true" [ngValue]="entity?.natureTcn">
+                    {{ entity?.natureTcn?.libelleNatureTcn }}
+                  </option>
+                  <option *ngFor="let item of natureTcns" [ngValue]="item">
+                    {{ item.libelleNatureTcn }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+            </div>
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Formule intérêt</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="formulePrecomptee">
+                  <option disabled selected [ngValue]="null">Sélectionnez une formule...</option>
+                  <option *ngIf="entity?.formulePrecomptee" disabled [defaultSelected]="true" [ngValue]="entity?.formulePrecomptee">
+                    {{ entity?.formulePrecomptee?.libelleModeCalculInteret }}
+                  </option>
+                  <option *ngFor="let item of modeCalculInterets" [ngValue]="item">
+                    {{ item.libelleModeCalculInteret }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <label class="col-md-1 col-form-label d-flex align-items-center fw-bold small">Adjudication ?</label>
+              <div class="col-md-1 d-flex align-items-center">
+                <div class="form-check form-check-solid form-switch fv-row">
+                  <input name="estReglementaire" type="checkbox" formControlName="estParAdjudication"
+                         class="form-check-input w-45px h-30px">
+                  <label class="form-check-label"></label>
+                </div>
+              </div>
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">N° Identification</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="numeroIdentification"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Dénomination émiss.</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="denominationEmission"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Usance</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="0" formControlName="usance"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+            </div>
+          </ng-container>
+          <ng-container *ngIf="qualite === 'actions'">
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Type Action</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="typeAction">
+                  <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
+                  <option *ngIf="entity?.typeAction" disabled [defaultSelected]="true" [ngValue]="entity?.typeAction">
+                    {{ entity?.typeAction?.libelleTypeAction }}
+                  </option>
+                  <option *ngFor="let item of typeActions" [ngValue]="item">
+                    {{ item.libelleTypeAction }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Sous Type Action</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="sousTypeAction">
+                  <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
+                  <option *ngIf="entity?.sousTypeAction" disabled [defaultSelected]="true" [ngValue]="entity?.sousTypeAction">
+                    {{ entity?.sousTypeAction?.libelleSousTypeAction }}
+                  </option>
+                  <option *ngFor="let item of sousTypeActions" [ngValue]="item">
+                    {{ item.libelleSousTypeAction }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Per</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="Per" formControlName="per"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nominal non versé</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="Nominal non versé"
+                       formControlName="nominalNonVerse"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+            </div>
+          </ng-container>
+          <ng-container *ngIf="qualite === 'droits'">
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date déb. nég.</label>
+                <!--end::Label-->
+
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker #dateDebutNegociation="ngbDatepicker"
+                         aria-label="Date début négociation" formControlName="dateDebutNegociation"/>
+                  <!--end::Input-->
+                  <span (click)="dateDebutNegociation.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date fin nég.</label>
+                <!--end::Label-->
+
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker #dateFinNegociation="ngbDatepicker"
+                         aria-label="Date fin négociation" formControlName="dateFinNegociation"/>
+                  <!--end::Input-->
+                  <span (click)="dateFinNegociation.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date jouissance</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker #dateJouissance="ngbDatepicker"
+                         aria-label="Date jouissance" formControlName="dateJouissance"/>
+                  <!--end::Input-->
+                  <span (click)="dateJouissance.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Cours théo.</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="coursTheorique"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">P.U Sousc.</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="prixUnitaireSouscription"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Cours Ex. Drt.</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="coursActionExDroit"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+            </div>
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Action liée</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="actionLiee">
+                  <option disabled selected [ngValue]="null">Sélectionnez une action...</option>
+                  <option *ngIf="entity?.actionLiee" disabled [defaultSelected]="true" [ngValue]="entity?.actionLiee">
+                    {{ entity?.actionLiee?.designationTitre + ' (' + entity?.actionLiee?.symbolTitre + ')' }}
+                  </option>
+                  <option *ngFor="let item of actions" [ngValue]="item">
+                    {{ item.designationTitre + ' (' + item.symbolTitre + ')' }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Nouvelle action</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="nouvelleAction">
+                  <option disabled selected [ngValue]="null">Sélectionnez une action...</option>
+                  <option *ngIf="entity?.nouvelleAction" disabled [defaultSelected]="true" [ngValue]="entity?.nouvelleAction">
+                    {{ entity?.nouvelleAction?.designationTitre + ' (' + entity?.nouvelleAction?.symbolTitre + ')' }}
+                  </option>
+                  <option *ngFor="let item of actions" [ngValue]="item">
+                    {{ item.designationTitre + ' (' + item.symbolTitre + ')' }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <div class="col-md-8 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Parité</label>
+                <!--end::Label-->
+                <div class="input-group input-group-sm mb-2">
+                  <input type="text" aria-label="Nbr action" class="form-control form-control-sm" formControlName="pariteAncienNbre">
+                  <span class="input-group-text">action anc. à</span>
+                  <input type="text" aria-label="Prix action" class="form-control form-control-sm" formControlName="pariteAncienCours">
+                  <span class="input-group-text">pour</span>
+                  <input type="text" aria-label="Nbr action" class="form-control form-control-sm" formControlName="pariteNouveauNbre">
+                  <span class="input-group-text">action nouv. à</span>
+                  <input type="text" aria-label="Prix action" class="form-control form-control-sm" formControlName="pariteNouveauCours">
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="qualite === 'opc'">
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Forme juridique</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="formeJuridiqueOpc">
+                  <option disabled selected [ngValue]="null">Sélectionnez une forme...</option>
+                  <option *ngIf="entity?.formeJuridiqueOpc" disabled [defaultSelected]="true" [ngValue]="entity?.formeJuridiqueOpc">
+                    {{ entity?.formeJuridiqueOpc?.libelleFormeJuridiqueOpc }}
+                  </option>
+                  <option *ngFor="let item of formeJuridiquesOpc" [ngValue]="item">
+                    {{ item.libelleFormeJuridiqueOpc }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Type Affectation Vl.</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="typeAffectationTitre">
+                  <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
+                  <option *ngIf="entity?.typeAffectationTitre" disabled [defaultSelected]="true" [ngValue]="entity?.typeAffectationTitre">
+                    {{ entity?.typeAffectationTitre?.libelleTypeAffectation }}
+                  </option>
+                  <option *ngFor="let item of typeAffectationTitres" [ngValue]="item">
+                    {{ item.libelleTypeAffectation }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Classification</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="classificationOPC">
+                  <option disabled selected [ngValue]="null">Sélectionnez une classification...</option>
+                  <option *ngIf="entity?.classificationOPC" disabled [defaultSelected]="true" [ngValue]="entity?.classificationOPC">
+                    {{ entity?.classificationOPC?.libelleClassification }}
+                  </option>
+                  <option *ngFor="let item of classificationOpcs" [ngValue]="item">
+                    {{ item.libelleClassification }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Vl. origine</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="vlOrigine"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <label class="fs-5 fw-semibold mb-2">Périodicité</label>
+                <div class="input-group input-group-sm mb-2">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteVlNbre"/>
+                  <!--end::Input-->
+                  <div class="input-group-append">
+                    <!--begin::Select-->
+                    <select class="custom-select form-select form-select-sm" formControlName="periodiciteVlUnite">
+                      <option value="JOURS">JOURS</option>
+                      <option value="MOIS">MOIS</option>
+                      <option value="ANNEES">ANNEES.</option>
+                    </select>
+                    <!--end::Select-->
+                  </div>
+                </div>
+              </div>
+              <!--end::Col-->
+            </div>
+          </ng-container>
+          <ng-container *ngIf="qualite === 'autres'">
+
+          </ng-container>
+          <ng-container *ngIf="qualite === 'dat'">
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Taux Brut</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxBrut"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Taux Net</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxNet"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Type DAT</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="typeDAT">
+                  <option disabled value="null">Sélectionnez un type...</option>
+                  <option ngValue="SIMPLE">SIMPLE</option>
+                  <option ngValue="COMPOSE">COMPOSE</option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <div class="col-md-2 fv-row">
+                <label class="fs-5 fw-semibold mb-2">Durée</label>
+                <div class="input-group input-group-sm mb-2">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="dureeNbre"/>
+                  <!--end::Input-->
+                  <div class="input-group-append">
+                    <!--begin::Select-->
+                    <select class="custom-select form-select form-select-sm" formControlName="dureeUnite">
+                      <option value="JOURS">JOURS</option>
+                      <option value="MOIS">MOIS</option>
+                      <option value="ANNEES">ANNEES.</option>
+                    </select>
+                    <!--end::Select-->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2 fv-row">
+                <label class="fs-5 fw-semibold mb-2">Périodicité</label>
+                <div class="input-group input-group-sm mb-2">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteNbre"/>
+                  <!--end::Input-->
+                  <div class="input-group-append">
+                    <!--begin::Select-->
+                    <select class="custom-select form-select form-select-sm" formControlName="periodiciteUnite">
+                      <option value="JOURS">JOURS</option>
+                      <option value="MOIS">MOIS</option>
+                      <option value="ANNEES">ANNEES.</option>
+                    </select>
+                    <!--end::Select-->
+                  </div>
+                </div>
+              </div>
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Banque</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="banque">
+                  <option disabled selected [ngValue]="null">Sélectionnez une banque...</option>
+                  <option *ngIf="entity?.banque" disabled [defaultSelected]="true" [ngValue]="entity?.banque">
+                    {{ entity?.banque?.denomination }}
+                  </option>
+                  <option *ngFor="let item of banques$|async" [ngValue]="item">
+                    {{ item.denomination }}
+                  </option>
+                </select>
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+            </div>
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date jouissance</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                         #dateJouissance="ngbDatepicker" aria-label="Date jouissance" formControlName="dateJouissance"/>
+                  <!--end::Input-->
+                  <span (click)="dateJouissance.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date 1er Paie.</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                         #datePremierPaiement="ngbDatepicker" aria-label="Date 1er Paiement" formControlName="datePremierPaiement"/>
+                  <!--end::Input-->
+                  <span (click)="datePremierPaiement.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Date Dern. Paie.</label>
+                <!--end::Label-->
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                         #dateDernierPaiement="ngbDatepicker" aria-label="Date dernier Paiement" formControlName="dateDernierPaiement"/>
+                  <!--end::Input-->
+                  <span (click)="dateDernierPaiement.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Usance</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="0" formControlName="usance"/>
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+            </div>
+          </ng-container>
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-start">
+              <!--begin::Button-->
+              <button type="button" class="btn btn-sm btn-warning me-3" (click)="retourAlaListe()">
+                Retour à la liste
+              </button>
+              <!--end::Button-->
+            </div>
+            <div class="d-flex justify-content-end">
+              <!--begin::Button-->
+              <a type="reset" [routerLink]="['/titresciel/standard/parametre/instrumentfinancier/titres']" class="btn btn-sm btn-light me-3">
+                Annuler
+              </a>
+              <!--end::Button-->
+              <!--begin::Submit-->
+              <!--              <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.valid" (click)="onSaveEntity()">-->
+              <button [type]="!submitting ? 'submit' : 'button'" class="btn btn-sm btn-primary" [disabled]="form.invalid" (click)="onSaveEntity()">
+                <ng-container *ngIf="submitting">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    Patientez svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="!submitting">
+                  <span class="indicator-label">Enregistrer</span>
+                </ng-container>
+              </button>
+              <!--end::Submit-->
+            </div>
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

@@ -1,0 +1,255 @@
+<div class="pb-10 pb-lg-12">
+  <h2 class="fw-bolder text-gray-900">VL & Commissions</h2>
+  <div class="text-gray-500 fw-bold fs-6">
+    Infos sur le calcul de la VL
+    <a href="#" class="link-primary fw-bolder">Help Page</a>.
+  </div>
+</div>
+<div [formGroup]="form">
+  <div class="row mb-10">
+    <div class="col-md-6 fv-row">
+      <!--begin::Label-->
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold required">Durée Min. Placement</span>
+      </label>
+      <!--end::Label-->
+      <div class="flex-input-container">
+        <div class="flex-input-child">
+          <!--begin::Input-->
+          <input appNumeroPositifValidators type="text" name="dureeMinimalPlacement" class="form-control form-control-sm"
+                 formControlName="dureeMinimalPlacement"/>
+          <!--end::Input-->
+          <div class="fv-plugins-message-container invalid-feedback"
+               *ngIf="form.get('dureeMinimalPlacement')?.hasError('required') &&
+                      form.get('dureeMinimalPlacement')?.touched">
+            Ce champ est obligatoire
+          </div>
+        </div>
+        <div class="flex-input-child">
+          <!--begin::Select-->
+          <select name="uniteDureeMinimalPlacement" class="form-select form-select-sm mb-2"
+                  formControlName="uniteDureeMinimalPlacement"
+                  [ngClass]="{ 'is-invalid': (form.get('uniteDureeMinimalPlacement')?.dirty ||
+              form.get('uniteDureeMinimalPlacement')?.touched) && form.get('uniteDureeMinimalPlacement')?.invalid }">
+            <option disabled value="null">Sélectionnez une unité...</option>
+            <option ngValue="Jour(s)">Jour(s)</option>
+            <option ngValue="Semaine(s)">Semaine(s)</option>
+            <option ngValue="Mois">Mois</option>
+            <option ngValue="Année(s)">Année(s)</option>
+          </select>
+          <!--end::Select-->
+          <div class="fv-plugins-message-container invalid-feedback"
+               *ngIf="form.get('uniteDureeMinimalPlacement')?.hasError('required') &&
+                      form.get('uniteDureeMinimalPlacement')?.touched">
+            Ce champ est obligatoire
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold required">Min. Placement</span>
+      </label>
+      <input appNombreDecimal name="valeurMinimalPlacement" class="form-control form-control-sm" formControlName="valeurMinimalPlacement"/>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('valeurMinimalPlacement')?.hasError('required') &&
+        form.get('valeurMinimalPlacement')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="small fw-bold required">Type Affectation</span>
+      </label>
+      <select name="typeAffectationTitre" class="form-select form-select-sm mb-2"
+              [ngClass]="{ 'is-invalid': (form.get('typeAffectationTitre')?.dirty ||
+              form.get('typeAffectationTitre')?.touched) && form.get('typeAffectationTitre')?.invalid }"
+              formControlName="typeAffectationTitre">
+        <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
+        <option *ngIf="defaultValues.typeAffectationTitre" disabled [defaultSelected]="true"
+                [ngValue]="defaultValues.typeAffectationTitre">
+          {{ defaultValues.typeAffectationTitre.libelleTypeAffectation }}
+        </option>
+        <option *ngFor="let item of typeAffectation$|async" [ngValue]="item">
+          {{ item.libelleTypeAffectation }}
+        </option>
+      </select>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('typeAffectationTitre')?.hasError('required') &&
+                      form.get('typeAffectationTitre')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col-md-6 fv-row">
+      <!--begin::Label-->
+      <label class="required fw-semibold fw-bold small mb-2">Périodicité Calcul VL</label>
+      <!--end::Label-->
+      <div class="flex-input-container">
+        <div class="flex-input-child">
+          <!--begin::Input-->
+          <input appNumeroPositifValidators type="text" name="periodiciteCalculValeurLiquidativeOpcvm" class="form-control form-control-sm"
+                 formControlName="periodiciteCalculValeurLiquidativeOpcvm"/>
+          <!--end::Input-->
+          <div class="fv-plugins-message-container invalid-feedback"
+               *ngIf="form.get('periodiciteCalculValeurLiquidativeOpcvm')?.hasError('required') &&
+                      form.get('periodiciteCalculValeurLiquidativeOpcvm')?.touched">
+            Ce champ est obligatoire
+          </div>
+        </div>
+        <div class="flex-input-child">
+          <!--begin::Select-->
+          <select name="unitePeriodiciteCalculValeurLiquidative" class="form-select form-select-sm mb-2"
+                  formControlName="unitePeriodiciteCalculValeurLiquidative"
+                  [ngClass]="{ 'is-invalid': (form.get('unitePeriodiciteCalculValeurLiquidative')?.dirty ||
+                    form.get('unitePeriodiciteCalculValeurLiquidative')?.touched) && form.get('unitePeriodiciteCalculValeurLiquidative')?.invalid }">
+            <option disabled value="null">Sélectionnez une unité...</option>
+            <option ngValue="Jour(s)">Jour(s)</option>
+            <option ngValue="Semaine(s)">Semaine(s)</option>
+            <option ngValue="Mois">Mois</option>
+            <option ngValue="Année(s)">Année(s)</option>
+          </select>
+          <!--end::Select-->
+          <div class="fv-plugins-message-container invalid-feedback"
+               *ngIf="form.get('unitePeriodiciteCalculValeurLiquidative')?.hasError('required') &&
+                      form.get('unitePeriodiciteCalculValeurLiquidative')?.touched">
+            Ce champ est obligatoire
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="fw-bold small">Début Exercice</span>
+      </label>
+      <!--begin::Input-->
+      <div
+        style="display: flex; width: 100%; border-top-left-radius: 1px; border-bottom-left-radius: 1px;"
+        class="border">
+        <input
+          style="flex: 3; border-bottom-right-radius: 0; border-top-right-radius: 0"
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="dd/mm/yyyy"
+          name="debutExerciceActuelOpcvm"
+          formControlName="debutExerciceActuelOpcvm"
+          ngbDatepicker
+          #d1="ngbDatepicker"/>
+        <button style="flex: 0.5; padding: 5px;" class="btn btn-sm btn-default" (click)="d1.toggle()" type="button">
+          <i class="fa fa-calendar"></i>
+        </button>
+      </div>
+      <!--end::Input-->
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="fw-bold small">Fin Exercice</span>
+      </label>
+      <!--begin::Input-->
+      <div
+        style="display: flex; width: 100%; border-top-left-radius: 1px; border-bottom-left-radius: 1px;"
+        class="border">
+        <input
+          style="flex: 3; border-bottom-right-radius: 0; border-top-right-radius: 0"
+          type="text"
+          class="form-control form-control-sm input-sm"
+          placeholder="dd/mm/yyyy"
+          name="finExerciceActuelOpcvm"
+          formControlName="finExerciceActuelOpcvm"
+          ngbDatepicker
+          #d2="ngbDatepicker"/>
+        <button style="flex: 0.5; padding: 5px;" class="btn btn-sm btn-default" (click)="d2.toggle()" type="button">
+          <i class="fa fa-calendar"></i>
+        </button>
+      </div>
+      <!--end::Input-->
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="fw-bold small">Tafa(%)</span>
+      </label>
+      <input appNombreDecimal name="tauxTAF" class="form-control form-control-sm" formControlName="tauxTAF"/>
+    </div>
+    <label class="col-md-1 col-form-label d-flex align-items-center fw-bold small">TAF ?</label>
+    <div class="col-md-2 d-flex align-items-center">
+      <div class="form-check form-check-solid form-switch fv-row">
+        <input name="appliqueeTAF" type="checkbox" formControlName="appliqueeTAF"
+               class="form-check-input w-45px h-30px">
+        <label class="form-check-label"></label>
+      </div>
+    </div>
+    <label class="col-md-1 col-form-label d-flex align-items-center fw-bold small">TVA ?</label>
+    <div class="col-md-2 d-flex align-items-center">
+      <div class="form-check form-check-solid form-switch fv-row">
+        <input name="appliqueeTVA" type="checkbox" formControlName="appliqueeTVA"
+               class="form-check-input w-45px h-30px">
+        <label class="form-check-label"></label>
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="required fw-bold small">% Retroc. Sousc.</span>
+      </label>
+      <input appNombreDecimal name="tauxRetrocessionSouscription" class="form-control form-control-sm"
+             formControlName="tauxRetrocessionSouscription"/>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('tauxRetrocessionSouscription')?.hasError('required') &&
+        form.get('tauxRetrocessionSouscription')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+  </div>
+  <div class="row mb-10">
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="required fw-bold small">% Retroc. Rachat</span>
+      </label>
+      <input appNombreDecimal name="tauxRetrocessionRachat" class="form-control form-control-sm"
+             formControlName="tauxRetrocessionRachat"/>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('tauxRetrocessionRachat')?.hasError('required') &&
+        form.get('tauxRetrocessionRachat')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="required fw-bold small">% (Souscription)</span>
+      </label>
+      <input appNombreDecimal name="tauxCommissionSouscription" class="form-control form-control-sm"
+             formControlName="tauxCommissionSouscription"/>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('tauxCommissionSouscription')?.hasError('required') &&
+        form.get('tauxCommissionSouscription')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="required fw-bold small">% (Rachat)</span>
+      </label>
+      <input  appNombreDecimal name="tauxCommissionRachat" class="form-control form-control-sm"
+             formControlName="tauxCommissionRachat"/>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('tauxCommissionRachat')?.hasError('required') &&
+        form.get('tauxCommissionRachat')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+    <div class="col-md-3 fv-row">
+      <label class="d-flex align-items-center form-label">
+        <span class="required fw-bold small">N° Visa Note Info.</span>
+      </label>
+      <input  name="visaNoteInformation" class="form-control form-control-sm"
+             formControlName="visaNoteInformation"/>
+      <div class="fv-plugins-message-container invalid-feedback"
+           *ngIf="form.get('visaNoteInformation')?.hasError('required') &&
+        form.get('visaNoteInformation')?.touched">
+        Ce champ est obligatoire
+      </div>
+    </div>
+  </div>
+</div>

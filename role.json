@@ -1,0 +1,25 @@
+{
+  "idRole": 83,
+  "nom": "ROLE_MORALE",
+  "description": "Permet d'accéder au menu des personnes morales",
+  "permissions": [
+    {
+      "permission": {
+        "idPermis": 2,
+        "codePermis": "ALLOW_LIST",
+        "libellePermis": "Consultation de liste",
+        "estPrincipale": true
+      }
+    }
+  ],
+  "userPermissions": [],
+  "utilisateurs1": [
+    {
+      "id": {
+        "idUtilisateur": 1,
+        "idRole": 83
+      }
+    }
+  ],
+  "id": 83
+}

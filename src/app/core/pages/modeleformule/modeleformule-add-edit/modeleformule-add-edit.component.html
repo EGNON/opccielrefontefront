@@ -1,0 +1,102 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <fieldset class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Modèle</legend>
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Code</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input [readonly]="readOnly" type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="codeModeleEcriture"
+                     [ngClass]="{ 'is-invalid': submitted && f.codeModeleEcriture.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.codeModeleEcriture.errors" class="invalid-feedback">
+                <div *ngIf="f.codeModeleEcriture.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libellé</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libelleModeleEcriture"
+                     [ngClass]="{ 'is-invalid': submitted && f.libelleModeleEcriture.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libelleModeleEcriture.errors" class="invalid-feedback">
+                <div *ngIf="f.libelleModeleEcriture.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+          </div>
+          </fieldset>
+
+            <div class="row mb-5">
+              <div class="col-md-6 fv-row">
+                <label class=" fs-5 fw-semibold mb-2">Formule</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <ng-multiselect-dropdown
+                  [settings]="formuleSettings"
+                  [placeholder]="'Sélectionnez un ou plusieurs formules'"
+                  formControlName="modeleEcritureFormules"
+                  [data]="formule"
+                  [disabled]="false"
+                  (onFilterChange)="onFilterChange($event)"
+                  (onDropDownClose)="onDropDownClose($event)"
+                  (onSelect)="onItemSelect($event)"
+                  (onDeSelect)="onDeSelect($event)"
+                  (onSelectAll)="onSelectAll($event)"
+                  (onDeSelectAll)="onDeSelectAll($event)">
+                </ng-multiselect-dropdown>      <!--end::Select-->
+                <!--<div *ngIf="submitted && f.formule.errors" class="invalid-feedback">
+                  <div *ngIf="f.formule.errors.required">Ce champs est obligatoire</div>
+                </div>-->
+              </div>
+              </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Operation buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/app/standard/parametre/comptabilite/modeleformule" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Operation buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

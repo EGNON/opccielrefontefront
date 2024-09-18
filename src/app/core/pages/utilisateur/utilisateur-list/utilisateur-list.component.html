@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-header border-0 pt-6">
+    <!--begin::Card title-->
+    <div class="card-title">
+      <!--begin::Search-->
+      <div class="d-flex align-items-center position-relative my-1">
+        <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+        <input type="text" data-action="filter" class="form-control form-control-sm form-control-solid w-250px ps-12"
+               placeholder="Rechercher utilisateurs">
+      </div>
+      <!--end::Search-->
+    </div>
+    <!--begin::Card title-->
+
+    <!--begin::Card toolbar-->
+    <div class="card-toolbar">
+      <!--begin::Toolbar-->
+      <div class="d-flex justify-content-end">
+        <!-- Example split danger button -->
+<!--        <div class="btn-group">-->
+<!--          <button type="button" class="btn btn-danger">Action</button>-->
+<!--          <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--            <span class="visually-hidden">Toggle Dropdown</span>-->
+<!--          </button>-->
+<!--          <ul class="dropdown-menu">-->
+<!--            <li><a class="dropdown-item" href="#">Action</a></li>-->
+<!--            <li><a class="dropdown-item" href="#">Another action</a></li>-->
+<!--            <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+<!--            <li><hr class="dropdown-divider"></li>-->
+<!--            <li><a class="dropdown-item" href="#">Separated link</a></li>-->
+<!--          </ul>-->
+<!--        </div>-->
+        <!--begin::Add user-->
+        <button type="button" class="btn btn-sm btn-primary" data-action="create">
+          Nouvel utilisateur
+        </button>
+        <!--end::Add user-->
+      </div>
+      <!--end::Toolbar-->
+    </div>
+    <!--end::Card toolbar-->
+  </div>
+
+  <div class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <app-entity-crud
+        [datatableConfig]="datatableConfig"
+        route="/crm/utilisateurs"
+        [reload]="reloadEvent">
+      </app-entity-crud>
+    </div>
+  </div>
+</div>
+
+<swal #noticeSwal [swalOptions]="swalOptions">
+</swal>

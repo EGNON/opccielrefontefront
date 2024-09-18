@@ -1,0 +1,72 @@
+<div class="modal-header p-2">
+  <div class="modal-title h4">Connexion à un OPCVM</div>
+  <!--<button type="button" class="close" (click)="modal.dismiss()">
+    <span>&times;</span>
+  </button>-->
+
+  <button type="button" class="btn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="card modal-body p-lg-2">
+  <!--<form [formGroup]="form">
+    <div class="card-header border-0 pt-6">
+      &lt;!&ndash;begin::Card title&ndash;&gt;
+      <div class="card-title">
+        <div class="d-flex align-items-center mx-2">
+          &lt;!&ndash;<app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>&ndash;&gt;
+          <div class="input-group mb-0">
+            <input type="text" class="form-control form-control-sm form-control-solid w-200px"
+                   placeholder="dd/mm/yyyy" ngbDatepicker #d1="ngbDatepicker" aria-label="Date début" aria-describedby="basic-addon6"
+                   formControlName="startDate"/>
+            <span (click)="d1.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+            </span>
+          </div>
+        </div>
+        <div class="d-flex align-items-center mx-2">
+          <div class="input-group mb-0">
+            <input type="text" class="form-control form-control-sm form-control-solid w-200px"
+                   placeholder="dd/mm/yyyy" ngbDatepicker #d2="ngbDatepicker" aria-label="Date fin" aria-describedby="basic-addon7"
+                   formControlName="endDate"/>
+            <span (click)="d2.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      &lt;!&ndash;begin::Card title&ndash;&gt;
+
+      &lt;!&ndash;begin::Card toolbar&ndash;&gt;
+      <div class="card-toolbar">
+        &lt;!&ndash;begin::Toolbar&ndash;&gt;
+        <div class="d-flex justify-content-end">
+          &lt;!&ndash;begin::Add user&ndash;&gt;
+          <button type="submit" class="btn btn-primary btn-sm">
+            Appliquer
+          </button>
+          &lt;!&ndash;end::Add user&ndash;&gt;
+        </div>
+        &lt;!&ndash;end::Toolbar&ndash;&gt;
+      </div>
+      &lt;!&ndash;end::Card toolbar&ndash;&gt;
+    </div>
+  </form>
+  <hr>-->
+  <div class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <table datatable [dtOptions]="dtOptions" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+        <thead>
+          <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+            <ng-container *ngFor="let column of dtOptions.columns; let i=index">
+              <th>{{ column.title }}</th>
+            </ng-container>
+          </tr>
+        </thead>
+        <tbody class="fw-semibold text-gray-600"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

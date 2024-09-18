@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+             class="table align-middle table-row-dashed fs-6 gy-5 no-footer">
+        <thead>
+        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+          <th>TYPE</th>
+          <th>ACTIONNAIRE</th>
+          <th>PAYS</th>
+        </tr>
+        </thead>
+        <tbody class="fw-semibold text-gray-600">
+        <tr *ngFor="let item of reportList$|async">
+          <td>{{ item[1] }}</td>
+          <td>{{ item[2] }}</td>
+          <td>{{ item[3] }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

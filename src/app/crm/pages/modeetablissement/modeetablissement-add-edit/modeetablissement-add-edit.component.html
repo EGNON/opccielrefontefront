@@ -1,0 +1,68 @@
+<div class="modal-header p-2" *ngIf="isModal">
+  <div class="modal-title h4">Mode d'établissement</div>
+</div>
+<!--begin::Careers - Apply-->
+<div [class]="!isModal ? 'card' : 'modal-body p-lg-2'">
+  <!--begin::Body-->
+  <div [class]="!isModal ? 'card-body p-lg-5' : 'card-body p-lg-0'">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="formData" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libellé</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libelle" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libelle.errors" class="invalid-feedback">
+                <div *ngIf="f.libelle.errors.required">Le libellé est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" [routerLink]="!isModal ? ['/crm/standard/parametre/modeetablissement'] : []" class="btn btn-sm btn-light me-3"
+               (click)="!isModal ? null : modal.dismiss()">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveModeEtablissement()"
+                    [disabled]="formData.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

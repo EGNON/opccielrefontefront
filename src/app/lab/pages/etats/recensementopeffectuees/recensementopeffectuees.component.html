@@ -1,0 +1,54 @@
+<div class="card">
+ <!-- <div class="card-header border-0 pt-6">
+    &lt;!&ndash;begin::Card title&ndash;&gt;
+    <div class="card-title">
+      &lt;!&ndash;begin::Search&ndash;&gt;
+      <div class="d-flex align-items-center position-relative my-1">
+        <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+        <input type="text" data-action="filter" class="form-control form-control-solid w-250px ps-12"
+               placeholder="Rechercher une profession">
+      </div>
+      &lt;!&ndash;end::Search&ndash;&gt;
+    </div>
+    &lt;!&ndash;begin::Card title&ndash;&gt;
+
+    &lt;!&ndash;begin::Card toolbar&ndash;&gt;
+    <div class="card-toolbar">
+      &lt;!&ndash;begin::Toolbar&ndash;&gt;
+      <div class="d-flex justify-content-end">
+        &lt;!&ndash;begin::Add user&ndash;&gt;
+        <button type="button" class="btn btn-primary" data-action="create">
+          Nouvelle profession
+        </button>
+        &lt;!&ndash;end::Add user&ndash;&gt;
+      </div>
+      &lt;!&ndash;end::Toolbar&ndash;&gt;
+    </div>
+    &lt;!&ndash;end::Card toolbar&ndash;&gt;
+  </div>-->
+
+  <div class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <table #dataTable datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+        <thead>
+        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+          <th>DATE OP.</th>
+          <th>TYPE</th>
+          <th>ACTIONNAIRE</th>
+          <th>MONTANT</th>
+          <th>TRANSFERE</th>
+        </tr>
+        </thead>
+        <tbody class="fw-semibold text-gray-600">
+          <tr *ngFor="let item of (reportList$ | async)">
+            <td>{{ item[2] | date:"dd MMMM yyyy 'à' hh:mm" }}</td>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[3] }}</td>
+            <td>{{ item[5] | number }}</td>
+            <td>{{ item[6] | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

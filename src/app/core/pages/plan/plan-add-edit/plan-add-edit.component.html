@@ -1,0 +1,182 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Code</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input  type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="codePlan"
+                     [ngClass]="{ 'is-invalid': submitted && f.codePlan.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.codePlan.errors" class="invalid-feedback">
+                <div *ngIf="f.codePlan.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libellé</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libellePlan"
+                     [ngClass]="{ 'is-invalid': submitted && f.libellePlan.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libellePlan.errors" class="invalid-feedback">
+                <div *ngIf="f.libellePlan.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Compte capital</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNumeroPositifValidators type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="numCompteCapital"
+                     [ngClass]="{ 'is-invalid': submitted && f.numCompteCapital.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.numCompteCapital.errors" class="invalid-feedback">
+                <div *ngIf="f.numCompteCapital.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Compte bénéfice</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNumeroPositifValidators type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="numCompteBenefice"
+                     [ngClass]="{ 'is-invalid': submitted && f.numCompteBenefice.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.numCompteBenefice.errors" class="invalid-feedback">
+                <div *ngIf="f.numCompteBenefice.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Compte perte</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNumeroPositifValidators type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="numComptePerte"
+                     [ngClass]="{ 'is-invalid': submitted && f.numComptePerte.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.numComptePerte.errors" class="invalid-feedback">
+                <div *ngIf="f.numComptePerte.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Compte distribution</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNumeroPositifValidators type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="numCompteResInsDistribution"
+                     [ngClass]="{ 'is-invalid': submitted && f.numCompteResInsDistribution.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.numCompteResInsDistribution.errors" class="invalid-feedback">
+                <div *ngIf="f.numCompteResInsDistribution.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-5" *ngIf="id">
+            <!--begin::Col-->
+            <div class="col-md-12 fv-row">
+              <!--begin::Label-->
+              <div style="display: flex; justify-content: space-between;">
+                <!--begin::Label-->
+
+                <label class="required fs-5 fw-semibold mb-2">Compte comptable</label>
+                <!--end::Label-->
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callCompteForm(null,true)"
+                          style="display: flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-add"></i></button>
+                  <!--<button type="button" class="btn btn-sm btn-warning pt-2 pb-2 ps-2 pe-1 me-1" (click)="callCompteForm(compteSelect.value)"
+                          style="display: flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-edit"></i>
+                  </button>-->
+                  <!--                    <button type="button" class="btn btn-sm btn-danger pt-2 pb-2 ps-2 pe-1"-->
+                  <!--                            style="display: flex; align-items: center; justify-content: center;">-->
+                  <!--                      <i class="fa fa-minus"></i>-->
+                  <!--                    </button>-->
+                </div>
+              </div>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <select #compteSelect class="form-select form-select-sm mb-2" formControlName="compteComptable"
+                      >
+                <option selected>Sélectionnez un compte...</option>
+               <!-- <option [defaultSelected]="true" [ngValue]="entity?.compteComptable" [disabled]="true">
+                  {{ entity?.compteComptable?.numCompteComptable }}-{{entity?.compteComptable?.libelleCompteComptable }}
+                </option>-->
+                <option *ngFor="let item of compteComptableList$" [ngValue]="item">
+                  {{ item.numCompteComptable }}-{{item.libelleCompteComptable}}
+                </option>
+              </select>
+            </div>
+          </div>
+         <!-- <fieldset class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Compte comptable</legend>
+            <div class="card-body pt-0">
+              <div class="table-responsive angular-bootstrap-table">
+                <app-entity-crud
+                  [datatableConfig]="datatableConfig"
+                  route="/app/standard/parametre/comptabilite/plan"
+                  [reload]="reloadEvent">
+                </app-entity-crud>
+              </div>
+            </div>
+          </fieldset>-->
+            <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Emetteur buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/app/standard/parametre/comptabilite/plan" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Emetteur buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->
