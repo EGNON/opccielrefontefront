@@ -51,8 +51,8 @@ export class CorrespondanceListComponent implements OnInit, OnDestroy, AfterView
       },
       columns: [
         {
-          title: 'N°Compte', data: 'numCompteComptable', render: function (data, type, row) {
-            return row.numCompteComptable;
+          title: 'N°Compte', data: 'numeroCompteComptable', render: function (data, type, row) {
+            return row.numeroCompteComptable;
           }
         },
         {

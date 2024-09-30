@@ -41,6 +41,7 @@ export class JournalListComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log("PARAMS === ", dataTablesParameters);
         const sb = this.entityService.datatable(dataTablesParameters)
           .subscribe(resp => {
+            //console.log(resp.data)
             callback(resp.data);
           });
         this.subscriptions.push(sb);

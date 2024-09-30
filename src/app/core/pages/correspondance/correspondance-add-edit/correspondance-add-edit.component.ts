@@ -127,7 +127,7 @@ export class CorrespondanceAddEditComponent implements OnInit, OnDestroy {
       this.compteComptableService.afficherSelonPlanEtEstMvtListe(this.entityForm.value.plan.codePlan).subscribe(
         (data)=>{
           this.compteComptable$=data.data
-          // console.log(this.compteComptable$)
+           console.log(this.compteComptable$)
         }
       )
   }

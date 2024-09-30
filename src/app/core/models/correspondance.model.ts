@@ -3,7 +3,7 @@ import {Plan} from "./plan.model";
 import {Ib} from "./ib";
 
 export class Correspondance extends  ResourceModel<Correspondance>{
-  numCompteComptable:string;
+  numeroCompteComptable:string;
   plan:Plan;
   ib:Ib;
   codeRubrique:string;
