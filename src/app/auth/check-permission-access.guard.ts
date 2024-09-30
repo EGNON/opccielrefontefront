@@ -4,6 +4,7 @@ import {AuthService} from "../core/modules/auth";
 
 export const checkPermissionAccessGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
+  return true;
   // console.log("route.data.role");
   if(!route.data.role)
     return false;

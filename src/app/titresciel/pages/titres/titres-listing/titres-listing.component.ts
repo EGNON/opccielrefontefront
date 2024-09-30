@@ -91,6 +91,7 @@ export class TitresListingComponent {
     let qualiteActive: QualiteTitreModel = null;
     this.qualites$ = this.getAllQualites().pipe(
       map(resp => {
+        console.log("Resp === ", resp);
         let qualites: QualiteTitreModel[] = resp.data;
         if(qualites && qualites.length > 0)
         {

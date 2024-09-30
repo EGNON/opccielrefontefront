@@ -100,10 +100,12 @@ export class UtilisateurAddEditComponent implements OnInit, AfterViewInit, OnDes
       .pipe(
         filter(paramMap => paramMap.has('id')),
         map(paramMap => paramMap.get('id')!),
+        filter((id) => +id > 0),
         tap((id) => this.id = +id),
         switchMap(id => this.entityService.getById(+id!))
       ).subscribe(resp => {
         const entity = resp.data;
+        console.log("Entité === ", resp);
         this.defaultUserRoles = entity.roles1;
         this.defaultUserPermissions = entity.permissions;
         this.loadFormValues(entity);

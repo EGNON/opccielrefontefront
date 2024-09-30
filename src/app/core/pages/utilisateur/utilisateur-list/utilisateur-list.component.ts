@@ -81,6 +81,7 @@ export class UtilisateurListComponent implements  OnInit, AfterViewInit, OnDestr
     this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
+        console.log(dataTablesParameters);
         const sb = this.userService.afficherTous(dataTablesParameters).subscribe(resp => {
           callback(resp);
         });
