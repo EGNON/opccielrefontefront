@@ -87,7 +87,7 @@ export class ProfessionAddEditComponent implements OnInit, OnDestroy{
       id: this.id ? this.id : null
     };
     return this.id
-      ? this.professionService.updateRow(profession)
-      : this.professionService.createRow(profession);
+      ? this.professionService.update(profession)
+      : this.professionService.create(profession);
   }
 }

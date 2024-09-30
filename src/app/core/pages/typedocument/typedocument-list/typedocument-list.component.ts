@@ -109,7 +109,7 @@ export class TypedocumentListComponent implements OnInit, OnDestroy, AfterViewIn
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteTypedocumentModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.typeDocumentService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.typeDocumentService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

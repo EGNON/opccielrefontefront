@@ -4,13 +4,14 @@ import {environment} from "../../../environments/environment";
 import {TableService} from "./table.sevice";
 import {Observable} from "rxjs";
 import {EnvoiMail} from "../models/envoimail.model";
+import { ResourceService } from "./core/resource.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class EnvoimailService extends TableService<EnvoiMail> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class EnvoimailService extends ResourceService<EnvoiMail> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,EnvoiMail,`${environment.apiUrl}/envoimails`);
     this.API_URL = `${environment.apiUrl}/envoimails`;
   }
 

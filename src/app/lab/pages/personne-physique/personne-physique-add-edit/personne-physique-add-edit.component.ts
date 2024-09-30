@@ -62,7 +62,7 @@ export class PersonnePhysiqueAddEditComponent implements OnInit, OnDestroy, Afte
   personneSelect:any;
   personnePhysique: PersonnePhysique;
   personnePhysiqueUpdate: PersonnePhysique;
-  personnels$: Observable<Personnel[]>;
+  personnels$: any;
   private subscriptions: Subscription[] = [];
   statutPersonne:StatutPersonne;
   selectedFiles: { [k: string]: any } = {};
@@ -449,10 +449,8 @@ export class PersonnePhysiqueAddEditComponent implements OnInit, OnDestroy, Afte
 
   getPersonnelsAll()
   {
-    const sb = this.personnelService.isLoading$.subscribe((res: boolean) => this.isLoading = res);
-    this.subscriptions.push(sb);
-    this.personnelService.fetch();
-    this.personnels$ = this.personnelService.items$;
+    const sb = this.personnelService.afficherListe().subscribe(
+      (res) =>{this.personnels$=res});
   }
   getPersonnePhysique(){
     this.personnephysiqueService.afficherPersonneSelonQualite("actionnaire").subscribe(

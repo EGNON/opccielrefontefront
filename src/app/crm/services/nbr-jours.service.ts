@@ -3,13 +3,14 @@ import {TableService} from "./table.sevice";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {NbrJour} from "../models/nbr-jour.model";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NbrJoursService extends TableService<NbrJour> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class NbrJoursService extends ResourceService<NbrJour> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,NbrJour,`${environment.apiUrl}/nbrejourss`);
     this.API_URL = `${environment.apiUrl}/nbrejourss`;
   }
 

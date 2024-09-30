@@ -176,7 +176,7 @@ export class SocietedegestionListComponent implements OnInit, OnDestroy, AfterVi
     alert("Suppression");
     const modalRef = this.modalService.open(DeletePersonneMoraleModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.entityService.fetch(), () => {});
+    //modalRef.result.then(() => this.entityService.fetch(), () => {});
   }
 
   ngAfterViewInit(): void {

@@ -50,11 +50,11 @@ export class PersonnelShowComponent implements OnInit, OnDestroy{
               this.id = params[0];
             }),
             filter(params => params[0]!),
-            switchMap(params => this.entityService.getItemById(params[0]))
+            switchMap(params => this.entityService.getById(params[0]))
         ).subscribe(entity => {
           this.entity = entity;
 
-          this.pageInfo.updateTitle("Détail de " + entity.denomination);
+          this.pageInfo.updateTitle("Détail de " + entity.data.denomination);
         });
     this.subscriptions.push(paramSubscription);
   }

@@ -118,7 +118,7 @@ export class IndicateurListComponent implements OnInit, OnDestroy, AfterViewInit
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteIndicateurModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.indicateurService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.indicateurService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

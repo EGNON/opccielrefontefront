@@ -116,7 +116,7 @@ export class ModeetablissementListComponent  implements OnInit, OnDestroy, After
     const modalRef = this.modalService.open(DeleteModeetablissementModalComponent);
     modalRef.componentInstance.id = id;
     console.log(id)
-    modalRef.result.then(() => this.modeetablissementService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.modeetablissementService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

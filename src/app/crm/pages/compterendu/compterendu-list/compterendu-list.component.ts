@@ -146,7 +146,7 @@ export class CompterenduListComponent implements OnInit, OnDestroy, AfterViewIni
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteCompterenduModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.entityService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.entityService.fetchRows(null), () => {});
   }
 
   validateCR(idCR: number, request: any) {

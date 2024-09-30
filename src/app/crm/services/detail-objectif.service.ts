@@ -3,13 +3,14 @@ import {TableService} from "./table.sevice";
 import {DetailObjectif} from "../models/detail-objectif.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DetailObjectifService extends TableService<DetailObjectif> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class DetailObjectifService extends ResourceService<DetailObjectif> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,DetailObjectif,`${environment.apiUrl}/detailobjectifs`);
     this.API_URL = `${environment.apiUrl}/detailobjectifs`;
   }
 

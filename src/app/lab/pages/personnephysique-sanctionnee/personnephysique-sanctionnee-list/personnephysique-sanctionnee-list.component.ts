@@ -180,7 +180,7 @@ export class PersonnephysiqueSanctionneeListComponent implements OnInit, OnDestr
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeletePersonnephysiqueSanctionneeModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.personnePhysiqueService.fetch(), () => {});
+    //modalRef.result.then(() => this.personnePhysiqueService.fetch(), () => {});
   }
 
   ngAfterViewInit(): void {

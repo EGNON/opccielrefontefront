@@ -132,7 +132,7 @@ export class PersonneMoraleExposeListComponent implements OnInit, OnDestroy, Aft
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeletePersonneMoraleExposeModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.personneMoraleService.fetch(), () => {});
+    //modalRef.result.then(() => this.personneMoraleService.fetch(), () => {});
   }
 
   ngAfterViewInit(): void {

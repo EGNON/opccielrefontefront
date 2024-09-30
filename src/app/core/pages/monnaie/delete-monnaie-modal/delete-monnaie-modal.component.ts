@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./delete-monnaie-modal.component.scss']
 })
 export class DeleteMonnaieModalComponent {
-  @Input() id: string;
+  @Input() id: any;
   isLoading = false;
   subscriptions: Subscription[] = [];
 
@@ -25,7 +25,7 @@ export class DeleteMonnaieModalComponent {
 
   supprimerEntity() {
     this.isLoading = true;
-    const sb = this.monnaieService.deleteRow(this.id).pipe(
+    const sb = this.monnaieService.delete(this.id).pipe(
       delay(1000), // Remove it from your code (just for showing loading)
       tap(() => this.modal.close()),
       catchError((err) => {

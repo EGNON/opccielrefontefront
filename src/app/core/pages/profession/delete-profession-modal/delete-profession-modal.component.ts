@@ -24,7 +24,7 @@ export class DeleteProfessionModalComponent {
 
   supprimerProfession() {
     this.isLoading = true;
-    const sb = this.professionService.deleteRow(this.id).pipe(
+    const sb = this.professionService.delete(this.id).pipe(
       delay(1000), // Remove it from your code (just for showing loading)
       tap(() => this.modal.close()),
       catchError((err) => {

@@ -17,8 +17,8 @@ import {PageInfoService} from "../../../../template/_metronic/layout";
 })
 export class PaysAddEditComponent implements OnInit, OnDestroy{
   id?: number;
-  monnaies$: Observable<Monnaie[]>;
-  pays$: Observable<Pays[]>;
+  monnaies$: any;
+  pays$: any;
   isLoading = false;
   submitting = false;
   paysSelect:any;
@@ -96,17 +96,15 @@ export class PaysAddEditComponent implements OnInit, OnDestroy{
 
   getMonnaieAll()
   {
-    const sb  = this.monnaieService.isLoading$.subscribe((res: boolean) => this.isLoading = res);
-    this.subscriptions.push(sb);
-    this.monnaieService.fetch();
-    this.monnaies$ = this.monnaieService.items$;
+    const sb  = this.monnaieService.afficherMonnaieListe().subscribe(
+      (res) =>{ this.monnaies$= res});
+
   }
   getPaysAll()
   {
-    const sb  = this.paysService.isLoading$.subscribe((res: boolean) => this.isLoading = res);
-    this.subscriptions.push(sb);
-    this.paysService.fetch();
-    this.pays$ = this.paysService.items$;
+    const sb  = this.paysService.afficherListe().subscribe(
+      (res) =>{ this.pays$ = res});
+
   }
 
   get f() { return this.entityForm.controls; }
@@ -136,8 +134,8 @@ export class PaysAddEditComponent implements OnInit, OnDestroy{
       ...this.entityForm.value
     };
     return this.id
-      ? this.entityService.updateRow(entity)
-      : this.entityService.createRow(entity);
+      ? this.entityService.update(entity)
+      : this.entityService.create(entity);
   }
 }
 

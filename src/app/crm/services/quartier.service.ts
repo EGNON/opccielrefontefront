@@ -4,13 +4,14 @@ import {environment} from "../../../environments/environment";
 import {Quartier} from "../models/quartier.model";
 import {TableService} from "./table.sevice";
 import {Observable} from "rxjs";
+import { ResourceService } from "./core/resource.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class QuartierService extends TableService<Quartier> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class QuartierService extends ResourceService<Quartier> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,Quartier,`${environment.apiUrl}/quartiers`);
     this.API_URL = `${environment.apiUrl}/quartiers`;
   }
 

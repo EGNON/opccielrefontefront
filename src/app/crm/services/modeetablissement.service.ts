@@ -7,14 +7,15 @@ import {DataTablesResponse} from "../models/data-tables.response.model";
 import {Compterendu} from "../models/compterendu.model";
 import {EntityService} from "./entity.service";
 import {Modeetablissement} from "../models/modeetablissement.model";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ModeetablissementService extends EntityService<Modeetablissement> implements OnDestroy{
+export class ModeetablissementService extends ResourceService<Modeetablissement> implements OnDestroy{
 
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+  constructor(private http: HttpClient) {
+    super(http,Modeetablissement,`${environment.apiUrl}/modeetablissements`);
     this.API_URL = `${environment.apiUrl}/modeetablissements`;
   }
 

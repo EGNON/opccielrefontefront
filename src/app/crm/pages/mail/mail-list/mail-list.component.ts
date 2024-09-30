@@ -119,7 +119,7 @@ export class MailListComponent implements OnInit, OnDestroy, AfterViewInit{
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteMailModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.mailService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.mailService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

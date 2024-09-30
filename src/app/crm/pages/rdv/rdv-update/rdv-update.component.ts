@@ -358,7 +358,7 @@ export class RdvUpdateComponent implements OnInit, OnDestroy{
 
     return this.id
       ? this.rdvService.modifierUnePartieDeRDV(entity,this.id)
-      : this.rdvService.createRow(entity);
+      : this.rdvService.create(entity);
 
   }
   addRow(id: string){

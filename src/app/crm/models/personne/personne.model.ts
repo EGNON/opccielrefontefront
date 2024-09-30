@@ -9,8 +9,8 @@ import {Modeetablissement} from "../modeetablissement.model";
 import {Ville} from "../ville.model";
 
 export class Personne extends ResourceModel<Personne>{
-  idPersonne!: number;
-  denomination!: string;
+  idPersonne: number;
+  denomination: string;
   ifu!: string;
   mobile1!: string;
   mobile2!: string;

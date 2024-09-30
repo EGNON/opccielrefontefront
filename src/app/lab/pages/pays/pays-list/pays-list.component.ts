@@ -184,7 +184,7 @@ export class PaysListComponent implements OnInit, OnDestroy, AfterViewInit{
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeletePaysModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.paysService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.paysService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

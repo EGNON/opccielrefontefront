@@ -5,8 +5,9 @@ import {RDV} from "./rdv.model";
 import {PieceJointe} from "./piece-jointe.model";
 import {Utilisateur} from "./access/utilisateur.model";
 import {Opcvm} from "../../core/models/opcvm";
+import { ResourceModel } from "./core/resource.model";
 
-export interface Compterendu extends BaseModel{
+export class Compterendu extends ResourceModel<Compterendu>{
   idCR: number;
   dateCR: Date;
   heureDebCR: Time;
@@ -28,4 +29,8 @@ export interface Compterendu extends BaseModel{
   documents: PieceJointe[];
   createur: Utilisateur;
   estValide: false | true;
+
+  constructor(model?: Partial<Compterendu>) {
+    super(model);
+  }
 }

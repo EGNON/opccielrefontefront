@@ -27,7 +27,7 @@ export class DeleteRdvModalComponent {
   supprimerEntity() {
     this.isLoading = true;
     // this.agentConcerneService.supprimerAgentConcerne(this.id).subscribe();
-    const sb = this.rdvService.deleteRow(this.id).pipe(
+    const sb = this.rdvService.delete(this.id).pipe(
       delay(1000), // Remove it from your code (just for showing loading)
       tap(() => this.modal.close()),
       catchError((err) => {

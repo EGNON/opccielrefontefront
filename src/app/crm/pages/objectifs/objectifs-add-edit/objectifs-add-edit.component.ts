@@ -171,8 +171,8 @@ export class ObjectifsAddEditComponent implements OnInit, AfterViewInit, OnDestr
 
   saveEntity() {
     return this.id
-      ? this.entityService.updateRow(this.entityForm.value)
-      : this.entityService.createRow(this.entityForm.value);
+      ? this.entityService.update(this.entityForm.value)
+      : this.entityService.create(this.entityForm.value);
   }
 
   ngAfterViewInit(): void {

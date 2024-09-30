@@ -5,13 +5,14 @@ import {Monnaie} from "../models/monnaie.model";
 import {Observable} from "rxjs";
 import {DataTablesResponse} from "../models/data-tables.response.model";
 import {EntityService} from "./entity.service";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MonnaieService extends EntityService<Monnaie> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class MonnaieService extends ResourceService<Monnaie> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,Monnaie,`${environment.apiUrl}/monnaies`);
     this.API_URL = `${environment.apiUrl}/monnaies`;
   }
 

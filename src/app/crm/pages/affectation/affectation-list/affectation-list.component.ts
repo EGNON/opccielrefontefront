@@ -123,7 +123,7 @@ private idInAction: number;
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteAffectationModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.affectationService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.affectationService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

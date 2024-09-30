@@ -279,7 +279,7 @@ export class GeldegelListComponent implements OnInit, OnDestroy, AfterViewInit{
   saveEntity(id:any) {
     let entity=null;
 
-    const sb = this.entityService.getItemById(id)
+    const sb = this.entityService.getById(id)
 
       .subscribe((data)=>{
         this.personne=data;
@@ -294,7 +294,7 @@ export class GeldegelListComponent implements OnInit, OnDestroy, AfterViewInit{
           .subscribe();
         console.log(this.personne)
         if(this.personne.typePersonne=="PH"){
-          this.personnePhysiqueService.getItemById(id)
+          this.personnePhysiqueService.getById(id)
 
             .subscribe((data)=>{
               this.personnePhysique=data;
@@ -320,7 +320,7 @@ export class GeldegelListComponent implements OnInit, OnDestroy, AfterViewInit{
         }
         else
         {
-          this.personneMoraleService.getItemById(id)
+          this.personneMoraleService.getById(id)
 
             .subscribe((data)=>{
               this.personneMorale=data;
@@ -351,7 +351,7 @@ export class GeldegelListComponent implements OnInit, OnDestroy, AfterViewInit{
   updateEntity(id:any) {
     let entity=null;
 
-    const sb = this.entityService.getItemById(id)
+    const sb = this.entityService.getById(id)
 
       .subscribe((data)=>{
         this.personne=data;
@@ -367,7 +367,7 @@ export class GeldegelListComponent implements OnInit, OnDestroy, AfterViewInit{
           .subscribe();
         console.log("personne&&&=",this.personne.typePersonne)
         if(this.personne.typePersonne=="PH"){
-          this.personnePhysiqueService.getItemById(id)
+          this.personnePhysiqueService.getById(id)
 
             .subscribe((data)=>{
               this.personnePhysique=data;
@@ -394,7 +394,7 @@ export class GeldegelListComponent implements OnInit, OnDestroy, AfterViewInit{
         }
         else
         {
-          this.personneMoraleService.getItemById(id)
+          this.personneMoraleService.getById(id)
 
             .subscribe((data)=>{
               this.personneMorale=data;

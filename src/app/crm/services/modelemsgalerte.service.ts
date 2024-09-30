@@ -5,13 +5,14 @@ import {ModeleMsgAlerte} from "../models/modelemsgalerte.model";
 import {Observable} from "rxjs";
 import {DataTablesResponse} from "../models/data-tables.response.model";
 import {EntityService} from "./entity.service";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ModeleMsgAlerteService extends EntityService<ModeleMsgAlerte> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class ModeleMsgAlerteService extends ResourceService<ModeleMsgAlerte> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,ModeleMsgAlerte,`${environment.apiUrl}/modelemsgalertes`);
     this.API_URL = `${environment.apiUrl}/modelemsgalertes`;
   }
 

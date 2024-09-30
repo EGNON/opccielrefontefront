@@ -64,7 +64,7 @@ export class GeldegelAddEditComponent implements OnInit, OnDestroy{
     {
       this.buttonText="Dégeler"
 
-      const sb = this.personneService.getItemById(this.id)
+      const sb = this.personneService.getById(this.id)
         // .pipe(tap(
         //   entity => {
         //
@@ -141,7 +141,7 @@ export class GeldegelAddEditComponent implements OnInit, OnDestroy{
         (data)=>{
 
           if(this.personne.typePersonne=="PH"){
-            this.personnePhysiqueService.getItemById(this.id)
+            this.personnePhysiqueService.getById(this.id)
 
               .subscribe((data)=>{
                 this.personnePhysique=data;
@@ -158,7 +158,7 @@ export class GeldegelAddEditComponent implements OnInit, OnDestroy{
           }
           else
           {
-            this.personneMoraleService.getItemById(this.id)
+            this.personneMoraleService.getById(this.id)
               .subscribe((data)=>{
                 this.personneMorale=data;
                 entity=null;

@@ -23,6 +23,7 @@ export interface TableResponseModel<T> {
 
 
 export interface ResponseModel<T> {
+  idPersonne: number;
   data: any;
   message: string;
   timestamp: Date;

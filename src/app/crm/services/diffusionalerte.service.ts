@@ -4,14 +4,15 @@ import {environment} from "../../../environments/environment";
 import {DiffusionAlerte} from "../models/diffusionalerte.model";
 import {TableService} from "./table.sevice";
 import {Observable} from "rxjs";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DiffusionAlerteService extends TableService<DiffusionAlerte> implements OnDestroy{
+export class DiffusionAlerteService extends ResourceService<DiffusionAlerte> implements OnDestroy{
   API_ADD_URL = "";
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+  constructor(private http: HttpClient) {
+    super(http,DiffusionAlerte,`${environment.apiUrl}/diffusionalertes`);
     this.API_URL = `${environment.apiUrl}/diffusionalertes`;
   }
 

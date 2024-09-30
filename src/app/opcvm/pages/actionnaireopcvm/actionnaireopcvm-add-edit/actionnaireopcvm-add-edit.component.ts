@@ -112,7 +112,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
 
       return
     }
-    this.personneService.getItemById(this.idPersonne).subscribe(
+    this.personneService.getById(this.idPersonne).subscribe(
         (data) => {
           //this.personnel2$ = data;
           this.personne = data;

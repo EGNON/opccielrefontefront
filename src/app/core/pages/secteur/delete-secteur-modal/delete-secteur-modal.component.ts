@@ -24,7 +24,7 @@ export class DeleteSecteurModalComponent {
 
   supprimerEntity() {
     this.isLoading = true;
-    const sb = this.secteurService.deleteRow(this.id).pipe(
+    const sb = this.secteurService.delete(this.id).pipe(
       delay(1000), // Remove it from your code (just for showing loading)
       tap(() => this.modal.close()),
       catchError((err) => {

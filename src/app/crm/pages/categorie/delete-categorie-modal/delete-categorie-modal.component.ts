@@ -24,7 +24,7 @@ export class DeleteCategorieModalComponent {
 
   supprimerCategorie() {
     this.isLoading = true;
-    const sb = this.categorieService.deleteRow(this.id).pipe(
+    const sb = this.categorieService.delete(this.id).pipe(
       delay(1000), // Remove it from your code (just for showing loading)
       tap(() => this.modal.close()),
       catchError((err) => {

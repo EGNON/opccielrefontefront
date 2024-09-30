@@ -139,7 +139,7 @@ export class ModelemsgalerteCreateComponent implements OnInit, OnDestroy{
               id: this.id ? this.id : null
             };
 
-             this.modelemsgalerteService.updateRow(modelemsgalerte).subscribe(
+             this.modelemsgalerteService.update(modelemsgalerte).subscribe( 
                {next: (resp) => {
                          this.isLoading = false;
                          this.router.navigate(['/crm/notifications/modelemsgalerte']);
@@ -161,7 +161,7 @@ export class ModelemsgalerteCreateComponent implements OnInit, OnDestroy{
             this.modelemsgalerteService.modifier(
               this.formData.value.typeModele.idTypeModele,modelemsgalerte_UP).subscribe();
 
-            this.modelemsgalerteService.createRow(modelemsgalerte).subscribe(
+            this.modelemsgalerteService.create(modelemsgalerte).subscribe(
               {
                 next: (resp) => {
                   this.isLoading = false;
@@ -197,7 +197,7 @@ export class ModelemsgalerteCreateComponent implements OnInit, OnDestroy{
         defaut:true,
         id: this.id ? this.id : null
       };
-       this.modelemsgalerteService.createRow(modelemsgalerte).subscribe(
+       this.modelemsgalerteService.create(modelemsgalerte).subscribe(
          {next: (resp) => {
              alert('Enregistrement effectué avec succès');
            }

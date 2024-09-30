@@ -149,7 +149,7 @@ export class RdvListComponent implements OnInit, OnDestroy, AfterViewInit{
   supprimer(id: number) {
     const modalRef = this.modalService.open(DeleteRdvModalComponent);
     modalRef.componentInstance.id = id;
-    modalRef.result.then(() => this.rdvService.fetchRows(null), () => {});
+    //modalRef.result.then(() => this.rdvService.fetchRows(null), () => {});
   }
 
   ngAfterViewInit(): void {

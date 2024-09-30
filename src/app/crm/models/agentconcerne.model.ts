@@ -2,8 +2,9 @@ import {BaseModel} from "./base.model";
 import {RDV} from "./rdv.model";
 import {Time} from "@angular/common";
 import {Personnel} from "./personne/personnel.model";
+import { ResourceModel } from "./core/resource.model";
 
-export interface AgentConcerne extends BaseModel{
+export class AgentConcerne extends ResourceModel<AgentConcerne>{
   rdvDto:RDV;
   personnelDto:Personnel;
   dateDebReelle:Date;
@@ -11,4 +12,8 @@ export interface AgentConcerne extends BaseModel{
   dateFinReelle:Date;
   heureFinReelle:Time;
   etat:boolean;
+
+  constructor(model?: Partial<AgentConcerne>) {
+    super(model);
+  }
 }

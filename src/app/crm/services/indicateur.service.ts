@@ -4,13 +4,14 @@ import {environment} from "../../../environments/environment";
 import {Indicateur} from "../models/indicateur.model";
 import {DataTablesResponse} from "../models/data-tables.response.model";
 import {EntityService} from "./entity.service";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class IndicateurService extends EntityService<Indicateur> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class IndicateurService extends ResourceService<Indicateur> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,Indicateur,`${environment.apiUrl}/indicateurs`);
     this.API_URL = `${environment.apiUrl}/indicateurs`;
   }
 

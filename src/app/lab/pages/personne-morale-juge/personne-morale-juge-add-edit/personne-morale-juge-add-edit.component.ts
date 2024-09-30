@@ -270,17 +270,12 @@ export class PersonneMoraleJugeAddEditComponent implements OnInit, OnDestroy, Af
       // @ts-ignore
       const sb = this.saveEntity(formdata)
         .pipe(
-          filter(res => res != null && res.idPersonne > 0),
+          filter(res => res != null && res.data.idPersonne > 0),
           switchMap(res => {
             // console.log("pass")
-            // console.log("res=",res);
-            this.statutPersonne=new class implements StatutPersonne {
-              id: any;
-              idStatutPersonne: any;
-              personne: Personne;
-              personnel: Personnel | null | undefined;
-              qualite: Qualite | null | undefined;
-            }
+            // console.log("res=",res); 
+            this.statutPersonne=new StatutPersonne();
+            // @ts-ignore
             this.statutPersonne.personne=res
             // console.log("passez")
             return this.statutPersonneService.ajouterStatutSelonQualite(this.statutPersonne,"juge");

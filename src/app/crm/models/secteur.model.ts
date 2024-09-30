@@ -1,6 +1,11 @@
 import {BaseModel} from "./base.model";
+import { ResourceModel } from "./core/resource.model";
 
-export interface Secteur extends BaseModel{
+export class Secteur extends ResourceModel<Secteur>{
   idSecteur: number;
   libelleSecteur: string;
+
+  constructor(model?: Partial<Secteur>) {
+    super(model);
+  }
 }

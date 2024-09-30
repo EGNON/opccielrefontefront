@@ -288,6 +288,7 @@ export class PersonneMoraleExposeAddEditComponent implements OnInit, OnDestroy, 
               personnel: Personnel | null | undefined;
               qualite: Qualite | null | undefined;
             }
+            // @ts-ignore
             this.statutPersonne.personne=res
             // console.log("passez")
             return this.statutPersonneService.ajouterStatutSelonQualite(this.statutPersonne,"expose");

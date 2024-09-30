@@ -8,15 +8,16 @@ import {DataTablesResponse} from "../models/data-tables.response.model";
 import {Pays} from "../models/pays.model";
 import {environment} from "../../../environments/environment";
 import {Personnephysiquepays} from "../models/personnephysiquepays.model";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonnephysiquepaysService extends EntityService<Periodicite> implements OnDestroy{
+export class PersonnephysiquepaysService extends ResourceService<Periodicite> implements OnDestroy{
 
 
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+  constructor(private http: HttpClient) {
+    super(http,Periodicite,`${environment.apiUrl}/personnePhysiquePayss`);
     this.API_URL = `${environment.apiUrl}/personnePhysiquePayss`;
   }
   afficherTous()

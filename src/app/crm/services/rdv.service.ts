@@ -6,13 +6,15 @@ import {Observable} from "rxjs";
 import {PageResponse} from "../models/page.response.model";
 import {DataTablesResponse} from "../models/data-tables.response.model";
 import {EntityService} from "./entity.service";
+import { ResourceService } from './core/resource.service';
+import { ResponseModel } from '../models/table.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RdvService extends EntityService<RDV> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class RdvService extends ResourceService<RDV> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,RDV,`${environment.apiUrl}/rdvs`);
     this.API_URL = `${environment.apiUrl}/rdvs`;
   }
   ngOnDestroy(): void {
@@ -30,9 +32,9 @@ export class RdvService extends EntityService<RDV> implements OnDestroy{
   {
     return this.http.get<RDV>(environment.apiUrl + '/rdvs/listerdvs');
   }
-  modifierUnePartieDeRDV(rdv:RDV,id:number):Observable<RDV>
+  modifierUnePartieDeRDV(rdv:RDV,id:number):Observable<ResponseModel<RDV>>
   {
-    return this.http.put<RDV>(environment.apiUrl + '/rdvs/reelle/'+id,rdv);
+    return this.http.put<ResponseModel<RDV>>(environment.apiUrl + '/rdvs/reelle/'+id,rdv);
   }
   afficherTous(datatableRequest: any)
   {

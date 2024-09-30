@@ -4,13 +4,14 @@ import {HttpClient} from "@angular/common/http";
 import {Compterendu} from "../models/compterendu.model";
 import {EntityService} from "./entity.service";
 import {DataTablesResponse} from "../models/data-tables.response.model";
+import { ResourceService } from './core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CompterenduService extends EntityService<Compterendu> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class CompterenduService extends ResourceService<Compterendu> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,Compterendu,`${environment.apiUrl}/compterendus`);
     this.API_URL = `${environment.apiUrl}/compterendus`;
   }
 

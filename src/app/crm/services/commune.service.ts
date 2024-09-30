@@ -6,14 +6,15 @@ import {TableService} from "./table.sevice";
 import {Observable} from "rxjs";
 import {Quartier} from "../models/quartier.model";
 import {Commune} from "../models/commune.model";
+import { ResourceService } from "./core/resource.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommuneService extends TableService<Commune> implements OnDestroy{
+export class CommuneService extends ResourceService<Commune> implements OnDestroy{
 
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+  constructor(private http: HttpClient) {
+    super(http,Commune,`${environment.apiUrl}/communes`);
     this.API_URL = `${environment.apiUrl}/communes`;
   }
 

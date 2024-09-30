@@ -3,13 +3,14 @@ import {TableService} from "../table.sevice";
 import {MessageBox} from "../../models/message-box.model";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
+import { ResourceService } from '../core/resource.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MessageBoxService extends TableService<MessageBox> implements OnDestroy{
-  constructor(@Inject(HttpClient) http: HttpClient) {
-    super(http);
+export class MessageBoxService extends ResourceService<MessageBox> implements OnDestroy{
+  constructor(private http: HttpClient) {
+    super(http,MessageBox,`${environment.apiUrl}/messagesbox`);
     this.API_URL = `${environment.apiUrl}/messagesbox`;
   }
 
