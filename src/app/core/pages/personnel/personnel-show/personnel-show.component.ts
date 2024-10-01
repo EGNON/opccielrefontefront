@@ -52,7 +52,7 @@ export class PersonnelShowComponent implements OnInit, OnDestroy{
             filter(params => params[0]!),
             switchMap(params => this.entityService.getById(params[0]))
         ).subscribe(entity => {
-          this.entity = entity;
+          this.entity = entity.data;
 
           this.pageInfo.updateTitle("Détail de " + entity.data.denomination);
         });

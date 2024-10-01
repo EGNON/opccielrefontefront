@@ -221,8 +221,8 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
         langue: [null],
         teint: [null],
         exposeMotif: [null],
-        sousTypeClient: [null,Validators.required],
-        categorieClient: [null,Validators.required],
+        sousTypeClient: [null],
+        categorieClient: [null],
       };
 
       this.form = this.fb.group(
@@ -757,6 +757,12 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
           const statut: any = statuts.find(statut => statut.qualite.libelleQualite.toLowerCase() === this.qualite);
           // console.log("Statuts actuels === ", statuts.find(statut => statut.qualite.libelleQualite.toLowerCase() === this.qualite));
           //Enregistrement des statuts de personne
+          console.log(
+            {
+              ...statut,
+              personne: {idPersonne: res.idPersonne}
+            },
+              this.qualite);
           return this.statutPersonneService.ajouterStatutSelonQualite(
             {
               ...statut,
