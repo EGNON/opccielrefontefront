@@ -153,8 +153,8 @@ export class MoraleDetailsComponent {
         titreContact: [null, Validators.required],
         estConvertie: [this.etatConversion],
         statutPersonnes: this.fb.array([this.createStatutPersonneForm()]),
-        sousTypeClient: [null,Validators.required],
-        categorieClient: [null,Validators.required]
+        sousTypeClient: [null],
+        categorieClient: [null]
       };
       this.pmForm = {
         //Champs PersonneMorale

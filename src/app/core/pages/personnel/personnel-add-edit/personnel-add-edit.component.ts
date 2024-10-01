@@ -55,7 +55,7 @@ export class PersonnelAddEditComponent implements OnInit, AfterViewInit, OnDestr
         map(paramMap => paramMap.get('id')!),
         tap((id) => this.id = +id),
         switchMap(id => this.entityService.getById(Number.parseInt(id)))
-      ).subscribe(entity => this.loadFormValues(entity));
+      ).subscribe(entity => this.loadFormValues(entity.data));
     this.entityForm = this.fb.group(
       {
         id: [this.id],
