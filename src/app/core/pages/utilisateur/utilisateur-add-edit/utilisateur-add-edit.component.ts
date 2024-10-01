@@ -700,6 +700,7 @@ export class UtilisateurAddEditComponent implements OnInit, AfterViewInit, OnDes
       dateNaissance: dateNaiss,
       utilisateurRoles: null
     }
+    console.log("A soumettre === ", entity);
     return this.id
       ? this.entityService.update(entity)
       : this.entityService.create(entity);

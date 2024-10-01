@@ -47,8 +47,8 @@ export class TypecompteListComponent implements OnInit, OnDestroy, AfterViewInit
       },
       columns: [
         {
-          title: 'Code', data: 'codeTypeCompte', render: function (data, type, row) {
-            return row.codeTypeCompte;
+          title: 'Code', data: 'code', render: function (data, type, row) {
+            return row.code;
           }
         },
         {

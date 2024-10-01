@@ -6,9 +6,6 @@ import {SweetAlertOptions} from "sweetalert2";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TypecompteService} from "../../../../services/revuecompte/typecompte.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {
-  DeleteTypecompteModalComponent
-} from "../../typecompte/delete-typecompte-modal/delete-typecompte-modal.component";
 import {SoustypecompteService} from "../../../../services/revuecompte/soustypecompte.service";
 import {DeleteSoustypecompteModalComponent} from "../delete-soustypecompte-modal/delete-soustypecompte-modal.component";
 
@@ -52,8 +49,8 @@ export class SoustypecompteListComponent implements OnInit, OnDestroy, AfterView
       },
       columns: [
         {
-          title: 'Code', data: 'codeSousTypeCompte', render: function (data, type, row) {
-            return row.codeSousTypeCompte;
+          title: 'Code', data: 'code', render: function (data, type, row) {
+            return row.code;
           }
         },
         {
@@ -63,7 +60,7 @@ export class SoustypecompteListComponent implements OnInit, OnDestroy, AfterView
         },
         {
           title: 'Type compte', data: 'libelleTypeCompte', render: function (data, type, row) {
-            return row.typeCompte.codeTypeCompte+"-"+row.typeCompte.libelleTypeCompte;
+            return row.typeCompte.code+"-"+row.typeCompte.libelleTypeCompte;
           }
         },
       ],

@@ -17,11 +17,11 @@
               <!--end::Label-->
               <!--begin::Input-->
               <input  type="text" class="form-control form-control-sm form-control-solid"
-                      placeholder="" formControlName="codeCategorieClient"
-                      [ngClass]="{ 'is-invalid': submitted && f.codeCategorieClient.errors }"/>
+                      placeholder="" formControlName="code"
+                      [ngClass]="{ 'is-invalid': submitted && f.code.errors }"/>
               <!--end::Input-->
-              <div *ngIf="submitted && f.codeCategorieClient.errors" class="invalid-feedback">
-                <div *ngIf="f.codeCategorieClient.errors.required">Ce champs est obligatoire</div>
+              <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                <div *ngIf="f.code.errors.required">Ce champs est obligatoire</div>
               </div>
             </div>
 

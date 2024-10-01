@@ -62,7 +62,7 @@ export class SoustypeclientAddEditComponent implements OnInit, OnDestroy {
       {
         id: [null],
         libelleSousTypeClient: [null, Validators.required],
-        codeSousTypeClient: [null, Validators.required],
+        code: [null, Validators.required],
         typeClient: [null, Validators.required],
       }
     );
@@ -71,12 +71,13 @@ export class SoustypeclientAddEditComponent implements OnInit, OnDestroy {
     // this.afficherCategorie();
     if (this.id) {
       this.readOnly=true;
-      console.log(this.id)
+      console.log(this.id);
       this.pageInfo.updateTitle("Modification de Sous type client")
       const sb = this.entityService.getById(this.id)
         .pipe(first())
         .subscribe((entity) =>
-        { console.log(entity.data)
+        {
+          console.log(entity.data);
           this.loadFormValues(entity.data)
         });
       this.subscriptions.push(sb);
@@ -90,9 +91,10 @@ export class SoustypeclientAddEditComponent implements OnInit, OnDestroy {
   {
     this.entity = entity;
     this.entityForm.patchValue({libelleSousTypeClient: entity.libelleSousTypeClient});
-    this.entityForm.patchValue({codeSousTypeClient: entity.codeSousTypeClient});
+    this.entityForm.patchValue({code: entity.code});
     this.entityForm.patchValue({typeClient: entity.typeClient});
   }
+
   afficherTypeclient(){
     this.typeclientService.afficherTous().subscribe(
       (data)=>{
@@ -107,8 +109,8 @@ export class SoustypeclientAddEditComponent implements OnInit, OnDestroy {
   get f() {
     return this.entityForm.controls;
   }
-  onSaveEntity() {
 
+  onSaveEntity() {
     const sb = this.saveEntity().pipe(
       catchError((err) => {
         this.modal.dismiss(err);
@@ -130,11 +132,8 @@ export class SoustypeclientAddEditComponent implements OnInit, OnDestroy {
       id: this.id ? this.id : null,
     };
     console.log(entity)
-
     return this.id
       ? this.entityService.update(entity)
       : this.entityService.create(entity);
   }
 }
-
-

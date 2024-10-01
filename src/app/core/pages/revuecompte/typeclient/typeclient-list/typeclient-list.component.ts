@@ -7,7 +7,7 @@ import {TypeclientService} from "../../../../services/revuecompte/typeclient.ser
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
   DeleteTypeclientModalComponent
-} from "../../typeclient/delete-typeclient-modal/delete-typeclient-modal.component";
+} from "../delete-typeclient-modal/delete-typeclient-modal.component";
 
 @Component({
   selector: 'app-typeclient-list',
@@ -47,8 +47,8 @@ export class TypeclientListComponent implements OnInit, OnDestroy, AfterViewInit
       },
       columns: [
         {
-          title: 'Code', data: 'codeTypeClient', render: function (data, type, row) {
-            return row.codeTypeClient;
+          title: 'Code', data: 'code', render: function (data, type, row) {
+            return row.code;
           }
         },
         {
