@@ -256,9 +256,8 @@
                        placeholder="Ex : XXXXXXXXX" formControlName="numeroCpteDeposit"
                        [ngClass]="{ 'is-invalid': submitted && f.numeroCpteDeposit.errors }"/>
                 <!--end::Input-->
-                <div class="fv-plugins-message-container invalid-feedback"
-                     *ngIf="form.get('numeroCpteDeposit')?.hasError('uniqueCpte') &&
-                            form.get('numeroCpteDeposit')?.touched">
+                <div class="fv-plugins-message-container invalid-feedback" *ngIf="form.get('numeroCpteDeposit')?.hasError('uniqueCpte')
+                      && form.get('numeroCpteDeposit')?.touched">
                   Ce numéro existe déjà
                 </div>
                 <div *ngIf="submitted && f.numeroCpteDeposit.errors" class="invalid-feedback">

@@ -483,7 +483,7 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
     this.compteComptableService.afficherTous().subscribe(
       (data)=>{
         this.compteComptable$=data.data;
-        // console.log(this.compteComptable$)
+        console.log(this.compteComptable$)
       }
     )
   }
@@ -699,6 +699,7 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (data)=> {
           this.modeleEcriture=data?.data;
+          console.log(this.modeleEcriture)
           console.log("detailModeleTab",this.detailModeleTab)
           this.detailModeleService.enregistrer(this.detailModeleTab).subscribe()
         }
