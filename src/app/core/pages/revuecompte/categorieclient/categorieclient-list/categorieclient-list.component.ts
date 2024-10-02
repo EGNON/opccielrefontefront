@@ -7,7 +7,7 @@ import {CategorieclientService} from "../../../../services/revuecompte/categorie
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
   DeleteCategorieclientModalComponent
-} from "../../categorieclient/delete-categorieclient-modal/delete-categorieclient-modal.component";
+} from "../delete-categorieclient-modal/delete-categorieclient-modal.component";
 
 @Component({
   selector: 'app-categorieclient-list',
@@ -47,8 +47,8 @@ export class CategorieclientListComponent implements OnInit, OnDestroy, AfterVie
       },
       columns: [
         {
-          title: 'Code', data: 'codeCategorieClient', render: function (data, Categorie, row) {
-            return row.codeCategorieClient;
+          title: 'Code', data: 'code', render: function (data, Categorie, row) {
+            return row.code;
           }
         },
         {

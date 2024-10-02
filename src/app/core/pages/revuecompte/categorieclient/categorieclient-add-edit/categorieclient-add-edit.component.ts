@@ -50,13 +50,12 @@ export class CategorieclientAddEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.dateAlerte = new Date();
-
     this.id = this.route.snapshot.params['id'];
     this.entityForm = this.fb.group(
       {
         id: [null],
         libelleCategorieClient: [null, Validators.required],
-        codeCategorieClient: [null, Validators.required],
+        code: [null, Validators.required],
       }
     );
     this.readOnly=false;
@@ -82,7 +81,7 @@ export class CategorieclientAddEditComponent implements OnInit, OnDestroy {
   {
     this.entity = entity;
     this.entityForm.patchValue({libelleCategorieClient: entity.libelleCategorieClient});
-    this.entityForm.patchValue({codeCategorieClient: entity.codeCategorieClient});
+    this.entityForm.patchValue({code: entity.code});
   }
 
   ngOnDestroy(): void {
@@ -92,8 +91,8 @@ export class CategorieclientAddEditComponent implements OnInit, OnDestroy {
   get f() {
     return this.entityForm.controls;
   }
-  onSaveEntity() {
 
+  onSaveEntity() {
     const sb = this.saveEntity().pipe(
       catchError((err) => {
         this.modal.dismiss(err);
@@ -114,8 +113,7 @@ export class CategorieclientAddEditComponent implements OnInit, OnDestroy {
       // codeFormeJuridique: this.id ? this.id : null,
       id: this.id ? this.id : null,
     };
-    console.log(entity)
-
+    console.log(entity);
     return this.id
       ? this.entityService.update(entity)
       : this.entityService.create(entity);

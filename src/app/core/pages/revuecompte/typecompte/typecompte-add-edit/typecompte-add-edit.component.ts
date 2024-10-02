@@ -60,7 +60,7 @@ export class TypecompteAddEditComponent implements OnInit, OnDestroy {
       {
         id: [null],
         libelleTypeCompte: [null, Validators.required],
-        codeTypeCompte: [null, Validators.required],
+        code: [null, Validators.required],
       }
     );
     this.readOnly=false;
@@ -86,7 +86,7 @@ export class TypecompteAddEditComponent implements OnInit, OnDestroy {
   {
     this.entity = entity;
     this.entityForm.patchValue({libelleTypeCompte: entity.libelleTypeCompte});
-    this.entityForm.patchValue({codeTypeCompte: entity.codeTypeCompte});
+    this.entityForm.patchValue({code: entity.code});
   }
 
   ngOnDestroy(): void {

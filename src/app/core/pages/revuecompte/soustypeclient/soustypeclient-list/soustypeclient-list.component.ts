@@ -8,7 +8,7 @@ import {TypeclientService} from "../../../../services/revuecompte/typeclient.ser
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
   DeleteSoustypeclientModalComponent
-} from "../../soustypeclient/delete-soustypeclient-modal/delete-soustypeclient-modal.component";
+} from "../delete-soustypeclient-modal/delete-soustypeclient-modal.component";
 
 @Component({
   selector: 'app-soustypeclient-list',
@@ -49,8 +49,8 @@ export class SoustypeclientListComponent implements OnInit, OnDestroy, AfterView
       },
       columns: [
         {
-          title: 'Code', data: 'codeSousTypeClient', render: function (data, type, row) {
-            return row.codeSousTypeClient;
+          title: 'Code', data: 'code', render: function (data, type, row) {
+            return row.code;
           }
         },
         {
@@ -60,7 +60,7 @@ export class SoustypeclientListComponent implements OnInit, OnDestroy, AfterView
         },
         {
           title: 'Type client', data: 'libelleTypeClient', render: function (data, type, row) {
-            return row.typeClient.codeTypeClient+"-"+row.typeClient.libelleTypeClient;
+            return row.typeClient.code+"-"+row.typeClient.libelleTypeClient;
           }
         },
       ],

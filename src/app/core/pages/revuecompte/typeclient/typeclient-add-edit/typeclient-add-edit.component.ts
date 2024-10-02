@@ -60,7 +60,7 @@ export class TypeclientAddEditComponent implements OnInit, OnDestroy {
       {
         id: [null],
         libelleTypeClient: [null, Validators.required],
-        codeTypeClient: [null, Validators.required],
+        code: [null, Validators.required],
       }
     );
     this.readOnly=false;
@@ -86,7 +86,7 @@ export class TypeclientAddEditComponent implements OnInit, OnDestroy {
   {
     this.entity = entity;
     this.entityForm.patchValue({libelleTypeClient: entity.libelleTypeClient});
-    this.entityForm.patchValue({codeTypeClient: entity.codeTypeClient});
+    this.entityForm.patchValue({code: entity.code});
   }
 
   ngOnDestroy(): void {
@@ -96,8 +96,8 @@ export class TypeclientAddEditComponent implements OnInit, OnDestroy {
   get f() {
     return this.entityForm.controls;
   }
-  onSaveEntity() {
 
+  onSaveEntity() {
     const sb = this.saveEntity().pipe(
       catchError((err) => {
         this.modal.dismiss(err);

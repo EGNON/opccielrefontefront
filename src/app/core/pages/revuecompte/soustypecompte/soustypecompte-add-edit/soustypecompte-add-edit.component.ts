@@ -62,7 +62,7 @@ export class SoustypecompteAddEditComponent implements OnInit, OnDestroy {
       {
         id: [null],
         libelleSousTypeCompte: [null, Validators.required],
-        codeSousTypeCompte: [null, Validators.required],
+        code: [null, Validators.required],
         typeCompte: [null, Validators.required],
       }
     );
@@ -90,7 +90,7 @@ export class SoustypecompteAddEditComponent implements OnInit, OnDestroy {
   {
     this.entity = entity;
     this.entityForm.patchValue({libelleSousTypeCompte: entity.libelleSousTypeCompte});
-    this.entityForm.patchValue({codeSousTypeCompte: entity.codeSousTypeCompte});
+    this.entityForm.patchValue({code: entity.code});
     this.entityForm.patchValue({typeCompte: entity.typeCompte});
   }
   afficherTypeCompte(){
