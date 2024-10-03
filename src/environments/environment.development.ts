@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:9090/opcciel/api',
+  apiUrl: 'http://localhost:8181/opcciel/api',
   appVersion: 'v2.0',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,

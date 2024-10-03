@@ -111,7 +111,7 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
     if (this.id) {
       console.log(this.id)
       this.pageInfo.updateTitle("Modification de Modèle écriture")
-      const sb = this.entityService.getById(this.id)
+      const sb = this.entityService.afficherSelonId(this.id,this.id2,this.id3)
         .pipe(first())
         .subscribe((entity) =>
         {
@@ -483,7 +483,7 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
     this.compteComptableService.afficherTous().subscribe(
       (data)=>{
         this.compteComptable$=data.data;
-        console.log(this.compteComptable$)
+        //console.log(this.compteComptable$)
       }
     )
   }

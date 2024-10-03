@@ -127,7 +127,7 @@ export class CorrespondanceAddEditComponent implements OnInit, OnDestroy {
       this.compteComptableService.afficherSelonPlanEtEstMvtListe(this.entityForm.value.plan.codePlan).subscribe(
         (data)=>{
           this.compteComptable$=data.data
-           console.log(this.compteComptable$)
+          // console.log(this.compteComptable$)
         }
       )
   }
@@ -175,7 +175,7 @@ export class CorrespondanceAddEditComponent implements OnInit, OnDestroy {
 
   saveEntity() {
     const entity = {
-      numCompteComptable:this.entityForm.value.compteComptable.numCompteComptable,
+      numeroCompteComptable:this.entityForm.value.compteComptable.numCompteComptable,
       plan:this.entityForm.value.plan,
       ib:this.entityForm.value.ibRubriquePosition.ib,
       codeRubrique:this.entityForm.value.ibRubriquePosition.codeRubrique,

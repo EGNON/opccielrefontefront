@@ -109,7 +109,7 @@ export class PersonnephysiqueSanctionneeListComponent implements OnInit, OnDestr
         },
         {
           title: 'Nationnalité', data: 'paysNationnalite', render: function (data, type, row) {
-            const roleName = row.paysNationalite.libelleFr;
+            const roleName = row.paysNationalite?.libelleFr;
             return roleName || '';
           },
           orderData: [1],

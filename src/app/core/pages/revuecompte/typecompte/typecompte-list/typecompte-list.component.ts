@@ -52,8 +52,8 @@ export class TypecompteListComponent implements OnInit, OnDestroy, AfterViewInit
           }
         },
         {
-          title: 'Libellé', data: 'libelleTypeCompte', render: function (data, type, row) {
-            return row.libelleTypeCompte;
+          title: 'Libellé', data: 'intitule', render: function (data, type, row) {
+            return row.intitule;
           }
         },
       ],

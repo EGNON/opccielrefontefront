@@ -103,12 +103,12 @@ export class PostecomptableListComponent implements OnInit, OnDestroy, AfterView
         const edit = `
                 <li>
                     <a type="button" class="dropdown-item" data-action="edit"
-                    data-id="${full.codePosteComptable}" data-id2="${full.plan.codePlan}">Modifier</a>
+                    data-id="${full.codePosteComptable.trim()}"  data-id2="${full.plan.codePlan.trim()}">Modifier</a>
                 </li>`;
         const separator = `<li><hr class="dropdown-divider"></li>`;
         const delete1 = `<li>
                     <a type="button" class="dropdown-item" data-action="delete"
-                    data-id="${full.codePosteComptable}" data-id2="${full.plan.codePlan}">Supprimer</a>
+                    data-id="${full.codePosteComptable.trim()}" data-id2="${full.plan.codePlan.trim()}">Supprimer</a>
                 </li>`;
         const parentEmetteurEnd = `</ul>
             </div>`;

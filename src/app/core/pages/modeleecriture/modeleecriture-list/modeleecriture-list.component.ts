@@ -106,11 +106,15 @@ export class ModeleecritureListComponent implements OnInit, OnDestroy, AfterView
                 </li>`;
         const edit = `
                 <li>
-                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idModeleEcritureNatureOperation}">Modifier</a>
+                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.modeleEcriture.codeModeleEcriture.trim()}"
+                    data-id2="${full.natureOperation.codeNatureOperation.trim()}"
+                    data-id3="${full.typeTitre.codeTypeTitre.trim()}">Modifier</a>
                 </li>`;
         const separator = `<li><hr class="dropdown-divider"></li>`;
         const delete1 = `<li>
-                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idModeleEcritureNatureOperation}">Supprimer</a>
+                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.modeleEcriture.codeModeleEcriture.trim()}"
+                    data-id2="${full.natureOperation.codeNatureOperation.trim()}"
+                    data-id3="${full.typeTitre.codeTypeTitre.trim()}">Supprimer</a>
                 </li>`;
         const parentOperationEnd = `</ul>
             </div>`;
@@ -139,8 +143,8 @@ export class ModeleecritureListComponent implements OnInit, OnDestroy, AfterView
     this.clickListener = this.renderer.listen(document, 'click', (event) => {
       const closestBtn = event.target.closest('.btn, .dropdown-item');
       if (closestBtn) {
-        const {action, id} = closestBtn.dataset;
-        //let id4=id+"/"+id2+"/"+id3
+        const {action, id,id2,id3} = closestBtn.dataset;
+        let id4=id+"/"+id2+"/"+id3
         this.idInAction = id;
         switch (action) {
           case 'view':
@@ -152,11 +156,11 @@ export class ModeleecritureListComponent implements OnInit, OnDestroy, AfterView
             break;
 
           case 'edit':
-            this.router.navigate(['edit', id], {relativeTo: this.route});
+            this.router.navigate(['edit', id,id2,id3], {relativeTo: this.route});
             break;
 
           case 'delete':
-            this.supprimer(id);
+            this.supprimer(id4);
             break;
         }
       }

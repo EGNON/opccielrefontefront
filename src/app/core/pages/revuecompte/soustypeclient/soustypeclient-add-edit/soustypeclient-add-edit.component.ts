@@ -61,7 +61,7 @@ export class SoustypeclientAddEditComponent implements OnInit, OnDestroy {
     this.entityForm = this.fb.group(
       {
         id: [null],
-        libelleSousTypeClient: [null, Validators.required],
+        intitule: [null, Validators.required],
         code: [null, Validators.required],
         typeClient: [null, Validators.required],
       }
@@ -90,7 +90,7 @@ export class SoustypeclientAddEditComponent implements OnInit, OnDestroy {
   loadFormValues(entity: any)
   {
     this.entity = entity;
-    this.entityForm.patchValue({libelleSousTypeClient: entity.libelleSousTypeClient});
+    this.entityForm.patchValue({intitule: entity.intitule});
     this.entityForm.patchValue({code: entity.code});
     this.entityForm.patchValue({typeClient: entity.typeClient});
   }

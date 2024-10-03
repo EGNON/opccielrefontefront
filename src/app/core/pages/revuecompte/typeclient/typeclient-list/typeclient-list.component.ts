@@ -52,8 +52,8 @@ export class TypeclientListComponent implements OnInit, OnDestroy, AfterViewInit
           }
         },
         {
-          title: 'Libellé', data: 'libelleTypeClient', render: function (data, type, row) {
-            return row.libelleTypeClient;
+          title: 'Libellé', data: 'intitule', render: function (data, type, row) {
+            return row.intitule;
           }
         },
       ],

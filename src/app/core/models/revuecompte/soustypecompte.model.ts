@@ -3,8 +3,8 @@ import {Typecompte} from "./typecompte.model";
 
 export class Soustypecompte extends ResourceModel<Soustypecompte>{
   idSousTypeCompte: number;
-  libelleSousTypeCompte: string;
-  codeSousTypeCompte: string;
+  intitule: string;
+  code: string;
   typeCompte:Typecompte;
   constructor(model?: Partial<Soustypecompte>) {
     super(model);

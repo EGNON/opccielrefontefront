@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ModeleecritureListComponent, },
       { path: 'new', component: ModeleecritureAddEditComponent, },
-      { path: 'edit/:id', component: ModeleecritureAddEditComponent, },
+      { path: 'edit/:id/:id2/:id3', component: ModeleecritureAddEditComponent, },
       // { path: 'show/:id', component: SecteurShowComponent, },
       { path: 'Modeleecriture', redirectTo: '', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' },

@@ -54,13 +54,13 @@ export class SoustypecompteListComponent implements OnInit, OnDestroy, AfterView
           }
         },
         {
-          title: 'Libellé', data: 'libelleSousTypeCompte', render: function (data, type, row) {
-            return row.libelleSousTypeCompte;
+          title: 'Libellé', data: 'intitule', render: function (data, type, row) {
+            return row.intitule;
           }
         },
         {
           title: 'Type compte', data: 'libelleTypeCompte', render: function (data, type, row) {
-            return row.typeCompte.code+"-"+row.typeCompte.libelleTypeCompte;
+            return row.typeCompte.code+"-"+row.typeCompte.intitule;
           }
         },
       ],
