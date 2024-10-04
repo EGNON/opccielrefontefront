@@ -271,7 +271,7 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
       //Afficher ou cacher certains champs en fonction de la qualité
       this.addOrRemoveFieldsAndValidators(this._qualite.libelleQualite.toLowerCase());
 
-      this.getPersonnesAll('distributeur');
+      this.getPersonnesAll('distributeurs');
       this.getDegresAll();
       this.getProfessionAll();
       this.getSecteurActiviteAll();

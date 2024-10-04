@@ -82,7 +82,7 @@ export class FichekycPrintComponent implements OnInit, OnDestroy{
   }
   afficherClientSelonIdQualite(){
     this.idPersonne=this.selectPersonne.options[this.selectPersonne.selectedIndex].value;
-    this.qualite="actionnaire";
+    this.qualite="actionnaires".toUpperCase();
     this.personnePhysiqueService.afficherSelonIdQualite(this.idPersonne,this.qualite).subscribe(
       (data)=>{this.personnesSelonId$=data;
         this.pDateNaissanceConjoint=this.personnesSelonId$.dateNaissanceConjoint;
@@ -136,7 +136,7 @@ export class FichekycPrintComponent implements OnInit, OnDestroy{
     )
   }
   afficherClient(){
-    this.qualite="actionnaire";
+    this.qualite="actionnaires".toUpperCase();
     // this.personnes$ = this.route.paramMap
     //   .pipe(
     //     switchMap((qualite) => this.personnePhysiqueService.afficherPersonneSelonQualite(this.qualite))

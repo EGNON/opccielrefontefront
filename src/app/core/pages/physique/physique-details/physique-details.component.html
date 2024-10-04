@@ -249,7 +249,7 @@
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
                 <!--begin::Label-->
-                <label [class]="qualite != 'prospect' ? 'required fs-5 fw-semibold mb-2' : 'fs-5 fw-semibold mb-2'">N° compte dépositaire</label>
+                <label [class]="qualite === 'actionnaires' ? 'required fs-5 fw-semibold mb-2' : 'fs-5 fw-semibold mb-2'">N° compte dépositaire</label>
                 <!--end::Label-->
                 <!--begin::Input-->
                 <input appNumeroPositifValidators type="text" class="form-control form-control-sm"

@@ -51,7 +51,7 @@ export class ClientPrintComponent implements OnInit, OnDestroy{
   afficherClient(){
     this.prospect=this.selectProspect.options[this.selectProspect.selectedIndex].text;
     if(this.prospect=="Personne physique"){
-      this.qualite="actionnaire";
+      this.qualite="actionnaires".toUpperCase();
       this.personnes$ = this.route.paramMap
         .pipe(
           // filter(paramMap => paramMap.has('qualite')),
@@ -68,7 +68,7 @@ export class ClientPrintComponent implements OnInit, OnDestroy{
     }
     else
     {
-      this.qualite="actionnaire"
+      this.qualite="actionnaires".toUpperCase()
       this.personnes$ = this.route.paramMap
         .pipe(
           switchMap((qualite) => this.personneMoraleService.afficherPersonneSelonQualite(this.qualite))

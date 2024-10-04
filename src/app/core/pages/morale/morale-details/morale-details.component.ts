@@ -63,6 +63,7 @@ export class MoraleDetailsComponent {
   submitting = false;
   submitted = false;
   entity: any;
+  libelleQualite:string;
   entities: any[] = [];
   docs: Document[] = [];
   secteurs$: any;
@@ -205,10 +206,11 @@ export class MoraleDetailsComponent {
         this.pageInfo.updateTitle(this.title);
       }
 
+      this.libelleQualite=this._qualite.libelleQualite.toLowerCase();
       //Afficher ou cacher certains champs en fonction de la qualité
       this.addOrRemoveFieldsAndValidators(this._qualite.libelleQualite.toLowerCase());
 
-      this.getPersonnesAll('distributeur');
+      this.getPersonnesAll('distributeurs');
       this.getDegresAll();
       this.getProfessionAll();
       this.getSecteurActiviteAll();
@@ -336,45 +338,34 @@ export class MoraleDetailsComponent {
       this.form.controls["sousTypeClient"].setErrors(null);
       this.form.controls["sousTypeClient"].clearValidators();
       this.form.controls["sousTypeClient"].updateValueAndValidity();
+    }
 
-      /*//Pere
-      this.form.controls["nomPere"].setErrors(null);
-      this.form.controls["nomPere"].clearValidators();
-      this.form.controls["nomPere"].updateValueAndValidity();
+    if(qualite !== "prospect")
+    {
+      //nomContact
+      this.form.controls["nomContact"].setErrors(null);
+      this.form.controls["nomContact"].clearValidators();
+      this.form.controls["nomContact"].updateValueAndValidity();
 
-      this.form.controls["prenomsPere"].setErrors(null);
-      this.form.controls["prenomsPere"].clearValidators();
-      this.form.controls["prenomsPere"].updateValueAndValidity();
+      //prenomContact
+      this.form.controls["prenomContact"].setErrors(null);
+      this.form.controls["prenomContact"].clearValidators();
+      this.form.controls["prenomContact"].updateValueAndValidity();
 
-      this.form.controls["dateNaissancePere"].setErrors(null);
-      this.form.controls["dateNaissancePere"].clearValidators();
-      this.form.controls["dateNaissancePere"].updateValueAndValidity();
-
-      this.form.controls["paysPere"].setErrors(null);
-      this.form.controls["paysPere"].clearValidators();
-      this.form.controls["paysPere"].updateValueAndValidity();
-
-      //Mere
-      this.form.controls["nomMere"].setErrors(null);
-      this.form.controls["nomMere"].clearValidators();
-      this.form.controls["nomMere"].updateValueAndValidity();
-
-      this.form.controls["prenomsMere"].setErrors(null);
-      this.form.controls["prenomsMere"].clearValidators();
-      this.form.controls["prenomsMere"].updateValueAndValidity();
-
-      this.form.controls["dateNaissanceMere"].setErrors(null);
-      this.form.controls["dateNaissanceMere"].clearValidators();
-      this.form.controls["dateNaissanceMere"].updateValueAndValidity();
-
-      this.form.controls["paysMere"].setErrors(null);
-      this.form.controls["paysMere"].clearValidators();
-      this.form.controls["paysMere"].updateValueAndValidity();
-
-      //Profession
-      this.form.controls["profession"].setErrors(null);
-      this.form.controls["profession"].clearValidators();
-      this.form.controls["profession"].updateValueAndValidity();*/
+      //telContact
+      this.form.controls["telContact"].setErrors(null);
+      this.form.controls["telContact"].clearValidators();
+      this.form.controls["telContact"].updateValueAndValidity();
+      
+      //telContact
+      this.form.controls["emailContact"].setErrors(null);
+      this.form.controls["emailContact"].clearValidators();
+      this.form.controls["emailContact"].updateValueAndValidity();
+      
+      //titreContact
+      this.form.controls["titreContact"].setErrors(null);
+      this.form.controls["titreContact"].clearValidators();
+      this.form.controls["titreContact"].updateValueAndValidity();
     }
   }
 
