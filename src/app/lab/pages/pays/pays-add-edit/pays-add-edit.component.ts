@@ -97,8 +97,11 @@ export class PaysAddEditComponent implements OnInit, OnDestroy{
   getMonnaieAll()
   {
     const sb  = this.monnaieService.afficherMonnaieListe().subscribe(
-      (res) =>{ this.monnaies$= res});
-
+      (res) => {
+        // console.log("Résultat === ", res);
+      this.monnaies$ = res;
+    });
+    this.subscriptions.push(sb);
   }
   getPaysAll()
   {

@@ -19,6 +19,7 @@ import {TempsService} from "../../../services/temps.service";
 import {TypePlanification} from "../../../models/type-planification.model";
 import {Periodicite} from "../../../models/periodicite.model";
 import {PageInfoService} from "../../../../template/_metronic/layout";
+import {UtilisateurService} from "../../../services/access/utilisateur.service";
 //import {NumeroPositifValidatorsDirective} from "../../../../validators/numero-positif-validators.directive";
 
 @Component({
@@ -85,6 +86,7 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
     private entityService: AlerteService,
     private modelService: ModeleMsgAlerteService,
     private personnelService: PersonnelService,
+    private userService: UtilisateurService,
     private pageInfo: PageInfoService,
     private typePlanificationService: TypePlanificationService,
     private periodiciteService: PeriodiciteService,
@@ -191,7 +193,8 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
       ).subscribe(entity => this.loadFormValues(entity));
     this.subscriptions.push(sb);
     this.getModelMsgAlertesAll();
-    this.getPersonnelsAll();
+    // this.getPersonnelsAll();
+    this.getAllUsers();
     this.getTypePlanificationAll();
     this.getPeriodiciteAll();
     // setting and support i18n
@@ -328,11 +331,20 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
    console.log(this.protoAlertes2.controls[id].value)
     this.protoAlertes2.controls[id].patchValue({contenu:this.protoAlertes2.controls[id].value.modeleMsgAlerte.contenu})
   }
-  getPersonnelsAll()
+  /*getPersonnelsAll()
   {
-    const sb = this.personnelService.afficherPersonnelListe().subscribe(
-      (res) =>{ this.personnels = res});
+    const sb = this.personnelService.afficherListe().subscribe(
+      (res) => {
+        console.log("Liste des personnes === ", res);
+        this.personnels = res
+      });
+  }*/
 
+  getAllUsers() {
+    const sb = this.userService.afficherListeSimple().subscribe(res => {
+      this.personnels = res.data;
+    });
+    this.subscriptions.push(sb);
   }
 
   createItem(data: any): FormGroup {
@@ -606,6 +618,7 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
   public onFilterChange(item: any) {
     // console.log('onFilterChange', item);
   }
+
   public onDropDownClose(item: any) {
     // console.log('onDropDownClose', item);
   }
@@ -613,6 +626,7 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
   public onItemSelect(item: any) {
     // console.log('onItemSelect', item);
   }
+
   public onDeSelect(item: any) {
     // console.log('onDeSelect', item);
   }
@@ -620,6 +634,7 @@ export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnD
   public onSelectAll(items: any) {
     // console.log('onSelectAll', items);
   }
+
   public onDeSelectAll(items: any) {
     // console.log('onDeSelectAll', items);
   }

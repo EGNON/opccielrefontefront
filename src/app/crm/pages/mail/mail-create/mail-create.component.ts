@@ -3,14 +3,9 @@ import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Observable, of, retry, Subscription, tap} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, finalize} from "rxjs/operators";
-import {formatDate, Time} from "@angular/common";
-import {Degre} from "../../../models/degre.model";
+import {Time} from "@angular/common";
 import {Personne} from "../../../models/personne/personne.model";
 import {PieceJointe} from "../../../models/piece-jointe.model";
-import {Pays} from "../../../models/pays.model";
-import {Quartier} from "../../../models/quartier.model";
-import {Secteur} from "../../../models/secteur.model";
-import {StatutPersonne} from "../../../models/statut.personne.model";
 import {PersonneService} from "../../../services/personne/personne.service";
 import {EnvoimailService} from "../../../services/envoimail.service";
 import {FileUploadService} from "../../../services/file-upload.service";
@@ -27,7 +22,6 @@ import {Dossier} from "../../../models/dossier.model";
 import {MailSenderService} from "../../../services/mailsender.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 import {ModeleMsgAlerte} from "../../../models/modelemsgalerte.model";
-import {Formule} from "../../../../core/models/formule";
 
 @Component({
   selector: 'app-mail-create',
@@ -153,21 +147,28 @@ export class MailCreateComponent implements OnInit, OnDestroy{
   public onItemSelect(item: any) {
      //console.log('onItemSelect', item);
     this.select=true
+    debugger;
     this.afficherEmail(item.idPersonne)
-
   }
   public onDeSelect(item: any) {
      //console.log('onDeSelect', item);
     this.select=false
-    this.afficherEmail(item.idPersonne)
-
+    this.afficherEmail(item.idPersonne);
   }
 
-  public onSelectAll(items: any) {
-    // console.log('onSelectAll', items);
+  public onSelectAll(items: any[]) {
+    debugger;
+    if(items.length > 0) {
+      items.forEach(item => {
+        this.select=true;
+        this.afficherEmail(item.idPersonne);
+      });
+    }
   }
   public onDeSelectAll(items: any) {
     // console.log('onDeSelectAll', items);
+    this.select=false;
+    this.email = '';
   }
   loadValues(entity:any)
   {
@@ -199,7 +200,6 @@ export class MailCreateComponent implements OnInit, OnDestroy{
           entity.documents[i]=this.documentMailSelonMail
           this.documents.push(this.createItem(entity.documents[i]));
           this.documents.controls[i].patchValue(entity.documents[i]);
-
         }
       }
     );
@@ -485,6 +485,7 @@ export class MailCreateComponent implements OnInit, OnDestroy{
     // this.personneService.fetch();
     this.personneService.afficherPersonneListe().subscribe(
       (data)=>{
+        console.log("Liste des personnes ", data);
         this.personne$=data;
         this.personneMulti=data;
         // console.log(this.personne$)

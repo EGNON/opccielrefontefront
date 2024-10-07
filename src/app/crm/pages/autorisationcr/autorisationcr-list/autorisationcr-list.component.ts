@@ -60,7 +60,7 @@ export class AutorisationcrListComponent implements OnInit, OnDestroy, AfterView
           .pipe(
             filter((resp) => resp.data.length > 0),
             map(n => {
-              const newData = n.data.filter(obj => obj.createur.idPersonne === this.authService.currentUserValue?.id && obj.estValide);
+              const newData = n.data.filter(obj => obj.createur?.idPersonne === this.authService.currentUserValue?.id && obj.estValide);
               return {...n, data: newData};
             })
           )
