@@ -30,4 +30,9 @@ export class UtilisateurService extends ResourceService<Utilisateur> {
     const url = `${this.API_URL}/datatable/list`;
     return this.http.post<DataTablesResponse<any>>(url, dataTablesParameters);
   }
+
+  afficherListeSimple() {
+    const url = `${this.API_URL}`;
+    return this.http.get<DataTablesResponse<any>>(url);
+  }
 }

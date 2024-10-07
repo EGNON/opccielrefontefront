@@ -395,7 +395,6 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
   }
 
   onSaveRdv() {
-
     let message:string=this.formData.value.msg
     if(this.formData.value.msg!=null || this.formData.value.msg!=undefined)
     {
@@ -607,7 +606,7 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
     return this.id
       ? this.rdvService.update(entity)
       : this.rdvService.create(entity);
- 
+
   }
 
   afficherPersonne() {
@@ -645,7 +644,6 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
 
   }
   getModeleMsgAlerte(){
-
     this.modeleMsgAlerteService.afficherSelonTypeModeleEtDefaut("Rendez-vous").subscribe(
       (data)=>{
         this.modeleMsgAlerte$=data;

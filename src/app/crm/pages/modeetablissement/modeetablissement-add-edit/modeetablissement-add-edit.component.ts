@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {of, Subscription, tap} from "rxjs";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, finalize, first} from "rxjs/operators";
 import {ModeetablissementService} from "../../../services/modeetablissement.service";
 import {Modeetablissement} from "../../../models/modeetablissement.model";
-import {NgClass, NgIf} from "@angular/common";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 

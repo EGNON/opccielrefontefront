@@ -1,12 +1,11 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {of, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
-import {catchError, finalize, first} from "rxjs/operators";
+import {first} from "rxjs/operators";
 import {ModeleMsgAlerte} from "../../../models/modelemsgalerte.model";
 import {ModeleMsgAlerteService} from "../../../services/modelemsgalerte.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
-import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import {Typemodele} from "../../../models/typemodele.model";
 import {TypemodeleService} from "../../../services/typemodele.service";
 import {TypemodelemessageService} from "../../../services/typemodelemessage.service";
@@ -14,9 +13,7 @@ import tinymce from "tinymce";
 import {SwalComponent} from "@sweetalert2/ngx-sweetalert2";
 import {SweetAlertOptions} from "sweetalert2";
 import {RdvService} from "../../../services/rdv.service";
-import {data} from "jquery";
 import {RDV} from "../../../models/rdv.model";
-
 
 @Component({
   selector: 'app-modelemsgalerte-create',
@@ -86,6 +83,7 @@ export class ModelemsgalerteCreateComponent implements OnInit, OnDestroy{
     this.formData.patchValue({typeModele:entity.typeModele})
     this.formData.patchValue({defaut:entity.defaut})
   }
+
   ajouter()
   {
     tinymce.activeEditor.execCommand('mceInsertContent', false, "{"+this.formData.value.critere+"}");
@@ -105,6 +103,7 @@ export class ModelemsgalerteCreateComponent implements OnInit, OnDestroy{
     this.cdr.detectChanges();
     this.noticeSwal.fire();
   }
+
   afficherTypeModele(){
     this.typeModeleService.afficherTous().subscribe(
       (data)=>{
@@ -123,7 +122,6 @@ export class ModelemsgalerteCreateComponent implements OnInit, OnDestroy{
     this.isLoading = true;
     if(this.formData.invalid) return;
 
-
     //return this.id
     if(this.id)
     {
@@ -139,7 +137,7 @@ export class ModelemsgalerteCreateComponent implements OnInit, OnDestroy{
               id: this.id ? this.id : null
             };
 
-             this.modelemsgalerteService.update(modelemsgalerte).subscribe( 
+             this.modelemsgalerteService.update(modelemsgalerte).subscribe(
                {next: (resp) => {
                          this.isLoading = false;
                          this.router.navigate(['/crm/notifications/modelemsgalerte']);
