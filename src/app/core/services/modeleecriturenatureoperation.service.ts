@@ -20,5 +20,8 @@ export class ModeleecriturenatureoperationService extends ResourceService<Modele
   }
   update2(codeModele:string,codeNature:string,codeTypeTitre:string,modeleNatureOperation:any){
     return this.http.put<any>(`${this.API_URL}/${codeModele}/${codeNature}/${codeTypeTitre}`,modeleNatureOperation)
+  } 
+  supprier(codeModele:string,codeNature:string,codeTypeTitre:string){
+    return this.http.delete<any>(`${this.API_URL}/${codeModele}/${codeNature}/${codeTypeTitre}`)
   }
 }

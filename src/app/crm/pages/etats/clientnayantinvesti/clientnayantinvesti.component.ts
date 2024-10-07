@@ -72,7 +72,7 @@ export class ClientnayantinvestiComponent implements OnInit, OnDestroy{
     this.dateDebut=this.formData.get('dateDebut')?.value+"T00:00:00";
     this.dateFin=this.formData.get('dateFin')?.value+"T23:59:59";
     if(this.prospect=="Personne physique"){
-      this.qualite="actionnaire";
+      this.qualite="actionnaires".toUpperCase();
       this.personnePhysiqueService.afficherPersonnePhysiqueNayantPasInvesti(this.qualite,this.dateDebut,this.dateFin).subscribe(
         (data)=>{
           this.personnes$=data;
@@ -81,7 +81,7 @@ export class ClientnayantinvestiComponent implements OnInit, OnDestroy{
     }
     else
     {
-      this.qualite="actionnaire"
+      this.qualite="actionnaires".toUpperCase()
       this.personneMoraleService.afficherPersonneMoraleNayantPasInvesti(this.qualite,this.dateDebut,this.dateFin).subscribe(
         (data)=>{
           this.personnes$=data;

@@ -54,13 +54,13 @@ export class SoustypeclientListComponent implements OnInit, OnDestroy, AfterView
           }
         },
         {
-          title: 'Libellé', data: 'libelleSousTypeClient', render: function (data, type, row) {
-            return row.libelleSousTypeClient;
+          title: 'Libellé', data: 'intitule', render: function (data, type, row) {
+            return row.intitule;
           }
         },
         {
           title: 'Type client', data: 'libelleTypeClient', render: function (data, type, row) {
-            return row.typeClient.code+"-"+row.typeClient.libelleTypeClient;
+            return row.typeClient.code+"-"+row.typeClient.intitule;
           }
         },
       ],

@@ -569,7 +569,11 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
       personne={
         ...this.entityForm.value,
         dateNaissance: dateNaiss,
-    //    estJuge:this.estJuge,
+        /*nbrEnfant:0,
+        nbrPersonneACharge:0,
+        autresRevenus:0,
+        surfaceTotale:0,
+        salaire:0,*/
         personnePhysiquePaysDtos: this.entityForm.value.personnePhysiquePaysDtos.map((u: any) => {
           return {personnePhysiqueDto: null, paysDto: u};
         })}
@@ -578,17 +582,21 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
     {
       personne={
         ...this.entityForm.value,
-      //  estJuge:this.estJuge,
+        /*nbrEnfant:0,
+        nbrPersonneACharge:0,
+        autresRevenus:0,
+        surfaceTotale:0,
+        salaire:0,*/
         dateNaissance: dateNaiss
       }
 
     }
 
-   // console.log("personne&&&&=",personne)
+    //console.log("personne&&&&=",personne)
     formdata.append("data", JSON.stringify(personne));
 
     //console.log(this.id);
-    //console.log(formdata)
+    //console.log("formData",formdata)
     return this.id
       ? this.entityService.updateFn(formdata,personne.idPersonne)
       : this.entityService.createFn(formdata);

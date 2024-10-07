@@ -54,7 +54,7 @@ export class CategorieclientAddEditComponent implements OnInit, OnDestroy {
     this.entityForm = this.fb.group(
       {
         id: [null],
-        libelleCategorieClient: [null, Validators.required],
+        intitule: [null, Validators.required],
         code: [null, Validators.required],
       }
     );
@@ -80,7 +80,7 @@ export class CategorieclientAddEditComponent implements OnInit, OnDestroy {
   loadFormValues(entity: any)
   {
     this.entity = entity;
-    this.entityForm.patchValue({libelleCategorieClient: entity.libelleCategorieClient});
+    this.entityForm.patchValue({intitule: entity.intitule});
     this.entityForm.patchValue({code: entity.code});
   }
 

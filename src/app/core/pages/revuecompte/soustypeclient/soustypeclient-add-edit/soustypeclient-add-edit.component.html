@@ -31,11 +31,11 @@
               <!--end::Label-->
               <!--begin::Input-->
               <input  type="text" class="form-control form-control-sm form-control-solid"
-                      placeholder="" formControlName="libelleSousTypeClient"
-                      [ngClass]="{ 'is-invalid': submitted && f.libelleSousTypeClient.errors }"/>
+                      placeholder="" formControlName="intitule"
+                      [ngClass]="{ 'is-invalid': submitted && f.intitule.errors }"/>
               <!--end::Input-->
-              <div *ngIf="submitted && f.libelleSousTypeClient.errors" class="invalid-feedback">
-                <div *ngIf="f.libelleSousTypeClient.errors.required">Ce champs est obligatoire</div>
+              <div *ngIf="submitted && f.intitule.errors" class="invalid-feedback">
+                <div *ngIf="f.intitule.errors.required">Ce champs est obligatoire</div>
               </div>
             </div>
           </div>
@@ -51,10 +51,10 @@
                       [ngClass]="{ 'is-invalid': submitted && f.typeClient.errors }">
                 <option selected>Sélectionnez un type Client...</option>
                 <option [defaultSelected]="true" [ngValue]="entity?.typeClient" [disabled]="true">
-                  {{ entity?.typeClient?.codeTypeClient }}-{{ entity?.typeClient?.libelleTypeClient }}
+                  {{ entity?.typeClient?.code }}-{{ entity?.typeClient?.intitule }}
                 </option>
                 <option *ngFor="let item of typeclient$" [ngValue]="item">
-                  {{ item.codeTypeClient }}-{{ item.libelleTypeClient }}
+                  {{ item.code }}-{{ item.intitule }}
                 </option>
               </select>
               <!--end::Select-->

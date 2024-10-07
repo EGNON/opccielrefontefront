@@ -31,11 +31,11 @@
               <!--end::Label-->
               <!--begin::Input-->
               <input  type="text" class="form-control form-control-sm form-control-solid"
-                      placeholder="" formControlName="libelleSousTypeCompte"
-                      [ngClass]="{ 'is-invalid': submitted && f.libelleSousTypeCompte.errors }"/>
+                      placeholder="" formControlName="intitule"
+                      [ngClass]="{ 'is-invalid': submitted && f.intitule.errors }"/>
               <!--end::Input-->
-              <div *ngIf="submitted && f.libelleSousTypeCompte.errors" class="invalid-feedback">
-                <div *ngIf="f.libelleSousTypeCompte.errors.required">Ce champs est obligatoire</div>
+              <div *ngIf="submitted && f.intitule.errors" class="invalid-feedback">
+                <div *ngIf="f.intitule.errors.required">Ce champs est obligatoire</div>
               </div>
             </div>
           </div>
@@ -51,10 +51,10 @@
                       [ngClass]="{ 'is-invalid': submitted && f.typeCompte.errors }">
                 <option selected>Sélectionnez un type compte...</option>
                 <option [defaultSelected]="true" [ngValue]="entity?.typeCompte" [disabled]="true">
-                  {{ entity?.typeCompte?.codeTypeCompte }}-{{ entity?.typeCompte?.libelleTypeCompte }}
+                  {{ entity?.typeCompte?.code }}-{{ entity?.typeCompte?.intitule }}
                 </option>
                 <option *ngFor="let item of typeCompte$" [ngValue]="item">
-                  {{ item.codeTypeCompte }}-{{ item.libelleTypeCompte }}
+                  {{ item.code }}-{{ item.intitule }}
                 </option>
               </select>
               <!--end::Select-->

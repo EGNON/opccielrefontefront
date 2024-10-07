@@ -99,13 +99,13 @@ export class CorrespondanceListComponent implements OnInit, OnDestroy, AfterView
                     <a type="button" class="dropdown-item" data-action="edit"
                     data-id="${full.ib.codeIB}" data-id2="${full.codeRubrique}"
                     data-id3="${full.codePosition}" data-id4="${full.plan.codePlan}"
-                    data-id5="${full.numCompteComptable}">Modifier</a>
+                    data-id5="${full.numeroCompteComptable}">Modifier</a>
                 </li>`;
         const separator = `<li><hr class="dropdown-divider"></li>`;
         const delete1 = `<li>
                     <a type="button" class="dropdown-item" data-action="delete" data-id="${full.ib.codeIB}" data-id2="${full.codeRubrique}"
                     data-id3="${full.codePosition}" data-id4="${full.plan.codePlan}"
-                    data-id5="${full.numCompteComptable}" >Supprimer</a>
+                    data-id5="${full.numeroCompteComptable}" >Supprimer</a>
                 </li>`;
         const parentOperationEnd = `</ul>
             </div>`;

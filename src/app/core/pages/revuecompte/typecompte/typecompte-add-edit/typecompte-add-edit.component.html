@@ -31,11 +31,11 @@
               <!--end::Label-->
               <!--begin::Input-->
               <input  type="text" class="form-control form-control-sm form-control-solid"
-                     placeholder="" formControlName="libelleTypeCompte"
-                     [ngClass]="{ 'is-invalid': submitted && f.libelleTypeCompte.errors }"/>
+                     placeholder="" formControlName="intitule"
+                     [ngClass]="{ 'is-invalid': submitted && f.intitule.errors }"/>
               <!--end::Input-->
-              <div *ngIf="submitted && f.libelleTypeCompte.errors" class="invalid-feedback">
-                <div *ngIf="f.libelleTypeCompte.errors.required">Ce champs est obligatoire</div>
+              <div *ngIf="submitted && f.intitule.errors" class="invalid-feedback">
+                <div *ngIf="f.intitule.errors.required">Ce champs est obligatoire</div>
               </div>
             </div>
           </div>

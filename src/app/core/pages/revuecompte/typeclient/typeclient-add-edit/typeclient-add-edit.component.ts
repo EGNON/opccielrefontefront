@@ -59,7 +59,7 @@ export class TypeclientAddEditComponent implements OnInit, OnDestroy {
     this.entityForm = this.fb.group(
       {
         id: [null],
-        libelleTypeClient: [null, Validators.required],
+        intitule: [null, Validators.required],
         code: [null, Validators.required],
       }
     );
@@ -85,7 +85,7 @@ export class TypeclientAddEditComponent implements OnInit, OnDestroy {
   loadFormValues(entity: any)
   {
     this.entity = entity;
-    this.entityForm.patchValue({libelleTypeClient: entity.libelleTypeClient});
+    this.entityForm.patchValue({intitule: entity.intitule});
     this.entityForm.patchValue({code: entity.code});
   }
 

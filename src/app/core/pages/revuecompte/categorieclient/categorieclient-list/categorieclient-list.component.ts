@@ -52,8 +52,8 @@ export class CategorieclientListComponent implements OnInit, OnDestroy, AfterVie
           }
         },
         {
-          title: 'Libellé', data: 'libelleCategorieClient', render: function (data, Categorie, row) {
-            return row.libelleCategorieClient;
+          title: 'Libellé', data: 'intitule', render: function (data, Categorie, row) {
+            return row.intitule;
           }
         },
       ],

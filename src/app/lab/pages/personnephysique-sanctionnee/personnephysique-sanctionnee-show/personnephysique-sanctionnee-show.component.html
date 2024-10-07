@@ -25,12 +25,12 @@
         <td>{{ personnePhysique$.lieuNaissance }}</td>
       </tr>
       <tr class="d-flex justify-content-between">
-        <th class="fw-bold fs-7 text-uppercase">Pays de nissance</th>
-        <td>{{ personnePhysique$.paysNationalite.libelleFr}}</td>
+        <th class="fw-bold fs-7 text-uppercase">Pays de naissance</th>
+        <td>{{ personnePhysique$.paysNationalite?.libelleFr}}</td>
       </tr>
       <tr class="d-flex justify-content-between">
         <th class="fw-bold fs-7 text-uppercase">Pays de résidence</th>
-        <td>{{ personnePhysique$.paysResidence.libelleFr }}</td>
+        <td>{{ personnePhysique$.paysResidence?.libelleFr }}</td>
       </tr>
       <tr class="d-flex justify-content-between">
         <th class="fw-bold fs-7 text-uppercase">Est jugée</th>

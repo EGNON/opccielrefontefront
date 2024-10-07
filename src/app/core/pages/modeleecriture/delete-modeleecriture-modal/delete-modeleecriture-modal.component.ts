@@ -13,7 +13,7 @@ import {DetailmodeleService} from "../../../services/detailmodele.service";
   styleUrl: './delete-modeleecriture-modal.component.scss'
 })
 export class DeleteModeleecritureModalComponent implements OnInit{
-  @Input() id: number;
+  @Input() id: string;
   isLoading = false;
   subscriptions: Subscription[] = [];
 
@@ -28,15 +28,16 @@ export class DeleteModeleecritureModalComponent implements OnInit{
 
   supprimer() {
     this.isLoading = true;
-    // console.log(this.id)
-    this.entityService.getById(this.id).subscribe(
-      (data)=>{
+    console.log(this.id)
+    //this.entityService.getById(this.id).subscribe(
+    //  (data)=>{
         // console.log("code===",data.data.modeleEcriture.codeModeleEcriture)
         this.detailModeleService.supprimerSelonModeleEcriture
-        (data.data.modeleEcriture.codeModeleEcriture.trim()).subscribe()
-      }
-    )
-    const sb = this.entityService.delete(this.id).pipe(
+        (this.id.split('/')[0].trim()).subscribe()
+     // }
+    //)
+    const sb = this.entityService.supprier(this.id.split('/')[0],
+      this.id.split('/')[1],this.id.split('/')[2]).pipe(
       delay(1000), // Remove it from your code (just for showing loading)
       tap(() => this.modal.close()),
       catchError((err) => {
