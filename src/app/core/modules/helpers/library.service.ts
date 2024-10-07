@@ -1550,6 +1550,45 @@ export class LibraryService implements OnDestroy{
                   route: RisqueRouting.find((value, index, obj) =>
                     ('/risque/etats/ratiosharp/liste').includes(value.path!)),
                   children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_CORRELATION'),
+                  title: 'Corrélation',
+                  page: '/risque/etats/correlation/liste',
+                  role: 'ROLE_ETAT_CORRELATION',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/correlation/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_COVARIANCE'),
+                  title: 'Covariance',
+                  page: '/risque/etats/covariance/liste',
+                  role: 'ROLE_ETAT_COVARIANCE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/covariance/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_BETA'),
+                  title: 'Bêta',
+                  page: '/risque/etats/beta/liste',
+                  role: 'ROLE_ETAT_BETA',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/beta/liste').includes(value.path!)),
+                  children: []
                 }
                 /*{
                   allow: this.authService.isGrantedRole('ROLE_ETAT_OPCVM'),

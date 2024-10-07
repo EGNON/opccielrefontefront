@@ -3,10 +3,10 @@ import {DataTableDirective} from "angular-datatables";
 import {Observable, Subject, Subscription, tap} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReportingsService} from "../../../../risque/services/reportings/reportings.service";
-import {OpcvmService} from "../../../../opcciel1/services/opcvm.service";
 import $ from "jquery";
 import moment from "moment";
 import {first} from "rxjs/operators";
+import { OpcvmService } from '../../../../core/services/opcvm.service';
 
 @Component({
   selector: 'app-alpha',
@@ -228,6 +228,7 @@ export class AlphaComponent implements OnInit, OnDestroy, AfterViewInit{
   loadData(submitted = false) {
     this.selectOpcvm=document.getElementById('ComboOpcvm')
     this.idOpcvm=this.selectOpcvm.options[this.selectOpcvm.selectedIndex].value;
+    console.log(this.idOpcvm)
     // this.reportList$ = this.reportingsService.alpha(this.idOpcvm,
     //                                                 this.form.value.anneeDebut,
     //                                                 this.form.value.anneeFin)
@@ -248,9 +249,9 @@ export class AlphaComponent implements OnInit, OnDestroy, AfterViewInit{
     // this.subscriptions.push(sb);
   }
   afficherOpcvm(){
-    this.opcvmService.afficherOpcvm().subscribe(
+    this.opcvmService.afficherTous().subscribe(
       (data)=>{
-        this.opcvm$=data;
+        this.opcvm$=data.data;
       }
     )
   }

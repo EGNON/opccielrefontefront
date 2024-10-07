@@ -104,4 +104,14 @@ export class ReportingsService {
   ratioSharp(idOpcvm: any, anneeDebut: any,anneeFin:any) {
     return this.http.get<any>(`${this.API_URL}/risque/ratiosharp/${idOpcvm}/${anneeDebut}/${anneeFin}`);
   }
+  correlation(idOpcvm: any, parameter: any) {
+    return this.http.post<any>(`${this.API_URL}/risque/correlation/${idOpcvm}`,parameter);
+  }
+  covariance(idOpcvm: any, parameter: any) {
+    return this.http.post<any>(`${this.API_URL}/risque/covariance/${idOpcvm}`,parameter);
+  }
+  beta(idOpcvm: any, parameter: any) {
+    return this.http.post<any>(`${this.API_URL}/risque/beta/${idOpcvm}`,parameter);
+  }
+
 }
