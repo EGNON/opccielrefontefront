@@ -610,7 +610,7 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
   }
 
   afficherPersonne() {
-    this.personneService.afficherPersonneListe().subscribe(
+    this.personneService.afficherPersonnePhysiqueMorale().subscribe(
       (data) => {
         this.personne$ = data;
       }
@@ -647,8 +647,10 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
     this.modeleMsgAlerteService.afficherSelonTypeModeleEtDefaut("Rendez-vous").subscribe(
       (data)=>{
         this.modeleMsgAlerte$=data;
-        this.formData.patchValue({msg:data.contenu})
-        this.formData.patchValue({idModeleMsgAlerte:data.idModele})
+        if(data!==null){
+          this.formData.patchValue({msg:data.contenu})
+          this.formData.patchValue({idModeleMsgAlerte:data.idModele})
+        }
       }
     )
   }

@@ -8,13 +8,20 @@ import {NgbInputDatepicker} from "@ng-bootstrap/ng-bootstrap";
 import {ReactiveFormsModule} from "@angular/forms";
 import { AlphaComponent } from './alpha/alpha.component';
 import { RatiosharpComponent } from './ratiosharp/ratiosharp.component';
+import { CorrelationComponent } from './correlation/correlation.component';
+import { CovarianceComponent } from './covariance/covariance.component';
+import { BetaComponent } from './beta/beta.component';
 
 
 @NgModule({
   declarations: [
     VolatiliteComponent,
     AlphaComponent,
-    RatiosharpComponent
+    RatiosharpComponent,
+    CorrelationComponent,
+    CovarianceComponent,
+    BetaComponent
+
   ],
     imports: [
         CommonModule,

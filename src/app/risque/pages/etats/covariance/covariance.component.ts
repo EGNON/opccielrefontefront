@@ -3,17 +3,17 @@ import {DataTableDirective} from "angular-datatables";
 import {Observable, Subject, Subscription} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReportingsService} from "../../../services/reportings/reportings.service";
+import {OpcvmService} from "../../../../core/services/opcvm.service";
 import $ from "jquery";
 import moment from "moment/moment";
 import {first} from "rxjs/operators";
-import { OpcvmService } from '../../../../core/services/opcvm.service';
 
 @Component({
-  selector: 'app-ratiosharp',
-  templateUrl: './ratiosharp.component.html',
-  styleUrl: './ratiosharp.component.scss'
+  selector: 'app-covariance',
+  templateUrl: './covariance.component.html',
+  styleUrl: './covariance.component.scss'
 })
-export class RatiosharpComponent implements OnInit, OnDestroy, AfterViewInit{
+export class CovarianceComponent implements OnInit, OnDestroy, AfterViewInit{
   @ViewChild(DataTableDirective, {static: false})
   private datatableElement: DataTableDirective;
   isDtInit:boolean = false
@@ -24,6 +24,7 @@ export class RatiosharpComponent implements OnInit, OnDestroy, AfterViewInit{
   selectOpcvm:any;
   idOpcvm:any;
   opcvm$: any;
+  Covariance: any;
   reportList: any[] = [];
   form: FormGroup;
 
@@ -38,8 +39,9 @@ export class RatiosharpComponent implements OnInit, OnDestroy, AfterViewInit{
   ngOnInit(): void {
     this.form = this.fb.group({
       denominationOpcvm: [null, Validators.required],
-      anneeDebut: [null, Validators.required],
-      anneeFin: [null,Validators.required]
+      dateDebut: [null, Validators.required],
+      dateFin: [null,Validators.required],
+      covariance: [null]
     });
     this.afficherOpcvm()
     this.dtOptions = {...this.reportingsService.dtOptions};
@@ -65,19 +67,19 @@ export class RatiosharpComponent implements OnInit, OnDestroy, AfterViewInit{
       order: [],
       drawCallback: function (settings:any) {
         let api = this.api();
-        //   let rows = api.rows({page:'current'} ).nodes();
-        //   console.log("ROWS === ", settings);
-        //   let last: any = null;
-        //   api.column(5, {page:'current'} ).data().each(function (group: any, i: any) {
-        //     //console.log(group[9], i);
-        //     console.log(last, group[9], i);
-        //     if (last !== group[9]) {
-        //       $(rows).eq(i).before(
-        //         '<tr style="background-color:#49bbf1" class="group"><th colspan="9">'+group[9]+'</th></tr>'
-        //       );
-        //       last = group[9];
-        //     }
-        //   });
+        /*let rows = api.rows({page:'current'} ).nodes();
+        console.log("ROWS === ", settings);
+        let last: any = null;
+        api.column(5, {page:'current'} ).data().each(function (group: any, i: any) {
+          console.log(group[5], i);
+          console.log(last, group[5], i);
+          if (last !== group[5]) {
+            $(rows).eq(i).before(
+              '<tr style="background-color:#49bbf1" class="group"><th colspan="9">'+group[5]+'</th></tr>'
+            );
+            last = group[5];
+          }
+        });*/
       },
       lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
       lengthChange: false,
@@ -153,23 +155,18 @@ export class RatiosharpComponent implements OnInit, OnDestroy, AfterViewInit{
           }
         },
         {
-          title: "Dividende distribuée", data: 'dividendeDistribue', render: function (data: any, type: any, row: any) {
-            return row.dividendeDistribue;
+          title: "NAV BanchMark", data: 'nav', render: function (data: any, type: any, row: any) {
+            return row.nav;
           }
         },
         {
-          title: "Performance annuelle", data: 'performanceAnnuelle', render: function (data: any, type: any, row: any) {
-            return row.performanceAnnuelle;
+          title: "Performance du portefeuille", data: 'performancePortefeuille', render: function (data: any, type: any, row: any) {
+            return row.performancePortefeuille;
           }
         },
         {
-          title: "Volatilité annualisée", data: 'volatiliteAnnualisee', render: function (data: any, type: any, row: any) {
-            return row.volatiliteAnnualisee;
-          }
-        },
-        {
-          title: "Ratio de sharp", data: 'sharp', render: function (data: any, type: any, row: any) {
-            return row.sharp;
+          title: "Performance du BenchMark", data: 'performanceBenchMark', render: function (data: any, type: any, row: any) {
+            return row.performanceBenchMark;
           }
         }
       ],
@@ -208,7 +205,7 @@ export class RatiosharpComponent implements OnInit, OnDestroy, AfterViewInit{
       stateSave: true,
       destroy: true
     });
-    datatable.columns([0,1,5]).visible( true);
+    datatable.columns([0,1,4]).visible( true);
 
     return datatable;
   }
@@ -228,21 +225,35 @@ export class RatiosharpComponent implements OnInit, OnDestroy, AfterViewInit{
   loadData(submitted = false) {
     this.selectOpcvm=document.getElementById('ComboOpcvmRatioSharp')
     this.idOpcvm=this.selectOpcvm.options[this.selectOpcvm.selectedIndex].value;
-    // this.reportList$ = this.reportingsService.alpha(this.idOpcvm,
-    //                                                 this.form.value.anneeDebut,
-    //                                                 this.form.value.anneeFin)
-    //     .pipe(tap(() => this.dtTrigger.next(null)));
-    // const sb = this.reportList$.subscribe(res => {
-    //   console.log("RESP === ", res);
-    //   this.reportList = res
-    //   this.dtTrigger.next(null);
-    // });
-    this.reportingsService.ratioSharp(this.idOpcvm,
-      this.form.value.anneeDebut,
-      this.form.value.anneeFin)
+    let dateDebut: any;
+    let dateFin: any;
+    if (this.form.controls.dateDebut.value) {
+      dateDebut = new Date(
+        this.form.controls.dateDebut.value.year,
+        this.form.controls.dateDebut.value.month - 1,
+        this.form.controls.dateDebut.value.day + 1);
+    }
+    if (this.form.controls.dateFin.value) {
+      dateFin = new Date(
+        this.form.controls.dateFin.value.year,
+        this.form.controls.dateFin.value.month - 1,
+        this.form.controls.dateFin.value.day + 1);
+    }
+    let dates = {startDate: dateDebut, endDate: dateFin};
+    console.log("opcvm=",this.idOpcvm)
+    console.log("dates=",dates)
+    this.reportingsService.covariance(this.idOpcvm,
+      dates)
       .pipe(first())
       .subscribe(data => {
-        this.dataTable = this.initDatatable("datatable_RatioSharp");
+        console.log(data)
+        this.Covariance=data
+        if(this.Covariance.length!==0)
+        {
+          console.log("Covariance",this.Covariance[0].Covariance)
+          this.form.patchValue({covariance:this.Covariance[0].covariance})
+        }
+        this.dataTable = this.initDatatable("datatable_Covariance");
         this.dataTable.clear().rows.add(data).draw();
       });
     // this.subscriptions.push(sb);
@@ -271,3 +282,4 @@ export class RatiosharpComponent implements OnInit, OnDestroy, AfterViewInit{
     //this.dtTrigger.next(null);
   }
 }
+

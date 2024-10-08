@@ -10,7 +10,7 @@
                         id="ComboOpcvm" formControlName="denominationOpcvm" >
                     <option selected>Sélectonnez un fonds</option>
                   <option *ngFor="let opcvm of opcvm$"
-                          value="{{opcvm[0]}}">{{opcvm[21]}}</option>
+                          value="{{opcvm.idOpcvm}}">{{opcvm.denominationOpcvm}}</option>
                   <!--                <option>Tous</option>-->
                 </select>
             </div>

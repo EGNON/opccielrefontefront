@@ -1,0 +1,83 @@
+<div class="card">
+  <form [formGroup]="form">
+    <div class="row mb-5">
+      <div class="col-md-3 fv-row">
+        <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Fonds</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <div class="input-group mb-0">
+          <select
+            class="form-select form-select-sm form-select-solid"
+            id="ComboOpcvmRatioSharp" formControlName="denominationOpcvm" >
+            <option selected>Sélectonnez un fonds</option>
+            <option *ngFor="let opcvm of opcvm$"
+                    value="{{opcvm.idOpcvm}}">{{opcvm.denominationOpcvm}}</option>
+            <!--                <option>Tous</option>-->
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3 fv-row">
+        <!--begin::Input-->
+        <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Date début</label>
+        <div class="input-group mb-0">
+          <input type="text" class="form-control form-control-sm form-control-solid"
+                 placeholder="dd-mm-yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date début" aria-describedby="basic-addon6"
+                 formControlName="dateDebut"/>
+          <!--end::Input-->
+          <span (click)="d.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-3 fv-row">
+        <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Date fin</label>
+        <div class="input-group mb-0">
+          <input type="text" class="form-control form-control-sm form-control-solid"
+                 placeholder="dd-mm-yyyy" ngbDatepicker #d2="ngbDatepicker" aria-label="Date fin" aria-describedby="basic-addon6"
+                 formControlName="dateFin"/>
+          <!--end::Input-->
+          <span (click)="d2.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-2 fv-row">
+        <button  class="btn btn-sm btn-primary" style="margin-top: 40px" (click)="valider()" >
+          Valider
+        </button>
+      </div>
+      <div style="margin-top: 10px" class="row mb-2">
+        <div class="col-sm-12 fv-row">
+          <div class="alert alert-info d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+              <use xlink:href="#info-fill"/>
+            </svg>
+            Résultat covariance
+          </div>
+        </div>
+      </div>
+      <div class="row mb-5">
+        <div class="col-md-1 fv-row">
+          <label >Covariance=</label>
+        </div>
+        <div class="col-md-3 fv-row">
+          <input [readOnly]="true" type="text" class="form-control form-control-sm form-control-solid"
+                 formControlName="covariance"/>
+          <!--end::Input-->
+        </div>
+      </div>
+    </div>
+  </form>
+  <hr>
+  <div class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table align-middle table-row-dashed fs-6 gy-5 no-footer" id="datatable_Covariance">
+
+      </table>
+    </div>
+  </div>
+</div>
+
