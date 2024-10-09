@@ -1,0 +1,45 @@
+<div class="card card-flush">
+  <!--begin::Card header-->
+  <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+    <!--begin::Card title-->
+    <div class="card-title">
+      <!--      <div class="d-flex flex-column flex-lg-row mb-0">-->
+      <!--        &lt;!&ndash;begin::Content&ndash;&gt;-->
+      <!--        <div class="flex-lg-row-fluid me-0 me-lg-0">-->
+      <!--          <div class="col-md-12 fv-row">-->
+      <!--begin::Label-->
+      <label class="required fs-5 fw-semibold mb-2">Clients</label>
+      <!--end::Label-->
+      <!--begin::Input-->
+      <select
+        class="form-select form-select-sm form-select-solid"
+        id="ComboClient">
+        <option selected>Personne physique</option>
+        <option>Personne morale</option>
+      </select>
+      <!--          </div>-->
+      <!--          <div class="col-md-12 fv-row">-->
+      <a (click)="afficherClient()" style="margin-right: 5px;margin-left: 5px"  class="btn btn-sm btn-primary">Valider</a>
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="prospect==='Personne physique'" class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table align-middle table-row-dashed fs-6 gy-5 no-footer" id="datatable_Client_Physique">
+
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="prospect==='Personne morale'" class="card-body pt-0">
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table align-middle table-row-dashed fs-6 gy-5 no-footer" id="datatable_Client_Morale">
+
+      </table>
+    </div>
+  </div>
+</div>
+
