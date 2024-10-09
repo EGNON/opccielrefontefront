@@ -9,6 +9,7 @@ import {EntityCrudModule} from "../../../core/modules/entity-crud/entity-crud.mo
 import {SharedModule} from "../../../template/_metronic/shared/shared.module";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {ReactiveFormsModule} from "@angular/forms";
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 
@@ -24,6 +25,7 @@ import {ReactiveFormsModule} from "@angular/forms";
         ActionnaireopcvmRoutingModule,
         EntityCrudModule,
         SharedModule,
+        NgMultiSelectDropDownModule,
         SweetAlert2Module,
         ReactiveFormsModule
     ]

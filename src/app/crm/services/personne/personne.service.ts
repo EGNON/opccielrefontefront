@@ -29,9 +29,9 @@ export class PersonneService extends ResourceService<Personne> implements OnDest
     return this.http.get<Personne[]>(environment.apiUrl + '/personnephysiquemorales/tous');
   }
 
-  afficherPersonneOpcvm(idOpcvm:number):Observable<Personne[]>
+  afficherPersonneNotInOpcvm(idOpcvm:number):Observable<Personne[]>
   {
-    return this.http.get<Personne[]>(this.API_URL + `/opcvm/${idOpcvm}`);
+    return this.http.get<Personne[]>(this.API_URL + `/personnenotinopcvm/${idOpcvm}`);
   }
   afficherPersonneInOpcvm(idOpcvm:number):Observable<Personne[]>
   {

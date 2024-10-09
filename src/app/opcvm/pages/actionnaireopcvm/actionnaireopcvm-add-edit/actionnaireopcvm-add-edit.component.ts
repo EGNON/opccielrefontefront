@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, of, Subscription} from "rxjs";
 import {Monnaie} from "../../../../crm/models/monnaie.model";
 import {Pays} from "../../../../crm/models/pays.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PaysService} from "../../../../crm/services/pays.service";
 import {MonnaieService} from "../../../../crm/services/monnaie.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
@@ -24,6 +24,7 @@ import {Formule} from "../../../../core/models/formule";
 })
 export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
   id?: number;
+  public personneSettings = {};
   monnaies$: Observable<Monnaie[]>;
   opcvm:Opcvm;
   personne$: any;
@@ -72,6 +73,25 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
     }
     else
       this.pageInfo.updateTitle("Ajout d'actionnaire à un OPCVM")
+
+    this.personneSettings = {
+      singleSelection: false,
+      idField: 'idPersonne',
+      textField: 'denomination',
+      enableCheckAll: true,
+      selectAllText: 'Sélectionnez tous',
+      unSelectAllText: 'Ne pas tout sélectionné',
+      allowSearchFilter: true,
+      limitSelection: -1,
+      clearSearchFilter: true,
+      maxHeight: 197,
+      itemsShowLimit: 10,
+      searchPlaceholderText: 'Rechercher un élément',
+      noDataAvailablePlaceholderText: 'Aucune donnée à afficher',
+      closeDropDownOnSelection: false,
+      showSelectedItemsAtTop: false,
+      defaultOpen: false,
+    };
   }
   loadFormValues(entity: any)
   {
@@ -89,15 +109,37 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
-
+  get personnes(): FormArray { return <FormArray>this.entityForm.get('personne')}
   getPersonne()
   {
-    const sb  = this.personneService.afficherPersonneOpcvm(
+    const sb  = this.personneService.afficherPersonneNotInOpcvm(
         this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm).subscribe(
         (data)=>{
           this.personne$=data
+          this.personne=data
         }
     )
+  }
+
+  public onFilterChange(item: any) {
+    // console.log('onFilterChange', item);
+  }
+  public onDropDownClose(item: any) {
+    // console.log('onDropDownClose', item);
+  }
+
+  public onItemSelect(item: any) {
+    // console.log('onItemSelect', item);
+  }
+  public onDeSelect(item: any) {
+    // console.log('onDeSelect', item);
+  }
+
+  public onSelectAll(items: any) {
+    // console.log('onSelectAll', items);
+  }
+  public onDeSelectAll(items: any) {
+    // console.log('onDeSelectAll', items);
   }
 
   get f() { return this.entityForm.controls; }
@@ -198,12 +240,12 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
 
   onSaveEntity()
   {
-    this.tableau = document.getElementById("table_PersonneOpcvm");
+    /*this.tableau = document.getElementById("table_PersonneOpcvm");
     var length = this.tableau.getElementsByTagName('tr').length
     if (length == 1) {
       alert("Veuillez ajouter au moins un actionnaire")
       return;
-    }
+    }*/
     this.isLoading = true;
     this.submitted = true;
     if(this.entityForm.invalid) return;
@@ -220,7 +262,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
         )
         .subscribe(
           (data)=>{
-            this.nbreLigne = document.getElementById("table_PersonneOpcvm").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
+          /*  this.nbreLigne = document.getElementById("table_PersonneOpcvm").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
             var i: number = 2;
             //        console.log(this.nbreLigne);
             for (i === 2; i < this.nbreLigne; i++) {
@@ -232,7 +274,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
               this.actionnaireOpcvm.personne.idPersonne=document.getElementById("table_PersonneOpcvm").getElementsByTagName('tr')[i].cells[0].innerHTML;
               // console.log("act"+i,this.actionnaireOpcvm)
               this.entityService.create(this.actionnaireOpcvm).subscribe();
-            }
+            }*/
           }
       );
     this.subscriptions.push(sb);
@@ -240,20 +282,38 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
 
   saveEntity() {
      this.opcvm=new Opcvm();
-     this.actionnaireOpcvm=new Actionnaireopcvm();
-     this.actionnaireOpcvm.opcvm=new Opcvm();
-     this.actionnaireOpcvm.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm").idOpcvm;
-     this.actionnaireOpcvm.personne=new Personne();
+
+     let actionnaireOpcvmTab:any[]=[];
+
+    let personne= this.entityForm.value.personne.map((u: any) => {
+      return {personne: u};
+    })
+    console.log("personneMap==",personne)
+    console.log("length=",this.entityForm.value.personne.length)
+
     // @ts-ignore
-     this.actionnaireOpcvm.personne.idPersonne=document.getElementById("table_PersonneOpcvm").getElementsByTagName('tr')[1].cells[0].innerHTML;
+    let i:number=0;
+    let total:number=this.entityForm.value.personne.length
+    for( i===0;i<total;i++){
+      this.actionnaireOpcvm=new Actionnaireopcvm();
+      this.actionnaireOpcvm.opcvm=new Opcvm();
+      this.actionnaireOpcvm.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm").idOpcvm;
+      this.actionnaireOpcvm.personne=new Personne();
+
+      this.actionnaireOpcvm.personne=this.entityForm.value.personne[i];
+      //console.log("personne "+i,this.entityForm.value.personne[i])
+      actionnaireOpcvmTab.push(this.actionnaireOpcvm);
+    }
+    // @ts-ignore
+     //this.actionnaireOpcvm.personne.idPersonne=document.getElementById("table_PersonneOpcvm").getElementsByTagName('tr')[1].cells[0].innerHTML;
     const entity: any = {
       ...this.entityForm.value,
       opcvm:this.opcvm
     };
-    // console.log("act1",this.actionnaireOpcvm)
+     console.log("act1",actionnaireOpcvmTab)
     return this.id
-        ? this.entityService.update(this.actionnaireOpcvm)
-        : this.entityService.create(this.actionnaireOpcvm);
+        ? this.entityService.update(actionnaireOpcvmTab)
+        : this.entityService.create(actionnaireOpcvmTab);
   }
 }
 
