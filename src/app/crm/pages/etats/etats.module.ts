@@ -25,6 +25,7 @@ import { TestPrintComponent } from './test-print/test-print.component';
 import { TestPrint2Component } from './test-print-2/test-print-2.component';
 import {CardsModule, WidgetsModule} from "../../../template/_metronic/partials";
 import {SharedModule} from "../../../template/_metronic/shared/shared.module";
+import { ClientPrint2Component } from './client-print2/client-print2.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {SharedModule} from "../../../template/_metronic/shared/shared.module";
        ClientnayantinvestiComponent,
        ObjectifPrintComponent,
        TestPrintComponent,
-       TestPrint2Component
+       TestPrint2Component,
+       ClientPrint2Component
   ],
   imports: [
     CommonModule,

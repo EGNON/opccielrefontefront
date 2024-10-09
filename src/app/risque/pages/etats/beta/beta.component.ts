@@ -259,7 +259,7 @@ export class BetaComponent implements OnInit, OnDestroy, AfterViewInit{
       dates)
       .pipe(first())
       .subscribe(data => {
-        console.log(data)
+       // console.log(data)
         this.beta=data
         if(this.beta.length!==0)
         {

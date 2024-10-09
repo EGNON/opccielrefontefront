@@ -11,6 +11,7 @@ import {ClientnayantinvestiComponent} from "./clientnayantinvesti/clientnayantin
 import {ObjectifPrintComponent} from "./objectif-print/objectif-print.component";
 import {TestPrintComponent} from "./test-print/test-print.component";
 import {TestPrint2Component} from "./test-print-2/test-print-2.component";
+import { ClientPrint2Component } from './client-print2/client-print2.component';
 
 const routes: Routes = [
   {
