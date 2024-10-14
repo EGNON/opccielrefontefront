@@ -132,6 +132,11 @@ export class ConnexionComponent implements OnInit, OnDestroy{
     this.authService.LocalStorageManager.setValue("currentOpcvm", n);
     this.passEntry.emit(n);
     this.modal.dismiss();
+    /*alert('ok');
+    this.opcvmService.update({
+      ...n,
+      est
+    })*/
     this.router.navigate(['opcvm', 'dashboard']);
     return n;
   }

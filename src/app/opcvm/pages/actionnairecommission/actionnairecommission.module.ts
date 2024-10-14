@@ -12,8 +12,6 @@ import {ActionnairecommissionRoutingModule} from "./actionnairecommission-routin
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgbInputDatepicker} from "@ng-bootstrap/ng-bootstrap";
 
-
-
 @NgModule({
   declarations: [
     ActionnairecommissionComponent,

@@ -1,0 +1,131 @@
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form enctype="multipart/form-data" class="form mb-5">
+          <div class="row mb-5">
+            <div class="card">
+              <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                  <!--begin::Search-->
+                  <div class="d-flex align-items-center position-relative my-1">
+                    <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                    <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12">
+                  </div>
+                  <!--end::Search-->
+                </div>
+                <!--end::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                  <div class="col-md-2 fv-row d-none">
+                    <label>Choix du fichier</label>
+                    <div class="input-group input-group-sm">
+                      <input #file type="file" class="form-control form-control-sm" id="inputGroupFile05"
+                             accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                             aria-describedby="inputGroupFileAddon05" aria-label="Upload" (change)="onImagePicked($event)">
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-sm btn-success me-3" (click)="importCours(file, $event)">
+                      <span class="indicator-label">Importer les dépôts</span>
+                    </button>
+                    <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary"
+                            [disabled]="true" (click)="submitting ? null : save()">
+                      <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                      </ng-container>
+                      <ng-container *ngIf="!submitting">
+                        <span class="indicator-label">Enregistrer</span>
+                      </ng-container>
+                    </button>
+                  </div>
+                </div>
+                <!--end::Card toolbar-->
+              </div>
+              <div class="card-body pt-0">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="simple-tab-0" data-bs-toggle="tab" href="#simple-tabpanel-0"
+                       role="tab" [attr.aria-controls]="'simple-tabpanel-0'" aria-selected="true">PERSONNE PHYSIQUE</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="simple-tab-1" data-bs-toggle="tab" href="#simple-tabpanel-1"
+                       role="tab" [attr.aria-controls]="'simple-tabpanel-1'" aria-selected="true">PERSONNE MORALE</a>
+                  </li>
+                </ul>
+                <div class="tab-content pt-5" id="tab-content">
+                  <div class="tab-pane active" id="simple-tabpanel-0" role="tabpanel" [attr.aria-labelledby]="'simple-tab-0'">
+                    <div class="table-responsive angular-bootstrap-table" *ngIf="isLoading">
+                      <table datatable [dtOptions]="datatableConfigPh" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                        <thead>
+                        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                          <ng-container *ngFor="let column of datatableConfigPh.columns; let i=index">
+                            <th>{{ column.title }}</th>
+                          </ng-container>
+                        </tr>
+                        </thead>
+                        <tbody class="fw-semibold text-gray-600">
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="simple-tabpanel-1" role="tabpanel" [attr.aria-labelledby]="'simple-tab-1'">
+                    <div class="table-responsive angular-bootstrap-table" *ngIf="isLoading">
+                      <table datatable [dtOptions]="datatableConfigPm" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                        <thead>
+                        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                          <ng-container *ngFor="let column of datatableConfigPm.columns; let i=index">
+                            <th>{{ column.title }}</th>
+                          </ng-container>
+                        </tr>
+                        </thead>
+                        <tbody class="fw-semibold text-gray-600">
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="button" class="btn btn-sm btn-warning me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary"
+                    [disabled]="true" (click)="submitting ? null : save()">
+              <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+              </ng-container>
+              <ng-container *ngIf="!submitting">
+                <span class="indicator-label">Enregistrer</span>
+              </ng-container>
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>

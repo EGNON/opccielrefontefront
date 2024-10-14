@@ -1860,7 +1860,7 @@ export class LibraryService implements OnDestroy{
                 {
                   allow: this.authService.isGrantedRole('ROLE_PLANIFICATION_RDV'),
                   title: 'Importation des dépôts pour souscription',
-                  page: '#',
+                  page: '/opcvm/souscription/importationdepot',
                   role: 'ROLE_IMPORT_DEPOT_SOUS',
                   icon: '',
                   translate: '',

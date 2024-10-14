@@ -198,7 +198,6 @@ export class TitresListingComponent {
       ajax: (dataTablesParameters: any, callback: any) => {
         const sb = this.entityService.afficherTousSelonQualite(dataTablesParameters, this.qualite.libelleQualite, "Tcn")
           .subscribe(resp => {
-            console.log(this.qualite.libelleQualite + " : ", resp);
             callback(resp.data);
           });
         this.subscriptions.push(sb);
