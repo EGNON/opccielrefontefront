@@ -15,31 +15,44 @@
                             <label class="required fs-5 fw-semibold mb-2">Personne</label>
                             <!--end::Label-->
                             <!--begin::Select-->
-                            <select class="form-select form-select-sm mb-2" formControlName="personne"
+                          <ng-multiselect-dropdown
+                            [settings]="personneSettings"
+                            [placeholder]="'Sélectionnez une ou plusieurs personne(s)'"
+                            formControlName="personne"
+                            [data]="personne"
+                            [disabled]="false"
+                            (onFilterChange)="onFilterChange($event)"
+                            (onDropDownClose)="onDropDownClose($event)"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="onDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)">
+                          </ng-multiselect-dropdown>
+                            <!--<select class="form-select form-select-sm mb-2" formControlName="personne"
                                     [ngClass]="{ 'is-invalid': submitted && f.personne.errors }" >
                                 <option selected>Sélectionnez une personne...</option>
-<!--                                <option [defaultSelected]="true" [ngValue]="entity?.monnaieDto" [disabled]="true">-->
-<!--                                    {{ entity?.monnaieDto?.nom }}-->
-<!--                                </option>-->
+&lt;!&ndash;                                <option [defaultSelected]="true" [ngValue]="entity?.monnaieDto" [disabled]="true">&ndash;&gt;
+&lt;!&ndash;                                    {{ entity?.monnaieDto?.nom }}&ndash;&gt;
+&lt;!&ndash;                                </option>&ndash;&gt;
                                 <option *ngFor="let item of personne$" [ngValue]="item">
                                     {{ item.denomination }}
                                 </option>
-                            </select>
+                            </select>-->
                             <!--end::Select-->
-<!--                            <div *ngIf="submitted && f.personne.errors" class="invalid-feedback">-->
-<!--                                <div *ngIf="f.personne.errors.required">Ce champs est obligatoire</div>-->
-<!--                            </div>-->
+                            <div *ngIf="submitted && f.personne.errors" class="invalid-feedback">
+                                <div *ngIf="f.personne.errors.required">Ce champs est obligatoire</div>
+                            </div>
                         </div>
                         <!--end::Col-->
-                        <div class="col-md-3 fv-row">
-                            <!--begin::Label-->
+                        <!--<div class="col-md-3 fv-row">
+                            &lt;!&ndash;begin::Label&ndash;&gt;
                             <a type="button" class="btn btn-sm btn-primary" style="margin-top: 30px"
                                (click)="addRow('table_PersonneOpcvm')">
                                 Ajouter
                             </a>
                         </div>
                         <div class="table-responsive angular-bootstrap-table">
-                            <!--begin::Table-->
+                            &lt;!&ndash;begin::Table&ndash;&gt;
                             <table id="table_PersonneOpcvm"
                                    class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5">
                                 <thead>
@@ -53,8 +66,8 @@
 
                                 </tbody>
                             </table>
-                            <!--end::Table-->
-                        </div>
+                            &lt;!&ndash;end::Table&ndash;&gt;
+                        </div>-->
                     </div>
                     <!--end::Input group-->
                     <!--begin::Separator-->
