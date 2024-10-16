@@ -342,6 +342,7 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
   getPlaceAll = () => {
     this.placeService.afficherTous().subscribe(
       (resp) => {
+        console.log("Resp === ", resp);
         this["places"] = resp.data;
       });
   }

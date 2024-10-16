@@ -43,7 +43,9 @@ export class PersonneService extends ResourceService<Personne> implements OnDest
   afficherPersonneSelonNumeroCpteDepositaire(numero:string){
     return this.http.get<Personne[]>(environment.apiUrl + '/personnes/verifiernumerocptedepositaire/'+numero);
   }
-
+  rechercherParSigle(sigle: string) {
+    return this.http.post<any>(this.API_URL + `/rechercherpar/sigle-${sigle}`, null);
+  }
   afficherPersonneSelonQualite(keyword: any){
     const url = `${this.API_URL}/qualite/${keyword}`;
     return this.http.get<Personne[]>(url);
