@@ -113,5 +113,7 @@ export class ReportingsService {
   beta(idOpcvm: any, parameter: any) {
     return this.http.post<any>(`${this.API_URL}/risque/beta/${idOpcvm}`,parameter);
   }
-
+  ratioTreynor(idOpcvm: any, annee: any,rf:any) {
+    return this.http.get<any>(`${this.API_URL}/risque/ratiotreynor/${idOpcvm}/${annee}/${rf}`);
+  }
 }

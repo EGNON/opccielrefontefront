@@ -74,16 +74,16 @@ export class ActionnairecommissionListComponent implements OnInit, OnDestroy, Af
         },
         {
           title: 'Date', data: 'date', render: function (data, type, row) {
-            let daterecup:string[];
+            /*let daterecup:string[];
             let mois:number;
             let libelleMois:string;
              daterecup=row.date;
              mois=Number(daterecup[1]);
              libelleMois=daterecup[1]
              if(mois<10)
-               libelleMois="0"+daterecup[1];
+               libelleMois="0"+daterecup[1];*/
             //console.log(daterecup)
-            return row.date;//moment(data).format('DD/MM/YYYY');
+            return moment(data).format('DD/MM/YYYY');
           }
         },
       ],

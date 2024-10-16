@@ -1,31 +1,28 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {DataTableDirective} from "angular-datatables";
-import {Observable, Subject, Subscription} from "rxjs";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ReportingsService} from "../../../services/reportings/reportings.service";
-
-import $ from "jquery";
-import moment from "moment";
-import {first} from "rxjs/operators";
-import {OpcvmService} from "../../../../core/services/opcvm.service";
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataTableDirective } from 'angular-datatables';
+import moment from 'moment';
+import { first, Observable, Subject, Subscription } from 'rxjs';
+import { OpcvmService } from '../../../../core/services/opcvm.service';
+import { ReportingsService } from '../../../services/reportings/reportings.service';
 
 @Component({
-  selector: 'app-correlation',
-  templateUrl: './correlation.component.html',
-  styleUrl: './correlation.component.scss'
+  selector: 'app-ratiotreynor',
+  templateUrl: './ratiotreynor.component.html',
+  styleUrl: './ratiotreynor.component.scss'
 })
-export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
+export class RatiotreynorComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(DataTableDirective, {static: false})
   private datatableElement: DataTableDirective;
-  isDtInit:boolean = false
+  isDtInit: boolean = false
   dataTable: any;
   dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject<any>();
   reportList$: Observable<any>;
-  selectOpcvm:any;
-  idOpcvm:any;
+  selectOpcvm: any;
+  submitted = false;
+  idOpcvm: any;
   opcvm$: any;
-  correlation: any;
   reportList: any[] = [];
   form: FormGroup;
 
@@ -35,23 +32,27 @@ export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
     private cr: ChangeDetectorRef,
     private reportingsService: ReportingsService,
     private opcvmService: OpcvmService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       denominationOpcvm: [null, Validators.required],
-      dateDebut: [null, Validators.required],
-      dateFin: [null,Validators.required],
-      correlation: [null]
+      annee: [null, Validators.required],
+      rf: [null, Validators.required],
+      rtp: [null]
     });
+    this.submitted = false;
     this.afficherOpcvm()
     this.dtOptions = {...this.reportingsService.dtOptions};
-    console.log("INIT === ", this.form.value);
+    //console.log("INIT === ", this.form.value);
     // this.loadData();
   }
-  valider(){
+
+  valider() {
     this.loadData()
   }
+
   public dtInit(): void {
     if (this.isDtInit) {
       this.datatableElement.dtInstance.then(dtInstance => {
@@ -60,41 +61,42 @@ export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
       });
     } else this.isDtInit = true;
   }
+
   initDatatable(tableId: any) {
-    let $  = require('jquery');
+    let $ = require('jquery');
     const datatable = $(`#${tableId}`).DataTable({
       dom: 'Bfrtip',
       // columnDefs: [{visible: false, targets: 5}],
       order: [],
-      drawCallback: function (settings:any) {
+      drawCallback: function (settings: any) {
         let api = this.api();
-          /*let rows = api.rows({page:'current'} ).nodes();
-          console.log("ROWS === ", settings);
-          let last: any = null;
-          api.column(5, {page:'current'} ).data().each(function (group: any, i: any) {
-            console.log(group[5], i);
-            console.log(last, group[5], i);
-            if (last !== group[5]) {
-              $(rows).eq(i).before(
-                '<tr style="background-color:#49bbf1" class="group"><th colspan="9">'+group[5]+'</th></tr>'
-              );
-              last = group[5];
-            }
-          });*/
+        //   let rows = api.rows({page:'current'} ).nodes();
+        //   console.log("ROWS === ", settings);
+        //   let last: any = null;
+        //   api.column(5, {page:'current'} ).data().each(function (group: any, i: any) {
+        //     //console.log(group[9], i);
+        //     console.log(last, group[9], i);
+        //     if (last !== group[9]) {
+        //       $(rows).eq(i).before(
+        //         '<tr style="background-color:#49bbf1" class="group"><th colspan="9">'+group[9]+'</th></tr>'
+        //       );
+        //       last = group[9];
+        //     }
+        //   });
       },
       lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
       lengthChange: false,
       responsive: true,
       buttons: [
         {
-          extend:    'copy',
-          text:      '<i class="fa fa-files-o"></i> Copier',
+          extend: 'copy',
+          text: '<i class="fa fa-files-o"></i> Copier',
           titleAttr: 'Copy',
           className: 'btn btn-default btn-sm'
         },
         {
-          extend:    'csv',
-          text:      '<i class="fa fa-files-o"></i> CSV',
+          extend: 'csv',
+          text: '<i class="fa fa-files-o"></i> CSV',
           titleAttr: 'CSV',
           className: 'btn btn-default btn-sm',
           exportOptions: {
@@ -102,8 +104,8 @@ export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
           }
         },
         {
-          extend:    'excel',
-          text:      '<i class="fa fa-files-o"></i> Excel',
+          extend: 'excel',
+          text: '<i class="fa fa-files-o"></i> Excel',
           titleAttr: 'Excel',
           className: 'btn btn-default btn-sm',
           exportOptions: {
@@ -111,8 +113,8 @@ export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
           }
         },
         {
-          extend:    'pdf',
-          text:      '<i class="fa fa-file-pdf"></i> PDF',
+          extend: 'pdf',
+          text: '<i class="fa fa-file-pdf"></i> PDF',
           titleAttr: 'PDF',
           className: 'btn btn-default btn-sm',
           exportOptions: {
@@ -120,8 +122,8 @@ export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
           }
         },
         {
-          extend:    'print',
-          text:      '<i class="fa fa-print"></i> Imprimer',
+          extend: 'print',
+          text: '<i class="fa fa-print"></i> Imprimer',
           titleAttr: 'Print',
           className: 'btn btn-default btn-sm',
           /*autoPrint: false,*/
@@ -137,14 +139,14 @@ export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
       columns: [
         {
           title: "DATE .", data: 'dateFermeture', render: function (data: any, type: any, row: any) {
-            let daterecup:string[];
-            let mois:number;
-            let libelleMois:string;
-            daterecup=row.dateFermeture;
-            mois=Number(daterecup[1]);
-            libelleMois=daterecup[1]
-            if(mois<10)
-              libelleMois="0"+daterecup[1];
+            let daterecup: string[];
+            let mois: number;
+            let libelleMois: string;
+            daterecup = row.dateFermeture;
+            mois = Number(daterecup[1]);
+            libelleMois = daterecup[1]
+            if (mois < 10)
+              libelleMois = "0" + daterecup[1];
             //console.log(daterecup)
             //return daterecup[2]+"/"+libelleMois+"/"+daterecup[0];//moment(data).format('DD/MM/YYYY');
             return moment(row.dateFermeture).format('DD/MM/YYYY');
@@ -156,18 +158,27 @@ export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
           }
         },
         {
-          title: "NAV BanchMark", data: 'nav', render: function (data: any, type: any, row: any) {
-            return row.nav;
+          title: "Dividende distribuée", data: 'dividendeDistribue', render: function (data: any, type: any, row: any) {
+            return row.dividendeDistribue;
           }
         },
         {
-          title: "Performance du portefeuille", data: 'performancePortefeuille', render: function (data: any, type: any, row: any) {
-            return row.performancePortefeuille;
+          title: "Performance annuelle",
+          data: 'performanceAnnuelle',
+          render: function (data: any, type: any, row: any) {
+            return row.performanceAnnuelle;
           }
         },
         {
-          title: "Performance du BenchMark", data: 'performanceBenchMark', render: function (data: any, type: any, row: any) {
-            return row.performanceBenchMark;
+          title: "Volatilité annualisée",
+          data: 'volatiliteAnnualisee',
+          render: function (data: any, type: any, row: any) {
+            return row.volatiliteAnnualisee;
+          }
+        },
+        {
+          title: "Ratio de sharp", data: 'sharp', render: function (data: any, type: any, row: any) {
+            return row.sharp;
           }
         }
       ],
@@ -206,7 +217,7 @@ export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
       stateSave: true,
       destroy: true
     });
-    datatable.columns([0,1,4]).visible( true);
+    datatable.columns([0, 1, 5]).visible(true);
 
     return datatable;
   }
@@ -224,48 +235,31 @@ export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   loadData(submitted = false) {
-    this.selectOpcvm=document.getElementById('ComboOpcvmRatioSharp')
-    this.idOpcvm=this.selectOpcvm.options[this.selectOpcvm.selectedIndex].value;
-    let dateDebut: any;
-    let dateFin: any;
-    if (this.form.controls.dateDebut.value) {
-      dateDebut = new Date(
-        this.form.controls.dateDebut.value.year,
-        this.form.controls.dateDebut.value.month - 1,
-        this.form.controls.dateDebut.value.day + 1);
-    }
-    if (this.form.controls.dateFin.value) {
-      dateFin = new Date(
-        this.form.controls.dateFin.value.year,
-        this.form.controls.dateFin.value.month - 1,
-        this.form.controls.dateFin.value.day + 1);
-    }
-    let dates = {startDate: dateDebut, endDate: dateFin};
-    //console.log("opcvm=",this.idOpcvm)
-    //console.log("dates=",dates)
-    this.reportingsService.correlation(this.idOpcvm,
-     dates)
+    this.submitted = true;
+    this.selectOpcvm = document.getElementById('ComboOpcvmRatioTreynor')
+    this.idOpcvm = this.selectOpcvm.options[this.selectOpcvm.selectedIndex].value;
+
+    //console.log("opcvm="+this.idOpcvm+";annee"+this.form.value.annee+";"+this.form.value.rf)
+    this.reportingsService.ratioTreynor(this.idOpcvm,
+      this.form.value.annee,
+      this.form.value.rf.replace(',','.'))
       .pipe(first())
       .subscribe(data => {
-        //console.log(data)
-        this.correlation=data
-        if(this.correlation.length!==0)
-        {
-          console.log("correlation",this.correlation[0].correlation)
-          this.form.patchValue({correlation:this.correlation[0].correlation})
-        }
-        this.dataTable = this.initDatatable("datatable_Correlation");
-        this.dataTable.clear().rows.add(data).draw();
+      //  console.log(data)
+          this.form.patchValue({rtp:data.rtp})
+          this.submitted = false;
       });
     // this.subscriptions.push(sb);
   }
-  afficherOpcvm(){
+  get f() { return this.form.controls; }
+  afficherOpcvm() {
     this.opcvmService.afficherTous().subscribe(
-      (data)=>{
-        this.opcvm$=data.data;
+      (data) => {
+        this.opcvm$ = data.data;
       }
     )
   }
+
   rebindDataTable() {
     this.datatableElement.dtInstance.then(x => x.draw());
   }
@@ -283,4 +277,3 @@ export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
     //this.dtTrigger.next(null);
   }
 }
-

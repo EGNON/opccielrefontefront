@@ -11,6 +11,9 @@ import { RatiosharpComponent } from './ratiosharp/ratiosharp.component';
 import { CorrelationComponent } from './correlation/correlation.component';
 import { CovarianceComponent } from './covariance/covariance.component';
 import { BetaComponent } from './beta/beta.component';
+import { RatiotreynorComponent } from './ratiotreynor/ratiotreynor.component';
+import { NombreDecimalDirective } from '../../../validators/nombre-decimal.directive';
+import { NumeroPositifValidatorsDirective } from '../../../validators/numero-positif-validators.directive';
 
 
 @NgModule({
@@ -20,7 +23,8 @@ import { BetaComponent } from './beta/beta.component';
     RatiosharpComponent,
     CorrelationComponent,
     CovarianceComponent,
-    BetaComponent
+    BetaComponent,
+    RatiotreynorComponent
 
   ],
     imports: [
@@ -28,7 +32,9 @@ import { BetaComponent } from './beta/beta.component';
         EtatsRoutingModule,
         DataTablesModule,
         NgbInputDatepicker,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+      NombreDecimalDirective,
+      NumeroPositifValidatorsDirective
     ]
 })
 export class EtatsModule { }

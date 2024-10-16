@@ -97,6 +97,7 @@ export class TarificationordinaireAddEditComponent implements OnInit, OnDestroy{
       const sb = this.entityService.afficherTarificationSelonId(this.id,this.qualite)
         .subscribe((entity)=>{
           this.entity=entity.data;
+          console.log(this.entity)
           this.loadFormValues(entity.data);
         });
       this.subscriptions.push(sb);
@@ -148,7 +149,7 @@ export class TarificationordinaireAddEditComponent implements OnInit, OnDestroy{
     console.log("borne",borneInferieur)
     this.entityForm.patchValue({taux:taux.toString().replace('.',',')});
     this.entityForm.patchValue({forfait:entity.forfait.toString().trim()});
-    this.entityForm.patchValue({codeRole:entity.codeRole});
+    this.entityForm.patchValue({codeRole:entity.codeRole.trim()});
     this.entityForm.patchValue({classeTitre:entity.classeTitre});
     this.entityForm.patchValue({borneInferieur: borneInferieur.toString().trim()});
     this.entityForm.patchValue({borneSuperieur: entity.borneSuperieur});
