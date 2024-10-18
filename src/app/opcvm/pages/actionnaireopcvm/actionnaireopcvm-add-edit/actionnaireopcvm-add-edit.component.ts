@@ -313,7 +313,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
      console.log("act1",actionnaireOpcvmTab)
     return this.id
         ? this.entityService.update(actionnaireOpcvmTab)
-        : this.entityService.create(actionnaireOpcvmTab);
+        : this.entityService.create (actionnaireOpcvmTab);
   }
 }
 
