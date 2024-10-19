@@ -3,19 +3,14 @@ import {Subscription, switchMap, tap} from "rxjs";
 import {Config} from "datatables.net";
 import {SweetAlertOptions} from "sweetalert2";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ProfilcommissionsousrachService} from "../../../services/profilcommissionsousrach.service";
 import {AuthService} from "../../../../core/modules/auth";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {
-  DeleteProfilcommissionsousrachModalComponent
-} from "../../profilcommissionsousrach/delete-profilcommissionsousrach-modal/delete-profilcommissionsousrach-modal.component";
 import {TarificationordinaireService} from "../../../services/tarificationordinaire.service";
 import {
   DeleteTarificationordinaireModalComponent
 } from "../delete-tarificationordinaire-modal/delete-tarificationordinaire-modal.component";
 import {filter, map} from "rxjs/operators";
 import {Action} from "../../../../core/modules/entity-crud/entity-crud.component";
-import {Qualite} from "../../../../crm/models/qualite.model";
 
 @Component({
   selector: 'app-tarificationordinaire-list',
@@ -251,17 +246,17 @@ export class TarificationordinaireListComponent implements OnInit, OnDestroy, Af
       {
         title: 'Dénominaton', data: 'denomination', render: function (data:any, type:any, full:any) {
           if(lib==='sgi')
-            return full.registraire.denomination || '';
+            return full.registraire?.denomination || '';
           else
           if(lib==='depositaire')
-            return full.depositaire.denomination || '';
+            return full.depositaire?.denomination || '';
           else
-            return full.place.libellePlace;
+            return full.place?.libellePlace;
         }
       },
       {
         title: 'Classe', data: 'libelleClasseTitre', render: function (data:any, type:any, full:any) {
-          return full.classeTitre.libelleClasseTitre || '';
+          return full.classeTitre?.libelleClasseTitre || '';
         }
       },
       {
@@ -295,184 +290,8 @@ export class TarificationordinaireListComponent implements OnInit, OnDestroy, Af
         }
       },
     ];
-    console.log("columns",columns)
     return columns;
 
-  }
-  getDataTableConfig(qualite: string) {
-    let columns: any[];
-    let lib = qualite.toLowerCase().trim();
-    switch (lib) {
-      case 'sgi':
-        columns: [
-          {
-            title: 'SGI', data: 'denomination', render: function (data, type, row) {
-              return row.registraire.denomination;
-            }
-          },
-          {
-            title: 'Classe', data: 'libelleClasseTitre', render: function (data, type, row) {
-              return row.classeTitre.libelleClasseTitre;
-            }
-          },
-          {
-            title: 'Role', data: 'codeRole', render: function (data, type, row) {
-              return row.codeRole;
-            }
-          },
-          {
-            title: 'Borne inférieur', data: 'borneInferieur', render: function (data, type, row) {
-              return row.borneInferieur;
-            }
-          },
-          {
-            title: 'Borne supérieur', data: 'borneSuperieur', render: function (data, type, row) {
-              return row.borneSuperieur;
-            }
-          },
-          {
-            title: 'taux', data: 'taux', render: function (data, type, row) {
-              return row.taux;
-            }
-          },
-          {
-            title: 'Forfait', data: 'forfait', render: function (data, type, row) {
-              return row.forfait;
-            }
-          },
-        ];
-        break;
-      case 'depositaire':
-        columns: [
-          {
-            title: 'Dépositaire', data: 'denomination', render: function (data, type, row) {
-              return row.depositaire.denomination;
-            }
-          },
-          {
-            title: 'Classe', data: 'libelleClasseTitre', render: function (data:any, type:any, row:any) {
-              return row.classeTitre.libelleClasseTitre;
-            }
-          },
-          {
-            title: 'Role', data: 'codeRole', render: function (data:any, type:any, row:any) {
-              return row.codeRole;
-            }
-          },
-          {
-            title: 'Borne inférieur', data: 'borneInferieur', render: function (data, type, row) {
-              return row.borneInferieur;
-            }
-          },
-          {
-            title: 'Borne supérieur', data: 'borneSuperieur', render: function (data:any, type:any, row:any) {
-              return row.borneSuperieur;
-            }
-          },
-          {
-            title: 'taux', data: 'taux', render: function (data:any, type:any, row:any) {
-              return row.taux;
-            }
-          },
-          {
-            title: 'Forfait', data: 'forfait', render: function (data:any, type:any, row:any) {
-              return row.forfait;
-            }
-          },
-        ];
-        break;
-      default:
-        columns: [
-          {
-            title: 'Place', data: 'denomination', render: function (data:any, type:any, row:any) {
-              return row.place.libellePlace;
-            }
-          },
-          {
-            title: 'Classe', data: 'libelleClasseTitre', render: function (data, type, row) {
-              return row.classeTitre.libelleClasseTitre;
-            }
-          },
-          {
-            title: 'Role', data: 'codeRole', render: function (data, type, row) {
-              return row.codeRole;
-            }
-          },
-          {
-            title: 'Borne inférieur', data: 'borneInferieur', render: function (data, type, row) {
-              return row.borneInferieur;
-            }
-          },
-          {
-            title: 'Borne supérieur', data: 'borneSuperieur', render: function (data:any, type:any, row:any) {
-              return row.borneSuperieur;
-            }
-          },
-          {
-            title: 'taux', data: 'taux', render: function (data:any, type:any, row:any) {
-              return row.taux;
-            }
-          },
-          {
-            title: 'Forfait', data: 'forfait', render: function (data:any, type:any, row:any) {
-              return row.forfait;
-            }
-          },
-        ];
-        break;
-    }
-    columns.push({
-      sortable: false,
-      title: 'Actions',
-      class:'text-end min-w-70px',
-      render: (data: any, type: any, full: any) => {
-        const parentActionStart = `
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                      Action
-                    </button>
-                    <ul class="dropdown-menu">`;
-        const show = `
-                <li>
-                    <a type="button" class="dropdown-item" data-qualite="${qualite}" data-action="view" data-id="${full.idTarificationOrdinaire}">Afficher</a>
-                </li>`;
-        const edit = `
-                <li>
-                    <a type="button" class="dropdown-item" data-qualite="${qualite}" data-action="edit" data-id="${full.idTarificationOrdinaire}">Modifier</a>
-                </li>`;
-        const separator = `<li><hr class="dropdown-divider"></li>`;
-        const delete1 = `<li>
-                    <a type="button" class="dropdown-item" hasPermission = "CAN_DELETE" data-qualite="${qualite}" data-action="delete" data-id="${full.idTarificationOrdinaire}">Supprimer</a>
-                </li>`;
-        const parentActionEnd = `</ul>
-            </div>`;
-        const actions = [];
-        actions.push(parentActionStart);
-        actions.push(show);
-        actions.push(edit);
-        actions.push(separator);
-        actions.push(delete1);
-        actions.push(parentActionEnd);
-
-        return actions.join('');
-      },
-    });
-    let config = {
-      serverSide: true,
-      ajax: (dataTablesParameters: any, callback: any) => {
-        console.log("Param === ", dataTablesParameters);
-        const sb =this.entityService.datatable_TarificationOPC(dataTablesParameters,this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,qualite)
-          .subscribe(resp => {
-            console.log("Datatable Res === ", resp);
-            callback(resp);
-          });
-        this.subscriptions.push(sb);
-      },
-      columns: columns
-    };
-    this.datatableConfig = config;
-
-    return config;
   }
   ngOnDestroy(): void {
     if (this.clickListener) {

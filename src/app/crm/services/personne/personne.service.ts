@@ -1,10 +1,7 @@
-import {Inject, Injectable, OnDestroy} from '@angular/core';
-import {TableService} from "../table.sevice";
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Personne} from "../../models/personne/personne.model";
 import {Observable} from "rxjs";
-import {Monnaie} from "../../models/monnaie.model";
-import {Personnephysiquemorale} from "../../models/personne/personnephysiquemorale.model";
 import {environment} from "../../../../environments/environment";
 import { ResourceService } from '../core/resource.service';
 
@@ -66,7 +63,6 @@ export class PersonneService extends ResourceService<Personne> implements OnDest
     const url = `${this.API_URL}/datatable/list`;
     return this.http.post<Personne[]>(url,dataTablesParameters);
   }
-
   existeSelonNumCpteDeposit(keyword: string) {
     const url = `${this.API_URL}/existance/${keyword}/compte`;
     return this.http.post<Personne[]>(url, null);

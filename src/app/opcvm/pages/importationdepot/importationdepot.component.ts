@@ -146,6 +146,27 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
 
   createPmForm() {
     return this.fb.group({
+      //Champs DepotRachat
+      idSeance: [null],
+      opcvm: [null],
+      quantite: [0],
+      modeVL: ["CONNU"],
+      type: ["S"],
+      dateOperation: [null],
+      natureOperation: [null],
+      valeurCodeAnalytique: [null],
+      valeurFormule: [null],
+      estGenere: [false],
+      estVerifier: [false],
+      nomVerificateur: [null],
+      dateVerification: [null],
+      montantSouscrit: [null],
+      titre: [null],
+      qte: [0],
+      cours: [0],
+      commission: [0],
+      interetCouru: [0],
+      intererPrecompte: [0],
       //Champs communs
       id: [0],
       idPersonne: [0],
@@ -174,6 +195,27 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
 
   createPhForm() {
     return this.fb.group({
+      //Champs DepotRachat
+      idSeance: [null],
+      opcvm: [null],
+      quantite: [0],
+      modeVL: ["CONNU"],
+      type: ["S"],
+      dateOperation: [null],
+      natureOperation: [null],
+      valeurCodeAnalytique: [null],
+      valeurFormule: [null],
+      estGenere: [false],
+      estVerifier: [false],
+      nomVerificateur: [null],
+      dateVerification: [null],
+      montantSouscrit: [null],
+      titre: [null],
+      qte: [0],
+      cours: [0],
+      commission: [0],
+      interetCouru: [0],
+      intererPrecompte: [0],
       //Champs communs
       id: [null],
       idPersonne: [null],
@@ -250,17 +292,6 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
           arrs = arrs.filter((value, index) => index > 0);
           console.log("Tab ===", arrs);
           if(value.toLowerCase().trim() === "personne physique") {
-            /*this.phList.clear();
-            arrs.forEach((ph: any[]) => {
-              const phForm = self.createPhForm();
-              phForm.patchValue({
-                nom: ph[3],
-                prenom: ph[4],
-                sexe: ph[9]
-              });
-              this.phList.push(phForm);
-            });*/
-
             const arraySource = of(true).pipe(
               concatMap(() => {
                 return forkJoin(self.loadPhExcelData(arrs));
@@ -285,6 +316,22 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
               },
               columns: [
                 {
+                  title: 'DISTRIBUTEUR', data: 'distributeur', render: function (data: any, type: any, row: any) {
+                    const distributeur = row.distributeur;
+                    if(!distributeur)
+                      return '';
+
+                    return `<select class="form-select form-select-sm mb-2" formControlName="distributeur">
+                              <option disabled [defaultSelected]="true" [ngValue]="${distributeur}">
+                                ${ distributeur.denomination }
+                              </option>
+                            </select>`;
+                  },
+                  orderData: [1],
+                  orderSequence: ['asc', 'desc'],
+                  type: 'string',
+                },
+                {
                   title: 'N° Compte SGI', data: 'numeroCpteDeposit', render: function (data:any, type:any, row:any) {
                     const numeroCpteDeposit = row.numeroCpteDeposit;
                     return numeroCpteDeposit || '';
@@ -292,11 +339,6 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
                   orderData: [1],
                   orderSequence: ['asc', 'desc'],
                   type: 'string',
-                },
-                {
-                  title: 'Civilité', data: 'civilite', render: function (data:any, type:any, full:any) {
-                    return full.civilite || '';
-                  }
                 },
                 {
                   title: 'Dénomination', data: 'nom', render: function (data:any, type:any, full:any) {
@@ -325,28 +367,21 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
                   type: 'string',
                 },
                 {
-                  title: 'Mode d\'établissement', data: 'modeEtablissementDto', render: function (data:any, type:any, full:any) {
-                    const mode = full.modeEtablissementDto;
-                    if(!mode)
-                      return '';
-
-                    return mode.libelle;
+                  title: 'MONTANT SOUSCRIT (MS)', data: 'montantSouscrit', render: function (data:any, type:any, full:any) {
+                    return `<input readonly name="montantSouscrit" class="form-control form-control-sm" value="${full.montantSouscrit || 0}"/>`;
                   }
                 },
               ],
               createdRow: function (row, data, dataIndex, cells) {
-                /*const coursTitreForm = self.createCoursTitreForm();
-                const coursClone: any = data;
-                coursTitreForm.patchValue(coursClone);
-                self.cours.push(coursTitreForm);
+                const phForm = self.createPhForm();
+                const phClone: any = data;
+                phForm.patchValue(phClone);
+                self.phList.push(phForm);
                 $('td', row).find('input').on('change', (e) => {
                   self.filterForm.patchValue({[e.target.name]: +e.target.value!});
-                });*/
+                });
               },
             };
-            // this.datatableElement.dtInstance.then(dtInstance => {
-            //   dtInstance.ajax.reload();
-            // });
           }
           if(value.toLowerCase().trim() === "personne morale") {
             const arraySource = of(true).pipe(
@@ -372,6 +407,18 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
               },
               columns: [
                 {
+                  title: 'DISTRIBUTEUR', data: 'distributeur', render: function (data: any, type: any, row: any) {
+                    const distributeur = row.distributeur;
+                    if(!distributeur)
+                      return '';
+
+                    return distributeur.denomination;
+                  },
+                  orderData: [1],
+                  orderSequence: ['asc', 'desc'],
+                  type: 'string',
+                },
+                {
                   title: 'N° Compte SGI', data: 'numeroCpteDeposit', render: function (data:any, type:any, row:any) {
                     const numeroCpteDeposit = row.numeroCpteDeposit;
                     return numeroCpteDeposit || '';
@@ -379,11 +426,6 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
                   orderData: [1],
                   orderSequence: ['asc', 'desc'],
                   type: 'string',
-                },
-                {
-                  title: 'Civilité', data: 'civilite', render: function (data:any, type:any, full:any) {
-                    return full.civilite || '';
-                  }
                 },
                 {
                   title: 'Dénomination', data: 'nom', render: function (data:any, type:any, full:any) {
@@ -405,6 +447,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
                     if(!pays)
                       return '';
 
+                    // return pays.libelleFr;
                     return pays.libelleFr;
                   },
                   orderData: [1],
@@ -412,12 +455,8 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
                   type: 'string',
                 },
                 {
-                  title: 'Mode d\'établissement', data: 'modeEtablissementDto', render: function (data:any, type:any, full:any) {
-                    const mode = full.modeEtablissementDto;
-                    if(!mode)
-                      return '';
-
-                    return mode.libelle;
+                  title: 'MONTANT SOUSCRIT (MS)', data: 'montantSouscrit', render: function (data:any, type:any, full:any) {
+                    return `<input readonly name="montantSouscrit" class="form-control form-control-sm" value="${full.montantSouscrit || 0}"/>`;
                   }
                 },
               ],
@@ -448,7 +487,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
   loadPhExcelData = (phList: any[]) => {
     return phList.map((i) =>
       of(i).pipe(
-        delay(500),
+        // delay(500),
         switchMap((j: any[]) => {
           return this.pers.rechercherParSigle(j[0]).pipe(
             map(resp => ({
@@ -477,7 +516,8 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
               prenomsMere: null,
               numeroCpteDeposit: j[2],
               profession: null,
-              paysNationalite: null
+              paysNationalite: null,
+              montantSouscrit: j[6]
             }))
           )
         }),
@@ -488,29 +528,38 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
 
   loadPmExcelData = (pmList: any[]) => {
     return pmList.map((i) =>
-      of({
-        //Champs communs
-        id: null,
-        idPersonne: null,
-        mobile1: null,
-        mobile2: null,
-        fixe1: null,
-        fixe2: null,
-        ifu: null,
-        bp: null,
-        distributeur: null,
-        secteur: null,
-        emailPerso: null,
-        emailPro: null,
-        numeroCpteDeposit: null,
-        paysResidence: null,
-        //Champs PersonneMorale
-        sigle: null,
-        raisonSociale: null
-      })
+      of(i)
         .pipe(
-          delay(500),
-          tap(x => console.log("X === ", x)),
+          // delay(500),
+          switchMap((j: any[]) => {
+            return this.pers.rechercherParSigle(j[0]).pipe(
+              map(resp => ({
+                  //Champs communs
+                  id: null,
+                  idPersonne: null,
+                  denomination: j[3],
+                  mobile1: j[10],
+                  mobile2: null,
+                  fixe1: j[9],
+                  fixe2: null,
+                  ifu: null,
+                  bp: null,
+                  distributeur: {
+                    idPersonne: resp.data.idPersonne,
+                    denomination: resp.data.denomination
+                  },
+                  emailPerso: j[11],
+                  emailPro: j[11],
+                  numeroCpteDeposit: j[2],
+                  paysResidence: null,
+                  //Champs PersonneMorale
+                  sigle: null,
+                  raisonSociale: null,
+                  montantSouscrit: j[6]
+                }))
+            )
+          }),
+          // tap(x => console.log("X === ", x)),
         )
     );
   }
