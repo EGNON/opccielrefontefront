@@ -70,7 +70,7 @@ export class TarificationordinaireListComponent implements OnInit, OnDestroy, Af
             }),
             switchMap((qualite) => this.entityService.datatable_TarificationOPC(dataTablesParameters,this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,qualite))
           ).subscribe(resp => {
-            // console.log("DataTable Param = ", resp);
+             console.log("DataTable Param = ", resp.data);
             callback(resp.data);
           });
         this.subscriptions.push(sb);
@@ -246,10 +246,9 @@ export class TarificationordinaireListComponent implements OnInit, OnDestroy, Af
       {
         title: 'Dénominaton', data: 'denomination', render: function (data:any, type:any, full:any) {
           if(lib==='sgi')
-            return full.registraire?.denomination || '';
-          else
-          if(lib==='depositaire')
-            return full.depositaire?.denomination || '';
+            return full.personne?.denomination || '';
+          else if(lib==='depositaire')
+            return full.personne?.denomination || '';
           else
             return full.place?.libellePlace;
         }

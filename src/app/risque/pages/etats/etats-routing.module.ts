@@ -7,6 +7,7 @@ import {RatiosharpComponent} from "./ratiosharp/ratiosharp.component";
 import { CorrelationComponent } from './correlation/correlation.component';
 import { CovarianceComponent } from './covariance/covariance.component';
 import { BetaComponent } from './beta/beta.component';
+import { RatiotreynorComponent } from './ratiotreynor/ratiotreynor.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'correlation/liste', component: CorrelationComponent, },
       { path: 'covariance/liste', component: CovarianceComponent, },
       { path: 'beta/liste', component: BetaComponent, },
+      { path: 'ratiotreynor/liste', component: RatiotreynorComponent, },
 
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

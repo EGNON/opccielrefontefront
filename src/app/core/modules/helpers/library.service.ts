@@ -1589,6 +1589,19 @@ export class LibraryService implements OnDestroy{
                   route: RisqueRouting.find((value, index, obj) =>
                     ('/risque/etats/beta/liste').includes(value.path!)),
                   children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_RATIOTREYNOR'),
+                  title: 'Ratio de Treynor',
+                  page: '/risque/etats/ratiotreynor/liste',
+                  role: 'ROLE_ETAT_RATIOTREYNOR',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/ratiotreynor/liste').includes(value.path!)),
+                  children: []
                 }
                 /*{
                   allow: this.authService.isGrantedRole('ROLE_ETAT_OPCVM'),

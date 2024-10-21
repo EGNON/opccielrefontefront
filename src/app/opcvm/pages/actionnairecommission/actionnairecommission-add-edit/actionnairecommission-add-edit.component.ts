@@ -60,8 +60,8 @@ export class ActionnairecommissionAddEditComponent implements OnInit, OnDestroy{
     this.entityForm = this.fb.group(
       {
         id: [this.id],
-        personne: [null],
-        codeProfil:[null,Validators.required],
+        personne: [null,Validators.required],
+        codeProfil:[null],
         libelleProfil:[null],
         typeCommission:[null,Validators.required],
         date:[null,Validators.required],
@@ -92,7 +92,8 @@ export class ActionnairecommissionAddEditComponent implements OnInit, OnDestroy{
     this.entityForm.patchValue({personne: entity.personne});
     //this.entityForm.patchValue({id: entity.idPays});
     this.dateRecup=entity.date;
-    let date1 = new Date((this.dateRecup[0]+"/"+this.dateRecup[1]+"/"+this.dateRecup[2]));
+    //let date1 = new Date((this.dateRecup[0]+"/"+this.dateRecup[1]+"/"+this.dateRecup[2]));
+    let date1 = new Date(entity.date);
     console.log("data",date1)
     this.entityForm.patchValue({date: new NgbDate(
         date1.getFullYear(), date1.getMonth()+1, date1.getDate())});
@@ -148,7 +149,7 @@ export class ActionnairecommissionAddEditComponent implements OnInit, OnDestroy{
     this.subscriptions.push(sb);
   }
   afficherCodeProfil(){
-    this.entityForm.patchValue({codeProfil:this.entityForm.value.profilCommissionSousRach.codeProfil});
+    this.entityForm.patchValue({codeProfil:this.entityForm.value.profilCommissionSousRach.codeProfil.trim()});
   }
   saveEntity() {
     this.opcvm=new Opcvm();
@@ -160,9 +161,13 @@ export class ActionnairecommissionAddEditComponent implements OnInit, OnDestroy{
         this.entityForm.controls.date.value.month-1,
         this.entityForm.controls.date.value.day+1);
     }
+    let libelleProfil=""
+    if(this.entityForm.value.profilCommissionSousRach!=null){
+      libelleProfil=this.entityForm.value.profilCommissionSousRach.libelleProfil
+    }
     const entity: any = {
       ...this.entityForm.value,
-      libelleProfil:this.entityForm.value.profilCommissionSousRach.libelleProfil,
+      libelleProfil:libelleProfil,
       date:date,
       opcvm:this.opcvm
     };

@@ -1,0 +1,79 @@
+<div class="card">
+  <form [formGroup]="form">
+    <div class="row mb-5">
+      <div class="col-md-3 fv-row">
+        <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Fonds</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <select
+          class="form-select form-select-sm form-select-solid"
+          id="ComboOpcvmRatioTreynor" formControlName="denominationOpcvm"
+          [ngClass]="{ 'is-invalid': submitted && f.denominationOpcvm.errors }">
+          <option selected>Sélectonnez un fonds</option>
+          <option *ngFor="let opcvm of opcvm$"
+                  value="{{opcvm.idOpcvm}}">{{opcvm.denominationOpcvm}}</option>
+          <!--                <option>Tous</option>-->
+        </select>
+        <div *ngIf="submitted && f.denominationOpcvm.errors" class="invalid-feedback">
+          <div *ngIf="f.denominationOpcvm.errors.required">Le fonds est obligatoire</div>
+        </div>
+      </div>
+
+      <div class="col-md-3 fv-row">
+        <label style="margin-top: 10px" class=" fs-5 fw-semibold mb-2">Année</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <input appNumeroPositifValidators type="text" class="form-control form-control-sm form-control-solid"
+               placeholder="" id="annee" formControlName="annee"
+               [ngClass]="{ 'is-invalid': submitted && f.annee.errors }"/>
+        <!--end::Input-->
+        <div *ngIf="submitted && f.annee.errors" class="invalid-feedback">
+          <div *ngIf="f.annee.errors.required">Le fonds est obligatoire</div>
+        </div>
+      </div>
+      <div class="col-md-3 fv-row">
+        <label style="margin-top: 10px" class=" fs-5 fw-semibold mb-2">Taux sans risque</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <input appNombreDecimal type="text" class="form-control form-control-sm form-control-solid"
+               placeholder="" id="rf" formControlName="rf"
+               [ngClass]="{ 'is-invalid': submitted && f.rf.errors }"/>
+        <!--end::Input-->
+        <div *ngIf="submitted && f.rf.errors" class="invalid-feedback">
+          <div *ngIf="f.rf.errors.required">Le fonds est obligatoire</div>
+        </div>
+      </div>
+
+      <div class="col-md-2 fv-row">
+        <button type="submit" class="btn btn-sm btn-primary"
+                [disabled]="form.invalid" style="margin-top: 40px" (click)="valider()" >
+          Valider
+        </button>
+      </div>
+    </div>
+
+    <div style="margin-top: 10px" class="row mb-2">
+      <div class="col-sm-12 fv-row">
+        <div class="alert alert-info d-flex align-items-center" role="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+            <use xlink:href="#info-fill"/>
+          </svg>
+          Résultat Ratio de Treynor
+        </div>
+      </div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-md-2 fv-row">
+        <label >Ratio de Treynor=</label>
+      </div>
+      <div class="col-md-3 fv-row">
+        <input [readOnly]="true" type="text" class="form-control form-control-sm form-control-solid"
+               formControlName="rtp"/>
+        <!--end::Input-->
+      </div>
+    </div>
+  </form>
+  <hr>
+
+</div>
+
