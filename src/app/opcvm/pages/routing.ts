@@ -48,6 +48,11 @@ const OpcvmRouting: Routes = [
     loadChildren: () => import('./importationdepot/importationdepot.module').then((m) => m.ImportationdepotModule),
     data: { layout: 'dark-sidebar' },
   },
+  {
+    path: 'souscription/depotsouscription',
+    loadChildren: () => import('./depotsouscription/depotsouscription.module').then((m) => m.DepotsouscriptionModule),
+    data: { layout: 'dark-sidebar' },
+  },
 ];
 
 export { OpcvmRouting };

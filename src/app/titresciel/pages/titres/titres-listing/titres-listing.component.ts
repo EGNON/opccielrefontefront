@@ -1,4 +1,13 @@
-import {ChangeDetectorRef, Component, EventEmitter, Renderer2, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import {BehaviorSubject, Observable, Subscription} from "rxjs";
 import {DataTablesResponse} from "../../../../crm/models/data-tables.response.model";
 import {Config} from "datatables.net";
@@ -19,7 +28,7 @@ import {TableauAmortissementComponent} from "../../modal/tableau-amortissement/t
   templateUrl: './titres-listing.component.html',
   styleUrl: './titres-listing.component.scss'
 })
-export class TitresListingComponent {
+export class TitresListingComponent implements OnInit, OnDestroy, AfterViewInit{
   entity: any;
   newButtonTitle: string = "Nouveau";
   searchButtonTitle = 'Rechercher ';

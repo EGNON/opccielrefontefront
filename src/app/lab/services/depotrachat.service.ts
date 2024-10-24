@@ -36,5 +36,4 @@ export class DepotRachatService extends EntityService<DepotRachat> implements On
   {
     return this.http.get<DepotRachat[]>(`${this.API_URL}/depotsurannee/${codeExercice}/${montant}`);
   }
-
 }

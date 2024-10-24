@@ -1871,7 +1871,7 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [
                 {
-                  allow: this.authService.isGrantedRole('ROLE_PLANIFICATION_RDV'),
+                  allow: this.authService.isGrantedRole('ROLE_IMPORT_DEPOT_SOUS'),
                   title: 'Importation des dépôts pour souscription',
                   page: '/opcvm/souscription/importationdepot',
                   role: 'ROLE_IMPORT_DEPOT_SOUS',
@@ -1882,9 +1882,9 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_COMPTE_RENDU'),
+                  allow: this.authService.isGrantedRole('ROLE_DEPOT_SOUS'),
                   title: 'Dépot pour Souscription',
-                  page: '#',
+                  page: '/opcvm/souscription/depotsouscription',
                   role: 'ROLE_DEPOT_SOUS',
                   icon: '',
                   translate: '',
@@ -1915,9 +1915,9 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_AUTORISATION_CR'),
+                  allow: this.authService.isGrantedRole('ROLE_GENERATION_SOUS'),
                   title: 'Génération des souscriptions',
-                  page: '#',
+                  page: '/opcvm/souscription/depotsouscription/generate/part/actionnaire',
                   role: 'ROLE_GENERATION_SOUS',
                   icon: '',
                   translate: '',
