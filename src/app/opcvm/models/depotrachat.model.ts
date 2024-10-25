@@ -18,7 +18,7 @@ export class Depotrachat extends  ResourceModel<Depotrachat>{
   ecriture:string;
   estOD:boolean;
   type:string;
-  personneActionnaire:Personne;
+  actionnaire:Personne;
   idSeance:number;
   personne:Personne;
   opcvm:Opcvm;

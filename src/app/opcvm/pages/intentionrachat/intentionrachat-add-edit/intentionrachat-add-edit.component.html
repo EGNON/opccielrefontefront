@@ -38,8 +38,8 @@
                 <select class="form-select form-select-sm mb-2" formControlName="modeVL"
                         [ngClass]="{ 'is-invalid': submitted && f.modeVL.errors }">
                   <option disabled value="null">Sélectionnez un mode VL...</option>
-                  <option ngValue="RACHAT">CONNU</option>
-                  <option ngValue="SOUSCRIPTION">INCONNU</option>
+                  <option ngValue="CONNU">CONNU</option>
+                  <option ngValue="INCONNU">INCONNU</option>
                 </select>
                 <!--end::Select-->
                 <div *ngIf="submitted && f.modeVL.errors" class="invalid-feedback">
@@ -100,20 +100,20 @@
                 <label class="required fs-5 fw-semibold mb-2">Actionnaire</label>
                 <!--end::Label-->
                 <!--begin::Select-->
-                <select class="form-select form-select-sm mb-2" formControlName="personneActionnaire"
-                        [ngClass]="{ 'is-invalid': submitted && f.personneActionnaire.errors }"
+                <select class="form-select form-select-sm mb-2" formControlName="actionnaire"
+                        [ngClass]="{ 'is-invalid': submitted && f.actionnaire.errors }"
                 (change)="afficherNbrePart()">
                   <option disabled [ngValue]="null">Sélectionnez un actionnaire...</option>
-                  <option *ngIf="entity?.personneActionnaire" disabled [defaultSelected]="true" [ngValue]="entity?.personneActionnaire">
-                    {{ entity?.personneActionnaire?.denomination }}
+                  <option *ngIf="entity?.actionnaire" disabled [defaultSelected]="true" [ngValue]="entity?.actionnaire">
+                    {{ entity?.actionnaire?.denomination }}
                   </option>
                   <option *ngFor="let item of personneActionnaire$" [ngValue]="item">
                     {{ item.denomination }}
                   </option>
                 </select>
                 <!--end::Select-->
-                <div *ngIf="submitted && f.personneActionnaire.errors" class="invalid-feedback">
-                  <div *ngIf="f.personneActionnaire.errors.required">Ce champs est obligatoire</div>
+                <div *ngIf="submitted && f.actionnaire.errors" class="invalid-feedback">
+                  <div *ngIf="f.actionnaire.errors.required">Ce champs est obligatoire</div>
                 </div>
               </div>
               <!--end::Col-->
@@ -163,7 +163,7 @@
                 <label class="required fs-5 fw-semibold mb-2">Quantité rachat</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                <input  (keyup)="quantiteChange()" appNombreDecimal type="text" class="form-control form-control-sm"
                        placeholder="Ex : XXXXXXXXX" formControlName="quantite"
                        [ngClass]="{ 'is-invalid': submitted && f.quantite.errors }"/>
                 <!--end::Input-->
@@ -199,7 +199,7 @@
           <!--begin::Action buttons-->
           <div class="d-flex justify-content-end">
             <!--begin::Button-->
-            <a type="reset" routerLink="/opcvm/standard/profilopc" class="btn btn-sm btn-light me-3">
+            <a type="reset" routerLink="/opcvm/rachat/intentionrachat" class="btn btn-sm btn-light me-3">
               Annuler
             </a>
             <!--end::Button-->

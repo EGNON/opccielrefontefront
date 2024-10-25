@@ -91,6 +91,18 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
           }
         },
         {
+          title: 'Actionnaire.', data: 'denomination', render: function (data, type, row) {
+            //return row.standard;
+            return row.actionnaire.denomination;
+          }
+        },
+        {
+          title: 'Distributeur', data: 'denomination', render: function (data, type, row) {
+            //return row.standard;
+            return row.personne.denomination;
+          }
+        },
+        {
           title: 'Libelle OP.', data: 'libelleOperation', render: function (data, type, row) {
             //return row.standard;
             return row.libelleOperation;
@@ -99,7 +111,7 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
         {
           title: 'Quantité', data: 'qte', render: function (data, type, row) {
             //return row.standard;
-            return row.qte;
+            return row.quantite;
           }
         },
         {
@@ -134,15 +146,16 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
                     <ul class="dropdown-menu">`;
         const show = `
                 <li>
-                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idCritereAlerte}">Afficher</a>
+                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idDepotRachat}">Afficher</a>
                 </li>`;
         const edit = `
                 <li>
-                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idOperation}">Modifier</a>
+                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idDepotRachat}"
+                    data-id2="${full.idSeance}">Modifier</a>
                 </li>`;
         const separator = `<li><hr class="dropdown-divider"></li>`;
         const delete1 = `<li>
-                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idOperation}"
+                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idDepotRachat}"
                     >Supprimer</a>
                 </li>`;
         const parentActionEnd = `</ul>
@@ -184,7 +197,7 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
             break;
 
           case 'edit':
-            this.router.navigate(['edit', id], {relativeTo: this.route});
+            this.router.navigate(['edit', id,id2], {relativeTo: this.route});
             break;
 
           case 'delete':
