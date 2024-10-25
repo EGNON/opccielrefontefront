@@ -1,0 +1,187 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" class="form mb-5" enctype="multipart/form-data">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Référence pièce</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="referencePiece"/>
+              <!--end::Input-->
+              <!--<div *ngIf="submitted && f.referencePiece.errors" class="invalid-feedback">
+                <div *ngIf="f.referencePiece.errors.required">Le symbol est obligatoire</div>
+              </div>-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Mode VL.</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="modeVL">
+                <option disabled value="null">Sélectionnez un mode...</option>
+                <option ngValue="CONNU">CONNU</option>
+                <option ngValue="INCONNU">INCONNU</option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date Opération</label>
+              <!--end::Label-->
+
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="dd/mm/yyyy" ngbDatepicker #dateOperation="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                       formControlName="dateOperation"/>
+                <!--end::Input-->
+                <span (click)="dateOperation.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Distributeur</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="distributeur">
+                <option disabled selected [ngValue]="null">Sélectionnez un distributeur...</option>
+                <!--<option *ngIf="entity?.registraire" disabled [defaultSelected]="true" [ngValue]="entity?.registraire">
+                  {{ entity?.registraire?.denomination }}
+                </option>-->
+                <option *ngFor="let item of distributeurs$|async" [ngValue]="item">
+                  {{ item.denomination }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Actionnaire</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="actionnaire">
+                <option disabled selected [ngValue]="null">Sélectionnez un actionnaire...</option>
+                <!--<option *ngIf="entity?.actionnaire" disabled [defaultSelected]="true" [ngValue]="entity?.actionnaire">
+                  {{ entity?.actionnaire?.denomination }}
+                </option>-->
+                <option *ngFor="let item of actionnaires$|async" [ngValue]="item">
+                  {{ item.denomination }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Montant déposé</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="0" formControlName="montant"/>
+              <!--end::Input-->
+              <!--<div *ngIf="submitted && f.montant.errors" class="invalid-feedback">
+                <div *ngIf="f.montant.errors.required">Le montant déposé est obligatoire</div>
+              </div>-->
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Solde espèce</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="0" formControlName="soldeEspece"/>
+              <!--end::Input-->
+              <!--<div *ngIf="submitted && f.soldeEspece.errors" class="invalid-feedback">
+                <div *ngIf="f.soldeEspece.errors.required">Le solde espèce est obligatoire</div>
+              </div>-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Montant souscrit</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="0" formControlName="montantSouscrit"/>
+              <!--end::Input-->
+              <!--<div *ngIf="submitted && f.montantSouscrit.errors" class="invalid-feedback">
+                <div *ngIf="f.montantSouscrit.errors.required">Le montant souscrit est obligatoire</div>
+              </div>-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-8 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Libellé opération</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" readonly class="form-control form-control-sm" placeholder=""
+                     formControlName="libelleOperation"/>
+              <!--end::Input-->
+              <!--<div *ngIf="submitted && f.libelleOperation.errors" class="invalid-feedback">
+                <div *ngIf="f.libelleOperation.errors.required">Le solde espèce est obligatoire</div>
+              </div>-->
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/opcvm/souscription/depotsouscription" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="form.invalid" (click)="save()">
+              <ng-container *ngIf="submitting">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    Patientez svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                  </span>
+              </ng-container>
+              <ng-container *ngIf="!submitting">
+                <span class="indicator-label">Enregistrer</span>
+              </ng-container>
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->
