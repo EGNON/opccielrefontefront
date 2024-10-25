@@ -20,4 +20,8 @@ export class DepotsouscriptionService extends ResourceService<any> implements On
   afficherListeDepot(datatableRequest: any) {
     return this.http.post<any>(`${this.API_URL}/datatable/list`, datatableRequest);
   }
+
+  solde(idActionnaire: number, idOpcvm: number) {
+    return this.http.post<any>(`${environment.apiUrl}/libraries/${idActionnaire}/${idOpcvm}`, null);
+  }
 }

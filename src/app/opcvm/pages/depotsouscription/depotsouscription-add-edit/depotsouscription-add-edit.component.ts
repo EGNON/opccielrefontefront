@@ -1,9 +1,11 @@
 import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Subscription} from "rxjs";
+import {Observable, of, Subscription, switchMap, tap} from "rxjs";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 import {DepotsouscriptionService} from "../../../services/depotsouscription.service";
 import {PersonneService} from "../../../../crm/services/personne/personne.service";
+import {catchError, finalize, map} from "rxjs/operators";
+import {LoaderService} from "../../../../loader.service";
 
 @Component({
   selector: 'app-depotsouscription-add-edit',
@@ -13,8 +15,13 @@ import {PersonneService} from "../../../../crm/services/personne/personne.servic
 export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit, OnDestroy{
 
   @Input() id?: number;
+  isLoading = false;
   submitting = false;
+  submitted = false;
+
   title: string;
+  solde: number = 0;
+  soldeEspece: number = 0;
 
   currentOpcvm: any;
   form: FormGroup;
@@ -26,7 +33,8 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
     private entityService: DepotsouscriptionService,
     private personneService: PersonneService,
     private fb: FormBuilder,
-    private pageInfo: PageInfoService
+    private pageInfo: PageInfoService,
+    private loadingService: LoaderService,
   ) {}
 
   ngAfterViewInit(): void {
@@ -73,13 +81,54 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
     });
     this.getPersonnesAll('distributeurs');
     this.getPersonnesAll('actionnaires');
-    this.form.get('montant').valueChanges.subscribe(value => {
-      if(value)
-        this.form.patchValue({libelleOperation: `DEPOT DE ${value} FCFA POUR SOUSCRIPTION`});
+    const sb = this.form.get('actionnaire').valueChanges.pipe(
+      tap(() => this.loadingService.setLoading(true)),
+      switchMap(actionnaire => {
+        return this.entityService.solde(actionnaire.idPersonne, this.currentOpcvm?.idOpcvm).pipe(
+          map(result => {
+            return {
+              actionnaire: actionnaire,
+              solde: result
+            }
+          })
+        );
+      })
+    ).subscribe(resp => {
+      this.solde = resp.solde;
+      this.form.patchValue({soldeEspece: this.solde});
+      this.form.patchValue({montantSouscrit: 0});
+      this.form.patchValue({montant: 0});
+      this.loadingService.setLoading(false)
+      console.log("Solde === ", resp);
+    });
+    this.subscriptions.push(sb);
+    const sb1 = this.form.get('montant').valueChanges.subscribe(value => {
+      const montant = value !== "" ? parseFloat(value) : 0;
+      const monntantSouscrit = this.form.value.montantSouscrit !== "" ? parseFloat(this.form.value.montantSouscrit) : 0;
+      this.soldeEspece = this.solde + montant - monntantSouscrit;
+      this.form.patchValue({soldeEspece: this.soldeEspece});
+      if(montant > 0)
+        this.form.patchValue({libelleOperation: `DEPOT DE ${montant} FCFA POUR SOUSCRIPTION`});
       else
         this.form.patchValue({libelleOperation: null});
-      //console.log("Vous avez changé la valeur pour : " + value);
     });
+    this.subscriptions.push(sb1);
+    const sb2 = this.form.get('montantSouscrit').valueChanges.subscribe(value => {
+      const montant = this.form.value.montant !== "" ? parseFloat(this.form.value.montant) : 0;
+      const montantSouscrit = value !== "" ? parseFloat(value) : 0;
+      if(this.soldeEspece < montantSouscrit) {
+        this.form.patchValue({montantSouscrit: this.soldeEspece});
+        this.form.patchValue({soldeEspece: 0});
+      }
+      else {
+        this.form.patchValue({soldeEspece: this.solde + montant - montantSouscrit});
+      }
+      if(montant === 0 && montantSouscrit > 0)
+        this.form.patchValue({libelleOperation: `REINVESTISSEMENT DE  ${montantSouscrit} FCFA POUR SOUSCRIPTION`});
+      else
+        this.form.patchValue({libelleOperation: `DEPOT DE ${montant} FCFA POUR SOUSCRIPTION`});
+    });
+    this.subscriptions.push(sb2);
     if(this.id)
     {
       this.title = "Modification de dépôt pour souscription";
@@ -110,6 +159,7 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
 
   save() {
     if(this.form.invalid) return;
+    let result: Observable<any>;
     this.form.patchValue({datePiece: this.form.get("dateOperation").value});
     this.form.patchValue({dateValeur: this.form.get("dateOperation").value});
     let entity = this.form.value;
@@ -132,5 +182,28 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
       valeurCodeAnalytique: `OPC:${this.currentOpcvm?.idOpcvm};ACT:${entity.actionnaire?.idPersonne}`
     }
     console.log("Send form === ", entity);
+    if(this.id) {
+      result = this.entityService.update(entity);
+    }
+    else {
+      result = this.entityService.create(entity);
+    }
+    result
+      .pipe(
+        catchError((err) => {
+          this.submitting = false;
+          return of(err.message);
+        }),
+        finalize(() => {
+          this.isLoading = false;
+          this.submitting = false;
+          this.submitted = false;
+
+          this.router.navigate(['/opcvm/souscription/depotsouscription']);
+        })
+      )
+      .subscribe(value => {
+        console.log("Submit form === ", value);
+      });
   }
 }
