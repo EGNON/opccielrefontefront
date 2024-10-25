@@ -1949,6 +1949,30 @@ export class LibraryService implements OnDestroy{
                 }
               ]
             }
+            ,
+            {
+              allow: null,
+              title: 'Rachat',
+              icon: 'element-7',
+              dataLink: '',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_INT_RACH'),
+                  title: 'Intention de rachat',
+                  page: '/opcvm/rachat/intentionrachat',
+                  role: 'ROLE_INT_RACH',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Rachat',
+                  children: []
+                }
+              ]
+            }
           ]
         },
         {
