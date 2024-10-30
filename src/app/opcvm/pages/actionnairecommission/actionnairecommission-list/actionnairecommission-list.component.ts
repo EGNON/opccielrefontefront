@@ -15,6 +15,7 @@ import {formatNumber} from "@angular/common";
 import {
   DeleteActionnairecommissionModalComponent
 } from "../delete-actionnairecommission-modal/delete-actionnairecommission-modal.component";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-actionnairecommission-list',
@@ -35,6 +36,7 @@ export class ActionnairecommissionListComponent implements OnInit, OnDestroy, Af
   private idInAction: number;
 
   constructor(
+    private localStore: LocalService,
     private route: ActivatedRoute,
     private router: Router,
     private renderer: Renderer2,
@@ -50,7 +52,7 @@ export class ActionnairecommissionListComponent implements OnInit, OnDestroy, Af
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
         console.log("PARAMS === ", dataTablesParameters);
-        const sb = this.entityService.datatable_id(dataTablesParameters,this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+        const sb = this.entityService.datatable_id(dataTablesParameters,this.localStore.getData("currentOpcvm")?.idOpcvm)
           .subscribe(resp => {
             callback(resp.data);
           });

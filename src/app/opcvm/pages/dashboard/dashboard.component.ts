@@ -7,7 +7,6 @@ import {AuthService} from "../../../core/modules/auth";
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-  constructor(private authService: AuthService) {
-    console.log('DashboardComponent', this.authService.LocalStorageManager.getValue("currentOpcvm"));
+  constructor() {
   }
 }

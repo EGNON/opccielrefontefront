@@ -8,6 +8,7 @@ import {environment} from "../../../../../environments/environment";
 import {Utilisateur} from "../../../../crm/models/access/utilisateur.model";
 import {UtilisateurRolePermission} from "../models/utilisateur-role-permission.model";
 import {Opcvm} from "../../../models/opcvm";
+import {HttpClient} from "@angular/common/http";
 
 export type UserType = Utilisateur | undefined;
 export type OpcvmType = Opcvm | undefined;
@@ -73,6 +74,7 @@ export class AuthService implements OnDestroy {
   }
 
   constructor(
+    private http: HttpClient,
     private authHttpService: AuthHTTPService,
     private route: ActivatedRoute,
     private router: Router
@@ -114,6 +116,10 @@ export class AuthService implements OnDestroy {
     this.router.navigate(['/auth/login'], {
       queryParams: {},
     });
+  }
+
+  currentSeance(idOpcvm: any) {
+    return this.http.post<any>(`${environment.apiUrl}/libraries/${idOpcvm}`, null);
   }
 
   getUserByToken(): Observable<UserType> {

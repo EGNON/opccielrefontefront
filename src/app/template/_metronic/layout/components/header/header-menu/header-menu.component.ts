@@ -7,6 +7,7 @@ import {NgbDate, NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {ConnexionComponent} from "../../../../../../opcvm/pages/connexion/connexion.component";
 import {AuthService} from "../../../../../../core/modules/auth";
 import {Observable} from "rxjs";
+import {LocalService} from "../../../../../../services/local.service";
 declare var $:JQueryStatic;
 
 @Component({
@@ -20,6 +21,7 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
   opcvmIsConnected: any;
 
   constructor(
+    private localStore: LocalService,
     private authService: AuthService,
     private router: Router,
     private layout: LayoutService,
@@ -35,6 +37,7 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
     if(el.innerText.toLowerCase().includes("déconnexion"))
     {
       window.localStorage.removeItem("opcvmIsConnected");
+      this.localStore.clearData();
       this.opcvmIsConnected = null;
       this.authService.currentOpcvmSubject.next(null);
       this.router.navigate(['/'])

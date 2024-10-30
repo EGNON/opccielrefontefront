@@ -8,6 +8,7 @@ import {AuthService} from "../../../core/modules/auth";
 import {ActivatedRoute, Router} from "@angular/router";
 import moment from "moment";
 import {Config} from "datatables.net";
+import {LocalService} from "../../../services/local.service";
 
 @Component({
   selector: 'app-connexion',
@@ -24,6 +25,7 @@ export class ConnexionComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private localStore: LocalService,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
@@ -129,7 +131,12 @@ export class ConnexionComponent implements OnInit, OnDestroy{
   selectOpcvm(n: any) {
     this.authService.currentOpcvmSubject.next(n);
     window.localStorage.setItem("opcvmIsConnected", "1");
-    this.authService.LocalStorageManager.setValue("currentOpcvm", n);
+    // this.authService.LocalStorageManager.setValue("currentOpcvm", n);
+    this.localStore.saveData("currentOpcvm", n);
+    this.authService.currentSeance(n.idOpcvm).subscribe(seance => {
+      this.localStore.saveData("currentSeance", seance);
+    });
+    // this.localStore.saveData("opcvm", JSON.stringify(n));
     this.passEntry.emit(n);
     this.modal.dismiss();
     /*alert('ok');

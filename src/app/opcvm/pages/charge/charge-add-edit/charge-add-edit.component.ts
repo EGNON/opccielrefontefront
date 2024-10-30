@@ -15,6 +15,7 @@ import {catchError, filter, finalize, map} from "rxjs/operators";
 import {ChargeService} from "../../../services/charge.service";
 import {NatureevenementService} from "../../../../core/services/natureevenement.service";
 import {NatureoperationService} from "../../../../core/services/natureoperation.service";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-charge-add-edit',
@@ -48,6 +49,7 @@ export class ChargeAddEditComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private localStore: LocalService,
     public entityService: ChargeService,
     public natureOperationService: NatureoperationService,
     public authService: AuthService,
@@ -148,7 +150,7 @@ export class ChargeAddEditComponent implements OnInit, OnDestroy{
   }
   saveEntity() {
     this.opcvm=new Opcvm();
-    this.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm;
+    this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm;
     let date: any;
 
     const entity: any = {

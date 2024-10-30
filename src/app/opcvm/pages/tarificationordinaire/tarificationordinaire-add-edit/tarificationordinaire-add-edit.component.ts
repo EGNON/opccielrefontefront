@@ -4,18 +4,15 @@ import {Monnaie} from "../../../../crm/models/monnaie.model";
 import {Opcvm} from "../../../../core/models/opcvm";
 import {Actionnaireopcvm} from "../../../models/actionnaireopcvm.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActionnairecommissionService} from "../../../services/actionnairecommission.service";
-import {PersonneService} from "../../../../crm/services/personne/personne.service";
-import {ProfilcommissionsousrachService} from "../../../services/profilcommissionsousrach.service";
 import {AuthService} from "../../../../core/modules/auth";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 import {ActivatedRoute, Router} from "@angular/router";
-import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, filter, finalize, map} from "rxjs/operators";
 import {TarificationordinaireService} from "../../../services/tarificationordinaire.service";
 import {ClassetitreService} from "../../../../core/services/classetitre.service";
 import {PersonneMoraleService} from "../../../../crm/services/personne/personne.morale.service";
 import {PlaceService} from "../../../../core/services/place.service";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-tarificationordinaire-add-edit',
@@ -48,6 +45,7 @@ export class TarificationordinaireAddEditComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private localStore: LocalService,
     public entityService: TarificationordinaireService,
     public personneService: PersonneMoraleService,
     public classeTitreService: ClassetitreService,
@@ -236,7 +234,7 @@ export class TarificationordinaireAddEditComponent implements OnInit, OnDestroy{
   }
   saveEntity() {
     this.opcvm=new Opcvm();
-    this.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm;
+    this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm;
     let date: any;
 
     const entity: any = {

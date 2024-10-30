@@ -6,6 +6,7 @@ import {DepotsouscriptionService} from "../../../services/depotsouscription.serv
 import {PersonneService} from "../../../../crm/services/personne/personne.service";
 import {catchError, finalize, map} from "rxjs/operators";
 import {LoaderService} from "../../../../loader.service";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-depotsouscription-add-edit',
@@ -24,12 +25,14 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
   soldeEspece: number = 0;
 
   currentOpcvm: any;
+  currentSeance: any;
   form: FormGroup;
   private subscriptions: Subscription[] = [];
 
   [key: string]: any;
 
   constructor(
+    private localStore: LocalService,
     private entityService: DepotsouscriptionService,
     private personneService: PersonneService,
     private fb: FormBuilder,
@@ -45,15 +48,17 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
   }
 
   ngOnInit(): void {
-    this.currentOpcvm = JSON.parse(window.localStorage.getItem("currentOpcvm"));
+    this.currentOpcvm = this.localStore.getData("currentOpcvm");
+    this.currentSeance = this.localStore.getData("currentSeance");
     this.form = this.fb.group({
       id: [null],
       idOperation: [null],
-      opcvm: [null],
+      idSeance: [this.currentSeance?.idSeance],
+      opcvm: [this.currentOpcvm],
       transaction: [null],
       natureOperation: [null],
       actionnaire: [null, Validators.required],
-      distributeur: [null, Validators.required],
+      personne: [null, Validators.required],
       libelleOperation: [null, Validators.required],
       dateOperation: [null, Validators.required],
       valeurFormule: [null],
@@ -176,6 +181,7 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
       natureOperation: {
         codeNatureOperation: "DEP_SOUS"
       },
+      idSeance: this.currentSeance?.idSeanceOpcvm?.idSeance,
       opcvm: this.currentOpcvm,
       dateSaisie: new Date(),
       valeurFormule: `2:${entity.montant}`,

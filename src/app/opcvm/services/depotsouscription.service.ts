@@ -17,8 +17,8 @@ export class DepotsouscriptionService extends ResourceService<any> implements On
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
 
-  afficherListeDepot(datatableRequest: any) {
-    return this.http.post<any>(`${this.API_URL}/datatable/list`, datatableRequest);
+  afficherListeDepot(datatableRequest: any, idOpcvm: number, idSeance: number) {
+    return this.http.post<any>(`${this.API_URL}/datatable/list/${idOpcvm}/${idSeance}`, datatableRequest);
   }
 
   solde(idActionnaire: number, idOpcvm: number) {

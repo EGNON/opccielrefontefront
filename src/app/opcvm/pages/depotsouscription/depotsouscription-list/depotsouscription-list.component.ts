@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {Config} from "datatables.net";
-import {filter, map} from "rxjs/operators";
 import moment from "moment";
 import {DepotsouscriptionService} from "../../../services/depotsouscription.service";
 import {Subscription} from "rxjs";
@@ -10,6 +9,7 @@ import {
   DeleteCompterenduModalComponent
 } from "../../../../crm/pages/compterendu/delete-compterendu-modal/delete-compterendu-modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-depotsouscription-list',
@@ -20,6 +20,8 @@ export class DepotsouscriptionListComponent implements OnInit, OnDestroy, AfterV
 
   private subscriptions: Subscription[] = [];
   datatableConfig: Config = {};
+  currentOpcvm: any;
+  currentSeance: any;
 
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
@@ -29,6 +31,7 @@ export class DepotsouscriptionListComponent implements OnInit, OnDestroy, AfterV
   private idInAction: number;
 
   constructor(
+    private localStore: LocalService,
     private entityService: DepotsouscriptionService,
     private renderer: Renderer2,
     private router: Router,
@@ -73,10 +76,14 @@ export class DepotsouscriptionListComponent implements OnInit, OnDestroy, AfterV
   }
 
   ngOnInit(): void {
+    this.currentOpcvm = this.localStore.getData("currentOpcvm");
+    this.currentSeance = this.localStore.getData("currentSeance");
+    console.log("Oooooooo === ", this.localStore.getData("currentSeance"));
     this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
-        const sb = this.entityService.afficherListeDepot(dataTablesParameters)
+        const sb = this.entityService.afficherListeDepot(
+          dataTablesParameters, this.currentOpcvm?.idOpcvm, this.currentSeance?.idSeanceOpcvm?.idSeance)
           .subscribe(resp => {
             console.log("Retour === ", resp);
             callback(resp.data);

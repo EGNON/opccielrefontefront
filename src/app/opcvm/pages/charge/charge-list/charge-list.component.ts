@@ -11,6 +11,7 @@ import {
 } from "../../actionnairecommission/delete-actionnairecommission-modal/delete-actionnairecommission-modal.component";
 import {ChargeService} from "../../../services/charge.service";
 import {DeleteChargeModalComponent} from "../delete-charge-modal/delete-charge-modal.component";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-charge-list',
@@ -31,6 +32,7 @@ export class ChargeListComponent implements OnInit, OnDestroy, AfterViewInit {
   private idInAction: number;
 
   constructor(
+    private localStore: LocalService,
     private route: ActivatedRoute,
     private router: Router,
     private renderer: Renderer2,
@@ -40,13 +42,13 @@ export class ChargeListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    //console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
-    //console.log("idOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+    //console.log("currentOpcvm=",this.localStore.getData("currentOpcvm"))
+    //console.log("idOpcvm=",this.localStore.getData("currentOpcvm")?.idOpcvm)
     this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
         console.log("PARAMS === ", dataTablesParameters);
-        const sb = this.entityService.datatable_id(dataTablesParameters,this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+        const sb = this.entityService.datatable_id(dataTablesParameters,this.localStore.getData("currentOpcvm")?.idOpcvm)
           .subscribe(resp => {
             callback(resp.data);
           });
