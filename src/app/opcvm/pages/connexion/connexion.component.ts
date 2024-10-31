@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import moment from "moment";
 import {Config} from "datatables.net";
 import {LocalService} from "../../../services/local.service";
+import { SeanceopcvmService } from '../../services/seanceopcvm.service';
 
 @Component({
   selector: 'app-connexion',
@@ -30,6 +31,7 @@ export class ConnexionComponent implements OnInit, OnDestroy{
     private router: Router,
     private authService: AuthService,
     private opcvmService: OpcvmService,
+    private seanceOpcvmService: SeanceopcvmService,
     public modal: NgbActiveModal,
     private fb: FormBuilder) {}
 
@@ -139,6 +141,11 @@ export class ConnexionComponent implements OnInit, OnDestroy{
     // this.localStore.saveData("opcvm", JSON.stringify(n));
     this.passEntry.emit(n);
     this.modal.dismiss();
+    /*this.seanceOpcvmService.afficherSeanceEnCours(n).subscribe(
+      (data)=>{
+        this.authService.LocalStorageManager.setValue("currentSeance", data.data.idSeance);
+      }
+    )*/
     /*alert('ok');
     this.opcvmService.update({
       ...n,

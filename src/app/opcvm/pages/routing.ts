@@ -26,6 +26,12 @@ const OpcvmRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
+    path: 'rachat/intentionrachat',
+    loadChildren: () =>
+      import('./intentionrachat/intentionrachat.module').then((m) => m.IntentionrachatModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
     path: 'standard/tarificationactionnaire',
     loadChildren: () =>
       import('./actionnairecommission/actionnairecommission.module').then((m) => m.ActionnairecommissionModule),
