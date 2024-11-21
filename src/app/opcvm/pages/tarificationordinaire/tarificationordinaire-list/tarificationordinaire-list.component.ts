@@ -11,6 +11,7 @@ import {
 } from "../delete-tarificationordinaire-modal/delete-tarificationordinaire-modal.component";
 import {filter, map} from "rxjs/operators";
 import {Action} from "../../../../core/modules/entity-crud/entity-crud.component";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-tarificationordinaire-list',
@@ -32,6 +33,7 @@ export class TarificationordinaireListComponent implements OnInit, OnDestroy, Af
   private idInAction: number;
 
   constructor(
+    private localStore: LocalService,
     private route: ActivatedRoute,
     private router: Router,
     private renderer: Renderer2,
@@ -68,7 +70,7 @@ export class TarificationordinaireListComponent implements OnInit, OnDestroy, Af
               console.log("this.qualite",this.qualite)
               this.newButtonTitle = this.qualite ? ((voyelles.includes(this.qualite[0]) ? 'Nouvel ' : 'Nouveau ') + `${this.qualite}`) : this.newButtonTitle;
             }),
-            switchMap((qualite) => this.entityService.datatable_TarificationOPC(dataTablesParameters,this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,qualite))
+            switchMap((qualite) => this.entityService.datatable_TarificationOPC(dataTablesParameters,this.localStore.getData("currentOpcvm")?.idOpcvm,qualite))
           ).subscribe(resp => {
              console.log("DataTable Param = ", resp.data);
             callback(resp.data);

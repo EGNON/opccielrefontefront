@@ -16,6 +16,7 @@ import {Personne} from "../../../../crm/models/personne/personne.model";
 import {Actionnaireopcvm} from "../../../models/actionnaireopcvm.model";
 import {Modeleecritureformule} from "../../../../core/models/modeleecritureformule.model";
 import {Formule} from "../../../../core/models/formule";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-actionnaireopcvm-add-edit',
@@ -43,6 +44,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
 
   constructor(
+     private localStore: LocalService,
       public entityService: ActionnaireopcvmService,
       public personneService: PersonneService,
       public authService: AuthService,
@@ -113,7 +115,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
   getPersonne()
   {
     const sb  = this.personneService.afficherPersonneNotInOpcvm(
-        this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm).subscribe(
+        this.localStore.getData("currentOpcvm")?.idOpcvm).subscribe(
         (data)=>{
           this.personne$=data
           this.personne=data
@@ -297,7 +299,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
     for( i===0;i<total;i++){
       this.actionnaireOpcvm=new Actionnaireopcvm();
       this.actionnaireOpcvm.opcvm=new Opcvm();
-      this.actionnaireOpcvm.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm").idOpcvm;
+      this.actionnaireOpcvm.opcvm.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm;
       this.actionnaireOpcvm.personne=new Personne();
 
       this.actionnaireOpcvm.personne=this.entityForm.value.personne[i];

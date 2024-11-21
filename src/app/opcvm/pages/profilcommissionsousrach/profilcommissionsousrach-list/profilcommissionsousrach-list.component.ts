@@ -3,7 +3,6 @@ import {Subscription} from "rxjs";
 import {Config} from "datatables.net";
 import {SweetAlertOptions} from "sweetalert2";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ActionnaireopcvmService} from "../../../services/actionnaireopcvm.service";
 import {AuthService} from "../../../../core/modules/auth";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
@@ -13,6 +12,7 @@ import {ProfilcommissionsousrachService} from "../../../services/profilcommissio
 import {
   DeleteProfilcommissionsousrachModalComponent
 } from "../delete-profilcommissionsousrach-modal/delete-profilcommissionsousrach-modal.component";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-profilcommissionsousrach-list',
@@ -33,6 +33,7 @@ export class ProfilcommissionsousrachListComponent implements OnInit, OnDestroy,
   private idInAction: number;
 
   constructor(
+      private localStore: LocalService,
       private route: ActivatedRoute,
       private router: Router,
       private renderer: Renderer2,
@@ -48,7 +49,7 @@ export class ProfilcommissionsousrachListComponent implements OnInit, OnDestroy,
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
         console.log("PARAMS === ", dataTablesParameters);
-        const sb = this.entityService.datatable_id(dataTablesParameters,this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+        const sb = this.entityService.datatable_id(dataTablesParameters,this.localStore.getData("currentOpcvm")?.idOpcvm)
             .subscribe(resp => {
               callback(resp.data);
             });

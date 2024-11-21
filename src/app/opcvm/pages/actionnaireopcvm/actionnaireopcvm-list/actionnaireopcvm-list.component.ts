@@ -14,6 +14,7 @@ import {AuthService} from "../../../../core/modules/auth";
 import {
   DeleteActionnaireopcvmModalComponent
 } from "../delete-actionnaireopcvm-modal/delete-actionnaireopcvm-modal.component";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-actionnaireopcvm-list',
@@ -34,6 +35,7 @@ export class ActionnaireopcvmListComponent implements OnInit, OnDestroy, AfterVi
   private idInAction: number;
 
   constructor(
+    private localStore: LocalService,
     private route: ActivatedRoute,
     private router: Router,
     private renderer: Renderer2,
@@ -43,13 +45,13 @@ export class ActionnaireopcvmListComponent implements OnInit, OnDestroy, AfterVi
   }
 
   ngOnInit(): void {
-    console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
-    console.log("idOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+    console.log("currentOpcvm=",this.localStore.getData("currentOpcvm"))
+    console.log("idOpcvm=",this.localStore.getData("currentOpcvm")?.idOpcvm)
     this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
         console.log("PARAMS === ", dataTablesParameters);
-        const sb = this.entityService.datatable_id(dataTablesParameters,this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+        const sb = this.entityService.datatable_id(dataTablesParameters,this.localStore.getData("currentOpcvm")?.idOpcvm)
           .subscribe(resp => {
             callback(resp.data);
           });

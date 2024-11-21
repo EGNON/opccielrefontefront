@@ -14,6 +14,7 @@ import {Personne} from "../../../../crm/models/personne/personne.model";
 import {ActionnairecommissionService} from "../../../services/actionnairecommission.service";
 import {ProfilcommissionsousrachService} from "../../../services/profilcommissionsousrach.service";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-actionnairecommission-add-edit',
@@ -44,6 +45,7 @@ export class ActionnairecommissionAddEditComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private localStore: LocalService,
     public entityService: ActionnairecommissionService,
     public personneService: PersonneService,
     public profilCommissionSousRachService: ProfilcommissionsousrachService,
@@ -107,7 +109,7 @@ export class ActionnairecommissionAddEditComponent implements OnInit, OnDestroy{
   getPersonne()
   {
     const sb  = this.personneService.afficherPersonneInOpcvm(
-      this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm).subscribe(
+      this.localStore.getData("currentOpcvm")?.idOpcvm).subscribe(
       (data)=>{
         this.personne$=data
       }
@@ -117,7 +119,7 @@ export class ActionnairecommissionAddEditComponent implements OnInit, OnDestroy{
   {
     const sb  = this.profilCommissionSousRachService.afficherSelonTypeCommissionOpcvm(
       this.entityForm.value.typeCommission,
-      this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm
+      this.localStore.getData("currentOpcvm")?.idOpcvm
     ).subscribe(
       (data)=>{
         this.profil$=data.data
@@ -153,7 +155,7 @@ export class ActionnairecommissionAddEditComponent implements OnInit, OnDestroy{
   }
   saveEntity() {
     this.opcvm=new Opcvm();
-    this.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm;
+    this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm;
     let date: any;
     if (this.entityForm.controls.date.value) {
       date = new Date(

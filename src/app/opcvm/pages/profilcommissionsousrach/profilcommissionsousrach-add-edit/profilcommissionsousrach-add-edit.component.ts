@@ -2,19 +2,15 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, of, Subscription} from "rxjs";
 import {Monnaie} from "../../../../crm/models/monnaie.model";
 import {Opcvm} from "../../../../core/models/opcvm";
-import {Actionnaireopcvm} from "../../../models/actionnaireopcvm.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActionnaireopcvmService} from "../../../services/actionnaireopcvm.service";
-import {PersonneService} from "../../../../crm/services/personne/personne.service";
 import {AuthService} from "../../../../core/modules/auth";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, finalize} from "rxjs/operators";
-import {Personne} from "../../../../crm/models/personne/personne.model";
 import {ProfilcommissionsousrachService} from "../../../services/profilcommissionsousrach.service";
 import {Detailprofil} from "../../../models/detailprofil.model";
 import {DetailprofilService} from "../../../services/detailprofil.service";
-import {Console} from "inspector";
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-profilcommissionsousrach-add-edit',
@@ -42,6 +38,7 @@ export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestr
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private localStore: LocalService,
     public entityService: ProfilcommissionsousrachService,
     public detailProfilService: DetailprofilService,
     public authService: AuthService,
@@ -71,7 +68,7 @@ export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestr
     {
       this.pageInfo.updateTitle("Modification de profil'")
       const sb = this.entityService.afficherSelonProfilOpcvm(this.id,
-        this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+        this.localStore.getData("currentOpcvm")?.idOpcvm)
         .subscribe((entity)=>{
           console.log("profil=",entity.data)
           this.entity=entity.data;
@@ -92,7 +89,7 @@ export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestr
     this.entityForm.patchValue({typeCommission: entity.typeCommission});
     this.entityForm.patchValue({standard: entity.standard});
     this.detailProfilService.afficherSelonProfilOpcvm(entity.codeProfil,
-      this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm).subscribe(
+      this.localStore.getData("currentOpcvm")?.idOpcvm).subscribe(
       (data)=>{
         this.detailProfil$=data.data;
         let i=0;
@@ -303,12 +300,12 @@ export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestr
           this.nbreLigne = document.getElementById("table_DetailProfil").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
           let i: number = 1;
           this.detailProfilService.supprimer(this.entityForm.value.codeProfil,
-            this.authService.LocalStorageManager.getValue("currentOpcvm").idOpcvm).subscribe();
+            this.localStore.getData("currentOpcvm")?.idOpcvm).subscribe();
           //        console.log(this.nbreLigne);
           for (i === 1; i < this.nbreLigne; i++) {
             this.detailProfil=new Detailprofil();
             this.detailProfil.opcvm=new Opcvm();
-            this.detailProfil.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm").idOpcvm;
+            this.detailProfil.opcvm.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm;
             this.detailProfil.codeProfil=this.entityForm.value.codeProfil;
             // @ts-ignore
             this.detailProfil.borneInferieur=document.getElementById("table_DetailProfil").getElementsByTagName('tr')[i].cells[0].innerHTML;
@@ -328,7 +325,7 @@ export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestr
 
   saveEntity() {
     this.opcvm=new Opcvm();
-    this.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm").idOpcvm;
+    this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm;
 
     const entity: any = {
       codeProfil:this.entityForm.value.codeProfil,
@@ -340,7 +337,7 @@ export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestr
     console.log("act1",entity)
     return this.id
       ? this.entityService.modifier(this.entityForm.value.codeProfil,
-        this.authService.LocalStorageManager.getValue("currentOpcvm").idOpcvm,entity)
+        this.localStore.getData("currentOpcvm")?.idOpcvm,entity)
       : this.entityService.create(entity);
   }
 }
