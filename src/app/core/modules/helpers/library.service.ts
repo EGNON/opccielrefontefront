@@ -1970,6 +1970,40 @@ export class LibraryService implements OnDestroy{
                   dataLink: '',
                   parent: 'Rachat',
                   children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIFICATION_RACH_1'),
+                  title: 'Vérification Intention Niveau 1',
+                  page: '/opcvm/rachat/verificationintentionniveau1',
+                  role: 'ROLE_VERIFICATION_RACH_1',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Rachat',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIFICATION_RACH_2'),
+                  title: 'Vérification Intention Niveau 2',
+                  page: '/opcvm/rachat/verificationintentionniveau2',
+                  role: 'ROLE_VERIFICATION_RACH_2',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Rachat',
+                  children: []
+                }
+                ,
+                {
+                  allow: this.authService.isGrantedRole('ROLE_GENERATIONRACHAT'),
+                  title: 'Génération des rachats',
+                  page: '/opcvm/rachat/generationrachat',
+                  role: 'ROLE_GENERATIONRACHAT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Rachat',
+                  children: []
                 }
               ]
             }

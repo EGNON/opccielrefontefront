@@ -1,0 +1,253 @@
+import { Component, EventEmitter, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
+import {FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbActiveModal, NgbDate, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Config } from 'datatables.net';
+import { Subscription, switchMap } from 'rxjs';
+import { SweetAlertOptions } from 'sweetalert2';
+import { Natureoperation } from '../../../../core/models/natureoperation.model';
+import { Opcvm } from '../../../../core/models/opcvm';
+import { AuthService } from '../../../../core/modules/auth';
+import { PersonneService } from '../../../../crm/services/personne/personne.service';
+import { LoaderService } from '../../../../loader.service';
+import { Operationsouscriptionrachat } from '../../../models/operationsouscriptionrachat.model';
+import { DepotrachatService } from '../../../services/depotrachat.service';
+import { OperationsouscriptionrachatService } from '../../../services/operationsouscriptionrachat.service';
+import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
+
+@Component({
+  selector: 'app-generationrachat-list',
+  templateUrl: './generationrachat-list.component.html',
+  styleUrl: './generationrachat-list.component.scss'
+})
+export class GenerationrachatListComponent implements OnInit, OnDestroy {
+  @Output() passEntry: EventEmitter<any> = new EventEmitter();
+  isLoading: boolean;
+  private subscriptions: Subscription[] = [];
+  idSeance:number;
+  nbreLigne:number;
+  verifier:boolean;
+  verifier_Bouton:boolean;
+  operationSouscriptionRachatTab:Operationsouscriptionrachat[];
+  operationSouscriptionRachat:Operationsouscriptionrachat;
+  natureOperation:Natureoperation;
+  datatableConfig: Config = {};
+  submitted = false;
+  // Reload emitter inside datatable
+  reloadEvent: EventEmitter<boolean> = new EventEmitter();
+  depotRachat$:any;
+  opcvm:Opcvm;
+  personne$:any;
+  depotRachat2$:any;
+  swalOptions: SweetAlertOptions = {};
+  seance:any;
+  private clickListener: () => void;
+  private idInAction: number;
+  entityForm: FormGroup;
+
+  // @ts-ignore
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private renderer: Renderer2,
+    public entityService: DepotrachatService,
+    public operationSouscriptionRachatService:OperationsouscriptionrachatService,
+    public personneService: PersonneService,
+    public loadingService: LoaderService,
+    public seanceOpcvmService: SeanceopcvmService,
+    public authService: AuthService,
+    private fb: FormBuilder,
+    public modal: NgbActiveModal,
+    private modalService: NgbModal) {
+  }
+  get f() {
+    return this.entityForm.controls;
+  }
+  ngOnInit(): void {
+    this.entityForm = this.fb.group(
+      {
+        denominationOpcvm: [null],
+        idSeance: [null],
+        dateOuverture: [null],
+        dateFermeture: [null],
+        personne: [null],
+        dateOperation: [null,Validators.required],
+      }
+    );
+    this.afficherDistributeur()
+    // console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
+    // console.log("idOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+    this.seanceOpcvmService.afficherSeanceEnCours(this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+      .subscribe(val=> {
+        //console.log("val=",val)
+        this.seance=val.data;
+        this.idSeance=val.data.idSeanceOpcvm.idSeance;
+        this.entityForm.patchValue({denominationOpcvm:this.seance.opcvm?.denominationOpcvm})
+        this.entityForm.patchValue({idSeance:this.seance.idSeanceOpcvm.idSeance})
+        let dateOuverture = new Date(this.seance.dateOuverture);
+        this.entityForm.patchValue({dateOuverture: new NgbDate(
+            dateOuverture.getFullYear(), dateOuverture.getMonth()+1, dateOuverture.getDate())});
+
+        let dateFermeture = new Date(this.seance.dateFermeture);
+        this.entityForm.patchValue({dateFermeture: new NgbDate(
+            dateFermeture.getFullYear(), dateFermeture.getMonth()+1, dateFermeture.getDate())});
+
+
+    })
+  }
+  afficherPrecalcul(){
+    this.loadingService.setLoading(true)
+    this.entityService.afficherPrecalculRachat(this.entityForm.value.idSeance,
+      this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,
+      this.entityForm.value.personne.idPersonne).subscribe(
+      (data)=>{
+        this.depotRachat$=data
+      }
+    )
+    this.loadingService.setLoading(false)
+  }
+  afficherDistributeur(){
+    this.personneService.afficherPersonneSelonQualite("DISTRIBUTEURS").subscribe(
+      (data)=>{
+        this.personne$=data
+      }
+    )
+  }
+  ngOnDestroy(): void {
+    if (this.clickListener) {
+      this.clickListener();
+    }
+    this.subscriptions.forEach((sb) => sb.unsubscribe());
+  }
+
+  renderActionColumn(): void {
+    if (this.datatableConfig.columns) {
+      let actions = this.datatableConfig.columns[this.datatableConfig.columns?.length-1];
+      actions.render = (data: any, type: any, full: any) => {
+        const parentActionStart = `
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      Action
+                    </button>
+                    <ul class="dropdown-menu">`;
+        const show = `
+                <li>
+                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idDepotRachat}">Afficher</a>
+                </li>`;
+        const edit = `
+                <li>
+                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idDepotRachat}"
+                    data-id2="${full.idSeance}">Modifier</a>
+                </li>`;
+        const separator = `<li><hr class="dropdown-divider"></li>`;
+        const delete1 = `<li>
+                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idDepotRachat}"
+                    >Supprimer</a>
+                </li>`;
+        const parentActionEnd = `</ul>
+            </div>`;
+        const actions = [];
+        actions.push(parentActionStart);
+        // actions.push(show);
+        actions.push(edit);
+        actions.push(separator);
+        actions.push(delete1);
+        actions.push(parentActionEnd);
+
+        return actions.join('');
+      }
+    }
+  }
+  enregistrer(){
+   /* const entity={
+      idOpcvm:this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,
+      codeNatureOperation:"INT_RACH",
+      niveau:"1",
+      userLoginVerif:this.authService.currentUserValue?.denomination
+    }*/
+    this.loadingService.setLoading(true)
+    this.submitted=true
+    this.nbreLigne = document.getElementById("table_OperationSousRach").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
+    let i: number = 1;
+    let dateOperation: any;
+
+    if(this.entityForm.controls.dateOperation.value)
+    {
+      dateOperation = new Date(
+        this.entityForm.controls.dateOperation.value.year,
+        this.entityForm.controls.dateOperation.value.month-1,
+        this.entityForm.controls.dateOperation.value.day+1);
+    }
+    this.opcvm=new Opcvm();
+    this.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm
+    //        console.log(this.nbreLigne);
+    this.operationSouscriptionRachatTab=[]
+    for (i === 1; i < this.nbreLigne; i++) {
+      this.operationSouscriptionRachat=new Operationsouscriptionrachat();
+      this.operationSouscriptionRachat.referencePiece = "";
+      // @ts-ignore
+      this.operationSouscriptionRachat.idActionnaire=document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[0].innerHTML
+      this.operationSouscriptionRachat.opcvm=this.opcvm
+      this.operationSouscriptionRachat.idSeance=this.entityForm.value.idSeance
+      this.operationSouscriptionRachat.dateOperation =dateOperation;
+      this.natureOperation=new Natureoperation();
+      this.natureOperation.codeNatureOperation = "RACH_PART";
+      this.operationSouscriptionRachat.natureOperation=this.natureOperation
+      this.operationSouscriptionRachat.datePiece = dateOperation;
+      this.operationSouscriptionRachat.dateSaisie =new Date();
+      this.operationSouscriptionRachat.dateValeur =dateOperation;
+      this.operationSouscriptionRachat.ecriture = "A";
+      this.operationSouscriptionRachat.estRetrocede = false;
+      this.operationSouscriptionRachat.fraisSouscriptionRachat = 0;
+      this.operationSouscriptionRachat.idOperation = 0;
+      this.operationSouscriptionRachat.idTransaction = 0;
+      this.operationSouscriptionRachat.libelleOperation = "Rachat de " +
+        document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[4].innerHTML + " Part(s)";
+      this.operationSouscriptionRachat.valeurCodeAnalytique = "OPC:" + this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm.toString() +
+        ";ACT:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[0].innerHTML;
+      this.operationSouscriptionRachat.valeurFormule = "10:" +
+        document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[5].innerHTML +
+        ";17:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[9].innerHTML +
+        ";26:" + 0 +
+        ";35:" + 0+
+        ";36:" + 0 +
+        ";41:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[18].innerHTML +
+        ";43:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[4].innerHTML +
+        ";59:" + 0 +
+        ";60:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[11].innerHTML +
+        ";61:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[12].innerHTML +
+        ";62:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[17].innerHTML +
+        ";63:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[10].innerHTML +
+        ";64:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[13].innerHTML +
+        ";65:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[14].innerHTML +
+        ";66:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[16].innerHTML +
+        ";67:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[15].innerHTML +
+        ";72:" + 0 +
+        ";74:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[7].innerHTML +
+        ";80:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[19].innerHTML +
+        ";123:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[6].innerHTML +
+        ";84:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[8].innerHTML;
+      this.operationSouscriptionRachat.valeurFormule = this.operationSouscriptionRachat.valeurFormule.replace(',','.');
+
+      // @ts-ignore
+      this.operationSouscriptionRachatTab.push(this.operationSouscriptionRachat);
+    }
+    this.operationSouscriptionRachatService.creer(this.operationSouscriptionRachatTab)
+      .subscribe(
+        {
+          next: (value) => {
+            let currentUrl = this.router.url;
+            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+              this.router.navigate([currentUrl]);
+              this.submitted=false
+            });
+          },
+          error: err => {
+
+          }
+        }
+      )
+    this.loadingService.setLoading(false)
+  }
+}
+
