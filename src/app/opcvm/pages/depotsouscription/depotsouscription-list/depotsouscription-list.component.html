@@ -16,6 +16,9 @@
     <div class="card-toolbar">
       <!--begin::Toolbar-->
       <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-sm btn-success me-3" (click)="verificationListeDepot()">
+          <span class="indicator-label">Vérification souscription</span>
+        </button>
         <!--begin::Add user-->
         <button type="button" class="btn btn-sm btn-primary" data-action="create">
           Nouveau Dépôt
@@ -32,7 +35,8 @@
       <app-entity-crud
         [datatableConfig]="datatableConfig"
         route="/crm/rendezvous"
-        [reload]="reloadEvent">
+        [reload]="reloadEvent"
+        [changeTable]="changeTableEvent">
       </app-entity-crud>
     </div>
   </div>

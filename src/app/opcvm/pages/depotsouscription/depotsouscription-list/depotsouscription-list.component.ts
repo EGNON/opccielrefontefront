@@ -1,30 +1,36 @@
-import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Config} from "datatables.net";
 import moment from "moment";
 import {DepotsouscriptionService} from "../../../services/depotsouscription.service";
 import {Subscription} from "rxjs";
-import {SweetAlertOptions} from "sweetalert2";
+import Swal, {SweetAlertOptions} from "sweetalert2";
 import {ActivatedRoute, Router} from "@angular/router";
-import {
-  DeleteCompterenduModalComponent
-} from "../../../../crm/pages/compterendu/delete-compterendu-modal/delete-compterendu-modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {LocalService} from "../../../../services/local.service";
+import {
+  DeleteDepotsouscriptionModalComponent
+} from "../delete-depotsouscription-modal/delete-depotsouscription-modal.component";
+import {
+  VerifDepotsouscriptionReportComponent
+} from "../verif-depotsouscription-report/verif-depotsouscription-report.component";
+import {DataTableDirective} from "angular-datatables";
 
 @Component({
   selector: 'app-depotsouscription-list',
   templateUrl: './depotsouscription-list.component.html',
   styleUrl: './depotsouscription-list.component.scss'
 })
-export class DepotsouscriptionListComponent implements OnInit, OnDestroy, AfterViewInit{
+export class DepotsouscriptionListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private subscriptions: Subscription[] = [];
+
   datatableConfig: Config = {};
   currentOpcvm: any;
   currentSeance: any;
 
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
+  changeTableEvent: EventEmitter<boolean> = new EventEmitter();
   swalOptions: SweetAlertOptions = {};
 
   private clickListener: () => void;
@@ -45,7 +51,7 @@ export class DepotsouscriptionListComponent implements OnInit, OnDestroy, AfterV
     this.clickListener = this.renderer.listen(document, 'click', (event) => {
       const closestBtn = event.target.closest('.btn, .dropdown-item');
       if (closestBtn) {
-        const { action, id } = closestBtn.dataset;
+        const {action, id} = closestBtn.dataset;
         this.idInAction = id;
         switch (action) {
           case 'view':
@@ -134,13 +140,13 @@ export class DepotsouscriptionListComponent implements OnInit, OnDestroy, AfterV
   }
 
   supprimer(id: number) {
-    const modalRef = this.modalService.open(DeleteCompterenduModalComponent);
+    const modalRef = this.modalService.open(DeleteDepotsouscriptionModalComponent);
     modalRef.componentInstance.id = id;
   }
 
   renderActionColumn(): void {
     if (this.datatableConfig.columns) {
-      let actions = this.datatableConfig.columns[this.datatableConfig.columns?.length-1];
+      let actions = this.datatableConfig.columns[this.datatableConfig.columns?.length - 1];
       actions.render = (data: any, type: any, full: any) => {
         const parentActionStart = `
                 <div class="btn-group">
@@ -150,28 +156,73 @@ export class DepotsouscriptionListComponent implements OnInit, OnDestroy, AfterV
                     <ul class="dropdown-menu">`;
         const show = `
                 <li>
-                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idOperation}">Afficher</a>
+                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idDepotRachat}">Afficher</a>
                 </li>`;
         const edit = `
                 <li>
-                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idOperation}">Modifier</a>
+                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idDepotRachat}">Modifier</a>
                 </li>`;
         const separator = `<li><hr class="dropdown-divider"></li>`;
         const delete1 = `<li>
-                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idOperation}">Supprimer</a>
+                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idDepotRachat}">Supprimer</a>
                 </li>`;
         const parentActionEnd = `</ul>
             </div>`;
         const actions = [];
         actions.push(parentActionStart);
         actions.push(show);
-        if(!full.estValide) actions.push(edit);
-        if(!full.estValide) actions.push(separator);
-        if(!full.estValide) actions.push(delete1);
+        if (!full.estValide) actions.push(edit);
+        if (!full.estValide) actions.push(separator);
+        if (!full.estValide) actions.push(delete1);
         actions.push(parentActionEnd);
 
         return actions.join('');
       }
     }
+  }
+
+  verificationListeDepot() {
+    const modalRef = this.modalService.open(VerifDepotsouscriptionReportComponent, {
+      backdrop: "static",
+      size: "lg"
+    });
+    this.changeTableEvent.emit(true);
+    /*this.datatableElement.dtInstance.then(dtInstance => {
+      console.log("Data table instance === ", dtInstance);
+      dtInstance.ajax.reload();
+    });*/
+    // modalRef.componentInstance.id = id;
+    // this.router.navigate(['verification/liste/depot'], {relativeTo: this.route});
+    /*Swal.fire({
+      title: "Confirmez-vous la vérification de ces dépots pour souscriptions?",
+      // input: "email",
+      showCancelButton: true,
+      confirmButtonText: "Oui",
+      showLoaderOnConfirm: true,
+      confirmButtonColor: "#556ee6",
+      cancelButtonColor: "#f46a6a",
+      preConfirm: () => {
+        this.entityService.verificationListeDepot(this.currentOpcvm?.idOpcvm, this.currentSeance?.idSeanceOpcvm?.idSeance).subscribe((response: any) => {
+          const linkSource =
+            'data:application/octet-stream;base64,' + response.data;
+          const downloadLink = document.createElement('a');
+          const fileName = 'listVerifDepot.pdf';
+
+          downloadLink.href = linkSource;
+          downloadLink.download = fileName;
+          downloadLink.click();
+        });
+      },
+      allowOutsideClick: false
+    }).then(result => {
+      console.log("Retour sublime === ", result);
+      Swal.fire({
+        title: "Ajax request finished!",
+        html: "Submitted email: " + result.value,
+        confirmButtonColor: "#556ee6",
+      });
+    }).catch(error => {
+      console.log(error);
+    });*/
   }
 }

@@ -7,6 +7,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {DataTableDirective} from "angular-datatables";
 import {UniqueNumCpteDepositValidators} from "../../../validators/unique-num-cpte-deposit-validators";
 import {PersonneService} from "../../../crm/services/personne/personne.service";
+import {LocalService} from "../../../services/local.service";
 
 @Component({
   selector: 'app-importationdepot',
@@ -32,6 +33,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
   changeTableEvent: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
+    private localStore: LocalService,
     private loadingService: LoaderService,
     private pers: PersonneService,
     private fb: FormBuilder,
@@ -39,7 +41,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    const opcvm = JSON.parse(window.localStorage.getItem("currentOpcvm"));
+    const opcvm = this.localStore.getData("currentOpcvm");
     console.log("Opcvm === ", opcvm);
     this.filterForm = this.fb.group({
       fichier: new FormControl(null),
@@ -290,14 +292,13 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
           const sheet = workbook.Sheets[value];
           let arrs: [][] = xls.utils.sheet_to_json(sheet, {header:1});
           arrs = arrs.filter((value, index) => index > 0);
-          console.log("Tab ===", arrs);
           if(value.toLowerCase().trim() === "personne physique") {
             const arraySource = of(true).pipe(
               concatMap(() => {
                 return forkJoin(self.loadPhExcelData(arrs));
               })
             );
-
+            console.log("Tab ===", arrs);
             this.datatableConfigPh = {
               ...this.datatableConfigInit,
               paging: false,
@@ -521,7 +522,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
             }))
           )
         }),
-        // tap(x => console.log("X === ", x)),
+        tap(x => console.log("X === ", x)),
       )
     );
   }

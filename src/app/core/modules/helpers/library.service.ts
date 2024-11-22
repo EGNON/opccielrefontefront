@@ -1895,7 +1895,7 @@ export class LibraryService implements OnDestroy{
                 {
                   allow: this.authService.isGrantedRole('ROLE_AUTORISATION_CR'),
                   title: 'Vérification des dépôts Niveau 1',
-                  page: '#',
+                  page: '/opcvm/souscription/depotsouscription/verification/niveau1/liste/depot',
                   role: 'ROLE_VERIF_NIV1_DEPOT_SOUS',
                   icon: '',
                   translate: '',
@@ -1906,7 +1906,7 @@ export class LibraryService implements OnDestroy{
                 {
                   allow: this.authService.isGrantedRole('ROLE_AUTORISATION_CR'),
                   title: 'Vérification des dépôts Niveau 2',
-                  page: '#',
+                  page: '/opcvm/souscription/depotsouscription/verification/niveau2/liste/depot',
                   role: 'ROLE_VERIF_NIV2_DEPOT_SOUS',
                   icon: '',
                   translate: '',

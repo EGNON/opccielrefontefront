@@ -63,9 +63,9 @@
               <!--begin::Select-->
               <select class="form-select form-select-sm mb-2" formControlName="personne">
                 <option disabled selected [ngValue]="null">Sélectionnez un distributeur...</option>
-                <!--<option *ngIf="entity?.registraire" disabled [defaultSelected]="true" [ngValue]="entity?.registraire">
-                  {{ entity?.registraire?.denomination }}
-                </option>-->
+                <option *ngIf="entity?.personne" disabled [defaultSelected]="true" [ngValue]="entity?.personne">
+                  {{ entity?.personne?.denomination }}
+                </option>
                 <option *ngFor="let item of distributeurs$|async" [ngValue]="item">
                   {{ item.denomination }}
                 </option>
@@ -81,9 +81,9 @@
               <!--begin::Select-->
               <select class="form-select form-select-sm mb-2" formControlName="actionnaire">
                 <option disabled selected [ngValue]="null">Sélectionnez un actionnaire...</option>
-                <!--<option *ngIf="entity?.actionnaire" disabled [defaultSelected]="true" [ngValue]="entity?.actionnaire">
+                <option *ngIf="entity?.actionnaire" disabled [defaultSelected]="true" [ngValue]="entity?.actionnaire">
                   {{ entity?.actionnaire?.denomination }}
-                </option>-->
+                </option>
                 <option *ngFor="let item of actionnaires$|async" [ngValue]="item">
                   {{ item.denomination }}
                 </option>

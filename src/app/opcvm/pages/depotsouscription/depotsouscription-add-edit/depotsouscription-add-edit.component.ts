@@ -4,9 +4,11 @@ import {Observable, of, Subscription, switchMap, tap} from "rxjs";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 import {DepotsouscriptionService} from "../../../services/depotsouscription.service";
 import {PersonneService} from "../../../../crm/services/personne/personne.service";
-import {catchError, finalize, map} from "rxjs/operators";
+import {catchError, filter, finalize, map} from "rxjs/operators";
 import {LoaderService} from "../../../../loader.service";
 import {LocalService} from "../../../../services/local.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-depotsouscription-add-edit',
@@ -20,6 +22,7 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
   submitting = false;
   submitted = false;
 
+  entity: any;
   title: string;
   solde: number = 0;
   soldeEspece: number = 0;
@@ -38,6 +41,8 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
     private fb: FormBuilder,
     private pageInfo: PageInfoService,
     private loadingService: LoaderService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngAfterViewInit(): void {
@@ -48,11 +53,16 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
   }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
     this.currentOpcvm = this.localStore.getData("currentOpcvm");
     this.currentSeance = this.localStore.getData("currentSeance");
+    console.log("Séance actuelle === ", this.currentSeance);
+    const dateSeance = new Date(this.currentSeance?.dateFermeture);
     this.form = this.fb.group({
       id: [null],
-      idOperation: [null],
+      idOperation: [0],
+      idTransaction: [1],
+      idDepotRachat: [null],
       idSeance: [this.currentSeance?.idSeance],
       opcvm: [this.currentOpcvm],
       transaction: [null],
@@ -60,7 +70,8 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
       actionnaire: [null, Validators.required],
       personne: [null, Validators.required],
       libelleOperation: [null, Validators.required],
-      dateOperation: [null, Validators.required],
+      dateOperation: [new NgbDate(dateSeance.getFullYear(), dateSeance.getMonth()+1, dateSeance.getDate()),
+        Validators.required],
       valeurFormule: [null],
       valeurCodeAnalytique: [null],
       dateSaisie: [null],
@@ -71,12 +82,14 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
       estVerifier: [false],
       estVerifie1: [false],
       estVerifie2: [false],
-      userLoginVerificateur1: [null],
-      userLoginVerificateur2: [null],
+      userLoginVerificateur1: [""],
+      dateVerification1: [null],
+      userLoginVerificateur2: [""],
+      dateVerification2: [null],
       dateVerification: [null],
-      nomVerificateur: [null],
+      nomVerificateur: [""],
       referencePiece: [null],
-      modeVL: [null, Validators.required],
+      modeVL: ["CONNU", Validators.required],
       quantite: [0],
       ecriture: ["A"],
       type: ["S"],
@@ -84,8 +97,31 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
       montantSouscrit: [0, Validators.required],
       montant: [0, Validators.required],
     });
+
+    //Récupération de l'object correspondant à id
+    const paramSubscription = this.route.paramMap
+      .pipe(
+        map(paramMap => {
+          let params: any = new Array(2);
+          if(paramMap.has('id'))
+          {
+            params[0] = +paramMap.get('id')!;
+            // this.title = "Modification de " + this.title;
+          }
+
+          return params;
+        }),
+        tap((params) => {
+          this.id = params[0];
+        }),
+        filter(params => params[0]!),
+        switchMap(params => this.entityService.getById(params[0]))
+      ).subscribe(resp => this.loadFormValues(resp.data));
+    this.subscriptions.push(paramSubscription);
+
     this.getPersonnesAll('distributeurs');
     this.getPersonnesAll('actionnaires');
+
     const sb = this.form.get('actionnaire').valueChanges.pipe(
       tap(() => this.loadingService.setLoading(true)),
       switchMap(actionnaire => {
@@ -101,15 +137,20 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
     ).subscribe(resp => {
       this.solde = resp.solde;
       this.form.patchValue({soldeEspece: this.solde});
-      this.form.patchValue({montantSouscrit: 0});
-      this.form.patchValue({montant: 0});
-      this.loadingService.setLoading(false)
+      if(!this.id) {
+        this.form.patchValue({montantSouscrit: 0});
+        this.form.patchValue({montant: 0});
+      }
+      this.loadingService.setLoading(false);
       console.log("Solde === ", resp);
     });
     this.subscriptions.push(sb);
     const sb1 = this.form.get('montant').valueChanges.subscribe(value => {
       const montant = value !== "" ? parseFloat(value) : 0;
       const monntantSouscrit = this.form.value.montantSouscrit !== "" ? parseFloat(this.form.value.montantSouscrit) : 0;
+      /*if(this.id) {
+        this.soldeEspece += this.entity?.montantSouscrit;
+      }*/
       this.soldeEspece = this.solde + montant - monntantSouscrit;
       this.form.patchValue({soldeEspece: this.soldeEspece});
       if(montant > 0)
@@ -130,18 +171,19 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
       }
       if(montant === 0 && montantSouscrit > 0)
         this.form.patchValue({libelleOperation: `REINVESTISSEMENT DE  ${montantSouscrit} FCFA POUR SOUSCRIPTION`});
-      else
-        this.form.patchValue({libelleOperation: `DEPOT DE ${montant} FCFA POUR SOUSCRIPTION`});
+      /*else
+        this.form.patchValue({libelleOperation: `DEPOT DE ${montant} FCFA POUR SOUSCRIPTION`});*/
     });
     this.subscriptions.push(sb2);
+
     if(this.id)
     {
       this.title = "Modification de dépôt pour souscription";
       this.pageInfo.updateTitle(this.title);
-      this.entityService.getById(this.id).subscribe((resp) => {
+      /*this.entityService.getById(this.id).subscribe((resp) => {
         const entity = resp.data;
         this.loadFormValues(entity);
-      });
+      });*/
     }
     else
     {
@@ -158,13 +200,22 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
 
   loadFormValues(entity: any)
   {
-    this.form.patchValue({id: this.id});
-    this.form.patchValue({idOperation: entity.idOperation});
+    this.entity = entity;
+    console.log("Entity === ", entity);
+    this.form.patchValue(entity);
+    this.form.patchValue({id: entity.idDepotRachat});
+    let dateOperation = new Date(entity.dateOperation);
+    this.form.patchValue({dateOperation: new NgbDate(
+        dateOperation.getFullYear(), dateOperation.getMonth()+1, dateOperation.getDate())});
+    this.form.patchValue({emitEvent: false});
   }
 
   save() {
     if(this.form.invalid) return;
     let result: Observable<any>;
+    const futureDate = new Date();
+    futureDate.setFullYear(futureDate.getFullYear() + 26);
+    futureDate.setMonth(11, 31);
     this.form.patchValue({datePiece: this.form.get("dateOperation").value});
     this.form.patchValue({dateValeur: this.form.get("dateOperation").value});
     let entity = this.form.value;
@@ -184,15 +235,18 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
       idSeance: this.currentSeance?.idSeanceOpcvm?.idSeance,
       opcvm: this.currentOpcvm,
       dateSaisie: new Date(),
+      dateVerification: futureDate,
+      dateVerification1: futureDate,
+      dateVerification2: futureDate,
       valeurFormule: `2:${entity.montant}`,
       valeurCodeAnalytique: `OPC:${this.currentOpcvm?.idOpcvm};ACT:${entity.actionnaire?.idPersonne}`
     }
     console.log("Send form === ", entity);
     if(this.id) {
-      result = this.entityService.update(entity);
+      result = this.entityService.modifier(entity, "D");
     }
     else {
-      result = this.entityService.create(entity);
+      result = this.entityService.creer(entity, "D");
     }
     result
       .pipe(
@@ -204,12 +258,11 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
           this.isLoading = false;
           this.submitting = false;
           this.submitted = false;
-
-          this.router.navigate(['/opcvm/souscription/depotsouscription']);
         })
       )
       .subscribe(value => {
         console.log("Submit form === ", value);
+        this.router.navigate(['/opcvm/souscription/depotsouscription']);
       });
   }
 }

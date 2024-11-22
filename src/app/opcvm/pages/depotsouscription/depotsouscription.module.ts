@@ -13,6 +13,11 @@ import {EditorComponent} from "@tinymce/tinymce-angular";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgbInputDatepicker, NgbTimepicker} from "@ng-bootstrap/ng-bootstrap";
 import {NumeroPositifValidatorsDirective} from "../../../validators/numero-positif-validators.directive";
+import { DeleteDepotsouscriptionModalComponent } from './delete-depotsouscription-modal/delete-depotsouscription-modal.component';
+import { VerifDepotsouscriptionReportComponent } from './verif-depotsouscription-report/verif-depotsouscription-report.component';
+import {DataTablesModule} from "angular-datatables";
+import { VerifDepotsouscriptionNiv1Component } from './verif-depotsouscription-niv1/verif-depotsouscription-niv1.component';
+import { VerifDepotsouscriptionNiv2Component } from './verif-depotsouscription-niv2/verif-depotsouscription-niv2.component';
 
 
 @NgModule({
@@ -20,20 +25,25 @@ import {NumeroPositifValidatorsDirective} from "../../../validators/numero-posit
     DepotsouscriptionComponent,
     DepotsouscriptionListComponent,
     DepotsouscriptionAddEditComponent,
-    DepotsouscriptionGenerateComponent
+    DepotsouscriptionGenerateComponent,
+    DeleteDepotsouscriptionModalComponent,
+    VerifDepotsouscriptionReportComponent,
+    VerifDepotsouscriptionNiv1Component,
+    VerifDepotsouscriptionNiv2Component
   ],
-  imports: [
-    CommonModule,
-    DepotsouscriptionRoutingModule,
-    EntityCrudModule,
-    SharedModule,
-    SweetAlert2Module,
-    EditorComponent,
-    FormsModule,
-    NgbInputDatepicker,
-    NgbTimepicker,
-    NumeroPositifValidatorsDirective,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        DepotsouscriptionRoutingModule,
+        EntityCrudModule,
+        SharedModule,
+        SweetAlert2Module,
+        EditorComponent,
+        FormsModule,
+        NgbInputDatepicker,
+        NgbTimepicker,
+        NumeroPositifValidatorsDirective,
+        ReactiveFormsModule,
+        DataTablesModule
+    ]
 })
 export class DepotsouscriptionModule { }

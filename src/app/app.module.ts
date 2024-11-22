@@ -27,7 +27,7 @@ function appInitializer(authService: AuthService) {
     return new Promise((resolve, reject) => {
       //@ts-ignore
       authService.getUserByToken().subscribe().add(resolve);
-      //authService.getCurrentOpcvm().subscribe(()=>resolve,err=>reject(err));
+      // authService.getCurrentOpcvm().subscribe(()=>resolve,err=>reject(err));
     });
   };
 }
