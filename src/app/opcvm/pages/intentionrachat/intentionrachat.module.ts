@@ -12,6 +12,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { NombreDecimalDirective } from '../../../validators/nombre-decimal.directive';
+import { VerifintentionrachatComponent } from './verifintentionrachat/verifintentionrachat.component';
+import { Verificationniveau1Component } from './verificationniveau1/verificationniveau1.component';
 
 
 
@@ -20,7 +22,9 @@ import { NombreDecimalDirective } from '../../../validators/nombre-decimal.direc
     IntentionrachatComponent,
     IntentionrachatListComponent,
     IntentionrachatAddEditComponent,
-    DeleteIntentionrachatModalComponent
+    DeleteIntentionrachatModalComponent,
+    VerifintentionrachatComponent,
+    Verificationniveau1Component
   ],
   imports: [
     CommonModule,

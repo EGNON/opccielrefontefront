@@ -32,6 +32,24 @@ const OpcvmRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
+    path: 'rachat/verificationintentionniveau1',
+    loadChildren: () =>
+      import('./verificationniveau1/verificationniveau1.module').then((m) => m.Verificationniveau1Module),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
+    path: 'rachat/verificationintentionniveau2',
+    loadChildren: () =>
+      import('./verificationniveau2/verificationniveau2.module').then((m) => m.Verificationniveau2Module),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
+    path: 'rachat/generationrachat',
+    loadChildren: () =>
+      import('./generationrachat/generationrachat.module').then((m) => m.GenerationrachatModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
     path: 'standard/tarificationactionnaire',
     loadChildren: () =>
       import('./actionnairecommission/actionnairecommission.module').then((m) => m.ActionnairecommissionModule),

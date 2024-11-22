@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import {catchError, finalize, Observable, of, Subscription } from 'rxjs';
+import { Natureoperation } from '../../../../core/models/natureoperation.model';
 import { Opcvm } from '../../../../core/models/opcvm';
 import { AuthService } from '../../../../core/modules/auth';
 import { NantissementService } from '../../../../core/services/nantissement.service';
@@ -22,6 +23,7 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   id?: number;
   id2?: number;
   opcvm:Opcvm;
+  natureOperation:Natureoperation;
   personneDistributeur$: any;
   personneActionnaire$: any;
   personne: any;
@@ -177,6 +179,9 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   saveEntity() {
     this.opcvm=new Opcvm();
     this.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm").idOpcvm;
+
+    this.natureOperation=new Natureoperation();
+    this.natureOperation.codeNatureOperation="INT_RACH";
     let dateOperation: any;
     if(this.entityForm.controls.dateOperation.value)
     {
@@ -204,10 +209,12 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
     ...this.entityForm.value,
       idSeance:this.id2,
       opcvm:this.opcvm,
+      natureOperation:this.natureOperation,
       quantite:quantite,
       dateOperation:dateOperation,
       dateValeur:dateOperation,
       dateSaisie:dateSaisie,
+      datePiece:dateSaisie,
       dateVerification1:dateVerification1,
       dateVerification2:dateVerification1,
       userLoginVerificateur1:"",
@@ -217,9 +224,17 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
       ecriture:'A',
       type:'R',
       idActionnaire:idActionnaire,
-      idPersonne:idPersonne
+      idPersonne:idPersonne,
+      dateDernModifClient:dateSaisie,
+      montant:0,
+      montantSouscrit:0,
+      qte:0,
+      commission:0,
+      interetCouru:0,
+      interetPrecompte:0,
+      nomVerificateur:""
     };
-    console.log("act1",entity)
+   // console.log("act1",entity)
     return this.id
       ? this.entityService.update(entity)
       : this.entityService.create(entity);

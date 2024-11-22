@@ -3,8 +3,8 @@ import {Journal} from "./journal.model";
 import {Typeoperation} from "./typeoperation.model";
 
 export class Natureoperation extends  ResourceModel<Natureoperation>{
-  codeNatureoperation: string;
-  libelleNatureoperation: string;
+  codeNatureOperation: string;
+  libelleNatureOperation: string;
   journal:Journal;
   typeOperation:Typeoperation;
   constructor(model?: Partial<Natureoperation>) {

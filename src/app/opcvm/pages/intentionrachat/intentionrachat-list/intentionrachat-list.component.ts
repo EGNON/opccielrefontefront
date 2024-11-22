@@ -10,6 +10,7 @@ import { DepotrachatService } from '../../../services/depotrachat.service';
 import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
 
 import { DeleteIntentionrachatModalComponent } from '../delete-intentionrachat-modal/delete-intentionrachat-modal.component';
+import { VerifintentionrachatComponent } from '../verifintentionrachat/verifintentionrachat.component';
 
 @Component({
   selector: 'app-intentionrachat-list',
@@ -93,13 +94,13 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
         {
           title: 'Actionnaire.', data: 'denomination', render: function (data, type, row) {
             //return row.standard;
-            return row.actionnaire.denomination;
+            return row.actionnaire?.denomination;
           }
         },
         {
           title: 'Distributeur', data: 'denomination', render: function (data, type, row) {
             //return row.standard;
-            return row.personne.denomination;
+            return row.personne?.denomination;
           }
         },
         {
@@ -126,6 +127,16 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
       },
     };
   }
+  verifierRachat() {
+      const modalRef = this.modalService.open(VerifintentionrachatComponent, {
+        backdrop: "static",
+        size: "xl"
+      });
+      modalRef.componentInstance.passEntry.subscribe((receivedEntry:any) => {
+        //this.currentOpcvm = receivedEntry;
+        //console.log("RESP === ", receivedEntry);
+      });
+    }
 
   ngOnDestroy(): void {
     if (this.clickListener) {

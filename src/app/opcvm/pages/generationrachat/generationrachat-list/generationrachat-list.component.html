@@ -1,0 +1,175 @@
+<div class="card">
+<div class="card-header p-2">
+  <div class="card-title h4">LISTE DES RACHATS EN ATTENTE DE GENERATION</div>
+</div>
+<!--end::Card header-->
+<!--begin::Card body-->
+
+  <form [formGroup]="entityForm" class="form mb-5">
+    <div class="row mb-5">
+      <!--begin::Col-->
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class=" fs-5 fw-semibold mb-2">OPCVM</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <input [readonly]="true" type="text" class="form-control form-control-sm"
+               placeholder="Ex : XXXXXXXXX" formControlName="denominationOpcvm"/>
+        <!--end::Input-->
+      </div>
+      <!--end::Col-->
+      <!--begin::Col-->
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class=" fs-5 fw-semibold mb-2">Séance</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <input [readonly]="true" type="text" class="form-control form-control-sm"
+               placeholder="Ex : XXXXXXXXX" formControlName="idSeance"/>
+      </div>
+      <!--end::Col-->
+      <!--begin::Col-->
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Date ouv.</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <div class="input-group mb-0">
+          <!--begin::Input-->
+          <input [readonly]="true"  type="text" class="form-control form-control-sm"
+                 placeholder="dd/mm/yyyy" ngbDatepicker #d4="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                 formControlName="dateOuverture"/>
+          <!--end::Input-->
+          <!-- <span (click)="d4.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                           <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                       </span>-->
+        </div>
+      </div>
+
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Date ferm.</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <div class="input-group mb-0">
+          <!--begin::Input-->
+          <input [readonly]="true"  type="text" class="form-control form-control-sm"
+                 placeholder="dd/mm/yyyy" ngbDatepicker #d5="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                 formControlName="dateFermeture"/>
+          <!--end::Input-->
+          <!-- <span (click)="d4.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                           <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                       </span>-->
+        </div>
+      </div>
+      <!--end::Col-->
+
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Date opération.</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <div class="input-group mb-0">
+          <!--begin::Input-->
+          <input  type="text" class="form-control form-control-sm"
+                 placeholder="dd/mm/yyyy" ngbDatepicker #d6="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                 formControlName="dateOperation"
+                  [ngClass]="{ 'is-invalid': submitted && f.dateOperation.errors }"/>
+          <!--end::Input-->
+           <span (click)="d6.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                           <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+           </span>
+          <div *ngIf="submitted && f.dateOperation.errors" class="invalid-feedback">
+            <div *ngIf="f.dateOperation.errors.required">La date opération est obligatoire</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Distributeur</label>
+        <!--end::Label-->
+        <!--begin::Select-->
+        <select class="form-select form-select-sm mb-2" formControlName="personne">
+          <option [defaultSelected]="true">Sélectionnez un distributeur...</option>
+          <option *ngFor="let item of personne$" [ngValue]="item">
+            {{ item.denomination }}
+          </option>
+        </select>
+        <!--end::Select-->
+      </div>
+    </div>
+  </form>
+  <!-- begin::Table-->
+  <div class="card-body overflow-auto">
+  <table class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" id="table_OperationSousRach">
+      <thead>
+      <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+        <th style="width: 20px">ID</th>
+        <th style="width: 25px">N°Compte SGI</th>
+        <th style="width: 10%">Nom/sigle</th>
+        <th style="width: 20%">Prénoms/raison sociale</th>
+        <th style="width: 20px">Part</th>
+        <th style="width: 20px">Commission</th>
+        <th style="width: 20px">TAF COM</th>
+        <th style="width: 20px">Retrocession</th>
+        <th style="width: 20px">TAF RETRO</th>
+        <th style="width: 20px">COM RETRO</th>
+        <th style="width: 20px">REPORT A NOUVEAU</th>
+        <th style="width: 20px">AUTR. RES. BEN</th>
+        <th style="width: 20px">AUTR. RES. DEF</th>
+        <th style="width: 20px">AUTR. INS. BEN</th>
+        <th style="width: 20px">AUTR. INS. DEF</th>
+        <th style="width: 20px">SOM. NON. DISTR</th>
+        <th style="width: 20px">RES. EXO. ENCOURS</th>
+        <th style="width: 20px">RES. INS. DISTR</th>
+        <th style="width: 20px">S/R A LIQUIDER</th>
+        <th style="width: 20px">S/R PART</th>
+
+      </tr>
+      </thead>
+      <tbody class="fw-semibold text-gray-600">
+      <tr *ngFor="let depotRachat of depotRachat$">
+        <td>{{ depotRachat.idActionnaire}}</td>
+        <td>{{ depotRachat.numCompteSgi}}</td>
+        <td>{{ depotRachat.nomSigle}}</td>
+        <td>{{ depotRachat.prenomRaison }}</td>
+        <td>{{ depotRachat.qtePart }}</td>
+        <td>{{ depotRachat.commission }}</td>
+        <td>{{ depotRachat.tafCommission }}</td>
+        <td>{{ depotRachat.commissionRetrocession }}</td>
+        <td>{{ depotRachat.tafCommissionRetrocession }}</td>
+        <td>{{ depotRachat.commissionRetrocedee }}</td>
+        <td>{{ depotRachat.regulReportANouveau }}</td>
+        <td>{{ depotRachat.regulautreResultatBeneficiaire }}</td>
+        <td>{{ depotRachat.regulautreResultatDeficitaire }}</td>
+        <td>{{ depotRachat.regulResultatEnInstanceBeneficiaire }}</td>
+        <td>{{ depotRachat.regulResultatEnInstanceDeficitaire }}</td>
+        <td>{{ depotRachat.regulSommeNonDistribuable }}</td>
+        <td>{{ depotRachat.regulResultatExoEnCours }}</td>
+        <td>{{ depotRachat.regulExoDistribution }}</td>
+        <td>{{ depotRachat.montantSousRachatALiquider }}</td>
+        <td>{{ depotRachat.sousRachatPart }}</td>
+      </tr>
+      </tbody>
+    </table>
+  <div class="d-flex justify-content-end">
+    <button  style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
+            (click)="afficherPrecalcul()">Précalculer
+    </button>
+    <button  style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
+            >Exporter
+    </button>
+    <button type="submit" style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
+            [disabled]="entityForm.invalid"
+    (click)="enregistrer()">Enregistrer
+    </button>
+    <!--end::Table-->
+  </div>
+  </div>
+</div>
+<!--end::Card body-->
+<!--  </div>-->
+<!--end::Products-->
+<!--</div>-->
+

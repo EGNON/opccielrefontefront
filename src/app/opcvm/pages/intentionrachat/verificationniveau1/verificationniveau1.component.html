@@ -1,0 +1,135 @@
+<div class="modal-header p-2">
+  <div class="modal-title h4">LISTE DE VERIFICATION DES RACHATS</div>
+  <!--<button type="button" class="close" (click)="modal.dismiss()">
+    <span>&times;</span>
+  </button>-->
+
+  <button type="button" class="btn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!--end::Card header-->
+<!--begin::Card body-->
+<div class="card modal-body p-lg-2">
+  <form [formGroup]="entityForm" class="form mb-5">
+    <div class="row mb-5">
+      <!--begin::Col-->
+      <div class="col-md-3 fv-row">
+        <!--begin::Label-->
+        <label class=" fs-5 fw-semibold mb-2">OPCVM</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <input [readonly]="true" type="text" class="form-control form-control-sm"
+               placeholder="Ex : XXXXXXXXX" formControlName="denominationOpcvm"/>
+        <!--end::Input-->
+      </div>
+      <!--end::Col-->
+      <!--begin::Col-->
+      <div class="col-md-3 fv-row">
+        <!--begin::Label-->
+        <label class=" fs-5 fw-semibold mb-2">Séance</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <input [readonly]="true" type="text" class="form-control form-control-sm"
+               placeholder="Ex : XXXXXXXXX" formControlName="idSeance"/>
+      </div>
+      <!--end::Col-->
+      <!--begin::Col-->
+      <div class="col-md-3 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Date ouv.</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <div class="input-group mb-0">
+          <!--begin::Input-->
+          <input [readonly]="true"  type="text" class="form-control form-control-sm"
+                 placeholder="dd/mm/yyyy" ngbDatepicker #d4="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                 formControlName="dateOuverture"/>
+          <!--end::Input-->
+          <!-- <span (click)="d4.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                           <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                       </span>-->
+        </div>
+      </div>
+
+      <div class="col-md-3 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Date ferm.</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <div class="input-group mb-0">
+          <!--begin::Input-->
+          <input [readonly]="true"  type="text" class="form-control form-control-sm"
+                 placeholder="dd/mm/yyyy" ngbDatepicker #d5="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                 formControlName="dateFermeture"/>
+          <!--end::Input-->
+          <!-- <span (click)="d4.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                           <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                       </span>-->
+        </div>
+      </div>
+      <!--end::Col-->
+    </div>
+  </form>
+  <!--begin::Table-->
+  <!--<ul class="list-group list-group-flush vert-scrollable-150" id="alldata">
+    <table class="order-details" id="reporting-sup-cinq-millions" >
+      <thead>
+      <tr class="bg-blue">
+        <th style="width: 50px">Référence pièce</th>
+        <th style="width: 25%">Date opération</th>
+        <th style="width: 10%">Nom/sigle</th>
+        <th style="width: 20%">Prénoms/raison sociale</th>
+        <th style="width: 20%">Quantités</th>
+
+      </tr>
+      </thead>
+      <tbody class="fw-semibold text-gray-600">
+      <tr *ngFor="let depotRachat of depotRachat$">
+        <td>
+          <div class="d-flex align-items-center">
+            {{ depotRachat.referencePiece}}
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            {{ depotRachat.dateOperation|date:'dd/MM/yyyy' }}
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            {{ depotRachat.nomSigle}}
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            {{ depotRachat.prenomRaison }}
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            {{ depotRachat.qtePart }}
+          </div>
+        </td>
+        &lt;!&ndash;          <td>&ndash;&gt;
+        &lt;!&ndash;            <div class="d-flex align-items-center">&ndash;&gt;
+
+        &lt;!&ndash;            </div>&ndash;&gt;
+        &lt;!&ndash;          </td>&ndash;&gt;
+      </tr>
+      </tbody>
+    </table>
+  </ul>
+  <div class="d-flex justify-content-end">
+    <button *ngIf="!verifier" style="margin-left: 10px" type="button" class="btn btn-sm btn-primary"
+            (click)="validerRachat()"     >
+      confirmer la vérification de ces intentions de rachats
+    </button>
+    &lt;!&ndash;end::Table&ndash;&gt;
+  </div>-->
+</div>
+<!--end::Card body-->
+<!--  </div>-->
+<!--end::Products-->
+<!--</div>-->
+

@@ -5,6 +5,7 @@ import { Personne } from "../../crm/models/personne/personne.model";
 
 export class Depotrachat extends  ResourceModel<Depotrachat>{
   idOperation:number;
+  idDepotRachat:number;
   //private TransactionDto transaction;
   natureOperation:Natureoperation;
   dateOperation:Date;
