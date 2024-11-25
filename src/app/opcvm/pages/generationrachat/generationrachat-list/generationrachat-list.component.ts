@@ -14,6 +14,8 @@ import { Operationsouscriptionrachat } from '../../../models/operationsouscripti
 import { DepotrachatService } from '../../../services/depotrachat.service';
 import { OperationsouscriptionrachatService } from '../../../services/operationsouscriptionrachat.service';
 import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
+import {LocalService} from "../../../../services/local.service";
+import {Operationsouscriptionrachat2} from "../../../models/operationsouscriptionrachat2.model";
 
 @Component({
   selector: 'app-generationrachat-list',
@@ -28,8 +30,8 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
   nbreLigne:number;
   verifier:boolean;
   verifier_Bouton:boolean;
-  operationSouscriptionRachatTab:Operationsouscriptionrachat[];
-  operationSouscriptionRachat:Operationsouscriptionrachat;
+  operationSouscriptionRachatTab:Operationsouscriptionrachat2[];
+  operationSouscriptionRachat:Operationsouscriptionrachat2;
   natureOperation:Natureoperation;
   datatableConfig: Config = {};
   submitted = false;
@@ -54,6 +56,7 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
     public operationSouscriptionRachatService:OperationsouscriptionrachatService,
     public personneService: PersonneService,
     public loadingService: LoaderService,
+    public localStore: LocalService,
     public seanceOpcvmService: SeanceopcvmService,
     public authService: AuthService,
     private fb: FormBuilder,
@@ -77,7 +80,7 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
     this.afficherDistributeur()
     // console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
     // console.log("idOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
-    this.seanceOpcvmService.afficherSeanceEnCours(this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+    this.seanceOpcvmService.afficherSeanceEnCours(this.localStore.getData("currentOpcvm").idOpcvm)
       .subscribe(val=> {
         //console.log("val=",val)
         this.seance=val.data;
@@ -98,7 +101,7 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
   afficherPrecalcul(){
     this.loadingService.setLoading(true)
     this.entityService.afficherPrecalculRachat(this.entityForm.value.idSeance,
-      this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,
+      this.localStore.getData("currentOpcvm").idOpcvm,
       this.entityForm.value.personne.idPersonne).subscribe(
       (data)=>{
         this.depotRachat$=data
@@ -165,9 +168,13 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
       niveau:"1",
       userLoginVerif:this.authService.currentUserValue?.denomination
     }*/
+    this.nbreLigne = document.getElementById("table_OperationSousRach").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
+    if(this.nbreLigne===1){
+      alert("Aucune donnée dans la grille")
+      return
+    }
     this.loadingService.setLoading(true)
     this.submitted=true
-    this.nbreLigne = document.getElementById("table_OperationSousRach").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
     let i: number = 1;
     let dateOperation: any;
 
@@ -179,32 +186,55 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
         this.entityForm.controls.dateOperation.value.day+1);
     }
     this.opcvm=new Opcvm();
-    this.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm
+    this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm").idOpcvm
     //        console.log(this.nbreLigne);
     this.operationSouscriptionRachatTab=[]
     for (i === 1; i < this.nbreLigne; i++) {
-      this.operationSouscriptionRachat=new Operationsouscriptionrachat();
+      this.operationSouscriptionRachat=new Operationsouscriptionrachat2();
       this.operationSouscriptionRachat.referencePiece = "";
       // @ts-ignore
-      this.operationSouscriptionRachat.idActionnaire=document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[0].innerHTML
-      this.operationSouscriptionRachat.opcvm=this.opcvm
+      this.operationSouscriptionRachat.idActionnaire=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[0].innerHTML.trim())
+      this.operationSouscriptionRachat.idOpcvm=this.localStore.getData("currentOpcvm").idOpcvm
       this.operationSouscriptionRachat.idSeance=this.entityForm.value.idSeance
+      this.operationSouscriptionRachat.idPersonne=this.entityForm.value.personne.idPersonne
       this.operationSouscriptionRachat.dateOperation =dateOperation;
-      this.natureOperation=new Natureoperation();
-      this.natureOperation.codeNatureOperation = "RACH_PART";
-      this.operationSouscriptionRachat.natureOperation=this.natureOperation
+      this.operationSouscriptionRachat.codeNatureOperation="RACH_PART"
       this.operationSouscriptionRachat.datePiece = dateOperation;
       this.operationSouscriptionRachat.dateSaisie =new Date();
+      this.operationSouscriptionRachat.montantSousALiquider=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[18].innerHTML)
+      this.operationSouscriptionRachat.sousRachatPart=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[19].innerHTML)
+      this.operationSouscriptionRachat.commisiionSousRachat=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[5].innerHTML)
+      this.operationSouscriptionRachat.tAFCommissionSousRachat=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[6].innerHTML)
+      this.operationSouscriptionRachat.retrocessionSousRachat=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[7].innerHTML)
+      this.operationSouscriptionRachat.tAFRetrocessionSousRachat=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[8].innerHTML)
+      this.operationSouscriptionRachat.commissionSousRachatRetrocedee=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[9].innerHTML)
+      this.operationSouscriptionRachat.modeValeurLiquidative=null
+      this.operationSouscriptionRachat.coursVL=0
+      this.operationSouscriptionRachat.regulResultatExoEnCours=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[16].innerHTML)
+      this.operationSouscriptionRachat.regulSommeNonDistribuable=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[15].innerHTML)
+      this.operationSouscriptionRachat.regulReportANouveau=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[10].innerHTML)
+      this.operationSouscriptionRachat.regulautreResultatBeneficiaire=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[11].innerHTML)
+      this.operationSouscriptionRachat.regulautreResultatDeficitaire=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[12].innerHTML)
+      this.operationSouscriptionRachat.regulResultatEnInstanceBeneficiaire=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[13].innerHTML)
+      this.operationSouscriptionRachat.regulResultatEnInstanceDeficitaire=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[14].innerHTML)
+      this.operationSouscriptionRachat.regulExoDistribution=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[17].innerHTML)
+      this.operationSouscriptionRachat.montantDepose=0
+      this.operationSouscriptionRachat.montantConvertiEnPart=0
+      this.operationSouscriptionRachat.nombrePartSousRachat=0
       this.operationSouscriptionRachat.dateValeur =dateOperation;
       this.operationSouscriptionRachat.ecriture = "A";
       this.operationSouscriptionRachat.estRetrocede = false;
+      this.operationSouscriptionRachat.resteRembourse = false;
+      this.operationSouscriptionRachat.rachatPaye = false;
       this.operationSouscriptionRachat.fraisSouscriptionRachat = 0;
+      this.operationSouscriptionRachat.quantiteSouhaite = 0;
+      this.operationSouscriptionRachat.reste = 0;
       this.operationSouscriptionRachat.idOperation = 0;
       this.operationSouscriptionRachat.idTransaction = 0;
       this.operationSouscriptionRachat.libelleOperation = "Rachat de " +
         document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[4].innerHTML + " Part(s)";
-      this.operationSouscriptionRachat.valeurCodeAnalytique = "OPC:" + this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm.toString() +
-        ";ACT:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[0].innerHTML;
+      this.operationSouscriptionRachat.valeurCodeAnalytique = "OPC:" + this.localStore.getData("currentOpcvm").idOpcvm +
+        ";ACT:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[0].innerHTML.trim();
       this.operationSouscriptionRachat.valeurFormule = "10:" +
         document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[5].innerHTML +
         ";17:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[9].innerHTML +
@@ -228,7 +258,8 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
         ";123:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[6].innerHTML +
         ";84:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[8].innerHTML;
       this.operationSouscriptionRachat.valeurFormule = this.operationSouscriptionRachat.valeurFormule.replace(',','.');
-
+      this.operationSouscriptionRachat.userLogin =this.authService.currentUserValue?.denomination
+      console.log("tab"+i,this.operationSouscriptionRachat)
       // @ts-ignore
       this.operationSouscriptionRachatTab.push(this.operationSouscriptionRachat);
     }

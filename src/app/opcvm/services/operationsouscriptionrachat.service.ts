@@ -4,6 +4,7 @@ import {environment} from "../../../environments/environment";
 import {ResourceService} from "../../crm/services/core/resource.service";
 import {Tarificationordinaire} from "../models/tarificationordinaire.model";
 import { Operationsouscriptionrachat } from '../models/operationsouscriptionrachat.model';
+import {Operationsouscriptionrachat2} from "../models/operationsouscriptionrachat2.model";
 
 @Injectable({ providedIn: 'root' })
 export class OperationsouscriptionrachatService extends ResourceService<Operationsouscriptionrachat> {
@@ -16,6 +17,6 @@ export class OperationsouscriptionrachatService extends ResourceService<Operatio
   }
 
   creer(operationSouscriptionRachat:any){
-    return this.http.post<Operationsouscriptionrachat>(`${this.API_URL}/creer`,operationSouscriptionRachat)
+    return this.http.post<Operationsouscriptionrachat2>(`${this.API_URL}/creer`,operationSouscriptionRachat)
   }
 }
