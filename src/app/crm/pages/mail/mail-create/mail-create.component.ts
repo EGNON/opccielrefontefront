@@ -147,7 +147,7 @@ export class MailCreateComponent implements OnInit, OnDestroy{
   public onItemSelect(item: any) {
      //console.log('onItemSelect', item);
     this.select=true
-    debugger;
+    //debugger;
     this.afficherEmail(item.idPersonne)
   }
   public onDeSelect(item: any) {
@@ -157,7 +157,7 @@ export class MailCreateComponent implements OnInit, OnDestroy{
   }
 
   public onSelectAll(items: any[]) {
-    debugger;
+    //debugger;
     if(items.length > 0) {
       items.forEach(item => {
         this.select=true;

@@ -32,6 +32,12 @@ const OpcvmRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
+    path: 'rachat/paiementrachat',
+    loadChildren: () =>
+      import('./paiementrachat/paiementrachat.module').then((m) => m.PaiementrachatModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
     path: 'rachat/verificationintentionniveau1',
     loadChildren: () =>
       import('./verificationniveau1/verificationniveau1.module').then((m) => m.Verificationniveau1Module),

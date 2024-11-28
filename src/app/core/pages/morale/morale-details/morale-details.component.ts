@@ -321,7 +321,7 @@ export class MoraleDetailsComponent {
 
   addOrRemoveFieldsAndValidators(qualite: string)
   {
-    if(qualite === "prospect" || (qualite !== "prospect" && qualite !== "actionnaire"))
+    if(qualite === "prospect" || (qualite !== "prospect" && qualite !== "actionnaires"))
     {
       //numeroCpteDeposit
       this.form.controls["numeroCpteDeposit"].setErrors(null);
@@ -356,12 +356,12 @@ export class MoraleDetailsComponent {
       this.form.controls["telContact"].setErrors(null);
       this.form.controls["telContact"].clearValidators();
       this.form.controls["telContact"].updateValueAndValidity();
-      
+
       //telContact
       this.form.controls["emailContact"].setErrors(null);
       this.form.controls["emailContact"].clearValidators();
       this.form.controls["emailContact"].updateValueAndValidity();
-      
+
       //titreContact
       this.form.controls["titreContact"].setErrors(null);
       this.form.controls["titreContact"].clearValidators();

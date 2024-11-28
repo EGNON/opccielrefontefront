@@ -1,0 +1,132 @@
+<div class="card">
+  <div class="card-header p-2">
+    <div class="card-title h4">PAIEMNTS DES RACHATS</div>
+  </div>
+  <!--end::Card header-->
+  <!--begin::Card body-->
+
+  <form [formGroup]="entityForm" class="form mb-5">
+    <div class="row mb-5">
+      <!--begin::Col-->
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class=" fs-5 fw-semibold mb-2">OPCVM</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <input [readonly]="true" type="text" class="form-control form-control-sm"
+               placeholder="Ex : XXXXXXXXX" formControlName="denominationOpcvm"/>
+        <!--end::Input-->
+      </div>
+      <!--end::Col-->
+      <!--begin::Col-->
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class=" fs-5 fw-semibold mb-2">Séance</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <input [readonly]="true" type="text" class="form-control form-control-sm"
+               placeholder="Ex : XXXXXXXXX" formControlName="idSeance"/>
+      </div>
+      <!--end::Col-->
+      <!--begin::Col-->
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Date ouv.</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <div class="input-group mb-0">
+          <!--begin::Input-->
+          <input [readonly]="true"  type="text" class="form-control form-control-sm"
+                 placeholder="dd/mm/yyyy" ngbDatepicker #d4="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                 formControlName="dateOuverture"/>
+          <!--end::Input-->
+          <!-- <span (click)="d4.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                           <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                       </span>-->
+        </div>
+      </div>
+
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Date ferm.</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <div class="input-group mb-0">
+          <!--begin::Input-->
+          <input [readonly]="true"  type="text" class="form-control form-control-sm"
+                 placeholder="dd/mm/yyyy" ngbDatepicker #d5="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                 formControlName="dateFermeture"/>
+          <!--end::Input-->
+          <!-- <span (click)="d4.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                           <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                       </span>-->
+        </div>
+      </div>
+      <!--end::Col-->
+
+      <div class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Date opération.</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <div class="input-group mb-0">
+          <!--begin::Input-->
+          <input  type="text" class="form-control form-control-sm"
+                  placeholder="dd/mm/yyyy" ngbDatepicker #d6="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                  formControlName="dateOperation"
+                  [ngClass]="{ 'is-invalid': submitted && f.dateOperation.errors }"/>
+          <!--end::Input-->
+          <span (click)="d6.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                           <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+           </span>
+          <div *ngIf="submitted && f.dateOperation.errors" class="invalid-feedback">
+            <div *ngIf="f.dateOperation.errors.required">La date opération est obligatoire</div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </form>
+  <!-- begin::Table-->
+  <div class="card-body overflow-auto">
+    <table class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" id="table_PaiementRachat">
+      <thead>
+      <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+        <th style="width: 20%">ID OP.</th>
+        <th style="width: 30%">Nom/sigle</th>
+        <th style="width: 30%">Prénoms/raison sociale</th>
+        <th style="width: 20%">Montant</th>
+
+      </tr>
+      </thead>
+      <tbody class="fw-semibold text-gray-600">
+      <tr *ngFor="let depotRachat of operationPaiementRachat$">
+        <td >0</td>
+        <td >{{ depotRachat.nomSigle}}</td>
+        <td >{{ depotRachat.prenomRaisonSociale }}</td>
+        <td >{{ depotRachat.montant }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+      <button  style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
+               (click)="afficherPrecalculPaiementRachat()">Précalculer
+      </button>
+      <button type="submit" style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
+              [disabled]="entityForm.invalid"
+              (click)="enregistrer()">Enregistrer
+      </button>
+      <button  style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
+      >Vérifier
+      </button>
+
+      <!--end::Table-->
+    </div>
+  </div>
+</div>
+<!--end::Card body-->
+<!--  </div>-->
+<!--end::Products-->
+<!--</div>-->
+

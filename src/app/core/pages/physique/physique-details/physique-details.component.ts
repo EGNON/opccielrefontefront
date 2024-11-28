@@ -384,7 +384,7 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
 
   addOrRemoveFieldsAndValidators(qualite: string)
   {
-    if(qualite === "prospect" || (qualite !== "prospect" && qualite !== "actionnaire"))
+    if(qualite === "prospect" || (qualite !== "prospect" && qualite !== "actionnaires"))
     {
       //numeroCpteDeposit
       this.form.controls["numeroCpteDeposit"].setErrors(null);
