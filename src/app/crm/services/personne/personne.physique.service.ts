@@ -109,6 +109,7 @@ export class PersonnePhysiqueService extends ResourceService<PersonnePhysique> i
   {
     return this.http.get<PersonnePhysique>(`${this.API_URL}/statut/${qualite}-${id}`)
   }
+
   afficherPersonnePhysiqueNayantPasInvesti (qualite: string,dateDebut:Date,dateFin:Date )  {
     const url = `${this.API_URL}/investi/`+qualite+'/'+dateDebut+'/'+dateFin;
     return this.http.get<PersonnePhysique[]>(url);
@@ -127,6 +128,7 @@ export class PersonnePhysiqueService extends ResourceService<PersonnePhysique> i
     const url = `${this.API_URL}/datatable-${keyword}/list`;
     return this.http.post<DataTablesResponse<any>>(url, dataTablesParameters);
   }
+
   getPersonneSanctionnee(dataTablesParameters: any): Observable<DataTablesResponse<any>> {
     const url = `${this.API_URL}/datatable/physiquesanctionnee`;
     return this.http.post<DataTablesResponse<any>>(url, dataTablesParameters);
@@ -136,6 +138,7 @@ export class PersonnePhysiqueService extends ResourceService<PersonnePhysique> i
     const url = `${this.API_URL}/qualite/${keyword}`;
     return this.http.get(url);
   }
+
   afficherPersonnePhysiqueSelonQualite(keyword: any){
     const url = `${this.API_URL}/qualite/${keyword}`;
     return this.http.get<PersonnePhysique[]>(url);
@@ -158,6 +161,7 @@ export class PersonnePhysiqueService extends ResourceService<PersonnePhysique> i
   updateFn(formData: any, id: any) {
     return this.http.put<any>(`${this.API_URL}/uploads/file-${id}`, formData);
   }
+
   deleteByPersonneAndQualite(idPersonne:number,idQualite:number):Observable<PersonnePhysique>
   {
     return this.http.delete<PersonnePhysique>(environment.apiUrl + `/personnephysiques/${idPersonne}/${idQualite}`);

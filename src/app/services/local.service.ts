@@ -14,12 +14,18 @@ export class LocalService {
   }
 
   public getData(key: string) {
-    let data = localStorage.getItem(key)|| "";
-    return this.decrypt(data);
+    if (key in localStorage) {
+      let data = localStorage.getItem(key)|| "";
+      return this.decrypt(data);
+    } else {
+      alert('no');
+    }
   }
 
   public removeData(key: string) {
-    localStorage.removeItem(key);
+    if (key in localStorage) {
+      localStorage.removeItem(key);
+    }
   }
 
   public clearData() {

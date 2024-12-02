@@ -1926,9 +1926,9 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_AUTORISATION_CR'),
+                  allow: this.authService.isGrantedRole('ROLE_RESTITUTION_RELIQUAT'),
                   title: 'Restitution de reliquat',
-                  page: '#',
+                  page: '/opcvm/souscription/depotsouscription/restitution/reliquat/souscription/actionnaire',
                   role: 'ROLE_RESTITUTION_RELIQUAT',
                   icon: '',
                   translate: '',

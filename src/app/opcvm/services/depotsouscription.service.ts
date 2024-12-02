@@ -48,4 +48,12 @@ export class DepotsouscriptionService extends ResourceService<any> implements On
   confirmerListeVerifNiv2Depot(listeDepots: any) {
     return this.http.post<any>(`${this.API_URL}/confirmer/liste/verification/niveau1/depots/tous`, listeDepots);
   }
+
+  precalculSouscription(parameter: any) {
+    return this.http.post<any>(`${this.API_URL}/precalcul/souscription`, parameter);
+  }
+
+  genererSouscription(parameter: any) {
+    return this.http.post<any>(`${this.API_URL}/generer/souscription/tous`, parameter);
+  }
 }

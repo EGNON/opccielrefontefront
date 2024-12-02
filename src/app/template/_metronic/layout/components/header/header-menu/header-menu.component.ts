@@ -18,6 +18,7 @@ declare var $:JQueryStatic;
 export class HeaderMenuComponent implements OnInit, AfterViewInit {
   private modalRef: NgbModalRef;
   currentOpcvm$: Observable<any>;
+  currentOpcvm: any = null;
   opcvmIsConnected: any;
 
   constructor(
@@ -30,6 +31,8 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.currentOpcvm$ = this.authService.currentOpcvm$;
+    this.currentOpcvm = this.localStore.getData("currentOpcvm");
+    // console.log("Opcvm === ", this.currentOpcvm);
     this.opcvmIsConnected = window.localStorage.getItem("opcvmIsConnected");
   }
 
@@ -37,8 +40,11 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
     if(el.innerText.toLowerCase().includes("déconnexion"))
     {
       window.localStorage.removeItem("opcvmIsConnected");
-      this.localStore.clearData();
+      window.localStorage.removeItem("currentOpcvm");
+      window.localStorage.removeItem("currentSeance");
+      // this.localStore.clearData();
       this.opcvmIsConnected = null;
+      this.currentOpcvm = null;
       this.authService.currentOpcvmSubject.next(null);
       this.router.navigate(['/'])
     }
@@ -49,8 +55,8 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
         size: "xl"
       });
       modalRef.componentInstance.passEntry.subscribe((receivedEntry:any) => {
-        //this.currentOpcvm = receivedEntry;
-        //console.log("RESP === ", receivedEntry);
+        this.currentOpcvm = receivedEntry;
+        // console.log("RESP === ", receivedEntry);
       });
     }
   }

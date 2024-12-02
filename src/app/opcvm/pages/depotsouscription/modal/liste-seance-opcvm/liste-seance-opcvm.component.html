@@ -1,0 +1,77 @@
+<div class="modal-header p-2">
+  <div class="modal-title h4">Liste des séances</div>
+  <!--<button type="button" class="close" (click)="modal.dismiss()">
+    <span>&times;</span>
+  </button>-->
+
+  <button type="button" class="btn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="card modal-body p-lg-2">
+  <!--begin::Form-->
+<!--  <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">-->
+    <div class="card-header border-0 pt-6">
+      <!--begin::Card title-->
+      <div class="card-title">
+        <!--begin::Search-->
+        <div class="d-flex align-items-center position-relative my-1">
+          <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+          <input type="text" data-action="filter" class="form-control form-control-sm form-control-solid w-250px ps-12"
+                 placeholder="Rechercher une séance">
+        </div>
+        <!--end::Search-->
+      </div>
+      <!--begin::Card title-->
+
+      <!--begin::Card toolbar-->
+      <!--<div class="card-toolbar">
+        &lt;!&ndash;begin::Toolbar&ndash;&gt;
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-sm btn-info me-3" (click)="telecharger()">
+            <ng-container *ngIf="downloading">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+            </ng-container>
+            <ng-container *ngIf="!downloading">
+              <span class="indicator-label">Télécharger</span>
+            </ng-container>
+          </button>
+          &lt;!&ndash;begin::Add user&ndash;&gt;
+          <button type="submit" class="btn btn-sm btn-success" [disabled]="disableSaveBtn" (click)="confirmer($event)">
+            <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+            </ng-container>
+            <ng-container *ngIf="!submitting">
+              <span class="indicator-label">Confirmer</span>
+            </ng-container>
+          </button>
+          &lt;!&ndash;end::Add user&ndash;&gt;
+        </div>
+        &lt;!&ndash;end::Toolbar&ndash;&gt;
+      </div>-->
+      <!--end::Card toolbar-->
+    </div>
+    <hr>
+    <div class="card-body pt-0">
+      <div class="table-responsive angular-bootstrap-table">
+        <table datatable [dtOptions]="dtOptions" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+          <thead>
+          <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+            <ng-container *ngFor="let column of dtOptions.columns; let i=index">
+              <th>{{ column.title }}</th>
+            </ng-container>
+          </tr>
+          </thead>
+          <tbody class="fw-semibold text-gray-600"></tbody>
+        </table>
+      </div>
+    </div>
+<!--  </form>-->
+  <!--end::Form-->
+</div>

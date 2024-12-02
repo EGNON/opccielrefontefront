@@ -18,6 +18,8 @@ import { VerifDepotsouscriptionReportComponent } from './verif-depotsouscription
 import {DataTablesModule} from "angular-datatables";
 import { VerifDepotsouscriptionNiv1Component } from './verif-depotsouscription-niv1/verif-depotsouscription-niv1.component';
 import { VerifDepotsouscriptionNiv2Component } from './verif-depotsouscription-niv2/verif-depotsouscription-niv2.component';
+import { RestitutionReliquatComponent } from './restitution-reliquat/restitution-reliquat.component';
+import { ListeSeanceOpcvmComponent } from './modal/liste-seance-opcvm/liste-seance-opcvm.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { VerifDepotsouscriptionNiv2Component } from './verif-depotsouscription-n
     DeleteDepotsouscriptionModalComponent,
     VerifDepotsouscriptionReportComponent,
     VerifDepotsouscriptionNiv1Component,
-    VerifDepotsouscriptionNiv2Component
+    VerifDepotsouscriptionNiv2Component,
+    RestitutionReliquatComponent,
+    ListeSeanceOpcvmComponent
   ],
     imports: [
         CommonModule,

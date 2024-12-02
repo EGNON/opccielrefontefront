@@ -2,7 +2,8 @@
 <div class="menu-item me-lg-1">
   <a #link type="button" class="btn btn-primary btn-sm py-3" style="text-decoration: none !important;"
      (click)="opcvmForm(link)">
-    <span class="menu-title">{{ ((currentOpcvm$|async) != null || (opcvmIsConnected && opcvmIsConnected === "1")) ? 'Déconnexion de opcvm ' : 'Connexion à un opcvm ' }}</span>
+<!--    <span class="menu-title">{{ ((currentOpcvm$|async) != null || (opcvmIsConnected && opcvmIsConnected === "1")) ? 'Déconnexion de opcvm ' : 'Connexion à un opcvm ' }}</span>-->
+    <span class="menu-title">{{ currentOpcvm === null || currentOpcvm === undefined ? 'Connexion à Opcvm' : 'Déconnexion de ' + currentOpcvm.denominationOpcvm }}</span>
   </a>
 </div>
 <!-- Dashboard -->

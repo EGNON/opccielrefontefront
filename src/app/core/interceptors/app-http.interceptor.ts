@@ -22,7 +22,6 @@ export class AppHttpInterceptor implements HttpInterceptor {
       let token: any = this.authService.currentUserTokenValue.token;
       if(!token)
         return next.handle(request);
-
       let req = request.clone({
         headers: request.headers.set('Authorization', 'Bearer ' + token).set('Accept', '*/*')
       });

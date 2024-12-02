@@ -13,6 +13,7 @@ import {
 import {
   VerifDepotsouscriptionNiv2Component
 } from "./verif-depotsouscription-niv2/verif-depotsouscription-niv2.component";
+import {RestitutionReliquatComponent} from "./restitution-reliquat/restitution-reliquat.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'verification/liste/depot', component: VerifDepotsouscriptionReportComponent, },
       { path: 'verification/niveau1/liste/depot', component: VerifDepotsouscriptionNiv1Component, },
       { path: 'verification/niveau2/liste/depot', component: VerifDepotsouscriptionNiv2Component, },
+      { path: 'restitution/reliquat/souscription/actionnaire', component: RestitutionReliquatComponent, },
       { path: 'depotsouscription', redirectTo: '', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],

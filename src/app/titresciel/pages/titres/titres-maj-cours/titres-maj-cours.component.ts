@@ -54,6 +54,7 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
     private modalService: NgbModal,
     public modal: NgbActiveModal,) {
   }
+
   get f() {
     return this.filterForm.controls;
   }

@@ -252,7 +252,7 @@ export class VerifDepotsouscriptionReportComponent implements OnInit, OnDestroy{
       idOpcvm: this.currentOpcvm?.idOpcvm,
       idSeance: this.currentSeance?.idSeanceOpcvm?.idSeance,
       niveau: 0,
-      user: this.currentUser,
+      user: null,
     };
     const sb = this.entityService.telechargerListeDepot(downloadRequest)
       .pipe(

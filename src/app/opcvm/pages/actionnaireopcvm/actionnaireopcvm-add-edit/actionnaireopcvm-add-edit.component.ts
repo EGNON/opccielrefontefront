@@ -1,10 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, of, Subscription} from "rxjs";
 import {Monnaie} from "../../../../crm/models/monnaie.model";
-import {Pays} from "../../../../crm/models/pays.model";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {PaysService} from "../../../../crm/services/pays.service";
-import {MonnaieService} from "../../../../crm/services/monnaie.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, finalize} from "rxjs/operators";
@@ -14,8 +11,6 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Opcvm} from "../../../../core/models/opcvm";
 import {Personne} from "../../../../crm/models/personne/personne.model";
 import {Actionnaireopcvm} from "../../../models/actionnaireopcvm.model";
-import {Modeleecritureformule} from "../../../../core/models/modeleecritureformule.model";
-import {Formule} from "../../../../core/models/formule";
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
@@ -95,11 +90,11 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
       defaultOpen: false,
     };
   }
+
   loadFormValues(entity: any)
   {
     this.entity = entity;
-    this.entityForm.patchValue({libelleFr:
-      entity.libelleFr});
+    this.entityForm.patchValue({libelleFr: entity.libelleFr});
     this.entityForm.patchValue({libelleEn: entity.libelleEn});
     this.entityForm.patchValue({id: entity.idPays});
     this.entityForm.patchValue({indicatif: entity.indicatif});
@@ -112,8 +107,10 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
   get personnes(): FormArray { return <FormArray>this.entityForm.get('personne')}
+
   getPersonne()
   {
+    alert("Lol !!");
     const sb  = this.personneService.afficherPersonneNotInOpcvm(
         this.localStore.getData("currentOpcvm")?.idOpcvm).subscribe(
         (data)=>{
@@ -126,6 +123,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
   public onFilterChange(item: any) {
     // console.log('onFilterChange', item);
   }
+
   public onDropDownClose(item: any) {
     // console.log('onDropDownClose', item);
   }
@@ -145,6 +143,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
   }
 
   get f() { return this.entityForm.controls; }
+
   addRow(id: string) {
     if(this.entityForm.value.personne.idPersonne!=undefined ||
         this.entityForm.value.personne.idPersonne!=null)
@@ -153,8 +152,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
     }
     else
     {
-
-      return
+      return;
     }
     this.personneService.getById(this.idPersonne).subscribe(
         (data) => {
@@ -222,8 +220,8 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
           }
         }
     );
-
   }
+
   removeLine(index: number) {
     // @ts-ignore
     this.tableau = document.getElementById("table_PersonneOpcvm");
@@ -237,7 +235,6 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
     }
     //  console.log(tr);
     // console.log(index);
-
   }
 
   onSaveEntity()

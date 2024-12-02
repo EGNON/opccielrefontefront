@@ -1,50 +1,29 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {Config} from "datatables.net";
-import {of, Subscription} from "rxjs";
-import {LoaderService} from "../../../../loader.service";
-import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
-import {LocalService} from "../../../../services/local.service";
-import {DepotsouscriptionService} from "../../../services/depotsouscription.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Subscription, tap} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {AuthService} from "../../../../core/modules/auth";
 import moment from "moment/moment";
+import {map} from "rxjs/operators";
 import $ from "jquery";
-import {catchError, finalize} from "rxjs/operators";
-import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-verif-depotsouscription-niv2',
-  templateUrl: './verif-depotsouscription-niv2.component.html',
-  styleUrl: './verif-depotsouscription-niv2.component.scss'
+  selector: 'app-liste-seance-opcvm',
+  templateUrl: './liste-seance-opcvm.component.html',
+  styleUrl: './liste-seance-opcvm.component.scss'
 })
-export class VerifDepotsouscriptionNiv2Component implements OnInit, OnDestroy{
+export class ListeSeanceOpcvmComponent implements OnInit, OnDestroy{
+  [key: string]: any;
 
-  form: FormGroup;
+  @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
-  currentOpcvm: any;
-  currentSeance: any;
-  currentUser: any;
-
-  submitting = false;
-  submitted = false;
-  downloading = false;
-  downloaded = false;
-  disableSaveBtn = false;
-
+  //DataTable Config
   datatableConfig: Config = {};
   dtOptions: any = {};
 
+  //Get all subscriptions
   private subscriptions: Subscription[] = [];
 
-  constructor(private loadingService: LoaderService,
-              private fb: FormBuilder,
-              private localStore: LocalService,
-              private authService: AuthService,
-              private entityService: DepotsouscriptionService,
-              private router: Router,
-              private route: ActivatedRoute,
-              public modal: NgbActiveModal,) {
+  constructor(public modal: NgbActiveModal,) {
   }
 
   ngOnDestroy(): void {
@@ -52,12 +31,6 @@ export class VerifDepotsouscriptionNiv2Component implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.currentUser = this.authService.currentUserValue;
-    this.currentOpcvm = this.localStore.getData("currentOpcvm");
-    this.currentSeance = this.localStore.getData("currentSeance");
-    this.form = this.fb.group({
-      depots: this.fb.array([this.createListeVerifDepotForm()]),
-    });
     this.dtOptions = {
       // dom: 'Bfrtip',
       dom: "<'row'<'col-sm-12'tr>>" +
@@ -140,25 +113,11 @@ export class VerifDepotsouscriptionNiv2Component implements OnInit, OnDestroy{
       stateSave: true,
       destroy: true
     };
-    this.afficherListe();
-  }
-
-  get depots(): FormArray {
-    return <FormArray>this.form.get('depots');
-  }
-
-  createListeVerifDepotForm() {
-    return this.fb.group({});
-  }
-
-  ajouterFormControl(elt: any, fieldName: string, fieldValue: any, validators: any[] = []) {
-    elt.addControl(fieldName, this.fb.control(fieldValue, validators));
   }
 
   afficherListe() {
     const self = this;
-    self.depots.clear();
-    this.datatableConfig = {
+    /*this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
         const verificationListeDepotRequest = {
@@ -166,12 +125,14 @@ export class VerifDepotsouscriptionNiv2Component implements OnInit, OnDestroy{
           opcvmDto: this.currentOpcvm,
           datatableParameters: dataTablesParameters,
           estVerifier: null,
-          estVerifie1: true,
+          estVerifie1: false,
           estVerifie2: false
         };
 
         const sb = this.entityService.verificationListeDepot(verificationListeDepotRequest)
           .subscribe(resp => {
+            const depots: any[] = resp.data.data;
+            self.disableSaveBtn = depots.filter(d => d.estVerifier) != null ? depots.filter(d => d.estVerifier).length > 0 : false;
             callback(resp.data);
           });
         this.subscriptions.push(sb);
@@ -203,10 +164,10 @@ export class VerifDepotsouscriptionNiv2Component implements OnInit, OnDestroy{
           },
         },
         {
-          title: 'Vérifié ?', data: "estVerifie2", render: function(data, type, row){
+          title: 'Vérifié ?', data: "estVerifier", render: function(data, type, row){
             return `<div class="form-check form-check-custom form-check-solid form-check-success form-switch">
                       <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                        <input disabled="disabled" name="estVerifie2" type="checkbox" class="form-check-input"
+                        <input disabled="disabled" name="estVerifier" type="checkbox" class="form-check-input"
                             value="true" checked>
                       </div>
                     </div>`;
@@ -214,13 +175,14 @@ export class VerifDepotsouscriptionNiv2Component implements OnInit, OnDestroy{
         }
       ],
       createdRow: function (row, data, dataIndex) {
-        console.log("A vérifier === ", data);
         const listeVerifDepotForm = self.createListeVerifDepotForm();
         const depotClone: any = {
           ...data,
-          estVerifie2: true,
-          dateVerification2: new Date(),
-          userLoginVerificateur2: self.currentUser?.username,
+          estVerifier: true,
+          dateVerification: new Date(),
+          nomVerificateur: "User",
+          estVerifie1: false,
+          estVerifie2: false,
         };
         for (const key in depotClone) {
           let value = depotClone[key];
@@ -238,90 +200,6 @@ export class VerifDepotsouscriptionNiv2Component implements OnInit, OnDestroy{
     this.dtOptions = {
       ...this.dtOptions,
       ...this.datatableConfig,
-    }
-  }
-
-  telecharger() {
-    this.downloading = true;
-    const downloadRequest = {
-      idOpcvm: this.currentOpcvm?.idOpcvm,
-      idSeance: this.currentSeance?.idSeanceOpcvm?.idSeance,
-      niveau: 2,
-      user: {
-        idPersonne: this.currentUser?.idPersonne,
-        denomination: this.currentUser?.denomination
-      },
-    };
-    const sb = this.entityService.telechargerListeDepot(downloadRequest)
-      .pipe(
-        catchError((err) => {
-          this.downloading = false;
-          return of(err.message);
-        }),
-        finalize(() => {
-          this.downloading = false;
-          this.downloaded = false;
-        })
-      )
-      .subscribe((response: any) => {
-        const linkSource =
-          'data:application/octet-stream;base64,' + response.data;
-        const downloadLink = document.createElement('a');
-        const fileName = 'listVerif2Depot.pdf';
-
-        downloadLink.href = linkSource;
-        downloadLink.download = fileName;
-        downloadLink.click();
-      });
-    this.subscriptions.push(sb);
-  }
-
-  confirmer($event: any) {
-    this.submitting = true;
-    this.submitted = true;
-    this.loadingService.setLoading(true);
-
-    if (this.form.invalid) {
-      this.submitting = false;
-      this.loadingService.setLoading(false);
-      return;
-    }
-
-    this.entityService.confirmerListeVerifNiv2Depot(this.form.value.depots)
-      .pipe(
-        catchError((err) => {
-          this.submitting = false;
-          this.disableSaveBtn = false;
-          this.loadingService.setLoading(false);
-          return of(err.message);
-        }),
-        finalize(() => {
-          this.submitting = false;
-          this.submitted = false;
-          this.disableSaveBtn = true;
-          this.loadingService.setLoading(false);
-          Swal.fire({
-            title: "OPCCIEL",
-            text: "Confirmation effectuée avec succès.",
-            icon: "success",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Ok"
-          }).then((result) => {
-            if (result.isConfirmed) {
-              window.location.reload();
-            }
-          });
-        })
-      )
-      .subscribe(value => {
-        console.log("La réponse est là === ", value);
-        /*Swal.fire({
-          title: "OPCCIEL",
-          text: "Confirmation effectuée avec succès.",
-          icon: "success"
-        });*/
-      });
+    }*/
   }
 }
