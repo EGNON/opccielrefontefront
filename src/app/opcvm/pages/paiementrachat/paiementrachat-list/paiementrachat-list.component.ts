@@ -1,28 +1,30 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
-import {FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbActiveModal, NgbDate, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Config } from 'datatables.net';
-import { Subscription, switchMap } from 'rxjs';
-import { SweetAlertOptions } from 'sweetalert2';
-import { Natureoperation } from '../../../../core/models/natureoperation.model';
-import { Opcvm } from '../../../../core/models/opcvm';
-import { AuthService } from '../../../../core/modules/auth';
-import { PersonneService } from '../../../../crm/services/personne/personne.service';
-import { LoaderService } from '../../../../loader.service';
-import { Operationsouscriptionrachat } from '../../../models/operationsouscriptionrachat.model';
-import { DepotrachatService } from '../../../services/depotrachat.service';
-import { OperationsouscriptionrachatService } from '../../../services/operationsouscriptionrachat.service';
-import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
-import {LocalService} from "../../../../services/local.service";
+import {Component, EventEmitter, OnDestroy, OnInit, Output, Renderer2} from '@angular/core';
+import {Subscription} from "rxjs";
 import {Operationsouscriptionrachat2} from "../../../models/operationsouscriptionrachat2.model";
+import {Natureoperation} from "../../../../core/models/natureoperation.model";
+import {Config} from "datatables.net";
+import {Opcvm} from "../../../../core/models/opcvm";
+import {SweetAlertOptions} from "sweetalert2";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {DepotrachatService} from "../../../services/depotrachat.service";
+import {OperationsouscriptionrachatService} from "../../../services/operationsouscriptionrachat.service";
+import {PersonneService} from "../../../../crm/services/personne/personne.service";
+import {LoaderService} from "../../../../loader.service";
+import {LocalService} from "../../../../services/local.service";
+import {SeanceopcvmService} from "../../../services/seanceopcvm.service";
+import {AuthService} from "../../../../core/modules/auth";
+import {NgbActiveModal, NgbDate, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {OperationpaiementrachatService} from "../../../services/operationpaiementrachat.service";
+import {FormuleService} from "../../../../core/services/formule.service";
+import {ExerciceService} from "../../../services/exercice.service";
 
 @Component({
-  selector: 'app-generationrachat-list',
-  templateUrl: './generationrachat-list.component.html',
-  styleUrl: './generationrachat-list.component.scss'
+  selector: 'app-paiementrachat-list',
+  templateUrl: './paiementrachat-list.component.html',
+  styleUrl: './paiementrachat-list.component.scss'
 })
-export class GenerationrachatListComponent implements OnInit, OnDestroy {
+export class PaiementrachatListComponent implements OnInit, OnDestroy {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   isLoading: boolean;
   private subscriptions: Subscription[] = [];
@@ -37,9 +39,11 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
   submitted = false;
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
-  depotRachat$:any;
+  operationPaiementRachat$:any;
   opcvm:Opcvm;
   personne$:any;
+  exercice$:any;
+  solde:any;
   depotRachat2$:any;
   swalOptions: SweetAlertOptions = {};
   seance:any;
@@ -52,7 +56,9 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private renderer: Renderer2,
-    public entityService: DepotrachatService,
+    public entityService: OperationpaiementrachatService,
+    public formuleService: FormuleService,
+    public exerciceService: ExerciceService,
     public operationSouscriptionRachatService:OperationsouscriptionrachatService,
     public personneService: PersonneService,
     public loadingService: LoaderService,
@@ -73,13 +79,15 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
         idSeance: [null],
         dateOuverture: [null],
         dateFermeture: [null],
-        personne: [null],
         dateOperation: [null,Validators.required],
+        solde: [null],
+        totalMontantRachat: [null],
       }
     );
-    this.afficherDistributeur()
+
     // console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
     // console.log("idOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+    this.afficherSoldeCompteFormule()
     this.seanceOpcvmService.afficherSeanceEnCours(this.localStore.getData("currentOpcvm").idOpcvm)
       .subscribe(val=> {
         //console.log("val=",val)
@@ -94,27 +102,50 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
         let dateFermeture = new Date(this.seance.dateFermeture);
         this.entityForm.patchValue({dateFermeture: new NgbDate(
             dateFermeture.getFullYear(), dateFermeture.getMonth()+1, dateFermeture.getDate())});
-
-
-    })
+      })
   }
-  afficherPrecalcul(){
-    this.loadingService.setLoading(true)
-    this.entityService.afficherPrecalculRachat(this.entityForm.value.idSeance,
-      this.localStore.getData("currentOpcvm").idOpcvm,
-      this.entityForm.value.personne.idPersonne).subscribe(
+  afficherSoldeCompteFormule(){
+    let idOpcvm=this.localStore.getData("currentOpcvm").idOpcvm
+    this.exerciceService.afficherExerciceCourant(idOpcvm).subscribe(
       (data)=>{
-        this.depotRachat$=data
+        this.exercice$=data.data
+        console.log(this.exercice$)
+        const entity={
+          idOpcvm:this.localStore.getData("currentOpcvm").idOpcvm,
+          numCompte:"1231000",
+          codeplan:this.exercice$.plan.codePlan.trim(),
+          idTitre:null,
+          date:this.localStore.getData("currentSeance").dateFermeture.substring(0,10)
+        }
+        this.formuleService.soldeCompteFormule(entity).subscribe(
+          (data)=>{
+              this.solde=data.data
+            console.log("idOpcvm",this.localStore.getData("currentOpcvm").idOpcvm)
+            console.log("plan",this.exercice$.plan.codePlan)
+            console.log("dateFErmeture",this.localStore.getData("currentSeance").dateFermeture.substring(0,10))
+            console.log("solde=",this.solde)
+          }
+        )
+      }
+    )
+
+  }
+  afficherPrecalculPaiementRachat(){
+    this.loadingService.setLoading(true)
+    this.entityService.precalculPaiementRachat(
+      this.localStore.getData("currentOpcvm").idOpcvm,this.entityForm.value.idSeance).subscribe(
+      (data)=>{
+        this.operationPaiementRachat$=data.data
+        //console.log(this.operationPaiementRachat$)
+        let totalMontantRachat=0
+        let i=0
+        for(i==0;i<this.operationPaiementRachat$.length;i++){
+          totalMontantRachat+=Number(this.operationPaiementRachat$[i].montant)
+        }
+        this.entityForm.patchValue({totalMontantRachat:totalMontantRachat})
       }
     )
     this.loadingService.setLoading(false)
-  }
-  afficherDistributeur(){
-    this.personneService.afficherPersonneSelonQualite("DISTRIBUTEURS").subscribe(
-      (data)=>{
-        this.personne$=data
-      }
-    )
   }
   ngOnDestroy(): void {
     if (this.clickListener) {
@@ -123,51 +154,14 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
 
-  renderActionColumn(): void {
-    if (this.datatableConfig.columns) {
-      let actions = this.datatableConfig.columns[this.datatableConfig.columns?.length-1];
-      actions.render = (data: any, type: any, full: any) => {
-        const parentActionStart = `
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                      Action
-                    </button>
-                    <ul class="dropdown-menu">`;
-        const show = `
-                <li>
-                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idDepotRachat}">Afficher</a>
-                </li>`;
-        const edit = `
-                <li>
-                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idDepotRachat}"
-                    data-id2="${full.idSeance}">Modifier</a>
-                </li>`;
-        const separator = `<li><hr class="dropdown-divider"></li>`;
-        const delete1 = `<li>
-                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idDepotRachat}"
-                    >Supprimer</a>
-                </li>`;
-        const parentActionEnd = `</ul>
-            </div>`;
-        const actions = [];
-        actions.push(parentActionStart);
-        // actions.push(show);
-        actions.push(edit);
-        actions.push(separator);
-        actions.push(delete1);
-        actions.push(parentActionEnd);
 
-        return actions.join('');
-      }
-    }
-  }
   enregistrer(){
-   /* const entity={
-      idOpcvm:this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,
-      codeNatureOperation:"INT_RACH",
-      niveau:"1",
-      userLoginVerif:this.authService.currentUserValue?.denomination
-    }*/
+    /* const entity={
+       idOpcvm:this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,
+       codeNatureOperation:"INT_RACH",
+       niveau:"1",
+       userLoginVerif:this.authService.currentUserValue?.denomination
+     }*/
     this.nbreLigne = document.getElementById("table_OperationSousRach").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
     if(this.nbreLigne===1){
       alert("Aucune donnée dans la grille")
@@ -281,4 +275,5 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
     this.loadingService.setLoading(false)
   }
 }
+
 

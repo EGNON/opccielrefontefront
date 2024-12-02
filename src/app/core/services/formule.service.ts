@@ -15,4 +15,7 @@ export class FormuleService extends ResourceService<Formule>{
   afficherTous(){
     return this.http.get<any>(`${this.API_URL}`)
   }
+  soldeCompteFormule(soldeCompteFormule:any){
+    return this.http.post<any>(`${this.API_URL}/soldecompteformule`,soldeCompteFormule)
+  }
 }

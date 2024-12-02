@@ -2004,6 +2004,17 @@ export class LibraryService implements OnDestroy{
                   dataLink: '',
                   parent: 'Rachat',
                   children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_PAIEMENTRACHAT'),
+                  title: 'Paiement des rachats',
+                  page: '/opcvm/rachat/paiementrachat',
+                  role: 'ROLE_PAIEMENTRACHAT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Rachat',
+                  children: []
                 }
               ]
             }
