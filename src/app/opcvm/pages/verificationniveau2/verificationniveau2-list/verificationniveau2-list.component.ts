@@ -9,6 +9,7 @@ import { AuthService } from '../../../../core/modules/auth';
 import { LoaderService } from '../../../../loader.service';
 import { DepotrachatService } from '../../../services/depotrachat.service';
 import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-verificationniveau2-list',
@@ -44,6 +45,7 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
     public entityService: DepotrachatService,
     public seanceOpcvmService: SeanceopcvmService,
     private loadingService: LoaderService,
+    public localStore: LocalService,
     public authService: AuthService,
     private fb: FormBuilder,
     public modal: NgbActiveModal,
@@ -60,8 +62,8 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
       }
     );
     // console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
-    // console.log("idOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
-    this.seanceOpcvmService.afficherSeanceEnCours(this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+    // console.log("idOpcvm=",this.localStore.getData("currentOpcvm").idOpcvm)
+    this.seanceOpcvmService.afficherSeanceEnCours(this.localStore.getData("currentOpcvm").idOpcvm)
       .pipe(
         switchMap( (val) => {
           //console.log("val=",val)
@@ -78,7 +80,7 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
               dateFermeture.getFullYear(), dateFermeture.getMonth()+1, dateFermeture.getDate())});
 
           return this.entityService.verifierIntentionRachatRestant(
-            this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm
+            this.localStore.getData("currentOpcvm").idOpcvm
             ,this.idSeance,"INT_RACH",true,false,false);
         })
       ).subscribe(resp=> {
@@ -92,7 +94,7 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
         this.verifier=false;
         this.verifier_Bouton=false;
         this.entityService.afficherFT_DepotRachat(
-          this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,true,false).subscribe(
+          this.localStore.getData("currentOpcvm").idOpcvm,true,false).subscribe(
           (data)=>{
             this.depotRachat2$=data;
             if(this.depotRachat2$.length===0)
@@ -151,7 +153,7 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
   }
   validerRachat(){
    /* const entity={
-      idOpcvm:this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,
+      idOpcvm:this.localStore.getData("currentOpcvm").idOpcvm,
       codeNatureOperation:"INT_RACH",
       niveau:"1",
       userLoginVerif:this.authService.currentUserValue?.denomination

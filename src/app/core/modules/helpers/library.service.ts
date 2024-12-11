@@ -2015,6 +2015,17 @@ export class LibraryService implements OnDestroy{
                   dataLink: '',
                   parent: 'Rachat',
                   children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_AVISRACHAT'),
+                  title: 'Avis de rachat',
+                  page: '/opcvm/rachat/avisrachat',
+                  role: 'ROLE_AVISRACHAT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Rachat',
+                  children: []
                 }
               ]
             }

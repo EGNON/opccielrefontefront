@@ -8,6 +8,7 @@ import { SweetAlertOptions } from 'sweetalert2';
 import { AuthService } from '../../../../core/modules/auth';
 import { DepotrachatService } from '../../../services/depotrachat.service';
 import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-verificationniveau1',
@@ -40,6 +41,7 @@ export class Verificationniveau1Component implements OnInit, OnDestroy {
     public entityService: DepotrachatService,
     public seanceOpcvmService: SeanceopcvmService,
     public authService: AuthService,
+    public localStore: LocalService,
     private fb: FormBuilder,
     public modal: NgbActiveModal,
     private modalService: NgbModal) {
@@ -55,8 +57,8 @@ export class Verificationniveau1Component implements OnInit, OnDestroy {
       }
     );
     // console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
-    // console.log("idOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
-    this.seanceOpcvmService.afficherSeanceEnCours(this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+    // console.log("idOpcvm=",this.localStore.getData("currentOpcvm").idOpcvm)
+    this.seanceOpcvmService.afficherSeanceEnCours(this.localStore.getData("currentOpcvm").idOpcvm)
       .pipe(
         switchMap( (val) => {
           //console.log("val=",val)
@@ -74,7 +76,7 @@ export class Verificationniveau1Component implements OnInit, OnDestroy {
               dateFermeture.getFullYear(), dateFermeture.getMonth()+1, dateFermeture.getDate())});
 
           return this.entityService.verifierIntentionRachatRestant(
-          this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm
+          this.localStore.getData("currentOpcvm").idOpcvm
             ,this.idSeance,"INT_RACH",false,false,false);
         })
       ).subscribe(resp=> {
@@ -86,7 +88,7 @@ export class Verificationniveau1Component implements OnInit, OnDestroy {
           else{
             this.verifier=false;
             this.entityService.verifierIntentionRachatRestant(
-              this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm
+              this.localStore.getData("currentOpcvm").idOpcvm
               ,this.idSeance,"INT_RACH",true,false,false).subscribe(
               (data)=>{
                 this.depotRachat2$=data.data;
@@ -145,7 +147,7 @@ export class Verificationniveau1Component implements OnInit, OnDestroy {
   }
   validerRachat(){
     this.entityService.afficherFT_DepotRachat(
-      this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,false,false).subscribe(
+      this.localStore.getData("currentOpcvm").idOpcvm,false,false).subscribe(
       (data)=>{
         this.depotRachat$=data;
         let i=0;

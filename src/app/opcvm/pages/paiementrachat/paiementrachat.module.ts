@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {PaiementrachatComponent} from "./paiementrachat.component";
 import { PaiementrachatListComponent } from './paiementrachat-list/paiementrachat-list.component';
 import {PaiementrachatRoutingModule} from "./paiementrachat-routing.module";
+import {NgxPrintDirective} from "ngx-print";
 
 
 
@@ -19,16 +20,17 @@ import {PaiementrachatRoutingModule} from "./paiementrachat-routing.module";
     PaiementrachatListComponent,
 
   ],
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    EntityCrudModule,
-    SharedModule,
-    NgbInputDatepicker,
-    NombreDecimalDirective,
-    PaiementrachatRoutingModule,
-    SweetAlert2Module,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        EntityCrudModule,
+        SharedModule,
+        NgbInputDatepicker,
+        NombreDecimalDirective,
+        PaiementrachatRoutingModule,
+        SweetAlert2Module,
+        ReactiveFormsModule,
+        NgxPrintDirective
+    ]
 })
 export class PaiementrachatModule { }

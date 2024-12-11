@@ -18,6 +18,8 @@ import {NgbActiveModal, NgbDate, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {OperationpaiementrachatService} from "../../../services/operationpaiementrachat.service";
 import {FormuleService} from "../../../../core/services/formule.service";
 import {ExerciceService} from "../../../services/exercice.service";
+import {Operationpaiementrachat2} from "../../../models/operationpaiementrachat2.model";
+import {MiseenaffectationService} from "../../../services/miseenaffectation.service";
 
 @Component({
   selector: 'app-paiementrachat-list',
@@ -31,9 +33,10 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
   idSeance:number;
   nbreLigne:number;
   verifier:boolean;
+  exerciceEnCours:boolean;
   verifier_Bouton:boolean;
-  operationSouscriptionRachatTab:Operationsouscriptionrachat2[];
-  operationSouscriptionRachat:Operationsouscriptionrachat2;
+  operationPaiementRachatTab:Operationpaiementrachat2[];
+  operationPaiementRachat:Operationpaiementrachat2;
   natureOperation:Natureoperation;
   datatableConfig: Config = {};
   submitted = false;
@@ -43,10 +46,12 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
   opcvm:Opcvm;
   personne$:any;
   exercice$:any;
+  save:boolean;
   solde:any;
   depotRachat2$:any;
   swalOptions: SweetAlertOptions = {};
   seance:any;
+  estEnAttente:boolean;
   private clickListener: () => void;
   private idInAction: number;
   entityForm: FormGroup;
@@ -59,7 +64,8 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
     public entityService: OperationpaiementrachatService,
     public formuleService: FormuleService,
     public exerciceService: ExerciceService,
-    public operationSouscriptionRachatService:OperationsouscriptionrachatService,
+    public miseEnAffectationService: MiseenaffectationService,
+    public operationpaiementrachatService:OperationpaiementrachatService,
     public personneService: PersonneService,
     public loadingService: LoaderService,
     public localStore: LocalService,
@@ -84,10 +90,13 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
         totalMontantRachat: [null],
       }
     );
-
+    this.loadingService.setLoading(false);
     // console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
     // console.log("idOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
     this.afficherSoldeCompteFormule()
+    this.verificationMiseAffectationEnAttente()
+
+
     this.seanceOpcvmService.afficherSeanceEnCours(this.localStore.getData("currentOpcvm").idOpcvm)
       .subscribe(val=> {
         //console.log("val=",val)
@@ -102,14 +111,67 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
         let dateFermeture = new Date(this.seance.dateFermeture);
         this.entityForm.patchValue({dateFermeture: new NgbDate(
             dateFermeture.getFullYear(), dateFermeture.getMonth()+1, dateFermeture.getDate())});
+
+        this.entityForm.patchValue({dateOperation: new NgbDate(
+            dateFermeture.getFullYear(), dateFermeture.getMonth()+1, dateFermeture.getDate())});
       })
+    this.save=false
+    //console.log(this.localStore.getData("currentSeance"))
+    this.operationpaiementrachatService.liste(this.localStore.getData("currentOpcvm").idOpcvm,
+      this.localStore.getData("currentSeance").idSeanceOpcvm.idSeance).subscribe(
+      (data)=>{
+          this.operationPaiementRachat$=data.data
+          if(this.operationPaiementRachat$.length!==0 )
+          {
+            if(this.operationPaiementRachat$[0].idOperation==0){
+              this.save=false
+            }
+            else
+              this.save=true
+          }
+          //console.log(this.save)
+      }
+    )
+  }
+  verificationMiseAffectationEnAttente(){
+    this.miseEnAffectationService.verificationMiseAffectationEnAttente(this.localStore.getData("currentOpcvm").idOpcvm)
+      .subscribe((data)=>{
+        if(data.data!=0)
+          this.estEnAttente=true;
+        else
+          this.estEnAttente=false;
+      })
+  }
+  grise()
+  {
+    if(this.entityForm.invalid)
+      return true;
+    else
+      if(this.save)
+        return true;
+      else
+        return false;
+  }
+  imprimer(){
+    const printContent = document.getElementById("print");
+    const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
+    WindowPrt.document.write(printContent.innerHTML);
+    WindowPrt.document.close();
+    WindowPrt.focus();
+    WindowPrt.print();
+    WindowPrt.close();
   }
   afficherSoldeCompteFormule(){
     let idOpcvm=this.localStore.getData("currentOpcvm").idOpcvm
     this.exerciceService.afficherExerciceCourant(idOpcvm).subscribe(
       (data)=>{
         this.exercice$=data.data
-        console.log(this.exercice$)
+
+        if(data.data.length==0)
+          this.exerciceEnCours=false
+        else
+          this.exerciceEnCours=true
+        //console.log(this.exercice$)
         const entity={
           idOpcvm:this.localStore.getData("currentOpcvm").idOpcvm,
           numCompte:"1231000",
@@ -120,10 +182,11 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
         this.formuleService.soldeCompteFormule(entity).subscribe(
           (data)=>{
               this.solde=data.data
-            console.log("idOpcvm",this.localStore.getData("currentOpcvm").idOpcvm)
+              this.entityForm.patchValue({solde:this.solde})
+            /*console.log("idOpcvm",this.localStore.getData("currentOpcvm").idOpcvm)
             console.log("plan",this.exercice$.plan.codePlan)
-            console.log("dateFErmeture",this.localStore.getData("currentSeance").dateFermeture.substring(0,10))
-            console.log("solde=",this.solde)
+            console.log("dateFErmeture",this.localStore.getData("currentSeance").dateFermeture.substring(0,10))*/
+           // console.log("solde=",this.solde)
           }
         )
       }
@@ -143,6 +206,7 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
           totalMontantRachat+=Number(this.operationPaiementRachat$[i].montant)
         }
         this.entityForm.patchValue({totalMontantRachat:totalMontantRachat})
+        //console.log("totalMontant",totalMontantRachat)
       }
     )
     this.loadingService.setLoading(false)
@@ -162,11 +226,29 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
        niveau:"1",
        userLoginVerif:this.authService.currentUserValue?.denomination
      }*/
-    this.nbreLigne = document.getElementById("table_OperationSousRach").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
+
+
+    this.nbreLigne = document.getElementById("table_PaiementRachat").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
     if(this.nbreLigne===1){
-      alert("Aucune donnée dans la grille")
+      alert("Aucune donnée dans le tableau")
       return
     }
+
+    let solde=0
+    let totalMontantRachat=0
+    if(this.entityForm.value.solde!==null)
+      solde=Number(this.entityForm.value.solde)
+
+    if(this.entityForm.value.totalMontantRachat!==null)
+      totalMontantRachat=Number(this.entityForm.value.totalMontantRachat)
+
+    if(solde<totalMontantRachat)
+    {
+      alert("Solde=" + solde + "\n Total Rachat=" +totalMontantRachat +
+        "\n Vous ne disposez pas d'assez de liquidité pour effectuer ces paiements");
+      return;
+    }
+
     this.loadingService.setLoading(true)
     this.submitted=true
     let i: number = 1;
@@ -182,82 +264,35 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
     this.opcvm=new Opcvm();
     this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm").idOpcvm
     //        console.log(this.nbreLigne);
-    this.operationSouscriptionRachatTab=[]
+    this.operationPaiementRachatTab=[]
     for (i === 1; i < this.nbreLigne; i++) {
-      this.operationSouscriptionRachat=new Operationsouscriptionrachat2();
-      this.operationSouscriptionRachat.referencePiece = "";
+      this.operationPaiementRachat=new Operationpaiementrachat2();
+      this.operationPaiementRachat.referencePiece = "";
       // @ts-ignore
-      this.operationSouscriptionRachat.idActionnaire=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[0].innerHTML.trim())
-      this.operationSouscriptionRachat.idOpcvm=this.localStore.getData("currentOpcvm").idOpcvm
-      this.operationSouscriptionRachat.idSeance=this.entityForm.value.idSeance
-      this.operationSouscriptionRachat.idPersonne=this.entityForm.value.personne.idPersonne
-      this.operationSouscriptionRachat.dateOperation =dateOperation;
-      this.operationSouscriptionRachat.codeNatureOperation="RACH_PART"
-      this.operationSouscriptionRachat.datePiece = dateOperation;
-      this.operationSouscriptionRachat.dateSaisie =new Date();
-      this.operationSouscriptionRachat.montantSousALiquider=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[18].innerHTML)
-      this.operationSouscriptionRachat.sousRachatPart=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[19].innerHTML)
-      this.operationSouscriptionRachat.commisiionSousRachat=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[5].innerHTML)
-      this.operationSouscriptionRachat.tAFCommissionSousRachat=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[6].innerHTML)
-      this.operationSouscriptionRachat.retrocessionSousRachat=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[7].innerHTML)
-      this.operationSouscriptionRachat.tAFRetrocessionSousRachat=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[8].innerHTML)
-      this.operationSouscriptionRachat.commissionSousRachatRetrocedee=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[9].innerHTML)
-      this.operationSouscriptionRachat.modeValeurLiquidative=null
-      this.operationSouscriptionRachat.coursVL=0
-      this.operationSouscriptionRachat.regulResultatExoEnCours=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[16].innerHTML)
-      this.operationSouscriptionRachat.regulSommeNonDistribuable=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[15].innerHTML)
-      this.operationSouscriptionRachat.regulReportANouveau=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[10].innerHTML)
-      this.operationSouscriptionRachat.regulautreResultatBeneficiaire=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[11].innerHTML)
-      this.operationSouscriptionRachat.regulautreResultatDeficitaire=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[12].innerHTML)
-      this.operationSouscriptionRachat.regulResultatEnInstanceBeneficiaire=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[13].innerHTML)
-      this.operationSouscriptionRachat.regulResultatEnInstanceDeficitaire=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[14].innerHTML)
-      this.operationSouscriptionRachat.regulExoDistribution=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[17].innerHTML)
-      this.operationSouscriptionRachat.montantDepose=0
-      this.operationSouscriptionRachat.montantConvertiEnPart=0
-      this.operationSouscriptionRachat.nombrePartSousRachat=0
-      this.operationSouscriptionRachat.dateValeur =dateOperation;
-      this.operationSouscriptionRachat.ecriture = "A";
-      this.operationSouscriptionRachat.estRetrocede = false;
-      this.operationSouscriptionRachat.resteRembourse = false;
-      this.operationSouscriptionRachat.rachatPaye = false;
-      this.operationSouscriptionRachat.fraisSouscriptionRachat = 0;
-      this.operationSouscriptionRachat.quantiteSouhaite = 0;
-      this.operationSouscriptionRachat.reste = 0;
-      this.operationSouscriptionRachat.idOperation = 0;
-      this.operationSouscriptionRachat.idTransaction = 0;
-      this.operationSouscriptionRachat.libelleOperation = "Rachat de " +
-        document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[4].innerHTML + " Part(s)";
-      this.operationSouscriptionRachat.valeurCodeAnalytique = "OPC:" + this.localStore.getData("currentOpcvm").idOpcvm +
-        ";ACT:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[0].innerHTML.trim();
-      this.operationSouscriptionRachat.valeurFormule = "10:" +
-        document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[5].innerHTML +
-        ";17:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[9].innerHTML +
-        ";26:" + 0 +
-        ";35:" + 0+
-        ";36:" + 0 +
-        ";41:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[18].innerHTML +
-        ";43:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[4].innerHTML +
-        ";59:" + 0 +
-        ";60:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[11].innerHTML +
-        ";61:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[12].innerHTML +
-        ";62:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[17].innerHTML +
-        ";63:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[10].innerHTML +
-        ";64:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[13].innerHTML +
-        ";65:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[14].innerHTML +
-        ";66:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[16].innerHTML +
-        ";67:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[15].innerHTML +
-        ";72:" + 0 +
-        ";74:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[7].innerHTML +
-        ";80:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[19].innerHTML +
-        ";123:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[6].innerHTML +
-        ";84:" + document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[8].innerHTML;
-      this.operationSouscriptionRachat.valeurFormule = this.operationSouscriptionRachat.valeurFormule.replace(',','.');
-      this.operationSouscriptionRachat.userLogin =this.authService.currentUserValue?.denomination
-      console.log("tab"+i,this.operationSouscriptionRachat)
+      this.operationPaiementRachat.idActionnaire=Number(document.getElementById("table_PaiementRachat").getElementsByTagName('tr')[i].cells[4].innerHTML.trim())
+      this.operationPaiementRachat.idOpcvm=this.localStore.getData("currentOpcvm").idOpcvm
+      this.operationPaiementRachat.idSeance=this.entityForm.value.idSeance
+      this.operationPaiementRachat.dateOperation =dateOperation;
+      this.operationPaiementRachat.codeNatureOperation="PAI_RACH"
+      this.operationPaiementRachat.datePiece = dateOperation;
+      this.operationPaiementRachat.dateSaisie =new Date();
+      this.operationPaiementRachat.montant=Number(document.getElementById("table_PaiementRachat").getElementsByTagName('tr')[i].cells[3].innerHTML.trim())
+      this.operationPaiementRachat.dateValeur =dateOperation;
+      this.operationPaiementRachat.idOperation = 0;
+      this.operationPaiementRachat.idTransaction = 0;
+      this.operationPaiementRachat.libelleOperation = "PAIEMENT SUIVANT RACHAT DE " +
+        document.getElementById("table_PaiementRachat").getElementsByTagName('tr')[i].cells[3].innerHTML
+      this.operationPaiementRachat.valeurCodeAnalytique = "OPC:" + this.localStore.getData("currentOpcvm").idOpcvm +
+        ";ACT:" + document.getElementById("table_PaiementRachat").getElementsByTagName('tr')[i].cells[4].innerHTML.trim();
+      this.operationPaiementRachat.valeurFormule = "2:" +
+        Math.abs(Number(document.getElementById("table_PaiementRachat").getElementsByTagName('tr')[i].cells[3].innerHTML))
+      this.operationPaiementRachat.valeurFormule = this.operationPaiementRachat.valeurFormule.replace(',','.');
+      this.operationPaiementRachat.userLogin =this.authService.currentUserValue?.denomination
+
       // @ts-ignore
-      this.operationSouscriptionRachatTab.push(this.operationSouscriptionRachat);
+      this.operationPaiementRachatTab.push(this.operationPaiementRachat);
     }
-    this.operationSouscriptionRachatService.creer(this.operationSouscriptionRachatTab)
+    this.operationpaiementrachatService.creer(this.operationPaiementRachatTab)
       .subscribe(
         {
           next: (value) => {

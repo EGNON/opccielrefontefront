@@ -6,8 +6,25 @@
     <div class="d-flex flex-column flex-lg-row mb-0">
       <!--begin::Content-->
       <div class="flex-lg-row-fluid me-0 me-lg-0">
+
+        <div *ngIf="estVerifie2" class="row mb-5">
+          <!--begin::Col-->
+          <div class="col-md-12 fv-row">
+            <div style="margin-top: 10px" class="row mb-2">
+              <div class="col-sm-12 fv-row">
+                <div class="alert alert-info d-flex align-items-center" role="alert">
+                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                    <use xlink:href="#info-fill"/>
+                  </svg>
+                  Le niveau 2 a déja été vérifié
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--end::Col-->
+        </div>
         <!--begin::Form-->
-        <form [formGroup]="entityForm" class="form mb-5">
+        <form *ngIf="!estVerifie2" [formGroup]="entityForm" class="form mb-5">
           <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid" [value]="id" formControlName="id"/>
           <!--begin::Input group-->
 

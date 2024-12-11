@@ -8,6 +8,7 @@ import { SweetAlertOptions } from 'sweetalert2';
 import { AuthService } from '../../../../core/modules/auth';
 import { DepotrachatService } from '../../../services/depotrachat.service';
 import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-verifintentionrachat',
@@ -38,6 +39,7 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
     public entityService: DepotrachatService,
     public seanceOpcvmService: SeanceopcvmService,
     public authService: AuthService,
+    public localStore: LocalService,
     private fb: FormBuilder,
     public modal: NgbActiveModal,
     private modalService: NgbModal) {
@@ -53,8 +55,8 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
       }
     );
     // console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
-    // console.log("idOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
-    this.seanceOpcvmService.afficherSeanceEnCours(this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+    // console.log("idOpcvm=",this.localStore.getData("currentOpcvm").idOpcvm)
+    this.seanceOpcvmService.afficherSeanceEnCours(this.localStore.getData("currentOpcvm").idOpcvm)
       .subscribe(
         (data)=>{
           this.seance=data.data;
@@ -71,7 +73,7 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
         }
       )
     this.entityService.afficherFT_DepotRachat(
-      this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,false,false).subscribe(
+      this.localStore.getData("currentOpcvm").idOpcvm,false,false).subscribe(
       (data)=>{
         this.depotRachat$=data;
         let i=0;
@@ -139,7 +141,7 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
   }
   validerRachat(){
     this.entityService.afficherFT_DepotRachat(
-      this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,false,false).subscribe(
+      this.localStore.getData("currentOpcvm").idOpcvm,false,false).subscribe(
       (data)=>{
         this.depotRachat$=data;
         let i=0;

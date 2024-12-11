@@ -15,6 +15,12 @@ export class OperationsouscriptionrachatService extends ResourceService<Operatio
   afficherTous(){
     return this.http.get<any>(`${this.API_URL}`)
   }
+  listeOperationSouscriptionRachat(idOpcvm:any,codeNatureOperation:any,beginEndDate:any){
+    return this.http.post<any>(`${this.API_URL}/${idOpcvm}/${codeNatureOperation}`,beginEndDate)
+  }
+  avisOperation(idOperation:any){
+      return this.http.get<any>(`${this.API_URL}/avisoperation/${idOperation}`)
+    }
 
   creer(operationSouscriptionRachat:any){
     return this.http.post<Operationsouscriptionrachat2>(`${this.API_URL}/creer`,operationSouscriptionRachat)

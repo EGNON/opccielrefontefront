@@ -17,6 +17,7 @@ export class PieceJointe extends ResourceModel<PieceJointe>{
   personne: Personne;
   rdv:RDV;
   fToByte:any;
+  fToBlob:any;
   file: any;
 
   constructor(model?: Partial<PieceJointe>) {

@@ -35,4 +35,8 @@ export class MailSenderService extends ResourceService<MailSender> implements On
   {
     return this.http.post<MailSender>(this.API_URL + '/manywithfiles',mailSender);
   }
+  envoyerMailAPlusieursAvecFichier2(mailSender:MailSender):Observable<MailSender>
+  {
+    return this.http.post<MailSender>(this.API_URL + '/manywithfiles2',mailSender);
+  }
 }
