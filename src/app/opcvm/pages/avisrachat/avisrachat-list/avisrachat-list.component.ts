@@ -632,7 +632,7 @@ export class AvisrachatListComponent implements OnInit, OnDestroy {
               let dateEnvoi = new Date();
               const entity: any = {
                 objet: "AVIS d'OPERE",
-                msg: "Cher(e) client(e), \\n recevez en piece jointe votre avis d'opéré.\\n Cordialement ",
+                msg: "Cher(e) client(e), \n recevez en piece jointe votre avis d'opéré.\n Cordialement ",
                 documentMailDtos: this.documentMailTab,
                 envoiMailDtos: this.envoiMailTab,
                 dateEnvoi: dateEnvoi,
@@ -657,7 +657,7 @@ export class AvisrachatListComponent implements OnInit, OnDestroy {
                   const entity: any = {
                     recipientEmailMany: emailParameter,
                     subject: "AVIS d'OPERE",
-                    content: "Cher(e) client(e), \\n recevez en piece jointe votre avis d'opéré.\\n Cordialement ",
+                    content: "Cher(e) client(e), \n recevez en piece jointe votre avis d'opéré.\n Cordialement ",
                     fileName: fileNameParameter,
                     fToByte: blobParameter
                   };
