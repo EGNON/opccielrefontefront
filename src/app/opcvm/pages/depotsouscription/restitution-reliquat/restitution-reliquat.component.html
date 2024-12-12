@@ -112,11 +112,11 @@
                 <!--end::Card toolbar-->
               </div>
               <div class="card-body pt-0">
-                <div class="table-responsive angular-bootstrap-table" *ngIf="isLoading">
-                  <table datatable [dtOptions]="datatableConfig" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                <div class="table-responsive angular-bootstrap-table">
+                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                      <ng-container *ngFor="let column of datatableConfig.columns; let i=index">
+                      <ng-container *ngFor="let column of dtOptions.columns; let i=index">
                         <th>{{ column.title }}</th>
                       </ng-container>
                     </tr>
@@ -136,7 +136,7 @@
               Annuler
             </a>
             <!--end::Button-->
-            <button type="button" class="btn btn-sm btn-info me-3">
+            <button type="button" class="btn btn-sm btn-info me-3" (click)="precalcul()">
               <span class="indicator-label">Précalculer</span>
             </button>
             <!--begin::Submit-->

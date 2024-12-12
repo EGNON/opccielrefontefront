@@ -13,7 +13,6 @@ import {
 import {
   VerifDepotsouscriptionReportComponent
 } from "../verif-depotsouscription-report/verif-depotsouscription-report.component";
-import {DataTableDirective} from "angular-datatables";
 
 @Component({
   selector: 'app-depotsouscription-list',

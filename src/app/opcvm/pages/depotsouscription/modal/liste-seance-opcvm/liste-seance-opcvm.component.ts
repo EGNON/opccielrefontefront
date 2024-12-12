@@ -3,8 +3,9 @@ import {Config} from "datatables.net";
 import {Subscription, tap} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import moment from "moment/moment";
-import {map} from "rxjs/operators";
 import $ from "jquery";
+import {LocalService} from "../../../../../services/local.service";
+import {SeanceopcvmService} from "../../../../services/seanceopcvm.service";
 
 @Component({
   selector: 'app-liste-seance-opcvm',
@@ -13,6 +14,9 @@ import $ from "jquery";
 })
 export class ListeSeanceOpcvmComponent implements OnInit, OnDestroy{
   [key: string]: any;
+
+  currentOpcvm: any;
+  currentSeance: any;
 
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
@@ -23,7 +27,10 @@ export class ListeSeanceOpcvmComponent implements OnInit, OnDestroy{
   //Get all subscriptions
   private subscriptions: Subscription[] = [];
 
-  constructor(public modal: NgbActiveModal,) {
+  constructor(
+    private entityService: SeanceopcvmService,
+    public modal: NgbActiveModal,
+    private localStore: LocalService,) {
   }
 
   ngOnDestroy(): void {
@@ -31,11 +38,14 @@ export class ListeSeanceOpcvmComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    this.currentOpcvm = this.localStore.getData("currentOpcvm");
+    this.currentSeance = this.localStore.getData("currentSeance");
     this.dtOptions = {
       // dom: 'Bfrtip',
       dom: "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
       /*order: [0, 'desc'],*/
+      pagingType: "simple_numbers",
       lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
       lengthChange: false,
       responsive: true,
@@ -113,93 +123,84 @@ export class ListeSeanceOpcvmComponent implements OnInit, OnDestroy{
       stateSave: true,
       destroy: true
     };
+    this.afficherListe();
+  }
+
+  btnScripts(n: any) {
+    this.passEntry.emit(n);
+    this.modal.dismiss();
   }
 
   afficherListe() {
     const self = this;
-    /*this.datatableConfig = {
-      serverSide: true,
-      ajax: (dataTablesParameters: any, callback) => {
-        const verificationListeDepotRequest = {
-          seanceOpcvmDto: this.currentSeance,
-          opcvmDto: this.currentOpcvm,
-          datatableParameters: dataTablesParameters,
-          estVerifier: null,
-          estVerifie1: false,
-          estVerifie2: false
-        };
-
-        const sb = this.entityService.verificationListeDepot(verificationListeDepotRequest)
-          .subscribe(resp => {
-            const depots: any[] = resp.data.data;
-            self.disableSaveBtn = depots.filter(d => d.estVerifier) != null ? depots.filter(d => d.estVerifier).length > 0 : false;
-            callback(resp.data);
-          });
-        this.subscriptions.push(sb);
+    const columns: any[] = [
+      {
+        sortable: false,
+        title: 'Actions',
+        class:'text-center min-w-10px',
+        render: (data: any, type: any, full: any) => {
+          return `<button class="btn btn-primary btn-sm">Choisir</button>`;
+        },
       },
-      columns: [
-        {
-          title: 'Référence', data: 'referencePiece', render: function (data, type, row) {
-            return row.referencePiece;
-          },
+      {
+        title: 'N°', data: 'idSeance', render: function (data, type, row) {
+          return row.idSeanceOpcvm.idSeance;
         },
-        {
-          title: 'Date Opération', data: 'dateOperation', render: function (data, type, row) {
-            return moment(data).format('DD/MM/YYYY');
-          },
+      },
+      {
+        title: 'Date Ouv.', data: 'dateOuverture', render: function (data, type, row) {
+          return moment(data).format('DD/MM/YYYY');
         },
-        {
-          title: 'Dénomination', data: 'denomination', render: function (data, type, row) {
-            return row.actionnaire.denomination || '';
-          },
+      },
+      {
+        title: 'Date Ferm.', data: 'dateFermeture', render: function (data, type, row) {
+          return moment(data).format('DD/MM/YYYY');
         },
-        {
-          title: 'Montant Déposé', data: 'montant', render: function (data, type, row) {
-            return row.montant.toLocaleString('fr-FR', {minimumFractionDigits:6, maximumFractionDigits:6});
-          },
+      },
+      {
+        title: 'VL', data: 'valeurLiquidative', render: function (data, type, row) {
+          return row.valeurLiquidative?.toLocaleString('fr-FR', {minimumFractionDigits:6, maximumFractionDigits:6});
         },
-        {
-          title: 'Montant Souscrit', data: 'montantSouscrit', render: function (data, type, row) {
-            return row.montant.toLocaleString('fr-FR', {minimumFractionDigits:6, maximumFractionDigits:6});
-          },
-        },
-        {
-          title: 'Vérifié ?', data: "estVerifier", render: function(data, type, row){
+      },
+      {
+        title: 'E ?', data: "estEnCours", render: function(data, type, row){
+          if(row.estEnCours) {
             return `<div class="form-check form-check-custom form-check-solid form-check-success form-switch">
                       <div class="form-check form-check-custom form-check-solid form-switch mb-2">
-                        <input disabled="disabled" name="estVerifier" type="checkbox" class="form-check-input"
-                            value="true" checked>
+                        <input disabled="disabled" name="estEnCours" type="checkbox" class="form-check-input"
+                            value="${row.estEnCours}" checked>
+                      </div>
+                    </div>`;
+          }
+          else {
+            return `<div class="form-check form-check-custom form-check-solid form-check-success form-switch">
+                      <div class="form-check form-check-custom form-check-solid form-switch mb-2">
+                        <input disabled="disabled" name="estEnCours" type="checkbox" class="form-check-input"
+                            value="${row.estEnCours}">
                       </div>
                     </div>`;
           }
         }
-      ],
-      createdRow: function (row, data, dataIndex) {
-        const listeVerifDepotForm = self.createListeVerifDepotForm();
-        const depotClone: any = {
-          ...data,
-          estVerifier: true,
-          dateVerification: new Date(),
-          nomVerificateur: "User",
-          estVerifie1: false,
-          estVerifie2: false,
-        };
-        for (const key in depotClone) {
-          let value = depotClone[key];
-          if(key.includes("date")) {
-            value = new Date(value);
-          }
-          self.ajouterFormControl(listeVerifDepotForm, key, value, []);
-        }
-        self.depots.push(listeVerifDepotForm);
-        $('td', row).find('input').on('change', (e) => {
-          self.form.patchValue({[e.target.name]: +e.target.value!});
+      }
+    ];
+    this.datatableConfig = {
+      serverSide: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        const sb = this.entityService.listeSeanceOpcvm(dataTablesParameters, this.currentOpcvm?.idOpcvm)
+        .subscribe(resp => {
+          console.log(resp.data);
+          callback(resp.data);
         });
+        this.subscriptions.push(sb);
+      },
+      columns: columns,
+      createdRow: function (row, data, dataIndex) {
+        $(row).find('.btn').on('click', () => self.btnScripts(data));
       },
     };
     this.dtOptions = {
       ...this.dtOptions,
       ...this.datatableConfig,
-    }*/
+    }
   }
 }

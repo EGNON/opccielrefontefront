@@ -20,4 +20,8 @@ export class SeanceopcvmService extends ResourceService<Seanceopcvm> {
   afficherSeanceEnCours(idOpcvm:any){
     return this.http.get<any>(`${this.API_URL}/encours/${idOpcvm}`)
   }
+
+  listeSeanceOpcvm(params: any, idOpcvm) {
+    return this.http.post<any>(`${this.API_URL}/liste/seance/opcvm-${idOpcvm}`, params);
+  }
 }
