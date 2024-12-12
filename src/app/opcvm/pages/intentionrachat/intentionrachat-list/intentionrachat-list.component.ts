@@ -11,6 +11,7 @@ import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
 
 import { DeleteIntentionrachatModalComponent } from '../delete-intentionrachat-modal/delete-intentionrachat-modal.component';
 import { VerifintentionrachatComponent } from '../verifintentionrachat/verifintentionrachat.component';
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-intentionrachat-list',
@@ -21,6 +22,7 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
   isLoading: boolean;
   private subscriptions: Subscription[] = [];
   idSeance:number;
+  estVerifie2:boolean;
   datatableConfig: Config = {};
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
@@ -36,24 +38,25 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
     private renderer: Renderer2,
     public entityService: DepotrachatService,
     public seanceOpcvmService: SeanceopcvmService,
+    public localStore: LocalService,
     public authService: AuthService,
     private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
     // console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
-    // console.log("idOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm)
+    // console.log("idOpcvm=",this.localStore.getData("currentOpcvm").idOpcvm)
     this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
         console.log("PARAMS === ", dataTablesParameters);
         this.seanceOpcvmService.afficherSeanceEnCours
-        (this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm).pipe(
+        (this.localStore.getData("currentOpcvm").idOpcvm).pipe(
           switchMap( (val) => {
             console.log("val=",val)
             this.idSeance=val.data.idSeanceOpcvm.idSeance;
             return this.entityService.datatable_DepotRachat(
-              dataTablesParameters,this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm
+              dataTablesParameters,this.localStore.getData("currentOpcvm").idOpcvm
               ,this.idSeance,"INT_RACH");
           })
         ).subscribe(resp=> {
@@ -61,7 +64,7 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
         })
 
         /*const sb = this.entityService.datatable_DepotRachat(
-          dataTablesParameters,this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm
+          dataTablesParameters,this.localStore.getData("currentOpcvm").idOpcvm
         ,this.idSeance,"INT_RACH")
           .subscribe(resp => {
 
@@ -174,9 +177,12 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
         const actions = [];
         actions.push(parentActionStart);
         // actions.push(show);
-        actions.push(edit);
-        actions.push(separator);
-        actions.push(delete1);
+        if(!full.estVerifie2)
+        {
+          actions.push(edit);
+          actions.push(separator);
+          actions.push(delete1);
+        }
         actions.push(parentActionEnd);
 
         return actions.join('');

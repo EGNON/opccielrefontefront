@@ -21,4 +21,11 @@ export class OperationpaiementrachatService extends ResourceService<Operationpai
   precalculPaiementRachat(idOpcvm:any,idSeance:any):Observable<ResponseModel<Operationpaiementrachat2>>{
     return this.http.get<ResponseModel<Operationpaiementrachat2>>(`${this.API_URL}/${idOpcvm}/${idSeance}`);
   }
+  liste(idOpcvm:any,idSeance:any):Observable<ResponseModel<Operationpaiementrachat2>>{
+    return this.http.get<ResponseModel<Operationpaiementrachat2>>(`${this.API_URL}/liste/${idOpcvm}/${idSeance}`);
+  }
+
+  creer(operationPaiementRachat:any):Observable<Operationpaiementrachat2>{
+    return this.http.post<Operationpaiementrachat2>(`${this.API_URL}`,operationPaiementRachat);
+  }
 }

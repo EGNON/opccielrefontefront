@@ -144,6 +144,7 @@ export class FichekycPrintComponent implements OnInit, OnDestroy{
     this.personnePhysiqueService.afficherPersonneSelonQualite(this.qualite).subscribe(
       (data)=>{
         this.personnes$=data;
+        //console.log(this.personnes$)
       }
     )
   }

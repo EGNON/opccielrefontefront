@@ -1,16 +1,69 @@
 <div class="card">
   <div class="card-header p-2">
-    <div class="card-title h4">PAIEMNTS DES RACHATS</div>
+    <div class="card-title h4">PAIEMENT DES RACHATS</div>
   </div>
   <!--end::Card header-->
-  <!--begin::Card body-->
+  <div *ngIf="!exerciceEnCours">
+    <div class="col-md-12 fv-row">
+      <div style="margin-top: 10px" class="row mb-2">
+        <div class="col-sm-12 fv-row">
+          <div class="alert alert-info d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+              <use xlink:href="#info-fill"/>
+            </svg>
+            Veuillez définir l'exercice courant
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="exerciceEnCours">
+    <div *ngIf="estEnAttente" class="row mb-5">
+      <!--begin::Col-->
+      <div class="col-md-12 fv-row">
+        <div style="margin-top: 10px" class="row mb-2">
+          <div class="col-sm-12 fv-row">
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+              <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                <use xlink:href="#info-fill"/>
+              </svg>
+              Veuillez éffectuer l'enrégistrement de la décision du conseil avant de continuer.
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end::Col-->
+    </div>
+  </div>
 
+  <!--begin::Card body-->
+  <div *ngIf="exerciceEnCours">
+    <div *ngIf="!estEnAttente" id="print">
   <form [formGroup]="entityForm" class="form mb-5">
     <div class="row mb-5">
       <!--begin::Col-->
+      <div [hidden]="true"  class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class="client1 fs-5 fw-semibold mb-2">solde</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <input [readonly]="true" type="text" class="form-control form-control-sm"
+               placeholder="Ex : XXXXXXXXX" formControlName="solde"/>
+        </div>
+      <div [hidden]="true"  class="col-md-2 fv-row">
+        <!--begin::Label-->
+        <label class="client1 fs-5 fw-semibold mb-2">totalMontant</label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <input [readonly]="true" type="text" class="form-control form-control-sm"
+               placeholder="Ex : XXXXXXXXX" formControlName="totalMontantRachat"/>
+        </div>
+    </div>
+    <div class="  row mb-5">
+      <!--begin::Col-->
       <div class="col-md-2 fv-row">
         <!--begin::Label-->
-        <label class=" fs-5 fw-semibold mb-2">OPCVM</label>
+        <label class="client3 fs-5 fw-semibold mb-2">OPCVM</label>
         <!--end::Label-->
         <!--begin::Input-->
         <input [readonly]="true" type="text" class="form-control form-control-sm"
@@ -21,7 +74,7 @@
       <!--begin::Col-->
       <div class="col-md-2 fv-row">
         <!--begin::Label-->
-        <label class=" fs-5 fw-semibold mb-2">Séance</label>
+        <label class="client3 fs-5 fw-semibold mb-2">Séance</label>
         <!--end::Label-->
         <!--begin::Input-->
         <input [readonly]="true" type="text" class="form-control form-control-sm"
@@ -31,10 +84,10 @@
       <!--begin::Col-->
       <div class="col-md-2 fv-row">
         <!--begin::Label-->
-        <label class="required fs-5 fw-semibold mb-2">Date ouv.</label>
+        <label class="client1  fs-5 fw-semibold mb-2">Date ouv.</label>
         <!--end::Label-->
         <!--begin::Input-->
-        <div class="input-group mb-0">
+        <div class="client1 input-group mb-0">
           <!--begin::Input-->
           <input [readonly]="true"  type="text" class="form-control form-control-sm"
                  placeholder="dd/mm/yyyy" ngbDatepicker #d4="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
@@ -48,10 +101,10 @@
 
       <div class="col-md-2 fv-row">
         <!--begin::Label-->
-        <label class="required fs-5 fw-semibold mb-2">Date ferm.</label>
+        <label class="client1 fs-5 fw-semibold mb-2">Date ferm.</label>
         <!--end::Label-->
         <!--begin::Input-->
-        <div class="input-group mb-0">
+        <div class=" client1 input-group mb-0">
           <!--begin::Input-->
           <input [readonly]="true"  type="text" class="form-control form-control-sm"
                  placeholder="dd/mm/yyyy" ngbDatepicker #d5="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
@@ -66,10 +119,10 @@
 
       <div class="col-md-2 fv-row">
         <!--begin::Label-->
-        <label class="required fs-5 fw-semibold mb-2">Date opération.</label>
+        <label class="client1 required fs-5 fw-semibold mb-2">Date opération.</label>
         <!--end::Label-->
         <!--begin::Input-->
-        <div class="input-group mb-0">
+        <div class="client1 input-group mb-0">
           <!--begin::Input-->
           <input  type="text" class="form-control form-control-sm"
                   placeholder="dd/mm/yyyy" ngbDatepicker #d6="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
@@ -97,32 +150,44 @@
         <th style="width: 30%">Nom/sigle</th>
         <th style="width: 30%">Prénoms/raison sociale</th>
         <th style="width: 20%">Montant</th>
+        <th [hidden]="true" style="width: 20%">ID actionnaire</th>
 
       </tr>
       </thead>
       <tbody class="fw-semibold text-gray-600">
       <tr *ngFor="let depotRachat of operationPaiementRachat$">
-        <td >0</td>
+        <td *ngIf="!save">0</td>
+        <td *ngIf="save">{{depotRachat.idOperation}}</td>
         <td >{{ depotRachat.nomSigle}}</td>
         <td >{{ depotRachat.prenomRaisonSociale }}</td>
         <td >{{ depotRachat.montant }}</td>
+        <td [hidden]="true" >{{ depotRachat.idActionnaire }}</td>
       </tr>
       </tbody>
     </table>
-    <div class="d-flex justify-content-end">
-      <button  style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
+  </div>
+  </div>
+  </div>
+  <div *ngIf="exerciceEnCours">
+    <div *ngIf="!estEnAttente" class="d-flex justify-content-end">
+      <button [disabled]="save"   style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
                (click)="afficherPrecalculPaiementRachat()">Précalculer
       </button>
-      <button type="submit" style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
-              [disabled]="entityForm.invalid"
+      <button  type="submit" style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
+              [disabled]="grise()"
               (click)="enregistrer()">Enregistrer
       </button>
       <button  style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
-      >Vérifier
+               printTitle="PAIEMENT DE RACHAT"
+               printSectionId="print"
+               ngxPrint
+               styleSheetFile="assets/css/print.css"
+               class="btn btn-sm btn-primary">Vérifier
       </button>
 
       <!--end::Table-->
-    </div>
+
+  </div>
   </div>
 </div>
 <!--end::Card body-->

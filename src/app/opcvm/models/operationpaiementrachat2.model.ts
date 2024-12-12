@@ -11,6 +11,20 @@ export class Operationpaiementrachat2 extends  ResourceModel<Operationpaiementra
   nomSigle:string;
   prenomRaisonSociale:string;
   montant:number;
+  idOperation:number;
+  idTransaction:number;
+  codeNatureOperation:string;
+  dateOperation:Date;
+  libelleOperation:string;
+  dateSaisie:Date;
+  datePiece:Date;
+  dateValeur:Date;
+  referencePiece:string;
+  valeurFormule:string;
+  valeurCodeAnalytique:string;
+  userLogin:string;
+  dateDernModifClient:string;
+
   constructor(model?: Partial<Operationpaiementrachat2>) {
     super(model);
   }

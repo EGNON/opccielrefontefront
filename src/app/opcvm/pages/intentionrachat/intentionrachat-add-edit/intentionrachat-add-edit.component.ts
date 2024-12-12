@@ -13,6 +13,7 @@ import { LoaderService } from '../../../../loader.service';
 import { PageInfoService } from '../../../../template/_metronic/layout';
 import { Detailprofil } from '../../../models/detailprofil.model';
 import { DepotrachatService } from '../../../services/depotrachat.service';
+import {LocalService} from "../../../../services/local.service";
 
 @Component({
   selector: 'app-intentionrachat-add-edit',
@@ -37,6 +38,7 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   idPersonne:number;
   submitted = false;
   entityForm: FormGroup;
+  estVerifie2:boolean;
   entity:any;
   private subscriptions: Subscription[] = [];
 
@@ -46,6 +48,7 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
     public personneService: PersonneService,
     public authService: AuthService,
     private loadingService: LoaderService,
+    public localStore: LocalService,
     public pageInfo: PageInfoService,
     private fb: FormBuilder,
     private router: Router,
@@ -80,7 +83,10 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
       const sb = this.entityService.getById(this.id)
         .subscribe((entity)=>{
           this.entity=entity.data;
-          this.loadFormValues(entity.data);
+          this.estVerifie2=this.entity.estVerifie2
+          console.log(this.estVerifie2)
+          if(!this.estVerifie2)
+            this.loadFormValues(entity.data);
         });
       this.subscriptions.push(sb);
     }
@@ -97,7 +103,7 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   }
   afficherActionnaire(){
     this.personneService.afficherPersonneInOpcvmEtStatutCompte(
-      this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm
+      this.localStore.getData("currentOpcvm").idOpcvm
     ).subscribe(
       (data)=>{
         this.personneActionnaire$=data;
@@ -108,7 +114,7 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   afficherNbrePart(){
     //console.log("pass")
     this.loadingService.setLoading(true);
-      this.entityService.afficherNbrePart(this.authService.LocalStorageManager.getValue("currentOpcvm")?.idOpcvm,
+      this.entityService.afficherNbrePart(this.localStore.getData("currentOpcvm").idOpcvm,
         this.entityForm.value.actionnaire.idPersonne).subscribe(
         (data)=>{
           this.objetPart=data

@@ -20,9 +20,9 @@ export class MailService extends ResourceService<Mail> implements OnDestroy{
   ngOnDestroy(): void {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
-  afficherQuartierListe(id:number):Observable<Quartier>
+  creer(entity:any)
   {
-    return this.http.get<Quartier>(environment.apiUrl + '/quartiers/liste/'+id);
+    return this.http.post<any>(`${this.API_URL}/creer`,entity);
   }
   afficherTous(datatableRequest: any)
   {

@@ -38,6 +38,12 @@ const OpcvmRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
+    path: 'rachat/avisrachat',
+    loadChildren: () =>
+      import('./avisrachat/avisrachat.module').then((m) => m.AvisrachatModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
     path: 'rachat/verificationintentionniveau1',
     loadChildren: () =>
       import('./verificationniveau1/verificationniveau1.module').then((m) => m.Verificationniveau1Module),

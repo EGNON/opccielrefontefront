@@ -370,6 +370,7 @@ export class MailCreateComponent implements OnInit, OnDestroy{
             typeDocument: Typedocument;
             rdv:RDV;
             fToByte:any;
+            fToBlob:any;
             file: any;
           };
           // @ts-ignore
@@ -420,6 +421,7 @@ export class MailCreateComponent implements OnInit, OnDestroy{
                 typeDocument: Typedocument;
                 rdv:RDV;
                 fToByte:any;
+                fToBlob:any;
                 file: any;
               };
               this.documentMail.documentDto=this.pieceJointe
@@ -471,7 +473,7 @@ export class MailCreateComponent implements OnInit, OnDestroy{
       dateEnvoi:dateEnvoi,
       heureEnvoi:[dateEnvoi.getHours(),dateEnvoi.getMinutes(),dateEnvoi.getSeconds()].join(':')
     };
-    console.log(entity)
+   // console.log(entity)
 
 
     return this.id

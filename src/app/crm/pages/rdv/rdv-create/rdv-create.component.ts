@@ -512,6 +512,7 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
               typeDocument: Typedocument;
               rdv: RDV;
               fToByte: any;
+              fToBlob: any;
               file: any;
             };
             // @ts-ignore
