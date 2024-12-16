@@ -133,12 +133,14 @@ export class RdvListComponent implements OnInit, OnDestroy, AfterViewInit{
         actions.push(parentActionStart);
         actions.push(show);
         if(full.dateDebReelle===null)
-        //console.log("full=",full.dateDebReelle)
           actions.push(edit);
 
         actions.push(update);
-        actions.push(separator);
-        actions.push(delete1);
+        if(full.dateDebReelle===null)
+        {
+          actions.push(separator);
+          actions.push(delete1);
+        }
         actions.push(parentActionEnd);
 
         return actions.join('');

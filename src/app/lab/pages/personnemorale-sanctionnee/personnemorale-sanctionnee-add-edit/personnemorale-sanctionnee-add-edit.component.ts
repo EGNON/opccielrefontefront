@@ -101,8 +101,8 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
         raisonSociale: [null, Validators.required],
         sigle: [null, Validators.required],
         paysResidence: [null],
-        estJuge:[null],
-        estExpose:[null],
+        estJuge:[false],
+        estExpose:[false],
       }
     );
 
@@ -259,6 +259,11 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
 
       if(this.entityForm.invalid) return;
 
+      if(this.entityForm.value.estJuge===false && this.entityForm.value.estExpose===false)
+      {
+        alert("Veuillez cocher au moins une sanction.")
+        return;
+      }
       const formdata = new FormData();
       this.files.forEach((file) => { formdata.append('files', file); });
 
@@ -313,7 +318,7 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
     // $(this.element.nativeElement).select2({
     //   theme: 'bootstrap4'
     // });
-    console.log(this.element.nativeElement);
+    //console.log(this.element.nativeElement);
   }
 }
 

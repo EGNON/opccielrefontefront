@@ -321,6 +321,7 @@ export class MoraleDetailsComponent {
 
   addOrRemoveFieldsAndValidators(qualite: string)
   {
+    console.log(qualite)
     if(qualite === "prospect" || (qualite !== "prospect" && qualite !== "actionnaires"))
     {
       //numeroCpteDeposit
