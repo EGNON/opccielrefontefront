@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '',
     component: IntentionrachatComponent,
     children: [
-      { path: '', component: IntentionrachatListComponent, } ,
+      { path: '', component: IntentionrachatListComponent} ,
       { path: 'new/:id2', component: IntentionrachatAddEditComponent, },
       { path: 'edit/:id/:id2', component: IntentionrachatAddEditComponent, },
       { path: 'verificationintentionniveau1', component: Verificationniveau1Component, },
