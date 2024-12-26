@@ -181,6 +181,7 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
       const sb = this.rdvService.getEntityById(this.id)
         .pipe(tap(
           entity => {
+            console.log(entity)
               this.loadValues(entity);
           }
         ))
@@ -589,13 +590,25 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
       typeModele: Typemodele;
       rdvs:RDV[];
     };
-    this.modeleMsgAlerte.idModele=this.formData.value.idModeleMsgAlerte
+
+
     let entity: any=null;
     //if(this.id){
+    if(this.formData.value.idModeleMsgAlerte!=null)
+    {
+      this.modeleMsgAlerte.idModele=this.formData.value.idModeleMsgAlerte
       entity = {
         ...this.formData.value,
         modeleMsgAlerteDto:this.modeleMsgAlerte
       };
+    }
+    else
+    {
+      entity = {
+        ...this.formData.value
+      };
+    }
+
     /*}
     else {
       entity = {

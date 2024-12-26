@@ -519,6 +519,12 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
 
       if(this.entityForm.invalid) return;
 
+      if(this.entityForm.value.estJuge===false && this.entityForm.value.estExpose===false)
+      {
+        alert("Veuillez cocher au moins une sanction.")
+        return;
+      }
+
       const formdata = new FormData();
       this.files.forEach((file) => { formdata.append('files', file); });
 
