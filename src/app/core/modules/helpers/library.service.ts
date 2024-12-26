@@ -1939,7 +1939,7 @@ export class LibraryService implements OnDestroy{
                 {
                   allow: this.authService.isGrantedRole('ROLE_AUTORISATION_CR'),
                   title: 'Avis de souscription',
-                  page: '#',
+                  page: '/opcvm/souscription/depotsouscription/avis/souscription/actionnaire',
                   role: 'ROLE_AVIS_SOUS',
                   icon: '',
                   translate: '',
@@ -1948,8 +1948,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
               ]
-            }
-            ,
+            },
             {
               allow: null,
               title: 'Rachat',
@@ -2028,7 +2027,86 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
               ]
-            }
+            },
+            {
+              allow: null,
+              title: 'Souscription par transfert de titre',
+              icon: 'element-7',
+              dataLink: '',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_IMPORT_DEPOT_SOUS'),
+                  title: 'Souscription par transfert de titre',
+                  page: '#',
+                  role: 'ROLE_IMPORT_DEPOT_SOUS',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Souscription par transfert de titre',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_DEPOT_SOUS'),
+                  title: 'Vérification Niveau 1',
+                  page: '#',
+                  role: 'ROLE_DEPOT_SOUS',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Souscription par transfert de titre',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_DEPOT_SOUS'),
+                  title: 'Vérification Niveau 2',
+                  page: '#',
+                  role: 'ROLE_DEPOT_SOUS',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Souscription par transfert de titre',
+                  children: []
+                },
+              ]
+            },
+            {
+              allow: null,
+              title: 'Comptabilité',
+              icon: 'element-7',
+              dataLink: '',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_IMPORT_DEPOT_SOUS'),
+                  title: 'Consultation des écritures comptables',
+                  page: '#',
+                  role: 'ROLE_IMPORT_DEPOT_SOUS',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Comptabilité',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_DEPOT_SOUS'),
+                  title: 'Constatation des charges',
+                  page: '#',
+                  role: 'ROLE_DEPOT_SOUS',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Comptabilité',
+                  children: []
+                },
+              ]
+            },
           ]
         },
         {

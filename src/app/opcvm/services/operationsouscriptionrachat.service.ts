@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment} from "../../../environments/environment";
 import {ResourceService} from "../../crm/services/core/resource.service";
-import {Tarificationordinaire} from "../models/tarificationordinaire.model";
 import { Operationsouscriptionrachat } from '../models/operationsouscriptionrachat.model';
 import {Operationsouscriptionrachat2} from "../models/operationsouscriptionrachat2.model";
 
@@ -20,9 +19,13 @@ export class OperationsouscriptionrachatService extends ResourceService<Operatio
   }
   avisOperation(idOperation:any){
       return this.http.get<any>(`${this.API_URL}/avisoperation/${idOperation}`)
-    }
+  }
 
   creer(operationSouscriptionRachat:any){
     return this.http.post<Operationsouscriptionrachat2>(`${this.API_URL}/creer`,operationSouscriptionRachat)
+  }
+
+  listeOpSousRach(parameters: any) {
+    return this.http.post<any>(`${this.API_URL}/liste/opsousrach/datatable`, parameters)
   }
 }

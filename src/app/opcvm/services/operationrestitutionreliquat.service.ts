@@ -24,4 +24,8 @@ export class OperationrestitutionreliquatService extends ResourceService<any> {
   enregistrerTous(data: any) {
     return this.http.post<any>(`${this.API_URL}/enregistrer/restitution/reliquat`, data);
   }
+
+  listePaiementReliquat(idOpcvm: number, idSeance: any) {
+    return this.http.post<any>(`${this.API_URL}/verification/liste/paiement-${idOpcvm}/reliquat-${idSeance}`, null);
+  }
 }

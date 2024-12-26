@@ -1,5 +1,5 @@
-import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Api, Config} from "datatables.net";
 import {of, Subject, Subscription} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
@@ -9,11 +9,8 @@ import {DepotsouscriptionService} from "../../../services/depotsouscription.serv
 import {LocalService} from "../../../../services/local.service";
 import {PersonneService} from "../../../../crm/services/personne/personne.service";
 import {NgbActiveModal, NgbDate, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {DateCoursComponent} from "../../../../titresciel/pages/modal/date-cours/date-cours.component";
 import {ListeSeanceOpcvmComponent} from "../modal/liste-seance-opcvm/liste-seance-opcvm.component";
 import {OperationrestitutionreliquatService} from "../../../services/operationrestitutionreliquat.service";
-import $ from "jquery";
-import moment from "moment";
 import Swal from "sweetalert2";
 import {catchError, finalize} from "rxjs/operators";
 
@@ -29,6 +26,8 @@ export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDe
   currentSeance: any;
   currentUser: any;
 
+  downloading = false;
+  downloaded = false;
   submitting = false;
   submitted = false;
 
@@ -94,11 +93,15 @@ export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDe
           this.subscriptions.push(sb);
         }
         else if (prefix.toLowerCase() === "l") {
+          let idSeance = this.currentSeance?.idSeanceOpcvm?.idSeance;
           const sb = this.reliquatService.listeOperationRestitution(
-            dataTablesParameters, this.currentOpcvm?.idOpcvm, receivedEntry.idSeanceOpcvm.idSeance)
-            .subscribe(resp => {
-              callback(resp.data);
-            });
+            dataTablesParameters,
+            this.currentOpcvm?.idOpcvm,
+            idSeance !== null ? idSeance : receivedEntry?.idSeanceOpcvm?.idSeance
+          )
+          .subscribe(resp => {
+            callback(resp.data);
+          });
           this.subscriptions.push(sb);
         }
         else {
@@ -317,7 +320,7 @@ export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDe
         }
       },
     };
-    this.afficherListe("");
+    this.afficherListe("l");
   }
 
   ngAfterViewInit(): void {
@@ -331,7 +334,7 @@ export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDe
         this.dtTrigger.next(null);
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
     this.cdr.detectChanges();
   }
@@ -353,5 +356,41 @@ export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDe
       });
       this.afficherListe("l", receivedEntry);
     });
+  }
+
+  verification() {
+    console.log("Liste des paiements...");
+    this.downloading = true;
+    const sb = this.reliquatService.listePaiementReliquat(
+      this.currentOpcvm?.idOpcvm, this.currentSeance?.idSeanceOpcvm?.idSeance
+    )
+    .pipe(
+      catchError((err) => {
+        this.downloading = false;
+        return of(err.message);
+      }),
+      finalize(() => {
+        this.downloading = false;
+        this.downloaded = false;
+      })
+    )
+    .subscribe((response: any) => {
+      const linkSource =
+        'data:application/octet-stream;base64,' + response.data;
+      const downloadLink = document.createElement('a');
+      const fileName = 'listPaiementReliquat.pdf';
+
+      downloadLink.href = linkSource;
+      downloadLink.download = fileName;
+      downloadLink.click();
+    });
+    this.subscriptions.push(sb);
+  }
+
+  onChange(event: Event) {
+    // Get the new input value
+    const newValue = (event.target as HTMLInputElement).value;
+    // Perform actions based on the new value
+    console.log('Input value changed:', newValue);
   }
 }

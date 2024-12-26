@@ -20,6 +20,7 @@ import { VerifDepotsouscriptionNiv1Component } from './verif-depotsouscription-n
 import { VerifDepotsouscriptionNiv2Component } from './verif-depotsouscription-niv2/verif-depotsouscription-niv2.component';
 import { RestitutionReliquatComponent } from './restitution-reliquat/restitution-reliquat.component';
 import { ListeSeanceOpcvmComponent } from './modal/liste-seance-opcvm/liste-seance-opcvm.component';
+import { AvisSouscriptionComponent } from './avis-souscription/avis-souscription.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ListeSeanceOpcvmComponent } from './modal/liste-seance-opcvm/liste-sean
     VerifDepotsouscriptionNiv1Component,
     VerifDepotsouscriptionNiv2Component,
     RestitutionReliquatComponent,
-    ListeSeanceOpcvmComponent
+    ListeSeanceOpcvmComponent,
+    AvisSouscriptionComponent
   ],
     imports: [
         CommonModule,
