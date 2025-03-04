@@ -18,6 +18,26 @@
               <!--end::Input-->
             </div>
             <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-1 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">ID OP.</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="idOperation"/>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-1 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">ID TRANS.</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="idTransaction"/>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
             <div class="col-md-2 fv-row">
               <!--begin::Label-->
               <label class="fs-5 fw-semibold mb-2">Date Début</label>
@@ -40,6 +60,21 @@
                 <!--end::Input-->
               </div>
             </div>
+            <!--begin::Col-->
+            <div class="col-md-5 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Nature OP.</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="natureOperation">
+                <option disabled selected [ngValue]="null">Sélectionnez une nature...</option>
+                <option *ngFor="let item of (natureOps$|async)?.['data']" [ngValue]="item">
+                  {{ item.libelleNatureOperation }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
           </div>
           <hr>
           <div class="row mb-5">
@@ -69,7 +104,7 @@
                         <span class="indicator-label">Actualiser</span>
                       </ng-container>
                     </button>
-                    <button type="button" class="btn btn-sm btn-info me-3" (click)="telecharger()">
+                    <button type="button" class="btn btn-sm btn-info me-3">
                       <ng-container *ngIf="downloading">
                         <span class="indicator-progress" [style.display]="'block'">
                           Patientez svp...
@@ -77,10 +112,10 @@
                         </span>
                       </ng-container>
                       <ng-container *ngIf="!downloading">
-                        <span class="indicator-label">Aperçu</span>
+                        <span class="indicator-label">Imprimer</span>
                       </ng-container>
                     </button>
-                    <button type="button" class="btn btn-sm btn-warning" (click)="telecharger()">
+                    <!--<button type="button" class="btn btn-sm btn-warning">
                       <ng-container *ngIf="downloading">
                         <span class="indicator-progress" [style.display]="'block'">
                           Patientez svp...
@@ -90,24 +125,26 @@
                       <ng-container *ngIf="!downloading">
                         <span class="indicator-label">Envoyer</span>
                       </ng-container>
-                    </button>
+                    </button>-->
                   </div>
                 </div>
                 <!--end::Card toolbar-->
               </div>
               <div class="card-body pt-0">
                 <div class="table-responsive angular-bootstrap-table">
-                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+<!--                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">-->
+                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-bordered fs-6 gy-5 dataTable no-footer">
                     <thead>
-                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                      <ng-container *ngFor="let column of dtOptions.columns; let i=index">
-                        <th>{{ column.title }}</th>
-                      </ng-container>
-                    </tr>
+                      <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                        <ng-container *ngFor="let column of dtOptions.columns; let i=index">
+                          <th>{{ column.title }}</th>
+                        </ng-container>
+                      </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
                     </tbody>
                   </table>
+                  <div #details class="details hidden"></div>
                 </div>
               </div>
             </div>

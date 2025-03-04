@@ -10,7 +10,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgbInputDatepicker} from "@ng-bootstrap/ng-bootstrap";
 import {ConnexionComponent} from "./pages/connexion/connexion.component";
 
-
 const routes: Routes = [
   {
     path: '',

@@ -28,4 +28,8 @@ export class OperationsouscriptionrachatService extends ResourceService<Operatio
   listeOpSousRach(parameters: any) {
     return this.http.post<any>(`${this.API_URL}/liste/opsousrach/datatable`, parameters)
   }
+
+  telechargerAvisSouscription(data: any) {
+    return this.http.post<any>(`${this.API_URL}/jasperpdf/export/avis/souscription`, data);
+  }
 }

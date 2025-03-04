@@ -2084,10 +2084,10 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [
                 {
-                  allow: this.authService.isGrantedRole('ROLE_IMPORT_DEPOT_SOUS'),
+                  allow: this.authService.isGrantedRole('ROLE_CONSULT_ECR'),
                   title: 'Consultation des écritures comptables',
-                  page: '#',
-                  role: 'ROLE_IMPORT_DEPOT_SOUS',
+                  page: '/opcvm/comptabilite/consultation/ecritures',
+                  role: 'ROLE_CONSULT_ECR',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2097,8 +2097,31 @@ export class LibraryService implements OnDestroy{
                 {
                   allow: this.authService.isGrantedRole('ROLE_DEPOT_SOUS'),
                   title: 'Constatation des charges',
-                  page: '#',
+                  page: '/opcvm/comptabilite/constatation/charges/liste',
                   role: 'ROLE_DEPOT_SOUS',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Comptabilité',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_DEPOT_SOUS'),
+                  title: 'Paiement des commissions et taxes',
+                  page: '/opcvm/comptabilite/paiement/commission/liste',
+                  role: 'ROLE_DEPOT_SOUS',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Comptabilité',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_TRANS_PARTS'),
+                  title: 'Transfert de parts',
+                  // page: '/opcvm/comptabilite/transfert/parts',
+                  page: '/opcvm/comptabilite/transfert/parts/liste',
+                  role: 'ROLE_TRANS_PARTS',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2131,10 +2154,10 @@ export class LibraryService implements OnDestroy{
               parent: 'REPORTINGS',
               children: [
                 {
-                  allow: this.authService.isGrantedRole('ROLE_RDV_PLAN'),
+                  allow: this.authService.isGrantedRole('ROLE_REG_ACT'),
                   title: 'Régistre actionnaire',
-                  page: '#',
-                  role: 'ROLE_REGISTRE_ACTIONNAIRE',
+                  page: '/opcvm/etats/registre/actionnaire',
+                  role: 'ROLE_REG_ACT',
                   icon: '',
                   translate: '',
                   dataLink: '',

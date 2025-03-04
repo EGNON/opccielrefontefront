@@ -1,14 +1,14 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Api, Config} from "datatables.net";
-import {fromEvent, Subject, Subscription} from "rxjs";
+import {fromEvent, of, Subject, Subscription} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
 import {AuthService} from "../../../../core/modules/auth";
 import {LocalService} from "../../../../services/local.service";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {OperationsouscriptionrachatService} from "../../../services/operationsouscriptionrachat.service";
 import moment from "moment";
-import {map} from "rxjs/operators";
+import {catchError, finalize, map} from "rxjs/operators";
 import $ from "jquery";
 
 @Component({
@@ -136,6 +136,7 @@ export class AvisSouscriptionComponent implements OnInit, AfterViewInit, OnDestr
         },
       }
     ];
+    self.avis.clear();
     this.datatableConfig = {
       processing: true,
       serverSide: true,
@@ -162,10 +163,8 @@ export class AvisSouscriptionComponent implements OnInit, AfterViewInit, OnDestr
             dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
             dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
           };
-          console.log("A envoyer === ", param);
           const sb = this.entityService.listeOpSousRach(param)
           .subscribe(resp => {
-            console.log("Résultat obtenu === ", resp);
             callback(resp.data);
           });
           this.subscriptions.push(sb);
@@ -183,19 +182,21 @@ export class AvisSouscriptionComponent implements OnInit, AfterViewInit, OnDestr
       createdRow: function (row, data: any, dataIndex) {
         $(row).find('.form-check-input').on('click', (e) => {
           const checkbox = $(e.target);
-          // const listeAvisForm = self.createListeAvisForm();
-          console.log("Checkbox === ", checkbox);
-          const opSousRach: any = {
-            ...data,
-          };
-          for (const key in opSousRach) {
-            let value = opSousRach[key];
-            if(key.includes("date")) {
-              value = new Date(value);
+          const checked = checkbox.is(':checked');
+          if(checked) {
+            const listeAvisForm = self.createListeAvisForm();
+            const opSousRach: any = {
+              ...data,
+            };
+            for (const key in opSousRach) {
+              let value = opSousRach[key];
+              if(key.includes("date")) {
+                value = new Date(value);
+              }
+              self.ajouterFormControl(listeAvisForm, key, value, []);
             }
-            self.ajouterFormControl(self.listeAvisForm, key, value, []);
+            self.avis.push(listeAvisForm);
           }
-          self.avis.push(self.listeAvisForm);
         });
       },
     };
@@ -223,8 +224,30 @@ export class AvisSouscriptionComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   telecharger() {
-    console.log("Form === ", this.form);
-    console.log("Je suis prêt à télécharger l'avis de souscription");
+    this.downloading = true;
+    const sb = this.entityService.telechargerAvisSouscription(this.form.value.avis)
+      .pipe(
+        catchError((err) => {
+          this.downloading = false;
+          return of(err.message);
+        }),
+        finalize(() => {
+          this.downloading = false;
+          this.downloaded = false;
+        })
+      )
+      .subscribe((response: any) => {
+        console.log("Ici le retour attendu !!", response);
+        /*const linkSource =
+          'data:application/octet-stream;base64,' + response.data;
+        const downloadLink = document.createElement('a');
+        const fileName = 'listVerifDepot.pdf';
+
+        downloadLink.href = linkSource;
+        downloadLink.download = fileName;
+        downloadLink.click();*/
+      });
+    this.subscriptions.push(sb);
   }
 
   triggerFilter() {

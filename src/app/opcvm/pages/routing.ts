@@ -86,7 +86,14 @@ const OpcvmRouting: Routes = [
   },
   {
     path: 'souscription/depotsouscription',
+    // canActivate: [OpcvmAuthGuard],
     loadChildren: () => import('./depotsouscription/depotsouscription.module').then((m) => m.DepotsouscriptionModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
+    path: 'comptabilite',
+    // canActivate: [OpcvmAuthGuard],
+    loadChildren: () => import('./comptabilite/comptabilite.module').then((m) => m.ComptabiliteModule),
     data: { layout: 'dark-sidebar' },
   },
 ];

@@ -14,4 +14,8 @@ export class ChargeService extends ResourceService<Charge> {
     return this.http.get<any>(`${this.API_URL}`)
   }
 
+  afficherListeChargesParIdOpcvm(idOpcvm: number) {
+    console.log("idOpcvm = ", idOpcvm);
+    return this.http.get<any>(`${this.API_URL}/all/charges/opcvm/${idOpcvm}`);
+  }
 }

@@ -1,0 +1,205 @@
+<!--begin::Transfert - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" class="form mb-5" enctype="multipart/form-data">
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date Estimation</label>
+              <!--end::Label-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="dd/mm/yyyy" ngbDatepicker #dateOperation="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                       formControlName="dateOperation"/>
+                <!--end::Input-->
+                <span (click)="dateOperation.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                        <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                    </span>
+              </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Charge</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" #charge formControlName="charge">
+                <option disabled selected [ngValue]="null">Sélectionnez une charge...</option>
+                <option *ngFor="let item of (charges$|async)?.['data']" [ngValue]="item">
+                  {{ item.designation }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Solde Prévisionnel</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" [readonly]="true" class="form-control form-control-sm"
+                     placeholder="0" formControlName="montant"/>
+              <!--end::Input-->
+            </div>
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Montant Réel</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm"
+                     placeholder="0" formControlName="montantCharge"/>
+              <!--end::Input-->
+            </div>
+          </div>
+          <!--<fieldset class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">TRANSFERT DEPART</legend>
+            &lt;!&ndash;begin::Input group&ndash;&gt;
+            <div class="row mb-5">
+              &lt;!&ndash;begin::Col&ndash;&gt;
+              <div class="col-md-3 fv-row">
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <label class="fs-5 fw-semibold mb-2">Demandeur</label>
+                &lt;!&ndash;end::Label&ndash;&gt;
+                &lt;!&ndash;begin::Select&ndash;&gt;
+                <select class="form-select form-select-sm mb-2" #demandeur formControlName="demandeur" (change)="chargerInfosD($event, demandeur.value)">
+                  <option disabled selected [ngValue]="null">Sélectionnez le demandeur...</option>
+                  &lt;!&ndash;<option *ngIf="entity?.personne" disabled [defaultSelected]="true" [ngValue]="entity?.personne">
+                    {{ entity?.personne?.denomination }}
+                  </option>&ndash;&gt;
+                  <option *ngFor="let item of actionnaires$|async" [ngValue]="item">
+                    {{ item.denomination }}
+                  </option>
+                </select>
+                &lt;!&ndash;end::Select&ndash;&gt;
+              </div>
+              &lt;!&ndash;end::Col&ndash;&gt;
+              &lt;!&ndash;              {{ ((registre$|async)?.["data"])|json }}&ndash;&gt;
+              &lt;!&ndash;begin::Col&ndash;&gt;
+              <div class="col-md-3 fv-row">
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <label class="fs-5 fw-semibold mb-2">Qté Initiale</label>
+                &lt;!&ndash;end::Label&ndash;&gt;
+                &lt;!&ndash;begin::Input&ndash;&gt;
+                <input type="text" [readonly]="true" class="form-control form-control-sm"
+                       placeholder="0" formControlName="qteAvtD"/>
+                &lt;!&ndash;end::Input&ndash;&gt;
+              </div>
+              &lt;!&ndash;end::Col&ndash;&gt;
+              &lt;!&ndash;begin::Col&ndash;&gt;
+              <div class="col-md-3 fv-row">
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <label class="fs-5 fw-semibold mb-2">Qté Trans.</label>
+                &lt;!&ndash;end::Label&ndash;&gt;
+                &lt;!&ndash;begin::Input&ndash;&gt;
+                <input type="text" class="form-control form-control-sm" placeholder="0" formControlName="qteTrans"/>
+                &lt;!&ndash;end::Input&ndash;&gt;
+                &lt;!&ndash;<div *ngIf="submitted && f.montant.errors" class="invalid-feedback">
+                  <div *ngIf="f.montant.errors.required">Le montant déposé est obligatoire</div>
+                </div>&ndash;&gt;
+              </div>
+              &lt;!&ndash;end::Col&ndash;&gt;
+              &lt;!&ndash;begin::Col&ndash;&gt;
+              <div class="col-md-3 fv-row">
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <label class="fs-5 fw-semibold mb-2">Qté Après</label>
+                &lt;!&ndash;end::Label&ndash;&gt;
+                &lt;!&ndash;begin::Input&ndash;&gt;
+                <input type="text" [readonly]="true" class="form-control form-control-sm"
+                       placeholder="0" formControlName="qteApresD"/>
+                &lt;!&ndash;end::Input&ndash;&gt;
+              </div>
+              &lt;!&ndash;end::Col&ndash;&gt;
+            </div>
+            &lt;!&ndash;end::Input group&ndash;&gt;
+          </fieldset>
+          <fieldset class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">TRANSFERT ARRIVE</legend>
+            &lt;!&ndash;begin::Input group&ndash;&gt;
+            <div class="row mb-5">
+              &lt;!&ndash;begin::Col&ndash;&gt;
+              <div class="col-md-3 fv-row">
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <label class="fs-5 fw-semibold mb-2">Bénéficiaire</label>
+                &lt;!&ndash;end::Label&ndash;&gt;
+                &lt;!&ndash;begin::Select&ndash;&gt;
+                <select class="form-select form-select-sm mb-2" #beneficiaire formControlName="beneficiaire" (change)="chargerInfosB($event, beneficiaire.value)">
+                  <option disabled selected [ngValue]="null">Sélectionnez le bénéficiaire...</option>
+                  &lt;!&ndash;<option *ngIf="entity?.actionnaire" disabled [defaultSelected]="true" [ngValue]="entity?.actionnaire">
+                    {{ entity?.actionnaire?.denomination }}
+                  </option>&ndash;&gt;
+                  <option *ngFor="let item of actionnaires$|async" [ngValue]="item">
+                    {{ item.denomination }}
+                  </option>
+                </select>
+                &lt;!&ndash;end::Select&ndash;&gt;
+              </div>
+              &lt;!&ndash;end::Col&ndash;&gt;
+              &lt;!&ndash;begin::Col&ndash;&gt;
+              <div class="col-md-3 fv-row">
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <label class="fs-5 fw-semibold mb-2">Qté Avant</label>
+                &lt;!&ndash;end::Label&ndash;&gt;
+                &lt;!&ndash;begin::Input&ndash;&gt;
+                <input type="text" [readonly]="true" class="form-control form-control-sm"
+                       placeholder="0" formControlName="qteAvtB"/>
+                &lt;!&ndash;end::Input&ndash;&gt;
+              </div>
+              &lt;!&ndash;end::Col&ndash;&gt;
+              &lt;!&ndash;begin::Col&ndash;&gt;
+              <div class="col-md-3 fv-row">
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <label class="fs-5 fw-semibold mb-2">Qté Après</label>
+                &lt;!&ndash;end::Label&ndash;&gt;
+                &lt;!&ndash;begin::Input&ndash;&gt;
+                <input type="text" [readonly]="true" class="form-control form-control-sm"
+                       placeholder="0" formControlName="qteApresB"/>
+                &lt;!&ndash;end::Input&ndash;&gt;
+              </div>
+              &lt;!&ndash;end::Col&ndash;&gt;
+            </div>
+            &lt;!&ndash;end::Input group&ndash;&gt;
+          </fieldset>-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/opcvm/comptabilite/constatation/charges/liste" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="form.invalid" (click)="save()">
+              <ng-container *ngIf="submitting">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    Patientez svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                  </span>
+              </ng-container>
+              <ng-container *ngIf="!submitting">
+                <span class="indicator-label">Enregistrer</span>
+              </ng-container>
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Constatation Charges - Apply-->

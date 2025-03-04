@@ -92,7 +92,7 @@ export class SidebarMenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('click',['$event.target', '$event'])
   onClick(targetElement: HTMLElement, e: Event) {
-    //console.log(targetElement);
+    console.log(targetElement);
     switch(targetElement.tagName)
     {
       case 'BUTTON':
@@ -192,7 +192,6 @@ export class SidebarMenuComponent implements OnInit, AfterViewInit, OnDestroy {
       const sub_accordion = $(link).parents('.menu-sub-accordion');
       accordion.addClass('here show');
       sub_accordion.addClass('menu-active-bg');
-
       this.authService.currentRoleSubject.next(menu.role);
     }
     return active;

@@ -6,42 +6,7 @@
       <!--begin::Content-->
       <div class="flex-lg-row-fluid me-0 me-lg-0">
         <!--begin::Form-->
-        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
-          <div class="row mb-5">
-            <!--begin::Col-->
-            <div class="col-md-1 fv-row">
-              <!--begin::Label-->
-              <label class="fs-5 fw-semibold mb-2">N° Séance</label>
-              <!--end::Label-->
-              <!--begin::Input-->
-              <input readonly="readonly" type="text" class="form-control form-control-sm" placeholder="" formControlName="idSeance"/>
-              <!--end::Input-->
-            </div>
-            <!--end::Col-->
-            <div class="col-md-2 fv-row">
-              <!--begin::Label-->
-              <label class="fs-5 fw-semibold mb-2">Date Début</label>
-              <!--end::Label-->
-              <div class="input-group input-group-sm">
-                <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
-                       #dateDeb="ngbDatepicker" aria-label="Date Ouverture" formControlName="dateDebut" (click)="dateDeb.toggle()"/>
-                <!--end::Input-->
-              </div>
-            </div>
-            <div class="col-md-2 fv-row">
-              <!--begin::Label-->
-              <label class="fs-5 fw-semibold mb-2">Date Fin</label>
-              <!--end::Label-->
-              <div class="input-group input-group-sm">
-                <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
-                       #dateFin="ngbDatepicker" aria-label="Date Début" formControlName="dateFin" (click)="dateFin.toggle()"/>
-                <!--end::Input-->
-              </div>
-            </div>
-          </div>
-          <hr>
+<!--        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">-->
           <div class="row mb-5">
             <div class="card">
               <div class="card-header border-0 pt-6">
@@ -69,7 +34,7 @@
                         <span class="indicator-label">Actualiser</span>
                       </ng-container>
                     </button>
-                    <button type="button" class="btn btn-sm btn-info me-3" (click)="telecharger()">
+                    <button type="button" class="btn btn-sm btn-success me-3" routerLink="/opcvm/comptabilite/transfert/parts">
                       <ng-container *ngIf="downloading">
                         <span class="indicator-progress" [style.display]="'block'">
                           Patientez svp...
@@ -77,18 +42,7 @@
                         </span>
                       </ng-container>
                       <ng-container *ngIf="!downloading">
-                        <span class="indicator-label">Aperçu</span>
-                      </ng-container>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-warning" (click)="telecharger()">
-                      <ng-container *ngIf="downloading">
-                        <span class="indicator-progress" [style.display]="'block'">
-                          Patientez svp...
-                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                        </span>
-                      </ng-container>
-                      <ng-container *ngIf="!downloading">
-                        <span class="indicator-label">Envoyer</span>
+                        <span class="indicator-label">Nouveau Transfert</span>
                       </ng-container>
                     </button>
                   </div>
@@ -108,11 +62,12 @@
                     <tbody class="fw-semibold text-gray-600">
                     </tbody>
                   </table>
+                  <div #details class="details hidden"></div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
+<!--        </form>-->
         <!--end::Form-->
       </div>
       <!--end::Content-->

@@ -1,0 +1,28 @@
+<tr #detail id="detail-{{idOperation}}" class="detail">
+  <td></td>
+  <td colspan="5">
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table align-middle table-bordered fs-6 gy-5">
+        <thead>
+          <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+            <th>N° COMPTE</th>
+            <th>LIBELLE</th>
+            <th>DEBIT</th>
+            <th>CREDIT</th>
+          </tr>
+        </thead>
+        <tbody class="fw-semibold text-gray-600">
+<!--          <ng-container *ngFor="let detail of (details$|async)?.['data'];let i = index">-->
+          <ng-container *ngFor="let detail of details;let i = index">
+            <tr>
+              <td [ngClass]="detail.numeroCompte.trim() === total ? 'cell-total' : ''">{{ detail.numeroCompte }}</td>
+              <td>{{ detail.libelleCompteComptable }}</td>
+              <td class="text-end min-w-10px">{{ detail.debit | number: '.2' }}</td>
+              <td class="text-end min-w-10px">{{ detail.credit | number: '.2' }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </td>
+</tr>
