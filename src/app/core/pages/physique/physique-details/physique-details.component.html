@@ -291,7 +291,7 @@
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
                 <!--begin::Label-->
-                <label class="required fs-5 fw-semibold mb-2">Statut matrimonial</label>
+                <label [class]="qualite === 'actionnaires' ? 'required fs-5 fw-semibold mb-2' : 'fs-5 fw-semibold mb-2'">Statut matrimonial</label>
                 <!--end::Label-->
                 <!--begin::Select-->
                 <select class="form-select form-select-sm mb-2" formControlName="statutMatrimonial"
@@ -369,7 +369,7 @@
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
                 <!--begin::Label-->
-                <label class="required fs-5 fw-semibold mb-2">Date de naissance</label>
+                <label [class]="qualite === 'actionnaires' ? 'required fs-5 fw-semibold mb-2' : 'fs-5 fw-semibold mb-2'">Date de naissance</label>
                 <!--end::Label-->
 
                 <div class="input-group mb-0">
@@ -395,7 +395,7 @@
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
                 <!--begin::Label-->
-                <label class="required fs-5 fw-semibold mb-2">Nationalité</label>
+                <label [class]="qualite === 'actionnaires' ? 'required fs-5 fw-semibold mb-2' : 'fs-5 fw-semibold mb-2'">Nationalité</label>
                 <!--end::Label-->
                 <!--begin::Select-->
                 <select class="form-select form-select-sm mb-2" formControlName="paysNationalite"
@@ -417,7 +417,7 @@
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
                 <!--begin::Label-->
-                <label class="required fs-5 fw-semibold mb-2">Pays de résidence</label>
+                <label [class]="qualite === 'actionnaires' ? 'required fs-5 fw-semibold mb-2' : 'fs-5 fw-semibold mb-2'">Pays de résidence</label>
                 <!--end::Label-->
                 <!--begin::Select-->
                 <select class="form-select form-select-sm mb-2" formControlName="paysResidence"
@@ -562,7 +562,7 @@
               <div class="col-md-6 fv-row">
                 <div style="display: flex; justify-content: space-between;">
                   <!--begin::Label-->
-                  <label class="required fs-5 fw-semibold mb-2">Profession</label>
+                  <label [class]="qualite === 'actionnaires' ? 'required fs-5 fw-semibold mb-2' : 'fs-5 fw-semibold mb-2'">Profession</label>
                   <!--end::Label-->
                   <div style="display: flex; align-items: center; justify-content: center;">
                     <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callProfessionForm(null)"
@@ -713,7 +713,7 @@
             <div class="row mb-5">
               <div class="col-md-6 fv-row">
                 <!--begin::Label-->
-                <label class="required fs-5 fw-semibold mb-2">Langue parlée</label>
+                <label class="fs-5 fw-semibold mb-2">Langue parlée</label>
                 <!--end::Label-->
                 <!--begin::Select-->
                 <select class="form-select form-select-sm mb-2" formControlName="langue"

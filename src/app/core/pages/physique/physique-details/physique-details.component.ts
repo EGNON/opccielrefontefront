@@ -440,6 +440,21 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
       this.form.controls["profession"].setErrors(null);
       this.form.controls["profession"].clearValidators();
       this.form.controls["profession"].updateValueAndValidity();
+
+      //statutMatrimonial
+      this.form.controls["statutMatrimonial"].setErrors(null);
+      this.form.controls["statutMatrimonial"].clearValidators();
+      this.form.controls["statutMatrimonial"].updateValueAndValidity();
+
+      //paysNationalite
+      this.form.controls["paysNationalite"].setErrors(null);
+      this.form.controls["paysNationalite"].clearValidators();
+      this.form.controls["paysNationalite"].updateValueAndValidity();
+
+      //dateNaissance
+      this.form.controls["dateNaissance"].setErrors(null);
+      this.form.controls["dateNaissance"].clearValidators();
+      this.form.controls["dateNaissance"].updateValueAndValidity();
     }
   }
 
