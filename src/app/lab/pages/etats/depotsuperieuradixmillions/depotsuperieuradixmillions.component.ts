@@ -85,6 +85,15 @@ export class DepotsuperieuradixmillionsComponent implements OnInit, OnDestroy, A
       }
     )
   }
+  imprimer(){
+    this.selectExercie=document.getElementById('comboExercice2')
+    this.codeExercice=this.selectExercie.options[this.selectExercie.selectedIndex].text;
+    this.operationService.afficherOperationSupDixMillionsEtat(this.codeExercice).subscribe(
+      (data)=>{
+        // this.operationSouscriptionRachat$=data;
+      }
+    )
+  }
   public dtInit(): void {
     if (this.isDtInit) {
       this.dt.dtInstance.then(value => {
@@ -181,7 +190,7 @@ export class DepotsuperieuradixmillionsComponent implements OnInit, OnDestroy, A
     this.afficherDepotSurAnnee();
   }
   clickMe(){
-    this.sharedService.sendClickEvent();
+    // this.sharedService.sendClickEvent();
     this.afficherDepotSurAnnee();
   }
   generateExcelTable() {

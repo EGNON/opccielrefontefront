@@ -75,6 +75,26 @@ export class ClientPrintComponent implements OnInit, OnDestroy{
         );
     }
   }
+  imprimer(){
+    this.prospect=this.selectProspect.options[this.selectProspect.selectedIndex].text;
+    if(this.prospect=="Personne physique"){
+      this.qualite="actionnaires".toUpperCase();
+      this.personnePhysiqueService.afficherPersonneSelonQualiteEtat(this.qualite).subscribe(
+        (data=>{
+
+        })
+      )
+    }
+    else
+    {
+      this.qualite="actionnaires".toUpperCase();
+      this.personneMoraleService.afficherPersonneSelonQualiteEtat(this.qualite).subscribe(
+        (data=>{
+
+        })
+      )
+    }
+  }
   ngOnDestroy(): void {
 
     this.subscriptions.forEach((sb) => sb.unsubscribe());

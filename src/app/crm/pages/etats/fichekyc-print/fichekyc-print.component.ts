@@ -3,7 +3,7 @@ import {Observable, Subscription} from "rxjs";
 import {Personne} from "../../../models/personne/personne.model";
 import {PersonnePhysiqueService} from "../../../services/personne/personne.physique.service";
 import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DataTablesResponse} from "../../../models/data-tables.response.model";
 import {Config} from "datatables.net";
 
@@ -17,12 +17,12 @@ export class FichekycPrintComponent implements OnInit, OnDestroy{
   qualite?: string | null;
   entity: any;
   newButtonTitle: string = "Nouveau";
-  personnes$: any;
+  personnes: any;
   personnesSelonId$: any;
   title: string;
   isLoading: boolean = false;
   private subscriptions: Subscription[] = [];
-  personnes: DataTablesResponse<any>;
+  // personnes: DataTablesResponse<any>;
 
   datatableConfig: Config = {};
   // Reload emitter inside datatable
@@ -34,6 +34,7 @@ export class FichekycPrintComponent implements OnInit, OnDestroy{
   pDateNaissanceConjoint:string;
   pDateNaissancePere:string;
   pDateNaissanceMere:string;
+  public personneSettings = {};
   constructor(
     public personnePhysiqueService: PersonnePhysiqueService,
     private route: ActivatedRoute,
@@ -47,6 +48,7 @@ export class FichekycPrintComponent implements OnInit, OnDestroy{
     // this.prospect="Personne physique";
     this.formData = this.fb.group(
       {
+        personne: [null],
         autresRevenus: [null],
         periodicite: [null],
         statutMatrimonial: [null],
@@ -79,9 +81,37 @@ export class FichekycPrintComponent implements OnInit, OnDestroy{
       });
     this.afficherClient();
     this.selectPersonne = document.getElementById("ComboClientFicheKyc");
+    this.personneSettings = {
+      singleSelection: true,
+      idField: 'idPersonne',
+      textField: 'denomination',
+      enableCheckAll: false,
+      selectAllText: 'Sélectionnez tous',
+      unSelectAllText: 'Ne pas tout sélectionné',
+      allowSearchFilter: true,
+      limitSelection: -1,
+      clearSearchFilter: true,
+      maxHeight: 197,
+      itemsShowLimit: 3,
+      searchPlaceholderText: 'Rechercher un élément',
+      noDataAvailablePlaceholderText: 'Aucune donnée à afficher',
+      closeDropDownOnSelection: false,
+      showSelectedItemsAtTop: false,
+      defaultOpen: false,
+    };
+
+  }
+  get personne(): FormArray { return <FormArray>this.formData.get('personne')}
+  imprimer(){
+    //this.idPersonne=this.selectPersonne.options[this.selectPersonne.selectedIndex].value;
+    this.personnePhysiqueService.afficherFicheKYC(this.idPersonne).subscribe(
+      (data)=>{
+
+      }
+    )
   }
   afficherClientSelonIdQualite(){
-    this.idPersonne=this.selectPersonne.options[this.selectPersonne.selectedIndex].value;
+    //this.idPersonne=this.selectPersonne.options[this.selectPersonne.selectedIndex].value;
     this.qualite="actionnaires".toUpperCase();
     this.personnePhysiqueService.afficherSelonIdQualite(this.idPersonne,this.qualite).subscribe(
       (data)=>{this.personnesSelonId$=data;
@@ -137,16 +167,37 @@ export class FichekycPrintComponent implements OnInit, OnDestroy{
   }
   afficherClient(){
     this.qualite="actionnaires".toUpperCase();
-    // this.personnes$ = this.route.paramMap
+    // this.personnes = this.route.paramMap
     //   .pipe(
     //     switchMap((qualite) => this.personnePhysiqueService.afficherPersonneSelonQualite(this.qualite))
     //   );
     this.personnePhysiqueService.afficherPersonneSelonQualite(this.qualite).subscribe(
       (data)=>{
-        this.personnes$=data;
-        //console.log(this.personnes$)
+        this.personnes=data;
+        console.log(this.personnes)
       }
     )
+  }
+  public onFilterChange(item: any) {
+    // console.log('onFilterChange', item);
+  }
+  public onDropDownClose(item: any) {
+    // console.log('onDropDownClose', item);
+  }
+
+  public onItemSelect(item: any) {
+    // console.log('onItemSelect', item);
+    this.idPersonne=item.idPersonne;
+  }
+  public onDeSelect(item: any) {
+    // console.log('onDeSelect', item);
+  }
+
+  public onSelectAll(items: any) {
+    // console.log('onSelectAll', items);
+  }
+  public onDeSelectAll(items: any) {
+    // console.log('onDeSelectAll', items);
   }
   ngOnDestroy(): void {
 

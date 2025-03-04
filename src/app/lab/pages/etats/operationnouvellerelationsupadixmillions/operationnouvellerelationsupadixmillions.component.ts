@@ -90,6 +90,15 @@ export class OperationnouvellerelationsupadixmillionsComponent implements OnInit
       }
     )
   }
+  imprimer(){
+    this.selectAnnee=document.getElementById('comboAnnee')
+    this.annee=this.selectAnnee.options[this.selectAnnee.selectedIndex].text;
+    this.operationService.afficherOperationNouvelleRelationSupADixMillionsEtat(this.annee).subscribe(
+      (data)=>{
+        // this.operationSouscriptionRachat$=data;
+      }
+    )
+  }
   public dtInit(): void {
     if (this.isDtInit) {
       this.dt.dtInstance.then(dtInstance => {
@@ -289,7 +298,7 @@ export class OperationnouvellerelationsupadixmillionsComponent implements OnInit
     );
   }
   clickMe(){
-    this.sharedService.sendClickEventNouvelleRelation();
+    // this.sharedService.sendClickEventNouvelleRelation();
     this.afficherOperation();
   }
 }

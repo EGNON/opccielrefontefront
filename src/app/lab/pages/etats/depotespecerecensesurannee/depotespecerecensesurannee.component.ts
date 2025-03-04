@@ -97,6 +97,15 @@ export class DepotespecerecensesuranneeComponent implements OnInit, OnDestroy, A
       }
     )
   }
+  imprimer(){
+    this.selectExercie=document.getElementById('comboExercice')
+    this.codeExercice=this.selectExercie.options[this.selectExercie.selectedIndex].text;
+    this.operationService.afficherListeDepotRecenseSurAnneeEtat(this.codeExercice).subscribe(
+      (data)=>{
+        // this.depotRachat$=data;
+      }
+    )
+  }
   public dtInit(): void {
     if (this.isDtInit) {
       this.dt.dtInstance.then(dtInstance => {
@@ -339,7 +348,7 @@ export class DepotespecerecensesuranneeComponent implements OnInit, OnDestroy, A
     );
   }
   clickMe(){
-    this.sharedService.sendClickEventRecenseSurAnnee();
+    // this.sharedService.sendClickEventRecenseSurAnnee();
     this.afficherDepotSurAnnee();
   }
 }

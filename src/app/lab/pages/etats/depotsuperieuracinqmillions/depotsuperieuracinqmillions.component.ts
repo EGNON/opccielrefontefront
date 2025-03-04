@@ -70,7 +70,7 @@ private idInAction: number;
   this.subscriptions.forEach((sb) => sb.unsubscribe());
 }
   clickMe(){
-    this.sharedService.sendClickEventCinq();
+  //  this.sharedService.sendClickEventCinq();
     this.afficherDepot();
   }
   afficherExercice(){
@@ -230,6 +230,15 @@ afficherDepot()
         }
       }
     });
+  }
+  imprimerDepot(){
+    this.selectExercie=document.getElementById('comboExerciceCinq')
+    this.codeExercice=this.selectExercie.options[this.selectExercie.selectedIndex].text;
+    this.operationService.afficherOperationSupCinqMillionsEtat(this.codeExercice).subscribe(
+      (data)=>{
+        //this.depotRachat$=data;
+      }
+    )
   }
   public openPDF(): void {
     let DATA: any = document.getElementById('reporting-sup-cinq-millions');

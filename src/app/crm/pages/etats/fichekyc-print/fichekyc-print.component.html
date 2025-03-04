@@ -2,7 +2,7 @@
 <div class="card card-flush">
   <!--begin::Card header-->
   <div class="card-header align-items-center py-5 gap-2 gap-md-5">
-    <form >
+    <form [formGroup]="formData">
       <!--    &lt;!&ndash;end::Card title&ndash;&gt;-->
       <!--    &lt;!&ndash;begin::Card toolbar&ndash;&gt;-->
       <div class="d-flex flex-column flex-lg-row mb-0">
@@ -17,25 +17,40 @@
               <label class="required fs-5 fw-semibold mb-2">Client(s)</label>
               <!--end::Label-->
               <!--begin::Input-->
-              <select
-                class="form-select form-select-sm form-select-solid"
-                id="ComboClientFicheKyc">
-                <option selected>Sélectonnez un client</option>
-                <option *ngFor="let personne of personnes$"
-                        value="{{personne.idPersonne}}">{{personne.denomination}}</option>
-              </select>
+<!--              <select-->
+<!--                class="form-select form-select-sm form-select-solid"-->
+<!--                id="ComboClientFicheKyc">-->
+<!--                <option selected>Sélectonnez un client</option>-->
+<!--                <option *ngFor="let personne of personnes$"-->
+<!--                        value="{{personne.idPersonne}}">{{personne.denomination}}</option>-->
+<!--              </select>-->
+              <ng-multiselect-dropdown
+                [settings]="personneSettings"
+                [placeholder]="'Sélectionnez une personne'"
+                formControlName="personne"
+                [data]="personnes"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange($event)"
+                (onDropDownClose)="onDropDownClose($event)"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onDeSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                (onDeSelectAll)="onDeSelectAll($event)">
+              </ng-multiselect-dropdown>
             </div>
 
             <div class="col-md-6 fv-row">
 <!--              <div class="card-toolbar flex-row-fluid justify-content-end gap-5">-->
               <!--begin::Add Monnaie-->
               <a (click)="afficherClientSelonIdQualite()" style="margin-right: 5px;margin-top: 30px"  class="btn btn-sm btn-primary">Valider</a>
-              <button printTitle="Fiche KYC"
-                      printSectionId="print-section"
-                      ngxPrint
-                      styleSheetFile="assets/css/print.css"
-                      class="btn btn-sm btn-primary"
-                      style="margin-top: 30px">Imprimer</button>
+<!--              <button printTitle="Fiche KYC"-->
+<!--                      printSectionId="print-section"-->
+<!--                      ngxPrint-->
+<!--                      styleSheetFile="assets/css/print.css"-->
+<!--                      class="btn btn-sm btn-primary"-->
+<!--                      style="margin-top: 30px">Imprimer</button>-->
+              <button class="btn btn-sm btn-primary"
+                      style="margin-top: 30px" (click)="imprimer()">Imprimer</button>
               <!--end::Add Monnaie-->
             </div>
 <!--            </div>-->

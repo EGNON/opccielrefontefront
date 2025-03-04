@@ -89,6 +89,28 @@ export class ClientnayantinvestiComponent implements OnInit, OnDestroy{
       )
     }
   }
+  imprimer(){
+    this.prospect=this.selectProspect.options[this.selectProspect.selectedIndex].text;
+    this.dateDebut=this.formData.get('dateDebut')?.value+"T00:00:00";
+    this.dateFin=this.formData.get('dateFin')?.value+"T23:59:59";
+    if(this.prospect=="Personne physique"){
+      this.qualite="actionnaires".toUpperCase();
+      this.personnePhysiqueService.afficherPersonnePhysiqueNayantPasInvestiEtat(this.qualite,this.dateDebut,this.dateFin).subscribe(
+        (data)=>{
+
+        }
+      )
+    }
+    else
+    {
+      this.qualite="actionnaires".toUpperCase()
+      this.personneMoraleService.afficherPersonneMoraleNayantPasInvestiEtat(this.qualite,this.dateDebut,this.dateFin).subscribe(
+        (data)=>{
+
+        }
+      )
+    }
+  }
   ngOnDestroy(): void {
 
     this.subscriptions.forEach((sb) => sb.unsubscribe());

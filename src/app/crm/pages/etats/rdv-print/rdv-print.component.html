@@ -24,11 +24,17 @@
         <!--begin::Add Monnaie-->
       <a (click)="afficherRDV()" style="margin-right: 5px;margin-left: 5px;margin-top: 25px"  class="btn btn-sm btn-primary">Valider</a>
       <button  *ngIf="!afficherTous" class="btn btn-sm btn-primary"
-               (click)="downloadPdf('reporting-rdv-not','alldata-rdv-not')"
+               (click)="imprimer('0')"
                style="margin-top: 25px">Imprimer</button>
       <button  *ngIf="afficherTous" class="btn btn-sm btn-primary"
-               (click)="downloadPdf('reporting-rdv','alldata-rdv')"
+               (click)="imprimer('tous')"
                style="margin-top: 25px">Imprimer</button>
+<!--        <button  *ngIf="!afficherTous" class="btn btn-sm btn-primary"-->
+<!--               (click)="downloadPdf('reporting-rdv-not','alldata-rdv-not')"-->
+<!--               style="margin-top: 25px">Imprimer</button>-->
+<!--      <button  *ngIf="afficherTous" class="btn btn-sm btn-primary"-->
+<!--               (click)="downloadPdf('reporting-rdv','alldata-rdv')"-->
+<!--               style="margin-top: 25px">Imprimer</button>-->
   <!--      &lt;!&ndash;end::Add Monnaie&ndash;&gt;-->
       </div>
       <!--end::Card toolbar-->
@@ -38,7 +44,8 @@
 <!--  <section class="sheet padding-2mm">-->
 <!--    <article>-->
 <!--begin::Card body-->
-<div *ngIf="!afficherTous">
+<div >
+<!--<div *ngIf="!afficherTous">-->
   <!--          <div class="table-responsive angular-bootstrap-table">-->
   <!--begin::Table-->
   <!--            <table class="t1 table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" style="overflow: visible !important;">-->
@@ -49,7 +56,7 @@
       <th style="width: 20%" colspan="1">
         <img src="assets/img/spahir2.jpg" />
       </th>
-      <th style="width: 80%"  colspan="4" class="text-start company-data">
+      <th style="width: 80%"  colspan="5" class="text-start company-data">
         <li style="list-style-type:none;">Date: {{dateJour|date:'dd/MM/yyyy hh:mm:ss'}}</li> <br>
         <li style="list-style-type:none;">SAPHIR ASSET MANAGEMENT</li> <br>
         <li style="list-style-type:none;">Tél : +229 20 21 35 10/66 18 01 74</li> <br>
@@ -58,7 +65,7 @@
       </th>
     </tr>
     <tr>
-      <th style="width: 100%" colspan="5">
+      <th style="width: 100%" colspan="6">
         <h2 style="text-align: center">Liste des rendez-vous planifiés</h2>
       </th>
     </tr>
@@ -66,45 +73,77 @@
       <th style="width:5%">Date début</th>
       <th style="width:50%">Objet</th>
       <th style="width:5%">Date fin</th>
-<!--      <th style="width:5%">Heure fin</th>-->
+      <th style="width:5%">Heure fin</th>
       <th style="width:20%">Client/prospect</th>
       <th style="width:15%">Adresse</th>
       <!--          <th class="text-end min-w-70px">Actions</th>-->
     </tr>
     </thead>
     <tbody class="fw-semibold text-gray-600">
-    <tr *ngFor="let item of agentConcerne$" >
-      <td>
-        <div class="d-flex align-items-center">
-          {{ item.rdvDto.dateDebRdv| date: 'dd/MM/yyyy'}} {{item.rdvDto.heureDebutRdv}}
-        </div>
-      </td>
-      <td>
-        <div class="d-flex align-items-center">
-          {{ item.rdvDto.objetRdv}}
-        </div>
-      </td>
-      <td>
-        <div class="d-flex align-items-center">
-          {{ item.rdvDto.dateFinRdv | date: 'dd/MM/yyyy'}} {{ item.rdvDto.heureFinRdv}}
-        </div>
-      </td>
+<!--    <tr *ngFor="let item of agentConcerne$" >-->
 <!--      <td>-->
 <!--        <div class="d-flex align-items-center">-->
-<!--          {{ item.rdvDto.heureFinRdv}}-->
+<!--          {{ item.rdvDto.dateDebRdv| date: 'dd/MM/yyyy'}} {{item.rdvDto.heureDebutRdv}}-->
 <!--        </div>-->
 <!--      </td>-->
-      <td>
-        <div class="d-flex align-items-center">
-          {{ item.rdvDto.personnePhysiqueMoraleDto.denomination}}
-        </div>
-      </td>
-      <td>
-        <div class="d-flex align-items-center">
-          {{ item.rdvDto.quartierDto.libelleQuartier}}
-        </div>
-      </td>
-    </tr>
+<!--      <td>-->
+<!--        <div class="d-flex align-items-center">-->
+<!--          {{ item.rdvDto.objetRdv}}-->
+<!--        </div>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <div class="d-flex align-items-center">-->
+<!--          {{ item.rdvDto.dateFinRdv | date: 'dd/MM/yyyy'}} {{ item.rdvDto.heureFinRdv}}-->
+<!--        </div>-->
+<!--      </td>-->
+<!--&lt;!&ndash;      <td>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="d-flex align-items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;          {{ item.rdvDto.heureFinRdv}}&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </td>&ndash;&gt;-->
+<!--      <td>-->
+<!--        <div class="d-flex align-items-center">-->
+<!--          {{ item.rdvDto.personnePhysiqueMoraleDto.denomination}}-->
+<!--        </div>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <div class="d-flex align-items-center">-->
+<!--          {{ item.rdvDto.quartierDto.libelleQuartier}}-->
+<!--        </div>-->
+<!--      </td>-->
+<!--    </tr>-->
+        <tr *ngFor="let item of rdv$" >
+          <td>
+            <div class="d-flex align-items-center">
+              {{ item.dateDebRdv| date: 'dd/MM/yyyy'}}
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              {{ item.objetRdv}}
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              {{ item.dateFinRdv| date: 'dd/MM/yyyy'}}
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              {{ item.heureFinRdv}}
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              {{ item.personnePhysiqueMoraleDto.denomination}}
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              {{ item.quartierDto.libelleQuartier}}
+            </div>
+          </td>
+        </tr>
     </tbody>
   </table>
   <!--end::Table-->
@@ -114,79 +153,79 @@
 <!--end::Card body-->
 
 <!--begin::Card body-->
-<div *ngIf="afficherTous">
-  <div class="table-responsive angular-bootstrap-table">
-    <!--begin::Table-->
-    <!--            <table class="t1 table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5">-->
-    <ul class="list-group list-group-flush vert-scrollable-150" id="alldata-rdv">
-      <table class="order-details" id="reporting-rdv">
-      <thead>
-      <tr>
-        <th style="width: 20%" colspan="1">
-          <img src="assets/img/spahir2.jpg" />
-        </th>
-        <th style="width: 80%"  colspan="5" class="text-start company-data">
-          <li style="list-style-type:none;">Date: {{dateJour|date:'dd/MM/yyyy hh:mm:ss'}}</li> <br>
-          <li style="list-style-type:none;">SAPHIR ASSET MANAGEMENT</li> <br>
-          <li style="list-style-type:none;">Tél : +229 20 21 35 10/66 18 01 74</li> <br>
-          <li style="list-style-type:none;">Adresse: Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL,3ème étage de
-            l'immeuble de la SGI BENIN</li> <br>
-        </th>
-      </tr>
-      <tr>
-        <th style="width: 100%" colspan="6">
-          <h2 style="text-align: center">Liste des rendez-vous planifiés</h2>
-        </th>
-      </tr>
-      <tr class="bg-blue">
-        <th style="width:5%">Date début</th>
-        <th style="width:50%">Objet</th>
-        <th style="width:5%">Date fin</th>
-        <th style="width:5%">Heure fin</th>
-        <th style="width:20%">Client/prospect</th>
-        <th style="width:15%">Adresse</th>
-        <!--          <th class="text-end min-w-70px">Actions</th>-->
-      </tr>
-      </thead>
-      <tbody class="fw-semibold text-gray-600">
-      <tr *ngFor="let item of rdv$" >
-        <td>
-          <div class="d-flex align-items-center">
-            {{ item.dateDebRdv| date: 'dd/MM/yyyy'}}
-          </div>
-        </td>
-        <td>
-          <div class="d-flex align-items-center">
-            {{ item.objetRdv}}
-          </div>
-        </td>
-        <td>
-          <div class="d-flex align-items-center">
-            {{ item.dateFinRdv| date: 'dd/MM/yyyy'}}
-          </div>
-        </td>
-        <td>
-          <div class="d-flex align-items-center">
-            {{ item.heureFinRdv}}
-          </div>
-        </td>
-        <td>
-          <div class="d-flex align-items-center">
-            {{ item.personnePhysiqueMoraleDto.denomination}}
-          </div>
-        </td>
-        <td>
-          <div class="d-flex align-items-center">
-            {{ item.quartierDto.libelleQuartier}}
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <!--end::Table-->
-    </ul>
-  </div>
-</div>
+<!--<div *ngIf="afficherTous">-->
+<!--  <div class="table-responsive angular-bootstrap-table">-->
+<!--    &lt;!&ndash;begin::Table&ndash;&gt;-->
+<!--    &lt;!&ndash;            <table class="t1 table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5">&ndash;&gt;-->
+<!--    <ul class="list-group list-group-flush vert-scrollable-150" id="alldata-rdv">-->
+<!--      <table class="order-details" id="reporting-rdv">-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th style="width: 20%" colspan="1">-->
+<!--          <img src="assets/img/spahir2.jpg" />-->
+<!--        </th>-->
+<!--        <th style="width: 80%"  colspan="5" class="text-start company-data">-->
+<!--          <li style="list-style-type:none;">Date: {{dateJour|date:'dd/MM/yyyy hh:mm:ss'}}</li> <br>-->
+<!--          <li style="list-style-type:none;">SAPHIR ASSET MANAGEMENT</li> <br>-->
+<!--          <li style="list-style-type:none;">Tél : +229 20 21 35 10/66 18 01 74</li> <br>-->
+<!--          <li style="list-style-type:none;">Adresse: Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL,3ème étage de-->
+<!--            l'immeuble de la SGI BENIN</li> <br>-->
+<!--        </th>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <th style="width: 100%" colspan="6">-->
+<!--          <h2 style="text-align: center">Liste des rendez-vous planifiés</h2>-->
+<!--        </th>-->
+<!--      </tr>-->
+<!--      <tr class="bg-blue">-->
+<!--        <th style="width:5%">Date début</th>-->
+<!--        <th style="width:50%">Objet</th>-->
+<!--        <th style="width:5%">Date fin</th>-->
+<!--        <th style="width:5%">Heure fin</th>-->
+<!--        <th style="width:20%">Client/prospect</th>-->
+<!--        <th style="width:15%">Adresse</th>-->
+<!--        &lt;!&ndash;          <th class="text-end min-w-70px">Actions</th>&ndash;&gt;-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody class="fw-semibold text-gray-600">-->
+<!--      <tr *ngFor="let item of rdv$" >-->
+<!--        <td>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            {{ item.dateDebRdv| date: 'dd/MM/yyyy'}}-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            {{ item.objetRdv}}-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            {{ item.dateFinRdv| date: 'dd/MM/yyyy'}}-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            {{ item.heureFinRdv}}-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            {{ item.personnePhysiqueMoraleDto.denomination}}-->
+<!--          </div>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <div class="d-flex align-items-center">-->
+<!--            {{ item.quartierDto.libelleQuartier}}-->
+<!--          </div>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+<!--    &lt;!&ndash;end::Table&ndash;&gt;-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</div>-->
 <!--end::Card body-->
 <br>
 <p class="text-center">

@@ -18,8 +18,16 @@ export class ObjectifAffecteService extends ResourceService<ObjectifAffecte> imp
   ngOnDestroy(): void {
   }
 
-  afficherSelonPersonnelEtPeriodicite(idPerosnnel:number,idPeriodicite:number)
+  afficherSelonPersonnelEtPeriodicite(idPerosnnel:number,beginEndDate:any)
   {
-    return this.http.get<Affectation[]>(`${this.API_URL}`+'/etats/'+idPerosnnel+'/'+idPeriodicite);
+    return this.http.post<Affectation[]>(`${this.API_URL}`+'/etats/'+idPerosnnel,beginEndDate);
+  }
+  afficherObjectifPrevu(idPersonnel:number,beginEndDate:any)
+  {
+    return this.http.post<Affectation[]>(`${this.API_URL}`+'/objectifprevu/'+idPersonnel,beginEndDate);
+  }
+  afficherObjectifReel(idPersonnel:number,beginEndDate:any)
+  {
+    return this.http.post<Affectation[]>(`${this.API_URL}`+'/objectifreel/'+idPersonnel,beginEndDate);
   }
 }

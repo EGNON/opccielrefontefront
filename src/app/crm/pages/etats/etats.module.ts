@@ -26,6 +26,7 @@ import { TestPrint2Component } from './test-print-2/test-print-2.component';
 import {CardsModule, WidgetsModule} from "../../../template/_metronic/partials";
 import {SharedModule} from "../../../template/_metronic/shared/shared.module";
 import { ClientPrint2Component } from './client-print2/client-print2.component';
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 @NgModule({
   declarations: [
@@ -43,22 +44,23 @@ import { ClientPrint2Component } from './client-print2/client-print2.component';
        TestPrint2Component,
        ClientPrint2Component
   ],
-  imports: [
-    CommonModule,
-    WidgetsModule,
-    EtatsRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule,
-    CardsModule,
-    DataTablesModule,
-    NgxPrintModule,
-    NgbDropdown,
-    NgbDropdownItem,
-    NgbDropdownMenu,
-    NgbDropdownToggle,
-    SweetAlert2Module,
-    NgbInputDatepicker
-  ]
+    imports: [
+        CommonModule,
+        WidgetsModule,
+        EtatsRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedModule,
+        CardsModule,
+        DataTablesModule,
+        NgxPrintModule,
+        NgbDropdown,
+        NgbDropdownItem,
+        NgbDropdownMenu,
+        NgbDropdownToggle,
+        SweetAlert2Module,
+        NgbInputDatepicker,
+        NgMultiSelectDropDownModule
+    ]
 })
 export class EtatsModule { }
