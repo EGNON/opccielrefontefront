@@ -96,6 +96,15 @@ export class OperationconditioninhabituelleComponent implements OnInit, OnDestro
       }
     )
   }
+  imprimer(){
+    this.selectAnnee=document.getElementById('comboAnneeInhabituelle')
+    this.annee=this.selectAnnee.options[this.selectAnnee.selectedIndex].text;
+    this.operationService.afficherTransactionInhabituelleEtat(this.annee).subscribe(
+      (data)=>{
+        // this.operationSouscriptionRachat$=data;
+      }
+    )
+  }
   public dtInit(): void {
     if (this.isDtInit) {
       this.dt.dtInstance.then(dtInstance => {
@@ -308,7 +317,7 @@ export class OperationconditioninhabituelleComponent implements OnInit, OnDestro
     );
   }
   clickMe(){
-    this.sharedService.sendClickEventConditionInhabituelle();
+    // this.sharedService.sendClickEventConditionInhabituelle();
     this.afficherOperation();
   }
 }

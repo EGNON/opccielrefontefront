@@ -44,9 +44,9 @@ export class RdvPrintComponent implements OnInit{
       this.personnelSelectionnee=this.selectPersonnel.options[this.selectPersonnel.selectedIndex].value;
 
       this.idPersonnel=this.personnelSelectionnee;
-      this.agentconcerneService.afficherAgentConcerneSelonPersonnel(this.idPersonnel).subscribe(
+      this.rdvService.afficherRDVSelonPersonnel(this.idPersonnel).subscribe(
         (data) => {
-          this.agentConcerne$=data;
+          this.rdv$=data;
         }
       );
     }
@@ -54,10 +54,10 @@ export class RdvPrintComponent implements OnInit{
       this.afficherTous=true;
       this.personnelSelectionnee=this.selectPersonnel.options[this.selectPersonnel.selectedIndex].value;
       this.idPersonnel=this.personnelSelectionnee;
-      this.rdvService.afficherRDVListe().subscribe(
+      this.rdvService.afficherRDVListe2().subscribe(
         (data) => {
           // console.log("DATA === ", data);
-          this.rdv$=data.content;
+          this.rdv$=data;
         }
       );
     }
@@ -105,6 +105,18 @@ export class RdvPrintComponent implements OnInit{
 
       PDF.save('liste des rendez-vous.pdf');
     });
+  }
+  imprimer(etat:string){
+    if(etat=="0"){
+      etat=this.idPersonnel.toString();
+    }
+    else
+      etat="tous"
+    this.rdvService.afficherListeEtat(etat).subscribe(
+      (data)=>{
+
+      }
+    );
   }
   async downloadPdf(name:any,alldata:any) {
     var data = document.getElementById(name);

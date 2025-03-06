@@ -182,8 +182,10 @@
 <!--          </div>-->
 <!--          <div class="col-md-12 fv-row">-->
             <a (click)="afficherProspect()" style="margin-right: 5px;margin-left: 5px"  class="btn btn-sm btn-primary">Valider</a>
-            <button  *ngIf="prospect=='Personne physique'" class="btn btn-sm btn-primary" (click)="downloadPdf('reporting-prospect-physique','alldata-prospect-physique')">Imprimer</button>
-            <button  *ngIf="prospect=='Personne morale'" class="btn btn-sm btn-primary" (click)="downloadPdf('reporting-prospect-morale','alldata-prospect-morale')">Imprimer</button>
+<!--            <button  *ngIf="prospect=='Personne physique'" class="btn btn-sm btn-primary" (click)="downloadPdf('reporting-prospect-physique','alldata-prospect-physique')">Imprimer</button>-->
+<!--            <button  *ngIf="prospect=='Personne morale'" class="btn btn-sm btn-primary" (click)="downloadPdf('reporting-prospect-morale','alldata-prospect-morale')">Imprimer</button>-->
+            <button  *ngIf="prospect=='Personne physique'" class="btn btn-sm btn-primary" (click)="imprimer()">Imprimer</button>
+            <button  *ngIf="prospect=='Personne morale'" class="btn btn-sm btn-primary" (click)="imprimer()">Imprimer</button>
 <!--          </div>-->
 <!--        </div>-->
 <!--      </div>-->

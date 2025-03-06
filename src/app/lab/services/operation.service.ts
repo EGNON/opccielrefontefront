@@ -25,25 +25,50 @@ export class OperationService extends EntityService<Operation> implements OnDest
   {
     return this.http.get<Operation[]>(`${this.API_URL}/depotsurannee/${codeExercice}`);
   }
+  afficherListeDepotRecenseSurAnneeEtat(codeExercice:number)
+  {
+    return this.http.get<Operation[]>(`${this.API_URL}/depotsuranneeetat/${codeExercice}`);
+  }
   afficherOperationSupDixMillions(codeExercice:number)
   {
     return this.http.get<Operation[]>(`${this.API_URL}/operationsupdixmillions/${codeExercice}`);
+  }
+  afficherOperationSupDixMillionsEtat(codeExercice:number)
+  {
+    return this.http.get<Operation[]>(`${this.API_URL}/operationsupdixmillionsetat/${codeExercice}`);
   }
   afficherOperationSupCinqMillions(codeExercice:number)
   {
     return this.http.get<Operation[]>(`${this.API_URL}/operationsupcinqmillions/${codeExercice}`);
   }
+  afficherOperationSupCinqMillionsEtat(codeExercice:number)
+    {
+      return this.http.get<Operation[]>(`${this.API_URL}/operationsupcinqmillionsetat/${codeExercice}`);
+    }
 
   afficherOperationNouvelleRelationSupADixMillions(annee:number)
   {
     return this.http.get<Operation[]>(`${this.API_URL}/nouvellerelation/${annee}`);
   }
+  afficherOperationNouvelleRelationSupADixMillionsEtat(annee:number)
+  {
+    return this.http.get<Operation[]>(`${this.API_URL}/nouvellerelationetat/${annee}`);
+  }
   afficherTransactionInhabituelle(annee:number)
   {
     return this.http.get<Operation[]>(`${this.API_URL}/transactioninhabituelle/${annee}`);
-  }afficherTransactionNormale(annee:number)
+  }
+  afficherTransactionInhabituelleEtat(annee:number)
+  {
+    return this.http.get<Operation[]>(`${this.API_URL}/transactioninhabituelleetat/${annee}`);
+  }
+  afficherTransactionNormale(annee:number)
   {
     return this.http.get<Operation[]>(`${this.API_URL}/transactionnormale/${annee}`);
+  }
+  afficherTransactionNormaleEtat(annee:number)
+  {
+    return this.http.get<Operation[]>(`${this.API_URL}/transactionnormaleetat/${annee}`);
   }
 
 }

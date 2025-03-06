@@ -13,6 +13,7 @@ export class CompterenduPrintComponent implements OnInit{
   personnel$:any;
   compteRendu$:any;
   idPersonnel:number;
+  idUtilisateur:string;
   selectPersonnel:any;
   dateJour:Date;
   personnelSelectionnee:any;
@@ -53,6 +54,25 @@ export class CompterenduPrintComponent implements OnInit{
         }
       );
     }
+
+  }
+  imprimer(){
+    this.denomination=this.selectPersonnel.options[this.selectPersonnel.selectedIndex].text;
+    if(this.denomination!="Tous"){
+      this.personnelSelectionnee=this.selectPersonnel.options[this.selectPersonnel.selectedIndex].value;
+
+      this.idUtilisateur=this.personnelSelectionnee;
+    }
+    else
+      this.idUtilisateur=null;
+
+      this.compteRenduService.afficherEtat(this.idUtilisateur).subscribe(
+        (data) => {
+          // this.compteRendu$=data;
+          console.log("pass" ,data)
+        }
+      );
+
 
   }
   afficherPersonnel(){

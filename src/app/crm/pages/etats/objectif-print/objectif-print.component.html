@@ -226,6 +226,7 @@
   <div class="card-header align-items-center py-5 gap-2 gap-md-5">
     <!--    &lt;!&ndash;end::Card title&ndash;&gt;-->
     <!--    &lt;!&ndash;begin::Card toolbar&ndash;&gt;-->
+    <form [formGroup]="formData">
     <div class="d-flex flex-column flex-lg-row mb-0">
       <!--      &lt;!&ndash;begin::Content&ndash;&gt;-->
       <div class="flex-lg-row-fluid me-0 me-lg-0">
@@ -264,33 +265,58 @@
           </div>
 
           <div class="col-md-3 fv-row">
-            <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Périodicité</label>
-            <!--end::Label-->
-            <!--begin::Input-->
-            <select
-              class="form-select form-select-sm form-select-solid"
-              id="ComboPeriodicite">
-              <option selected>Sélectonnez une période</option>
-              <option *ngFor="let periodicite of periodicite$.content"
-                      value="{{periodicite.idPeriodicite}}">{{periodicite.libelle}}</option>
-            </select>
+           <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Début</label>
+<!--            &lt;!&ndash;end::Label&ndash;&gt;-->
+<!--            &lt;!&ndash;begin::Input&ndash;&gt;-->
+<!--            <select-->
+<!--              class="form-select form-select-sm form-select-solid"-->
+<!--              id="ComboPeriodicite">-->
+<!--              <option selected>Sélectonnez une période</option>-->
+<!--              <option *ngFor="let periodicite of periodicite$.content"-->
+<!--                      value="{{periodicite.idPeriodicite}}">{{periodicite.libelle}}</option>-->
+<!--            </select>-->
+            <div class="input-group mb-0">
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm"
+                     placeholder="dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date début" aria-describedby="basic-addon6"
+                     formControlName="startDate" />
+              <!--end::Input-->
+              <span (click)="d.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+            </div>
           </div>
+
+          <div class="col-md-3 fv-row">
+            <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Fin</label>
+            <div class="input-group mb-0">
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm"
+                     placeholder="dd/mm/yyyy" ngbDatepicker #d1="ngbDatepicker" aria-label="Date fin" aria-describedby="basic-addon6"
+                     formControlName="endDate"/>
+              <!--end::Input-->
+              <span (click)="d1.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+              </span>
+            </div>
+          </div>
+
           <!--    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">-->
-          <div class="col-md-6 fv-row">
+          <div class="col-md-3 fv-row">
             <!--begin::Add Monnaie-->
             <a (click)="afficherObjetif()" style="margin-right: 5px;margin-left: 5px;margin-top: 40px"  class="btn btn-sm btn-primary">Valider</a>
             <button  *ngIf="etatPrevu" class="btn btn-sm btn-primary"
-                     (click)="downloadPdf('reporting-objectif','alldata-objectif-etat-prevu')"
+                     (click)="imprimer()"
                      style="margin-top: 40px">Imprimer</button>
             <button  *ngIf="!etatPrevu" style="margin-top: 40px" class="btn btn-sm btn-primary"
-                     (click)="downloadPdf('reporting-objectif-not','alldata-objectif-etat-prevu-not')">Imprimer</button>
+                     (click)="imprimer()">Imprimer</button>
           </div>
         </div>
           <!--end::Card toolbar-->
         </div>
 
       </div>
-
+    </form>
     </div>
 </div>
 
@@ -309,7 +335,7 @@
       <th style="width: 20%" colspan="1">
         <img src="assets/img/spahir2.jpg" />
       </th>
-      <th style="width: 80%"  colspan="4" class="text-start company-data">
+      <th style="width: 80%"  colspan="5" class="text-start company-data">
         <li style="list-style-type:none;">Date: {{dateJour|date:'dd/MM/yyyy hh:mm:ss'}}</li> <br>
         <li style="list-style-type:none;">SAPHIR ASSET MANAGEMENT</li> <br>
         <li style="list-style-type:none;">Tél : +229 20 21 35 10/66 18 01 74</li> <br>
@@ -318,7 +344,7 @@
       </th>
     </tr>
     <tr>
-      <th style="width: 100%" colspan="5">
+      <th style="width: 100%" colspan="6">
         <h2 style="text-align: center">Point périodique des objectifs</h2>
       </th>
     </tr>
@@ -332,6 +358,7 @@
       <th width="30%">Client</th>
       <th width="20%">Catégorie</th>
       <th width="15%">Indicateur</th>
+      <th width="15%">Périodicité</th>
       <th width="15%">Valeur affectée</th>
     </tr>
     </thead>
@@ -364,6 +391,11 @@
       </td>
       <td>
         <div class="d-flex align-items-center">
+          {{ item.periodicite.libelle}}
+        </div>
+      </td>
+      <td>
+        <div class="d-flex align-items-center">
           {{ item.valeurAffecte|number}}
         </div>
       </td>
@@ -388,7 +420,7 @@
         <th style="width: 20%" colspan="1">
           <img src="assets/img/spahir2.jpg" />
         </th>
-        <th style="width: 80%"  colspan="5" class="text-start company-data">
+        <th style="width: 80%"  colspan="6" class="text-start company-data">
           <li style="list-style-type:none;">Date: {{dateJour|date:'dd/MM/yyyy hh:mm:ss'}}</li> <br>
           <li style="list-style-type:none;">SAPHIR ASSET MANAGEMENT</li> <br>
           <li style="list-style-type:none;">Tél : +229 20 21 35 10/66 18 01 74</li> <br>
@@ -397,7 +429,7 @@
         </th>
       </tr>
       <tr>
-        <th style="width: 100%" colspan="6">
+        <th style="width: 100%" colspan="7">
           <h2 style="text-align: center">Point périodique des objectifs</h2>
         </th>
       </tr>
@@ -411,6 +443,7 @@
         <th width="30%">Client</th>
         <th width="20%">Catégorie</th>
         <th width="15%">Indicateur</th>
+        <th width="15%">Périodicité</th>
         <th width="15%">Valeur affectée</th>
         <th width="10%">Valeur fournie</th>
       </tr>
@@ -440,6 +473,11 @@
         <td>
           <div class="d-flex align-items-center">
             {{ item.indicateur.libelle}}
+          </div>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            {{ item.periodicite.libelle}}
           </div>
         </td>
         <td>

@@ -35,8 +35,10 @@ export class ObjectifPrintComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.formData = this.fb.group(
       {
-        etatFourni:[null],
-        etatPrevu:[null],
+        etatFourni:[false],
+        etatPrevu:[true],
+        startDate:[new Date()],
+        endDate:[new Date()],
       }
     );
     this.selectPersonnel = document.getElementById("ComboPersonnelEtat");
@@ -67,15 +69,68 @@ export class ObjectifPrintComponent implements OnInit, OnDestroy{
   afficherObjetif(){
     // @ts-ignore
     this.etatPrevu = document.getElementById("etatPrevu").checked;
+    let startDate: any;
+    let endDate: any;
+    if (this.formData.controls.startDate.value) {
+      startDate = new Date(
+        this.formData.controls.startDate.value.year,
+        this.formData.controls.startDate.value.month - 1,
+        this.formData.controls.startDate.value.day + 1);
+    }
+    if (this.formData.controls.endDate.value) {
+      endDate = new Date(
+        this.formData.controls.endDate.value.year,
+        this.formData.controls.endDate.value.month - 1,
+        this.formData.controls.endDate.value.day + 1);
+    }
+    let dates = {startDate: startDate, endDate: endDate};
     // console.log(this.etatPrevu)
     this.idPersonne=this.selectPersonnel.options[this.selectPersonnel.selectedIndex].value;
-    this.idPeriodicite=this.selectPeriodicite.options[this.selectPeriodicite.selectedIndex].value;
-    this.objectifAffecteService.afficherSelonPersonnelEtPeriodicite(this.idPersonne,this.idPeriodicite).subscribe(
+    // this.idPeriodicite=this.selectPeriodicite.options[this.selectPeriodicite.selectedIndex].value;
+    this.objectifAffecteService.afficherSelonPersonnelEtPeriodicite(this.idPersonne,dates).subscribe(
       (data)=>{
         this.objectifAffecte$=data;
-        // console.log(this.objectifAffecte$)
+        console.log(this.objectifAffecte$)
       }
     )
+  }
+  imprimer(){
+
+    let startDate: any;
+    let endDate: any;
+    if (this.formData.controls.startDate.value) {
+      startDate = new Date(
+        this.formData.controls.startDate.value.year,
+        this.formData.controls.startDate.value.month - 1,
+        this.formData.controls.startDate.value.day + 1);
+    }
+    if (this.formData.controls.endDate.value) {
+      endDate = new Date(
+        this.formData.controls.endDate.value.year,
+        this.formData.controls.endDate.value.month - 1,
+        this.formData.controls.endDate.value.day + 1);
+    }
+    let dates = {startDate: startDate, endDate: endDate};
+    // @ts-ignore
+    this.etatPrevu = document.getElementById("etatPrevu").checked;
+    // console.log(this.etatPrevu)
+    this.idPersonne=this.selectPersonnel.options[this.selectPersonnel.selectedIndex].value;
+    // this.idPeriodicite=this.selectPeriodicite.options[this.selectPeriodicite.selectedIndex].value;
+    if(this.etatPrevu){
+      this.objectifAffecteService.afficherObjectifPrevu(this.idPersonne,dates).subscribe(
+        (data)=>{
+
+        }
+      )
+    }
+    else
+    {
+      this.objectifAffecteService.afficherObjectifReel(this.idPersonne,dates).subscribe(
+        (data)=>{
+
+        }
+      )
+    }
   }
   afficherPersonnel(){
     this.personnelService.afficherPersonnelSelonEstCommercial().subscribe(

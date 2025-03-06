@@ -146,7 +146,7 @@
       <!--begin::Add Monnaie-->
       <a (click)="afficherCompteRendu()" style="margin-right: 5px;margin-left: 5px;margin-top: 25px"  class="btn btn-sm btn-primary">Valider</a>
       <button   class="btn btn-sm btn-primary"
-               (click)="downloadPdf('reporting-cr','alldata-cr')"
+               (click)="imprimer()"
                style="margin-top: 25px">Imprimer</button>
     </div>
     <!--end::Card toolbar-->
@@ -203,7 +203,7 @@
       </td>
       <td>
         <div class="d-flex align-items-center" [innerHTML]="item.description">
-          
+
         </div>
       </td>
       <td>

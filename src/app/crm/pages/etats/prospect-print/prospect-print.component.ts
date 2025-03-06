@@ -60,7 +60,26 @@ export class ProspectPrintComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
+  imprimer(){
+    this.prospect=this.selectProspect.options[this.selectProspect.selectedIndex].text;
+    if(this.prospect=="Personne physique"){
+      this.qualite="prospect";
+      this.personnePhysiqueService.afficherPersonneSelonQualiteEtat(this.qualite).subscribe(
+        (data=>{
 
+        })
+      )
+    }
+    else
+    {
+      this.qualite="prospect"
+      this.personneMoraleService.afficherPersonneSelonQualiteEtat(this.qualite).subscribe(
+        (data=>{
+
+        })
+      )
+    }
+  }
   convertToPDF() {
     html2canvas(document.getElementById('reporting')!).then(canvas => {
       const contentDataURL = canvas.toDataURL('image/png');

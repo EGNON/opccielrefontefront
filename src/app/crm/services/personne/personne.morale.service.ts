@@ -121,8 +121,16 @@ export class PersonneMoraleService extends ResourceService<PersonneMorale> imple
     const url = `${this.API_URL}/qualite/${keyword}`;
     return this.http.get<PersonneMorale[]>(url);
   }
+  afficherPersonneSelonQualiteEtat = (keyword: any) => {
+    const url = `${this.API_URL}/qualite/etat/${keyword}`;
+    return this.http.get<PersonneMorale[]>(url);
+  }
   afficherPersonneMoraleNayantPasInvesti (qualite: string,dateDebut:Date,dateFin:Date )  {
     const url = `${this.API_URL}/investi/`+qualite+'/'+dateDebut+'/'+dateFin;
+    return this.http.get<PersonneMorale[]>(url);
+  }
+  afficherPersonneMoraleNayantPasInvestiEtat (qualite: string,dateDebut:Date,dateFin:Date )  {
+    const url = `${this.API_URL}/investietat/`+qualite+'/'+dateDebut+'/'+dateFin;
     return this.http.get<PersonneMorale[]>(url);
   }
   afficherPersonneMoraleSelonId(id:number):Observable<PersonneMorale>

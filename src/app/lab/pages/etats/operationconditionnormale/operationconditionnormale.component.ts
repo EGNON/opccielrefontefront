@@ -86,6 +86,15 @@ export class OperationconditionnormaleComponent implements OnInit, OnDestroy, Af
       }
     )
   }
+  imprimer(){
+    this.selectAnnee=document.getElementById('comboAnneeNormale')
+    this.annee=this.selectAnnee.options[this.selectAnnee.selectedIndex].text;
+    this.operationService.afficherTransactionNormaleEtat(this.annee).subscribe(
+      (data)=>{
+        // this.operationSouscriptionRachat$=data;
+      }
+    )
+  }
   public dtInit(): void {
     if (this.isDtInit) {
       this.dt.dtInstance.then(dtInstance => {
@@ -285,7 +294,7 @@ export class OperationconditionnormaleComponent implements OnInit, OnDestroy, Af
     );
   }
   clickMe(){
-    this.sharedService.sendClickEventConditionNormale();
+    // this.sharedService.sendClickEventConditionNormale();
     this.afficherOperation();
   }
 }

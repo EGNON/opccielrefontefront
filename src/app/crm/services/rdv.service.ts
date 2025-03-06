@@ -32,6 +32,18 @@ export class RdvService extends ResourceService<RDV> implements OnDestroy{
   {
     return this.http.get<RDV>(environment.apiUrl + '/rdvs/listerdvs');
   }
+  afficherListeEtat(etat:string)
+  {
+    return this.http.get<RDV>(environment.apiUrl + `/rdvs/listerdvs/${etat}`);
+  }
+  afficherRDVSelonPersonnel(idPersonnel:number)
+  {
+    return this.http.get<RDV>(environment.apiUrl + `/rdvs/listerdvspersonnel/${idPersonnel}`);
+  }
+  afficherRDVListe2()
+  {
+    return this.http.get<RDV>(environment.apiUrl + `/rdvs/listerdvsetat`);
+  }
   modifierUnePartieDeRDV(rdv:RDV,id:number):Observable<ResponseModel<RDV>>
   {
     return this.http.put<ResponseModel<RDV>>(environment.apiUrl + '/rdvs/reelle/'+id,rdv);
