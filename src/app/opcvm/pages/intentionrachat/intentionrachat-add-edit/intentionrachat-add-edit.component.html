@@ -119,7 +119,7 @@
                 <!--begin::Select-->
                 <select class="form-select form-select-sm mb-2" formControlName="actionnaire"
                         [ngClass]="{ 'is-invalid': submitted && f.actionnaire.errors }"
-                (change)="afficherNbrePart()">
+                (change)="afficherNbrePart(0)">
                   <option disabled [ngValue]="null">Sélectionnez un actionnaire...</option>
                   <option *ngIf="entity?.actionnaire" disabled [defaultSelected]="true" [ngValue]="entity?.actionnaire">
                     {{ entity?.actionnaire?.denomination }}

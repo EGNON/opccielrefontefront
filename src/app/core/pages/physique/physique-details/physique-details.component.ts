@@ -455,6 +455,11 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
       this.form.controls["dateNaissance"].setErrors(null);
       this.form.controls["dateNaissance"].clearValidators();
       this.form.controls["dateNaissance"].updateValueAndValidity();
+
+      //degre
+      this.form.controls["degre"].setErrors(null);
+      this.form.controls["degre"].clearValidators();
+      this.form.controls["degre"].updateValueAndValidity();
     }
   }
 

@@ -70,7 +70,7 @@ export class DepotespecerecensesuranneeComponent implements OnInit, OnDestroy, A
 
   ngOnInit(): void {
     this.afficherExercice()
-    this.pageInfo.updateTitle("Point des dépôts en espèces recensées sur l’année")
+    this.pageInfo.updateTitle("Détermination du solde global de l'ensemble des comptes détenus par un même client")
     // this.afficherDepot();
   }
 

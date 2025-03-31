@@ -69,13 +69,18 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
           let dateFermeture = new Date(this.seance.dateFermeture);
           this.entityForm.patchValue({dateFermeture: new NgbDate(
               dateFermeture.getFullYear(), dateFermeture.getMonth()+1, dateFermeture.getDate())});
-
+          this.afficherVerificationIntentionRachat()
         }
       )
+
+  }
+  afficherVerificationIntentionRachat()
+  {
     this.entityService.afficherFT_DepotRachat(
       this.localStore.getData("currentOpcvm").idOpcvm,false,false).subscribe(
       (data)=>{
         this.depotRachat$=data;
+        console.log("depotRachat=",this.depotRachat$)
         let i=0;
         let j=0;
         for(i===0;i<this.depotRachat$.length;i++){
@@ -85,15 +90,25 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
             j+=1;
           }
         }
-        console.log(j)
+        // console.log(j)
+        // console.log(this.depotRachat$.length)
         if(j===this.depotRachat$.length)
           this.verifier=true;
         else
           this.verifier=false;
+        // console.log(this.verifier)
       }
     )
   }
-
+  verifiIntentionRachat()
+  {
+    this.entityService.verifIntentionRachat(
+      this.localStore.getData("currentOpcvm").idOpcvm,false,false).subscribe(
+      (data)=>{
+        // console.log(data)
+      }
+    )
+  }
   ngOnDestroy(): void {
     if (this.clickListener) {
       this.clickListener();
@@ -151,20 +166,23 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
           this.id.push(this.depotRachat$[i].idDepotRachat)
         }
         //console.log(this.id)
-        this.entityService.modifier(this.id,this.authService.currentUserValue?.denomination)
+        this.entityService.modifier(this.id,this.authService.currentUserValue?.username)
           .subscribe(
             {
               next: (value) => {
-                let currentUrl = this.router.url;
-                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-                  this.router.navigate([currentUrl]);
-                });
+                // let currentUrl = this.router.url;
+                // this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                //   this.router.navigate([currentUrl]);
+                // });
+                this.verifier=true
               },
               error: err => {
 
               }
             }
           )
+
+        // this.afficherVerificationIntentionRachat()
       }
     )
   }

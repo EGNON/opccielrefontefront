@@ -16,8 +16,8 @@ export class DepotrachatService extends ResourceService<Depotrachat> {
   modifier(id:any,userLogin:any){
     return this.http.put<Depotrachat>(`${this.API_URL}/${id}/${userLogin}`,null)
   }
-  creer(obj:any){
-    return this.http.post<Depotrachat>(`${this.API_URL}/creer`,obj)
+  verifIntRachN1(obj:any){
+    return this.http.post<Depotrachat>(`${this.API_URL}/modifier`,obj)
   }
   creerOperation(id:any,userLogin:any){
     return this.http.post<Depotrachat>(`${this.API_URL}/creer/${id}/${userLogin}`,null)
@@ -34,13 +34,18 @@ export class DepotrachatService extends ResourceService<Depotrachat> {
   afficherFT_DepotRachat(idOpcvm:any,niveau1:any,niveau2:any){
     return this.http.get<any>(`${this.API_URL}/depotrachat/${idOpcvm}/${niveau1}/${niveau2}`)
   }
+  verifIntentionRachat(idOpcvm:any,niveau1:any,niveau2:any){
+    // verifintrach/{idOpcvm}/{niveau1}/{niveau2}
+    return this.http.get<any>(`${this.API_URL}/verifintrach/${idOpcvm}/${niveau1}/${niveau2}`)
+  }
+  verifIntentionRachatN1N2(idOpcvm:any,niveau1:any,niveau2:any){
+    return this.http.get<any>(`${this.API_URL}/verifintrachN1/${idOpcvm}/${niveau1}/${niveau2}`)
+  }
   afficherPrecalculRachat(idSeance:any,idOpcvm:any,idPersonne:any){
     return this.http.get<any>(`${this.API_URL}/precalculrachat/${idSeance}/${idOpcvm}/${idPersonne}`)
   }
   datatable_DepotRachat(resource: any,idOpcvm:any,idSeance:any,codeNatureOperation:any): Observable<ResponseModel<Depotrachat>> {
     // console.log("Resource = ", resource);
-    return this.http
-      .post<ResponseModel<Depotrachat>>(`${this.API_URL}/datatable/list/${idOpcvm}/${idSeance}/${codeNatureOperation}`, resource)
-      ;
+    return this.http.post<ResponseModel<Depotrachat>>(`${this.API_URL}/datatable/list/${idOpcvm}/${idSeance}/${codeNatureOperation}`, resource)
   }
 }

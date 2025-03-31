@@ -138,9 +138,13 @@
     </table>
   </ul>
   <div class="d-flex justify-content-end">
-    <button *ngIf="!verifier_Bouton" style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
+    <button [disabled]="verifier_Bouton" style="margin-top: 10px;margin-right: 5px" type="button" class="btn btn-sm btn-success"
+            (click)="verifiIntentionRachat()">
+      Aperçu
+    </button>
+    <button [disabled]="verifier_Bouton" style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
             (click)="validerRachat()"     >
-      Confirmez la vérification niveau 1 de ces intentions de rachat
+      Confirmez la vérification niveau 1
     </button>
     <!--end::Table-->
   </div>

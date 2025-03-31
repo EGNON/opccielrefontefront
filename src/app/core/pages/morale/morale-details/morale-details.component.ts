@@ -339,6 +339,16 @@ export class MoraleDetailsComponent {
       this.form.controls["sousTypeClient"].setErrors(null);
       this.form.controls["sousTypeClient"].clearValidators();
       this.form.controls["sousTypeClient"].updateValueAndValidity();
+
+      //IFU
+      this.form.controls["ifu"].setErrors(null);
+      this.form.controls["ifu"].clearValidators();
+      this.form.controls["ifu"].updateValueAndValidity();
+
+      //DEGRE
+      this.form.controls["degre"].setErrors(null);
+      this.form.controls["degre"].clearValidators();
+      this.form.controls["degre"].updateValueAndValidity();
     }
 
     if(qualite !== "prospect")
@@ -367,6 +377,8 @@ export class MoraleDetailsComponent {
       this.form.controls["titreContact"].setErrors(null);
       this.form.controls["titreContact"].clearValidators();
       this.form.controls["titreContact"].updateValueAndValidity();
+
+
     }
   }
 

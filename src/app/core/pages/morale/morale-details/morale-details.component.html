@@ -140,7 +140,7 @@
               <div class="col-md-6 fv-row">
                 <div style="display: flex; justify-content: space-between;">
                   <!--begin::Label-->
-                  <label class="fs-5 fw-semibold mb-2">Secteur d'activité</label>
+                  <label class="required fs-5 fw-semibold mb-2">Secteur d'activité</label>
                   <!--end::Label-->
                   <div style="display: flex; align-items: center; justify-content: center;">
                     <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callSecteurForm(null)"
@@ -181,7 +181,7 @@
               <div class="col-md-6 fv-row">
                 <div style="display: flex; justify-content: space-between;">
                   <!--begin::Label-->
-                  <label class="required fs-5 fw-semibold mb-2">Dégré de connaissance</label>
+                  <label [class]="qualite === 'actionnaires' ? 'required fs-5 fw-semibold mb-2' : 'fs-5 fw-semibold mb-2'">Dégré de connaissance</label>
                   <!--end::Label-->
                   <div style="display: flex; align-items: center; justify-content: center;">
                     <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callDegreForm(null)"
@@ -217,7 +217,7 @@
               <!--begin::Col-->
               <div class="col-md-6 fv-row">
                 <!--begin::Label-->
-                <label class="required fs-5 fw-semibold mb-2">Ifu</label>
+                <label [class]="qualite === 'actionnaires' ? 'required fs-5 fw-semibold mb-2' : 'fs-5 fw-semibold mb-2'">Ifu</label>
                 <!--end::Label-->
                 <!--begin::Input-->
                 <input appNumeroPositifValidators type="text" class="form-control form-control-sm"

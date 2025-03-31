@@ -111,11 +111,13 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
       }
     )
   }
-  afficherNbrePart(){
+  afficherNbrePart(idActionnaire:any){
     //console.log("pass")
+    if(idActionnaire===0)
+      idActionnaire=this.entityForm.value.actionnaire.idPersonne
     this.loadingService.setLoading(true);
       this.entityService.afficherNbrePart(this.localStore.getData("currentOpcvm").idOpcvm,
-        this.entityForm.value.actionnaire.idPersonne).subscribe(
+        idActionnaire).subscribe(
         (data)=>{
           this.objetPart=data
           console.log(this.objetPart)
@@ -137,6 +139,7 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   loadFormValues(entity: any)
   {
     this.entity = entity;
+    console.log("entity=",this.entity)
     this.entityForm.patchValue({referencePiece:
       entity.referencePiece});
     this.entityForm.patchValue({libelleOperation: entity.libelleOperation});
@@ -145,11 +148,13 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
         dateOparation.getFullYear(), dateOparation.getMonth()+1, dateOparation.getDate())});
     //this.entityForm.patchValue({dateOperation: entity.libelleOperation});
     this.entityForm.patchValue({id: entity.idDepotRachat});
-    this.entityForm.patchValue({quantite: entity.quantite});
+    let quantite:string=entity.quantite
+    this.entityForm.patchValue({quantite:quantite.replace('.',',')});
     this.entityForm.patchValue({modeVL: entity.modeVL});
     this.entityForm.patchValue({actionnaire: entity.actionnaire});
     this.entityForm.patchValue({personne: entity.personne});
-    this.afficherNbrePart()
+    console.log("actionnaire=",entity.actionnaire)
+    this.afficherNbrePart(entity.actionnaire.idPersonne)
   }
 
   ngOnDestroy(): void {
@@ -183,8 +188,9 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   }
 
   saveEntity() {
+    console.log(this.entityForm.value)
     this.opcvm=new Opcvm();
-    this.opcvm.idOpcvm=this.authService.LocalStorageManager.getValue("currentOpcvm").idOpcvm;
+    this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm").idOpcvm
 
     this.natureOperation=new Natureoperation();
     this.natureOperation.codeNatureOperation="INT_RACH";
@@ -209,8 +215,19 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
     }
     let dateSaisie=new Date();
     let dateVerification1=new Date("2050-12-31");
+    let dateVerification=new Date("2014-12-20");
 
-    let quantite=this.entityForm.value.quantite.replace(',',".")
+    let quantite=this.entityForm.value.quantite
+    if(this.entityForm.controls.quantite.value)
+    {
+       quantite=this.entityForm.value.quantite.replace(',',".")
+    }
+
+
+    let valeurCodeAnalytique="OPC:" + this.opcvm.idOpcvm +
+      ";ACT:" + idActionnaire;
+
+    let ValeurFormule="6:" + quantite;
     const entity: any = {
     ...this.entityForm.value,
       idSeance:this.id2,
@@ -218,9 +235,15 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
       natureOperation:this.natureOperation,
       quantite:quantite,
       dateOperation:dateOperation,
-      dateValeur:dateOperation,
+      dateValeur:dateSaisie,
       dateSaisie:dateSaisie,
       datePiece:dateSaisie,
+      estOD:false,
+      estVerifie1:false,
+      estVerifie2:false,
+      estVerifier:false,
+      estGenere:false,
+      dateVerification:dateVerification,
       dateVerification1:dateVerification1,
       dateVerification2:dateVerification1,
       userLoginVerificateur1:"",
@@ -238,7 +261,9 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
       commission:0,
       interetCouru:0,
       interetPrecompte:0,
-      nomVerificateur:""
+      nomVerificateur:"",
+      valeurCodeAnalytique:valeurCodeAnalytique,
+      valeurFormule:ValeurFormule
     };
    // console.log("act1",entity)
     return this.id

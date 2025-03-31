@@ -151,6 +151,24 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
       }
     }
   }
+  verifiIntentionRachatN2()
+  {
+    this.entityService.verifIntentionRachatN1N2(
+      this.localStore.getData("currentOpcvm").idOpcvm,true,false).subscribe(
+      (data)=>{
+        // console.log(data)
+      }
+    )
+  }
+  verifiIntentionRachatN2_Final()
+  {
+    this.entityService.verifIntentionRachatN1N2(
+      this.localStore.getData("currentOpcvm").idOpcvm,true,true).subscribe(
+      (data)=>{
+        // console.log(data)
+      }
+    )
+  }
   validerRachat(){
    /* const entity={
       idOpcvm:this.localStore.getData("currentOpcvm").idOpcvm,
@@ -174,7 +192,7 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
     console.log("id=",id)
     //return
 
-    this.entityService.creerOperation(id,this.authService.currentUserValue?.denomination)
+    this.entityService.creerOperation(id,this.authService.currentUserValue?.username)
       .subscribe(
         {
           next: (value) => {

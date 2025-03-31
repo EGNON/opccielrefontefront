@@ -147,20 +147,30 @@ private idInAction: number;
     }
   }
 }
+  verifiIntentionRachat()
+  {
+    this.entityService.verifIntentionRachatN1N2(
+      this.localStore.getData("currentOpcvm").idOpcvm,false,false).subscribe(
+      (data)=>{
+        // console.log(data)
+      }
+    )
+  }
   validerRachat(){
     const entity={
       idOpcvm:this.localStore.getData("currentOpcvm").idOpcvm,
       codeNatureOperation:"INT_RACH",
       niveau:"1",
-      userLoginVerif:this.authService.currentUserValue?.denomination
+      userLoginVerif:this.authService.currentUserValue?.username
     }
-    this.entityService.creer(entity)
+    this.entityService.verifIntRachN1(entity)
           .subscribe(
             {
               next: (value) => {
                 let currentUrl = this.router.url;
                 this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
                   this.router.navigate([currentUrl]);
+                  this.verifier_Bouton=true
                 });
               },
               error: err => {

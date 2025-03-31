@@ -1436,7 +1436,7 @@ export class LibraryService implements OnDestroy{
                 },
                 {
                   allow: this.authService.isGrantedRole('ROLE_DEPOT_RECENSE_ESPECE'),
-                  title: 'Point des dépôts en espèces recensés sur l\'année',
+                  title: 'Détermination du solde global de l\'ensemble des comptes détenus par un même client',
                   page: '/lab/etats/depot-espece-sur-annee/liste',
                   role: 'ROLE_DEPOT_RECENSE_ESPECE',
                   icon: '',

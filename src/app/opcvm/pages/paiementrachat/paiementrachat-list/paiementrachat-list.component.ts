@@ -123,11 +123,16 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
           this.operationPaiementRachat$=data.data
           if(this.operationPaiementRachat$.length!==0 )
           {
-            if(this.operationPaiementRachat$[0].idOperation==0){
-              this.save=false
-            }
-            else
-              this.save=true
+            let i=0
+            // for(i===0;i<this.operationPaiementRachat$.length;i++)
+            // {
+              if(this.operationPaiementRachat$[0].idOperation==0){
+                this.save=false
+              }
+              else
+                this.save=true
+            // }
+
           }
           //console.log(this.save)
       }
@@ -206,9 +211,17 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
           totalMontantRachat+=Number(this.operationPaiementRachat$[i].montant)
         }
         this.entityForm.patchValue({totalMontantRachat:totalMontantRachat})
+        if(this.operationPaiementRachat$.length!==0){
+          this.save=false
+        }
+        else
+          this.save=true
+
         //console.log("totalMontant",totalMontantRachat)
       }
     )
+    //console.log(document.getElementById("table_PaiementRachat").getElementsByTagName('tr')[1].cells[0].innerHTML.trim())
+
     this.loadingService.setLoading(false)
   }
   ngOnDestroy(): void {
@@ -265,6 +278,7 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
     this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm").idOpcvm
     //        console.log(this.nbreLigne);
     this.operationPaiementRachatTab=[]
+
     for (i === 1; i < this.nbreLigne; i++) {
       this.operationPaiementRachat=new Operationpaiementrachat2();
       this.operationPaiementRachat.referencePiece = "";
