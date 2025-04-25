@@ -24,4 +24,7 @@ export class SeanceopcvmService extends ResourceService<Seanceopcvm> {
   listeSeanceOpcvm(params: any, idOpcvm) {
     return this.http.post<any>(`${this.API_URL}/liste/seance/opcvm-${idOpcvm}`, params);
   }
+  listeSeanceOpcvmDesc(idOpcvm:any) {
+    return this.http.get<any>(`${this.API_URL}/listedesc/${idOpcvm}`);
+  }
 }

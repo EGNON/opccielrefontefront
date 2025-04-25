@@ -2130,6 +2130,51 @@ export class LibraryService implements OnDestroy{
                 },
               ]
             },
+            {
+              allow: null,
+              title: 'Ordre de bourse',
+              icon: 'element-7',
+              dataLink: '',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_CONSULT_ECR'),
+                  title: 'Ordre',
+                  page: '/opcvm/ordre/liste',
+                  role: 'ROLE_CONSULT_ECR',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Ordre de bourse',
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_CONSULT_ECR'),
+                  title: 'Validation des ordres de bourse',
+                  page: '/opcvm/ordre/liste/validation',
+                  role: 'ROLE_CONSULT_ECR',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Ordre de bourse',
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_CONSULT_ECR'),
+                  title: 'Impression des ordres de bourse',
+                  page: '/opcvm/ordre/liste/impression',
+                  role: 'ROLE_CONSULT_ECR',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Ordre de bourse',
+                  children: []
+                }
+              ]
+            },
           ]
         },
         {

@@ -138,6 +138,54 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
       }
     )
   }
+  verifierPaiementRachat()
+  {
+    let jour="0"
+    let mois="0"
+    let annee="0"
+    jour=this.entityForm.controls.dateOuverture.value.day
+    mois=this.entityForm.controls.dateOuverture.value.month
+    annee=this.entityForm.controls.dateOuverture.value.year
+
+    if(Number(jour)<10)
+    {
+      jour="0"+jour
+    }
+    if(Number(mois)<10)
+    {
+      mois="0"+mois
+    }
+
+    let dateOuv=jour+"-"+
+      (mois)+"-"+annee
+
+    // let dateFerm=this.entityForm.controls.dateFermeture.value.day+"-"+
+    //   (this.entityForm.controls.dateFermeture.value.month)+"-"+
+    // this.entityForm.controls.dateFermeture.value.year
+    jour=this.entityForm.controls.dateFermeture.value.day
+    mois=this.entityForm.controls.dateFermeture.value.month
+    annee=this.entityForm.controls.dateFermeture.value.year
+
+    if(Number(jour)<10)
+    {
+      jour="0"+jour
+    }
+    if(Number(mois)<10)
+    {
+      mois="0"+mois
+    }
+
+    let dateFerm=jour+"-"+
+      (mois)+"-"+annee
+
+
+    this.operationpaiementrachatService.verifierPaiementRachat(this.localStore.getData("currentOpcvm").idOpcvm,
+      this.localStore.getData("currentSeance").idSeanceOpcvm.idSeance,this.entityForm.value.denominationOpcvm,
+      dateOuv,dateFerm).subscribe(
+      (data)=>{
+
+      })
+  }
   verificationMiseAffectationEnAttente(){
     this.miseEnAffectationService.verificationMiseAffectationEnAttente(this.localStore.getData("currentOpcvm").idOpcvm)
       .subscribe((data)=>{
@@ -301,7 +349,7 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
       this.operationPaiementRachat.valeurFormule = "2:" +
         Math.abs(Number(document.getElementById("table_PaiementRachat").getElementsByTagName('tr')[i].cells[3].innerHTML))
       this.operationPaiementRachat.valeurFormule = this.operationPaiementRachat.valeurFormule.replace(',','.');
-      this.operationPaiementRachat.userLogin =this.authService.currentUserValue?.denomination
+      this.operationPaiementRachat.userLogin =this.authService.currentUserValue?.username
 
       // @ts-ignore
       this.operationPaiementRachatTab.push(this.operationPaiementRachat);

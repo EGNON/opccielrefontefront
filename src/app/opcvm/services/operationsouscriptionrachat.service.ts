@@ -20,6 +20,12 @@ export class OperationsouscriptionrachatService extends ResourceService<Operatio
   avisOperation(idOperation:any){
       return this.http.get<any>(`${this.API_URL}/avisoperation/${idOperation}`)
   }
+  avisOperationPdf(idOperation:any){
+      return this.http.get<any>(`${this.API_URL}/jasperpdf/avisoperation/${idOperation}`)
+  }
+  avisOperationPdf2(idOperation:any){
+      return this.http.get<any>(`${this.API_URL}/jasperpdf/avisoperation2/${idOperation}`)
+  }
 
   creer(operationSouscriptionRachat:any){
     return this.http.post<Operationsouscriptionrachat2>(`${this.API_URL}/creer`,operationSouscriptionRachat)

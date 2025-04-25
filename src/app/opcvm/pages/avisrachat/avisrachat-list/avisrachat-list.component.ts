@@ -1,6 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output, Renderer2} from '@angular/core';
 import {of, Subscription} from "rxjs";
-import {Operationpaiementrachat2} from "../../../models/operationpaiementrachat2.model";
 import {Natureoperation} from "../../../../core/models/natureoperation.model";
 import {Config} from "datatables.net";
 import {Opcvm} from "../../../../core/models/opcvm";
@@ -12,35 +11,24 @@ import {FormuleService} from "../../../../core/services/formule.service";
 import {ExerciceService} from "../../../services/exercice.service";
 import {MiseenaffectationService} from "../../../services/miseenaffectation.service";
 import {PersonneService} from "../../../../crm/services/personne/personne.service";
-import {LoaderService} from "../../../../loader.service";
 import {LocalService} from "../../../../services/local.service";
 import {SeanceopcvmService} from "../../../services/seanceopcvm.service";
 import {AuthService} from "../../../../core/modules/auth";
 import {NgbActiveModal, NgbDate, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {OperationsouscriptionrachatService} from "../../../services/operationsouscriptionrachat.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
-import moment from "moment";
 import {EnvoiMail} from "../../../../crm/models/envoimail.model";
-import {Mail} from "../../../../crm/models/mail.model";
 import {Personne} from "../../../../crm/models/personne/personne.model";
-import {Time} from "@angular/common";
-import {ModeleMsgAlerte} from "../../../../crm/models/modelemsgalerte.model";
 import {Dossier} from "../../../../crm/models/dossier.model";
 import {PieceJointe} from "../../../../crm/models/piece-jointe.model";
-import {Compterendu} from "../../../../crm/models/compterendu.model";
-import {Typedocument} from "../../../../crm/models/typedocument.model";
-import {RDV} from "../../../../crm/models/rdv.model";
 import {DocumentMail} from "../../../../crm/models/documentmail.model";
-import {catchError, finalize} from "rxjs/operators";
 import {EnvoimailService} from "../../../../crm/services/envoimail.service";
 import {TypeDocumentService} from "../../../../crm/services/type-document.service";
 import {FileUploadService} from "../../../../crm/services/file-upload.service";
 import {DocumentmailService} from "../../../../crm/services/documentmail.service";
 import {MailSenderService} from "../../../../crm/services/mailsender.service";
 import {MailService} from "../../../../crm/services/mail.service";
-import {DateTime} from "luxon";
+import {LoaderService} from "../../../../loader.service";
 
 @Component({
   selector: 'app-avisrachat-list',
@@ -106,7 +94,7 @@ export class AvisrachatListComponent implements OnInit, OnDestroy {
     public miseEnAffectationService: MiseenaffectationService,
     public operationsouscriptionrachatService:OperationsouscriptionrachatService,
     public personneService: PersonneService,
-    public loadingService: LoaderService,
+    private loadingService: LoaderService,
     public localStore: LocalService,
     public seanceOpcvmService: SeanceopcvmService,
     public authService: AuthService,
@@ -291,95 +279,95 @@ export class AvisrachatListComponent implements OnInit, OnDestroy {
       else
         id+=","+this.idOperationTab[l]
     }
-
-    this.operationsouscriptionrachatService.avisOperation(id).subscribe(
-      (data)=> {
-        this.avisOperation$ = data.data
-        let i = 0
-        let operations = []
-        for (i === 0; i < this.avisOperation$.length; i++) {
-          console.log("op" + i + "=", this.avisOperation$[i])
-          operations.push({
-            numero: this.avisOperation$[i].idOperation,
-            dateOperation: moment(this.avisOperation$[i].dateOperation).format('DD/MM/YYYY'),
-            dateValeur: moment(this.avisOperation$[i].dateValeur).format('DD/MM/YYYY'),
-            vl: this.avisOperation$[i].coursVL,
-            Qte: this.avisOperation$[i].nombrePartSousRachat,
-            intitule: this.avisOperation$[i].intitule,
-            phone: this.avisOperation$[i].phone,
-            numCompteSgi: this.avisOperation$[i].numCompteSgi,
-            mail: this.avisOperation$[i].mail,
-            codeNatureOperation: this.avisOperation$[i].codeNatureOperation,
-            montantBrut: Number(this.avisOperation$[i].nombrePartSousRachat) * Number(this.avisOperation$[i].coursVL),
-            total: Number(this.avisOperation$[i].nombrePartSousRachat) * Number(this.avisOperation$[i].coursVL) - Number(this.avisOperation$[i].commisiionSousRachat) - Number(this.avisOperation$[i].tafcommissionSousRachat),
-            commission: this.avisOperation$[i].commisiionSousRachat,
-            TAFA: this.avisOperation$[i].tafcommissionSousRachat,
-            denominationOpcvm: this.avisOperation$[i].denominationOpcvm
-          })
-        }
-        const doc = new jsPDF();
-        // Liste des opérations (par exemple)
-        // Pour chaque opération, créer une nouvelle page
-        operations.forEach((operation, index) => {
-
-          if (index > 0) {
-            doc.addPage(); // Nouvelle page après la première opération
-          }
-
-          // Titre de la première page
-          doc.setFontSize(14);
-          doc.text('AVIS DE' + operation.codeNatureOperation, 105, 10, {align: 'center'});
-
-          // Détails du compte
-          doc.setFontSize(10);
-          doc.text('Cotonou, Le ' + moment(new Date()).format('DD/MM/YYYY hh:mm'), 10, 20);
-          doc.text(operation.intitule, 10, 40);
-          doc.text(operation.phone, 10, 50);
-          doc.text(operation.mail, 10, 60);
-          doc.text('Nous avons exécuté pour le Compte titre N°' + operation.numCompteSgi + ' ce qui suit', 10, 30);
-
-          // Table des opérations
-          autoTable(doc, {
-            startY: 70,
-            head: [['OPERATION', 'TYPE DE FCP', 'N°OPÉRATION', 'DATE OPÉRATION', 'DATE VALEUR', 'QTE', 'VL']],
-            body: [[operation.codeNatureOperation, operation.denominationOpcvm, operation.numero, operation.dateOperation, operation.dateValeur, operation.Qte, operation.vl]],
-          });
-
-          // Montants spécifiques à l'opération
-          doc.text('MONTANT BRUT :' + operation.montantBrut, 10, 100);
-          doc.text('COMMISSION : ' + operation.commission, 10, 110);
-          doc.text('TAFA :' + operation.TAFA, 10, 120);
-          doc.text('TOTAL :' + operation.total, 10, 130);
-          doc.text('En conséquence, nous créditons votre compte de : ' + operation.total, 10, 140);
-          doc.text('Nous vous remercions pour votre confiance ', 10, 150);
-
-          doc.setFontSize(8);
-          doc.text('Cet avis édité par ordinateur ne porte pas de signature.', 10, 250);
-
-          doc.text(
-            "Capital: 250 000 000 F CFA Agrément N°SG/2017-02 CREPMF RC N° RCCM/RB/COT/15 B 14715 IFU N°: 3201502603811",
-            10,
-            270
-          );
-          doc.text(
-            "Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL IMMEUBLE SGI BENIN 01 BP 4546 COTONOU BENIN",
-            10,
-            275
-          );
-          doc.text(
-            "Tél : (229) 21 31 15 41/ 66 18 01 74  www.saphiram.com  contact@saphiram.com",
-            10,
-            280
-          );
-        });
-
-        // Footer commun pour toutes les pages
-
-
-        // Sauvegarder le PDF
-         doc.save('Avis_Operation.pdf');
-      }
-    )
+    this.operationsouscriptionrachatService.avisOperationPdf(id).subscribe()
+    // this.operationsouscriptionrachatService.avisOperation(id).subscribe(
+    //   (data)=> {
+    //     this.avisOperation$ = data.data
+    //     let i = 0
+    //     let operations = []
+    //     for (i === 0; i < this.avisOperation$.length; i++) {
+    //       console.log("op" + i + "=", this.avisOperation$[i])
+    //       operations.push({
+    //         numero: this.avisOperation$[i].idOperation,
+    //         dateOperation: moment(this.avisOperation$[i].dateOperation).format('DD/MM/YYYY'),
+    //         dateValeur: moment(this.avisOperation$[i].dateValeur).format('DD/MM/YYYY'),
+    //         vl: this.avisOperation$[i].coursVL,
+    //         Qte: this.avisOperation$[i].nombrePartSousRachat,
+    //         intitule: this.avisOperation$[i].intitule,
+    //         phone: this.avisOperation$[i].phone,
+    //         numCompteSgi: this.avisOperation$[i].numCompteSgi,
+    //         mail: this.avisOperation$[i].mail,
+    //         codeNatureOperation: this.avisOperation$[i].codeNatureOperation,
+    //         montantBrut: Number(this.avisOperation$[i].nombrePartSousRachat) * Number(this.avisOperation$[i].coursVL),
+    //         total: Number(this.avisOperation$[i].nombrePartSousRachat) * Number(this.avisOperation$[i].coursVL) - Number(this.avisOperation$[i].commisiionSousRachat) - Number(this.avisOperation$[i].tafcommissionSousRachat),
+    //         commission: this.avisOperation$[i].commisiionSousRachat,
+    //         TAFA: this.avisOperation$[i].tafcommissionSousRachat,
+    //         denominationOpcvm: this.avisOperation$[i].denominationOpcvm
+    //       })
+    //     }
+    //     const doc = new jsPDF();
+    //     // Liste des opérations (par exemple)
+    //     // Pour chaque opération, créer une nouvelle page
+    //     operations.forEach((operation, index) => {
+    //
+    //       if (index > 0) {
+    //         doc.addPage(); // Nouvelle page après la première opération
+    //       }
+    //
+    //       // Titre de la première page
+    //       doc.setFontSize(14);
+    //       doc.text('AVIS DE' + operation.codeNatureOperation, 105, 10, {align: 'center'});
+    //
+    //       // Détails du compte
+    //       doc.setFontSize(10);
+    //       doc.text('Cotonou, Le ' + moment(new Date()).format('DD/MM/YYYY hh:mm'), 10, 20);
+    //       doc.text(operation.intitule, 10, 40);
+    //       doc.text(operation.phone, 10, 50);
+    //       doc.text(operation.mail, 10, 60);
+    //       doc.text('Nous avons exécuté pour le Compte titre N°' + operation.numCompteSgi + ' ce qui suit', 10, 30);
+    //
+    //       // Table des opérations
+    //       autoTable(doc, {
+    //         startY: 70,
+    //         head: [['OPERATION', 'TYPE DE FCP', 'N°OPÉRATION', 'DATE OPÉRATION', 'DATE VALEUR', 'QTE', 'VL']],
+    //         body: [[operation.codeNatureOperation, operation.denominationOpcvm, operation.numero, operation.dateOperation, operation.dateValeur, operation.Qte, operation.vl]],
+    //       });
+    //
+    //       // Montants spécifiques à l'opération
+    //       doc.text('MONTANT BRUT :' + operation.montantBrut, 10, 100);
+    //       doc.text('COMMISSION : ' + operation.commission, 10, 110);
+    //       doc.text('TAFA :' + operation.TAFA, 10, 120);
+    //       doc.text('TOTAL :' + operation.total, 10, 130);
+    //       doc.text('En conséquence, nous créditons votre compte de : ' + operation.total, 10, 140);
+    //       doc.text('Nous vous remercions pour votre confiance ', 10, 150);
+    //
+    //       doc.setFontSize(8);
+    //       doc.text('Cet avis édité par ordinateur ne porte pas de signature.', 10, 250);
+    //
+    //       doc.text(
+    //         "Capital: 250 000 000 F CFA Agrément N°SG/2017-02 CREPMF RC N° RCCM/RB/COT/15 B 14715 IFU N°: 3201502603811",
+    //         10,
+    //         270
+    //       );
+    //       doc.text(
+    //         "Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL IMMEUBLE SGI BENIN 01 BP 4546 COTONOU BENIN",
+    //         10,
+    //         275
+    //       );
+    //       doc.text(
+    //         "Tél : (229) 21 31 15 41/ 66 18 01 74  www.saphiram.com  contact@saphiram.com",
+    //         10,
+    //         280
+    //       );
+    //     });
+    //
+    //     // Footer commun pour toutes les pages
+    //
+    //
+    //     // Sauvegarder le PDF
+    //      doc.save('Avis_Operation.pdf');
+    //   }
+    // )
 
 }
   saveMail() {
@@ -422,6 +410,20 @@ export class AvisrachatListComponent implements OnInit, OnDestroy {
       alert("Veuillez cocher les opérations s'il vous plait")
       return
     }
+    // let id=""
+    // let l=0
+    // for(l===0;l<this.idOperationTab.length;l++){
+    //   if(l===0)
+    //     id=this.idOperationTab[l]
+    //   else
+    //     id+=","+this.idOperationTab[l]
+    // }
+
+    // if(this.idOperationTab.length===0){
+    //   alert("Veuillez cocher les opérations s'il vous plait")
+    //   return
+    // }
+    this.loadingService.setLoading(true);
     let id=""
     let l=0
     for(l===0;l<this.idOperationTab.length;l++){
@@ -430,269 +432,277 @@ export class AvisrachatListComponent implements OnInit, OnDestroy {
       else
         id+=","+this.idOperationTab[l]
     }
+    // this.operationsouscriptionrachatService.avisOperationPdf2(id).subscribe(
+    //   (data)=>{
+    //     alert("Envoi effectué avec succès")
+    //   }
+    // )
+    this.loadingService.setLoading(false);
+
     let fToByte:any[]=[];
     let fFileName:any[]=[];
-    this.operationsouscriptionrachatService.avisOperation(id).subscribe(
-      (data)=>{
-        this.avisOperation$=data.data
-        let i=0
-        let operations=[]
-        for(i===0;i<this.avisOperation$.length;i++){
-          console.log("op"+i+"=",this.avisOperation$[i])
-          operations.push({
-            idActionnaire:this.avisOperation$[i].idActionnaire,
-            numero: this.avisOperation$[i].idOperation,
-            dateOperation: moment(this.avisOperation$[i].dateOperation).format('DD/MM/YYYY'),
-            dateValeur: moment(this.avisOperation$[i].dateValeur).format('DD/MM/YYYY'),
-            vl:this.avisOperation$[i].coursVL,
-            Qte: this.avisOperation$[i].nombrePartSousRachat,
-            intitule:this.avisOperation$[i].intitule,
-            phone:this.avisOperation$[i].phone,
-            numCompteSgi:this.avisOperation$[i].numCompteSgi,
-            mail:this.avisOperation$[i].mail,
-            codeNatureOperation:this.avisOperation$[i].codeNatureOperation,
-            montantBrut:Number(this.avisOperation$[i].nombrePartSousRachat)*Number(this.avisOperation$[i].coursVL),
-            total:Number(this.avisOperation$[i].nombrePartSousRachat)*Number(this.avisOperation$[i].coursVL)-Number(this.avisOperation$[i].commisiionSousRachat)- Number(this.avisOperation$[i].tafcommissionSousRachat),
-            commission:this.avisOperation$[i].commisiionSousRachat,
-            TAFA:this.avisOperation$[i].tafcommissionSousRachat,
-            denominationOpcvm:this.avisOperation$[i].denominationOpcvm
-          })
-        }
-
-        // Liste des opérations (par exemple)
-        // Pour chaque opération, créer une nouvelle page
-        let email: any[] = [];
-
-        this.mailTAB=[]
-        i=0;
-        operations.forEach((operation, index) => {
-          const doc = new jsPDF();
-
-          // Titre de la première page
-          doc.setFontSize(14);
-          doc.text('AVIS DE'+operation.codeNatureOperation, 105, 10, { align: 'center' });
-
-          // Détails du compte
-          doc.setFontSize(10);
-          doc.text('Cotonou, Le '+ moment(new Date()).format('DD/MM/YYYY hh:mm'), 10, 20);
-          doc.text(operation.intitule, 10, 40);
-          doc.text(operation.phone, 10, 50);
-          doc.text(operation.mail, 10, 60);
-          doc.text('Nous avons exécuté pour le Compte titre N°'+operation.numCompteSgi+' ce qui suit', 10, 30);
-
-          // Table des opérations
-          autoTable(doc, {
-            startY: 70,
-            head: [['OPERATION','TYPE DE FCP','N°OPÉRATION', 'DATE OPÉRATION', 'DATE VALEUR', 'QTE','VL']],
-            body: [[operation.codeNatureOperation,operation.denominationOpcvm,operation.numero, operation.dateOperation, operation.dateValeur, operation.Qte,operation.vl]],
-          });
-
-          // Montants spécifiques à l'opération
-          doc.text('MONTANT BRUT :'+operation.montantBrut, 10, 100);
-          doc.text('COMMISSION : '+operation.commission, 10, 110);
-          doc.text('TAFA :'+operation.TAFA, 10, 120);
-          doc.text('TOTAL :'+operation.total, 10, 130);
-          doc.text('En conséquence, nous créditons votre compte de : '+operation.total, 10, 140);
-          doc.text('Nous vous remercions pour votre confiance ', 10, 150);
-
-          doc.setFontSize(8);
-          doc.text('Cet avis édité par ordinateur ne porte pas de signature.', 10, 250);
-
-          doc.text(
-            "Capital: 250 000 000 F CFA Agrément N°SG/2017-02 CREPMF RC N° RCCM/RB/COT/15 B 14715 IFU N°: 3201502603811",
-            10,
-            270
-          );
-          doc.text(
-            "Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL IMMEUBLE SGI BENIN 01 BP 4546 COTONOU BENIN",
-            10,
-            275
-          );
-          doc.text(
-            "Tél : (229) 21 31 15 41/ 66 18 01 74  www.saphiram.com  contact@saphiram.com",
-            10,
-            280
-          );
-          //doc.save('Avis_Operation.pdf');
-
-          const blobToBinary = async (blob) => {
-            const buffer =  await new Response(blob).arrayBuffer();
-
-            const view = new Int8Array(buffer);
-            return [...view].map((n) => n.toString(2)).join(' ');
-          };
-
-          const blob = doc.output("blob");
-          //const arrayBuffer = await new Response(blob).arrayBuffer();
-          this.convertBlobToBytes(blob).then(value => {
-            fFileName[i]="OPERE_COMPTE"+operation.numCompteSgi.trim()+"_OP"+operation.numero+".pdf"
-            let fileNameParameter: any[] = [];
-            fileNameParameter[0]=fFileName[i]
-
-            fToByte[i]= [...value];
-            let blobParameter: any[] = [];
-            blobParameter[0]=[...value]
-
-            this.personne = new Personne();
-            this.personne.idPersonne = operation.idActionnaire
-
-
-            email[i] = operation.mail
-            let emailParameter: any[] = [];
-            emailParameter[0]=email[i]
-
-            console.log("email=",email[i])
-            if (email[i].trim() !== "") {
-              this.envoiMailTab = []
-              this.documentMailTab = []
-              this.envoiMail = new class implements EnvoiMail {
-                id: any;
-                mailDto: Mail;
-                personneDto: Personne;
-              };
-              this.envoiMail.mailDto = new class implements Mail {
-                dateEnvoi: Date;
-                heureEnvoi: Time;
-                id: any;
-                idMail: number;
-                msg: string;
-                objet: string;
-                modeleMsgAlerte: ModeleMsgAlerte;
-              };
-              this.envoiMail.mailDto = this.mailDto;
-              this.envoiMail.personneDto = new Personne();
-              // @ts-ignore
-              this.envoiMail.personneDto.idPersonne = operation.idActionnaire
-              this.envoiMailTab.push(this.envoiMail);
-
-
-              let url: any[] = [];
-
-              this.dossier = new Dossier();
-              let chemin = ""
-              url[i] = chemin;
-              this.pieceJointe = new class implements PieceJointe {
-                chemin: string;
-                compteRendu: Compterendu;
-                dateRattachement: Date;
-                dateValidite: Date;
-                extensionDoc: string;
-                id: any;
-                idDoc: number;
-                nomDoc: string;
-                personne: Personne;
-                typeDocument: Typedocument;
-                rdv: RDV;
-                fToByte: any;
-                fToBlob: any;
-                file: any;
-              };
-              // @ts-ignore
-              this.pieceJointe.nomDoc = fFileName[i].replace(".pdf","");
-              this.pieceJointe.extensionDoc = "pdf";
-              this.pieceJointe.typeDocument = new class implements Typedocument {
-                id: any;
-                idTypeDoc: number;
-                libelleTypeDoc: string;
-              };
-              this.pieceJointe.typeDocument = null;
-              this.pieceJointe.personne = new Personne();
-
-              // @ts-ignore
-              this.dossier = new Dossier();
-              //        let chemin=this.dossier.chemin+"\\"+this.pieceJointe.nomDoc+"."+this.pieceJointe.extensionDoc;
-              // @ts-ignore
-              this.pieceJointe.personne = new Personne();
-              this.pieceJointe.personne.idPersonne = operation.idActionnaire
-              this.pieceJointe.fToByte = fToByte[i];
-              this.documentMail = new class implements DocumentMail {
-                documentDto: PieceJointe;
-                id: any;
-                mailDto: Mail;
-              }
-              this.documentMail.documentDto = new class implements PieceJointe {
-                chemin: string;
-                compteRendu: Compterendu;
-                dateRattachement: Date;
-                dateValidite: Date;
-                extensionDoc: string;
-                id: any;
-                idDoc: number;
-                nomDoc: string;
-                personne: Personne;
-                typeDocument: Typedocument;
-                rdv: RDV;
-                fToByte: any;
-                fToBlob: any;
-                file: any;
-              };
-              this.documentMail.documentDto = this.pieceJointe
-              this.documentMailTab.push(this.documentMail);
-
-              let dateEnvoi = new Date();
-              const entity: any = {
-                objet: "AVIS d'OPERE",
-                msg: "Cher(e) client(e), \n recevez en piece jointe votre avis d'opéré.\n Cordialement ",
-                documentMailDtos: this.documentMailTab,
-                envoiMailDtos: this.envoiMailTab,
-                dateEnvoi: dateEnvoi,
-                heureEnvoi: [dateEnvoi.getHours(), dateEnvoi.getMinutes(), dateEnvoi.getSeconds()].join(':')
-              };
-              // this.mailTAB.push({
-              //   id:null,
-              //   objet: "AVIS d'OPERE",
-              //   msg: "Cher(e) client(e), recevez en piece jointe votre avis d'opéré. Cordialement ",
-              //   documentMailDtos: this.documentMailTab,
-              //   envoiMailDtos: this.envoiMailTab,
-              //   dateEnvoi: dateEnvoi,
-              //   heureEnvoi: dateEnvoi.getHours()+":"+ dateEnvoi.getMinutes()+":"+dateEnvoi.getSeconds(),
-              //   diffusionAlerteDto:null,
-              //   modeleMsgAlerteDto:null
-              // })
-              console.log(entity)
-              this.mailService.creer(entity)
-                .subscribe((data) => {
-                  this.mailDto = data;
-                  //email=this.email.split(';')
-                  const entity: any = {
-                    recipientEmailMany: emailParameter,
-                    subject: "AVIS d'OPERE",
-                    content: "Cher(e) client(e), \n recevez en piece jointe votre avis d'opéré.\n Cordialement ",
-                    fileName: fileNameParameter,
-                    fToByte: blobParameter
-                  };
-                  console.log("entity==", entity);
-                  this.mailSenderService.envoyerMailAPlusieursAvecFichier2(entity).subscribe();
-                });
-            }
-
-          })
-
-          // console.log("i="+i+";length=",operations.length-1)
-          // if(i===operations.length-1){
-          //   console.log("mail=",this.mailTAB)
-          //   this.mailService.creer(this.mailTAB)
-          //     .subscribe((data) => {
-          //       this.mailDto = data;
-          //       //email=this.email.split(';')
-          //       const entity: any = {
-          //         recipientEmailMany: email,
-          //         subject: "AVIS d'OPERE",
-          //         content: "Cher(e) client(e), \\n recevez en piece jointe votre avis d'opéré.\\n Cordialement ",
-          //         fileName: fFileName,
-          //         fToByte: fToByte
-          //       };
-          //       console.log("entity==", entity);
-          //       this.mailSenderService.envoyerMailAPlusieursAvecFichier2(entity).subscribe();
-          //     });
-          // }
-          i+=1;
-        });
-
-
-      }
-    )
-
+  //   this.operationsouscriptionrachatService.avisOperation(id).subscribe(
+  //     (data)=>{
+  //       this.avisOperation$=data.data
+  //       let i=0
+  //       let operations=[]
+  //       for(i===0;i<this.avisOperation$.length;i++){
+  //         // console.log("op"+i+"=",this.avisOperation$[i])
+  //       //   operations.push({
+  //       //     idActionnaire:this.avisOperation$[i].idActionnaire,
+  //       //     numero: this.avisOperation$[i].idOperation,
+  //       //     dateOperation: moment(this.avisOperation$[i].dateOperation).format('DD/MM/YYYY'),
+  //       //     dateValeur: moment(this.avisOperation$[i].dateValeur).format('DD/MM/YYYY'),
+  //       //     vl:this.avisOperation$[i].coursVL,
+  //       //     Qte: this.avisOperation$[i].nombrePartSousRachat,
+  //       //     intitule:this.avisOperation$[i].intitule,
+  //       //     phone:this.avisOperation$[i].phone,
+  //       //     numCompteSgi:this.avisOperation$[i].numCompteSgi,
+  //       //     mail:this.avisOperation$[i].mail,
+  //       //     codeNatureOperation:this.avisOperation$[i].codeNatureOperation,
+  //       //     montantBrut:Number(this.avisOperation$[i].nombrePartSousRachat)*Number(this.avisOperation$[i].coursVL),
+  //       //     total:Number(this.avisOperation$[i].nombrePartSousRachat)*Number(this.avisOperation$[i].coursVL)-Number(this.avisOperation$[i].commisiionSousRachat)- Number(this.avisOperation$[i].tafcommissionSousRachat),
+  //       //     commission:this.avisOperation$[i].commisiionSousRachat,
+  //       //     TAFA:this.avisOperation$[i].tafcommissionSousRachat,
+  //       //     denominationOpcvm:this.avisOperation$[i].denominationOpcvm
+  //       //   })
+  //       // }
+  //       //
+  //       // Liste des opérations (par exemple)
+  //       // Pour chaque opération, créer une nouvelle page
+  //       let email: any[] = [];
+  //
+  //       this.mailTAB=[]
+  //       i=0;
+  //
+  //       operations.forEach((operation, index) => {
+  //         const doc = new jsPDF();
+  //
+  //         // Titre de la première page
+  //         doc.setFontSize(14);
+  //         doc.text('AVIS DE'+operation.codeNatureOperation, 105, 10, { align: 'center' });
+  //
+  //         // Détails du compte
+  //         doc.setFontSize(10);
+  //         doc.text('Cotonou, Le '+ moment(new Date()).format('DD/MM/YYYY hh:mm'), 10, 20);
+  //         doc.text(operation.intitule, 10, 40);
+  //         doc.text(operation.phone, 10, 50);
+  //         doc.text(operation.mail, 10, 60);
+  //         doc.text('Nous avons exécuté pour le Compte titre N°'+operation.numCompteSgi+' ce qui suit', 10, 30);
+  //
+  //         // Table des opérations
+  //         autoTable(doc, {
+  //           startY: 70,
+  //           head: [['OPERATION','TYPE DE FCP','N°OPÉRATION', 'DATE OPÉRATION', 'DATE VALEUR', 'QTE','VL']],
+  //           body: [[operation.codeNatureOperation,operation.denominationOpcvm,operation.numero, operation.dateOperation, operation.dateValeur, operation.Qte,operation.vl]],
+  //         });
+  //
+  //         // Montants spécifiques à l'opération
+  //         doc.text('MONTANT BRUT :'+operation.montantBrut, 10, 100);
+  //         doc.text('COMMISSION : '+operation.commission, 10, 110);
+  //         doc.text('TAFA :'+operation.TAFA, 10, 120);
+  //         doc.text('TOTAL :'+operation.total, 10, 130);
+  //         doc.text('En conséquence, nous créditons votre compte de : '+operation.total, 10, 140);
+  //         doc.text('Nous vous remercions pour votre confiance ', 10, 150);
+  //
+  //         doc.setFontSize(8);
+  //         doc.text('Cet avis édité par ordinateur ne porte pas de signature.', 10, 250);
+  //
+  //         doc.text(
+  //           "Capital: 250 000 000 F CFA Agrément N°SG/2017-02 CREPMF RC N° RCCM/RB/COT/15 B 14715 IFU N°: 3201502603811",
+  //           10,
+  //           270
+  //         );
+  //         doc.text(
+  //           "Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL IMMEUBLE SGI BENIN 01 BP 4546 COTONOU BENIN",
+  //           10,
+  //           275
+  //         );
+  //         doc.text(
+  //           "Tél : (229) 21 31 15 41/ 66 18 01 74  www.saphiram.com  contact@saphiram.com",
+  //           10,
+  //           280
+  //         );
+  //         //doc.save('Avis_Operation.pdf');
+  //
+  //         const blobToBinary = async (blob) => {
+  //           const buffer =  await new Response(blob).arrayBuffer();
+  //
+  //           const view = new Int8Array(buffer);
+  //           return [...view].map((n) => n.toString(2)).join(' ');
+  //         };
+  //
+  //         const blob = doc.output("blob");
+  //         //const arrayBuffer = await new Response(blob).arrayBuffer();
+  //         this.convertBlobToBytes(blob).then(value => {
+  //           fFileName[i]="OPERE_COMPTE"+operation.numCompteSgi.trim()+"_OP"+operation.numero+".pdf"
+  //           let fileNameParameter: any[] = [];
+  //           fileNameParameter[0]=fFileName[i]
+  //
+  //           fToByte[i]= [...value];
+  //           let blobParameter: any[] = [];
+  //           blobParameter[0]=[...value]
+  //
+  //           this.personne = new Personne();
+  //           this.personne.idPersonne = operation.idActionnaire
+  //
+  //
+  //           email[i] = operation.mail
+  //           let emailParameter: any[] = [];
+  //           emailParameter[0]=email[i]
+  //
+  //           console.log("email=",email[i])
+  //           if (email[i].trim() !== "") {
+  //             this.envoiMailTab = []
+  //             this.documentMailTab = []
+  //             this.envoiMail = new class implements EnvoiMail {
+  //               id: any;
+  //               mailDto: Mail;
+  //               personneDto: Personne;
+  //             };
+  //             this.envoiMail.mailDto = new class implements Mail {
+  //               dateEnvoi: Date;
+  //               heureEnvoi: Time;
+  //               id: any;
+  //               idMail: number;
+  //               msg: string;
+  //               objet: string;
+  //               modeleMsgAlerte: ModeleMsgAlerte;
+  //             };
+  //             this.envoiMail.mailDto = this.mailDto;
+  //             this.envoiMail.personneDto = new Personne();
+  //             // @ts-ignore
+  //             this.envoiMail.personneDto.idPersonne = operation.idActionnaire
+  //             this.envoiMailTab.push(this.envoiMail);
+  //
+  //
+  //             let url: any[] = [];
+  //
+  //             this.dossier = new Dossier();
+  //             let chemin = ""
+  //             url[i] = chemin;
+  //             this.pieceJointe = new class implements PieceJointe {
+  //               chemin: string;
+  //               compteRendu: Compterendu;
+  //               dateRattachement: Date;
+  //               dateValidite: Date;
+  //               extensionDoc: string;
+  //               id: any;
+  //               idDoc: number;
+  //               nomDoc: string;
+  //               personne: Personne;
+  //               typeDocument: Typedocument;
+  //               rdv: RDV;
+  //               fToByte: any;
+  //               fToBlob: any;
+  //               file: any;
+  //             };
+  //             // @ts-ignore
+  //             this.pieceJointe.nomDoc = fFileName[i].replace(".pdf","");
+  //             this.pieceJointe.extensionDoc = "pdf";
+  //             this.pieceJointe.typeDocument = new class implements Typedocument {
+  //               id: any;
+  //               idTypeDoc: number;
+  //               libelleTypeDoc: string;
+  //             };
+  //             this.pieceJointe.typeDocument = null;
+  //             this.pieceJointe.personne = new Personne();
+  //
+  //             // @ts-ignore
+  //             this.dossier = new Dossier();
+  //             //        let chemin=this.dossier.chemin+"\\"+this.pieceJointe.nomDoc+"."+this.pieceJointe.extensionDoc;
+  //             // @ts-ignore
+  //             this.pieceJointe.personne = new Personne();
+  //             this.pieceJointe.personne.idPersonne = operation.idActionnaire
+  //             this.pieceJointe.fToByte = fToByte[i];
+  //             this.documentMail = new class implements DocumentMail {
+  //               documentDto: PieceJointe;
+  //               id: any;
+  //               mailDto: Mail;
+  //             }
+  //             this.documentMail.documentDto = new class implements PieceJointe {
+  //               chemin: string;
+  //               compteRendu: Compterendu;
+  //               dateRattachement: Date;
+  //               dateValidite: Date;
+  //               extensionDoc: string;
+  //               id: any;
+  //               idDoc: number;
+  //               nomDoc: string;
+  //               personne: Personne;
+  //               typeDocument: Typedocument;
+  //               rdv: RDV;
+  //               fToByte: any;
+  //               fToBlob: any;
+  //               file: any;
+  //             };
+  //             this.documentMail.documentDto = this.pieceJointe
+  //             this.documentMailTab.push(this.documentMail);
+  //
+  //             let dateEnvoi = new Date();
+  //             const entity: any = {
+  //               objet: "AVIS d'OPERE",
+  //               msg: "Cher(e) client(e), \n recevez en piece jointe votre avis d'opéré.\n Cordialement ",
+  //               documentMailDtos: this.documentMailTab,
+  //               envoiMailDtos: this.envoiMailTab,
+  //               dateEnvoi: dateEnvoi,
+  //               heureEnvoi: [dateEnvoi.getHours(), dateEnvoi.getMinutes(), dateEnvoi.getSeconds()].join(':')
+  //             };
+  //             // this.mailTAB.push({
+  //             //   id:null,
+  //             //   objet: "AVIS d'OPERE",
+  //             //   msg: "Cher(e) client(e), recevez en piece jointe votre avis d'opéré. Cordialement ",
+  //             //   documentMailDtos: this.documentMailTab,
+  //             //   envoiMailDtos: this.envoiMailTab,
+  //             //   dateEnvoi: dateEnvoi,
+  //             //   heureEnvoi: dateEnvoi.getHours()+":"+ dateEnvoi.getMinutes()+":"+dateEnvoi.getSeconds(),
+  //             //   diffusionAlerteDto:null,
+  //             //   modeleMsgAlerteDto:null
+  //             // })
+  //             console.log(entity)
+  //             this.mailService.creer(entity)
+  //               .subscribe((data) => {
+  //                 this.mailDto = data;
+  //                 //email=this.email.split(';')
+  //                 const entity: any = {
+  //                   recipientEmailMany: emailParameter,
+  //                   subject: "AVIS d'OPERE",
+  //                   content: "Cher(e) client(e), \n recevez en piece jointe votre avis d'opéré.\n Cordialement ",
+  //                   fileName: fileNameParameter,
+  //                   fToByte: blobParameter
+  //                 };
+  //                 console.log("entity==", entity);
+  //                 this.mailSenderService.envoyerMailAPlusieursAvecFichier2(entity).subscribe();
+  //               });
+  //           }
+  //
+  //         })
+  //
+  //         // console.log("i="+i+";length=",operations.length-1)
+  //         // if(i===operations.length-1){
+  //         //   console.log("mail=",this.mailTAB)
+  //         //   this.mailService.creer(this.mailTAB)
+  //         //     .subscribe((data) => {
+  //         //       this.mailDto = data;
+  //         //       //email=this.email.split(';')
+  //         //       const entity: any = {
+  //         //         recipientEmailMany: email,
+  //         //         subject: "AVIS d'OPERE",
+  //         //         content: "Cher(e) client(e), \\n recevez en piece jointe votre avis d'opéré.\\n Cordialement ",
+  //         //         fileName: fFileName,
+  //         //         fToByte: fToByte
+  //         //       };
+  //         //       console.log("entity==", entity);
+  //         //       this.mailSenderService.envoyerMailAPlusieursAvecFichier2(entity).subscribe();
+  //         //     });
+  //         // }
+  //         i+=1;
+  //       });
+  //
+  //
+  //     }
+  //   )
+  //
   }
 
 enregistrer(){

@@ -96,6 +96,12 @@ const OpcvmRouting: Routes = [
     loadChildren: () => import('./comptabilite/comptabilite.module').then((m) => m.ComptabiliteModule),
     data: { layout: 'dark-sidebar' },
   },
+  {
+    path: 'ordre',
+    // canActivate: [OpcvmAuthGuard],
+    loadChildren: () => import('./ordre/ordre.module').then((m) => m.OrdreModule),
+    data: { layout: 'dark-sidebar' },
+  },
 ];
 
 export { OpcvmRouting };
