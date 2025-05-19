@@ -221,7 +221,7 @@ export class AuthService implements OnDestroy {
 
   isGrantedRole(role: string)
   {
-    return true;
+     return true;
 
     if(!this.currentUserValue || !role)
       return false;

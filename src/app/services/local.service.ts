@@ -18,7 +18,7 @@ export class LocalService {
       let data = localStorage.getItem(key)|| "";
       return this.decrypt(data);
     } else {
-      alert('no');
+      //alert('no');
     }
   }
 

@@ -432,11 +432,11 @@ export class AvisrachatListComponent implements OnInit, OnDestroy {
       else
         id+=","+this.idOperationTab[l]
     }
-    // this.operationsouscriptionrachatService.avisOperationPdf2(id).subscribe(
-    //   (data)=>{
-    //     alert("Envoi effectué avec succès")
-    //   }
-    // )
+    this.operationsouscriptionrachatService.avisOperationPdf2(id).subscribe(
+      (data)=>{
+        alert("Envoi effectué avec succès")
+      }
+    )
     this.loadingService.setLoading(false);
 
     let fToByte:any[]=[];

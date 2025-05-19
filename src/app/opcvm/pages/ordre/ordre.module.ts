@@ -16,6 +16,15 @@ import { OrdreCreateComponent } from './ordre-create/ordre-create.component';
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import { ValidationOrdreComponent } from './validation-ordre/validation-ordre.component';
 import { ImpressionOrdreComponent } from './impression-ordre/impression-ordre.component';
+import {OrdreencoursComponent} from "./ordreencours/ordreencours.component";
+import {Avisoperationbourse} from "../../models/avisoperationbourse.model";
+import {AvisoperationbourseListComponent} from "./avisoperationbourse-list/avisoperationbourse-list.component";
+import {
+  AvisoperationbourseAddEditComponent
+} from "./avisoperationbourse-add-edit/avisoperationbourse-add-edit.component";
+import {NumeroPositifValidatorsDirective} from "../../../validators/numero-positif-validators.directive";
+import { ReglementlivraisonComponent } from './reglementlivraison/reglementlivraison.component';
+import { GenerationreglementlivraisonComponent } from './generationreglementlivraison/generationreglementlivraison.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +33,13 @@ import { ImpressionOrdreComponent } from './impression-ordre/impression-ordre.co
     OrdreAddEditComponent,
     DeleteOrdreModalComponent,
     OrdreCreateComponent,
+    OrdreencoursComponent,
+    AvisoperationbourseListComponent,
+    AvisoperationbourseAddEditComponent,
     ValidationOrdreComponent,
-    ImpressionOrdreComponent
+    ImpressionOrdreComponent,
+    ReglementlivraisonComponent,
+    GenerationreglementlivraisonComponent
   ],
     imports: [
         CommonModule,
@@ -38,7 +52,8 @@ import { ImpressionOrdreComponent } from './impression-ordre/impression-ordre.co
         ReactiveFormsModule,
         NgbInputDatepicker,
         FormsModule,
-        NgMultiSelectDropDownModule
+        NgMultiSelectDropDownModule,
+        NumeroPositifValidatorsDirective
     ]
 })
 export class OrdreModule { }

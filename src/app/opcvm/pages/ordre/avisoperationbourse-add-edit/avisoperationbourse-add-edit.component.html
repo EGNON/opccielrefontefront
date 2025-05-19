@@ -1,0 +1,281 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid" [value]="id" formControlName="id"/>
+          <input type="hidden" class="form-control form-control-sm form-control-solid"  formControlName="role"/>
+          <input type="hidden" class="form-control form-control-sm form-control-solid"  formControlName="symboleTitre"/>
+          <input type="hidden" class="form-control form-control-sm form-control-solid"  formControlName="codeClasseTitre"/>
+          <input type="hidden" class="form-control form-control-sm form-control-solid"  formControlName="codeTypeTitre"/>
+          <input type="hidden" class="form-control form-control-sm form-control-solid"  formControlName="idTitre"/>
+          <input type="hidden" class="form-control form-control-sm form-control-solid"  formControlName="referencePiece"/>
+          <input type="hidden" class="form-control form-control-sm form-control-solid"  formControlName="coursLimiteOrdre"/>
+
+<!--          <input class="form-control form-control-sm form-control-solid"  formControlName="role"/>-->
+<!--          <input class="form-control form-control-sm form-control-solid"  formControlName="symboleTitre"/>-->
+<!--          <input  class="form-control form-control-sm form-control-solid"  formControlName="codeClasseTitre"/>-->
+<!--          <input  class="form-control form-control-sm form-control-solid"  formControlName="codeTypeTitre"/>-->
+<!--          <input  class="form-control form-control-sm form-control-solid"  formControlName="idTitre"/>-->
+<!--          <input  class="form-control form-control-sm form-control-solid"  formControlName="referencePiece"/>-->
+<!--          <input  class="form-control form-control-sm form-control-solid"  formControlName="coursLimiteOrdre"/>-->
+          <!--begin::Input group-->
+          <div class="row mb-5">
+
+            <div class="col-md-4 fv-row">
+              <!--begin::Label-->
+              <label class=" fs-5 fw-semibold mb-2">Référence</label>
+              <!--end::Label-->
+              <input  type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="referenceAvis"
+                     [ngClass]="{ 'is-invalid': submitted && f.referenceAvis.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.referenceAvis.errors" class="invalid-feedback">
+                <div *ngIf="f.referenceAvis.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--begin::Col-->
+            <div class="col-md-4 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date opération</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input (dateSelect)="dateChange()" type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="dd-mm-yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date operation" aria-describedby="basic-addon6"
+                       formControlName="dateOperation" [ngClass]="{ 'is-invalid': submitted && f.dateOperation.errors }"/>
+                <!--end::Input-->
+                <span (click)="d.toggle()"  class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+
+              <div *ngIf="submitted && f.dateOperation.errors" class="invalid-feedback">
+                <div *ngIf="f.dateOperation.errors.required">La date opération est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-4 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date REC/LIV PREVU</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="dd-mm-yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date REC/LIV PREVU" aria-describedby="basic-addon6"
+                       formControlName="dateReceptionLivraisonPrevu" [ngClass]="{ 'is-invalid': submitted && f.dateReceptionLivraisonPrevu.errors }"/>
+                <!--end::Input-->
+                <span (click)="d.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+
+              <div *ngIf="submitted && f.dateReceptionLivraisonPrevu.errors" class="invalid-feedback">
+                <div *ngIf="f.dateReceptionLivraisonPrevu.errors.required">La date REC/LIV PREVUE est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+
+          </div>
+            <div class="row mb-5">
+              <div class="col-md-4 fv-row">
+                <!--begin::Label-->
+                <label class=" fs-5 fw-semibold mb-2">Quantité</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="quantiteLimite"
+                       [ngClass]="{ 'is-invalid': submitted && f.quantiteLimite.errors }"
+                       (keyup)="onQuantiteKeyPress($event)"/>
+                <!--end::Input-->
+                  <div *ngIf="submitted && f.quantiteLimite.errors" class="invalid-feedback">
+                    <div *ngIf="f.quantiteLimite.errors.required">Ce champs est obligatoire</div>
+                  </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-4 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Cours</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="coursLimite"
+                       [ngClass]="{ 'is-invalid': submitted && f.coursLimite.errors }"
+                       (keyup)="onCoursKeyPress($event)"/>
+                <!--end::Input-->
+                  <div *ngIf="submitted && f.coursLimite.errors" class="invalid-feedback">
+                    <div *ngIf="f.coursLimite.errors.required">Ce champs est obligatoire</div>
+                  </div>
+              </div>
+
+              <!--begin::Col-->
+              <div class="col-md-4 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">CUMP</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="cump"
+                       [ngClass]="{ 'is-invalid': submitted && f.cump.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.cump.errors" class="invalid-feedback">
+                  <div *ngIf="f.cump.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+
+            </div>
+            <!--end::Input group-->
+
+
+          <fieldset  class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3"> </legend>
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-3 fv-row">
+                <!--begin::Label-->
+                <label class=" fs-5 fw-semibold mb-2">Montant brut</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="montantBrut"
+                />
+                <!--end::Select-->
+
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-3 fv-row">
+                <label class=" fs-5 fw-semibold mb-2">Intérêt</label>
+                <!--begin::Label-->
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="interet"
+                />
+                <!--end::Col-->
+              </div>
+              <div class="col-md-3 fv-row">
+                <!--begin::Label-->
+                <label class=" fs-5 fw-semibold mb-2">INT. Précompté</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="interetPrecompte"
+                />
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-3 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">COM. Depos</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="commissionDepositaire"
+                />
+                <!--end::Input-->
+              </div>
+            </div>
+
+            <div class="row mb-5">
+
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">Com. Place</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="commissionPlace"
+                />
+                <!--end::Input-->
+              </div>
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class=" fs-5 fw-semibold mb-2">COM. SGI</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="commissionSGI"
+                />
+                <!--end::Select-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <label class=" fs-5 fw-semibold mb-2">TAF</label>
+                <!--begin::Label-->
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="tAF"
+                />
+                <!--end::Col-->
+              </div>
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class=" fs-5 fw-semibold mb-2">+/-value</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="plusOuMoinsValue"
+                />
+                <!--end::Input-->
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+
+              <!--begin::Col-->
+              <div class="col-md-2 fv-row">
+                <!--begin::Label-->
+                <label class="fs-5 fw-semibold mb-2">MT NET</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                       placeholder="Ex : XXXXXXXXX" formControlName="montantNet"
+                />
+                <!--end::Input-->
+              </div>
+            </div>
+            <!--end::Input group-->
+          </fieldset>
+
+
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/opcvm/ordre/liste" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

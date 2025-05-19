@@ -7,6 +7,12 @@ const RisqueRouting: Routes = [
       import('./etats/etats.module').then((m) => m.EtatsModule),
     data: { layout: 'dark-sidebar' },
   },
+  {
+    path: 'navbenchmark',
+    loadChildren: () =>
+      import('./navbenchmark/navbenchmark.module').then((m) => m.NavbenchmarkModule),
+    data: { layout: 'dark-sidebar' },
+  },
 ];
 
 export { RisqueRouting };

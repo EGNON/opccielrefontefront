@@ -239,6 +239,7 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
           const sb = this.operationService.afficherListeOperations(param)
             .subscribe(resp => {
               callback(resp.data);
+              console.log(resp.data)
             });
           this.subscriptions.push(sb);
         }

@@ -17,6 +17,10 @@ export class SeanceopcvmService extends ResourceService<Seanceopcvm> {
   afficherTous(){
     return this.http.get<any>(`${this.API_URL}`)
   }
+
+  afficherTousDataTable(datatableRequest:any){
+    return this.http.post<any>(`${this.API_URL}/datatable/list`,datatableRequest)
+  }
   afficherSeanceEnCours(idOpcvm:any){
     return this.http.get<any>(`${this.API_URL}/encours/${idOpcvm}`)
   }
@@ -26,5 +30,11 @@ export class SeanceopcvmService extends ResourceService<Seanceopcvm> {
   }
   listeSeanceOpcvmDesc(idOpcvm:any) {
     return this.http.get<any>(`${this.API_URL}/listedesc/${idOpcvm}`);
+  }
+  afficherSelonId(idOpcvm:any,idSeance:any) {
+    return this.http.get<any>(`${this.API_URL}/${idOpcvm}/${idSeance}`);
+  }
+  modifier(idOpcvm:any,idSeance:any,navbenchmark:any,entity:any) {
+    return this.http.put<any>(`${this.API_URL}/${idOpcvm}/${idSeance}/${navbenchmark}`,entity);
   }
 }

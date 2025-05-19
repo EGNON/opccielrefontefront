@@ -58,6 +58,7 @@ export class OrdreCreateComponent implements OnInit, OnDestroy{
   nbreLigne: number;
   entity:any;
   coursLimite:any;
+  symbolTitre:any;
   quantiteLimite:any;
   titre: any;
   titreModel: TitreModel;
@@ -291,6 +292,8 @@ export class OrdreCreateComponent implements OnInit, OnDestroy{
       this.titres.patchValue(this.titreSelectionne);
     }
     this.idTitre=entity.titre.idTitre
+    this.symbolTitre=entity.titre.symbolTitre
+    console.log(this.symbolTitre)
     this.entityForm.patchValue({role: entity.role});
     this.entityForm.patchValue({typeOrdre: entity.typeOrdre});
     this.entityForm.patchValue({quantiteLimite: entity.quantiteLimite.toString()});
@@ -474,6 +477,8 @@ export class OrdreCreateComponent implements OnInit, OnDestroy{
   public onItemSelect(item: any) {
     // console.log('onItemSelect', item);
     this.idTitre=item.idTitre
+    this.symbolTitre=item.symbolTitre
+    console.log(this.symbolTitre)
     this.titreService.getById(item.idTitre).subscribe(
       (data)=>{
         this.titreSelonId=data.data
@@ -693,19 +698,19 @@ export class OrdreCreateComponent implements OnInit, OnDestroy{
     {
       codeNatureOperation = "ORDRE_ACH";
       libelleOperation = "ORDRE D'ACHAT DE " + this.entityForm.value.quantiteLimite +
-        " " + this.entityForm.value.titre.symbolTitre;
+        " " + this.symbolTitre;
     }
     else if (role === "VENTE")
     {
       codeNatureOperation = "ORDRE_VTE";
       libelleOperation = "ORDRE DE VENTE DE " +this.entityForm.value.quantiteLimite +
-        " " + this.entityForm.value.titre.symbolTitre;
+        " " + this.symbolTitre;
     }
     else
     {
       codeNatureOperation = "ORDRE_SOUS";
       libelleOperation = "ORDRE DE SOUSCRIPTION A " + this.entityForm.value.quantiteLimite +
-        " " + this.entityForm.value.titre.symbolTitre;
+        " " + this.symbolTitre;
     }
     let valeurFormule = "5:" + this.entityForm.value.montantBrut.replace(',', '.') +
       ";50:" + this.entityForm.value.quantiteLimite.replace(',', '.');

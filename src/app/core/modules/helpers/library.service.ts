@@ -1205,18 +1205,32 @@ export class LibraryService implements OnDestroy{
                   route: LabRouting.find((value, index, obj) =>
                     ('/lab/geldegel').includes(value.path!)),
                   children: []
-                },
-                // {
-                //   allow: this.authService.isGrantedRole('ROLE_TRANSACTION'),
-                //   title: 'TRansactions',
-                //   page: '/lab/transactions',
-                //   role: 'ROLE_TRANSACTION',
-                //   icon: '',
-                //   translate: '',
-                //   dataLink: '',
-                //   parent: 'Gel/dégel',
-                //   children: []
-                // }
+                }
+              ]
+            },
+            {
+              allow: null,
+              title: 'Risque',
+              icon: '',
+              page: '',
+              role: '',
+              translate: '',
+              dataLink: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_NAVBENCHMARK'),
+                  title: 'NavBenchMark',
+                  page: '/risque/navbenchmark/liste',
+                  role: 'ROLE_NAVBENCHMARK',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Risque',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/navbenchmark/liste').includes(value.path!)),
+                  children: []
+                }
               ]
             }
           ]
@@ -1960,10 +1974,10 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [
                 {
-                  allow: this.authService.isGrantedRole('ROLE_INT_RACH'),
+                  allow: this.authService.isGrantedRole('ROLE_INTENTION_RACHAT'),
                   title: 'Intention de rachat',
                   page: '/opcvm/rachat/intentionrachat',
-                  role: 'ROLE_INT_RACH',
+                  role: 'ROLE_INTENTION_RACHAT',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -1971,10 +1985,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_VERIFICATION_RACH_1'),
+                  allow: this.authService.isGrantedRole('ROLE_RACH_VERIF_N1'),
                   title: 'Vérification Intention Niveau 1',
                   page: '/opcvm/rachat/verificationintentionniveau1',
-                  role: 'ROLE_VERIFICATION_RACH_1',
+                  role: 'ROLE_RACH_VERIF_N1',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -1982,10 +1996,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_VERIFICATION_RACH_2'),
+                  allow: this.authService.isGrantedRole('ROLE_RACH_VERIF_N2'),
                   title: 'Vérification Intention Niveau 2',
                   page: '/opcvm/rachat/verificationintentionniveau2',
-                  role: 'ROLE_VERIFICATION_RACH_2',
+                  role: 'ROLE_RACH_VERIF_N2',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -1994,10 +2008,10 @@ export class LibraryService implements OnDestroy{
                 }
                 ,
                 {
-                  allow: this.authService.isGrantedRole('ROLE_GENERATIONRACHAT'),
+                  allow: this.authService.isGrantedRole('ROLE_GENERATION_RACHAT'),
                   title: 'Génération des rachats',
                   page: '/opcvm/rachat/generationrachat',
-                  role: 'ROLE_GENERATIONRACHAT',
+                  role: 'ROLE_GENERATION_RACHAT',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2005,10 +2019,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_PAIEMENTRACHAT'),
+                  allow: this.authService.isGrantedRole('ROLE_PAIEMENT_RACHAT'),
                   title: 'Paiement des rachats',
                   page: '/opcvm/rachat/paiementrachat',
-                  role: 'ROLE_PAIEMENTRACHAT',
+                  role: 'ROLE_PAIEMENT_RACHAT',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2016,10 +2030,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_AVISRACHAT'),
+                  allow: this.authService.isGrantedRole('ROLE_AVIS_RACHAT'),
                   title: 'Avis de rachat',
                   page: '/opcvm/rachat/avisrachat',
-                  role: 'ROLE_AVISRACHAT',
+                  role: 'ROLE_AVIS_RACHAT',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2141,10 +2155,10 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_CONSULT_ECR'),
+                  allow: this.authService.isGrantedRole('ROLE_ORDRE_BOURSE'),
                   title: 'Ordre',
                   page: '/opcvm/ordre/liste',
-                  role: 'ROLE_CONSULT_ECR',
+                  role: 'ROLE_ORDRE_BOURSE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2152,10 +2166,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_CONSULT_ECR'),
+                  allow:this.authService.isGrantedRole('ROLE_VALIDATION_ORDRE'),
                   title: 'Validation des ordres de bourse',
                   page: '/opcvm/ordre/liste/validation',
-                  role: 'ROLE_CONSULT_ECR',
+                  role: 'ROLE_VALIDATION_ORDRE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2163,14 +2177,82 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_CONSULT_ECR'),
+                  allow:this.authService.isGrantedRole('ROLE_IMPRESSION_ORDRE'),
                   title: 'Impression des ordres de bourse',
                   page: '/opcvm/ordre/liste/impression',
-                  role: 'ROLE_CONSULT_ECR',
+                  role: 'ROLE_IMPRESSION_ORDRE',
                   icon: '',
                   translate: '',
                   dataLink: '',
                   parent: 'Ordre de bourse',
+                  children: []
+                },
+                {
+                  allow:this.authService.isGrantedRole('ROLE_AVIS_ORDRE'),
+                  title: 'Avis d\'exécution d\'ordre',
+                  page: '/opcvm/ordre/liste/avisoperationbourse',
+                  role: 'ROLE_AVIS_ORDRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Ordre de bourse',
+                  children: []
+                },
+                {
+                  allow:true,
+                  title: 'Règlement/Livraison',
+                  page: '',
+                  role: '',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Ordre de bourse',
+                  children: [
+                    {
+                      allow:this.authService.isGrantedRole('ROLE_REGLEMENT_LIVRAISON'),
+                      title: 'Règlement / Livraison en attente',
+                      page: '/opcvm/ordre/liste/reglementlivraison',
+                      role: 'ROLE_REGLEMENT_LIVRAISON',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Règlement/Livraison',
+                      children: []
+                    },
+                    {
+                      allow:this.authService.isGrantedRole('ROLE_GENERATION_REGLEMENT_LIVRAISON'),
+                      title: 'Génération Règlement/Livraison',
+                      page: '/opcvm/ordre/liste/reglementlivraison/generation',
+                      role: 'ROLE_GENERATION_REGLEMENT_LIVRAISON',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Règlement/Livraison',
+                      children: []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              allow: null,
+              title: 'Evenement sur valeur',
+              icon: 'element-7',
+              dataLink: '',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ORDRE_BOURSE'),
+                  title: 'Détachement',
+                  page: '/opcvm/evenementsurvaleur/operationdetachement/liste',
+                  role: 'ROLE_ORDRE_BOURSE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Evenement sur valeur',
                   children: []
                 }
               ]

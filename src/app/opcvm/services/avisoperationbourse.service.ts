@@ -7,10 +7,10 @@ import {environment} from "../../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class OrdreService extends ResourceService<any> implements OnDestroy{
+export class AvisoperationbourseService extends ResourceService<any> implements OnDestroy{
   constructor(private http: HttpClient) {
-    super(http,Opcvm,`${environment.apiUrl}/ordres`);
-    this.API_URL = `${environment.apiUrl}/ordres`;
+    super(http,Opcvm,`${environment.apiUrl}/avisoperationbourses`);
+    this.API_URL = `${environment.apiUrl}/avisoperationbourses`;
   }
 
   ngOnDestroy(): void {
@@ -23,6 +23,15 @@ export class OrdreService extends ResourceService<any> implements OnDestroy{
   calculer(resource: any) {
     return this.http.post<any>(`${this.API_URL}/calculer`, resource);
   }
+  enregistrerReglementLivraison(resource: any,idOperation:any,userLogin:any) {
+    return this.http.post<any>(`${this.API_URL}/reglementlivraison/${idOperation}/${userLogin}`, resource);
+  }
+  afficherReglementLivraison(idOpcvm:any) {
+      return this.http.get<any>(`${this.API_URL}/reglementlivraison/${idOpcvm}`);
+    }
+    afficherGenerationReglementLivraison(idOpcvm:any) {
+      return this.http.get<any>(`${this.API_URL}/generationreglementlivraison/${idOpcvm}`);
+    }
 
   modifier(resource: any) {
     return this.http.put<any>(`${this.API_URL}`, resource);
@@ -36,18 +45,15 @@ export class OrdreService extends ResourceService<any> implements OnDestroy{
   apercuOrdreDeBourse(numeroOrdre: any) {
     return this.http.get<any>(`${this.API_URL}/jasperpdf/ordreDeBourse/${numeroOrdre}`);
   }
-  supprimer(idOrdre: any,userLogin:any) {
-    return this.http.delete<any>(`${this.API_URL}/${idOrdre}/${userLogin}`);
+  supprimer(idAvis: any,userLogin:any) {
+    return this.http.delete<any>(`${this.API_URL}/${idAvis}/${userLogin}`);
   }
 
-  afficherListeOrdre(datatableRequest: any, idOpcvm: number) {
-    return this.http.post<any>(`${this.API_URL}/datatable/list/${idOpcvm}`, datatableRequest);
+  afficherListeAvis(datatableRequest: any, idOpcvm: number,idOrdre:number) {
+    return this.http.post<any>(`${this.API_URL}/datatable/list/${idOpcvm}/${idOrdre}`, datatableRequest);
   }
-  afficherOrdreEnCours(datatableRequest: any, idOpcvm: number) {
-    return this.http.post<any>(`${this.API_URL}/ordreencours/datatable/list/${idOpcvm}`, datatableRequest);
-  }
-  afficherListe(idOpcvm: number) {
-    return this.http.get<any>(`${this.API_URL}/tous/${idOpcvm}`);
+  afficherListe(idOpcvm: number,idOrdre:any) {
+    return this.http.get<any>(`${this.API_URL}/tous/${idOpcvm}/${idOrdre}`);
   }
  afficherSelonId(id: number) {
     return this.http.get<any>(`${this.API_URL}/${id}`);

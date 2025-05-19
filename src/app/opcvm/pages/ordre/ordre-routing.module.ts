@@ -9,6 +9,15 @@ import {OrdreAddEditComponent} from "./ordre-add-edit/ordre-add-edit.component";
 import {OrdreCreateComponent} from "./ordre-create/ordre-create.component";
 import {ValidationOrdreComponent} from "./validation-ordre/validation-ordre.component";
 import {ImpressionOrdreComponent} from "./impression-ordre/impression-ordre.component";
+import {OrdreencoursComponent} from "./ordreencours/ordreencours.component";
+import {AvisoperationbourseListComponent} from "./avisoperationbourse-list/avisoperationbourse-list.component";
+import {
+  AvisoperationbourseAddEditComponent
+} from "./avisoperationbourse-add-edit/avisoperationbourse-add-edit.component";
+import {ReglementlivraisonComponent} from "./reglementlivraison/reglementlivraison.component";
+import {
+  GenerationreglementlivraisonComponent
+} from "./generationreglementlivraison/generationreglementlivraison.component";
 
 const routes: Routes = [
   {
@@ -16,6 +25,11 @@ const routes: Routes = [
     component: OrdreComponent,
     children: [
       { path: 'liste', component: OrdreListComponent, } ,
+      { path: 'liste/avisoperationbourse', component: OrdreencoursComponent, } ,
+      { path: 'liste/avisoperationbourse/liste/:id', component: AvisoperationbourseListComponent, } ,
+      { path: 'liste/avisoperationbourse/liste/:id/new', component: AvisoperationbourseAddEditComponent, } ,
+      { path: 'liste/reglementlivraison', component: ReglementlivraisonComponent, } ,
+      { path: 'liste/reglementlivraison/generation', component: GenerationreglementlivraisonComponent, } ,
       { path: 'liste/new', component: OrdreCreateComponent, },
       { path: 'liste/validation', component: ValidationOrdreComponent, },
       { path: 'liste/impression', component: ImpressionOrdreComponent, },

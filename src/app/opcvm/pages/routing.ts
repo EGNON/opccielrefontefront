@@ -102,6 +102,12 @@ const OpcvmRouting: Routes = [
     loadChildren: () => import('./ordre/ordre.module').then((m) => m.OrdreModule),
     data: { layout: 'dark-sidebar' },
   },
+  {
+    path: 'evenementsurvaleur/operationdetachement',
+    // canActivate: [OpcvmAuthGuard],
+    loadChildren: () => import('./operationdetachement/operationdetachement.module').then((m) => m.OperationdetachementModule),
+    data: { layout: 'dark-sidebar' },
+  },
 ];
 
 export { OpcvmRouting };
