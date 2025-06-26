@@ -18,6 +18,9 @@ export class DetailmodeleService extends ResourceService<Detailmodele>{
   afficherSelonModeleEcriture(code:string){
     return this.http.get<any>(`${this.API_URL}/${code}`)
   }
+  afficherSelonModeleEcritureParProjection(code:string){
+    return this.http.get<any>(`${this.API_URL}/projection/${code}`)
+  }
   supprimerSelonModeleEcriture(code:string){
     return this.http.delete<any>(`${this.API_URL}/${code}`)
   }

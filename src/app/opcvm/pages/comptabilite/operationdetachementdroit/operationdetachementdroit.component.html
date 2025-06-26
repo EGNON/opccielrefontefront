@@ -1,0 +1,303 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid" [value]="id" formControlName="id"/>
+<!--          <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid"  formControlName="codeTypeTitre"/>-->
+<!--          <div [hidden]="true" class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">-->
+<!--            <input type="checkbox" checked="checked" [value]="false"-->
+<!--                   class="form-check-input ng-untouched ng-pristine ng-valid"-->
+<!--                   formControlName="estPaye">-->
+<!--            &lt;!&ndash;            <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est payés</label>&ndash;&gt;-->
+<!--          </div>-->
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <div class="col-md-4 fv-row">
+              <!--begin::Label-->
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Symbole</label>
+              <!--end::Label-->
+              <ng-multiselect-dropdown
+                [settings]="droitSettings"
+                [placeholder]="'Sélectionnez un titre'"
+                formControlName="droit"
+                [data]="titre"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange($event)"
+                (onDropDownClose)="onDropDownClose($event)"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onDeSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                (onDeSelectAll)="onDeSelectAll($event)">
+              </ng-multiselect-dropdown>
+              <!--end::Col-->
+            </div>
+            <!--end::Col-->
+          </div>
+          <hr>
+          <fieldset formGroupName="detachement" class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Détachement</legend>
+            <div class="row mb-5">
+              <div class="col-md-4 fv-row">
+            <label class=" fs-5 fw-semibold mb-2">Référence Avis</label>
+            <input formControlName="referenceAvis" type="text" class="form-control form-control-sm" />
+                </div>
+              <div class="col-md-4 fv-row">
+              <label class=" fs-5 fw-semibold mb-2">Date Opération</label>
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="dd-mm-yyyy" ngbDatepicker #d2="ngbDatepicker" aria-label="Date valeur" aria-describedby="basic-addon6"
+                       formControlName="dateOperation" [ngClass]="{ 'is-invalid': submitted && f.dateOperation.errors }"/>
+                <!--end::Input-->
+                <span (click)="d2.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-4 fv-row">
+            <label class=" fs-5 fw-semibold mb-2">Date Valeur</label>
+            <div class="input-group mb-0">
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="dd-mm-yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date valeur" aria-describedby="basic-addon6"
+                     formControlName="dateValeur" [ngClass]="{ 'is-invalid': submitted && f.dateValeur.errors }"/>
+              <!--end::Input-->
+              <span (click)="d.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon8">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+            </div>
+            </div>
+              <div class="col-md-4 fv-row">
+              <label class=" fs-5 fw-semibold mb-2">Qte Action</label>
+              <input formControlName="qteAction" type="number" class="form-control form-control-sm" />
+              </div>
+
+              <div class="col-md-4 fv-row">
+                <label class=" fs-5 fw-semibold mb-2">Qte Droit</label>
+                <input formControlName="qteDroit" type="number" class="form-control form-control-sm" />
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <!--begin::Button-->
+              <a  class="btn btn-sm btn-success me-3" (click)="afficherQuantiteReel()">
+                Ajouter
+              </a>
+              <!--end::Button-->
+              <!--begin::Submit-->
+              <button type="submit" class="btn btn-sm btn-primary" (click)="saveEntity()"
+                      >
+                <!--begin::Indicator label-->
+                <span class="indicator-label">Enregistrer</span>
+                <!--end::Indicator label-->
+                <!--begin::Indicator progress-->
+                <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                <!--end::Indicator progress-->
+              </button>
+
+              <a style="margin-left: 5px" class="btn btn-sm btn-danger me-3">
+                Supprimer
+              </a>
+              <!--end::Submit-->
+            </div>
+          </fieldset>
+          <hr>
+
+          <!-- Conversion -->
+          <fieldset formGroupName="conversion">
+            <legend>Conversion</legend>
+            <div class="row mb-5">
+              <div class="col-md-4 fv-row">
+                <label>Référence Avis</label>
+                <input formControlName="referenceAvis" type="text" class="form-control form-control-sm" />
+              </div>
+              <div class="col-md-4 fv-row">
+                <label>Date Opération</label>
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm form-control-solid"
+                         placeholder="dd-mm-yyyy" ngbDatepicker #d10="ngbDatepicker" aria-label="Date valeur" aria-describedby="basic-addon6"
+                         formControlName="dateOperation" [ngClass]="{ 'is-invalid': submitted && f.dateOperation.errors }"/>
+                  <!--end::Input-->
+                  <span (click)="d10.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon10">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-4 fv-row">
+                <label>Date Valeur</label>
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm form-control-solid"
+                         placeholder="dd-mm-yyyy" ngbDatepicker #d3="ngbDatepicker" aria-label="Date valeur" aria-describedby="basic-addon6"
+                         formControlName="dateValeur" [ngClass]="{ 'is-invalid': submitted && f.dateValeur.errors }"/>
+                  <!--end::Input-->
+                  <span (click)="d3.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon9">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-5">
+              <div class="col-md-4 fv-row">
+                  <label>Nombre droit</label>
+                  <input formControlName="nombreDroit" type="number" class="form-control form-control-sm" />
+              </div>
+              <div class="col-md-4 fv-row">
+                <label>Qte Attribuée</label>
+                <input formControlName="qteAttribuee" type="number" class="form-control form-control-sm" />
+              </div>
+              <div class="col-md-4 fv-row">
+                <label>Nombre Rompu</label>
+                <input formControlName="nombreRompu" type="number" class="form-control form-control-sm" />
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <!--begin::Button-->
+              <a  class="btn btn-sm btn-success me-3">
+                Ajouter
+              </a>
+              <!--end::Button-->
+              <!--begin::Submit-->
+              <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+              >
+                <!--begin::Indicator label-->
+                <span class="indicator-label">Enregistrer</span>
+                <!--end::Indicator label-->
+                <!--begin::Indicator progress-->
+                <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                <!--end::Indicator progress-->
+              </button>
+
+              <a style="margin-left: 5px" class="btn btn-sm btn-danger me-3">
+                Supprimer
+              </a>
+              <!--end::Submit-->
+            </div>
+          </fieldset>
+
+          <hr>
+
+          <!-- Paiement des rompus -->
+          <fieldset formGroupName="paiementRompu">
+            <legend>Paiement des rompus</legend>
+            <div class="row mb-5">
+              <div class="col-md-4 fv-row">
+                <label>Référence Avis</label>
+                <input formControlName="referenceAvis" type="text" class="form-control form-control-sm" />
+              </div>
+
+              <div class="col-md-4 fv-row">
+                  <label>Date Opération</label>
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm form-control-solid"
+                         placeholder="dd-mm-yyyy" ngbDatepicker #d11="ngbDatepicker" aria-label="Date valeur" aria-describedby="basic-addon6"
+                         formControlName="dateOperation" [ngClass]="{ 'is-invalid': submitted && f.dateOperation.errors }"/>
+                  <!--end::Input-->
+                  <span (click)="d11.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon11">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-4 fv-row">
+                <label>Date Valeur</label>
+                <div class="input-group mb-0">
+                  <!--begin::Input-->
+                  <input type="text" class="form-control form-control-sm form-control-solid"
+                         placeholder="dd-mm-yyyy" ngbDatepicker #d12="ngbDatepicker" aria-label="Date valeur" aria-describedby="basic-addon6"
+                         formControlName="dateValeur" [ngClass]="{ 'is-invalid': submitted && f.dateValeur.errors }"/>
+                  <!--end::Input-->
+                  <span (click)="d12.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon12">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-5">
+              <div class="col-md-4 fv-row">
+                <label>Nombre Rompu</label>
+                <input formControlName="nombreRompu" type="number" class="form-control form-control-sm" />
+              </div>
+              <div class="col-md-4 fv-row">
+                  <label>Coût de cession</label>
+                  <input formControlName="coutCession" type="number" class="form-control form-control-sm" />
+              </div>
+              <div class="col-md-4 fv-row">
+                  <label>Montant</label>
+                  <input formControlName="montant" type="number" class="form-control form-control-sm" />
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <!--begin::Button-->
+              <a  class="btn btn-sm btn-success me-3">
+                Ajouter
+              </a>
+              <!--end::Button-->
+              <!--begin::Submit-->
+              <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+              >
+                <!--begin::Indicator label-->
+                <span class="indicator-label">Enregistrer</span>
+                <!--end::Indicator label-->
+                <!--begin::Indicator progress-->
+                <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                <!--end::Indicator progress-->
+              </button>
+
+              <a style="margin-left: 5px" class="btn btn-sm btn-danger me-3">
+                Supprimer
+              </a>
+              <!--end::Submit-->
+            </div>
+          </fieldset>
+
+
+          <!--begin::Separator-->
+<!--          <div class="separator mb-8"></div>-->
+<!--          &lt;!&ndash;end::Separator&ndash;&gt;-->
+<!--          &lt;!&ndash;begin::Action buttons&ndash;&gt;-->
+<!--          <div class="d-flex justify-content-end">-->
+<!--            &lt;!&ndash;begin::Button&ndash;&gt;-->
+<!--            <a type="reset" routerLink="/opcvm/ordre/liste" class="btn btn-sm btn-light me-3">-->
+<!--              Annuler-->
+<!--            </a>-->
+<!--            &lt;!&ndash;end::Button&ndash;&gt;-->
+<!--            &lt;!&ndash;begin::Submit&ndash;&gt;-->
+<!--            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"-->
+<!--                    [disabled]="entityForm.invalid">-->
+<!--              &lt;!&ndash;begin::Indicator label&ndash;&gt;-->
+<!--              <span class="indicator-label">Enregistrer</span>-->
+<!--              &lt;!&ndash;end::Indicator label&ndash;&gt;-->
+<!--              &lt;!&ndash;begin::Indicator progress&ndash;&gt;-->
+<!--              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...-->
+<!--															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>-->
+<!--              &lt;!&ndash;end::Indicator progress&ndash;&gt;-->
+<!--            </button>-->
+<!--            &lt;!&ndash;end::Submit&ndash;&gt;-->
+<!--          </div>-->
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

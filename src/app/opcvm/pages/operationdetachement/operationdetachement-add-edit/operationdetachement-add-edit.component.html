@@ -10,6 +10,12 @@
         <form [formGroup]="entityForm" class="form mb-5">
           <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid" [value]="id" formControlName="id"/>
           <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid"  formControlName="codeTypeTitre"/>
+          <div [hidden]="true" class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+            <input type="checkbox" checked="checked" [value]="false"
+                   class="form-check-input ng-untouched ng-pristine ng-valid"
+                    formControlName="estPaye">
+<!--            <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est payés</label>-->
+          </div>
           <!--begin::Input group-->
           <div class="row mb-5">
             <div class="col-md-4 fv-row">
@@ -66,93 +72,62 @@
             </div>
             <!--end::Col-->
           </div>
-          <div class="row mb-5">
-            <!--begin::Col-->
-            <div class="col-md-4 fv-row">
-              <!--begin::Label-->
-              <label class="required fs-5 fw-semibold mb-2">Type evenement</label>
-              <!--end::Label-->
-              <!--begin::Select-->
-              <select class="form-select form-select-sm mb-2" formControlName="typeEvenement"
-                      [ngClass]="{ 'is-invalid': submitted && f.typeEvenement.errors }"
-              (change)="afficherTitre()">
-                <option disabled value="null">Sélectionnez un type evenement...</option>
-                <option ngValue="DIVIDENDE">DIVIDENDE</option>
-                <option ngValue="COUPON">COUPON</option>
-              </select>
-              <!--end::Select-->
-              <div *ngIf="submitted && f.typeEvenement.errors" class="invalid-feedback">
-                <div *ngIf="f.typeEvenement.errors.required">Ce champs est obligatoire</div>
-              </div>
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-md-4 fv-row">
-              <!--begin::Label-->
-              <label class="required fs-5 fw-semibold mb-2">Type paiement</label>
-              <!--end::Label-->
-              <!--begin::Select-->
-              <select class="form-select form-select-sm mb-2" formControlName="typePayement"
-                      [ngClass]="{ 'is-invalid': submitted && f.typePayement.errors }"
-              (change)="typePayementChange()">
-                <option disabled value="null">Sélectionnez un type paiement...</option>
-                <option ngValue="CAPITAL + INTERET">CAPITAL + INTERET</option>
-                <option ngValue="INTERET">INTERET</option>
-                <option ngValue="CAPITAL">CAPITAL</option>
-                <option ngValue="INTERET MORATOIRE">INTERET MORATOIRE</option>
-              </select>
-              <!--end::Select-->
-              <div *ngIf="submitted && f.typePayement.errors" class="invalid-feedback">
-                <div *ngIf="f.typePayement.errors.required">Ce champs est obligatoire</div>
-              </div>
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col-md-4 fv-row">
-              <!--begin::Label-->
-              <label class="required fs-5 fw-semibold mb-2">Intervenant</label>
-              <!--end::Label-->
-              <!--begin::Input-->
-              <select class="form-select form-select-sm mb-2" formControlName="intervenant"
-                      [ngClass]="{ 'is-invalid': submitted && f.intervenant.errors }"
-              >
-                <option disabled selected [ngValue]="null">Sélectionnez un intervenant...</option>
-                <option *ngIf="entity?.intervenant" [defaultSelected]="true" [ngValue]="entity?.intervenant">
-                  {{ entity?.intervenant?.denomination }}
-                </option>
-                <option *ngFor="let item of personne$" [ngValue]="item">
-                  {{ item.denomination }}
-                </option>
-              </select>
-              <!--end::Select-->
-              <div *ngIf="submitted && f.intervenant.errors" class="invalid-feedback">
-                <div *ngIf="f.intervenant.errors.required">Ce champs est obligatoire</div>
-              </div>
-            </div>
-            <!--end::Col-->
-          </div>
           <fieldset class="border rounded-3 p-3">
             <legend class="float-none w-auto px-3">TITRE</legend>
             <div class="row mb-5">
-              <div class="col-md-3 fv-row">
+              <!--begin::Col-->
+              <div class="col-md-4 fv-row">
                 <!--begin::Label-->
-                <label class="fs-5 fw-semibold mb-2">Symbole</label>
+                <label class="required fs-5 fw-semibold mb-2">Type evenement</label>
                 <!--end::Label-->
-                <ng-multiselect-dropdown
-                  [settings]="titreSettings"
-                  [placeholder]="'Sélectionnez un titre'"
-                  formControlName="titre"
-                  [data]="titre"
-                  [disabled]="false"
-                  (onFilterChange)="onFilterChange($event)"
-                  (onDropDownClose)="onDropDownClose($event)"
-                  (onSelect)="onItemSelect($event)"
-                  (onDeSelect)="onDeSelect($event)"
-                  (onSelectAll)="onSelectAll($event)"
-                  (onDeSelectAll)="onDeSelectAll($event)">
-                </ng-multiselect-dropdown>
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="typeEvenement"
+                        [ngClass]="{ 'is-invalid': submitted && f.typeEvenement.errors }"
+                (change)="afficherTitre()">
+                  <option disabled value="null">Sélectionnez un type evenement...</option>
+                  <option ngValue="DIVIDENDE">DIVIDENDE</option>
+                  <option ngValue="COUPON">COUPON</option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.typeEvenement.errors" class="invalid-feedback">
+                  <div *ngIf="f.typeEvenement.errors.required">Ce champs est obligatoire</div>
+                </div>
               </div>
-              <div class="col-md-6 fv-row">
+              <!--end::Col-->
+              <div class="col-md-4 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Symbole</label>
+                <!--end::Label-->
+<!--                <ng-multiselect-dropdown-->
+<!--                  [settings]="titreSettings"-->
+<!--                  [placeholder]="'Sélectionnez un titre'"-->
+<!--                  formControlName="titre"-->
+<!--                  [data]="titre"-->
+<!--                  [disabled]="false"-->
+<!--                  (onFilterChange)="onFilterChange($event)"-->
+<!--                  (onDropDownClose)="onDropDownClose($event)"-->
+<!--                  (onSelect)="onItemSelect($event)"-->
+<!--                  (onDeSelect)="onDeSelect($event)"-->
+<!--                  (onSelectAll)="onSelectAll($event)"-->
+<!--                  (onDeSelectAll)="onDeSelectAll($event)">-->
+<!--                </ng-multiselect-dropdown>-->
+                <select class="form-select form-select-sm mb-2" formControlName="titre"
+                       (change)="titreChange()" [ngClass]="{ 'is-invalid': submitted && f.titre.errors }"
+                >
+                  <option disabled selected [ngValue]="null">Sélectionnez un titre...</option>
+                  <option *ngIf="entity?.titre" [defaultSelected]="true" [ngValue]="entity?.titre">
+                    {{ entity?.titre?.symbolTitre }}
+                  </option>
+                  <option *ngFor="let item of titre$" [ngValue]="item">
+                    {{ item.symboleTitre }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.titre.errors" class="invalid-feedback">
+                  <div *ngIf="f.titre.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <div class="col-md-4 fv-row">
                 <!--begin::Label-->
                 <label class=" fs-5 fw-semibold mb-2">Désignation</label>
                 <!--end::Label-->
@@ -160,8 +135,56 @@
                 <input [readOnly]="true" type="text" class="form-control form-control-sm"
                        placeholder="Ex : XXXXXXXXX" formControlName="designation"/>
               </div>
+            </div>
+          </fieldset>
 
-              <div class="col-md-3 fv-row">
+            <div class="row mb-5">
+              <!--begin::Col-->
+              <div *ngIf="typePayementVisible" class="col-md-4 fv-row">
+                <!--begin::Label-->
+                <label class=" fs-5 fw-semibold mb-2">Type paiement</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="typePayement"
+                        [ngClass]="{ 'is-invalid': submitted && f.typePayement.errors }"
+                        (change)="typePayementChange()">
+                  <option disabled value="null">Sélectionnez un type paiement...</option>
+                  <option ngValue="CAPITAL + INTERET">CAPITAL + INTERET</option>
+                  <option ngValue="INTERET">INTERET</option>
+                  <option ngValue="CAPITAL">CAPITAL</option>
+                  <option ngValue="INTERET MORATOIRE">INTERET MORATOIRE</option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.typePayement.errors" class="invalid-feedback">
+                  <div *ngIf="f.typePayement.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+              <div class="col-md-4 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Intervenant</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <select class="form-select form-select-sm mb-2" formControlName="intervenant"
+                        [ngClass]="{ 'is-invalid': submitted && f.intervenant.errors }"
+                >
+                  <option disabled selected [ngValue]="null">Sélectionnez un intervenant...</option>
+                  <option *ngIf="entity?.intervenant" [defaultSelected]="true" [ngValue]="entity?.intervenant">
+                    {{ entity?.intervenant?.denomination }}
+                  </option>
+                  <option *ngFor="let item of personne$" [ngValue]="item">
+                    {{ item.denomination }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.intervenant.errors" class="invalid-feedback">
+                  <div *ngIf="f.intervenant.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+
+              <div class="col-md-4 fv-row">
                 <!--begin::Label-->
                 <label class="required fs-5 fw-semibold mb-2">Date échéance</label>
                 <!--end::Label-->
@@ -182,7 +205,8 @@
                 </div>
               </div>
             </div>
-          </fieldset>
+
+
 
           <fieldset  class="border rounded-3 p-3">
             <legend class="float-none w-auto px-3"></legend>
@@ -193,8 +217,8 @@
                 <label class="required fs-5 fw-semibold mb-2">Quantité amortie</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input appNombreDecimal type="text" class="form-control form-control-sm"
-                       placeholder="Ex : XXXXXXXXX" formControlName="quantiteAmortie"
+                <input [readOnly]="bQtiteAMORT" appNombreDecimal type="text" class="form-control form-control-sm"
+                       (keyup)="onQuantiteAmortieKeyPress($event)" placeholder="Ex : XXXXXXXXX" formControlName="quantiteAmortie"
                        [ngClass]="{ 'is-invalid': submitted && f.quantiteAmortie.errors }"/>
                 <!--end::Input-->
                 <div *ngIf="submitted && f.quantiteAmortie.errors" class="invalid-feedback">
@@ -208,8 +232,8 @@
                 <label class="required fs-5 fw-semibold mb-2">Nominal remboursé</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input appNombreDecimal type="text" class="form-control form-control-sm"
-                       placeholder="Ex : XXXXXXXXX" formControlName="nominalRemb"
+                <input [readOnly]="bNominalRemb" appNombreDecimal type="text" class="form-control form-control-sm"
+                       (keyup)="onNominalRembKeyPress($event)" placeholder="Ex : XXXXXXXXX" formControlName="nominalRemb"
                        [ngClass]="{ 'is-invalid': submitted && f.nominalRemb.errors }"/>
                 <!--end::Input-->
                 <div *ngIf="submitted && f.nominalRemb.errors" class="invalid-feedback">
@@ -223,7 +247,7 @@
                 <label class="required fs-5 fw-semibold mb-2">Capital remboursé</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input appNombreDecimal type="text" class="form-control form-control-sm"
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
                        placeholder="Ex : XXXXXXXXX" formControlName="capitalRembourse"
                        [ngClass]="{ 'is-invalid': submitted && f.capitalRembourse.errors }"/>
                 <!--end::Input-->
@@ -240,8 +264,8 @@
                 <label class="required fs-5 fw-semibold mb-2">Quantité détenue</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input appNombreDecimal type="text" class="form-control form-control-sm"
-                       placeholder="Ex : XXXXXXXXX" formControlName="qteDetenue"
+                <input  appNombreDecimal type="text" class="form-control form-control-sm"
+                        (keyup)="onQteDetenueKeyPress($event)" placeholder="Ex : XXXXXXXXX" formControlName="qteDetenue"
                        [ngClass]="{ 'is-invalid': submitted && f.qteDetenue.errors }"/>
                 <!--end::Input-->
                 <div *ngIf="submitted && f.qteDetenue.errors" class="invalid-feedback">
@@ -255,8 +279,8 @@
                 <label class="required fs-5 fw-semibold mb-2">COUP/DIV NET UNI.</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input appNombreDecimal type="text" class="form-control form-control-sm"
-                       placeholder="Ex : XXXXXXXXX" formControlName="couponDividendeUnitaire"
+                <input [readOnly]="bCoupDivUnit" appNombreDecimal type="text" class="form-control form-control-sm"
+                       (keyup)="onCouponDivUnitaireKeyPress($event)" placeholder="Ex : XXXXXXXXX" formControlName="couponDividendeUnitaire"
                        [ngClass]="{ 'is-invalid': submitted && f.couponDividendeUnitaire.errors }"/>
                 <!--end::Input-->
                 <div *ngIf="submitted && f.couponDividendeUnitaire.errors" class="invalid-feedback">

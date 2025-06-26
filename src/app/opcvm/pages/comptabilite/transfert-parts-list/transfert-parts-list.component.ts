@@ -144,12 +144,12 @@ export class TransfertPartsListComponent implements OnInit, OnDestroy, AfterView
       },
       {
         title: 'DEMANDEUR', data: 'demandeur', render: function (data, type, full) {
-          return full.demandeur?.denomination;
+          return full.demandeur;
         }
       },
       {
         title: 'QTE INITIALE', data: 'qteInitiale', render: function (data, type, full) {
-          return full.qteInitiale;
+          return full.qteInitialeB;
         }
       },
       {
@@ -159,7 +159,7 @@ export class TransfertPartsListComponent implements OnInit, OnDestroy, AfterView
       },
       {
         title: 'BENEFICIAIRE', data: 'beneficiaire', render: function (data, type, full) {
-          return full.beneficiaire?.denomination;
+          return full.beneficiaire;
         }
       },
       {

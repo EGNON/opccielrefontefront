@@ -97,6 +97,12 @@ const OpcvmRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
+    path: 'vde',
+    // canActivate: [OpcvmAuthGuard],
+    loadChildren: () => import('./vde/vde.module').then((m) => m.VDEModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
     path: 'ordre',
     // canActivate: [OpcvmAuthGuard],
     loadChildren: () => import('./ordre/ordre.module').then((m) => m.OrdreModule),
@@ -106,6 +112,12 @@ const OpcvmRouting: Routes = [
     path: 'evenementsurvaleur/operationdetachement',
     // canActivate: [OpcvmAuthGuard],
     loadChildren: () => import('./operationdetachement/operationdetachement.module').then((m) => m.OperationdetachementModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
+    path: 'avisevenementsurvaleur',
+    // canActivate: [OpcvmAuthGuard],
+    loadChildren: () => import('./operationevenementsurvaleur/operationevenementsurvaleur.module').then((m) => m.OperationevenementsurvaleurModule),
     data: { layout: 'dark-sidebar' },
   },
 ];

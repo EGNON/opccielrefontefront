@@ -10,6 +10,7 @@ import {LoaderService} from "../../../../loader.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 import {OperationTransfertService} from "../../../services/operation-transfert.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
   selector: 'app-transfert-parts',
@@ -32,6 +33,7 @@ export class TransfertPartsComponent implements OnInit, AfterViewInit, OnDestroy
   constructor(
     private localStore: LocalService,
     private loadingService: LoaderService,
+    private authService: AuthService,
     private lib: LibrairiesService,
     private entityService: OperationTransfertService,
     private personneService: PersonneService,
@@ -134,7 +136,8 @@ export class TransfertPartsComponent implements OnInit, AfterViewInit, OnDestroy
     let dateOp = this.form.value.dateOperation;
     let entity = {
       ...this.form.value,
-      dateOperation: new Date(dateOp.year, dateOp.month-1, dateOp.day+1)
+      dateOperation: new Date(dateOp.year, dateOp.month-1, dateOp.day+1),
+      userLogin:this.authService.currentUserValue?.username
     };
     if(this.id) {
       // result = this.entityService.modifier(entity, "D");

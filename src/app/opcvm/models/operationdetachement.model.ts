@@ -17,6 +17,8 @@ export class Operationdetachement extends  ResourceModel<Operationdetachement>{
   datePiece:Date;
   dateValeur:Date;
   referencePiece:string;
+  symboleTitre:string;
+  designationTitre:string;
   idTransaction:number;
   idActionnaire:number;
   ecriture:string;

@@ -1,0 +1,152 @@
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="dd-mm-yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date ordre" aria-describedby="basic-addon6"
+                       formControlName="dateOperation" [ngClass]="{ 'is-invalid': submitted && f.dateOperation.errors }"/>
+                <!--end::Input-->
+                <span (click)="d.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+
+              <div *ngIf="submitted && f.dateOperation.errors" class="invalid-feedback">
+                <div *ngIf="f.dateOperation.errors.required">La date est obligatoire</div>
+              </div>
+            </div>
+            </div>
+          <hr>
+          <div class="row mb-5">
+            <div class="card">
+              <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+<!--                <div class="card-title">-->
+<!--                  &lt;!&ndash;begin::Search&ndash;&gt;-->
+<!--                  <div class="d-flex align-items-center position-relative my-1">-->
+<!--                    <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>-->
+<!--                    <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12">-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash;end::Search&ndash;&gt;-->
+<!--                </div>-->
+                <!--end::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                  <div class="d-flex justify-content-end">
+<!--                    <button [disabled]="desactiveBouton" class="btn btn-sm btn-primary me-3" (click)="generer()">-->
+<!--                      <ng-container *ngIf="submitting">-->
+<!--                    <span class="indicator-progress" [style.display]="'block'">-->
+<!--                      Patientez svp...-->
+<!--                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>-->
+<!--                    </span>-->
+<!--                      </ng-container>-->
+<!--                      <ng-container *ngIf="!submitting">-->
+<!--                        <span class="indicator-label">Afficher</span>-->
+<!--                      </ng-container>-->
+<!--                    </button>-->
+                    <button [disabled]="desactiveBouton" type="button" class="btn btn-sm btn-info me-3" (click)="onSaveEntity()">
+                      <ng-container *ngIf="downloading">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!downloading">
+                        <span class="indicator-label">Extourner</span>
+                      </ng-container>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-warning" routerLink="/opcvm/vde/generationextourne/liste">
+<!--                      <ng-container *ngIf="downloading">-->
+<!--                        <span class="indicator-progress" [style.display]="'block'">-->
+<!--                          Patientez svp...-->
+<!--                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>-->
+<!--                        </span>-->
+<!--                      </ng-container>-->
+<!--                      <ng-container *ngIf="!downloading">-->
+                        <span class="indicator-label">Annuler</span>
+<!--                      </ng-container>-->
+                    </button>
+                  </div>
+                </div>
+                <!--end::Card toolbar-->
+              </div>
+              <ul class="list-group list-group-flush vert-scrollable-150" id="alldata">
+                <table id="table_DifferenceEstimation" class="order-details" >
+                  <thead>
+                  <tr class="bg-blue">
+                    <th   style="width: 20px">ID</th>
+                    <th style="width: 50px">Symbole</th>
+                    <th style="width: 25%">VDE Cours</th>
+                    <th style="width: 10%">VDE Intérêt</th>
+
+                  </tr>
+                  </thead>
+                  <tbody class="fw-semibold text-gray-600">
+                  <tr *ngFor="let depotRachat of operationDifferenceEstimation$">
+                    <td>{{ depotRachat.titre.idTitre}}</td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        {{ depotRachat.titre.symbolTitre}}
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        {{ depotRachat.valeurVDECours|number }}
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        {{ depotRachat.valeurVDEInteret|number}}
+                      </div>
+                    </td>
+                    <!--          <td>-->
+                    <!--            <div class="d-flex align-items-center">-->
+
+                    <!--            </div>-->
+                    <!--          </td>-->
+                  </tr>
+                  </tbody>
+                </table>
+              </ul>
+<!--              <div *ngIf="vde===true" class="card-body pt-0">-->
+<!--                <div class="table-responsive angular-bootstrap-table">-->
+<!--                  &lt;!&ndash;                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">&ndash;&gt;-->
+<!--                  <table datatable [dtOptions]="dtOptionsVDE" [dtTrigger]="dtTriggerVDE" class="table align-middle table-bordered fs-6 gy-5 dataTable no-footer">-->
+<!--                    <thead>-->
+<!--                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">-->
+<!--                      <ng-container *ngFor="let column of dtOptionsVDE.columns; let i=index">-->
+<!--                        <th>{{ column.title }}</th>-->
+<!--                      </ng-container>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody class="fw-semibold text-gray-600">-->
+<!--                    </tbody>-->
+<!--                  </table>-->
+<!--                  &lt;!&ndash;                  <div #details class="details hidden"></div>&ndash;&gt;-->
+<!--                </div>-->
+<!--              </div>-->
+            </div>
+          </div>
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>

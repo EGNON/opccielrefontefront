@@ -99,7 +99,7 @@ export class JournalAddEditComponent implements OnInit, OnDestroy {
     )
   }
   afficherCompteComptable(){
-    this.compteComptableService.afficherTous().subscribe(
+    this.compteComptableService.afficherTous(this.entityForm.value.plan.codePlan).subscribe(
       (data)=>{
         this.compteComptable=data.data;
         // console.log(this.compteComptable)

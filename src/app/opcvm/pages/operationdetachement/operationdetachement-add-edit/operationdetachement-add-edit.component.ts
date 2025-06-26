@@ -35,6 +35,7 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
   personne: any;
   detailProfil: Detailprofil;
   formule$: any;
+  typePayementVisible: boolean;
   isLoading = false;
   submitting = false;
   paysSelect:any;
@@ -56,6 +57,11 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
   bCoupDivUnit= false;
   bQtiteAMORT = false;
   codeTypeTitre:string;
+  quantiteAmortie:number;
+  NominalRemb:number;
+  qteDetenue:number;
+  couponDivUnitaire:number;
+  libelleModeAmortissement:any;
   public titreSettings = {};
   private subscriptions: Subscription[] = [];
 
@@ -86,6 +92,7 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
         typeEvenement: [null,Validators.required],
         typePayement: [null],
         codeTypeTitre: [null],
+        estPaye: [false],
         intervenant: [null,Validators.required],
         titre: [null,Validators.required],
         designation: [null],
@@ -132,14 +139,20 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
 
     this.entityForm.patchValue({dateValeur: new NgbDate(
         date.getFullYear(), date.getMonth()+1, date.getDate())});
+    this.quantiteAmortie=0
+    this.NominalRemb=0
+    this.qteDetenue=0
+    this.couponDivUnitaire=0
 
     this.afficherIntervenant()
     this.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm
     this.dateFermeture=this.localStore.getData("currentSeance")?.dateFermeture
 
+    this.opcvm=new Opcvm();
+    this.opcvm.idOpcvm=this.idOpcvm
     if(this.id)
     {
-      this.pageInfo.updateTitle("Modification de détachement'")
+      this.pageInfo.updateTitle("Modification de détachement")
       const sb = this.entityService.getById(this.id)
         .subscribe((entity)=>{
           console.log("profil=",entity.data)
@@ -149,29 +162,107 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
       this.subscriptions.push(sb);
     }
     else
+    {
       this.pageInfo.updateTitle("Ajout de détachement")
+      this.entityForm.patchValue({idOperation:"EN CRÉATION"})
+    }
+
+  }
+  onQuantiteAmortieKeyPress($event) {
+    this.quantiteAmortie=$event.target.value
+    this.capitalRemb()
+  }
+  onNominalRembKeyPress($event) {
+    // console.log("pass")
+    this.NominalRemb=$event.target.value
+    this.capitalRemb()
+  }
+  onQteDetenueKeyPress($event) {
+    this.qteDetenue=$event.target.value
+
+    this.couponDivTotal()
+  }
+  onCouponDivUnitaireKeyPress($event) {
+    this.couponDivUnitaire=$event.target.value
+
+    this.couponDivTotal()
   }
   afficherTitre(){
-    this.loadingService.setLoading(true)
+    this.entityForm.patchValue({quantiteAmortie:"0"})
+    this.entityForm.patchValue({nominalRemb:"0"})
+    this.entityForm.patchValue({capitalRembourse:"0"})
+    this.entityForm.patchValue({qteDetenue:"0"})
+    this.entityForm.patchValue({couponDividendeUnitaire:"0"})
+    this.entityForm.patchValue({couponDividendeTotal:"0"})
+    this.entityForm.patchValue({montantTotalARecevoir:"0"})
+    // this.loadingService.setLoading(true)
     let typeEVenement=this.entityForm.value.typeEvenement
+
+    if(typeEVenement==="DIVIDENDE"){
+      this.typePayementVisible=false
+    }
+    else
+      this.typePayementVisible=true
+
     this.entityService.afficherTitre(this.localStore.getData("currentOpcvm")?.idOpcvm,
       this.localStore.getData("currentSeance")?.dateFermeture,typeEVenement).subscribe(
       (data)=>{
         this.titre$=data.data
         this.titre=data.data
-        this.loadingService.setLoading(false)
+        // this.loadingService.setLoading(false)
       }
     )
+    if(typeEVenement==="DIVIDENDE"){
+      this.bQtiteAMORT = true;
+      this.bNominalRemb = true;
+    }
+    else
+    {
+      this.bQtiteAMORT = false;
+      this.bNominalRemb = false;
+    }
+
   }
   loadFormValues(entity: any)
   {
     this.entity = entity;
-    this.entityForm.patchValue({codeProfil:
-      entity.codeProfil});
-    this.entityForm.patchValue({libelleProfil: entity.libelleProfil});
-    this.entityForm.patchValue({id: entity.codeProfil});
-    this.entityForm.patchValue({typeCommission: entity.typeCommission});
-    this.entityForm.patchValue({standard: entity.standard});
+    console.log(this.entity)
+    this.entityForm.patchValue({idOperation:"-"});
+    let dateOperation = new Date(entity.dateOperation);
+    this.entityForm.patchValue({dateOperation: new NgbDate(
+        dateOperation.getFullYear(), dateOperation.getMonth()+1, dateOperation.getDate())});
+
+    let dateValeur = new Date(entity.dateValeur);
+    this.entityForm.patchValue({dateValeur: new NgbDate(
+        dateValeur.getFullYear(), dateValeur.getMonth()+1, dateValeur.getDate())});
+
+   let dateReelle = new Date(entity.dateReelle);
+      this.entityForm.patchValue({dateReelle: new NgbDate(
+          dateReelle.getFullYear(), dateReelle.getMonth()+1, dateReelle.getDate())});
+
+    this.entityForm.patchValue({titre: entity.titre});
+    this.idTitre=entity.titre.idTitre
+    this.afficherTitre()
+    this.entityForm.patchValue({designation: entity.titre.designationTitre});
+    this.entityForm.patchValue({codeTypeTitre:entity.titre.typeTitre.codeTypeTitre})
+    this.entityForm.patchValue({id: entity.idOperation});
+    this.entityForm.patchValue({estPaye: entity.estPaye});
+    this.entityForm.patchValue({typeEvenement: entity.typeEvenement});
+    this.entityForm.patchValue({typePayement: entity.typePayement});
+    this.entityForm.patchValue({intervenant: entity.intervenant});
+    this.entityForm.patchValue({quantiteAmortie:entity.quantiteAmortie.toString()})
+    this.quantiteAmortie=entity.quantiteAmortie
+    this.entityForm.patchValue({nominalRemb:entity.nominalRemb.toString()})
+    this.NominalRemb=entity.nominalRemb
+    this.entityForm.patchValue({capitalRembourse:entity.capitalRembourse.toString()})
+    this.entityForm.patchValue({qteDetenue:entity.qteDetenue.toString()})
+    this.qteDetenue=entity.qteDetenue
+    this.entityForm.patchValue({couponDividendeUnitaire:entity.couponDividendeUnitaire.toString()})
+    this.couponDivUnitaire=entity.couponDividendeUnitaire
+
+    this.entityForm.patchValue({couponDividendeTotal:entity.montantBrut.toString()})
+    this.entityForm.patchValue({montantTotalARecevoir:entity.montantTotalARecevoir.toString()})
+
   }
   afficherIntervenant(){
     this.personneService.afficherPersonneSelonQualite("REGISTRAIRES").subscribe(
@@ -195,12 +286,13 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
       idOpcvm:this.idOpcvm,
       idTitre:this.idTitre
     }
-    console.log("entityreel=",entity)
+    // console.log("entityreel=",entity)
     this.formuleService.quantiteReel(entity).subscribe(
       (data)=>{
         // this.formule$=data.data
-        console.log(data.data)
+        // console.log(data.data)
         this.entityForm.patchValue({qteDetenue:data.data})
+        this.qteDetenue=data.data
       }
     )
   }
@@ -230,6 +322,7 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
         let dateEcheance = new Date(data.data);
         this.entityForm.patchValue({dateReelle: new NgbDate(
             dateEcheance.getFullYear(), dateEcheance.getMonth()+1, dateEcheance.getDate())});
+        // this.typePayementChange()
         // this.entityForm.patchValue({dateReelle:dateEcheance})
       }
     )
@@ -239,7 +332,11 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
   }
   typePayementChange(){
     if(!this.idTitre)
+    {
+      // this.loadingService.setLoading(false)
       return
+    }
+
 
     let dateOperation: any;
     if(this.entityForm.controls.dateOperation.value)
@@ -252,7 +349,7 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
     let dateReelle: any;
     if(this.entityForm.controls.dateReelle.value)
     {
-      dateOperation = new Date(
+      dateReelle = new Date(
         this.entityForm.controls.dateReelle.value.year,
         this.entityForm.controls.dateReelle.value.month-1,
         this.entityForm.controls.dateReelle.value.day+1);
@@ -260,17 +357,25 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
     let dateValeur: any;
     if(this.entityForm.controls.dateValeur.value)
     {
-      dateOperation = new Date(
+      dateValeur = new Date(
         this.entityForm.controls.dateValeur.value.year,
         this.entityForm.controls.dateValeur.value.month-1,
         this.entityForm.controls.dateValeur.value.day+1);
     }
 
+    let typeEvenement=this.entityForm.value.typeEvenement
+    let typePayement=this.entityForm.value.typePayement
+
+    if(typeEvenement==="DIVIDENDE")
+      typePayement=""
     let titre=new TitreModel()
     titre.idTitre=this.idTitre
     const entity={
       ...this.entityForm.value,
       titre:titre,
+      idOperation:0,
+      typePayement:typePayement,
+      opcvm:this.opcvm,
       dateOperation:dateOperation,
       dateValeur:dateValeur,
       dateReelle:dateReelle
@@ -278,48 +383,132 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
     this.entityService.valeurOuQte(entity).subscribe(
       (data)=>{
         let entity=data.data
-        this.entityForm.patchValue({nominalRemb:entity.nominalRemb})
-        this.entityForm.patchValue({couponDividendeUnitaire :entity.couponDividendeUnitaire})
-        this.entityForm.patchValue({quantiteAmortie :entity.quantiteAmortie})
+        if(entity.nominalRemb)
+        {
+          this.entityForm.patchValue({nominalRemb:entity.nominalRemb.toString()})
+          this.NominalRemb=entity.nominalRemb
+        }
+        else
+        {
+          this.entityForm.patchValue({nominalRemb :"0"})
+          this.NominalRemb=0
+        }
+        if(entity.couponDividendeUnitaire)
+        {
+          this.entityForm.patchValue({couponDividendeUnitaire :entity.couponDividendeUnitaire.toString()})
+          this.couponDivUnitaire=entity.couponDividendeUnitaire
+        }
+        else
+        {
+          this.entityForm.patchValue({couponDividendeUnitaire :"0"})
+          this.couponDivUnitaire=0
+        }
+
+        if(entity.quantiteAmortie)
+        {
+          this.entityForm.patchValue({quantiteAmortie :entity.quantiteAmortie.toString()})
+          this.quantiteAmortie=entity.quantiteAmortie
+        }
+        else
+        {
+          this.entityForm.patchValue({quantiteAmortie :"0"})
+          this.quantiteAmortie=0
+        }
+
+        if(entity.capitalRembourse)
+          this.entityForm.patchValue({capitalRembourse :entity.capitalRembourse.toString()})
+        else
+          this.entityForm.patchValue({capitalRembourse :"0"})
+
+        if(entity.couponDividendeTotal)
+          this.entityForm.patchValue({couponDividendeTotal :entity.couponDividendeTotal.toString()})
+        else
+          this.entityForm.patchValue({couponDividendeTotal :"0"})
+
+        if(entity.montantTotalARecevoir)
+          this.entityForm.patchValue({montantTotalARecevoir :entity.montantTotalARecevoir.toString()})
+        else
+          this.entityForm.patchValue({montantTotalARecevoir :"0"})
+
+        this.libelleModeAmortissement=entity.libelleModeAmortissement
+        console.log(this.libelleModeAmortissement)
 
         this.bNominalRemb=entity.bNominalRemb
         this.bCoupDivUnit=entity.bCoupDivUnit
         this.bQtiteAMORT=entity.bQtiteAMORT
+        // console.log("qteamort=",entity.bQtiteAMORT)
+        // console.log("bCoupDivUnit=",entity.bCoupDivUnit)
+        // console.log("bNominalRemb=",entity.bNominalRemb)
+         console.log("entity=",entity)
+        // this.loadingService.setLoading(false)
       }
     )
-    let typePayement=this.entityForm.value.typePayement
+
+    typeEvenement=this.entityForm.value.typeEvenement
+    if(typeEvenement==="DIVIDENDE"){
+      return
+    }
+
+    typePayement=this.entityForm.value.typePayement
+    console.log(typePayement)
     switch (typePayement)
     {
       case "CAPITAL + INTERET":
         //meb_qtiteAMORT.ReadOnly=false;
+        // console.log("1")
         this.bNominalRemb=false
         this.bCoupDivUnit=false
 
-        this.capitalRemb();
-        this.couponDivTotal();
+        // this.capitalRemb();
+        // this.couponDivTotal();
         break;
 
       case "INTERET":
+        // console.log("2")
         this.bQtiteAMORT=true
         this.bNominalRemb=true
         this.bCoupDivUnit=false
         //meb_qtiteAMORT.Value = 0;
-        this.entityForm.patchValue({nominalRemb:"0"})
-        this.entityForm.patchValue({capitalRembourse:"0"})
-
-        this.couponDivTotal();
+        // this.entityForm.patchValue({nominalRemb:"0"})
+        // this.entityForm.patchValue({capitalRembourse:"0"})
+        //
+        // this.couponDivTotal();
         break;
 
       case "CAPITAL":
+        // console.log("3")
         //meb_qtiteAMORT.ReadOnly = false;
         this.bNominalRemb = false;
         this.bCoupDivUnit= true;
-        this.entityForm.patchValue({couponDividendeUnitaire:"0"})
-        this.entityForm.patchValue({couponDividendeTotal:"0"})
-
-         this.capitalRemb();
+        // this.entityForm.patchValue({couponDividendeUnitaire:"0"})
+        // this.entityForm.patchValue({couponDividendeTotal:"0"})
+        //
+        //  this.capitalRemb();
         break;
     }
+  }
+  couponDivTotal(){
+    let couponDividendeUnitaire:number=this.couponDivUnitaire;
+    // if(this.entityForm.controls.couponDividendeUnitaire.value){
+    //   couponDividendeUnitaire=this.entityForm.value.couponDividendeUnitaire
+    // }
+
+    let quantiteAmortie:number=0;
+    if(this.entityForm.controls.quantiteAmortie.value){
+      quantiteAmortie=this.entityForm.value.quantiteAmortie
+    }
+    let nominalRemb:number=0;
+    if(this.entityForm.controls.nominalRemb.value){
+      nominalRemb=this.entityForm.value.nominalRemb
+    }
+
+    this.entityForm.patchValue({couponDividendeTotal:Math.round(this.qteDetenue*couponDividendeUnitaire).toString()})
+    let couponDividendeTotal=Math.round(this.qteDetenue*couponDividendeUnitaire)
+    // console.log(this.qteDetenue)
+    // console.log(couponDividendeUnitaire)
+    this.entityForm.patchValue({montantTotalARecevoir :(Number(quantiteAmortie)*Number(nominalRemb)+Number(couponDividendeTotal)).toString()})
+    // meb_mtantCoupDivTot.Value = decimal.Round(Convert.ToDecimal(meb_QtiteDetenue.Value) *
+    //   Convert.ToDecimal(meb_coupDivUnit.Value));
   }
   capitalRemb()
   {
@@ -329,19 +518,29 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
       if(this.entityForm.controls.qteDetenue.value){
         qteDetenue=this.entityForm.value.qteDetenue
       }
-      let nominalRemb:number=0;
-      if(this.entityForm.controls.nominalRemb.value){
-        nominalRemb=this.entityForm.value.nominalRemb
+      // console.log(qteDetenue)
+      let couponDividendeTotal:number=0;
+      if(this.entityForm.controls.couponDividendeTotal.value){
+        couponDividendeTotal=this.entityForm.value.couponDividendeTotal
       }
-      let quantiteAmortie:number=0;
-      if(this.entityForm.controls.quantiteAmortie.value){
-        quantiteAmortie=this.entityForm.value.quantiteAmortie
-      }
+      let nominalRemb:number=this.NominalRemb;
+      // if(this.entityForm.controls.nominalRemb.value){
+      //   nominalRemb=this.entityForm.value.nominalRemb
+      // }
+      // console.log(nominalRemb)
+
+      let quantiteAmortie:number=this.quantiteAmortie;
+      // if(this.entityForm.controls.quantiteAmortie.value){
+      //   quantiteAmortie=this.entityForm.value.quantiteAmortie
+      // }
+      // console.log(quantiteAmortie)
       let codeTypeTitre:string="";
       if(this.entityForm.controls.codeTypeTitre.value){
         codeTypeTitre=this.entityForm.value.codeTypeTitre
       }
       codeTypeTitre=codeTypeTitre.trim().toUpperCase()
+      // console.log(codeTypeTitre)
+      this.loadingService.setLoading(true)
       if ( codeTypeTitre==="OBLIGATI"||
         codeTypeTitre==="OBLIGATN")
       {
@@ -349,13 +548,23 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
           (data)=>{
             this.tcn$=data.data
             if(this.tcn$!==null){
-              if (this.tcn$.modeAmortissement.libelleModeAmortissement === "SUR VALEUR")
+              console.log(this.tcn$.modeAmortissement.libelleModeAmortissement)
+              if (this.tcn$.modeAmortissement.libelleModeAmortissement.trim() === "SUR VALEUR")
               {
+
+                let montant:number=Number(qteDetenue*nominalRemb)+Number(couponDividendeTotal)
+
+                // console.log("montant",montant)
                 this.entityForm.patchValue({capitalRembourse:(qteDetenue*nominalRemb).toString()})
+                this.entityForm.patchValue({montantTotalARecevoir :(montant).toString()})
+                this.loadingService.setLoading(false)
               }
               else
               {
+                let montant:number=Number(quantiteAmortie*nominalRemb)+Number(couponDividendeTotal)
                 this.entityForm.patchValue({capitalRembourse:(quantiteAmortie*nominalRemb).toString()})
+                this.entityForm.patchValue({montantTotalARecevoir :(montant).toString()})
+                this.loadingService.setLoading(false)
               }
             }
           }
@@ -370,36 +579,45 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
         this.tcnService.getById(this.idTitre).subscribe(
           (data)=>{
             this.tcn$=data.data
-            console.log(this.tcn$)
-            if (this.tcn$.modeAmortissement.libelleModeAmortissement === "SUR VALEUR")
+            if (this.tcn$.modeAmortissement.libelleModeAmortissement.trim() === "SUR VALEUR")
             {
+
+              let montant:number=Number(qteDetenue*nominalRemb)+Number(couponDividendeTotal)
+
+              // console.log("montant",montant)
               this.entityForm.patchValue({capitalRembourse:(qteDetenue*nominalRemb).toString()})
+              this.entityForm.patchValue({montantTotalARecevoir :(montant).toString()})
+              this.loadingService.setLoading(false)
             }
             else
             {
+              let montant:number=Number(quantiteAmortie*nominalRemb)+Number(couponDividendeTotal)
               this.entityForm.patchValue({capitalRembourse:(quantiteAmortie*nominalRemb).toString()})
+              this.entityForm.patchValue({montantTotalARecevoir :(montant).toString()})
+              this.loadingService.setLoading(false)
             }
           }
         )
       }
+
     }
     catch { }
 
   }
 
-  couponDivTotal()
-  {
-    let qteDetenue:number=0;
-    if(this.entityForm.controls.qteDetenue.value){
-      qteDetenue=this.entityForm.value.qteDetenue
-    }
-    let couponDividendeUnitaire:number=0;
-    if(this.entityForm.controls.couponDividendeUnitaire.value){
-      couponDividendeUnitaire=this.entityForm.value.couponDividendeUnitaire
-    }
-    this.entityForm.patchValue({couponDividendeTotal:Math.round(qteDetenue*couponDividendeUnitaire).toString()})
-
-  }
+  // couponDivTotal()
+  // {
+  //   let qteDetenue:number=0;
+  //   if(this.entityForm.controls.qteDetenue.value){
+  //     qteDetenue=this.entityForm.value.qteDetenue
+  //   }
+  //   let couponDividendeUnitaire:number=0;
+  //   if(this.entityForm.controls.couponDividendeUnitaire.value){
+  //     couponDividendeUnitaire=this.entityForm.value.couponDividendeUnitaire
+  //   }
+  //   this.entityForm.patchValue({couponDividendeTotal:Math.round(qteDetenue*couponDividendeUnitaire).toString()})
+  //
+  // }
   get f() { return this.entityForm.controls; }
   addRow(id: string) {
     // @ts-ignore
@@ -509,6 +727,7 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
 
   public onItemSelect(item: any) {
     // console.log('onItemSelect', item);
+    // this.loadingService.setLoading(true)
     this.idTitre=item.idTitre
     // this.symbolTitre=item.symbolTitre
     // // console.log(this.symbolTitre)
@@ -517,10 +736,35 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
         this.titreSelonId=data.data
         this.entityForm.patchValue({designation:this.titreSelonId.designationTitre})
         this.entityForm.patchValue({codeTypeTitre:this.titreSelonId.typeTitre.codeTypeTitre})
+        this.afficherQuantiteReel()
+        this.afficherDerniereEcheance()
+
       }
     )
-    this.afficherQuantiteReel()
-    this.afficherDerniereEcheance()
+    let typeEvenement=this.entityForm.value.typeEvenement
+    if(typeEvenement==="DIVIDENDE")
+      this.typePayementChange()
+    // this.afficherQuantiteReel()
+    // this.afficherDerniereEcheance()
+    // this.typePayementChange()
+  }
+  titreChange(){
+    this.idTitre=this.entityForm.value.titre.idTitre
+    // this.symbolTitre=item.symbolTitre
+    // // console.log(this.symbolTitre)
+    this.titreService.getById(this.idTitre).subscribe(
+      (data)=>{
+        this.titreSelonId=data.data
+        this.entityForm.patchValue({designation:this.titreSelonId.designationTitre})
+        this.entityForm.patchValue({codeTypeTitre:this.titreSelonId.typeTitre.codeTypeTitre})
+        this.afficherQuantiteReel()
+        this.afficherDerniereEcheance()
+
+      }
+    )
+    let typeEvenement=this.entityForm.value.typeEvenement
+    if(typeEvenement==="DIVIDENDE")
+      this.typePayementChange()
   }
   public onDeSelect(item: any) {
     // console.log('onDeSelect', item);
@@ -539,12 +783,7 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
 
   onSaveEntity()
   {
-    this.tableau = document.getElementById("table_DetailProfil");
-    let length = this.tableau.getElementsByTagName('tr').length
-    if (length == 1) {
-      alert("Veuillez ajouter le détails profil")
-      return;
-    }
+
     this.isLoading = true;
     this.submitted = true;
     if(this.entityForm.invalid) return;
@@ -556,33 +795,12 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
         finalize(() => {
           this.submitted = false;
           this.isLoading = false;
-          this.router.navigate(['/opcvm/standard/profilopc']);
+          this.router.navigate(['/opcvm/evenementsurvaleur/operationdetachement/liste']);
         })
       )
       .subscribe(
-        (data)=>{
+        (data)=> {
 
-          this.nbreLigne = document.getElementById("table_DetailProfil").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
-          let i: number = 1;
-          this.detailProfilService.supprimer(this.entityForm.value.codeProfil,
-            this.localStore.getData("currentOpcvm")?.idOpcvm).subscribe();
-          //        console.log(this.nbreLigne);
-          for (i === 1; i < this.nbreLigne; i++) {
-            this.detailProfil=new Detailprofil();
-            this.detailProfil.opcvm=new Opcvm();
-            this.detailProfil.opcvm.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm;
-            this.detailProfil.codeProfil=this.entityForm.value.codeProfil;
-            // @ts-ignore
-            this.detailProfil.borneInferieur=document.getElementById("table_DetailProfil").getElementsByTagName('tr')[i].cells[0].innerHTML;
-            // @ts-ignore
-            this.detailProfil.borneSuperieur=document.getElementById("table_DetailProfil").getElementsByTagName('tr')[i].cells[1].innerHTML;
-            // @ts-ignore
-            this.detailProfil.montantMinimum=document.getElementById("table_DetailProfil").getElementsByTagName('tr')[i].cells[2].innerHTML;
-            // @ts-ignore
-            this.detailProfil.taux=document.getElementById("table_DetailProfil").getElementsByTagName('tr')[i].cells[3].innerHTML;
-            console.log("detailProfil"+i,this.detailProfil)
-            this.detailProfilService.create(this.detailProfil).subscribe();
-          }
         }
       );
     this.subscriptions.push(sb);
@@ -592,16 +810,95 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
     this.opcvm=new Opcvm();
     this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm;
 
+    let dateReelle: any;
+    if(this.entityForm.controls.dateReelle.value)
+    {
+      dateReelle = new Date(
+        this.entityForm.controls.dateReelle.value.year,
+        this.entityForm.controls.dateReelle.value.month-1,
+        this.entityForm.controls.dateReelle.value.day+1);
+    }
+    let dateOperation: any;
+    if(this.entityForm.controls.dateOperation.value)
+    {
+      dateOperation = new Date(
+        this.entityForm.controls.dateOperation.value.year,
+        this.entityForm.controls.dateOperation.value.month-1,
+        this.entityForm.controls.dateOperation.value.day+1);
+    }
+    let dateSaisie=new Date();
+    let dateValeur: any;
+    if(this.entityForm.controls.dateValeur.value)
+    {
+      dateValeur = new Date(
+        this.entityForm.controls.dateValeur.value.year,
+        this.entityForm.controls.dateValeur.value.month-1,
+        this.entityForm.controls.dateValeur.value.day+1);
+    }
+    let datePiece=dateOperation
+
+    let montantTotalARecevoir=0
+    if(this.entityForm.controls.montantTotalARecevoir.value)
+    {
+      montantTotalARecevoir=this.entityForm.value.montantTotalARecevoir
+    }
+    let titre=new TitreModel();
+    titre.idTitre=this.idTitre
+
+    let typeEvenement=""
+    if(this.entityForm.controls.typeEvenement.value)
+    {
+      typeEvenement=this.entityForm.value.typeEvenement
+    }
+
+    let couponDividendeTotal=0
+    if(this.entityForm.controls.couponDividendeTotal.value)
+    {
+      couponDividendeTotal=this.entityForm.value.couponDividendeTotal
+    }
+
+    let typePayement=""
+    if(typeEvenement==="COUPON") {
+      if (this.entityForm.controls.typePayement.value) {
+        typePayement = this.entityForm.value.typePayement
+      }
+    }
+    let idOperation=0
+    let estPaye=false
+    if (this.entityForm.controls.estPaye.value) {
+      estPaye = this.entityForm.value.estPaye
+    }
+    if(this.id)
+      idOperation=this.id
     const entity: any = {
-      codeProfil:this.entityForm.value.codeProfil,
-      libelleProfil:this.entityForm.value.libelleProfil,
-      typeCommission:this.entityForm.value.typeCommission,
-      standard:this.entityForm.value.standard,
-      opcvm:this.opcvm
+      ...this.entityForm.value,
+      idSeance : this.localStore.getData("currentSeance").idSeanceOpcvm?.idSeance,
+      idTransaction : 0,
+      idOperation:idOperation,
+      dateReelle :dateReelle,
+      dateOperation :dateOperation,
+      dateSaisie :dateSaisie,
+      dateValeur :dateValeur,
+      datePiece:datePiece,
+      referencePiece:"-",
+      montant :montantTotalARecevoir,
+      ecriture:"A",
+      estOD :false,
+      estPaye :estPaye,
+      type : "DC",
+      titre:titre,
+      typeEvenement:typeEvenement,
+      typePayement :typePayement,
+      montantBrut:couponDividendeTotal,
+      opcvm:this.opcvm,
+      libelleModeAmortissement:this.libelleModeAmortissement,
+      valeurCodeAnalytique:"OPC:" + this.idOpcvm.toString() +
+        ";TIT:" + this.idTitre.toString(),
+      userLogin:this.authService.currentUserValue?.username
     };
     console.log("act1",entity)
     return this.id
-      ? this.entityService.update(entity)
+      ? this.entityService.modifier(entity)
       : this.entityService.create(entity);
   }
 }

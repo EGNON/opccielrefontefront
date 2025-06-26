@@ -1,0 +1,93 @@
+<!--begin::Transfert - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5" enctype="multipart/form-data">
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date opération</label>
+              <!--end::Label-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm"
+                       placeholder="dd/mm/yyyy" ngbDatepicker #dateOperation="ngbDatepicker" aria-label="Date opération" aria-describedby="basic-addon6"
+                       formControlName="dateOperation"/>
+                <!--end::Input-->
+                <span (click)="dateOperation.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                        <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                    </span>
+              </div>
+            </div>
+            <!--end::Col-->
+
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Solde logique</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" [readonly]="true" class="form-control form-control-sm"
+                     placeholder="0" formControlName="soldeLogique"/>
+              <!--end::Input-->
+            </div>
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Solde dépositaire</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
+                     (keyup)="onSoldedeposiataireKeyPress($event)" placeholder="0" formControlName="soldeEspeceDepositaire"/>
+              <!--end::Input-->
+            </div>
+
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Ecart</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" [readonly]="true" class="form-control form-control-sm"
+                     placeholder="0" formControlName="ecart"/>
+              <!--end::Input-->
+            </div>
+          </div>
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/opcvm/comptabilite/regulecartsolde/liste" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="entityForm.invalid" (click)="onSaveEntity()">
+              <ng-container *ngIf="submitting">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    Patientez svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                  </span>
+              </ng-container>
+              <ng-container *ngIf="!submitting">
+                <span class="indicator-label">Enregistrer</span>
+              </ng-container>
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Constatation Charges - Apply-->

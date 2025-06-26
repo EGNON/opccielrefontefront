@@ -8,6 +8,7 @@ export class Detailmodele extends  ResourceModel<Detailmodele>{
   numCompteComptable:string;
   numeroOrdre:number;
   sensMvt:string;
+  userLogin:string;
   constructor(model?: Partial<Detailmodele>) {
     super(model);
   }

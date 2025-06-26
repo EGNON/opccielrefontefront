@@ -12,6 +12,9 @@ import {
 } from "../../profilcommissionsousrach/delete-profilcommissionsousrach-modal/delete-profilcommissionsousrach-modal.component";
 import {OperationdetachementService} from "../../../services/operationdetachement.service";
 import moment from "moment";
+import {
+  DeleteModalOperationdetachementComponent
+} from "../delete-modal-operationdetachement/delete-modal-operationdetachement.component";
 
 @Component({
   selector: 'app-operationdetachement-list',
@@ -57,12 +60,12 @@ export class OperationdetachementListComponent implements OnInit, OnDestroy, Aft
       columns: [
         {
           title: 'Titre', data: 'symbolTitre', render: function (data, type, row) {
-            return row.titre.symbolTitre;
+            return row.symboleTitre;
           }
         },
         {
-          title: 'Intervenant', data: 'denomination', render: function (data, type, row) {
-            return row.intervenant.denomination;
+          title: 'Intervenant', data: 'intervenant', render: function (data, type, row) {
+            return row.intervenant;
           }
         },
         {
@@ -157,15 +160,15 @@ export class OperationdetachementListComponent implements OnInit, OnDestroy, Aft
                     <ul class="dropdown-menu">`;
         const show = `
                 <li>
-                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idCritereAlerte}">Afficher</a>
+                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idOperation}">Afficher</a>
                 </li>`;
         const edit = `
                 <li>
-                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idDetachement}">Modifier</a>
+                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idOperation}">Modifier</a>
                 </li>`;
         const separator = `<li><hr class="dropdown-divider"></li>`;
         const delete1 = `<li>
-                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idDetachement}"
+                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idOperation}"
                     >Supprimer</a>
                 </li>`;
         const parentActionEnd = `</ul>
@@ -184,7 +187,7 @@ export class OperationdetachementListComponent implements OnInit, OnDestroy, Aft
   }
 
   supprimer(id: string) {
-    const modalRef = this.modalService.open(DeleteProfilcommissionsousrachModalComponent);
+    const modalRef = this.modalService.open(DeleteModalOperationdetachementComponent);
     modalRef.componentInstance.id = id;
     // modalRef.result.then(() => this.entityService.fetch(), () => {});
   }

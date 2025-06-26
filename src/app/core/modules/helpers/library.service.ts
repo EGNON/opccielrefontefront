@@ -2098,6 +2098,40 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [
                 {
+                  allow: true,
+                  title: 'Vérification des écritures comptables',
+                  page: '',
+                  role: '',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Comptabilité',
+                  children: [
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_VERIF_N1'),
+                      title: 'Niveau 1',
+                      page: '/opcvm/comptabilite/verification/niveau1',
+                      role: 'ROLE_VERIF_N1',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Vérification des écritures comptables',
+                      children: []
+                    },
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_VERIF_N2'),
+                      title: 'Niveau 2',
+                      page: '/opcvm/comptabilite/verification/niveau2',
+                      role: 'ROLE_VERIF_N2',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Vérification des écritures comptables',
+                      children: []
+                    }
+                  ]
+                },
+                {
                   allow: this.authService.isGrantedRole('ROLE_CONSULT_ECR'),
                   title: 'Consultation des écritures comptables',
                   page: '/opcvm/comptabilite/consultation/ecritures',
@@ -2109,10 +2143,32 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_DEPOT_SOUS'),
+                  allow: this.authService.isGrantedRole('ROLE_CONS_CHARGE'),
                   title: 'Constatation des charges',
                   page: '/opcvm/comptabilite/constatation/charges/liste',
-                  role: 'ROLE_DEPOT_SOUS',
+                  role: 'ROLE_CONS_CHARGE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Comptabilité',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_PAIE_CHARGE'),
+                  title: 'Paiement des charges',
+                  page: '/opcvm/comptabilite/paiement/charges/liste',
+                  role: 'ROLE_PAIE_CHARGE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Comptabilité',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_REGUL_ECART_SOLDE'),
+                  title: 'Régularisation d\'écart sur solde',
+                  page: '/opcvm/comptabilite/regulecartsolde/liste',
+                  role: 'ROLE_REGUL_ECART_SOLDE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2142,7 +2198,89 @@ export class LibraryService implements OnDestroy{
                   parent: 'Comptabilité',
                   children: []
                 },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_RETRO_COM_INVEST'),
+                  title: 'Rétrocession de commission sur investissement',
+                  // page: '/opcvm/comptabilite/transfert/parts',
+                  page: '/opcvm/comptabilite/retrocessioncommissioninvestissement/liste',
+                  role: 'ROLE_RETRO_COM_INVEST',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Comptabilité',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ECRITURE_MANUEL'),
+                  title: 'Saisie des écritures manuelles',
+                  // page: '/opcvm/comptabilite/transfert/parts',
+                  page: '/opcvm/comptabilite/ecritures/manuelle',
+                  role: 'ROLE_ECRITURE_MANUEL',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Comptabilité',
+                  children: []
+                }
               ]
+            }
+            ,
+            {
+              allow: null,
+              title: 'Opération sur capital',
+              icon: 'element-7',
+              dataLink: '',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_AUGMENTATION_CAPITAL'),
+                  title: 'Augmentation de capital',
+                  page: '/opcvm/comptabilite/operationdetachementdroit/liste',
+                  role: 'ROLE_AUGMENTATION_CAPITAL',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Opération sur capital',
+                  children: []
+                }
+                ]
+            },
+            {
+              allow: null,
+              title: 'Extournes des VDE',
+              icon: 'element-7',
+              dataLink: '',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_EXTOURNE_VDE'),
+                  title: 'Génération des extournes des VDE',
+                  page: '/opcvm/vde/generationextourne/liste',
+                  role: 'ROLE_EXTOURNE_VDE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Extournes des VDE',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF1_VDE'),
+                  title: 'Vérification des extournes des VDE Niveau 1',
+                  page: '/opcvm/vde/generationextourne/liste/verification/niveau1',
+                  role: 'ROLE_VERIF1_VDE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Extournes des VDE',
+                  children: []
+                }
+                ]
             },
             {
               allow: null,
@@ -2245,10 +2383,21 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [
                 {
-                  allow: this.authService.isGrantedRole('ROLE_ORDRE_BOURSE'),
+                  allow: this.authService.isGrantedRole('ROLE_EVT_DETACHEMENT'),
                   title: 'Détachement',
                   page: '/opcvm/evenementsurvaleur/operationdetachement/liste',
-                  role: 'ROLE_ORDRE_BOURSE',
+                  role: 'ROLE_EVT_DETACHEMENT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Evenement sur valeur',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_EVT_AVIS'),
+                  title: 'Avis evenement sur valeur',
+                  page: '/opcvm/avisevenementsurvaleur/liste',
+                  role: 'ROLE_EVT_AVIS',
                   icon: '',
                   translate: '',
                   dataLink: '',

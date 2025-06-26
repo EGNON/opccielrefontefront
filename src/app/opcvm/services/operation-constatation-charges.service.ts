@@ -27,4 +27,7 @@ export class OperationConstatationChargesService extends ResourceService<any> im
   creerConstatationCharge(data: any) {
     return this.http.post<any>(`${this.API_URL}`, data)
   }
+  afficherConstatationCharge(idOpcvm:any,idSeance:any) {
+    return this.http.get<any>(`${this.API_URL}/liste/${idOpcvm}/${idSeance}`)
+  }
 }

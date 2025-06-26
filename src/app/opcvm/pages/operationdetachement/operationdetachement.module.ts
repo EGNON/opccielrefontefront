@@ -12,6 +12,7 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {NgbInputDatepicker} from "@ng-bootstrap/ng-bootstrap";
 import {NombreDecimalDirective} from "../../../validators/nombre-decimal.directive";
 import {ReactiveFormsModule} from "@angular/forms";
+import { DeleteModalOperationdetachementComponent } from './delete-modal-operationdetachement/delete-modal-operationdetachement.component';
 
 
 
@@ -19,7 +20,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   declarations: [
     OperationdetachementComponent,
     OperationdetachementListComponent,
-    OperationdetachementAddEditComponent
+    OperationdetachementAddEditComponent,
+    DeleteModalOperationdetachementComponent
   ],
   imports: [
     CommonModule,

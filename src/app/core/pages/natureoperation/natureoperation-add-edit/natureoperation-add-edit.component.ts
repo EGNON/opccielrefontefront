@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, finalize, first} from "rxjs/operators";
 import {JournalService} from "../../../services/journal.service";
 import {TypeoperationService} from "../../../services/typeoperation.service";
+import {AuthService} from "../../../modules/auth";
 
 @Component({
   selector: 'app-natureoperation-add-edit',
@@ -48,6 +49,7 @@ export class NatureoperationAddEditComponent implements OnInit, OnDestroy {
   constructor(
     public modal: NgbActiveModal,
     private entityService: NatureoperationService,
+    public authService: AuthService,
     private journalService: JournalService,
     private typeOperationService: TypeoperationService,
     private cryptageService: CryptageService,
@@ -147,6 +149,7 @@ export class NatureoperationAddEditComponent implements OnInit, OnDestroy {
   saveEntity() {
     const entity = {
       ...this.entityForm.value,
+      userLogin:this.authService.currentUserValue?.username,
       // codeFormeJuridique: this.id ? this.id : null,
       id: this.id ? this.id : null,
     };

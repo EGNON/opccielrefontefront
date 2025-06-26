@@ -20,6 +20,7 @@ import {Modeleecritureformule} from "../../../models/modeleecritureformule.model
 import {Modeleecriture} from "../../../models/modeleecriture.model";
 import {Formule} from "../../../models/formule";
 import {Pays} from "../../../../crm/models/pays.model";
+import {AuthService} from "../../../modules/auth";
 
 @Component({
   selector: 'app-modeleformule-add-edit',
@@ -65,6 +66,7 @@ export class ModeleformuleAddEditComponent implements OnInit, OnDestroy {
     public modal: NgbActiveModal,
     private entityService: ModeleecritureService,
     private formuleService: FormuleService,
+    public authService: AuthService,
     private modeleEcritureFormuleService: ModeleecritureformuleService,
     private compteComptableService: ComptecomptableService,
     private cryptageService: CryptageService,
@@ -253,7 +255,7 @@ export class ModeleformuleAddEditComponent implements OnInit, OnDestroy {
   }
 
   afficherCompteComptable(){
-    this.compteComptableService.afficherTous().subscribe(
+    this.compteComptableService.afficherTous("PCIA").subscribe(
       (data)=>{
         this.compteComptable=data.data;
         console.log(this.compteComptable)
@@ -321,6 +323,7 @@ export class ModeleformuleAddEditComponent implements OnInit, OnDestroy {
       entity={
         ...this.entityForm.value,
         id:this.id,
+        userLogin:this.authService.currentUserValue?.username,
         modeleEcritureFormules: this.entityForm.value.modeleEcritureFormules.map((u: any) => {
           return {modeleEcriture: null, formule: u};
         })}
@@ -329,6 +332,7 @@ export class ModeleformuleAddEditComponent implements OnInit, OnDestroy {
     {
       entity={
         ...this.entityForm.value,
+        userLogin:this.authService.currentUserValue?.username,
         id:this.id
       }
 

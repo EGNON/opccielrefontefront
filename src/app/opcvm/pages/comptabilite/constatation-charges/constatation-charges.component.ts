@@ -10,6 +10,7 @@ import {OperationConstatationChargesService} from "../../../services/operation-c
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {ChargeService} from "../../../services/charge.service";
 import {catchError, finalize, map} from "rxjs/operators";
+import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
   selector: 'app-constatation-charges',
@@ -34,6 +35,7 @@ export class ConstatationChargesComponent implements OnInit, AfterViewInit, OnDe
     private loadingService: LoaderService,
     private lib: LibrairiesService,
     private chargeService: ChargeService,
+    private authService: AuthService,
     private entityService: OperationConstatationChargesService,
     private router: Router,
     private fb: FormBuilder,
@@ -110,8 +112,10 @@ export class ConstatationChargesComponent implements OnInit, AfterViewInit, OnDe
       dateSolde: new Date(dateOp.year, dateOp.month-1, dateOp.day+1),
       datePiece: new Date(dateOp.year, dateOp.month-1, dateOp.day+1),
       dateSaisie: new Date(),
-      dateValeur: new Date(dateOp.year, dateOp.month-1, dateOp.day+1)
+      dateValeur: new Date(dateOp.year, dateOp.month-1, dateOp.day+1),
+      userLogin:this.authService.currentUserValue?.username
     };
+    console.log(this.id)
     if(this.id) {
       // result = this.entityService.modifier(entity, "D");
       result = of(null);

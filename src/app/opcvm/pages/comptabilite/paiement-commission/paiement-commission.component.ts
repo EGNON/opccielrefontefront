@@ -9,6 +9,7 @@ import {PageInfoService} from "../../../../template/_metronic/layout";
 import {OperationCommissionService} from "../../../services/operation-commission.service";
 import {catchError, finalize, map} from "rxjs/operators";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
+import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
   selector: 'app-paiement-commission',
@@ -33,6 +34,7 @@ export class PaiementCommissionComponent implements OnInit, AfterViewInit, OnDes
     private localStore: LocalService,
     private loadingService: LoaderService,
     private lib: LibrairiesService,
+    public authService: AuthService,
     private entityService: OperationCommissionService,
     private router: Router,
     private fb: FormBuilder,
@@ -108,7 +110,8 @@ export class PaiementCommissionComponent implements OnInit, AfterViewInit, OnDes
       dateSolde: new Date(dateOp.year, dateOp.month-1, dateOp.day+1),
       datePiece: new Date(dateOp.year, dateOp.month-1, dateOp.day+1),
       dateSaisie: new Date(),
-      dateValeur: new Date(dateOp.year, dateOp.month-1, dateOp.day+1)
+      dateValeur: new Date(dateOp.year, dateOp.month-1, dateOp.day+1),
+      userLogin:this.authService.currentUserValue?.username
     };
     console.log("Entity === ", entity);
     if(this.id) {

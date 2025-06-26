@@ -1,0 +1,105 @@
+<div class="card">
+  <div class="card-header p-2">
+    <div class="card-title h4">PAIEMENT CHARGES</div>
+  </div>
+  <!--end::Card header-->
+
+  <!--begin::Card body-->
+  <!--  <div *ngIf="exerciceEnCours">-->
+  <!--    <div *ngIf="!estEnAttente" id="print">-->
+  <!--      <form [formGroup]="entityForm" class="form mb-5">-->
+
+  <!--      </form>-->
+  <!-- begin::Table-->
+  <form [formGroup]="form" class="form mb-5">
+    <div class="row mb-5">
+      <div class="col-md-4 fv-row">
+        <!--begin::Label-->
+        <label class="fs-5 fw-semibold mb-2">Date opération</label>
+        <!--end::Label-->
+        <div class="input-group input-group-sm">
+          <!--begin::Input-->
+          <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                 #dateDeb="ngbDatepicker" aria-label="Date Ouverture" formControlName="dateOperation" (click)="dateDeb.toggle()"/>
+          <!--end::Input-->
+        </div>
+      </div>
+      <!--begin::Col-->
+      <div class="col-md-8 fv-row">
+        <!--begin::Label-->
+        <label class="fs-5 fw-semibold mb-2">Séance</label>
+        <!--end::Label-->
+        <ng-multiselect-dropdown
+          [settings]="seanceOpcvmSettings"
+          [placeholder]="'Sélectionnez une séance'"
+          formControlName="seance"
+          [data]="seance"
+          [disabled]="false"
+          (onFilterChange)="onFilterChange($event)"
+          (onDropDownClose)="onDropDownClose($event)"
+          (onSelect)="onItemSelect($event)"
+          (onDeSelect)="onDeSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          (onDeSelectAll)="onDeSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <!--end::Col-->
+      </div>
+  </form>
+
+  <div class="card-body overflow-auto">
+    <table class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" id="table_AvisOperation">
+      <thead>
+      <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+        <th class="w-10px pe-2" >
+          <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="1" />
+          </div>
+        </th>
+        <th [hidden]="true" style="width: 5%">ID OP.</th>
+        <th style="width: 20%">Charge</th>
+        <th style="width: 20%">Date solde</th>
+        <th style="width: 20%">Solde provisionné</th>
+        <th style="width: 20%">Montant réel</th>
+        <th style="width: 20%">Statut</th>
+
+      </tr>
+      </thead>
+      <tbody class="fw-semibold text-gray-600">
+      <tr *ngFor="let avisOperationBourse of operationConstationCharge$">
+        <td >
+          <input class="form-check-input" type="checkbox" value="1"
+                 [(ngModel)]="avisOperationBourse.isSelected" (change)="getIdOperation(avisOperationBourse.isSelected, avisOperationBourse.idOperation+';'+avisOperationBourse.estPayee)" />
+          <!--              </div>-->
+        </td>
+        <td [hidden]="true">{{avisOperationBourse.idOperation}}</td>
+        <td >{{avisOperationBourse.designation}}</td>
+        <td >{{avisOperationBourse.dateSolde|date: 'dd/MM/YYYY' }}</td>
+        <td >{{avisOperationBourse.montant|number }}</td>
+        <td >{{avisOperationBourse.montantCharge|number }}</td>
+        <td [innerHtml]="avisOperationBourse.estPayee?'PAYE':'NON PAYE'"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div *ngIf="exerciceEnCours">-->
+  <div  class="d-flex justify-content-end">
+    <button   style="margin-top: 10px;margin-right: 5px" type="button" class="btn btn-sm btn-primary"
+              (click)="save()">Enregistrer
+    </button>
+    <button   style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
+              (click)="save()">Imprimer
+    </button>
+    <!--end::Table-->
+
+  </div>
+  <!--  </div>-->
+</div>
+<!--end::Card body-->
+<!--  </div>-->
+<!--end::Products-->
+<!--</div>-->
+

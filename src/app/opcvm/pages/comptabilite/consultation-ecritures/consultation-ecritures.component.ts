@@ -173,7 +173,7 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
       },
     };
     this.afficherNatureOperationListe();
-    this.afficherListe("l");
+    // this.afficherListe("l");
   }
 
   afficherNatureOperationListe() {
@@ -229,9 +229,46 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
           ...this.form.value,
           datatableParameters: dataTablesParameters
         };
+
         if (prefix.toLowerCase() === "l") {
+          //datedebut
+          let mois=param.dateDebut.month
+          let libellemois=mois.toString()
+
+          if(mois<10)
+            libellemois="0"+mois.toString()
+
+          let jour=param.dateDebut.day
+          let libellejour=jour.toString()
+
+          if(jour<10)
+            libellejour="0"+jour.toString()
+
+          let dateDebut=jour+"-"+mois+"-"+param.dateDebut.year.toString()
+
+          //datefin
+           mois=param.dateFin.month
+           libellemois=mois.toString()
+
+          if(mois<10)
+            libellemois="0"+mois.toString()
+
+           jour=param.dateFin.day
+           libellejour=jour.toString()
+
+          if(jour<10)
+            libellejour="0"+jour.toString()
+
+          let dateFin=jour+"-"+mois+"-"+param.dateFin.year.toString()
+          // param = {
+          //   ...param,
+          //   dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1).toString().substring(0,10),
+          //   dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1).toString().substring(0,10),
+          // };
           param = {
             ...param,
+            dateDeb: dateDebut,
+            dateFn: dateFin,
             dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
             dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
           };

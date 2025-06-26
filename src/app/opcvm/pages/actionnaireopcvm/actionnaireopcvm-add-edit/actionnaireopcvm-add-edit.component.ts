@@ -110,7 +110,7 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
 
   getPersonne()
   {
-    alert("Lol !!");
+    // alert("Lol !!");
     const sb  = this.personneService.afficherPersonneNotInOpcvm(
         this.localStore.getData("currentOpcvm")?.idOpcvm).subscribe(
         (data)=>{
@@ -287,8 +287,8 @@ export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
     let personne= this.entityForm.value.personne.map((u: any) => {
       return {personne: u};
     })
-    console.log("personneMap==",personne)
-    console.log("length=",this.entityForm.value.personne.length)
+    // console.log("personneMap==",personne)
+    // console.log("length=",this.entityForm.value.personne.length)
 
     // @ts-ignore
     let i:number=0;

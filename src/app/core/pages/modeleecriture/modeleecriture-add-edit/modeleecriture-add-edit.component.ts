@@ -20,6 +20,7 @@ import {TypetitreService} from "../../../services/typetitre.service";
 import {NatureoperationService} from "../../../services/natureoperation.service";
 import {DetailmodeleService} from "../../../services/detailmodele.service";
 import {Detailmodele} from "../../../models/detailmodele.model";
+import {AuthService} from "../../../modules/auth";
 
 @Component({
   selector: 'app-modeleecriture-add-edit',
@@ -80,6 +81,7 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
     private natureOperationService: NatureoperationService,
     private cryptageService: CryptageService,
     private pageInfo: PageInfoService,
+    public authService: AuthService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
     private router: Router,
@@ -129,7 +131,7 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
     this.modeleEcritureFormuleService.afficherSelonModeleEcriture(this.codeModeleEcriture).subscribe(
       (data)=>{
         this.Formule$=data.data;
-        // console.log(this.Formule$)
+         // console.log(this.Formule$)
       }
     )
     // @ts-ignore
@@ -150,7 +152,7 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
         let i=0;
         for(i=0;i<this.detailModele$.length;i++)
         {
-          var option=this.detailModele$[i].sensMvt
+          var option=this.detailModele$[i].sensMvt.trim()
           // @ts-ignore
           this.tableau = document.getElementById("table_Compte");
           //Calcul du nombre de cellule par ligne dans le tableau -> on regarde combien il y a de td dans le premier tr
@@ -330,12 +332,12 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
         // if(nbreLigne==0){
         //   ajouter=true;
         // }
-        for (let i = 1; i < nbreLigne; i++) {
-          if (this.tableau.getElementsByTagName('tr')[i].cells[1].innerHTML===this.entityForm.value.compteComptable.numCompteComptable.toString() ||
-            this.tableau.getElementsByTagName('tr')[i].cells[2].innerHTML===this.entityForm.value.compteComptable.numCompteComptable.toString()) {
-            ajouter = false;
-          }
-        }
+        // for (let i = 1; i < nbreLigne; i++) {
+        //   if (this.tableau.getElementsByTagName('tr')[i].cells[1].innerHTML===this.entityForm.value.compteComptable.numCompteComptable.toString() ||
+        //     this.tableau.getElementsByTagName('tr')[i].cells[2].innerHTML===this.entityForm.value.compteComptable.numCompteComptable.toString()) {
+        //     ajouter = false;
+        //   }
+        // }
         if (ajouter) {
           var tr = document.createElement('tr'); //On créé une ligne
           var td_id = document.createElement('td');
@@ -480,10 +482,10 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
   }
 
   afficherCompteComptable(){
-    this.compteComptableService.afficherTous().subscribe(
+    this.compteComptableService.afficherTous("PCIA").subscribe(
       (data)=>{
         this.compteComptable$=data.data;
-        //console.log(this.compteComptable$)
+        console.log(this.compteComptable$)
       }
     )
   }
@@ -681,6 +683,7 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
       // @ts-ignore
       this.detailModele.sensMvt = document.getElementById("table_Compte").getElementsByTagName('tr')[i].cells[6].innerHTML;
       this.detailModele.numeroOrdre = i;
+      this.detailModele.userLogin = this.authService.currentUserValue?.username;
       // console.log("details modele"+i+"==",this.detailModele)
       //this.detailModeleService.create(this.detailModele).subscribe();
       this.detailModeleTab.push(this.detailModele);
@@ -710,10 +713,11 @@ export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
   saveEntity() {
     const entity = {
       ...this.entityForm.value,
+      userLogin:this.authService.currentUserValue?.username,
       // codeFormeJuridique: this.id ? this.id : null,
       id: this.id ? this.id : null,
     };
-    console.log(entity)
+    // console.log(entity)
     this.detailModeleService.supprimerSelonModeleEcriture
     (this.entityForm.value.modeleEcriture.codeModeleEcriture.trim()).subscribe(
       (data)=>{

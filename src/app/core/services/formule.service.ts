@@ -18,6 +18,9 @@ export class FormuleService extends ResourceService<Formule>{
   soldeCompteFormule(soldeCompteFormule:any){
     return this.http.post<any>(`${this.API_URL}/soldecompteformule`,soldeCompteFormule)
   }
+  soldeCompte(soldeCompte:any){
+    return this.http.post<any>(`${this.API_URL}/soldecompte`,soldeCompte)
+  }
   cump(idOpcvm:any,idTitre:any,dateEstimation:any){
     return this.http.get<any>(`${this.API_URL}/cump/${idOpcvm}/${idTitre}/${dateEstimation}`)
   }

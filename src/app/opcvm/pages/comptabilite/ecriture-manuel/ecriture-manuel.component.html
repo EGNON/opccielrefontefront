@@ -1,0 +1,277 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <fieldset class="border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Modèles écritures</legend>
+            <div class="row mb-5">
+              <div class="col-md-6 fv-row">
+                <label class="required fs-5 fw-semibold mb-2">Type opération</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="typeOperation"
+                        [ngClass]="{ 'is-invalid': submitted && f.typeOperation.errors }"
+                        (change)="afficherNatureOperation()">
+                  <option selected>Sélectionnez un type opération...</option>
+                  <option [defaultSelected]="true" [ngValue]="entity?.natureOperation.typeOperation" [disabled]="true">
+                    {{ entity?.natureOperation.typeOperation?.libelleTypeOperation }}
+                  </option>
+                  <option *ngFor="let item of typeOperation$" [ngValue]="item">
+                    {{ item.libelleTypeOperation }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.typeOperation.errors" class="invalid-feedback">
+                  <div *ngIf="f.typeOperation.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <div class="col-md-6 fv-row">
+                <label class="required fs-5 fw-semibold mb-2">Nature</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="natureOperation"
+                        [ngClass]="{ 'is-invalid': submitted && f.natureOperation.errors }">
+                  <option selected>Sélectionnez une nature opération...</option>
+                  <option [defaultSelected]="true" [ngValue]="entity?.natureOperation" [disabled]="true">
+                    {{ entity?.natureOperation?.libelleNatureOperation }}
+                  </option>
+                  <option *ngFor="let item of natureOperation$" [ngValue]="item">
+                    {{ item.libelleNatureOperation }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.natureOperation.errors" class="invalid-feedback">
+                  <div *ngIf="f.natureOperation.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-12 fv-row">
+                <label  class="required fs-5 fw-semibold mb-2">Type titre</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="typeTitre"
+                      (change)="afficherTitre()"  [ngClass]="{ 'is-invalid': submitted && f.typeTitre.errors }">
+                  <option selected>Sélectionnez un type titre...</option>
+                  <option [defaultSelected]="true" [ngValue]="entity?.typeTitre" [disabled]="true">
+                    {{ entity?.typeTitre?.libelleTypeTitre }}
+                  </option>
+                  <option *ngFor="let item of typeTitre$" [ngValue]="item">
+                    {{ item.libelleTypeTitre }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.typeTitre.errors" class="invalid-feedback">
+                  <div *ngIf="f.typeTitre.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-6 fv-row">
+                <label  class=" required fs-5 fw-semibold mb-2">Modèle écriture</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="modeleEcriture"
+                        [ngClass]="{ 'is-invalid': submitted && f.modeleEcriture.errors }"
+                        (change)="loadValuesSelonModeleEcriture()">
+                  <option selected>Sélectionnez un modèle écriture...</option>
+                  <option [defaultSelected]="true" [ngValue]="entity?.modeleEcriture" [disabled]="true">
+                    {{ entity?.modeleEcriture?.libelleModeleEcriture }}
+                  </option>
+                  <option *ngFor="let item of modeleEcriture$" [ngValue]="item">
+                    {{ item.libelleModeleEcriture }}
+                  </option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.modeleEcriture.errors" class="invalid-feedback">
+                  <div *ngIf="f.modeleEcriture.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              <div class="col-md-6 fv-row">
+                <label class=" fs-5 fw-semibold mb-2">Titre</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <ng-multiselect-dropdown
+                  [settings]="titreSettings"
+                  [placeholder]="'Sélectionnez un titre'"
+                  formControlName="titre"
+                  [data]="titre"
+                  [disabled]="false"
+                  (onFilterChange)="onFilterChange($event)"
+                  (onDropDownClose)="onDropDownClose($event)"
+                  (onSelect)="onItemSelect($event)"
+                  (onDeSelect)="onDeSelect($event)"
+                  (onSelectAll)="onSelectAll($event)"
+                  (onDeSelectAll)="onDeSelectAll($event)">
+                </ng-multiselect-dropdown>      <!--end::Select-->
+                <!--<div *ngIf="submitted && f.formule.errors" class="invalid-feedback">
+                  <div *ngIf="f.formule.errors.required">Ce champs est obligatoire</div>
+                </div>-->
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div *ngIf="actionnaire" class="col-md-4 fv-row">
+                <label class=" fs-5 fw-semibold mb-2">Actionnaire</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <ng-multiselect-dropdown
+                  [settings]="personneSettings"
+                  [placeholder]="'Sélectionnez un titre'"
+                  formControlName="actionnaire"
+                  [data]="personne$"
+                  [disabled]="false"
+                  (onFilterChange)="onFilterChangeA($event)"
+                  (onDropDownClose)="onDropDownCloseA($event)"
+                  (onSelect)="onItemSelectA($event)"
+                  (onDeSelect)="onDeSelectA($event)"
+                  (onSelectAll)="onSelectAllA($event)"
+                  (onDeSelectAll)="onDeSelectAllA($event)">
+                </ng-multiselect-dropdown>      <!--end::Select-->
+                <!--<div *ngIf="submitted && f.formule.errors" class="invalid-feedback">
+                  <div *ngIf="f.formule.errors.required">Ce champs est obligatoire</div>
+                </div>-->
+              </div>
+              <div *ngIf="banque" class="col-md-4 fv-row">
+                <label class=" fs-5 fw-semibold mb-2">Banque</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="banque"
+                        [ngClass]="{ 'is-invalid': submitted && f.compteComptable.errors }"
+                >
+                  <option selected>Sélectionnez une banque...</option>
+                  <option *ngFor="let item of banques$" [ngValue]="item">
+                    {{ item.nomBanque }}
+                  </option>
+                </select>
+                <!--end::Select-->
+<!--                <div *ngIf="submitted && f.banque.errors" class="invalid-feedback">-->
+<!--                  <div *ngIf="f.banque.errors.required">Ce champs est obligatoire</div>-->
+<!--                </div>-->
+              </div>
+
+              <div class="col-md-4 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Libelle opération</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  type="text" class="form-control form-control-sm"
+                        placeholder="Ex : XXXXXXXXX" formControlName="libelleOperation"
+                        [ngClass]="{ 'is-invalid': submitted && f.libelleOperation.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.libelleOperation.errors" class="invalid-feedback">
+                  <div *ngIf="f.libelleOperation.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+
+              <div class="col-md-4 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Montant</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <input  type="text" class="form-control form-control-sm"
+                        placeholder="Ex : XXXXXXXXX" formControlName="montant"
+                        [ngClass]="{ 'is-invalid': submitted && f.montant.errors }"/>
+                <!--end::Input-->
+                <div *ngIf="submitted && f.montant.errors" class="invalid-feedback">
+                  <div *ngIf="f.montant.errors.required">Ce champs est obligatoire</div>
+                </div>
+              </div>
+              </div>
+              <div class="table-responsive angular-bootstrap-table">
+                <!--begin::Table-->
+                <table id="table_Compte"
+                       class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5">
+                  <thead>
+                  <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                    <th class="min-w-200px" [hidden]="true">ID</th>
+                    <th class="min-w-200px">Compte</th>
+                    <th class="min-w-200px">Libellé</th>
+                    <th class="min-w-200px">Débit</th>
+                    <th class="min-w-200px">Crédit</th>
+                    <th [hidden]="true" class="min-w-200px" >Formule</th>
+                    <th [hidden]="true" class="min-w-200px" >Type</th>
+                   <th [hidden]="true" class="min-w-200px" >Sens</th>
+<!--                    <th class="text-end min-w-70px">Actions</th>-->
+                  </tr>
+                  </thead>
+                  <tbody formArrayName="lignes"  class="fw-semibold text-gray-600" >
+                  <tr *ngFor="let ligne of lignes.controls; let i = index" [formGroupName]="i">
+                    <td [hidden]="true">{{ ligne.get('idFormule')?.value }}</td>
+                    <td>{{ ligne.get('numCompteComptable')?.value }}</td>
+                    <td>{{ ligne.get('libelleCompteComptable')?.value }}</td>
+                    <td>
+                      <input type="number" class="form-control form-control-sm"
+                      (keypress)="allowOnlyNumbers($event,i)"
+                             formControlName="debit"
+                             (focus)="onFocusInput(i,'debit')"
+                       />
+                      </td>
+                    <td>
+                      <input  type="number" class="form-control form-control-sm"
+                             (keypress)="allowOnlyNumbers($event,i)"
+                             formControlName="credit"
+                              (focus)="onFocusInput(i,'credit')"
+                            />
+                    </td>
+                    <td [hidden]="true" >{{ ligne.get('libelleFormule')?.value }}</td>
+                    <td [hidden]="true" >{{ ligne.get('type')?.value }}</td>
+                    <td [hidden]="true" >{{ ligne.get('sensMvt')?.value }}</td>
+                  </tr>
+
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <td colspan="2"><strong>Total</strong></td>
+<!--                    <td></td>-->
+<!--                    <td></td>-->
+                    <td>{{ columnTotals.debit }}</td>
+                    <td>{{ columnTotals.credit }}</td>
+                  </tr>
+                  </tfoot>
+                </table>
+                <!--end::Table-->
+              </div>
+<!--            </div>-->
+          </fieldset>
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Operation buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/opcvm/comptabilite/ecritures/manuelle" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="saveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Operation buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

@@ -17,7 +17,20 @@ import { ConstatationChargesComponent } from './constatation-charges/constatatio
 import { ConstatationChargesListComponent } from './constatation-charges-list/constatation-charges-list.component';
 import { PaiementCommissionListComponent } from './paiement-commission-list/paiement-commission-list.component';
 import { PaiementCommissionComponent } from './paiement-commission/paiement-commission.component';
-
+import { ListeverificationecritureV1Component } from './listeverificationecriture-v1/listeverificationecriture-v1.component';
+import { ListeverificationecritureV2Component } from './listeverificationecriture-v2/listeverificationecriture-v2.component';
+import { PaiementChargesComponent } from './paiement-charges/paiement-charges.component';
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import { RegulecartsoldeComponent } from './regulecartsolde/regulecartsolde.component';
+import { RegulecartsoldeListComponent } from './regulecartsolde-list/regulecartsolde-list.component';
+import { DeleteModalRegulecartsoldeComponent } from './delete-modal-regulecartsolde/delete-modal-regulecartsolde.component';
+import { RegulecartsoldeAddEditComponent } from './regulecartsolde-add-edit/regulecartsolde-add-edit.component';
+import {NombreDecimalDirective} from "../../../validators/nombre-decimal.directive";
+import {NumeroPositifValidatorsDirective} from "../../../validators/numero-positif-validators.directive";
+import { PaiementCommissionInvestissementListComponent } from './paiement-commission-investissement-list/paiement-commission-investissement-list.component';
+import { PaiementCommissionInvestissementAddEditComponent } from './paiement-commission-investissement-add-edit/paiement-commission-investissement-add-edit.component';
+import { EcritureManuelComponent } from './ecriture-manuel/ecriture-manuel.component';
+import { OperationdetachementdroitComponent } from './operationdetachementdroit/operationdetachementdroit.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +42,18 @@ import { PaiementCommissionComponent } from './paiement-commission/paiement-comm
     ConstatationChargesComponent,
     ConstatationChargesListComponent,
     PaiementCommissionListComponent,
-    PaiementCommissionComponent
+    PaiementCommissionComponent,
+    ListeverificationecritureV1Component,
+    ListeverificationecritureV2Component,
+    PaiementChargesComponent,
+    RegulecartsoldeComponent,
+    RegulecartsoldeListComponent,
+    DeleteModalRegulecartsoldeComponent,
+    RegulecartsoldeAddEditComponent,
+    PaiementCommissionInvestissementListComponent,
+    PaiementCommissionInvestissementAddEditComponent,
+    EcritureManuelComponent,
+    OperationdetachementdroitComponent
   ],
     imports: [
         CommonModule,
@@ -40,7 +64,10 @@ import { PaiementCommissionComponent } from './paiement-commission/paiement-comm
         ReactiveFormsModule,
         SharedModule,
         EntityCrudModule,
-        SweetAlert2Module
+        SweetAlert2Module,
+        NgMultiSelectDropDownModule,
+        NombreDecimalDirective,
+        NumeroPositifValidatorsDirective
     ]
 })
 export class ComptabiliteModule { }

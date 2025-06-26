@@ -95,8 +95,8 @@ export class ComptecomptableService extends ResourceService<Comptecomptable> {
       destroy:true
     }
   }
-  afficherTous(){
-    return this.http.get<any>(`${this.API_URL}`)
+  afficherTous(codePlan:any){
+    return this.http.get<any>(`${this.API_URL}/plan/${codePlan}`)
   }
   afficherSelonNumCompteComptable(numCompteComptable:string){
     return this.http.get<any>(`${this.API_URL}/${numCompteComptable}`)

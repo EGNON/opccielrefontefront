@@ -36,6 +36,9 @@ export class TitreService extends ResourceService<TitreModel>{
   afficher(id: number, keyword: any){
     return this.http.post<any>(`${this.API_URL}/afficher-${keyword}/${id}`, null);
   }
+  afficherSelonTypeTitre(code: any){
+    return this.http.get<any>(`${this.API_URL}/typetitre/${code}`);
+  }
 
   afficherTous(){
     return this.http.get<any>(`${this.API_URL}/liste`)
