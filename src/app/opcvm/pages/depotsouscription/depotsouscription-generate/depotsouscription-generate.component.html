@@ -81,6 +81,18 @@
                 <!--end::Input-->
               </div>
             </div>
+<!--            <div [hidden]="true" class="col-md-4 fv-row">-->
+<!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
+<!--              <label class="fs-5 fw-semibold mb-2">OP.</label>-->
+<!--              &lt;!&ndash;end::Label&ndash;&gt;-->
+<!--              &lt;!&ndash;begin::Select&ndash;&gt;-->
+<!--              <select #mySelect4 class="form-select form-select-sm mb-2" formControlName="operation">-->
+<!--                <option *ngFor="let item of depotRachat$" [ngValue]="item">-->
+<!--                  {{ item.idOperation }}-->
+<!--                </option>-->
+<!--              </select>-->
+<!--              &lt;!&ndash;end::Select&ndash;&gt;-->
+<!--            </div>-->
             <div class="col-md-3 fv-row">
               <!--begin::Label-->
               <label class="fs-5 fw-semibold mb-2">Distributeur</label>
@@ -119,7 +131,15 @@
                 <div class="card-toolbar">
                   <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-sm btn-info me-3" (click)="precalcul()">
-                      <span class="indicator-label">Précalculer</span>
+                      <ng-container *ngIf="precalculer">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                      </ng-container>
+                      <ng-container *ngIf="!precalculer">
+                        <span class="indicator-label">Précalculer</span>
+                      </ng-container>
                     </button>
                     <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary" (click)="submitting ? null : save()">
                       <ng-container *ngIf="submitting">

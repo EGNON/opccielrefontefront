@@ -67,6 +67,14 @@ export class OperationService extends ResourceService<any> implements OnDestroy{
   afficherActionnaireBanque(idOpcvm: any,code:any) {
     return this.http.get<any>(`${this.API_URL}/actionnairebanque/${idOpcvm}/${code}`);
   }
+
+  verifierEtape(niveau: any,idOpcvm: any,idSeance: any,estVerifie1: any,estVerifie2: any,niv: any) {
+    return this.http.get<any>(`${this.API_URL}/verifieretape/${niveau}/${idOpcvm}/${idSeance}/${estVerifie1}/${estVerifie2}/${niv}`);
+  }
+  etape(niveau: any,idOpcvm: any) {
+    return this.http.get<any>(`${this.API_URL}/verifieretape/${niveau}/${idOpcvm}`);
+  }
+
   validationEcritureNiveau1(list:any, userLogin:any, codeTypeOperation:any, form:any, idOpcvm:any){
     return this.http.put<any>(`${this.API_URL}/validationecritureniveau1/${userLogin}/${codeTypeOperation}/${form}/${idOpcvm}`, list);
 }

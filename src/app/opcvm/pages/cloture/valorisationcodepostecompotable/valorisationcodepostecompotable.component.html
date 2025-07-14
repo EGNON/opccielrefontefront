@@ -1,0 +1,157 @@
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Séance</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <ng-multiselect-dropdown
+                [settings]="seanceSettings"
+                [placeholder]="'Sélectionnez une séance'"
+                formControlName="seance"
+                [data]="seance"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange($event)"
+                (onDropDownClose)="onDropDownClose($event)"
+                (onSelect)="onItemSelect($event)"
+                (onDeSelect)="onDeSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                (onDeSelectAll)="onDeSelectAll($event)"
+              >
+              </ng-multiselect-dropdown>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-6 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date opération</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateOperation="ngbDatepicker" aria-label="Date Début" formControlName="dateOperation"
+                       (click)="dateOperation.toggle()"/>
+                <!--end::Input-->
+              </div>
+            </div>
+            <!--end::Col-->
+
+          </div>
+          <hr>
+          <div class="row mb-5">
+            <div class="card">
+              <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                  <!--begin::Search-->
+                  <div class="d-flex align-items-center position-relative my-1">
+                    <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                    <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12">
+                  </div>
+                  <!--end::Search-->
+                </div>
+                <!--end::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                  <div class="d-flex justify-content-end">
+                    <button class="btn btn-sm btn-primary me-3"
+                    (click)="actualiser()">
+                      <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                      </ng-container>
+                      <ng-container *ngIf="!submitting">
+                        <span class="indicator-label">Précalculer</span>
+                      </ng-container>
+                    </button>
+                    <button  type="button" class="btn btn-sm btn-info me-3" (click)="save()">
+                      <ng-container *ngIf="submitted">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!submitted">
+                        <span class="indicator-label">Enregistrer</span>
+                      </ng-container>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-warning">
+                      <ng-container *ngIf="downloading">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!downloading">
+                        <span class="indicator-label">Exporter</span>
+                      </ng-container>
+                    </button>
+                  </div>
+                </div>
+                <!--end::Card toolbar-->
+              </div>
+              <div  class="card-body pt-0">
+                <!--begin::Table-->
+               <ul class="list-group list-group-flush vert-scrollable-150" id="alldata">
+                  <table class="order-details" id="table_codeposte" >
+                    <thead>
+                    <tr class="bg-blue">
+                      <th style="width: 25%">Code</th>
+                      <th style="width: 25%">Libelle</th>
+                      <th style="width: 25%">Formule</th>
+                      <th style="width: 25%">Valeur</th>
+                      <th  style="width: 25%">codeplan</th>
+
+                    </tr>
+                    </thead>
+                    <tbody class="fw-semibold text-gray-600">
+                    <tr *ngFor="let obj of posteComptableSeanceOpcvm$">
+                      <td>
+                        <div class="d-flex align-items-center">
+                          {{ obj.codePosteComptable}}
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          {{ obj.libellePosteComptable}}
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          {{ obj.formuleSysteme}}
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          {{ obj.valeur }}
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          {{ obj.plan.codePlan }}
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </ul>
+                </div>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

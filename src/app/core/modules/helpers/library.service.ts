@@ -2279,6 +2279,50 @@ export class LibraryService implements OnDestroy{
                   dataLink: '',
                   parent: 'Extournes des VDE',
                   children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF2_VDE'),
+                  title: 'Vérification des extournes des VDE Niveau 2',
+                  page: '/opcvm/vde/generationextourne/liste/verification/niveau2',
+                  role: 'ROLE_VERIF2_VDE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Extournes des VDE',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF1_EXTOURNE_VDE'),
+                  title: 'Vérification des écritures d\'extourne des VDE Niveau 1',
+                  page: '/opcvm/vde/generationextourne/liste/verificationextourne/niveau1',
+                  role: 'ROLE_VERIF1_EXTOURNE_VDE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Extournes des VDE',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF2_EXTOURNE_VDE'),
+                  title: 'Vérification des écritures d\'extourne des VDE Niveau 2',
+                  page: '/opcvm/vde/generationextourne/liste/verificationextourne/niveau2',
+                  role: 'ROLE_VERIF2_EXTOURNE_VDE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Extournes des VDE',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_SOLDE_COMPTE_EXTOURNE'),
+                  title: 'Solde des comptes VDE et revenus',
+                  page: '/opcvm/vde/generationextourne/liste/soldecompteextourne',
+                  role: 'ROLE_SOLDE_COMPTE_EXTOURNE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Extournes des VDE',
+                  children: []
                 }
                 ]
             },
@@ -2402,6 +2446,139 @@ export class LibraryService implements OnDestroy{
                   translate: '',
                   dataLink: '',
                   parent: 'Evenement sur valeur',
+                  children: []
+                }
+              ]
+            },
+            {
+              allow: null,
+              title: 'Cloture de seance',
+              icon: 'element-7',
+              dataLink: '',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_GENERATION_DIFF_ESTIMATION'),
+                  title: 'Génération différences d\'estimation',
+                  page: '/opcvm/cloture/generationdifferenceestimation',
+                  role: 'ROLE_GENERATION_DIFF_ESTIMATION',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIFICATION_NIVEAU1_DE'),
+                  title: 'Vérification Niveau 1 (DE)',
+                  page: '/opcvm/cloture/verificationniveu1de',
+                  role: 'ROLE_VERIFICATION_NIVEAU1_DE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIFICATION_NIVEAU2_DE'),
+                  title: 'Vérification Niveau 2 (DE)',
+                  page: '/opcvm/cloture/verificationniveu2de',
+                  role: 'ROLE_VERIFICATION_NIVEAU2_DE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_ECRITURE_NIVEAU1_DE'),
+                  title: 'Vérification niveau 1 jeux d\'écritures (DE)',
+                  page: '/opcvm/cloture/verificationecritureniveu1de',
+                  role: 'ROLE_VERIF_ECRITURE_NIVEAU1_DE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_ECRITURE_NIVEAU2_DE'),
+                  title: 'Vérification niveau 1 jeux d\'écritures (DE)',
+                  page: '/opcvm/cloture/verificationecritureniveu2de',
+                  role: 'ROLE_VERIF_ECRITURE_NIVEAU2_DE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_AMORTISSEMENT_CHARGE'),
+                  title: 'Amortissement des charges',
+                  page: '/opcvm/cloture/amortissementcharge',
+                  role: 'ROLE_AMORTISSEMENT_CHARGE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_CHARGE1'),
+                  title: 'Vérification Niveau 1 (CHARGES)',
+                  page: '/opcvm/cloture/verificationchargeniveau1',
+                  role: 'ROLE_VERIF_CHARGE1',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_CHARGE2'),
+                  title: 'Vérification Niveau 2 (CHARGES)',
+                  page: '/opcvm/cloture/verificationchargeniveau2',
+                  role: 'ROLE_VERIF_CHARGE2',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_ECRITURE_CHARGE1'),
+                  title: 'Vérification niveau 1 jeux d\'écritures (CHARGES)',
+                  page: '/opcvm/cloture/verificationecriturechargeniveau1',
+                  role: 'ROLE_VERIF_ECRITURE_CHARGE1',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_ECRITURE_CHARGE2'),
+                  title: 'Vérification niveau 2 jeux d\'écritures (CHARGES)',
+                  page: '/opcvm/cloture/verificationecriturechargeniveau2',
+                  role: 'ROLE_VERIF_ECRITURE_CHARGE2',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VALORISATION_CODE_POSTE'),
+                  title: 'Valorisation des postes comptables',
+                  page: '/opcvm/cloture/valorisationcodeposte',
+                  role: 'ROLE_VALORISATION_CODE_POSTE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
                   children: []
                 }
               ]

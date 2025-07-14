@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Config} from "datatables.net";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {of, Subject, Subscription} from "rxjs";
@@ -24,14 +24,16 @@ export class DepotsouscriptionGenerateComponent implements OnInit, OnDestroy{
   currentUser: any;
 
   submitting = false;
+  precalculer = false;
   submitted = false;
-
+  depotRachat$:any;
   //DataTable Config
   datatableConfigInit: any = {};
   datatableConfig: Config = {};
   dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective, {static: false}) datatableElement: DataTableDirective;
+  @ViewChild('mySelect4') mySelect!: ElementRef<HTMLSelectElement>;
   changeTableEvent: EventEmitter<boolean> = new EventEmitter();
 
   isLoading: boolean = false;
@@ -138,6 +140,7 @@ export class DepotsouscriptionGenerateComponent implements OnInit, OnDestroy{
   afficherListe() {
     const self = this;
     self.sous.clear();
+    this.precalculer=true
     this.datatableConfig = {
       ...this.datatableConfigInit,
       serverSide: true,
@@ -156,7 +159,14 @@ export class DepotsouscriptionGenerateComponent implements OnInit, OnDestroy{
             // const depots: any[] = resp.data.data;
             // self.disableSaveBtn = depots.filter(d => d.estVerifier) != null ? depots.filter(d => d.estVerifier).length > 0 : false;
             callback(resp.data);
+            this.precalculer=false
           });
+        // this.entityService.precalculSouscriptionListe(precalculRequest).subscribe(
+        //   (data)=>{
+        //     this.depotRachat$=data.data
+        //     this.precalculer=false
+        //   }
+        // )
         this.subscriptions.push(sb);
       },
       columns: [
@@ -206,8 +216,8 @@ export class DepotsouscriptionGenerateComponent implements OnInit, OnDestroy{
           },
         },
         {
-          title: 'Taf Retro.', data: 'tafCommissionRetrocession', render: function (data, type, row) {
-            return row.tafCommissionRetrocession?.toLocaleString('fr-FR', {minimumFractionDigits:6, maximumFractionDigits:6});
+          title: 'Taf Retro.', data: 'tafcommissionRetrocession', render: function (data, type, row) {
+            return row.tafcommissionRetrocession?.toLocaleString('fr-FR', {minimumFractionDigits:6, maximumFractionDigits:6});
           },
         },
         {
@@ -277,9 +287,11 @@ export class DepotsouscriptionGenerateComponent implements OnInit, OnDestroy{
           idOperation: null,
           idTransaction: null,
           idActionnaire: data.idActionnaire,
+          codeNatureOperation: "SOUS_PART",
           actionnaire: {
             idPersonne: data.idActionnaire,
           },
+          personne: self.form.get("distributeur").value,
           idSeance: self.currentSeance?.idSeanceOpcvm?.idSeance,
           idOpcvm: self.currentOpcvm?.idOpcvm,
           opcvm: self.currentOpcvm,
@@ -289,7 +301,7 @@ export class DepotsouscriptionGenerateComponent implements OnInit, OnDestroy{
           },
           referencePiece: "",
           dateDernModifClient: new Date(),
-          userLogin: self.currentUser?.denomination,
+          userLogin: self.currentUser?.username,
           ecriture: "A",
           estOD: false,
           type: "GSR",
@@ -299,11 +311,11 @@ export class DepotsouscriptionGenerateComponent implements OnInit, OnDestroy{
           dateValeur: self.currentSeance?.dateFermeture,
           montant: data.montantSousRachatALiquider,
           montantSousALiquider: data.montantSousRachatALiquider,
-          SousRachatPart: data.sousRachatPart,
+          sousRachatPart: data.sousRachatPart,
           commisiionSousRachat: data.commission,
-          TAFCommissionSousRachat: data.tafCommission,
+          tAFCommissionSousRachat: data.tafCommission,
           retrocessionSousRachat: data.commissionRetrocession,
-          TAFRetrocessionSousRachat: data.tafCommissionRetrocession,
+          tAFRetrocessionSousRachat: data.tafcommissionRetrocession,
           commissionSousRachatRetrocedee: data.commissionRetrocedee,
           modeValeurLiquidative: null,
           coursVL: 0,
@@ -473,7 +485,7 @@ export class DepotsouscriptionGenerateComponent implements OnInit, OnDestroy{
       this.loadingService.setLoading(false);
       return;
     }
-
+    console.log(this.form.value.sous)
     this.entityService.genererSouscription(this.form.value.sous)
       .pipe(
         catchError((err) => {

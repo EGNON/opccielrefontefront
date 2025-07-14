@@ -40,6 +40,7 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
   submitting = false;
   verification = false;
   valider = false;
+  liste = false;
   submitted = false;
   confirmerGrise:boolean;
   apercuGrise:boolean;
@@ -105,6 +106,8 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
     this.confirmerGrise=true
     this.apercuGrise=true
     this.verifierGrise=true
+    this.submitting=false
+    this.liste=false
     this.pageInfo.updateTitle("Vérification écritures comptables niveau 1");
     this.dtOptions = {
       // dom: 'Bfrtip',
@@ -115,6 +118,7 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
       lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
       lengthChange: false,
       responsive: true,
+
       buttons: [
         {
           extend:    'copy',
@@ -216,6 +220,7 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
         dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
         estVerifie1:estVerifie1,
         estVerifie2:false,
+        idSeance:0,
         codeTypeOperation:null
       };
     this.operationService.afficherListeVerificationEritureNiveau1(param,null).subscribe(
@@ -249,6 +254,7 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
         dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
         estVerifie1:estVerifie1,
         estVerifie2:false,
+        idSeance:0,
         codeTypeOperation:null
       };
     console.log(param)
@@ -281,6 +287,7 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
         dateDebut: new Date(param.dateDebut.year, param.dateDebut.month - 1, param.dateDebut.day + 1),
         dateFin: new Date(param.dateFin.year, param.dateFin.month - 1, param.dateFin.day + 1),
         estVerifie1: estVerifie1,
+        idSeance:0,
         estVerifie2: false
       }
       console.log(param);
@@ -309,7 +316,10 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
 
   }
   afficherListe(prefix: string) {
+    if(this.liste)
+      this.submitting=true
 
+    this.liste=true
     const self = this;
     let columns: any[] = [
       {
@@ -367,17 +377,14 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
         if (prefix.toLowerCase() === "l") {
           param = {
             ...param,
+            idSeance:0,
             dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
             dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
             estVerifie1:estVerifie1,
             estVerifie2:false
           };
           console.log(param);
-          this.operationService.afficherListeVerificationEritureListe(param)
-            .subscribe(resp => {
-              this.operation$=resp.data
-              console.log("operation=",this.operation$)
-            });
+
           const sb = this.operationService.afficherListeVerificationEriture(param)
             .subscribe(resp => {
               callback(resp.data);
@@ -404,6 +411,12 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
                   this.verifierGrise=true
                 }
               }
+            });
+          this.operationService.afficherListeVerificationEritureListe(param)
+            .subscribe(resp => {
+              this.operation$=resp.data
+              console.log("operation=",this.operation$)
+              this.submitting=false
             });
           this.subscriptions.push(sb);
         }

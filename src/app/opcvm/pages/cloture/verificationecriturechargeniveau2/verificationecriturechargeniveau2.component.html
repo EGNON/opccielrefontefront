@@ -1,0 +1,223 @@
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
+          <div class="row mb-5">
+            <!--            &lt;!&ndash;begin::Col&ndash;&gt;-->
+            <!--            <div class="col-md-1 fv-row">-->
+            <!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
+            <!--              <label class="fs-5 fw-semibold mb-2">N° Séance</label>-->
+            <!--              &lt;!&ndash;end::Label&ndash;&gt;-->
+            <!--              &lt;!&ndash;begin::Input&ndash;&gt;-->
+            <!--              <input readonly="readonly" type="text" class="form-control form-control-sm" placeholder="" formControlName="idSeance"/>-->
+            <!--              &lt;!&ndash;end::Input&ndash;&gt;-->
+            <!--            </div>-->
+            <!--            &lt;!&ndash;end::Col&ndash;&gt;-->
+            <!--            &lt;!&ndash;begin::Col&ndash;&gt;-->
+            <!--            <div class="col-md-1 fv-row">-->
+            <!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
+            <!--              <label class="fs-5 fw-semibold mb-2">ID OP.</label>-->
+            <!--              &lt;!&ndash;end::Label&ndash;&gt;-->
+            <!--              &lt;!&ndash;begin::Input&ndash;&gt;-->
+            <!--              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="idOperation"/>-->
+            <!--              &lt;!&ndash;end::Input&ndash;&gt;-->
+            <!--            </div>-->
+            <!--            &lt;!&ndash;end::Col&ndash;&gt;-->
+            <!--            &lt;!&ndash;begin::Col&ndash;&gt;-->
+            <!--            <div class="col-md-1 fv-row">-->
+            <!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
+            <!--              <label class="fs-5 fw-semibold mb-2">ID TRANS.</label>-->
+            <!--              &lt;!&ndash;end::Label&ndash;&gt;-->
+            <!--              &lt;!&ndash;begin::Input&ndash;&gt;-->
+            <!--              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="idTransaction"/>-->
+            <!--              &lt;!&ndash;end::Input&ndash;&gt;-->
+            <!--            </div>-->
+            <!--            &lt;!&ndash;end::Col&ndash;&gt;-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date Début</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateDeb="ngbDatepicker" aria-label="Date Ouverture" formControlName="dateDebut" (click)="dateDeb.toggle()"/>
+                <!--end::Input-->
+              </div>
+            </div>
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date Fin</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateFin="ngbDatepicker" aria-label="Date Début" formControlName="dateFin" (click)="dateFin.toggle()"/>
+                <!--end::Input-->
+              </div>
+            </div>
+            <!--begin::Col-->
+            <div class="col-md-4 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Type OP.</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="typeOperation">
+                <option disabled selected [ngValue]="null">Sélectionnez un type opération...</option>
+                <option *ngFor="let item of typeOperation$" >
+                  {{ item.libelleTypeOperation }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class=" fs-5 fw-semibold mb-2">Vérification N1</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="verif1"
+                      (change)="actualiser()">
+                <option disabled value="null"></option>
+                <option ngValue="NON">NON</option>
+                <option ngValue="OUI">OUI</option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div [hidden]="true" class="col-md-4 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">OP.</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select #mySelect class="form-select form-select-sm mb-2" formControlName="operation">
+                <option *ngFor="let item of operation$" [ngValue]="item">
+                  {{ item.idOperation }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <!--end::Col-->
+          </div>
+          <hr>
+          <div class="row mb-5">
+            <div class="card">
+              <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                  <!--begin::Search-->
+                  <div class="d-flex align-items-center position-relative my-1">
+                    <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                    <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12">
+                  </div>
+                  <!--end::Search-->
+                </div>
+                <!--end::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                  <div class="d-flex justify-content-end">
+                    <button  class="btn btn-sm btn-primary me-3" (click)=" verificationEcritureNiveau1De()">
+                      <ng-container *ngIf="verifierEtape">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                      </ng-container>
+                      <ng-container *ngIf="!verifierEtape">
+                        <span class="indicator-label">Vérifiez les étapes</span>
+                      </ng-container>
+                    </button>
+                    <button [disabled]="verifierGriseAfficher" [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary me-3" (click)="submitting ? null : actualiser()">
+                      <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                      </ng-container>
+                      <ng-container *ngIf="!submitting">
+                        <span class="indicator-label">Afficher</span>
+                      </ng-container>
+                    </button>
+                    <button [disabled]="verifierGrise" (click)="verificationNiveau1()" type="button" class="btn btn-sm btn-info me-3">
+                      <ng-container *ngIf="verification">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!verification">
+                        <span class="indicator-label">Vérifier</span>
+                      </ng-container>
+                    </button>
+                    <button [disabled]="apercuGrise" (click)="apercu()" type="button" class="btn btn-sm btn-info me-3">
+                      <ng-container *ngIf="downloading">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!downloading">
+                        <span class="indicator-label">Aperçu</span>
+                      </ng-container>
+                    </button>
+                    <button [disabled]="confirmerGrise" (click)="validationEcritureNiveau1()" type="button" class="btn btn-sm btn-info me-3">
+                      <ng-container *ngIf="valider">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!valider">
+                        <span class="indicator-label">Confirmez la vérification niveau 2</span>
+                      </ng-container>
+                    </button>
+                    <!--<button type="button" class="btn btn-sm btn-warning">
+                      <ng-container *ngIf="downloading">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!downloading">
+                        <span class="indicator-label">Envoyer</span>
+                      </ng-container>
+                    </button>-->
+                  </div>
+                </div>
+                <!--end::Card toolbar-->
+              </div>
+              <div class="card-body pt-0">
+                <div class="table-responsive angular-bootstrap-table">
+                  <!--                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">-->
+                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-bordered fs-6 gy-5 dataTable no-footer">
+                    <thead>
+                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                      <ng-container *ngFor="let column of dtOptions.columns; let i=index">
+                        <th>{{ column.title }}</th>
+                      </ng-container>
+                    </tr>
+                    </thead>
+                    <tbody class="fw-semibold text-gray-600">
+                    </tbody>
+                  </table>
+                  <div #details class="details hidden"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>

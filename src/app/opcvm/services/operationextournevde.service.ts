@@ -21,8 +21,12 @@ export class OperationextournevdeService extends ResourceService<Operationextour
       return this.http.get<any>(`${this.API_URL}/jasperpdf/vde/${idSeance}/${idOpcvm}/${estVerifie}/${estVerifie1}/${estVerifie2}/${niveau}`);
 
   }
-  modifier(operationEtourneVDE:any){
-    return this.http.put<any>(`${this.API_URL}/creerverif`,operationEtourneVDE)
+  soldeCompteExtourne(obj:any){
+      return this.http.post<any>(`${this.API_URL}/jasperpdf/vde/soldecompteextourne`,obj);
+
+  }
+  modifier(operationEtourneVDE:any,niveau:any){
+    return this.http.put<any>(`${this.API_URL}/creerverif/${niveau}`,operationEtourneVDE)
   }
   supprimer(userLogin:any,id:any){
     return this.http.delete<any>(`${this.API_URL}/${userLogin}/${id}`)

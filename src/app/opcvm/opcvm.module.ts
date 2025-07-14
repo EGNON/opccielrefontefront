@@ -21,7 +21,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     OpcvmComponent,
-    ConnexionComponent
+    ConnexionComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

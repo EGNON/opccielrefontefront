@@ -37,6 +37,7 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
   downloading = false;
   downloaded = false;
   submitting = false;
+  liste = false;
   verification = false;
   valider = false;
   submitted = false;
@@ -50,7 +51,7 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective, {static: false}) datatableElement: DataTableDirective;
   @ViewChild('details', {read: ViewContainerRef}) detailsComponentContainer: ViewContainerRef;
-  @ViewChild('mySelect') mySelect!: ElementRef<HTMLSelectElement>;
+  @ViewChild('mySelect2') mySelect!: ElementRef<HTMLSelectElement>;
   isLoading: boolean = false;
   subscriptions: Subscription[] = [];
 
@@ -104,6 +105,7 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
     this.confirmerGrise=true
     this.apercuGrise=true
     this.verifierGrise=true
+    this.liste=false
     this.pageInfo.updateTitle("Vérification écritures comptables niveau 2");
     this.dtOptions = {
       // dom: 'Bfrtip',
@@ -214,6 +216,7 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
       dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
       dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
       estVerifie1:true,
+      idSeance:0,
       estVerifie2:estVerifie2,
       codeTypeOperation:null
     };
@@ -247,6 +250,7 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
       dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
       dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
       estVerifie1:true,
+      idSeance:0,
       estVerifie2:estVerifie2,
       codeTypeOperation:null
     };
@@ -280,6 +284,7 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
       dateDebut: new Date(param.dateDebut.year, param.dateDebut.month - 1, param.dateDebut.day + 1),
       dateFin: new Date(param.dateFin.year, param.dateFin.month - 1, param.dateFin.day + 1),
       estVerifie1: true,
+      idSeance:0,
       estVerifie2: estVerifie2
     }
     console.log(param);
@@ -308,7 +313,10 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
 
   }
   afficherListe(prefix: string) {
+    if(this.liste)
+      this.submitting=true
 
+    this.liste=true
     const self = this;
     let columns: any[] = [
       {
@@ -366,17 +374,14 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
         if (prefix.toLowerCase() === "l") {
           param = {
             ...param,
+            idSeance:0,
             dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
             dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
             estVerifie1:true,
             estVerifie2:estVerifie2
           };
           console.log(param);
-          this.operationService.afficherListeVerificationEritureListe(param)
-            .subscribe(resp => {
-              this.operation$=resp.data
-              console.log("operation=",this.operation$)
-            });
+
           const sb = this.operationService.afficherListeVerificationEriture(param)
             .subscribe(resp => {
               callback(resp.data);
@@ -403,6 +408,12 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
                   this.verifierGrise=true
                 }
               }
+            });
+          this.operationService.afficherListeVerificationEritureListe(param)
+            .subscribe(resp => {
+              this.operation$=resp.data
+              this.submitting=false
+              console.log("operation=",this.operation$)
             });
           this.subscriptions.push(sb);
         }

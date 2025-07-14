@@ -14,6 +14,10 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import { OperationextournevdeAddEditComponent } from './operationextournevde-add-edit/operationextournevde-add-edit.component';
 import { Verificationniveau1vdeComponent } from './verificationniveau1vde/verificationniveau1vde.component';
 import { Verificationniveau1modalvdeComponent } from './verificationniveau1modalvde/verificationniveau1modalvde.component';
+import { Verificationniveau2modalvdeComponent } from './verificationniveau2modalvde/verificationniveau2modalvde.component';
+import { Verificationextourneniveau1modalvdeComponent } from './verificationextourneniveau1modalvde/verificationextourneniveau1modalvde.component';
+import { Verificationextourneniveau2modalvdeComponent } from './verificationextourneniveau2modalvde/verificationextourneniveau2modalvde.component';
+import { SoldecompteextourneComponent } from './soldecompteextourne/soldecompteextourne.component';
 
 
 
@@ -23,7 +27,11 @@ import { Verificationniveau1modalvdeComponent } from './verificationniveau1modal
     OperationextournevdeComponent,
     OperationextournevdeAddEditComponent,
     Verificationniveau1vdeComponent,
-    Verificationniveau1modalvdeComponent
+    Verificationniveau1modalvdeComponent,
+    Verificationniveau2modalvdeComponent,
+    Verificationextourneniveau1modalvdeComponent,
+    Verificationextourneniveau2modalvdeComponent,
+    SoldecompteextourneComponent
   ],
   imports: [
     CommonModule,

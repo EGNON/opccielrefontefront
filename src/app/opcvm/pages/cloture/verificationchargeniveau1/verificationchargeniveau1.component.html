@@ -1,0 +1,67 @@
+<div class="modal-header p-2">
+  <!--  <div class="modal-title h4">LISTE DE VERIFICATION DES VDE NIVEAU 1</div>-->
+  <!--<button type="button" class="close" (click)="modal.dismiss()">
+    <span>&times;</span>
+  </button>-->
+
+  <!--<button type="button" class="btn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>-->
+</div>
+<!--end::Card header-->
+<!--begin::Card body-->
+<div class="card modal-body p-lg-2">
+  <!--  <form [formGroup]="entityForm" class="form mb-5">-->
+  <!--    &lt;!&ndash;begin::Input group&ndash;&gt;-->
+  <!--    <div class="row mb-5">-->
+  <!--      <div class="col-md-3 fv-row">-->
+  <!--        &lt;!&ndash;begin::Label&ndash;&gt;-->
+  <!--        <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">-->
+  <!--          <input type="checkbox" checked="checked" [value]="false"-->
+  <!--                 class="form-check-input ng-untouched ng-pristine ng-valid"-->
+  <!--                 id="estEnCloture" formControlName="estEnCloture">-->
+  <!--          <label class="form-check-label text-gray-700 fw-bold text-nowrap">Passé à la clôture si la vérification est correcte</label>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </form>-->
+  <!-- begin::Table-->
+  <div class="d-flex justify-content-start">
+    <button  style="margin-top: 10px;margin-right: 5px" type="button" class="btn btn-sm btn-success"
+             (click)="verificationNiveau1Charge()"     >
+      <ng-container *ngIf="downloading">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+      </ng-container>
+      <ng-container *ngIf="!downloading">
+        <span class="indicator-label">Vérifier</span>
+      </ng-container>
+
+    </button>
+    <button  style="margin-top: 10px;margin-right: 5px" type="button" class="btn btn-sm btn-primary"
+             (click)="save()"     >
+      <ng-container *ngIf="submitted">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+      </ng-container>
+      <ng-container *ngIf="!submitted">
+        <span class="indicator-label">Confirmer la vérification (CHARGES) niveau 1 </span>
+      </ng-container>
+
+    </button>
+    <!--    <button  style="margin-top: 10px" type="button" class="btn btn-sm btn-success"-->
+    <!--             (click)="verifiIntentionRachatN2_Final()"   >-->
+    <!--      Télécharger-->
+    <!--    </button>-->
+    <!--end::Table-->
+  </div>
+</div>
+<!--end::Card body-->
+<!--  </div>-->
+<!--end::Products-->
+<!--</div>-->
+

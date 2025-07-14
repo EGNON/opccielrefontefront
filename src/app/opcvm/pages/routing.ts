@@ -103,6 +103,12 @@ const OpcvmRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
+    path: 'cloture',
+    // canActivate: [OpcvmAuthGuard],
+    loadChildren: () => import('./cloture/cloture.module').then((m) => m.ClotureModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
     path: 'ordre',
     // canActivate: [OpcvmAuthGuard],
     loadChildren: () => import('./ordre/ordre.module').then((m) => m.OrdreModule),

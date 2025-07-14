@@ -39,7 +39,7 @@ export class Verificationniveau1modalvdeComponent implements OnInit{
     estVerifie2:false,
     userLogin1:this.authService.currentUserValue?.username
   }
-    this.operationExtourneVDEService.modifier(entity).subscribe(
+    this.operationExtourneVDEService.modifier(entity,1).subscribe(
       (data)=>{
         alert('La confirmation a été effectuée')
       }

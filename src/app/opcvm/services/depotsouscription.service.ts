@@ -52,6 +52,9 @@ export class DepotsouscriptionService extends ResourceService<any> implements On
   precalculSouscription(parameter: any) {
     return this.http.post<any>(`${this.API_URL}/precalcul/souscription`, parameter);
   }
+  precalculSouscriptionListe(parameter: any) {
+    return this.http.post<any>(`${this.API_URL}/precalculliste/souscription`, parameter);
+  }
 
   genererSouscription(parameter: any) {
     return this.http.post<any>(`${this.API_URL}/generer/souscription/tous`, parameter);

@@ -16,8 +16,23 @@ export class OperationdifferenceestimationService extends ResourceService<any> {
     return this.http.post<any>(`${this.API_URL}/datatable/list`, parameters);
 
   }
-  afficherListe(idOpcvm:any,idSeance){
+  validerNiveau(obj: any) {
+    return this.http.post<any>(`${this.API_URL}/validerniveau`,obj);
+  }
+  precalculDifferenceEstimation(parameters:any){
+    return this.http.post<any>(`${this.API_URL}/differenceestimation`, parameters);
+
+  }
+  enregistrer(parameters:any){
+    return this.http.post<any>(`${this.API_URL}/enregistrerdifferenceestimation`, parameters);
+
+  }
+  afficherListe(idOpcvm:any,idSeance:any){
     return this.http.get<any>(`${this.API_URL}/tous/${idOpcvm}/${idSeance}`);
+
+  }
+  generationDifferenceEstimation(idOpcvm:any,estEnCloture){
+    return this.http.get<any>(`${this.API_URL}/${idOpcvm}/${estEnCloture}`);
 
   }
   modifier(operationDetachement:any){
