@@ -1760,7 +1760,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_LISTE_CR'),
+                  allow: this.authService.isGrantedRole('ROLE_COMPTE_BANQUE_OPCVM'),
                   title: 'Comptes bancaires de l\'OPC',
                   icon: '',
                   page: '#',
@@ -1796,7 +1796,7 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [
                 {
-                  allow: this.authService.isGrantedRole('ROLE_MODELE_MSG_ALERTE'),
+                  allow: this.authService.isGrantedRole('ROLE_CONSTITUTION_CAPITAL'),
                   title: 'Constitution de capital',
                   page: '#',
                   role: 'ROLE_CONSTITUTION_CAPITAL',
@@ -1807,7 +1807,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_ALERTE'),
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_NIV1_CC'),
                   title: 'Vérification Niveau 1 (CC)',
                   page: '#',
                   role: 'ROLE_VERIF_NIV1_CC',
@@ -1818,7 +1818,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_ALERTE'),
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_NIV2_CC'),
                   title: 'Vérification Niveau 2 (CC)',
                   page: '#',
                   role: 'ROLE_VERIF_NIV2_CC',
@@ -1829,7 +1829,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_MAIL'),
+                  allow: this.authService.isGrantedRole('ROLE_VALO_POSTE_COMPTABLE'),
                   title: 'Valorisation des postes comptables',
                   page: '#',
                   role: 'ROLE_VALO_POSTE_COMPTABLE',
@@ -1840,7 +1840,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_MAIL'),
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_NIV1_PC'),
                   title: 'Vérification Niveau 1 (PC)',
                   page: '#',
                   role: 'ROLE_VERIF_NIV1_PC',
@@ -1851,7 +1851,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_MAIL'),
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_NIV2_PC'),
                   title: 'Vérification Niveau 2 (PC)',
                   page: '#',
                   role: 'ROLE_VERIF_NIV2_PC',
@@ -1862,7 +1862,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_MAIL'),
+                  allow: this.authService.isGrantedRole('ROLE_CLOTURE_SEANCE0'),
                   title: 'Clôture de la séance 0',
                   page: '#',
                   role: 'ROLE_CLOTURE_SEANCE0',
@@ -1907,7 +1907,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_AUTORISATION_CR'),
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_NIV1_DEPOT_SOUS'),
                   title: 'Vérification des dépôts Niveau 1',
                   page: '/opcvm/souscription/depotsouscription/verification/niveau1/liste/depot',
                   role: 'ROLE_VERIF_NIV1_DEPOT_SOUS',
@@ -1918,7 +1918,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_AUTORISATION_CR'),
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_NIV2_DEPOT_SOUS'),
                   title: 'Vérification des dépôts Niveau 2',
                   page: '/opcvm/souscription/depotsouscription/verification/niveau2/liste/depot',
                   role: 'ROLE_VERIF_NIV2_DEPOT_SOUS',
@@ -1951,7 +1951,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_AUTORISATION_CR'),
+                  allow: this.authService.isGrantedRole('ROLE_AVIS_SOUS'),
                   title: 'Avis de souscription',
                   page: '/opcvm/souscription/depotsouscription/avis/souscription/actionnaire',
                   role: 'ROLE_AVIS_SOUS',
@@ -2108,10 +2108,10 @@ export class LibraryService implements OnDestroy{
                   parent: 'Comptabilité',
                   children: [
                     {
-                      allow: this.authService.isGrantedRole('ROLE_VERIF_N1'),
+                      allow: this.authService.isGrantedRole('ROLE_VERIF_ECRITURE_N1'),
                       title: 'Niveau 1',
                       page: '/opcvm/comptabilite/verification/niveau1',
-                      role: 'ROLE_VERIF_N1',
+                      role: 'ROLE_VERIF_ECRITURE_N1',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -2119,10 +2119,10 @@ export class LibraryService implements OnDestroy{
                       children: []
                     },
                     {
-                      allow: this.authService.isGrantedRole('ROLE_VERIF_N2'),
+                      allow: this.authService.isGrantedRole('ROLE_VERIF_ECRITURE_N2'),
                       title: 'Niveau 2',
                       page: '/opcvm/comptabilite/verification/niveau2',
-                      role: 'ROLE_VERIF_N2',
+                      role: 'ROLE_VERIF_ECRITURE_N2',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -2176,10 +2176,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_DEPOT_SOUS'),
+                  allow: this.authService.isGrantedRole('ROLE_PAIEMENT_COMMISSION'),
                   title: 'Paiement des commissions et taxes',
                   page: '/opcvm/comptabilite/paiement/commission/liste',
-                  role: 'ROLE_DEPOT_SOUS',
+                  role: 'ROLE_PAIEMENT_COMMISSION',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2575,6 +2575,39 @@ export class LibraryService implements OnDestroy{
                   title: 'Valorisation des postes comptables',
                   page: '/opcvm/cloture/valorisationcodeposte',
                   role: 'ROLE_VALORISATION_CODE_POSTE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_PC_N1'),
+                  title: 'Vérification Niveau 1 (PC)',
+                  page: '/opcvm/cloture/verificationvalorisationcodeposteniveau1',
+                  role: 'ROLE_VERIF_PC_N1',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_VERIF_PC_N2'),
+                  title: 'Vérification Niveau 2 (PC)',
+                  page: '/opcvm/cloture/verificationvalorisationcodeposteniveau2',
+                  role: 'ROLE_VERIF_PC_N2',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Cloture de seance',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_CLOTURE_SEANCE'),
+                  title: 'Clôture séance',
+                  page: '/opcvm/cloture/seancevl',
+                  role: 'ROLE_CLOTURE_SEANCE',
                   icon: '',
                   translate: '',
                   dataLink: '',

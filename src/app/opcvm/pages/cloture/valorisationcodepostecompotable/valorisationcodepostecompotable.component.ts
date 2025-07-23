@@ -24,6 +24,7 @@ import {Opcvm} from "../../../../core/models/opcvm";
 import {Operationchargeaetaler} from "../../../models/operationchargeaetaler.model";
 import {Postecomptableseanceopcvm} from "../../../models/postecomptableseanceopcvm.model";
 import {Plan} from "../../../../core/models/plan.model";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-valorisationcodepostecompotable',
@@ -34,6 +35,7 @@ export class ValorisationcodepostecompotableComponent implements OnInit, AfterVi
   form: FormGroup;
   listeAvisForm: any
   opcvm: Opcvm
+  boutonGrise:boolean
 
   currentOpcvm: any;
   currentSeance: any;
@@ -68,7 +70,6 @@ export class ValorisationcodepostecompotableComponent implements OnInit, AfterVi
   isLoading: boolean = false;
   subscriptions: Subscription[] = [];
 
-  [key: string]: any;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -78,6 +79,7 @@ export class ValorisationcodepostecompotableComponent implements OnInit, AfterVi
     private posteComptableSeanceOpcvmService: PostecomptableseanceopcvmService,
     private seanceOpcvmService: SeanceopcvmService,
     private localStore: LocalService,
+    private router: Router,
     public renderer: Renderer2) {
     this.currentUser = this.authService.currentUserValue;
     this.currentOpcvm = this.localStore.getData("currentOpcvm");
@@ -125,7 +127,7 @@ export class ValorisationcodepostecompotableComponent implements OnInit, AfterVi
       showSelectedItemsAtTop: false,
       defaultOpen: false,
     };
-
+    this.boutonGrise=true
     this.afficherSeance();
     // this.afficherListe()
     // this.afficherListe("l");
@@ -162,8 +164,14 @@ export class ValorisationcodepostecompotableComponent implements OnInit, AfterVi
         this.posteComptableSeanceOpcvmService.afficherListe(param).subscribe(
           (data)=>{
             this.posteComptableSeanceOpcvm$=data.data
-            console.log(this.posteComptableSeanceOpcvm$)
+            // console.log(this.posteComptableSeanceOpcvm$)
             const data2 =data.data;
+
+            // console.log(data.message)
+            if(data.message==="Liste des postes comptables enregistrés")
+              this.boutonGrise=true
+            else
+              this.boutonGrise=false
 
             if (data2 !== undefined && typeof data2 === 'string') {
               const parts = data2.split('.');
@@ -231,12 +239,12 @@ export class ValorisationcodepostecompotableComponent implements OnInit, AfterVi
 
 
         console.log(param);
-        const sb = this.operationDifferenceEstimationService.afficherTous(param)
-          .subscribe(resp => {
-            callback(resp.data);
-            console.log(resp.data)
-          });
-        this.subscriptions.push(sb);
+        // const sb = this.operationDifferenceEstimationService.afficherTous(param)
+        //   .subscribe(resp => {
+        //     callback(resp.data);
+        //     console.log(resp.data)
+        //   });
+        // this.subscriptions.push(sb);
 
       },
       columns: columns,
@@ -322,6 +330,7 @@ export class ValorisationcodepostecompotableComponent implements OnInit, AfterVi
       alert("Aucune donnée dans le tableau")
       return
     }
+    console.log(this.nbreLigne)
     // this.loadingService.setLoading(true)
     this.submitted=true
     let i: number = 1;
@@ -340,9 +349,10 @@ export class ValorisationcodepostecompotableComponent implements OnInit, AfterVi
     this.posteComptableSeanceOpcvmTab=[]
 
     for (i === 1; i < this.nbreLigne; i++) {
+      console.log("i=",i)
       this.posteComptableSeanceOpcvm=new Postecomptableseanceopcvm();
       this.posteComptableSeanceOpcvm.opcvm=this.opcvm
-      this.posteComptableSeanceOpcvm.idSeance=this.idSeance
+      this.posteComptableSeanceOpcvm.idSeance=this.idSeance+1
       this.posteComptableSeanceOpcvm.dateValeur =dateOperation;
       this.posteComptableSeanceOpcvm.codePosteComptable=document.getElementById("table_codeposte").getElementsByTagName('tr')[i].cells[0].innerHTML.trim()
       this.posteComptableSeanceOpcvm.plan=new Plan();

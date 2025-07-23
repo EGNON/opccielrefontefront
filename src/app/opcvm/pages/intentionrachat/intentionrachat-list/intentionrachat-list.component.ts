@@ -45,7 +45,8 @@ export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterVie
 
   ngOnInit(): void {
     // console.log("currentOpcvm=",this.authService.LocalStorageManager.getValue("currentOpcvm"))
-    // console.log("idOpcvm=",this.localStore.getData("currentOpcvm").idOpcvm)
+    console.log("opcvm=",this.localStore.getData("currentOpcvm"))
+    console.log("user=",this.authService.currentUserValue?.username)
     this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {

@@ -51,7 +51,7 @@ private idInAction: number;
           }
         },
         {
-          title: 'Catégorie', data: 'libelleCategorie', render: function (data, type, row) {
+          title: 'Catégorie', data: 'libelle', render: function (data, type, row) {
             return row.categoriePersonne?.libelle;
           }
         },

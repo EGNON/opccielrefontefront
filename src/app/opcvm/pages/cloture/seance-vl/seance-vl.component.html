@@ -1,0 +1,131 @@
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-1 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">N° Séance</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input readonly="readonly" type="text" class="form-control form-control-sm" placeholder="" formControlName="idSeance"/>
+              <!--end::Input-->
+            </div>
+            <!--end::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date ouv</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input [readOnly]="true" type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateDeb="ngbDatepicker" aria-label="Date Ouverture" formControlName="dateDebut" (click)="dateDeb.toggle()"/>
+                <!--end::Input-->
+              </div>
+            </div>
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date Ferm</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input [readOnly]="true" type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateFin="ngbDatepicker" aria-label="Date Début" formControlName="dateFin" (click)="dateFin.toggle()"/>
+                <!--end::Input-->
+              </div>
+            </div>
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class=" fs-5 fw-semibold mb-2">VL</label>
+              <!--end::Label-->
+              <input readonly="readonly" type="text" class="form-control form-control-sm" placeholder="" formControlName="VL"/>
+            </div>
+            <!--end::Col-->
+          </div>
+          <hr>
+          <div class="row mb-5">
+            <div class="card">
+              <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                  <!--begin::Search-->
+                  <div class="d-flex align-items-center position-relative my-1">
+                    <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                    <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12">
+                  </div>
+                  <!--end::Search-->
+                </div>
+                <!--end::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                  <div class="d-flex justify-content-end">
+                    <a #link  class="btn btn-sm btn-primary me-3" (click)=" clotureSeance(link)">
+                      <ng-container *ngIf="valider">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                      </ng-container>
+                      <ng-container *ngIf="!valider">
+                        <span class="indicator-label">Clôturer</span>
+                      </ng-container>
+                    </a>
+                  </div>
+                </div>
+                <!--end::Card toolbar-->
+              </div>
+              <div class="card-body pt-0">
+                <div class="table-responsive angular-bootstrap-table">
+                  <!--                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">-->
+                  <ul class="list-group list-group-flush vert-scrollable-150" id="alldata">
+                    <table class="table align-middle table-bordered fs-6 gy-5" id="table_codeposte" >
+                      <thead>
+                      <tr class="bg-blue">
+                        <th style="width: 10%"></th>
+                        <th style="width: 10%">N°</th>
+                        <th style="width: 65%">Libelle</th>
+
+                      </tr>
+                      </thead>
+                      <tbody class="fw-semibold text-gray-600">
+                      <tr *ngFor="let obj of seanceVL$">
+                        <td >
+                          <div class="form-check form-check-sm form-check-custom form-check-solid">
+                            <input class="form-check-input" type="checkbox" [checked]="obj.etat" />
+                          </div>
+                        </td>
+                        <td>
+
+                          {{ obj.numero}}
+
+                        </td>
+                        <td>
+
+                          {{ obj.libelle}}
+
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </ul>
+                  <div #details class="details hidden"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>

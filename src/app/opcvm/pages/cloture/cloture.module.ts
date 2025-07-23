@@ -19,6 +19,9 @@ import { Verificationchargeniveau2Component } from './verificationchargeniveau2/
 import { Verificationecriturechargeniveau1Component } from './verificationecriturechargeniveau1/verificationecriturechargeniveau1.component';
 import { Verificationecriturechargeniveau2Component } from './verificationecriturechargeniveau2/verificationecriturechargeniveau2.component';
 import { ValorisationcodepostecompotableComponent } from './valorisationcodepostecompotable/valorisationcodepostecompotable.component';
+import { Valorisationcodepostecomptablen1Component } from './valorisationcodepostecomptablen1/valorisationcodepostecomptablen1.component';
+import { ValorisationcodepostecomptablenComponent } from './valorisationcodepostecomptablen/valorisationcodepostecomptablen.component';
+import { SeanceVLComponent } from './seance-vl/seance-vl.component';
 
 
 
@@ -36,7 +39,10 @@ import { ValorisationcodepostecompotableComponent } from './valorisationcodepost
     Verificationchargeniveau2Component,
     Verificationecriturechargeniveau1Component,
     Verificationecriturechargeniveau2Component,
-    ValorisationcodepostecompotableComponent
+    ValorisationcodepostecompotableComponent,
+    Valorisationcodepostecomptablen1Component,
+    ValorisationcodepostecomptablenComponent,
+    SeanceVLComponent
   ],
   imports: [
     CommonModule,

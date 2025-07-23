@@ -73,10 +73,10 @@
                     </span>
                       </ng-container>
                       <ng-container *ngIf="!submitting">
-                        <span class="indicator-label">Précalculer</span>
+                        <span class="indicator-label">Précalculer ou afficher la liste</span>
                       </ng-container>
                     </button>
-                    <button  type="button" class="btn btn-sm btn-info me-3" (click)="save()">
+                    <button [disabled]="boutonGrise"  type="button" class="btn btn-sm btn-info me-3" (click)="save()">
                       <ng-container *ngIf="submitted">
                         <span class="indicator-progress" [style.display]="'block'">
                           Patientez svp...
@@ -105,43 +105,43 @@
               <div  class="card-body pt-0">
                 <!--begin::Table-->
                <ul class="list-group list-group-flush vert-scrollable-150" id="alldata">
-                  <table class="order-details" id="table_codeposte" >
+                  <table class="table align-middle table-bordered fs-6 gy-5" id="table_codeposte" >
                     <thead>
                     <tr class="bg-blue">
                       <th style="width: 25%">Code</th>
                       <th style="width: 25%">Libelle</th>
                       <th style="width: 25%">Formule</th>
                       <th style="width: 25%">Valeur</th>
-                      <th  style="width: 25%">codeplan</th>
+                      <th [hidden]="true" style="width: 25%">codeplan</th>
 
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
                     <tr *ngFor="let obj of posteComptableSeanceOpcvm$">
                       <td>
-                        <div class="d-flex align-items-center">
+
                           {{ obj.codePosteComptable}}
-                        </div>
+
                       </td>
                       <td>
-                        <div class="d-flex align-items-center">
+
                           {{ obj.libellePosteComptable}}
-                        </div>
+
                       </td>
                       <td>
-                        <div class="d-flex align-items-center">
+
                           {{ obj.formuleSysteme}}
-                        </div>
+
                       </td>
                       <td>
-                        <div class="d-flex align-items-center">
+
                           {{ obj.valeur }}
-                        </div>
+
                       </td>
-                      <td>
-                        <div class="d-flex align-items-center">
+                      <td *ngIf="obj.plan!==null" [hidden]="true">
+
                           {{ obj.plan.codePlan }}
-                        </div>
+
                       </td>
                     </tr>
                     </tbody>

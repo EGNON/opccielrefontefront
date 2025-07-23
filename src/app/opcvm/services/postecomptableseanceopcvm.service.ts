@@ -23,5 +23,10 @@ export class PostecomptableseanceopcvmService extends ResourceService<any> imple
   creer(params: any) {
     return this.http.post<any>(`${this.API_URL}`,params);
   }
-
+  verifierPosteComptableNiveau(idOpcvm: any,idSeance:any,estVerifie1:any,estVerifie2:any,niveau:any,niv:any) {
+    return this.http.get<any>(`${this.API_URL}/jasperpdf/codepostecomptable/${idOpcvm}/${idSeance}/${estVerifie1}/${estVerifie2}/${niveau}/${niv}`);
+  }
+  validerNiveau(obj: any) {
+    return this.http.post<any>(`${this.API_URL}/validerniveau`,obj);
+  }
 }

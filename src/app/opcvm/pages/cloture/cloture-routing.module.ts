@@ -27,6 +27,13 @@ import {
 import {
   ValorisationcodepostecompotableComponent
 } from "./valorisationcodepostecompotable/valorisationcodepostecompotable.component";
+import {
+  Valorisationcodepostecomptablen1Component
+} from "./valorisationcodepostecomptablen1/valorisationcodepostecomptablen1.component";
+import {
+  ValorisationcodepostecomptablenComponent
+} from "./valorisationcodepostecomptablen/valorisationcodepostecomptablen.component";
+import {SeanceVLComponent} from "./seance-vl/seance-vl.component";
 
 const routes: Routes = [
   {
@@ -45,6 +52,9 @@ const routes: Routes = [
       { path: 'verificationecriturechargeniveau1', component: Verificationecriturechargeniveau1Component, } ,
       { path: 'verificationecriturechargeniveau2', component: Verificationecriturechargeniveau2Component, } ,
       { path: 'valorisationcodeposte', component: ValorisationcodepostecompotableComponent, } ,
+      { path: 'verificationvalorisationcodeposteniveau1', component: Valorisationcodepostecomptablen1Component, } ,
+      { path: 'verificationvalorisationcodeposteniveau2', component: ValorisationcodepostecomptablenComponent, } ,
+      { path: 'seancevl', component: SeanceVLComponent, } ,
       // { path: 'show/:id', component: TarificationordinaireShowComponent, },
       { path: 'Tarificationordinaire', redirectTo: '', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' },
