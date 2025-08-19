@@ -548,6 +548,7 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
           (data)=>{
             this.tcn$=data.data
             if(this.tcn$!==null){
+              console.log(this.tcn$)
               console.log(this.tcn$.modeAmortissement.libelleModeAmortissement)
               if (this.tcn$.modeAmortissement.libelleModeAmortissement.trim() === "SUR VALEUR")
               {
@@ -579,6 +580,7 @@ export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
         this.tcnService.getById(this.idTitre).subscribe(
           (data)=>{
             this.tcn$=data.data
+            // console.log(this.tcn$ad)
             if (this.tcn$.modeAmortissement.libelleModeAmortissement.trim() === "SUR VALEUR")
             {
 

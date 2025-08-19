@@ -8,12 +8,16 @@ import {DataTablesModule} from "angular-datatables";
 import {NgbInputDatepicker} from "@ng-bootstrap/ng-bootstrap";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../../template/_metronic/shared/shared.module";
+import { PortefeuilleComponent } from './portefeuille/portefeuille.component';
+import { RelevetitrefcpComponent } from './relevetitrefcp/relevetitrefcp.component';
 
 
 @NgModule({
   declarations: [
     EtatsComponent,
-    RegistreActionnaireComponent
+    RegistreActionnaireComponent,
+    PortefeuilleComponent,
+    RelevetitrefcpComponent
   ],
     imports: [
         CommonModule,

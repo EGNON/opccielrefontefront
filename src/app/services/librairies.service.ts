@@ -16,6 +16,24 @@ export class LibrairiesService {
   registreActionnaire(param: any) {
     return this.http.post<any>(`${this.API_URL}/registre/actionnaire/opcvm`, param);
   }
+  portefeuilleetat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/portefeuille`, param);
+  }
+  portefeuille(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/portefeuille`, param);
+  }
+  portefeuilleListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/portefeuille/liste`, param);
+  }
+  releveTitreFCP(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/relevetitrefcp`, param);
+  }
+  releveTitreFCPEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/relevetitrefcp`, param);
+  }
+  releveTitreFCPListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/relevetitrefcp/liste`, param);
+  }
 
   telechargerRegistreActionnaire(param: any) {
     return this.http.post<any>(`${this.API_URL}/jasperpdf/export/registre/actionnaire/xxxxxxx/yyyy`, param);

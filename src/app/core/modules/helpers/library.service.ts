@@ -2452,6 +2452,40 @@ export class LibraryService implements OnDestroy{
             },
             {
               allow: null,
+              title: 'CIRCULAIRES',
+              icon: 'element-7',
+              dataLink: '',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_CIRCULAIRE8'),
+                  title: 'CIRCULAIRE N°8/CREPMF/2022',
+                  page: '/opcvm/circulaire8',
+                  role: 'ROLE_CIRCULAIRE8',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'CIRCULAIRES',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_EVT_AVIS'),
+                  title: 'Avis evenement sur valeur',
+                  page: '/opcvm/avisevenementsurvaleur/liste',
+                  role: 'ROLE_EVT_AVIS',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Evenement sur valeur',
+                  children: []
+                }
+              ]
+            },
+            {
+              allow: null,
               title: 'Cloture de seance',
               icon: 'element-7',
               dataLink: '',
@@ -2640,7 +2674,7 @@ export class LibraryService implements OnDestroy{
               parent: 'REPORTINGS',
               children: [
                 {
-                  allow: this.authService.isGrantedRole('ROLE_REG_ACT'),
+                  allow: true,//this.authService.isGrantedRole('ROLE_REG_ACT'),
                   title: 'Régistre actionnaire',
                   page: '/opcvm/etats/registre/actionnaire',
                   role: 'ROLE_REG_ACT',
@@ -2651,16 +2685,27 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_LISTE_CR'),
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_PORTEFEUILLE'),
                   title: 'Consultation portefeuille',
-                  page: '#',
-                  role: 'ROLE_CONSULT_PORTEFEUILLE_OPCVM',
+                  page: '/opcvm/etats/portefeuille',
+                  role: 'ROLE_CONSULTATION_PORTEFEUILLE',
                   icon: '',
                   translate: '',
                   dataLink: '',
                   parent: 'Etats & Statistiques',
                   children: []
                 },
+                {
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RELEVETITREFCP'),
+                  title: 'Relevé Titre',
+                  page: '/opcvm/etats/relevetitrefcp',
+                  role: 'ROLE_CONSULTATION_RELEVETITREFCP',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: []
+                }
               ]
             },
           ]

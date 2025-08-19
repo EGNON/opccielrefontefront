@@ -415,6 +415,7 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
     } else {
       this.isLoading = true;
       this.submitted = true;
+      this.submitting = true;
       if (this.formData.invalid) return;
       const sb = this.saveRDV()
         .pipe(
@@ -423,6 +424,7 @@ export class RdvCreateComponent implements OnInit, OnDestroy {
           }),
           finalize(() => {
             this.submitted = false;
+            this.submitting = false;
             this.isLoading = false;
             this.router.navigate(['/crm/rendezvous/rdv']);
           })
