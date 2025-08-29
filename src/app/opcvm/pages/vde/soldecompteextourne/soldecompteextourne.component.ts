@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {LocalService} from "../../../../services/local.service";
 import {AuthService} from "../../../../core/modules/auth";
 import {OperationextournevdeService} from "../../../services/operationextournevde.service";
+import {catchError, finalize} from "rxjs/operators";
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-soldecompteextourne',
@@ -10,6 +12,7 @@ import {OperationextournevdeService} from "../../../services/operationextournevd
 })
 export class SoldecompteextourneComponent implements OnInit{
   currentSeance: any;
+  verification: boolean;
   constructor(
     private localStore: LocalService,
     private authService: AuthService,
@@ -23,12 +26,21 @@ export class SoldecompteextourneComponent implements OnInit{
     // this.dialogRef.close();
   }
   soldeCompteExtourne(){
+    this.verification=true
     const entity={
       idOpcvm: this.localStore.getData("currentOpcvm")?.idOpcvm,
       numCompteComptable:null,
       dateEstimation:new Date(this.currentSeance?.dateFermeture)
     }
-    this.operationExtourneVDEService.soldeCompteExtourne(entity).subscribe(
+    this.operationExtourneVDEService.soldeCompteExtourne(entity).pipe(
+      catchError((err) => {
+        this.verification=false
+        return of(err.message);
+      }),
+      finalize(() => {
+        this.verification=false
+      })
+    ).subscribe(
 
     )
   }

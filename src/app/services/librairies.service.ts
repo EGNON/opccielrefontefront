@@ -34,7 +34,57 @@ export class LibrairiesService {
   releveTitreFCPListe(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/relevetitrefcp/liste`, param);
   }
-
+  etatSuiviAtionnaire(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etatsuiviactionnaire`, param);
+  }
+  etatSuiviAtionnaireEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/etatsuiviactionnaire`, param);
+  }
+  etatSuiviAtionnaireListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etatsuiviactionnaire/liste`, param);
+  }
+  etatSuiviClientEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/etatsuiviclient`, param);
+  }
+  etatSuiviClientListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etatsuiviclient/liste`, param);
+  }
+  pointTresorerie(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/pointtresorerie`, param);
+  }
+  historiqueActionnaireEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/historiqueactionnaire`, param);
+  }
+  historiqueActionnaire(param: any) {
+    return this.http.post<any>(`${this.API_URL}/historiqueactionnaire`, param);
+  }
+  releveActionnaireEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/releveactionnaire`, param);
+  }
+  ficheClientEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/ficheclient`,param);
+  }
+  releveActionnaire(param: any) {
+    return this.http.post<any>(`${this.API_URL}/releveactionnaire`, param);
+  }
+  afficherPersonnePhysiqueMorale() {
+    return this.http.get<any>(`${this.API_URL}/personnephysiquemorale`);
+  }
+  rechercherPersonnePhysiqueMorale(valeur:any) {
+    return this.http.get<any>(`${this.API_URL}/personnephysiquemorale/${valeur}`);
+  }
+  rechercherPersonnePhysiqueMoraleSelonType(type:any,valeur:any) {
+    return this.http.get<any>(`${this.API_URL}/personnephysiquemoraleselontype/${type}/${valeur}`);
+  }
+  afficherPersonnePhysiqueMoraleSelonType(valeur:any) {
+    return this.http.get<any>(`${this.API_URL}/personnephysiquemoraleselontype/${valeur}`);
+  }
+  historiqueActionnaireListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/historiqueactionnaire/liste`, param);
+  }
+  procedureComptable() {
+    return this.http.get<any>(`${this.API_URL}/etats/procedurecomptable`);
+  }
   telechargerRegistreActionnaire(param: any) {
     return this.http.post<any>(`${this.API_URL}/jasperpdf/export/registre/actionnaire/xxxxxxx/yyyy`, param);
   }

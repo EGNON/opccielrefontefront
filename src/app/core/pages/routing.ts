@@ -5,6 +5,20 @@ import {checkRoleAccessGuard} from "../../auth/check-role-access.guard";
 const CoreRouting: Routes = [
   //PARAMETRE
   {
+    path: 'standard/etats',
+    canActivate: [checkRoleAccessGuard, checkPermissionAccessGuard],
+    // canActivateChild: [checkPermissionAccessGuard],
+    loadChildren: () => import('./etats/etats.module').then((m) => m.EtatsModule),
+    data: { layout: 'dark-sidebar', role: 'ROLE_ETATS' },
+  },
+  {
+    path: 'standard/historiqueactionnaire',
+    canActivate: [checkRoleAccessGuard, checkPermissionAccessGuard],
+    // canActivateChild: [checkPermissionAccessGuard],
+    loadChildren: () => import('./historiqueactionnaire/historiqueactionnaire.module').then((m) => m.HistoriqueactionnaireModule),
+    data: { layout: 'dark-sidebar', role: 'ROLE_HistoriqueActionnaire' },
+  },
+  {
     path: 'standard/parametre/degre',
     canActivate: [checkRoleAccessGuard, checkPermissionAccessGuard],
     // canActivateChild: [checkPermissionAccessGuard],

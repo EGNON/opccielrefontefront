@@ -1,0 +1,162 @@
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <!--begin::Label-->
+            <div class="d-flex justify-content-sm-start">
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="radio" checked="checked"  [value]="true"
+                       class="form-check-input ng-untouched ng-pristine ng-valid"
+                       id="fichePhysique" formControlName="estPH">
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Physique</label>
+              </div>
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="radio" [value]="false"
+                       class="form-check-input ng-untouched ng-pristine ng-valid"
+                       id="ficheMorale" formControlName="estPH" >
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Morale</label>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row mb-5">
+            <div class="card">
+              <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                  <!--begin::Search-->
+                  <div class="d-flex align-items-center position-relative my-1">
+                    <!--                    <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>-->
+                    <input type="text" class="form-control form-control-sm"
+                           formControlName="search">
+                    <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1"
+                            style="margin-left: 25px display: flex; align-items: center; justify-content: center;"
+                            (click)="rechercherActionnaire()">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                  <!--end::Search-->
+                </div>
+                <!--end::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                  <div class="d-flex justify-content-end">
+                    <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary me-3" (click)="submitting ? null : actualiser()">
+                      <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                      </ng-container>
+                      <ng-container *ngIf="!submitting">
+                        <span class="indicator-label">Actualiser</span>
+                      </ng-container>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-info me-3" (click)="downloading ? null : telecharger()">
+                      <ng-container *ngIf="downloading">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!downloading">
+                        <span class="indicator-label">Imprimer</span>
+                      </ng-container>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-info me-3" (click)="export ? null : exportExcel()">
+                      <ng-container *ngIf="export">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!export">
+                        <span class="indicator-label">Exporter</span>
+                      </ng-container>
+                    </button>
+                    <!--<button type="button" class="btn btn-sm btn-warning">
+                      <ng-container *ngIf="downloading">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!downloading">
+                        <span class="indicator-label">Envoyer</span>
+                      </ng-container>
+                    </button>-->
+                  </div>
+                </div>
+                <!--end::Card toolbar-->
+              </div>
+              <!--              <div class="card-body pt-0">-->
+
+              <!--              </div>-->
+            </div>
+          </div>
+        </form>
+        <!--end::Form-->
+        <div class="card-body overflow-auto">
+          <table class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" id="table_AvisOperation">
+            <thead>
+            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+              <th class="w-10px pe-2">
+                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                  <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="1" />
+                </div>
+              </th>
+              <th style="width: 10%">ID</th>
+              <th style="width: 10%">N°COMPTE SGI</th>
+              <th style="width: 30%">NOM / SIGLE</th>
+              <th style="width: 30%">PRENOMS / RAISON SOCIALE</th>
+              <th style="width: 15%">STATUT</th>
+
+
+            </tr>
+            </thead>
+            <tbody class="fw-semibold text-gray-600">
+            <tr *ngFor="let actionnaire of actionnaire$ | paginate
+              : {
+                  itemsPerPage: tableSize,
+                  currentPage: page,
+                  totalItems: count
+                };
+          let i = index">
+              <td *ngIf="actionnaire.typePersonne===typePersonne">
+                <!--              <div class="form-check form-check-sm form-check-custom form-check-solid">-->
+                <input class="form-check-input" type="checkbox" value="1"
+                       [(ngModel)]="actionnaire.isSelected" (change)="getIdActionnaire(actionnaire.isSelected, actionnaire.idPersonne)" />
+                <!--              </div>-->
+              </td>
+              <td *ngIf="actionnaire.typePersonne===typePersonne">{{actionnaire.idPersonne}}</td>
+              <td *ngIf="actionnaire.typePersonne===typePersonne">{{ actionnaire.numCompteDepositaire}}</td>
+              <td *ngIf="actionnaire.typePersonne===typePersonne">{{ actionnaire.nomSigle}}</td>
+              <td *ngIf="actionnaire.typePersonne===typePersonne">{{ actionnaire.prenomRaison}}</td>
+              <td *ngIf="actionnaire.typePersonne===typePersonne">{{ actionnaire.statutCompte }}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-center">
+            <pagination-controls
+              previousLabel="Précédent"
+              nextLabel="Suivant"
+              (pageChange)="onTableDataChange($event)"
+            >
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>

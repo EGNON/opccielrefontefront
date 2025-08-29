@@ -10,6 +10,7 @@ import {RisqueRouting} from "../../../risque/pages/routing";
 import {BehaviorSubject} from "rxjs";
 import {hooks} from "prismjs";
 import all = hooks.all;
+import {Routing} from "../../../routing";
 
 @Injectable({
   providedIn: 'root'
@@ -1615,6 +1616,97 @@ export class LibraryService implements OnDestroy{
                   parent: 'Etats & Statistiques',
                   route: RisqueRouting.find((value, index, obj) =>
                     ('/risque/etats/ratiotreynor/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTRESORERIE'),
+                  title: 'Point de la trésorerie des fonds',
+                  page: '/app/standard/etats/pointtresorerie',
+                  role: 'ROLE_ETAT_POINTRESORERIE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/pointtresorerie').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_PROEDURECOMPTABLE'),
+                  title: 'Procédures comptables',
+                  page: '/app/standard/etats/procedurecomptable',
+                  role: 'ROLE_ETAT_PROEDURECOMPTABLE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/pointtresorerie').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_HISTORIQUEACTIONNAIRE'),
+                  title: 'Historique actionnaires',
+                  page: '/app/standard/historiqueactionnaire/liste',
+                  role: 'ROLE_ETAT_HISTORIQUEACTIONNAIRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/pointtresorerie').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_RELEVEACTIONNAIRE'),
+                  title: 'Relevé actionnaire',
+                  page: '/app/standard/etats/releveactionnaire',
+                  role: 'ROLE_ETAT_RELEVEACTIONNAIRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/releveactionnaire').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_FICHECLIENT'),
+                  title: 'Fiche client',
+                  page: '/app/standard/etats/ficheclient',
+                  role: 'ROLE_ETAT_FICHECLIENT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/ficheclient').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_SUIVICLIENT'),
+                  title: 'Etat de suivi des clients',
+                  page: '/app/standard/etats/etatsuiviclient',
+                  role: 'ROLE_ETAT_SUIVICLIENT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/ficheclient').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_SUIVIACTIONNAIRE'),
+                  title: 'Point des actionnaires',
+                  page: '/app/standard/etats/etatsuiviactionnaire',
+                  role: 'ROLE_ETAT_SUIVIACTIONNAIRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/ficheclient').includes(value.path!)),
                   children: []
                 }
                 /*{

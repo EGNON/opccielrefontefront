@@ -6,6 +6,7 @@ import { Operationsouscriptionrachat } from '../models/operationsouscriptionrach
 import {Operationsouscriptionrachat2} from "../models/operationsouscriptionrachat2.model";
 import {Operationdetachement} from "../models/operationdetachement.model";
 import {Operationextournevde} from "../models/operationextournevde.model";
+import {Observable} from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class OperationextournevdeService extends ResourceService<Operationextournevde> {
@@ -19,6 +20,12 @@ export class OperationextournevdeService extends ResourceService<Operationextour
   }
   verifVDE(idSeance:any,idOpcvm:any,estVerifie:any,estVerifie1:any,estVerifie2:any,niveau:any){
       return this.http.get<any>(`${this.API_URL}/jasperpdf/vde/${idSeance}/${idOpcvm}/${estVerifie}/${estVerifie1}/${estVerifie2}/${niveau}`);
+
+  }
+  excelVDE(idSeance:any,idOpcvm:any,estVerifie:any,estVerifie1:any,estVerifie2:any,niveau:any):Observable<Blob>{
+      return this.http.get<any>(`${this.API_URL}/excel/vde/${idSeance}/${idOpcvm}/${estVerifie}/${estVerifie1}/${estVerifie2}/${niveau}`,{
+        responseType: 'blob' as 'json' // 🔑 très important
+      });
 
   }
   soldeCompteExtourne(obj:any){

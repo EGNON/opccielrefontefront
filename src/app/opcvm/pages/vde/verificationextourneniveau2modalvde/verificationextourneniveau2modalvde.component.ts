@@ -10,7 +10,7 @@ import {
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Typeoperation} from "../../../../core/models/typeoperation.model";
 import {Api, Config} from "datatables.net";
-import {Subject, Subscription} from "rxjs";
+import {of, Subject, Subscription} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
 import {AuthService} from "../../../../core/modules/auth";
 import {LocalService} from "../../../../services/local.service";
@@ -20,6 +20,7 @@ import {OperationService} from "../../../services/operation.service";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import moment from "moment";
 import $ from "jquery";
+import {catchError, finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-verificationextourneniveau2modalvde',
@@ -255,7 +256,15 @@ export class Verificationextourneniveau2modalvdeComponent implements OnInit, Aft
       codeTypeOperation:"DE"
     };
     console.log(param)
-    this.operationService.apercuVerificationEritureNiveau(param,2,"DE").subscribe(
+    this.operationService.apercuVerificationEritureNiveau(param,2,"DE").pipe(
+      catchError((err) => {
+        this.downloading=false
+        return of(err.message);
+      }),
+      finalize(() => {
+        this.downloading=false
+      })
+    ).subscribe(
       (data)=>{
         console.log(data.data)
 
@@ -263,7 +272,7 @@ export class Verificationextourneniveau2modalvdeComponent implements OnInit, Aft
         // this.verificationNiveau$=data.data
       }
     );
-    this.downloading=false
+    // this.downloading=false
   }
   validationEcritureNiveau1(){
     this.valider=true
@@ -376,17 +385,17 @@ export class Verificationextourneniveau2modalvdeComponent implements OnInit, Aft
             idSeance:0,
             dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
             dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
-            estVerifie1:estVerifie1,
-            estVerifie2:false,
+            estVerifie1:true,
+            estVerifie2:estVerifie1,
             typeOperationDto:this.typeOperation,
             codeTypeOperation:"DE"
           };
           console.log(param);
-          // this.operationService.afficherListeVerificationEritureListe(param)
-          //   .subscribe(resp => {
-          //     this.operation$=resp.data
-          //     console.log("operation=",this.operation$)
-          //   });
+          this.operationService.afficherListeVerificationEritureListe(param)
+            .subscribe(resp => {
+              this.operation$=resp.data
+              console.log("operation=",this.operation$)
+            });
           const sb = this.operationService.afficherListeVerificationEriture(param)
             .subscribe(resp => {
               callback(resp.data);

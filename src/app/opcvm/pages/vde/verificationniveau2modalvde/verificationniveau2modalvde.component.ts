@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {LocalService} from "../../../../services/local.service";
 import {AuthService} from "../../../../core/modules/auth";
 import {OperationextournevdeService} from "../../../services/operationextournevde.service";
+import moment from "moment/moment";
+import {catchError, finalize} from "rxjs/operators";
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-verificationniveau2modalvde',
@@ -10,6 +13,8 @@ import {OperationextournevdeService} from "../../../services/operationextournevd
 })
 export class Verificationniveau2modalvdeComponent implements OnInit{
   currentSeance: any;
+  export = false;
+  exportPdf = false;
   constructor(
     private localStore: LocalService,
     private authService: AuthService,
@@ -23,10 +28,40 @@ export class Verificationniveau2modalvdeComponent implements OnInit{
     // this.dialogRef.close();
   }
   verifVDE(){
+    this.exportPdf=true
     this.operationExtourneVDEService.verifVDE(this.currentSeance?.idSeanceOpcvm.idSeance,
-      this.localStore.getData("currentOpcvm")?.idOpcvm,false,true,false,2).subscribe(
-
+      this.localStore.getData("currentOpcvm")?.idOpcvm,false,true,false,2).pipe(
+      catchError((err) => {
+        this.exportPdf=false
+        return of(err.message);
+      }),
+      finalize(() => {
+        this.exportPdf=false
+      })
+    ).subscribe(
+      (data)=>{
+        // this.exportPdf=false
+      }
     )
+  }
+  exportExcel() {
+    this.export=true
+    // 1️⃣ Définir les entêtes
+    // const headers = ['ID','N°COMPTE SGI','NOM / SIGLE','PRENOMS / RAISON SOCIALE'];
+
+    this.operationExtourneVDEService.excelVDE(this.currentSeance?.idSeanceOpcvm.idSeance,
+      this.localStore.getData("currentOpcvm")?.idOpcvm,false,true,false,2).subscribe((blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "verificationExtourneVDE_Niveau2"+"_" + moment(new Date()).format("DD MM YYYY") +".xlsx";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      this.export=false
+    });
+    // 2️⃣ Mapper les données avec les entêtes
+
   }
   modifier(){
     const entity={

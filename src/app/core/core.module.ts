@@ -6,6 +6,8 @@ import {CoreRouting} from "./pages/routing";
 import { ChangerQualitePersonneComponent } from './pages/modal/changer-qualite-personne/changer-qualite-personne.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {NgbInputDatepicker} from "@ng-bootstrap/ng-bootstrap";
+import {DataTablesModule} from "angular-datatables";
+import {SharedModule} from "../template/_metronic/shared/shared.module";
 
 const routes: Routes = [
   {
@@ -18,13 +20,15 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     CoreComponent,
-    ChangerQualitePersonneComponent
+    ChangerQualitePersonneComponent,
   ],
-  imports: [
-    RouterModule.forChild(routes),
-    CommonModule,
-    ReactiveFormsModule,
-    NgbInputDatepicker
-  ]
+    imports: [
+        RouterModule.forChild(routes),
+        CommonModule,
+        ReactiveFormsModule,
+        NgbInputDatepicker,
+        DataTablesModule,
+        SharedModule
+    ]
 })
 export class CoreModule { }
