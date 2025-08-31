@@ -12,9 +12,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {NatureevenementService} from "../../../services/natureevenement.service";
 
 @Component({
-  selector: 'app-natureevenement-add-edit',
-  templateUrl: './natureevenement-add-edit.component.html',
-  styleUrl: './natureevenement-add-edit.component.scss'
+    selector: 'app-natureevenement-add-edit',
+    templateUrl: './natureevenement-add-edit.component.html',
+    styleUrl: './natureevenement-add-edit.component.scss',
+    standalone: false
 })
 export class NatureevenementAddEditComponent implements OnInit, OnDestroy {
   id?: any;

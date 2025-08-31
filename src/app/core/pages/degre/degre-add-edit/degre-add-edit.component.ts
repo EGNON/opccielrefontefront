@@ -20,9 +20,10 @@ import {SwalComponent} from "@sweetalert2/ngx-sweetalert2";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-degre-add-edit',
-  templateUrl: './degre-add-edit.component.html',
-  styleUrls: ['./degre-add-edit.component.scss']
+    selector: 'app-degre-add-edit',
+    templateUrl: './degre-add-edit.component.html',
+    styleUrls: ['./degre-add-edit.component.scss'],
+    standalone: false
 })
 export class DegreAddEditComponent implements OnInit, OnDestroy {
   id?: number;

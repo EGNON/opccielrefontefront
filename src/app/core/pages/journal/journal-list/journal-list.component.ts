@@ -9,9 +9,10 @@ import {CleComptecomptable} from "../../../models/clecomptecomptable.model";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-journal-list',
-  templateUrl: './journal-list.component.html',
-  styleUrl: './journal-list.component.scss'
+    selector: 'app-journal-list',
+    templateUrl: './journal-list.component.html',
+    styleUrl: './journal-list.component.scss',
+    standalone: false
 })
 export class JournalListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

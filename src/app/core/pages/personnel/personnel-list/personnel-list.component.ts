@@ -18,9 +18,10 @@ import {PersonnelService} from "../../../../crm/services/personne/personnel.serv
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-personnel-list',
-  templateUrl: './personnel-list.component.html',
-  styleUrl: './personnel-list.component.scss'
+    selector: 'app-personnel-list',
+    templateUrl: './personnel-list.component.html',
+    styleUrl: './personnel-list.component.scss',
+    standalone: false
 })
 export class PersonnelListComponent implements OnInit, AfterViewInit, OnDestroy {
 

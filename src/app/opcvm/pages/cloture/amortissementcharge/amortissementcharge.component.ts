@@ -25,9 +25,10 @@ import {Operationchargeaetaler} from "../../../models/operationchargeaetaler.mod
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-amortissementcharge',
-  templateUrl: './amortissementcharge.component.html',
-  styleUrl: './amortissementcharge.component.scss'
+    selector: 'app-amortissementcharge',
+    templateUrl: './amortissementcharge.component.html',
+    styleUrl: './amortissementcharge.component.scss',
+    standalone: false
 })
 export class AmortissementchargeComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

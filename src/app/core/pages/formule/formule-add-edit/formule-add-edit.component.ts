@@ -13,9 +13,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, finalize, first} from "rxjs/operators";
 
 @Component({
-  selector: 'app-formule-add-edit',
-  templateUrl: './formule-add-edit.component.html',
-  styleUrl: './formule-add-edit.component.scss'
+    selector: 'app-formule-add-edit',
+    templateUrl: './formule-add-edit.component.html',
+    styleUrl: './formule-add-edit.component.scss',
+    standalone: false
 })
 export class FormuleAddEditComponent implements OnInit, OnDestroy {
   id?: any;

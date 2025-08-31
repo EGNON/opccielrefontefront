@@ -24,9 +24,10 @@ declare var $:JQueryStatic;
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-physique-listing',
-  templateUrl: './physique-listing.component.html',
-  styleUrl: './physique-listing.component.scss'
+    selector: 'app-physique-listing',
+    templateUrl: './physique-listing.component.html',
+    styleUrl: './physique-listing.component.scss',
+    standalone: false
 })
 export class PhysiqueListingComponent implements OnInit, AfterViewInit, OnDestroy{
   entity: any;

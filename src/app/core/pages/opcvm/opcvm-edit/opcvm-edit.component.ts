@@ -7,9 +7,10 @@ import {OpcvmService} from "../../../services/opcvm.service";
 import {map} from "rxjs/operators";
 
 @Component({
-  selector: 'app-opcvm-edit',
-  templateUrl: './opcvm-edit.component.html',
-  styleUrl: './opcvm-edit.component.scss'
+    selector: 'app-opcvm-edit',
+    templateUrl: './opcvm-edit.component.html',
+    styleUrl: './opcvm-edit.component.scss',
+    standalone: false
 })
 export class OpcvmEditComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy{
   id: number = 0;

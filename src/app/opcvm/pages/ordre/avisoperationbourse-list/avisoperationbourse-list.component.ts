@@ -14,9 +14,10 @@ import {TitreModel} from "../../../../titresciel/models/titre.model";
 import {Opcvm} from "../../../../core/models/opcvm";
 
 @Component({
-  selector: 'app-avisoperationbourse-list',
-  templateUrl: './avisoperationbourse-list.component.html',
-  styleUrl: './avisoperationbourse-list.component.scss'
+    selector: 'app-avisoperationbourse-list',
+    templateUrl: './avisoperationbourse-list.component.html',
+    styleUrl: './avisoperationbourse-list.component.scss',
+    standalone: false
 })
 export class AvisoperationbourseListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

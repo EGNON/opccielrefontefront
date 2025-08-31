@@ -20,9 +20,10 @@ import "select2";
 import {UniqueNumCpteDepositValidators} from "../../../../validators/unique-num-cpte-deposit-validators";
 
 @Component({
-  selector: 'app-personne-morale-add-edit',
-  templateUrl: './personne-morale-add-edit.component.html',
-  styleUrls: ['./personne-morale-add-edit.component.scss']
+    selector: 'app-personne-morale-add-edit',
+    templateUrl: './personne-morale-add-edit.component.html',
+    styleUrls: ['./personne-morale-add-edit.component.scss'],
+    standalone: false
 })
 export class PersonneMoraleAddEditComponent implements OnInit, AfterViewInit, OnDestroy{
 

@@ -12,9 +12,10 @@ import {catchError, finalize, map} from "rxjs/operators";
 import $ from "jquery";
 
 @Component({
-  selector: 'app-avis-souscription',
-  templateUrl: './avis-souscription.component.html',
-  styleUrl: './avis-souscription.component.scss'
+    selector: 'app-avis-souscription',
+    templateUrl: './avis-souscription.component.html',
+    styleUrl: './avis-souscription.component.scss',
+    standalone: false
 })
 export class AvisSouscriptionComponent implements OnInit, AfterViewInit, OnDestroy{
   form: FormGroup;

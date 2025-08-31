@@ -12,9 +12,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {TypeactionService} from "../../../services/typeaction.service";
 
 @Component({
-  selector: 'app-typeaction-add-edit',
-  templateUrl: './typeaction-add-edit.component.html',
-  styleUrl: './typeaction-add-edit.component.scss'
+    selector: 'app-typeaction-add-edit',
+    templateUrl: './typeaction-add-edit.component.html',
+    styleUrl: './typeaction-add-edit.component.scss',
+    standalone: false
 })
 export class TypeactionAddEditComponent implements OnInit, OnDestroy {
   id?: any;

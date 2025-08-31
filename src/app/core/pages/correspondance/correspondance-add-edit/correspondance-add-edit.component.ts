@@ -14,9 +14,10 @@ import {IbrubriquepositionService} from "../../../services/ibrubriqueposition.se
 import {CorrespondanceService} from "../../../services/correspondance.service";
 
 @Component({
-  selector: 'app-correspondance-add-edit',
-  templateUrl: './correspondance-add-edit.component.html',
-  styleUrl: './correspondance-add-edit.component.scss'
+    selector: 'app-correspondance-add-edit',
+    templateUrl: './correspondance-add-edit.component.html',
+    styleUrl: './correspondance-add-edit.component.scss',
+    standalone: false
 })
 export class CorrespondanceAddEditComponent implements OnInit, OnDestroy {
   id?: any;

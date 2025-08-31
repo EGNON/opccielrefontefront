@@ -12,9 +12,10 @@ import {LoaderService} from "../../../../loader.service";
 import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-depotsouscription-generate',
-  templateUrl: './depotsouscription-generate.component.html',
-  styleUrl: './depotsouscription-generate.component.scss'
+    selector: 'app-depotsouscription-generate',
+    templateUrl: './depotsouscription-generate.component.html',
+    styleUrl: './depotsouscription-generate.component.scss',
+    standalone: false
 })
 export class DepotsouscriptionGenerateComponent implements OnInit, OnDestroy{
   form: FormGroup;

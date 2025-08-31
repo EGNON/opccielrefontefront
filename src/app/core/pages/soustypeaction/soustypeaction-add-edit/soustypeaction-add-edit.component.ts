@@ -12,9 +12,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {SoustypeactionService} from "../../../services/soustypeaction.service";
 
 @Component({
-  selector: 'app-soustypeaction-add-edit',
-  templateUrl: './soustypeaction-add-edit.component.html',
-  styleUrl: './soustypeaction-add-edit.component.scss'
+    selector: 'app-soustypeaction-add-edit',
+    templateUrl: './soustypeaction-add-edit.component.html',
+    styleUrl: './soustypeaction-add-edit.component.scss',
+    standalone: false
 })
 export class SoustypeactionAddEditComponent implements OnInit, OnDestroy {
   id?: any;

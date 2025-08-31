@@ -24,9 +24,10 @@ import {TitreService} from "../../../services/titre.service";
 import {TableauAmortissementComponent} from "../../modal/tableau-amortissement/tableau-amortissement.component";
 
 @Component({
-  selector: 'app-titres-listing',
-  templateUrl: './titres-listing.component.html',
-  styleUrl: './titres-listing.component.scss'
+    selector: 'app-titres-listing',
+    templateUrl: './titres-listing.component.html',
+    styleUrl: './titres-listing.component.scss',
+    standalone: false
 })
 export class TitresListingComponent implements OnInit, OnDestroy, AfterViewInit{
   entity: any;

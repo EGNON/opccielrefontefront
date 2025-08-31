@@ -10,9 +10,10 @@ import {MenuService} from "../../../../crm/services/access/menu.service";
 import {RoleService} from "../../../../crm/services/access/role.service";
 
 @Component({
-  selector: 'app-menus-add-edit',
-  templateUrl: './menus-add-edit.component.html',
-  styleUrls: ['./menus-add-edit.component.scss']
+    selector: 'app-menus-add-edit',
+    templateUrl: './menus-add-edit.component.html',
+    styleUrls: ['./menus-add-edit.component.scss'],
+    standalone: false
 })
 export class MenusAddEditComponent implements OnInit, OnDestroy{
   id?: number;

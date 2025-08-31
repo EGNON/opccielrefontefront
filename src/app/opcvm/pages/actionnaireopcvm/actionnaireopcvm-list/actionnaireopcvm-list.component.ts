@@ -17,9 +17,10 @@ import {
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-actionnaireopcvm-list',
-  templateUrl: './actionnaireopcvm-list.component.html',
-  styleUrl: './actionnaireopcvm-list.component.scss'
+    selector: 'app-actionnaireopcvm-list',
+    templateUrl: './actionnaireopcvm-list.component.html',
+    styleUrl: './actionnaireopcvm-list.component.scss',
+    standalone: false
 })
 export class ActionnaireopcvmListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

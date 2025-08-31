@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {CompartimentService} from "../../../services/compartiment.service";
 
 @Component({
-  selector: 'app-delete-compartiment-modal',
-  templateUrl: './delete-compartiment-modal.component.html',
-  styleUrl: './delete-compartiment-modal.component.scss'
+    selector: 'app-delete-compartiment-modal',
+    templateUrl: './delete-compartiment-modal.component.html',
+    styleUrl: './delete-compartiment-modal.component.scss',
+    standalone: false
 })
 export class DeleteCompartimentModalComponent implements OnInit{
   @Input() id: number;

@@ -15,9 +15,10 @@ import {Categorie} from "../../../../crm/models/categorie.model";
 import {CategorieService} from "../../../../crm/services/categorie.service";
 
 @Component({
-  selector: 'app-souscategorie-add-edit',
-  templateUrl: './souscategorie-add-edit.component.html',
-  styleUrl: './souscategorie-add-edit.component.scss'
+    selector: 'app-souscategorie-add-edit',
+    templateUrl: './souscategorie-add-edit.component.html',
+    styleUrl: './souscategorie-add-edit.component.scss',
+    standalone: false
 })
 export class SouscategorieAddEditComponent implements OnInit, OnDestroy {
   id?: number;

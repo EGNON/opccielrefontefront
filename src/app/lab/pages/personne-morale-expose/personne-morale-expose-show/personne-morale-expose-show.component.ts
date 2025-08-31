@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-personne-morale-expose-show',
-  templateUrl: './personne-morale-expose-show.component.html',
-  styleUrl: './personne-morale-expose-show.component.scss'
+    selector: 'app-personne-morale-expose-show',
+    templateUrl: './personne-morale-expose-show.component.html',
+    styleUrl: './personne-morale-expose-show.component.scss',
+    standalone: false
 })
 export class PersonneMoraleExposeShowComponent {
 

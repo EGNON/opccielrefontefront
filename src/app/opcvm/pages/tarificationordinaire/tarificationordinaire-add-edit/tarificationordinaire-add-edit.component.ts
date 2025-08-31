@@ -15,9 +15,10 @@ import {PlaceService} from "../../../../core/services/place.service";
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-tarificationordinaire-add-edit',
-  templateUrl: './tarificationordinaire-add-edit.component.html',
-  styleUrl: './tarificationordinaire-add-edit.component.scss'
+    selector: 'app-tarificationordinaire-add-edit',
+    templateUrl: './tarificationordinaire-add-edit.component.html',
+    styleUrl: './tarificationordinaire-add-edit.component.scss',
+    standalone: false
 })
 export class TarificationordinaireAddEditComponent implements OnInit, OnDestroy{
   qualite: string;

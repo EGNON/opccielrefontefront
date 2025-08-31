@@ -24,9 +24,10 @@ import * as XLSX from "xlsx";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-operationconditioninhabituelle',
-  templateUrl: './operationconditioninhabituelle.component.html',
-  styleUrl: './operationconditioninhabituelle.component.scss'
+    selector: 'app-operationconditioninhabituelle',
+    templateUrl: './operationconditioninhabituelle.component.html',
+    styleUrl: './operationconditioninhabituelle.component.scss',
+    standalone: false
 })
 export class OperationconditioninhabituelleComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

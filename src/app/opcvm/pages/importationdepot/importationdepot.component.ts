@@ -10,9 +10,10 @@ import {PersonneService} from "../../../crm/services/personne/personne.service";
 import {LocalService} from "../../../services/local.service";
 
 @Component({
-  selector: 'app-importationdepot',
-  templateUrl: './importationdepot.component.html',
-  styleUrl: './importationdepot.component.scss'
+    selector: 'app-importationdepot',
+    templateUrl: './importationdepot.component.html',
+    styleUrl: './importationdepot.component.scss',
+    standalone: false
 })
 export class ImportationdepotComponent implements OnInit, OnDestroy{
   submitting = false;

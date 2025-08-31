@@ -9,9 +9,10 @@ import {QualiteService} from "../../../../crm/services/qualite.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-personne-physique-juge-modal',
-  templateUrl: './delete-personne-physique-juge-modal.component.html',
-  styleUrl: './delete-personne-physique-juge-modal.component.scss'
+    selector: 'app-delete-personne-physique-juge-modal',
+    templateUrl: './delete-personne-physique-juge-modal.component.html',
+    styleUrl: './delete-personne-physique-juge-modal.component.scss',
+    standalone: false
 })
 export class DeletePersonnePhysiqueJugeModalComponent implements OnInit{
   @Input() id: number;

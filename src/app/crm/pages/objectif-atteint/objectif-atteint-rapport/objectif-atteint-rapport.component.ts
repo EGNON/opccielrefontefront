@@ -13,9 +13,10 @@ import {PersonnelService} from "../../../services/personne/personnel.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-objectif-atteint-rapport',
-  templateUrl: './objectif-atteint-rapport.component.html',
-  styleUrls: ['./objectif-atteint-rapport.component.scss']
+    selector: 'app-objectif-atteint-rapport',
+    templateUrl: './objectif-atteint-rapport.component.html',
+    styleUrls: ['./objectif-atteint-rapport.component.scss'],
+    standalone: false
 })
 export class ObjectifAtteintRapportComponent implements OnInit, AfterViewInit, OnDestroy{
   id?: number;

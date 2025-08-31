@@ -11,9 +11,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-mail-list',
-  templateUrl: './mail-list.component.html',
-  styleUrls: ['./mail-list.component.scss']
+    selector: 'app-mail-list',
+    templateUrl: './mail-list.component.html',
+    styleUrls: ['./mail-list.component.scss'],
+    standalone: false
 })
 export class MailListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

@@ -12,9 +12,10 @@ import {Permission} from "../../../models/permission";
 import {map} from "rxjs/operators";
 
 @Component({
-  selector: 'app-role-listing',
-  templateUrl: './role-listing.component.html',
-  styleUrls: ['./role-listing.component.scss']
+    selector: 'app-role-listing',
+    templateUrl: './role-listing.component.html',
+    styleUrls: ['./role-listing.component.scss'],
+    standalone: false
 })
 export class RoleListingComponent implements OnInit, AfterViewInit, OnDestroy {
 

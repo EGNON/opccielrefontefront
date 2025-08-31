@@ -18,9 +18,10 @@ import {NatureoperationService} from "../../../../core/services/natureoperation.
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-charge-add-edit',
-  templateUrl: './charge-add-edit.component.html',
-  styleUrl: './charge-add-edit.component.scss'
+    selector: 'app-charge-add-edit',
+    templateUrl: './charge-add-edit.component.html',
+    styleUrl: './charge-add-edit.component.scss',
+    standalone: false
 })
 export class ChargeAddEditComponent implements OnInit, OnDestroy{
   qualite: string;

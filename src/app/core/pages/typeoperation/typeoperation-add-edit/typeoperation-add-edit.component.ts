@@ -11,9 +11,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, finalize, first} from "rxjs/operators";
 
 @Component({
-  selector: 'app-typeoperation-add-edit',
-  templateUrl: './typeoperation-add-edit.component.html',
-  styleUrl: './typeoperation-add-edit.component.scss'
+    selector: 'app-typeoperation-add-edit',
+    templateUrl: './typeoperation-add-edit.component.html',
+    styleUrl: './typeoperation-add-edit.component.scss',
+    standalone: false
 })
 export class TypeoperationAddEditComponent implements OnInit, OnDestroy {
   id?: any;

@@ -6,9 +6,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-categorie-modal',
-  templateUrl: './delete-categorie-modal.component.html',
-  styleUrls: ['./delete-categorie-modal.component.scss']
+    selector: 'app-delete-categorie-modal',
+    templateUrl: './delete-categorie-modal.component.html',
+    styleUrls: ['./delete-categorie-modal.component.scss'],
+    standalone: false
 })
 export class DeleteCategorieModalComponent {
   @Input() id: number;

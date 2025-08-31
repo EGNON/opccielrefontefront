@@ -32,9 +32,10 @@ import {UniqueNumCpteDepositValidators} from "../../../../validators/unique-num-
 import {NumbersAuthaurization} from "../../../../validators/numbers-authaurization";
 // import {NumbersAuthaurization} from "../../../../validators/numbers-authaurization";
 @Component({
-  selector: 'app-personne-physique-add-edit',
-  templateUrl: './personne-physique-add-edit.component.html',
-  styleUrls: ['./personne-physique-add-edit.component.scss']
+    selector: 'app-personne-physique-add-edit',
+    templateUrl: './personne-physique-add-edit.component.html',
+    styleUrls: ['./personne-physique-add-edit.component.scss'],
+    standalone: false
 })
 
 

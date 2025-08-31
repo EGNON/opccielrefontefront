@@ -27,9 +27,10 @@ import {Plan} from "../../../../core/models/plan.model";
 import {Route, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-valorisationcodepostecompotable',
-  templateUrl: './valorisationcodepostecompotable.component.html',
-  styleUrl: './valorisationcodepostecompotable.component.scss'
+    selector: 'app-valorisationcodepostecompotable',
+    templateUrl: './valorisationcodepostecompotable.component.html',
+    styleUrl: './valorisationcodepostecompotable.component.scss',
+    standalone: false
 })
 export class ValorisationcodepostecompotableComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

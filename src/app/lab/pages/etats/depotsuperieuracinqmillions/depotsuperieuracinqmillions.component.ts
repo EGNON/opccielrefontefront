@@ -19,9 +19,10 @@ import * as XLSX from "xlsx";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-depotsuperieuracinqmillions',
-  templateUrl: './depotsuperieuracinqmillions.component.html',
-  styleUrl: './depotsuperieuracinqmillions.component.scss'
+    selector: 'app-depotsuperieuracinqmillions',
+    templateUrl: './depotsuperieuracinqmillions.component.html',
+    styleUrl: './depotsuperieuracinqmillions.component.scss',
+    standalone: false
 })
 export class DepotsuperieuracinqmillionsComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

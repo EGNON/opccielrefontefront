@@ -10,9 +10,10 @@ import {first} from "rxjs/operators";
 import {OpcvmService} from "../../../../core/services/opcvm.service";
 
 @Component({
-  selector: 'app-correlation',
-  templateUrl: './correlation.component.html',
-  styleUrl: './correlation.component.scss'
+    selector: 'app-correlation',
+    templateUrl: './correlation.component.html',
+    styleUrl: './correlation.component.scss',
+    standalone: false
 })
 export class CorrelationComponent implements OnInit, OnDestroy, AfterViewInit{
   @ViewChild(DataTableDirective, {static: false})

@@ -9,9 +9,10 @@ import moment from "moment";
 import $ from "jquery";
 
 @Component({
-  selector: 'app-date-cours',
-  templateUrl: './date-cours.component.html',
-  styleUrl: './date-cours.component.scss'
+    selector: 'app-date-cours',
+    templateUrl: './date-cours.component.html',
+    styleUrl: './date-cours.component.scss',
+    standalone: false
 })
 export class DateCoursComponent implements OnInit, OnDestroy{
   place: Place;

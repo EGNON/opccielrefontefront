@@ -17,9 +17,10 @@ import {
 } from "../delete-modal-operationdetachement/delete-modal-operationdetachement.component";
 
 @Component({
-  selector: 'app-operationdetachement-list',
-  templateUrl: './operationdetachement-list.component.html',
-  styleUrl: './operationdetachement-list.component.scss'
+    selector: 'app-operationdetachement-list',
+    templateUrl: './operationdetachement-list.component.html',
+    styleUrl: './operationdetachement-list.component.scss',
+    standalone: false
 })
 export class OperationdetachementListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

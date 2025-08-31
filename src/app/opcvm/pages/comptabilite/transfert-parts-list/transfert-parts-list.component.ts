@@ -9,9 +9,10 @@ import {DataTableDirective} from "angular-datatables";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-transfert-parts-list',
-  templateUrl: './transfert-parts-list.component.html',
-  styleUrl: './transfert-parts-list.component.scss'
+    selector: 'app-transfert-parts-list',
+    templateUrl: './transfert-parts-list.component.html',
+    styleUrl: './transfert-parts-list.component.scss',
+    standalone: false
 })
 export class TransfertPartsListComponent implements OnInit, OnDestroy, AfterViewInit {
   form: FormGroup;

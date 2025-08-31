@@ -6,9 +6,10 @@ import {ProfessionService} from "../../../../crm/services/profession.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-profession-modal',
-  templateUrl: './delete-profession-modal.component.html',
-  styleUrls: ['./delete-profession-modal.component.scss']
+    selector: 'app-delete-profession-modal',
+    templateUrl: './delete-profession-modal.component.html',
+    styleUrls: ['./delete-profession-modal.component.scss'],
+    standalone: false
 })
 export class DeleteProfessionModalComponent {
   @Input() id: number;

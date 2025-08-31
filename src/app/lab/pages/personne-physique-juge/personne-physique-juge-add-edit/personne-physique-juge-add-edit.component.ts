@@ -31,9 +31,10 @@ import {Qualite} from "../../../../crm/models/qualite.model";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-personne-physique-juge-add-edit',
-  templateUrl: './personne-physique-juge-add-edit.component.html',
-  styleUrl: './personne-physique-juge-add-edit.component.scss'
+    selector: 'app-personne-physique-juge-add-edit',
+    templateUrl: './personne-physique-juge-add-edit.component.html',
+    styleUrl: './personne-physique-juge-add-edit.component.scss',
+    standalone: false
 })
 export class PersonnePhysiqueJugeAddEditComponent implements OnInit, OnDestroy, AfterViewInit{
   public paysSettings = {};

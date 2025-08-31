@@ -8,9 +8,10 @@ import {DeletePlanModalComponent} from "../../plan/delete-plan-modal/delete-plan
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-plan-list',
-  templateUrl: './plan-list.component.html',
-  styleUrl: './plan-list.component.scss'
+    selector: 'app-plan-list',
+    templateUrl: './plan-list.component.html',
+    styleUrl: './plan-list.component.scss',
+    standalone: false
 })
 export class PlanListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

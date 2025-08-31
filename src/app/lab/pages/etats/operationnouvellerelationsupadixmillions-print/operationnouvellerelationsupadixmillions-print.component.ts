@@ -12,9 +12,10 @@ import {OperationService} from "../../../services/operation.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-operationnouvellerelationsupadixmillions-print',
-  templateUrl: './operationnouvellerelationsupadixmillions-print.component.html',
-  styleUrl: './operationnouvellerelationsupadixmillions-print.component.scss'
+    selector: 'app-operationnouvellerelationsupadixmillions-print',
+    templateUrl: './operationnouvellerelationsupadixmillions-print.component.html',
+    styleUrl: './operationnouvellerelationsupadixmillions-print.component.scss',
+    standalone: false
 })
 export class OperationnouvellerelationsupadixmillionsPrintComponent implements OnInit, OnDestroy{
   isLoading: boolean;

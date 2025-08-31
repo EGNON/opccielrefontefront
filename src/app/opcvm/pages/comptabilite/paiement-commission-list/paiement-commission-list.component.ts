@@ -9,9 +9,10 @@ import {OperationCommissionService} from "../../../services/operation-commission
 import moment from "moment/moment";
 
 @Component({
-  selector: 'app-paiement-commission-list',
-  templateUrl: './paiement-commission-list.component.html',
-  styleUrl: './paiement-commission-list.component.scss'
+    selector: 'app-paiement-commission-list',
+    templateUrl: './paiement-commission-list.component.html',
+    styleUrl: './paiement-commission-list.component.scss',
+    standalone: false
 })
 export class PaiementCommissionListComponent implements OnInit, OnDestroy, AfterViewInit {
   form: FormGroup;

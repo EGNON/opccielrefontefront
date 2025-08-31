@@ -11,9 +11,10 @@ import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-verifintentionrachat',
-  templateUrl: './verifintentionrachat.component.html',
-  styleUrl: './verifintentionrachat.component.scss'
+    selector: 'app-verifintentionrachat',
+    templateUrl: './verifintentionrachat.component.html',
+    styleUrl: './verifintentionrachat.component.scss',
+    standalone: false
 })
 export class VerifintentionrachatComponent implements OnInit, OnDestroy {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();

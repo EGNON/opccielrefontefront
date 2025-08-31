@@ -6,9 +6,10 @@ import {PersonneMoraleService} from "../../../../crm/services/personne/personne.
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-personne-morale-modal',
-  templateUrl: './delete-personne-morale-modal.component.html',
-  styleUrls: ['./delete-personne-morale-modal.component.scss']
+    selector: 'app-delete-personne-morale-modal',
+    templateUrl: './delete-personne-morale-modal.component.html',
+    styleUrls: ['./delete-personne-morale-modal.component.scss'],
+    standalone: false
 })
 export class DeletePersonneMoraleModalComponent implements OnInit{
   @Input() id: number;

@@ -9,9 +9,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {OperationregulecartsoldeService} from "../../../services/operationregulecartsolde.service";
 
 @Component({
-  selector: 'app-delete-modal-regulecartsolde',
-  templateUrl: './delete-modal-regulecartsolde.component.html',
-  styleUrl: './delete-modal-regulecartsolde.component.scss'
+    selector: 'app-delete-modal-regulecartsolde',
+    templateUrl: './delete-modal-regulecartsolde.component.html',
+    styleUrl: './delete-modal-regulecartsolde.component.scss',
+    standalone: false
 })
 export class DeleteModalRegulecartsoldeComponent implements OnInit{
   @Input() id: string;

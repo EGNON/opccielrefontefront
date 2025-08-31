@@ -38,9 +38,10 @@ import {Opcvm} from "../../../../core/models/opcvm";
 import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-ecriture-manuel',
-  templateUrl: './ecriture-manuel.component.html',
-  styleUrl: './ecriture-manuel.component.scss'
+    selector: 'app-ecriture-manuel',
+    templateUrl: './ecriture-manuel.component.html',
+    styleUrl: './ecriture-manuel.component.scss',
+    standalone: false
 })
 export class EcritureManuelComponent implements OnInit, OnDestroy {
   id?: any;

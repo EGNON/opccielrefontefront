@@ -7,9 +7,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {TypemodeleService} from "../../../services/typemodele.service";
 
 @Component({
-  selector: 'app-typemodele-add-edit',
-  templateUrl: './typemodele-add-edit.component.html',
-  styleUrl: './typemodele-add-edit.component.scss'
+    selector: 'app-typemodele-add-edit',
+    templateUrl: './typemodele-add-edit.component.html',
+    styleUrl: './typemodele-add-edit.component.scss',
+    standalone: false
 })
 export class TypemodeleAddEditComponent implements OnInit, OnDestroy {
   id?: number;

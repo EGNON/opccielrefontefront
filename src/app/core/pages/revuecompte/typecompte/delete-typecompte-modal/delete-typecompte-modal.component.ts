@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {TypecompteService} from "../../../../services/revuecompte/typecompte.service";
 
 @Component({
-  selector: 'app-delete-typecompte-modal',
-  templateUrl: './delete-typecompte-modal.component.html',
-  styleUrl: './delete-typecompte-modal.component.scss'
+    selector: 'app-delete-typecompte-modal',
+    templateUrl: './delete-typecompte-modal.component.html',
+    styleUrl: './delete-typecompte-modal.component.scss',
+    standalone: false
 })
 export class DeleteTypecompteModalComponent implements OnInit{
   @Input() id: number;

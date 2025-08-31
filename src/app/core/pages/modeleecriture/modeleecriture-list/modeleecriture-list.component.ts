@@ -13,9 +13,10 @@ import {ModeleecriturenatureoperationService} from "../../../services/modeleecri
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-modeleecriture-list',
-  templateUrl: './modeleecriture-list.component.html',
-  styleUrl: './modeleecriture-list.component.scss'
+    selector: 'app-modeleecriture-list',
+    templateUrl: './modeleecriture-list.component.html',
+    styleUrl: './modeleecriture-list.component.scss',
+    standalone: false
 })
 export class ModeleecritureListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

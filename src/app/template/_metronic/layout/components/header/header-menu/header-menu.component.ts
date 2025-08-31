@@ -11,9 +11,10 @@ import {LocalService} from "../../../../../../services/local.service";
 declare var $:JQueryStatic;
 
 @Component({
-  selector: 'app-header-menu',
-  templateUrl: './header-menu.component.html',
-  styleUrls: ['./header-menu.component.scss'],
+    selector: 'app-header-menu',
+    templateUrl: './header-menu.component.html',
+    styleUrls: ['./header-menu.component.scss'],
+    standalone: false
 })
 export class HeaderMenuComponent implements OnInit, AfterViewInit {
   private modalRef: NgbModalRef;

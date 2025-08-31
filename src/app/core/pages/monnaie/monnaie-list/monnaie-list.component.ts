@@ -9,9 +9,10 @@ import {MonnaieService} from "../../../../crm/services/monnaie.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-monnaie-list',
-  templateUrl: './monnaie-list.component.html',
-  styleUrls: ['./monnaie-list.component.scss']
+    selector: 'app-monnaie-list',
+    templateUrl: './monnaie-list.component.html',
+    styleUrls: ['./monnaie-list.component.scss'],
+    standalone: false
 })
 export class MonnaieListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

@@ -23,9 +23,10 @@ import {Typeoperation} from "../../../../core/models/typeoperation.model";
 import $ from "jquery";
 
 @Component({
-  selector: 'app-verificationecriturechargeniveau1',
-  templateUrl: './verificationecriturechargeniveau1.component.html',
-  styleUrl: './verificationecriturechargeniveau1.component.scss'
+    selector: 'app-verificationecriturechargeniveau1',
+    templateUrl: './verificationecriturechargeniveau1.component.html',
+    styleUrl: './verificationecriturechargeniveau1.component.scss',
+    standalone: false
 })
 export class Verificationecriturechargeniveau1Component implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

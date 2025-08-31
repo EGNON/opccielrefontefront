@@ -8,9 +8,10 @@ import {LocalService} from "../../../../../services/local.service";
 import {SeanceopcvmService} from "../../../../services/seanceopcvm.service";
 
 @Component({
-  selector: 'app-liste-seance-opcvm',
-  templateUrl: './liste-seance-opcvm.component.html',
-  styleUrl: './liste-seance-opcvm.component.scss'
+    selector: 'app-liste-seance-opcvm',
+    templateUrl: './liste-seance-opcvm.component.html',
+    styleUrl: './liste-seance-opcvm.component.scss',
+    standalone: false
 })
 export class ListeSeanceOpcvmComponent implements OnInit, OnDestroy{
   [key: string]: any;

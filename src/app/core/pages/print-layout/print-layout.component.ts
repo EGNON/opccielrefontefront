@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-print-layout',
-  templateUrl: './print-layout.component.html',
-  styleUrl: './print-layout.component.scss'
+    selector: 'app-print-layout',
+    templateUrl: './print-layout.component.html',
+    styleUrl: './print-layout.component.scss',
+    standalone: false
 })
 export class PrintLayoutComponent {
 

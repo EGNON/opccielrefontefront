@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-typeclient',
-  templateUrl: './typeclient.component.html',
-  styleUrl: './typeclient.component.scss'
+    selector: 'app-typeclient',
+    templateUrl: './typeclient.component.html',
+    styleUrl: './typeclient.component.scss',
+    standalone: false
 })
 export class TypeclientComponent {
 

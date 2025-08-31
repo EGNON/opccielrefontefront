@@ -29,9 +29,10 @@ import {PlanService} from "../../../services/plan.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-postecomptable-add-edit',
-  templateUrl: './postecomptable-add-edit.component.html',
-  styleUrl: './postecomptable-add-edit.component.scss'
+    selector: 'app-postecomptable-add-edit',
+    templateUrl: './postecomptable-add-edit.component.html',
+    styleUrl: './postecomptable-add-edit.component.scss',
+    standalone: false
 })
 export class PostecomptableAddEditComponent implements OnInit, OnDestroy {
   id?: any;

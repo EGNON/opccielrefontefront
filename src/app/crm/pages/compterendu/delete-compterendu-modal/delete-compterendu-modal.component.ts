@@ -6,9 +6,10 @@ import {CompterenduService} from "../../../services/compterendu.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-compterendu-modal',
-  templateUrl: './delete-compterendu-modal.component.html',
-  styleUrls: ['./delete-compterendu-modal.component.scss']
+    selector: 'app-delete-compterendu-modal',
+    templateUrl: './delete-compterendu-modal.component.html',
+    styleUrls: ['./delete-compterendu-modal.component.scss'],
+    standalone: false
 })
 export class DeleteCompterenduModalComponent implements OnInit{
   @Input() id: number;

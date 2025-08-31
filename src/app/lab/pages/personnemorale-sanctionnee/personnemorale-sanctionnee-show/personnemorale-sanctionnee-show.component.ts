@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-personnemorale-sanctionnee-show',
-  templateUrl: './personnemorale-sanctionnee-show.component.html',
-  styleUrl: './personnemorale-sanctionnee-show.component.scss'
+    selector: 'app-personnemorale-sanctionnee-show',
+    templateUrl: './personnemorale-sanctionnee-show.component.html',
+    styleUrl: './personnemorale-sanctionnee-show.component.scss',
+    standalone: false
 })
 export class PersonnemoraleSanctionneeShowComponent {
 

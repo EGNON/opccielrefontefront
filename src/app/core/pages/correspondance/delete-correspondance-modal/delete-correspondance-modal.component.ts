@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {CorrespondanceService} from "../../../services/correspondance.service";
 
 @Component({
-  selector: 'app-delete-correspondance-modal',
-  templateUrl: './delete-correspondance-modal.component.html',
-  styleUrl: './delete-correspondance-modal.component.scss'
+    selector: 'app-delete-correspondance-modal',
+    templateUrl: './delete-correspondance-modal.component.html',
+    styleUrl: './delete-correspondance-modal.component.scss',
+    standalone: false
 })
 export class DeleteCorrespondanceModalComponent implements OnInit{
   @Input() id: string;

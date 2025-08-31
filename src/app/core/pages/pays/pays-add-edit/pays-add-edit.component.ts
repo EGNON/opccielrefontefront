@@ -10,9 +10,10 @@ declare var $:JQueryStatic;
 import "select2";
 
 @Component({
-  selector: 'app-pays-add-edit',
-  templateUrl: './pays-add-edit.component.html',
-  styleUrls: ['./pays-add-edit.component.scss']
+    selector: 'app-pays-add-edit',
+    templateUrl: './pays-add-edit.component.html',
+    styleUrls: ['./pays-add-edit.component.scss'],
+    standalone: false
 })
 export class PaysAddEditComponent implements OnInit, AfterViewInit, OnDestroy{
   id?: number;

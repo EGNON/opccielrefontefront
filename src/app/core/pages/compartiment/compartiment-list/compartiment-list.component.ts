@@ -8,9 +8,10 @@ import {DeleteCompartimentModalComponent} from "../delete-compartiment-modal/del
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-compartiment-list',
-  templateUrl: './compartiment-list.component.html',
-  styleUrl: './compartiment-list.component.scss'
+    selector: 'app-compartiment-list',
+    templateUrl: './compartiment-list.component.html',
+    styleUrl: './compartiment-list.component.scss',
+    standalone: false
 })
 export class CompartimentListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

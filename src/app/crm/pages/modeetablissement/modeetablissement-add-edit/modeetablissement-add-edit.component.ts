@@ -9,9 +9,10 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-modeetablissement-add-edit',
-  templateUrl: './modeetablissement-add-edit.component.html',
-  styleUrl: './modeetablissement-add-edit.component.scss'
+    selector: 'app-modeetablissement-add-edit',
+    templateUrl: './modeetablissement-add-edit.component.html',
+    styleUrl: './modeetablissement-add-edit.component.scss',
+    standalone: false
 })
 export class ModeetablissementAddEditComponent  implements OnInit, OnDestroy{
   id?: string;

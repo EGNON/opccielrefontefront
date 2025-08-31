@@ -11,9 +11,10 @@ import FileSaver from "file-saver";
 import {FileUploadService} from "../../../services/file-upload.service";
 
 @Component({
-  selector: 'app-mail-show',
-  templateUrl: './mail-show.component.html',
-  styleUrl: './mail-show.component.scss'
+    selector: 'app-mail-show',
+    templateUrl: './mail-show.component.html',
+    styleUrl: './mail-show.component.scss',
+    standalone: false
 })
 export class MailShowComponent implements OnInit, OnDestroy{
   qualite: string;

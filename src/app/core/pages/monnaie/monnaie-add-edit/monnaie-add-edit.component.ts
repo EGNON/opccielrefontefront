@@ -8,9 +8,10 @@ import {Monnaie} from "../../../../crm/models/monnaie.model";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-monnaie-add-edit',
-  templateUrl: './monnaie-add-edit.component.html',
-  styleUrls: ['./monnaie-add-edit.component.scss']
+    selector: 'app-monnaie-add-edit',
+    templateUrl: './monnaie-add-edit.component.html',
+    styleUrls: ['./monnaie-add-edit.component.scss'],
+    standalone: false
 })
 export class MonnaieAddEditComponent implements OnInit, OnDestroy{
   id?: string;

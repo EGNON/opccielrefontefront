@@ -25,9 +25,10 @@ import {Personne} from "../../../../crm/models/personne/personne.model";
 import {Operationevenementsurvaleur} from "../../../models/operationevenementsurvaleur.model";
 
 @Component({
-  selector: 'app-operationevenementsurvaleur-add-edit',
-  templateUrl: './operationevenementsurvaleur-add-edit.component.html',
-  styleUrl: './operationevenementsurvaleur-add-edit.component.scss'
+    selector: 'app-operationevenementsurvaleur-add-edit',
+    templateUrl: './operationevenementsurvaleur-add-edit.component.html',
+    styleUrl: './operationevenementsurvaleur-add-edit.component.scss',
+    standalone: false
 })
 export class OperationevenementsurvaleurAddEditComponent implements OnInit, OnDestroy{
   id?: number;

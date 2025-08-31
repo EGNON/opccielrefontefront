@@ -12,9 +12,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-compterendu-list',
-  templateUrl: './compterendu-list.component.html',
-  styleUrls: ['./compterendu-list.component.scss']
+    selector: 'app-compterendu-list',
+    templateUrl: './compterendu-list.component.html',
+    styleUrls: ['./compterendu-list.component.scss'],
+    standalone: false
 })
 export class CompterenduListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

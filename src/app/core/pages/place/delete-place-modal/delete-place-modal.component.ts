@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {PlaceService} from "../../../services/place.service";
 
 @Component({
-  selector: 'app-delete-place-modal',
-  templateUrl: './delete-place-modal.component.html',
-  styleUrl: './delete-place-modal.component.scss'
+    selector: 'app-delete-place-modal',
+    templateUrl: './delete-place-modal.component.html',
+    styleUrl: './delete-place-modal.component.scss',
+    standalone: false
 })
 export class DeletePlaceModalComponent implements OnInit{
   @Input() id: number;

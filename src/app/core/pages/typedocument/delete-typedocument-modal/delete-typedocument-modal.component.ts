@@ -6,9 +6,10 @@ import {TypeDocumentService} from "../../../../crm/services/type-document.servic
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-typedocument-modal',
-  templateUrl: './delete-typedocument-modal.component.html',
-  styleUrls: ['./delete-typedocument-modal.component.scss']
+    selector: 'app-delete-typedocument-modal',
+    templateUrl: './delete-typedocument-modal.component.html',
+    styleUrls: ['./delete-typedocument-modal.component.scss'],
+    standalone: false
 })
 export class DeleteTypedocumentModalComponent {
   @Input() id: number;

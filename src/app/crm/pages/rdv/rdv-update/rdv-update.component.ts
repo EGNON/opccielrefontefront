@@ -21,9 +21,10 @@ import {PageInfoService} from "../../../../template/_metronic/layout";
 import {ModeleMsgAlerte} from "../../../models/modelemsgalerte.model";
 
 @Component({
-  selector: 'app-rdv-update',
-  templateUrl: './rdv-update.component.html',
-  styleUrls: ['./rdv-update.component.scss']
+    selector: 'app-rdv-update',
+    templateUrl: './rdv-update.component.html',
+    styleUrls: ['./rdv-update.component.scss'],
+    standalone: false
 })
 export class RdvUpdateComponent implements OnInit, OnDestroy{
   id?: number;

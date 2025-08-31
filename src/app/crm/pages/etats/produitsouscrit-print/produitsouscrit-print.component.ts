@@ -6,9 +6,10 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 @Component({
-  selector: 'app-produitsouscrit-print',
-  templateUrl: './produitsouscrit-print.component.html',
-  styleUrls: ['./produitsouscrit-print.component.scss']
+    selector: 'app-produitsouscrit-print',
+    templateUrl: './produitsouscrit-print.component.html',
+    styleUrls: ['./produitsouscrit-print.component.scss'],
+    standalone: false
 })
 export class ProduitsouscritPrintComponent implements OnInit{
   personnel$:any;

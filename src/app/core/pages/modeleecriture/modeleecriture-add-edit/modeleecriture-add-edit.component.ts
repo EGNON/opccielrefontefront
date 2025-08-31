@@ -23,9 +23,10 @@ import {Detailmodele} from "../../../models/detailmodele.model";
 import {AuthService} from "../../../modules/auth";
 
 @Component({
-  selector: 'app-modeleecriture-add-edit',
-  templateUrl: './modeleecriture-add-edit.component.html',
-  styleUrl: './modeleecriture-add-edit.component.scss'
+    selector: 'app-modeleecriture-add-edit',
+    templateUrl: './modeleecriture-add-edit.component.html',
+    styleUrl: './modeleecriture-add-edit.component.scss',
+    standalone: false
 })
 export class ModeleecritureAddEditComponent implements OnInit, OnDestroy {
   id?: any;

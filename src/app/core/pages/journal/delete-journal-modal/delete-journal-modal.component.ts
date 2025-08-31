@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {JournalService} from "../../../services/journal.service";
 
 @Component({
-  selector: 'app-delete-journal-modal',
-  templateUrl: './delete-journal-modal.component.html',
-  styleUrl: './delete-journal-modal.component.scss'
+    selector: 'app-delete-journal-modal',
+    templateUrl: './delete-journal-modal.component.html',
+    styleUrl: './delete-journal-modal.component.scss',
+    standalone: false
 })
 export class DeleteJournalModalComponent implements OnInit{
   @Input() id: number;

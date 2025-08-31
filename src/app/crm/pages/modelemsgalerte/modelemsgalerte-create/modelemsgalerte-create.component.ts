@@ -16,9 +16,10 @@ import {RdvService} from "../../../services/rdv.service";
 import {RDV} from "../../../models/rdv.model";
 
 @Component({
-  selector: 'app-modelemsgalerte-create',
-  templateUrl: './modelemsgalerte-create.component.html',
-  styleUrls: ['./modelemsgalerte-create.component.scss']
+    selector: 'app-modelemsgalerte-create',
+    templateUrl: './modelemsgalerte-create.component.html',
+    styleUrls: ['./modelemsgalerte-create.component.scss'],
+    standalone: false
 })
 export class ModelemsgalerteCreateComponent implements OnInit, OnDestroy{
   declare  tinymce: any;

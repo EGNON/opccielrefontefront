@@ -6,9 +6,10 @@ import {filter, map} from "rxjs/operators";
 import {PersonneMoraleService} from "../../../../crm/services/personne/personne.morale.service";
 
 @Component({
-  selector: 'app-personne-morale-show',
-  templateUrl: './personne-morale-show.component.html',
-  styleUrls: ['./personne-morale-show.component.scss']
+    selector: 'app-personne-morale-show',
+    templateUrl: './personne-morale-show.component.html',
+    styleUrls: ['./personne-morale-show.component.scss'],
+    standalone: false
 })
 export class PersonneMoraleShowComponent implements OnInit, OnDestroy{
   qualite: string;

@@ -4,9 +4,10 @@ import {LibrairiesService} from "../../../../services/librairies.service";
 import {finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-procedurecomptable',
-  templateUrl: './procedurecomptable.component.html',
-  styleUrl: './procedurecomptable.component.scss'
+    selector: 'app-procedurecomptable',
+    templateUrl: './procedurecomptable.component.html',
+    styleUrl: './procedurecomptable.component.scss',
+    standalone: false
 })
 export class ProcedurecomptableComponent implements OnInit{
   downloading:boolean;

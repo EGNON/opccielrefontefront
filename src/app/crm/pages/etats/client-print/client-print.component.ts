@@ -10,9 +10,10 @@ import {DataTablesResponse} from "../../../models/data-tables.response.model";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-client-print',
-  templateUrl: './client-print.component.html',
-  styleUrls: ['./client-print.component.scss']
+    selector: 'app-client-print',
+    templateUrl: './client-print.component.html',
+    styleUrls: ['./client-print.component.scss'],
+    standalone: false
 })
 export class ClientPrintComponent implements OnInit, OnDestroy{
   baseRoute: string = "";

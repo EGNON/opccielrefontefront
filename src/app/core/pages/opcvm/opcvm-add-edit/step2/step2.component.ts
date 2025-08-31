@@ -7,9 +7,10 @@ import {map} from "rxjs/operators";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-step2',
-  templateUrl: './step2.component.html',
-  styleUrl: './step2.component.scss'
+    selector: 'app-step2',
+    templateUrl: './step2.component.html',
+    styleUrl: './step2.component.scss',
+    standalone: false
 })
 export class Step2Component implements OnInit, OnDestroy{
   @Input('updateParentModel') updateParentModel: (

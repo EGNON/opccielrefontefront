@@ -10,9 +10,10 @@ import {FileUploadService} from "../../../services/file-upload.service";
 import FileSaver, { saveAs } from 'file-saver';
 
 @Component({
-  selector: 'app-rdv-show',
-  templateUrl: './rdv-show.component.html',
-  styleUrl: './rdv-show.component.scss'
+    selector: 'app-rdv-show',
+    templateUrl: './rdv-show.component.html',
+    styleUrl: './rdv-show.component.scss',
+    standalone: false
 })
 export class RdvShowComponent implements OnInit, OnDestroy{
   qualite: string;

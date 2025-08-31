@@ -8,9 +8,10 @@ import {TypeobligationService} from "../../../services/typeobligation.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-typeobligation-list',
-  templateUrl: './typeobligation-list.component.html',
-  styleUrl: './typeobligation-list.component.scss'
+    selector: 'app-typeobligation-list',
+    templateUrl: './typeobligation-list.component.html',
+    styleUrl: './typeobligation-list.component.scss',
+    standalone: false
 })
 export class TypeobligationListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

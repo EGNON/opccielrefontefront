@@ -9,9 +9,10 @@ import {SecteurService} from "../../../../crm/services/secteur.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-secteur-list',
-  templateUrl: './secteur-list.component.html',
-  styleUrls: ['./secteur-list.component.scss']
+    selector: 'app-secteur-list',
+    templateUrl: './secteur-list.component.html',
+    styleUrls: ['./secteur-list.component.scss'],
+    standalone: false
 })
 export class SecteurListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

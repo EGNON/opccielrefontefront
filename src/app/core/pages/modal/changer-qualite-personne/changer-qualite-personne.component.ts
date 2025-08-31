@@ -7,9 +7,10 @@ import {of} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-changer-qualite-personne',
-  templateUrl: './changer-qualite-personne.component.html',
-  styleUrl: './changer-qualite-personne.component.scss'
+    selector: 'app-changer-qualite-personne',
+    templateUrl: './changer-qualite-personne.component.html',
+    styleUrl: './changer-qualite-personne.component.scss',
+    standalone: false
 })
 export class ChangerQualitePersonneComponent implements OnInit, AfterViewInit, OnDestroy{
   id?: number;

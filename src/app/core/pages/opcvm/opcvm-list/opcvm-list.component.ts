@@ -12,9 +12,10 @@ import {PageInfoService} from "../../../../template/_metronic/layout";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-opcvm-list',
-  templateUrl: './opcvm-list.component.html',
-  styleUrl: './opcvm-list.component.scss'
+    selector: 'app-opcvm-list',
+    templateUrl: './opcvm-list.component.html',
+    styleUrl: './opcvm-list.component.scss',
+    standalone: false
 })
 export class OpcvmListComponent implements OnInit, AfterViewInit, OnDestroy{
   datatableConfig: Config = {};

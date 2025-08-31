@@ -8,9 +8,10 @@ import {ProfilcommissionsousrachService} from "../../../services/profilcommissio
 import {DetailprofilService} from "../../../services/detailprofil.service";
 
 @Component({
-  selector: 'app-delete-profilcommissionsousrach-modal',
-  templateUrl: './delete-profilcommissionsousrach-modal.component.html',
-  styleUrl: './delete-profilcommissionsousrach-modal.component.scss'
+    selector: 'app-delete-profilcommissionsousrach-modal',
+    templateUrl: './delete-profilcommissionsousrach-modal.component.html',
+    styleUrl: './delete-profilcommissionsousrach-modal.component.scss',
+    standalone: false
 })
 export class DeleteProfilcommissionsousrachModalComponent implements OnInit{
   @Input() id: string;

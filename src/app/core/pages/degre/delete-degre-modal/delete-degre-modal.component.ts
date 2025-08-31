@@ -6,9 +6,10 @@ import {DegreService} from "../../../../crm/services/degre.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-degre-modal',
-  templateUrl: './delete-degre-modal.component.html',
-  styleUrls: ['./delete-degre-modal.component.scss']
+    selector: 'app-delete-degre-modal',
+    templateUrl: './delete-degre-modal.component.html',
+    styleUrls: ['./delete-degre-modal.component.scss'],
+    standalone: false
 })
 export class DeleteDegreModalComponent implements OnInit{
   @Input() id: number;

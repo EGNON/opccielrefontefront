@@ -8,9 +8,10 @@ import {Categorie} from "../../../models/categorie.model";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-categorie-add-edit',
-  templateUrl: './categorie-add-edit.component.html',
-  styleUrls: ['./categorie-add-edit.component.scss']
+    selector: 'app-categorie-add-edit',
+    templateUrl: './categorie-add-edit.component.html',
+    styleUrls: ['./categorie-add-edit.component.scss'],
+    standalone: false
 })
 export class CategorieAddEditComponent implements OnInit, OnDestroy{
   id?: number;

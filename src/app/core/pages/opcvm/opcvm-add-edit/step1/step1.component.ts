@@ -19,9 +19,10 @@ import {PersonneService} from "../../../../../crm/services/personne/personne.ser
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-step1',
-  templateUrl: './step1.component.html',
-  styleUrl: './step1.component.scss'
+    selector: 'app-step1',
+    templateUrl: './step1.component.html',
+    styleUrl: './step1.component.scss',
+    standalone: false
 })
 export class Step1Component implements OnInit, AfterViewInit, OnChanges, OnDestroy{
   @Input('updateParentModel') updateParentModel: (

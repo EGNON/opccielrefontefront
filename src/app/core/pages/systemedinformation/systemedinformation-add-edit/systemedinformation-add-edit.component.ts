@@ -13,9 +13,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {SystemedinformationService} from "../../../../crm/services/systemedinformation.service";
 
 @Component({
-  selector: 'app-systemedinformation-add-edit',
-  templateUrl: './systemedinformation-add-edit.component.html',
-  styleUrl: './systemedinformation-add-edit.component.scss'
+    selector: 'app-systemedinformation-add-edit',
+    templateUrl: './systemedinformation-add-edit.component.html',
+    styleUrl: './systemedinformation-add-edit.component.scss',
+    standalone: false
 })
 export class SystemedinformationAddEditComponent implements OnInit, OnDestroy {
   id?: any;

@@ -21,9 +21,10 @@ import moment from "moment/moment";
 import $ from "jquery";
 
 @Component({
-  selector: 'app-listeverificationecriture-v2',
-  templateUrl: './listeverificationecriture-v2.component.html',
-  styleUrl: './listeverificationecriture-v2.component.scss'
+    selector: 'app-listeverificationecriture-v2',
+    templateUrl: './listeverificationecriture-v2.component.html',
+    styleUrl: './listeverificationecriture-v2.component.scss',
+    standalone: false
 })
 export class ListeverificationecritureV2Component implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

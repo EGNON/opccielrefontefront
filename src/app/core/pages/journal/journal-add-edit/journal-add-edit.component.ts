@@ -14,9 +14,10 @@ import {ComptecomptableService} from "../../../services/comptecomptable.service"
 import {ResponseModel} from "../../../../crm/models/table.model";
 
 @Component({
-  selector: 'app-journal-add-edit',
-  templateUrl: './journal-add-edit.component.html',
-  styleUrl: './journal-add-edit.component.scss'
+    selector: 'app-journal-add-edit',
+    templateUrl: './journal-add-edit.component.html',
+    styleUrl: './journal-add-edit.component.scss',
+    standalone: false
 })
 export class JournalAddEditComponent implements OnInit, OnDestroy {
   id?: any;

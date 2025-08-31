@@ -13,9 +13,10 @@ import {DetailprofilService} from "../../../services/detailprofil.service";
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-profilcommissionsousrach-add-edit',
-  templateUrl: './profilcommissionsousrach-add-edit.component.html',
-  styleUrl: './profilcommissionsousrach-add-edit.component.scss'
+    selector: 'app-profilcommissionsousrach-add-edit',
+    templateUrl: './profilcommissionsousrach-add-edit.component.html',
+    styleUrl: './profilcommissionsousrach-add-edit.component.scss',
+    standalone: false
 })
 export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestroy{
   id?: number;

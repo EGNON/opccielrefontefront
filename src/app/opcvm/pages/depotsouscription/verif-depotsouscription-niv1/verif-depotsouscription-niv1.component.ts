@@ -13,9 +13,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-verif-depotsouscription-niv1',
-  templateUrl: './verif-depotsouscription-niv1.component.html',
-  styleUrl: './verif-depotsouscription-niv1.component.scss'
+    selector: 'app-verif-depotsouscription-niv1',
+    templateUrl: './verif-depotsouscription-niv1.component.html',
+    styleUrl: './verif-depotsouscription-niv1.component.scss',
+    standalone: false
 })
 export class VerifDepotsouscriptionNiv1Component implements OnInit, OnDestroy{
 

@@ -6,9 +6,10 @@ import {ModeleObjectifService} from "../../../services/modele-objectif.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-objectifs-modal',
-  templateUrl: './delete-objectifs-modal.component.html',
-  styleUrls: ['./delete-objectifs-modal.component.scss']
+    selector: 'app-delete-objectifs-modal',
+    templateUrl: './delete-objectifs-modal.component.html',
+    styleUrls: ['./delete-objectifs-modal.component.scss'],
+    standalone: false
 })
 export class DeleteObjectifsModalComponent implements OnInit{
   @Input() id: number;

@@ -12,14 +12,15 @@ import {environment} from "../../../../environments/environment";
 import {PersonneService} from "../../../crm/services/personne/personne.service";
 
 @Directive({
-  selector: '[appNumeroCompteDepositaire]',
-  providers:[
-    {
-      provide: NG_ASYNC_VALIDATORS,
-      useExisting:NumeroCompteDepositaireDirective,
-      multi:true
-    }
-  ]
+    selector: '[appNumeroCompteDepositaire]',
+    providers: [
+        {
+            provide: NG_ASYNC_VALIDATORS,
+            useExisting: NumeroCompteDepositaireDirective,
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class NumeroCompteDepositaireDirective implements AsyncValidator{
 

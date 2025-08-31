@@ -10,9 +10,10 @@ import {
 } from "../delete-categorieclient-modal/delete-categorieclient-modal.component";
 
 @Component({
-  selector: 'app-categorieclient-list',
-  templateUrl: './categorieclient-list.component.html',
-  styleUrl: './categorieclient-list.component.scss'
+    selector: 'app-categorieclient-list',
+    templateUrl: './categorieclient-list.component.html',
+    styleUrl: './categorieclient-list.component.scss',
+    standalone: false
 })
 export class CategorieclientListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

@@ -12,9 +12,10 @@ import {LocalService} from "../../../services/local.service";
 import { SeanceopcvmService } from '../../services/seanceopcvm.service';
 
 @Component({
-  selector: 'app-connexion',
-  templateUrl: './connexion.component.html',
-  styleUrl: './connexion.component.scss'
+    selector: 'app-connexion',
+    templateUrl: './connexion.component.html',
+    styleUrl: './connexion.component.scss',
+    standalone: false
 })
 export class ConnexionComponent implements OnInit, OnDestroy{
   @Output() passEntry: EventEmitter<any> = new EventEmitter();

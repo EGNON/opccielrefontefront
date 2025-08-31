@@ -33,9 +33,10 @@ import {Plan} from "../../../models/plan.model";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-plan-add-edit',
-  templateUrl: './plan-add-edit.component.html',
-  styleUrl: './plan-add-edit.component.scss'
+    selector: 'app-plan-add-edit',
+    templateUrl: './plan-add-edit.component.html',
+    styleUrl: './plan-add-edit.component.scss',
+    standalone: false
 })
 export class PlanAddEditComponent implements OnInit, OnDestroy {
   id?: any;

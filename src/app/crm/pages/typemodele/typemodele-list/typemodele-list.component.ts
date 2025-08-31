@@ -12,9 +12,10 @@ import {
 import {TypemodeleService} from "../../../services/typemodele.service";
 
 @Component({
-  selector: 'app-typemodele-list',
-  templateUrl: './typemodele-list.component.html',
-  styleUrl: './typemodele-list.component.scss'
+    selector: 'app-typemodele-list',
+    templateUrl: './typemodele-list.component.html',
+    styleUrl: './typemodele-list.component.scss',
+    standalone: false
 })
 export class TypemodeleListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

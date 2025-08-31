@@ -8,9 +8,10 @@ import {DeletePlaceModalComponent} from "../delete-place-modal/delete-place-moda
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-place-list',
-  templateUrl: './place-list.component.html',
-  styleUrl: './place-list.component.scss'
+    selector: 'app-place-list',
+    templateUrl: './place-list.component.html',
+    styleUrl: './place-list.component.scss',
+    standalone: false
 })
 export class PlaceListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

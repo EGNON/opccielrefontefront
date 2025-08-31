@@ -15,9 +15,10 @@ import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {Infoscirculaire8Service} from "../../../services/infoscirculaire8.service";
 
 @Component({
-  selector: 'app-circulaire8-add-edit',
-  templateUrl: './circulaire8-add-edit.component.html',
-  styleUrl: './circulaire8-add-edit.component.scss'
+    selector: 'app-circulaire8-add-edit',
+    templateUrl: './circulaire8-add-edit.component.html',
+    styleUrl: './circulaire8-add-edit.component.scss',
+    standalone: false
 })
 export class Circulaire8AddEditComponent implements OnInit, OnDestroy{
   qualite: string;

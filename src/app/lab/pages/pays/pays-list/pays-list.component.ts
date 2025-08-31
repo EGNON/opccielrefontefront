@@ -11,9 +11,10 @@ import * as XLSX from "xlsx";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'lab-pays-list',
-  templateUrl: './pays-list.component.html',
-  styleUrl: './pays-list.component.scss'
+    selector: 'lab-pays-list',
+    templateUrl: './pays-list.component.html',
+    styleUrl: './pays-list.component.scss',
+    standalone: false
 })
 export class PaysListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

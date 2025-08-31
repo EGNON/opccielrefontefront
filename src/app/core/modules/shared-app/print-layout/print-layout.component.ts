@@ -6,9 +6,10 @@ export class ReportSize {
 }
 
 @Component({
-  selector: 'reportings-print-layout',
-  templateUrl: './print-layout.component.html',
-  styleUrl: './print-layout.component.scss'
+    selector: 'reportings-print-layout',
+    templateUrl: './print-layout.component.html',
+    styleUrl: './print-layout.component.scss',
+    standalone: false
 })
 export class PrintLayoutComponent implements OnInit, AfterViewInit{
 

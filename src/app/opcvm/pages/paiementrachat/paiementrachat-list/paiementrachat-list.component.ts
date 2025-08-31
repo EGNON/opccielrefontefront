@@ -22,9 +22,10 @@ import {Operationpaiementrachat2} from "../../../models/operationpaiementrachat2
 import {MiseenaffectationService} from "../../../services/miseenaffectation.service";
 
 @Component({
-  selector: 'app-paiementrachat-list',
-  templateUrl: './paiementrachat-list.component.html',
-  styleUrl: './paiementrachat-list.component.scss'
+    selector: 'app-paiementrachat-list',
+    templateUrl: './paiementrachat-list.component.html',
+    styleUrl: './paiementrachat-list.component.scss',
+    standalone: false
 })
 export class PaiementrachatListComponent implements OnInit, OnDestroy {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();

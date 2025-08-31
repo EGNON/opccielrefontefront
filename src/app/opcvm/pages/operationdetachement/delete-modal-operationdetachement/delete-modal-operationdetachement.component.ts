@@ -9,9 +9,10 @@ import {OperationdetachementService} from "../../../services/operationdetachemen
 import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-delete-modal-operationdetachement',
-  templateUrl: './delete-modal-operationdetachement.component.html',
-  styleUrl: './delete-modal-operationdetachement.component.scss'
+    selector: 'app-delete-modal-operationdetachement',
+    templateUrl: './delete-modal-operationdetachement.component.html',
+    styleUrl: './delete-modal-operationdetachement.component.scss',
+    standalone: false
 })
 export class DeleteModalOperationdetachementComponent implements OnInit{
   @Input() id: string;

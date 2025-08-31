@@ -5,9 +5,10 @@ import {ChartComponent} from "ng-apexcharts";
 
 
 @Component({
-  selector: 'app-bar-chart',
-  templateUrl: './bar-chart.component.html',
-  styleUrl: './bar-chart.component.scss'
+    selector: 'app-bar-chart',
+    templateUrl: './bar-chart.component.html',
+    styleUrl: './bar-chart.component.scss',
+    standalone: false
 })
 export class BarChartComponent {
   @ViewChild('chart') chart: ChartComponent;

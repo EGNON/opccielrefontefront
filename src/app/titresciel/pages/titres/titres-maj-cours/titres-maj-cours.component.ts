@@ -13,9 +13,10 @@ import {LoaderService} from "../../../../loader.service";
 import {IndiceBrvmService} from "../../../services/indice-brvm.service";
 
 @Component({
-  selector: 'app-titres-maj-cours',
-  templateUrl: './titres-maj-cours.component.html',
-  styleUrl: './titres-maj-cours.component.scss'
+    selector: 'app-titres-maj-cours',
+    templateUrl: './titres-maj-cours.component.html',
+    styleUrl: './titres-maj-cours.component.scss',
+    standalone: false
 })
 export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy{
   submitting = false;

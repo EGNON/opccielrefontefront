@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {ComptecomptableService} from "../../../services/comptecomptable.service";
 
 @Component({
-  selector: 'app-delete-comptecomptable-modal',
-  templateUrl: './delete-comptecomptable-modal.component.html',
-  styleUrl: './delete-comptecomptable-modal.component.scss'
+    selector: 'app-delete-comptecomptable-modal',
+    templateUrl: './delete-comptecomptable-modal.component.html',
+    styleUrl: './delete-comptecomptable-modal.component.scss',
+    standalone: false
 })
 export class DeleteComptecomptableModalComponent implements OnInit{
   @Input() id: string;

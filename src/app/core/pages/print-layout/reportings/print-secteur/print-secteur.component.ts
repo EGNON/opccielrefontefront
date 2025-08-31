@@ -6,9 +6,10 @@ import * as html2pdf from "html2pdf.js";
 import autoTable from "jspdf-autotable";
 
 @Component({
-  selector: 'app-print-secteur',
-  templateUrl: './print-secteur.component.html',
-  styleUrl: './print-secteur.component.scss'
+    selector: 'app-print-secteur',
+    templateUrl: './print-secteur.component.html',
+    styleUrl: './print-secteur.component.scss',
+    standalone: false
 })
 export class PrintSecteurComponent {
   @ViewChild("report", {static: false}) el: ElementRef;

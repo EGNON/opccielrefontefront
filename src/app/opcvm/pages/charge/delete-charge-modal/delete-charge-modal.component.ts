@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {ChargeService} from "../../../services/charge.service";
 
 @Component({
-  selector: 'app-delete-charge-modal',
-  templateUrl: './delete-charge-modal.component.html',
-  styleUrl: './delete-charge-modal.component.scss'
+    selector: 'app-delete-charge-modal',
+    templateUrl: './delete-charge-modal.component.html',
+    styleUrl: './delete-charge-modal.component.scss',
+    standalone: false
 })
 export class DeleteChargeModalComponent implements OnInit{
   @Input() id: number;

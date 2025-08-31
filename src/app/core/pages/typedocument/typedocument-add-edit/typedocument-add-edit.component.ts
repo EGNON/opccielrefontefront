@@ -7,9 +7,10 @@ import {TypeDocumentService} from "../../../../crm/services/type-document.servic
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-typedocument-add-edit',
-  templateUrl: './typedocument-add-edit.component.html',
-  styleUrls: ['./typedocument-add-edit.component.scss']
+    selector: 'app-typedocument-add-edit',
+    templateUrl: './typedocument-add-edit.component.html',
+    styleUrls: ['./typedocument-add-edit.component.scss'],
+    standalone: false
 })
 export class TypedocumentAddEditComponent implements OnInit, OnDestroy {
   id?: number;

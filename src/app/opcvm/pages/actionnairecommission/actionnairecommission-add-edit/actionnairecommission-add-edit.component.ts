@@ -17,9 +17,10 @@ import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-actionnairecommission-add-edit',
-  templateUrl: './actionnairecommission-add-edit.component.html',
-  styleUrl: './actionnairecommission-add-edit.component.scss'
+    selector: 'app-actionnairecommission-add-edit',
+    templateUrl: './actionnairecommission-add-edit.component.html',
+    styleUrl: './actionnairecommission-add-edit.component.scss',
+    standalone: false
 })
 export class ActionnairecommissionAddEditComponent implements OnInit, OnDestroy{
   id?: number;

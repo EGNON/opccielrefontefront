@@ -19,9 +19,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-autorisationcr-list',
-  templateUrl: './autorisationcr-list.component.html',
-  styleUrls: ['./autorisationcr-list.component.scss']
+    selector: 'app-autorisationcr-list',
+    templateUrl: './autorisationcr-list.component.html',
+    styleUrls: ['./autorisationcr-list.component.scss'],
+    standalone: false
 })
 export class AutorisationcrListComponent implements OnInit, OnDestroy, AfterViewInit{
   @ViewChildren("itemElement") private itemElements: QueryList<ElementRef>;

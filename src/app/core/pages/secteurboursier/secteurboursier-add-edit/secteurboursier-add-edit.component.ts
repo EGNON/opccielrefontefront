@@ -12,9 +12,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {SecteurboursierService} from "../../../services/secteurboursier.service";
 
 @Component({
-  selector: 'app-secteurboursier-add-edit',
-  templateUrl: './secteurboursier-add-edit.component.html',
-  styleUrl: './secteurboursier-add-edit.component.scss'
+    selector: 'app-secteurboursier-add-edit',
+    templateUrl: './secteurboursier-add-edit.component.html',
+    styleUrl: './secteurboursier-add-edit.component.scss',
+    standalone: false
 })
 export class SecteurboursierAddEditComponent implements OnInit, OnDestroy {
   id?: any;

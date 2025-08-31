@@ -15,7 +15,8 @@ import "select2";
 declare var $: any;
 
 @Directive({
-  selector: '[appSelect2]'
+    selector: '[appSelect2]',
+    standalone: false
 })
 export class Select2Directive implements AfterViewInit, OnChanges {
   select2: any;

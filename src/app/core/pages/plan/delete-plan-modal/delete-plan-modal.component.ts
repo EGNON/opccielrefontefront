@@ -6,9 +6,10 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-delete-plan-modal',
-  templateUrl: './delete-plan-modal.component.html',
-  styleUrl: './delete-plan-modal.component.scss'
+    selector: 'app-delete-plan-modal',
+    templateUrl: './delete-plan-modal.component.html',
+    styleUrl: './delete-plan-modal.component.scss',
+    standalone: false
 })
 export class DeletePlanModalComponent implements OnInit{
   @Input() id: number;

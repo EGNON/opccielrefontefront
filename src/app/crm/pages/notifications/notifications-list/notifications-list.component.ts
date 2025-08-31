@@ -11,9 +11,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-notifications-list',
-  templateUrl: './notifications-list.component.html',
-  styleUrls: ['./notifications-list.component.scss']
+    selector: 'app-notifications-list',
+    templateUrl: './notifications-list.component.html',
+    styleUrls: ['./notifications-list.component.scss'],
+    standalone: false
 })
 export class NotificationsListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

@@ -26,9 +26,10 @@ import {ConnexionComponent} from "../../connexion/connexion.component";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-seance-vl',
-  templateUrl: './seance-vl.component.html',
-  styleUrl: './seance-vl.component.scss'
+    selector: 'app-seance-vl',
+    templateUrl: './seance-vl.component.html',
+    styleUrl: './seance-vl.component.scss',
+    standalone: false
 })
 export class SeanceVLComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

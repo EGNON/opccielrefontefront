@@ -7,9 +7,10 @@ import {IndicateurService} from "../../../services/indicateur.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-indicateur-add-edit',
-  templateUrl: './indicateur-add-edit.component.html',
-  styleUrls: ['./indicateur-add-edit.component.scss']
+    selector: 'app-indicateur-add-edit',
+    templateUrl: './indicateur-add-edit.component.html',
+    styleUrls: ['./indicateur-add-edit.component.scss'],
+    standalone: false
 })
 export class IndicateurAddEditComponent implements OnInit, OnDestroy{
   id?: number;

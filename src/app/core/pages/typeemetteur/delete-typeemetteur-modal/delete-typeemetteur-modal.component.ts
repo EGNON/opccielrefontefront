@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {TypeemetteurService} from "../../../services/typeemetteur.service";
 
 @Component({
-  selector: 'app-delete-typeemetteur-modal',
-  templateUrl: './delete-typeemetteur-modal.component.html',
-  styleUrl: './delete-typeemetteur-modal.component.scss'
+    selector: 'app-delete-typeemetteur-modal',
+    templateUrl: './delete-typeemetteur-modal.component.html',
+    styleUrl: './delete-typeemetteur-modal.component.scss',
+    standalone: false
 })
 export class DeleteTypeemetteurModalComponent implements OnInit{
   @Input() id: number;

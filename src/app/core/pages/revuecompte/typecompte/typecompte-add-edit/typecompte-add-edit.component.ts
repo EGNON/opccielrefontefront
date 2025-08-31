@@ -11,9 +11,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {TypecompteService} from "../../../../services/revuecompte/typecompte.service";
 
 @Component({
-  selector: 'app-typecompte-add-edit',
-  templateUrl: './typecompte-add-edit.component.html',
-  styleUrl: './typecompte-add-edit.component.scss'
+    selector: 'app-typecompte-add-edit',
+    templateUrl: './typecompte-add-edit.component.html',
+    styleUrl: './typecompte-add-edit.component.scss',
+    standalone: false
 })
 export class TypecompteAddEditComponent implements OnInit, OnDestroy {
   id?: any;

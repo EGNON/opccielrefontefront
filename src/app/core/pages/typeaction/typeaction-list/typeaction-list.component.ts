@@ -8,9 +8,10 @@ import {DeleteTypeactionModalComponent} from "../delete-typeaction-modal/delete-
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-typeaction-list',
-  templateUrl: './typeaction-list.component.html',
-  styleUrl: './typeaction-list.component.scss'
+    selector: 'app-typeaction-list',
+    templateUrl: './typeaction-list.component.html',
+    styleUrl: './typeaction-list.component.scss',
+    standalone: false
 })
 export class TypeactionListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

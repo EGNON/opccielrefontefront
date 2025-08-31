@@ -15,9 +15,10 @@ import {Langue} from "../../../models/langue.model";
 import {Pays} from "../../../../crm/models/pays.model";
 
 @Component({
-  selector: 'app-langue-add-edit',
-  templateUrl: './langue-add-edit.component.html',
-  styleUrl: './langue-add-edit.component.scss'
+    selector: 'app-langue-add-edit',
+    templateUrl: './langue-add-edit.component.html',
+    styleUrl: './langue-add-edit.component.scss',
+    standalone: false
 })
 export class LangueAddEditComponent implements OnInit, AfterViewInit, OnDestroy{
   id?: number;

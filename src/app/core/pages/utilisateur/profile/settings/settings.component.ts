@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import {PageInfoService, PageLink} from "../../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
+    selector: 'app-settings',
+    templateUrl: './settings.component.html',
+    standalone: false
 })
 export class SettingsComponent {
   links: Array<PageLink> = [

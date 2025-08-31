@@ -6,9 +6,10 @@ import {AffectationService} from "../../../services/affectation.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-affectation-modal',
-  templateUrl: './delete-affectation-modal.component.html',
-  styleUrls: ['./delete-affectation-modal.component.scss']
+    selector: 'app-delete-affectation-modal',
+    templateUrl: './delete-affectation-modal.component.html',
+    styleUrls: ['./delete-affectation-modal.component.scss'],
+    standalone: false
 })
 export class DeleteAffectationModalComponent implements OnInit{
   @Input() id: number;

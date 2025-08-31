@@ -11,9 +11,10 @@ import {PersonnePhysiqueService} from "../../../../crm/services/personne/personn
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-personne-physique-juge-list',
-  templateUrl: './personne-physique-juge-list.component.html',
-  styleUrl: './personne-physique-juge-list.component.scss'
+    selector: 'app-personne-physique-juge-list',
+    templateUrl: './personne-physique-juge-list.component.html',
+    styleUrl: './personne-physique-juge-list.component.scss',
+    standalone: false
 })
 export class PersonnePhysiqueJugeListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

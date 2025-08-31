@@ -18,9 +18,10 @@ import {
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-actionnairecommission-list',
-  templateUrl: './actionnairecommission-list.component.html',
-  styleUrl: './actionnairecommission-list.component.scss'
+    selector: 'app-actionnairecommission-list',
+    templateUrl: './actionnairecommission-list.component.html',
+    styleUrl: './actionnairecommission-list.component.scss',
+    standalone: false
 })
 export class ActionnairecommissionListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

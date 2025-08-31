@@ -23,9 +23,10 @@ import {Pays} from "../../../../crm/models/pays.model";
 import {AuthService} from "../../../modules/auth";
 
 @Component({
-  selector: 'app-modeleformule-add-edit',
-  templateUrl: './modeleformule-add-edit.component.html',
-  styleUrl: './modeleformule-add-edit.component.scss'
+    selector: 'app-modeleformule-add-edit',
+    templateUrl: './modeleformule-add-edit.component.html',
+    styleUrl: './modeleformule-add-edit.component.scss',
+    standalone: false
 })
 export class ModeleformuleAddEditComponent implements OnInit, OnDestroy {
   id?: any;

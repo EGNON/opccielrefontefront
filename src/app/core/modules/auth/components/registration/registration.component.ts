@@ -8,9 +8,10 @@ import { first } from 'rxjs/operators';
 import {Utilisateur} from "../../../../../crm/models/access/utilisateur.model";
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+    selector: 'app-registration',
+    templateUrl: './registration.component.html',
+    styleUrls: ['./registration.component.scss'],
+    standalone: false
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
   registrationForm: FormGroup;

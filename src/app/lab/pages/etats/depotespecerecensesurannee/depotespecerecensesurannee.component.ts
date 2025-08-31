@@ -27,9 +27,10 @@ import {Config} from "datatables.net";
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
 @Component({
-  selector: 'app-depotespecerecensesurannee',
-  templateUrl: './depotespecerecensesurannee.component.html',
-  styleUrl: './depotespecerecensesurannee.component.scss'
+    selector: 'app-depotespecerecensesurannee',
+    templateUrl: './depotespecerecensesurannee.component.html',
+    styleUrl: './depotespecerecensesurannee.component.scss',
+    standalone: false
 })
 export class DepotespecerecensesuranneeComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

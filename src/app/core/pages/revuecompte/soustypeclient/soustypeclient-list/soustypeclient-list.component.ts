@@ -11,9 +11,10 @@ import {
 } from "../delete-soustypeclient-modal/delete-soustypeclient-modal.component";
 
 @Component({
-  selector: 'app-soustypeclient-list',
-  templateUrl: './soustypeclient-list.component.html',
-  styleUrl: './soustypeclient-list.component.scss'
+    selector: 'app-soustypeclient-list',
+    templateUrl: './soustypeclient-list.component.html',
+    styleUrl: './soustypeclient-list.component.scss',
+    standalone: false
 })
 export class SoustypeclientListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

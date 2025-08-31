@@ -8,9 +8,10 @@ import {FileUploadService} from "../../../../crm/services/file-upload.service";
 import FileSaver from "file-saver";
 
 @Component({
-  selector: 'app-personne-physique-show',
-  templateUrl: './personne-physique-show.component.html',
-  styleUrls: ['./personne-physique-show.component.scss']
+    selector: 'app-personne-physique-show',
+    templateUrl: './personne-physique-show.component.html',
+    styleUrls: ['./personne-physique-show.component.scss'],
+    standalone: false
 })
 export class PersonnePhysiqueShowComponent implements OnInit, OnDestroy{
   qualite: string;

@@ -11,9 +11,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {TypeevenementService} from "../../../services/typeevenement.service";
 
 @Component({
-  selector: 'app-typeevenement-add-edit',
-  templateUrl: './typeevenement-add-edit.component.html',
-  styleUrl: './typeevenement-add-edit.component.scss'
+    selector: 'app-typeevenement-add-edit',
+    templateUrl: './typeevenement-add-edit.component.html',
+    styleUrl: './typeevenement-add-edit.component.scss',
+    standalone: false
 })
 export class TypeevenementAddEditComponent implements OnInit, OnDestroy {
   id?: any;

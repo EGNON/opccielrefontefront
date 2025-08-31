@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-titres-showing',
-  templateUrl: './titres-showing.component.html',
-  styleUrl: './titres-showing.component.scss'
+    selector: 'app-titres-showing',
+    templateUrl: './titres-showing.component.html',
+    styleUrl: './titres-showing.component.scss',
+    standalone: false
 })
 export class TitresShowingComponent {
 

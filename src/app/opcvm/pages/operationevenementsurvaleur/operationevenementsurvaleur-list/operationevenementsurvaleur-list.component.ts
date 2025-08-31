@@ -17,9 +17,10 @@ import {
 import {OperationevenementsurvaleurService} from "../../../services/operationevenementsurvaleur.service";
 
 @Component({
-  selector: 'app-operationevenementsurvaleur-list',
-  templateUrl: './operationevenementsurvaleur-list.component.html',
-  styleUrl: './operationevenementsurvaleur-list.component.scss'
+    selector: 'app-operationevenementsurvaleur-list',
+    templateUrl: './operationevenementsurvaleur-list.component.html',
+    styleUrl: './operationevenementsurvaleur-list.component.scss',
+    standalone: false
 })
 export class OperationevenementsurvaleurListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

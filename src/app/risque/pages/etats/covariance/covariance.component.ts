@@ -9,9 +9,10 @@ import moment from "moment/moment";
 import {first} from "rxjs/operators";
 
 @Component({
-  selector: 'app-covariance',
-  templateUrl: './covariance.component.html',
-  styleUrl: './covariance.component.scss'
+    selector: 'app-covariance',
+    templateUrl: './covariance.component.html',
+    styleUrl: './covariance.component.scss',
+    standalone: false
 })
 export class CovarianceComponent implements OnInit, OnDestroy, AfterViewInit{
   @ViewChild(DataTableDirective, {static: false})

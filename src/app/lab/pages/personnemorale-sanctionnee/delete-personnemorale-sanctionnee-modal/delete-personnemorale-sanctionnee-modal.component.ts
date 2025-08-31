@@ -9,9 +9,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {PersonneMoraleService} from "../../../../crm/services/personne/personne.morale.service";
 
 @Component({
-  selector: 'app-delete-personnemorale-sanctionnee-modal',
-  templateUrl: './delete-personnemorale-sanctionnee-modal.component.html',
-  styleUrl: './delete-personnemorale-sanctionnee-modal.component.scss'
+    selector: 'app-delete-personnemorale-sanctionnee-modal',
+    templateUrl: './delete-personnemorale-sanctionnee-modal.component.html',
+    styleUrl: './delete-personnemorale-sanctionnee-modal.component.scss',
+    standalone: false
 })
 export class DeletePersonnemoraleSanctionneeModalComponent implements OnInit{
   @Input() id: number;

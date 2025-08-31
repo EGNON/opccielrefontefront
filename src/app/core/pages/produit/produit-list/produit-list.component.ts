@@ -9,9 +9,10 @@ import {ProduitService} from "../../../../crm/services/produit.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-produit-list',
-  templateUrl: './produit-list.component.html',
-  styleUrls: ['./produit-list.component.scss']
+    selector: 'app-produit-list',
+    templateUrl: './produit-list.component.html',
+    styleUrls: ['./produit-list.component.scss'],
+    standalone: false
 })
 export class ProduitListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

@@ -13,9 +13,10 @@ import {
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-ibrubriqueposition-list',
-  templateUrl: './ibrubriqueposition-list.component.html',
-  styleUrl: './ibrubriqueposition-list.component.scss'
+    selector: 'app-ibrubriqueposition-list',
+    templateUrl: './ibrubriqueposition-list.component.html',
+    styleUrl: './ibrubriqueposition-list.component.scss',
+    standalone: false
 })
 export class IbrubriquepositionListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

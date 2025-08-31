@@ -23,10 +23,11 @@ import {UtilisateurService} from "../../../services/access/utilisateur.service";
 //import {NumeroPositifValidatorsDirective} from "../../../../validators/numero-positif-validators.directive";
 
 @Component({
-  selector: 'app-notifications-add-edit',
-  templateUrl: './notifications-add-edit.component.html',
-  styleUrls: ['./notifications-add-edit.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-notifications-add-edit',
+    templateUrl: './notifications-add-edit.component.html',
+    styleUrls: ['./notifications-add-edit.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NotificationsAddEditComponent implements OnInit, AfterViewInit, OnDestroy{
   id?: number;

@@ -20,9 +20,10 @@ import {Action} from "../../../modules/entity-crud/entity-crud.component";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-personne-physique-list',
-  templateUrl: './personne-physique-list.component.html',
-  styleUrls: ['./personne-physique-list.component.scss']
+    selector: 'app-personne-physique-list',
+    templateUrl: './personne-physique-list.component.html',
+    styleUrls: ['./personne-physique-list.component.scss'],
+    standalone: false
 })
 export class PersonnePhysiqueListComponent implements OnInit, AfterViewInit, OnDestroy{
   /*@HostBinding('class') class = 'menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 w-200px py-4';

@@ -6,9 +6,10 @@ import {MailService} from "../../../services/mail.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-mail-modal',
-  templateUrl: './delete-mail-modal.component.html',
-  styleUrls: ['./delete-mail-modal.component.scss']
+    selector: 'app-delete-mail-modal',
+    templateUrl: './delete-mail-modal.component.html',
+    styleUrls: ['./delete-mail-modal.component.scss'],
+    standalone: false
 })
 export class DeleteMailModalComponent implements OnInit{
   @Input() id: number;

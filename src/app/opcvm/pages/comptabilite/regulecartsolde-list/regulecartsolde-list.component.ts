@@ -17,9 +17,10 @@ import {
 import moment from "moment";
 
 @Component({
-  selector: 'app-regulecartsolde-list',
-  templateUrl: './regulecartsolde-list.component.html',
-  styleUrl: './regulecartsolde-list.component.scss'
+    selector: 'app-regulecartsolde-list',
+    templateUrl: './regulecartsolde-list.component.html',
+    styleUrl: './regulecartsolde-list.component.scss',
+    standalone: false
 })
 export class RegulecartsoldeListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

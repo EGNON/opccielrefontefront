@@ -22,9 +22,10 @@ import {ExerciceService} from "../../../services/exercice.service";
 import moment from "moment";
 
 @Component({
-  selector: 'app-relevetitrefcp',
-  templateUrl: './relevetitrefcp.component.html',
-  styleUrl: './relevetitrefcp.component.scss'
+    selector: 'app-relevetitrefcp',
+    templateUrl: './relevetitrefcp.component.html',
+    styleUrl: './relevetitrefcp.component.scss',
+    standalone: false
 })
 export class RelevetitrefcpComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

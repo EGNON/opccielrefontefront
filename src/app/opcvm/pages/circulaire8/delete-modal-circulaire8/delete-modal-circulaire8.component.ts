@@ -8,9 +8,10 @@ import {Infoscirculaire8Service} from "../../../services/infoscirculaire8.servic
 import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-delete-modal-circulaire8',
-  templateUrl: './delete-modal-circulaire8.component.html',
-  styleUrl: './delete-modal-circulaire8.component.scss'
+    selector: 'app-delete-modal-circulaire8',
+    templateUrl: './delete-modal-circulaire8.component.html',
+    styleUrl: './delete-modal-circulaire8.component.scss',
+    standalone: false
 })
 export class DeleteModalCirculaire8Component implements OnInit{
   @Input() id: number;

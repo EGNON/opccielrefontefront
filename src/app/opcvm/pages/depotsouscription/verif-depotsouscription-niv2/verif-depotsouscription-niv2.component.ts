@@ -14,9 +14,10 @@ import {catchError, finalize} from "rxjs/operators";
 import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-verif-depotsouscription-niv2',
-  templateUrl: './verif-depotsouscription-niv2.component.html',
-  styleUrl: './verif-depotsouscription-niv2.component.scss'
+    selector: 'app-verif-depotsouscription-niv2',
+    templateUrl: './verif-depotsouscription-niv2.component.html',
+    styleUrl: './verif-depotsouscription-niv2.component.scss',
+    standalone: false
 })
 export class VerifDepotsouscriptionNiv2Component implements OnInit, OnDestroy{
 

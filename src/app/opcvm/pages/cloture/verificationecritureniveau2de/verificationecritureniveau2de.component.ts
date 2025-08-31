@@ -23,9 +23,10 @@ import {Typeoperation} from "../../../../core/models/typeoperation.model";
 import $ from "jquery";
 
 @Component({
-  selector: 'app-verificationecritureniveau2de',
-  templateUrl: './verificationecritureniveau2de.component.html',
-  styleUrl: './verificationecritureniveau2de.component.scss'
+    selector: 'app-verificationecritureniveau2de',
+    templateUrl: './verificationecritureniveau2de.component.html',
+    styleUrl: './verificationecritureniveau2de.component.scss',
+    standalone: false
 })
 export class Verificationecritureniveau2deComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

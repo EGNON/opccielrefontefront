@@ -13,9 +13,10 @@ import {catchError, finalize, map} from "rxjs/operators";
 import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-constatation-charges',
-  templateUrl: './constatation-charges.component.html',
-  styleUrl: './constatation-charges.component.scss'
+    selector: 'app-constatation-charges',
+    templateUrl: './constatation-charges.component.html',
+    styleUrl: './constatation-charges.component.scss',
+    standalone: false
 })
 export class ConstatationChargesComponent implements OnInit, AfterViewInit, OnDestroy{
 

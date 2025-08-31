@@ -18,9 +18,10 @@ import {LocalService} from "../../../../services/local.service";
 import {Operationsouscriptionrachat2} from "../../../models/operationsouscriptionrachat2.model";
 
 @Component({
-  selector: 'app-generationrachat-list',
-  templateUrl: './generationrachat-list.component.html',
-  styleUrl: './generationrachat-list.component.scss'
+    selector: 'app-generationrachat-list',
+    templateUrl: './generationrachat-list.component.html',
+    styleUrl: './generationrachat-list.component.scss',
+    standalone: false
 })
 export class GenerationrachatListComponent implements OnInit, OnDestroy {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();

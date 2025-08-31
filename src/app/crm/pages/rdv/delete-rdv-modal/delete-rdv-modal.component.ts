@@ -7,9 +7,10 @@ import {AgentConcerneService} from "../../../services/agentconcerne.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-rdv-modal',
-  templateUrl: './delete-rdv-modal.component.html',
-  styleUrls: ['./delete-rdv-modal.component.scss']
+    selector: 'app-delete-rdv-modal',
+    templateUrl: './delete-rdv-modal.component.html',
+    styleUrls: ['./delete-rdv-modal.component.scss'],
+    standalone: false
 })
 export class DeleteRdvModalComponent {
   @Input() id: number;

@@ -14,9 +14,10 @@ import {Action} from "../../../../core/modules/entity-crud/entity-crud.component
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-tarificationordinaire-list',
-  templateUrl: './tarificationordinaire-list.component.html',
-  styleUrl: './tarificationordinaire-list.component.scss'
+    selector: 'app-tarificationordinaire-list',
+    templateUrl: './tarificationordinaire-list.component.html',
+    styleUrl: './tarificationordinaire-list.component.scss',
+    standalone: false
 })
 export class TarificationordinaireListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

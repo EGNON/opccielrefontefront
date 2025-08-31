@@ -9,9 +9,10 @@ import {TypeDocumentService} from "../../../../crm/services/type-document.servic
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-typedocument-list',
-  templateUrl: './typedocument-list.component.html',
-  styleUrls: ['./typedocument-list.component.scss']
+    selector: 'app-typedocument-list',
+    templateUrl: './typedocument-list.component.html',
+    styleUrls: ['./typedocument-list.component.scss'],
+    standalone: false
 })
 export class TypedocumentListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

@@ -6,9 +6,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {of} from "rxjs";
 
 @Component({
-  selector: 'app-soldecompteextourne',
-  templateUrl: './soldecompteextourne.component.html',
-  styleUrl: './soldecompteextourne.component.scss'
+    selector: 'app-soldecompteextourne',
+    templateUrl: './soldecompteextourne.component.html',
+    styleUrl: './soldecompteextourne.component.scss',
+    standalone: false
 })
 export class SoldecompteextourneComponent implements OnInit{
   currentSeance: any;

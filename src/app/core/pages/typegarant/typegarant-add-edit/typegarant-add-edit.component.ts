@@ -12,9 +12,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {TypegarantService} from "../../../services/typegarant.service";
 
 @Component({
-  selector: 'app-typegarant-add-edit',
-  templateUrl: './typegarant-add-edit.component.html',
-  styleUrl: './typegarant-add-edit.component.scss'
+    selector: 'app-typegarant-add-edit',
+    templateUrl: './typegarant-add-edit.component.html',
+    styleUrl: './typegarant-add-edit.component.scss',
+    standalone: false
 })
 export class TypegarantAddEditComponent implements OnInit, OnDestroy {
   id?: any;

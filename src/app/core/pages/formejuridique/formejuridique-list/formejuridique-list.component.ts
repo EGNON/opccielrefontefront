@@ -8,9 +8,10 @@ import {DeleteFormejuridiqueModalComponent} from "../delete-formejuridique-modal
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-formejuridique-list',
-  templateUrl: './formejuridique-list.component.html',
-  styleUrl: './formejuridique-list.component.scss'
+    selector: 'app-formejuridique-list',
+    templateUrl: './formejuridique-list.component.html',
+    styleUrl: './formejuridique-list.component.scss',
+    standalone: false
 })
 export class FormejuridiqueListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

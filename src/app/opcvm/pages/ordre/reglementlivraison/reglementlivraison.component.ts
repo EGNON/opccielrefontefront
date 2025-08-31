@@ -32,9 +32,10 @@ import {NgbActiveModal, NgbDate, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AvisoperationbourseService} from "../../../services/avisoperationbourse.service";
 
 @Component({
-  selector: 'app-reglementlivraison',
-  templateUrl: './reglementlivraison.component.html',
-  styleUrl: './reglementlivraison.component.scss'
+    selector: 'app-reglementlivraison',
+    templateUrl: './reglementlivraison.component.html',
+    styleUrl: './reglementlivraison.component.scss',
+    standalone: false
 })
 export class ReglementlivraisonComponent implements OnInit, OnDestroy {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();

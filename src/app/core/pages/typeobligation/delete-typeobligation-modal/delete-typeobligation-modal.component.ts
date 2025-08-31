@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {TypeobligationService} from "../../../services/typeobligation.service";
 
 @Component({
-  selector: 'app-delete-typeobligation-modal',
-  templateUrl: './delete-typeobligation-modal.component.html',
-  styleUrl: './delete-typeobligation-modal.component.scss'
+    selector: 'app-delete-typeobligation-modal',
+    templateUrl: './delete-typeobligation-modal.component.html',
+    styleUrl: './delete-typeobligation-modal.component.scss',
+    standalone: false
 })
 export class DeleteTypeobligationModalComponent implements OnInit{
   @Input() id: number;

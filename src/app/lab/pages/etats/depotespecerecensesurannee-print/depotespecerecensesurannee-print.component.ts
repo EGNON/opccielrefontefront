@@ -11,9 +11,10 @@ import {OperationService} from "../../../services/operation.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-depotespecerecensesurannee-print',
-  templateUrl: './depotespecerecensesurannee-print.component.html',
-  styleUrl: './depotespecerecensesurannee-print.component.scss'
+    selector: 'app-depotespecerecensesurannee-print',
+    templateUrl: './depotespecerecensesurannee-print.component.html',
+    styleUrl: './depotespecerecensesurannee-print.component.scss',
+    standalone: false
 })
 export class DepotespecerecensesuranneePrintComponent implements OnInit, OnDestroy{
   isLoading: boolean;

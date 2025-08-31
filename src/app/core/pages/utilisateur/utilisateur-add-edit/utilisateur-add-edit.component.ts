@@ -21,9 +21,10 @@ import {UtilisateurRolePermission} from "../../../modules/auth/models/utilisateu
 declare var $: JQueryStatic;
 
 @Component({
-  selector: 'app-utilisateur-add-edit',
-  templateUrl: './utilisateur-add-edit.component.html',
-  styleUrls: ['./utilisateur-add-edit.component.scss']
+    selector: 'app-utilisateur-add-edit',
+    templateUrl: './utilisateur-add-edit.component.html',
+    styleUrls: ['./utilisateur-add-edit.component.scss'],
+    standalone: false
 })
 export class UtilisateurAddEditComponent implements OnInit, AfterViewInit, OnDestroy {
   id?: number;

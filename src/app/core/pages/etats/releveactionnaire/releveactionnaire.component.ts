@@ -22,9 +22,10 @@ import {saveAs} from "file-saver";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-releveactionnaire',
-  templateUrl: './releveactionnaire.component.html',
-  styleUrl: './releveactionnaire.component.scss'
+    selector: 'app-releveactionnaire',
+    templateUrl: './releveactionnaire.component.html',
+    styleUrl: './releveactionnaire.component.scss',
+    standalone: false
 })
 export class ReleveactionnaireComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

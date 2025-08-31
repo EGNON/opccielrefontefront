@@ -7,9 +7,10 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 @Component({
-  selector: 'app-rdv-print',
-  templateUrl: './rdv-print.component.html',
-  styleUrls: ['./rdv-print.component.scss']
+    selector: 'app-rdv-print',
+    templateUrl: './rdv-print.component.html',
+    styleUrls: ['./rdv-print.component.scss'],
+    standalone: false
 })
 export class RdvPrintComponent implements OnInit{
   personnel$:any;

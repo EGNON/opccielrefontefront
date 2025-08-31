@@ -15,9 +15,10 @@ import moment from "moment";
 import {DeleteOrdreModalComponent} from "../delete-ordre-modal/delete-ordre-modal.component";
 
 @Component({
-  selector: 'app-ordre-list',
-  templateUrl: './ordre-list.component.html',
-  styleUrl: './ordre-list.component.scss'
+    selector: 'app-ordre-list',
+    templateUrl: './ordre-list.component.html',
+    styleUrl: './ordre-list.component.scss',
+    standalone: false
 })
 export class OrdreListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

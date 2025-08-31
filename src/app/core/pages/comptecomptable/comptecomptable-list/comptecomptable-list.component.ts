@@ -15,9 +15,10 @@ import {
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-comptecomptable-list',
-  templateUrl: './comptecomptable-list.component.html',
-  styleUrl: './comptecomptable-list.component.scss'
+    selector: 'app-comptecomptable-list',
+    templateUrl: './comptecomptable-list.component.html',
+    styleUrl: './comptecomptable-list.component.scss',
+    standalone: false
 })
 export class ComptecomptableListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

@@ -2,9 +2,10 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {OperationService} from "../../../../services/operation.service";
 
 @Component({
-  selector: 'app-details-ecriture',
-  templateUrl: './details-ecriture.component.html',
-  styleUrl: './details-ecriture.component.scss'
+    selector: 'app-details-ecriture',
+    templateUrl: './details-ecriture.component.html',
+    styleUrl: './details-ecriture.component.scss',
+    standalone: false
 })
 export class DetailsEcritureComponent implements OnInit{
   @Input() idOperation: number = 0;

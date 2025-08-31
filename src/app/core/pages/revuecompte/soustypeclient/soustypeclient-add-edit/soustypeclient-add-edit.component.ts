@@ -12,9 +12,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, finalize, first} from "rxjs/operators";
 
 @Component({
-  selector: 'app-soustypeclient-add-edit',
-  templateUrl: './soustypeclient-add-edit.component.html',
-  styleUrl: './soustypeclient-add-edit.component.scss'
+    selector: 'app-soustypeclient-add-edit',
+    templateUrl: './soustypeclient-add-edit.component.html',
+    styleUrl: './soustypeclient-add-edit.component.scss',
+    standalone: false
 })
 export class SoustypeclientAddEditComponent implements OnInit, OnDestroy {
   id?: any;

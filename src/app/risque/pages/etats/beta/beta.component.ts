@@ -9,9 +9,10 @@ import moment from "moment/moment";
 import {first} from "rxjs/operators";
 
 @Component({
-  selector: 'app-beta',
-  templateUrl: './beta.component.html',
-  styleUrl: './beta.component.scss'
+    selector: 'app-beta',
+    templateUrl: './beta.component.html',
+    styleUrl: './beta.component.scss',
+    standalone: false
 })
 export class BetaComponent implements OnInit, OnDestroy, AfterViewInit{
   @ViewChild(DataTableDirective, {static: false})

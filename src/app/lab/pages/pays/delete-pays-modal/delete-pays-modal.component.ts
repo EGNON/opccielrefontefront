@@ -5,9 +5,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {PaysService} from "../../../../crm/services/pays.service";
 
 @Component({
-  selector: 'lab-delete-pays-modal',
-  templateUrl: './delete-pays-modal.component.html',
-  styleUrls: ['./delete-pays-modal.component.scss']
+    selector: 'lab-delete-pays-modal',
+    templateUrl: './delete-pays-modal.component.html',
+    styleUrls: ['./delete-pays-modal.component.scss'],
+    standalone: false
 })
 export class DeletePaysModalComponent implements OnInit{
   @Input() id: number;

@@ -19,9 +19,10 @@ import {OrdreService} from "../../../services/ordre.service";
 import {FormuleService} from "../../../../core/services/formule.service";
 
 @Component({
-  selector: 'app-avisoperationbourse-add-edit',
-  templateUrl: './avisoperationbourse-add-edit.component.html',
-  styleUrl: './avisoperationbourse-add-edit.component.scss'
+    selector: 'app-avisoperationbourse-add-edit',
+    templateUrl: './avisoperationbourse-add-edit.component.html',
+    styleUrl: './avisoperationbourse-add-edit.component.scss',
+    standalone: false
 })
 export class AvisoperationbourseAddEditComponent implements OnInit, OnDestroy{
   id?: number;

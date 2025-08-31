@@ -13,9 +13,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-verif-depotsouscription-report',
-  templateUrl: './verif-depotsouscription-report.component.html',
-  styleUrl: './verif-depotsouscription-report.component.scss'
+    selector: 'app-verif-depotsouscription-report',
+    templateUrl: './verif-depotsouscription-report.component.html',
+    styleUrl: './verif-depotsouscription-report.component.scss',
+    standalone: false
 })
 export class VerifDepotsouscriptionReportComponent implements OnInit, OnDestroy{
   @Output() passEntry: EventEmitter<any> = new EventEmitter();

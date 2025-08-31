@@ -6,9 +6,10 @@ import {SecteurService} from "../../../../crm/services/secteur.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-secteur-modal',
-  templateUrl: './delete-secteur-modal.component.html',
-  styleUrls: ['./delete-secteur-modal.component.scss']
+    selector: 'app-delete-secteur-modal',
+    templateUrl: './delete-secteur-modal.component.html',
+    styleUrls: ['./delete-secteur-modal.component.scss'],
+    standalone: false
 })
 export class DeleteSecteurModalComponent {
   @Input() id: number;

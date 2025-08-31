@@ -11,9 +11,10 @@ import {DataTablesResponse} from "../../../models/data-tables.response.model";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-clientnayantinvesti',
-  templateUrl: './clientnayantinvesti.component.html',
-  styleUrls: ['./clientnayantinvesti.component.scss']
+    selector: 'app-clientnayantinvesti',
+    templateUrl: './clientnayantinvesti.component.html',
+    styleUrls: ['./clientnayantinvesti.component.scss'],
+    standalone: false
 })
 export class ClientnayantinvestiComponent implements OnInit, OnDestroy{
   baseRoute: string = "";

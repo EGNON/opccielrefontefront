@@ -8,9 +8,10 @@ import {TypeoperationService} from "../../../services/typeoperation.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-typeoperation-list',
-  templateUrl: './typeoperation-list.component.html',
-  styleUrl: './typeoperation-list.component.scss'
+    selector: 'app-typeoperation-list',
+    templateUrl: './typeoperation-list.component.html',
+    styleUrl: './typeoperation-list.component.scss',
+    standalone: false
 })
 export class TypeoperationListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

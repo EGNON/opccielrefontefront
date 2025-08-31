@@ -6,9 +6,10 @@ import {PaysService} from "../../../../crm/services/pays.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-pays-modal',
-  templateUrl: './delete-pays-modal.component.html',
-  styleUrls: ['./delete-pays-modal.component.scss']
+    selector: 'app-delete-pays-modal',
+    templateUrl: './delete-pays-modal.component.html',
+    styleUrls: ['./delete-pays-modal.component.scss'],
+    standalone: false
 })
 export class DeletePaysModalComponent implements OnInit{
   @Input() id: number;

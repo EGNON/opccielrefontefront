@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {SoustypeactionService} from "../../../services/soustypeaction.service";
 
 @Component({
-  selector: 'app-delete-soustypeaction-modal',
-  templateUrl: './delete-soustypeaction-modal.component.html',
-  styleUrl: './delete-soustypeaction-modal.component.scss'
+    selector: 'app-delete-soustypeaction-modal',
+    templateUrl: './delete-soustypeaction-modal.component.html',
+    styleUrl: './delete-soustypeaction-modal.component.scss',
+    standalone: false
 })
 export class DeleteSoustypeactionModalComponent implements OnInit{
   @Input() id: number;

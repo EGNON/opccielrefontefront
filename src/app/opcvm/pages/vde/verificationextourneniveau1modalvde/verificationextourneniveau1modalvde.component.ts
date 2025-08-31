@@ -23,9 +23,10 @@ import {Typeoperation} from "../../../../core/models/typeoperation.model";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-verificationextourneniveau1modalvde',
-  templateUrl: './verificationextourneniveau1modalvde.component.html',
-  styleUrl: './verificationextourneniveau1modalvde.component.scss'
+    selector: 'app-verificationextourneniveau1modalvde',
+    templateUrl: './verificationextourneniveau1modalvde.component.html',
+    styleUrl: './verificationextourneniveau1modalvde.component.scss',
+    standalone: false
 })
 export class Verificationextourneniveau1modalvdeComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

@@ -10,9 +10,10 @@ import {DeletePostecomptableModalComponent} from "../delete-postecomptable-modal
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-postecomptable-list',
-  templateUrl: './postecomptable-list.component.html',
-  styleUrl: './postecomptable-list.component.scss'
+    selector: 'app-postecomptable-list',
+    templateUrl: './postecomptable-list.component.html',
+    styleUrl: './postecomptable-list.component.scss',
+    standalone: false
 })
 export class PostecomptableListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

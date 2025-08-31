@@ -17,9 +17,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-generationreglementlivraison',
-  templateUrl: './generationreglementlivraison.component.html',
-  styleUrl: './generationreglementlivraison.component.scss'
+    selector: 'app-generationreglementlivraison',
+    templateUrl: './generationreglementlivraison.component.html',
+    styleUrl: './generationreglementlivraison.component.scss',
+    standalone: false
 })
 export class GenerationreglementlivraisonComponent implements OnInit, OnDestroy {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();

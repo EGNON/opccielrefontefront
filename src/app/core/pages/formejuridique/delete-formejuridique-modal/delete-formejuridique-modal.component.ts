@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {FormejuridiqueService} from "../../../../crm/services/formejuridique.service";
 
 @Component({
-  selector: 'app-delete-formejuridique-modal',
-  templateUrl: './delete-formejuridique-modal.component.html',
-  styleUrl: './delete-formejuridique-modal.component.scss'
+    selector: 'app-delete-formejuridique-modal',
+    templateUrl: './delete-formejuridique-modal.component.html',
+    styleUrl: './delete-formejuridique-modal.component.scss',
+    standalone: false
 })
 export class DeleteFormejuridiqueModalComponent implements OnInit{
   @Input() id: number;

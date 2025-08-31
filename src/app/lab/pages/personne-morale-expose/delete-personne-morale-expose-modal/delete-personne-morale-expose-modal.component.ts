@@ -9,9 +9,10 @@ import {QualiteService} from "../../../../crm/services/qualite.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-personne-morale-expose-modal',
-  templateUrl: './delete-personne-morale-expose-modal.component.html',
-  styleUrl: './delete-personne-morale-expose-modal.component.scss'
+    selector: 'app-delete-personne-morale-expose-modal',
+    templateUrl: './delete-personne-morale-expose-modal.component.html',
+    styleUrl: './delete-personne-morale-expose-modal.component.scss',
+    standalone: false
 })
 export class DeletePersonneMoraleExposeModalComponent implements OnInit{
   @Input() id: number;

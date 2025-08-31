@@ -6,9 +6,10 @@ import {ReportingsService} from "../../../../risque/services/reportings/reportin
 import {OpcvmService} from "../../../../opcciel1/services/opcvm.service";
 
 @Component({
-  selector: 'app-opcvm1',
-  templateUrl: './opcvm1.component.html',
-  styleUrl: './opcvm1.component.scss'
+    selector: 'app-opcvm1',
+    templateUrl: './opcvm1.component.html',
+    styleUrl: './opcvm1.component.scss',
+    standalone: false
 })
 export class Opcvm1Component implements OnInit, OnDestroy, AfterViewInit{
   @ViewChild(DataTableDirective, {static: false})

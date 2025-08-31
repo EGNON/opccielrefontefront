@@ -9,7 +9,10 @@ export type NotificationsTabsType =
   | 'kt_topbar_notifications_2'
   | 'kt_topbar_notifications_3';
 
-@Pipe({ name: "safeHtml"})
+@Pipe({
+    name: "safeHtml",
+    standalone: false
+})
 export class SafeHtmlPipe implements PipeTransform{
   constructor(private sanitizer: DomSanitizer) {
   }
@@ -19,8 +22,9 @@ export class SafeHtmlPipe implements PipeTransform{
 }
 
 @Component({
-  selector: 'app-notifications-inner',
-  templateUrl: './notifications-inner.component.html',
+    selector: 'app-notifications-inner',
+    templateUrl: './notifications-inner.component.html',
+    standalone: false
 })
 export class NotificationsInnerComponent implements OnInit {
   @HostBinding('class') class =

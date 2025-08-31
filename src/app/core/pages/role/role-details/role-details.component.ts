@@ -8,9 +8,10 @@ import {RoleService} from "../../../../crm/services/access/role.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-role-details',
-  templateUrl: './role-details.component.html',
-  styleUrls: ['./role-details.component.scss']
+    selector: 'app-role-details',
+    templateUrl: './role-details.component.html',
+    styleUrls: ['./role-details.component.scss'],
+    standalone: false
 })
 export class RoleDetailsComponent implements OnInit {
 

@@ -8,9 +8,10 @@ import {DataTablesResponse} from "../../../models/data-tables.response.model";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-fichekyc-print',
-  templateUrl: './fichekyc-print.component.html',
-  styleUrls: ['./fichekyc-print.component.scss']
+    selector: 'app-fichekyc-print',
+    templateUrl: './fichekyc-print.component.html',
+    styleUrls: ['./fichekyc-print.component.scss'],
+    standalone: false
 })
 export class FichekycPrintComponent implements OnInit, OnDestroy{
   baseRoute: string = "";

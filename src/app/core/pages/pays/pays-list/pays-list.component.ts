@@ -9,9 +9,10 @@ import {PaysService} from "../../../../crm/services/pays.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-pays-list',
-  templateUrl: './pays-list.component.html',
-  styleUrls: ['./pays-list.component.scss']
+    selector: 'app-pays-list',
+    templateUrl: './pays-list.component.html',
+    styleUrls: ['./pays-list.component.scss'],
+    standalone: false
 })
 export class PaysListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

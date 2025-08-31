@@ -11,9 +11,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {TypeobligationService} from "../../../services/typeobligation.service";
 
 @Component({
-  selector: 'app-typeobligation-add-edit',
-  templateUrl: './typeobligation-add-edit.component.html',
-  styleUrl: './typeobligation-add-edit.component.scss'
+    selector: 'app-typeobligation-add-edit',
+    templateUrl: './typeobligation-add-edit.component.html',
+    styleUrl: './typeobligation-add-edit.component.scss',
+    standalone: false
 })
 export class TypeobligationAddEditComponent implements OnInit, OnDestroy {
   id?: any;

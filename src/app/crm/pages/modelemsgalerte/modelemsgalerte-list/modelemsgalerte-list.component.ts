@@ -12,9 +12,10 @@ import {Config} from "datatables.net";
 import {RdvService} from "../../../services/rdv.service";
 
 @Component({
-  selector: 'app-modelemsgalerte-list',
-  templateUrl: './modelemsgalerte-list.component.html',
-  styleUrls: ['./modelemsgalerte-list.component.scss']
+    selector: 'app-modelemsgalerte-list',
+    templateUrl: './modelemsgalerte-list.component.html',
+    styleUrls: ['./modelemsgalerte-list.component.scss'],
+    standalone: false
 })
 export class ModelemsgalerteListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

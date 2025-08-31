@@ -9,9 +9,10 @@ import FileSaver from "file-saver";
 import {AffectationService} from "../../../services/affectation.service";
 
 @Component({
-  selector: 'app-affectation-show',
-  templateUrl: './affectation-show.component.html',
-  styleUrls: ['./affectation-show.component.scss']
+    selector: 'app-affectation-show',
+    templateUrl: './affectation-show.component.html',
+    styleUrls: ['./affectation-show.component.scss'],
+    standalone: false
 })
 export class AffectationShowComponent implements OnInit, OnDestroy{
   qualite: string;

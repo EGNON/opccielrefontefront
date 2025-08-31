@@ -22,9 +22,10 @@ import {saveAs} from "file-saver";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-ficheclient',
-  templateUrl: './ficheclient.component.html',
-  styleUrl: './ficheclient.component.scss'
+    selector: 'app-ficheclient',
+    templateUrl: './ficheclient.component.html',
+    styleUrl: './ficheclient.component.scss',
+    standalone: false
 })
 export class FicheclientComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

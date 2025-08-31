@@ -12,9 +12,10 @@ import $ from "jquery";
 import moment from "moment/moment";
 
 @Component({
-  selector: 'app-volatilite',
-  templateUrl: './volatilite.component.html',
-  styleUrl: './volatilite.component.scss'
+    selector: 'app-volatilite',
+    templateUrl: './volatilite.component.html',
+    styleUrl: './volatilite.component.scss',
+    standalone: false
 })
 export class VolatiliteComponent implements OnInit, AfterViewInit{
   @ViewChild('datatable') tableRef: ElementRef;

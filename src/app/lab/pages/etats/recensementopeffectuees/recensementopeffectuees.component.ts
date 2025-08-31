@@ -3,9 +3,10 @@ import {ReportingsService} from "../../../services/reportings/reportings.service
 import {Observable, Subject, Subscription, tap} from "rxjs";
 
 @Component({
-  selector: 'app-recensementopeffectuees',
-  templateUrl: './recensementopeffectuees.component.html',
-  styleUrl: './recensementopeffectuees.component.scss'
+    selector: 'app-recensementopeffectuees',
+    templateUrl: './recensementopeffectuees.component.html',
+    styleUrl: './recensementopeffectuees.component.scss',
+    standalone: false
 })
 export class RecensementopeffectueesComponent implements OnInit{
   // dtOptions: Config = {};

@@ -3,9 +3,10 @@ import icons from "../../../../template/_metronic/shared/keenicon/icons.json";
 import {Observable} from "rxjs";
 
 @Component({
-  selector: 'app-user-notifications',
-  templateUrl: './user-notifications.component.html',
-  styleUrls: ['./user-notifications.component.scss']
+    selector: 'app-user-notifications',
+    templateUrl: './user-notifications.component.html',
+    styleUrls: ['./user-notifications.component.scss'],
+    standalone: false
 })
 export class UserNotificationsComponent implements OnInit {
   @Input() name: string;

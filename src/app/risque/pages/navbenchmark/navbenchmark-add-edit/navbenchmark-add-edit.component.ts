@@ -14,9 +14,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {SeanceopcvmService} from "../../../../opcvm/services/seanceopcvm.service";
 
 @Component({
-  selector: 'app-navbenchmark-add-edit',
-  templateUrl: './navbenchmark-add-edit.component.html',
-  styleUrl: './navbenchmark-add-edit.component.scss'
+    selector: 'app-navbenchmark-add-edit',
+    templateUrl: './navbenchmark-add-edit.component.html',
+    styleUrl: './navbenchmark-add-edit.component.scss',
+    standalone: false
 })
 export class NavbenchmarkAddEditComponent implements OnInit, OnDestroy{
   id?: number;

@@ -22,9 +22,10 @@ import {saveAs} from "file-saver";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-historiqueactionnaire-list',
-  templateUrl: './historiqueactionnaire-list.component.html',
-  styleUrl: './historiqueactionnaire-list.component.scss'
+    selector: 'app-historiqueactionnaire-list',
+    templateUrl: './historiqueactionnaire-list.component.html',
+    styleUrl: './historiqueactionnaire-list.component.scss',
+    standalone: false
 })
 export class HistoriqueactionnaireListComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

@@ -4,8 +4,9 @@ import { TranslationService } from '../../../../../../modules/i18n';
 import {AuthService, UserType} from "../../../../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-user-inner',
-  templateUrl: './user-inner.component.html',
+    selector: 'app-user-inner',
+    templateUrl: './user-inner.component.html',
+    standalone: false
 })
 export class UserInnerComponent implements OnInit, OnDestroy {
   @HostBinding('class')

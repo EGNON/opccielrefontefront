@@ -10,9 +10,10 @@ import {DataTablesResponse} from "../../../models/data-tables.response.model";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-prospect-print',
-  templateUrl: './prospect-print.component.html',
-  styleUrls: ['./prospect-print.component.scss']
+    selector: 'app-prospect-print',
+    templateUrl: './prospect-print.component.html',
+    styleUrls: ['./prospect-print.component.scss'],
+    standalone: false
 })
 export class ProspectPrintComponent implements OnInit, OnDestroy{
   baseRoute: string = "";

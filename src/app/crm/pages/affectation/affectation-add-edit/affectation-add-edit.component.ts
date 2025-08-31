@@ -13,9 +13,10 @@ import {Personnel} from "../../../models/personne/personnel.model";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-affectation-add-edit',
-  templateUrl: './affectation-add-edit.component.html',
-  styleUrls: ['./affectation-add-edit.component.scss']
+    selector: 'app-affectation-add-edit',
+    templateUrl: './affectation-add-edit.component.html',
+    styleUrls: ['./affectation-add-edit.component.scss'],
+    standalone: false
 })
 export class AffectationAddEditComponent implements OnInit, AfterViewInit, OnDestroy{
   id?: number;

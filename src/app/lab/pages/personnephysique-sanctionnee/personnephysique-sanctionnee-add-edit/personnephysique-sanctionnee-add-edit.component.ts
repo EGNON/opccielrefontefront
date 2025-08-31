@@ -29,9 +29,10 @@ import {catchError, filter, finalize, map} from "rxjs/operators";
 import {Qualite} from "../../../../crm/models/qualite.model";
 
 @Component({
-  selector: 'app-personnephysique-sanctionnee-add-edit',
-  templateUrl: './personnephysique-sanctionnee-add-edit.component.html',
-  styleUrl: './personnephysique-sanctionnee-add-edit.component.scss'
+    selector: 'app-personnephysique-sanctionnee-add-edit',
+    templateUrl: './personnephysique-sanctionnee-add-edit.component.html',
+    styleUrl: './personnephysique-sanctionnee-add-edit.component.scss',
+    standalone: false
 })
 export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDestroy, AfterViewInit{
   public paysSettings = {};

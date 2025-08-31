@@ -13,9 +13,10 @@ import {DeleteCorrespondanceModalComponent} from "../delete-correspondance-modal
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-correspondance-list',
-  templateUrl: './correspondance-list.component.html',
-  styleUrl: './correspondance-list.component.scss'
+    selector: 'app-correspondance-list',
+    templateUrl: './correspondance-list.component.html',
+    styleUrl: './correspondance-list.component.scss',
+    standalone: false
 })
 export class CorrespondanceListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

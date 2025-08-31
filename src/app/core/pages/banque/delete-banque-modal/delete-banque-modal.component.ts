@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {BanqueService} from "../../../services/banque.service";
 
 @Component({
-  selector: 'app-delete-banque-modal',
-  templateUrl: './delete-banque-modal.component.html',
-  styleUrl: './delete-banque-modal.component.scss'
+    selector: 'app-delete-banque-modal',
+    templateUrl: './delete-banque-modal.component.html',
+    styleUrl: './delete-banque-modal.component.scss',
+    standalone: false
 })
 export class DeleteBanqueModalComponent implements OnInit{
   @Input() id: number;

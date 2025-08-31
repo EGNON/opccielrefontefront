@@ -31,9 +31,10 @@ import {MailService} from "../../../../crm/services/mail.service";
 import {LoaderService} from "../../../../loader.service";
 
 @Component({
-  selector: 'app-avisrachat-list',
-  templateUrl: './avisrachat-list.component.html',
-  styleUrl: './avisrachat-list.component.scss'
+    selector: 'app-avisrachat-list',
+    templateUrl: './avisrachat-list.component.html',
+    styleUrl: './avisrachat-list.component.scss',
+    standalone: false
 })
 export class AvisrachatListComponent implements OnInit, OnDestroy {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();

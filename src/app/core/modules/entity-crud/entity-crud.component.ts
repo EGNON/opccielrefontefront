@@ -27,9 +27,10 @@ export interface Action {
 }
 
 @Component({
-  selector: 'app-entity-crud',
-  templateUrl: './entity-crud.component.html',
-  styleUrls: ['./entity-crud.component.scss']
+    selector: 'app-entity-crud',
+    templateUrl: './entity-crud.component.html',
+    styleUrls: ['./entity-crud.component.scss'],
+    standalone: false
 })
 export class EntityCrudComponent implements OnInit, AfterViewInit, OnDestroy {
 

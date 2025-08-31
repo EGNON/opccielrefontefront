@@ -17,9 +17,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {OperationService} from "../../../services/operation.service";
 
 @Component({
-  selector: 'app-paiement-commission-investissement-add-edit',
-  templateUrl: './paiement-commission-investissement-add-edit.component.html',
-  styleUrl: './paiement-commission-investissement-add-edit.component.scss'
+    selector: 'app-paiement-commission-investissement-add-edit',
+    templateUrl: './paiement-commission-investissement-add-edit.component.html',
+    styleUrl: './paiement-commission-investissement-add-edit.component.scss',
+    standalone: false
 })
 export class PaiementCommissionInvestissementAddEditComponent implements OnInit, OnDestroy{
   id?: number;

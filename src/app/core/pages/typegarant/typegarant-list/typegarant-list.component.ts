@@ -8,9 +8,10 @@ import {DeleteTypegarantModalComponent} from "../delete-typegarant-modal/delete-
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-typegarant-list',
-  templateUrl: './typegarant-list.component.html',
-  styleUrl: './typegarant-list.component.scss'
+    selector: 'app-typegarant-list',
+    templateUrl: './typegarant-list.component.html',
+    styleUrl: './typegarant-list.component.scss',
+    standalone: false
 })
 export class TypegarantListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

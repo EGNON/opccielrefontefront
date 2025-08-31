@@ -8,9 +8,10 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-delete-personnephysique-sanctionnee-modal',
-  templateUrl: './delete-personnephysique-sanctionnee-modal.component.html',
-  styleUrl: './delete-personnephysique-sanctionnee-modal.component.scss'
+    selector: 'app-delete-personnephysique-sanctionnee-modal',
+    templateUrl: './delete-personnephysique-sanctionnee-modal.component.html',
+    styleUrl: './delete-personnephysique-sanctionnee-modal.component.scss',
+    standalone: false
 })
 export class DeletePersonnephysiqueSanctionneeModalComponent implements OnInit{
   @Input() id: number;

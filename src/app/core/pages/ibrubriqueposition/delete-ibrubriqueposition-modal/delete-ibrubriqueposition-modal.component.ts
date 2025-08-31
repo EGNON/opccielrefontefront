@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {IbrubriquepositionService} from "../../../services/ibrubriqueposition.service";
 
 @Component({
-  selector: 'app-delete-ibrubriqueposition-modal',
-  templateUrl: './delete-ibrubriqueposition-modal.component.html',
-  styleUrl: './delete-ibrubriqueposition-modal.component.scss'
+    selector: 'app-delete-ibrubriqueposition-modal',
+    templateUrl: './delete-ibrubriqueposition-modal.component.html',
+    styleUrl: './delete-ibrubriqueposition-modal.component.scss',
+    standalone: false
 })
 export class DeleteIbrubriquepositionModalComponent implements OnInit{
   @Input() id: string;

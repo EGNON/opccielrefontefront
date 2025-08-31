@@ -15,9 +15,10 @@ import {OperationPaiementChargesService} from "../../../services/operation-paiem
 import {SeanceopcvmService} from "../../../services/seanceopcvm.service";
 
 @Component({
-  selector: 'app-paiement-charges',
-  templateUrl: './paiement-charges.component.html',
-  styleUrl: './paiement-charges.component.scss'
+    selector: 'app-paiement-charges',
+    templateUrl: './paiement-charges.component.html',
+    styleUrl: './paiement-charges.component.scss',
+    standalone: false
 })
 export class PaiementChargesComponent implements OnInit, AfterViewInit, OnDestroy{
 

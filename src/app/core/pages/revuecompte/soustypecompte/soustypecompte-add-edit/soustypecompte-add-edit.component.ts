@@ -12,9 +12,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {SoustypecompteService} from "../../../../services/revuecompte/soustypecompte.service";
 
 @Component({
-  selector: 'app-soustypecompte-add-edit',
-  templateUrl: './soustypecompte-add-edit.component.html',
-  styleUrl: './soustypecompte-add-edit.component.scss'
+    selector: 'app-soustypecompte-add-edit',
+    templateUrl: './soustypecompte-add-edit.component.html',
+    styleUrl: './soustypecompte-add-edit.component.scss',
+    standalone: false
 })
 export class SoustypecompteAddEditComponent implements OnInit, OnDestroy {
   id?: any;

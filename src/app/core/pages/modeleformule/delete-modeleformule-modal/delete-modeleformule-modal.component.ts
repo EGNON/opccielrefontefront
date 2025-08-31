@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {ModeleecritureService} from "../../../services/modeleecriture.service";
 
 @Component({
-  selector: 'app-delete-modeleformule-modal',
-  templateUrl: './delete-modeleformule-modal.component.html',
-  styleUrl: './delete-modeleformule-modal.component.scss'
+    selector: 'app-delete-modeleformule-modal',
+    templateUrl: './delete-modeleformule-modal.component.html',
+    styleUrl: './delete-modeleformule-modal.component.scss',
+    standalone: false
 })
 export class DeleteModeleformuleModalComponent implements OnInit{
   @Input() id: number;

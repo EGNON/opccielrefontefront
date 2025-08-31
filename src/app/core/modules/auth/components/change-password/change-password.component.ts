@@ -12,9 +12,10 @@ enum ErrorStates {
 }
 
 @Component({
-  selector: 'app-change-password',
-  templateUrl: './change-password.component.html',
-  styleUrl: './change-password.component.scss'
+    selector: 'app-change-password',
+    templateUrl: './change-password.component.html',
+    styleUrl: './change-password.component.scss',
+    standalone: false
 })
 export class ChangePasswordComponent {
   changePasswordForm: FormGroup;

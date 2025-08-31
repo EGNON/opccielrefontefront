@@ -16,9 +16,10 @@ import {TypeoperationService} from "../../../services/typeoperation.service";
 import {AuthService} from "../../../modules/auth";
 
 @Component({
-  selector: 'app-natureoperation-add-edit',
-  templateUrl: './natureoperation-add-edit.component.html',
-  styleUrl: './natureoperation-add-edit.component.scss'
+    selector: 'app-natureoperation-add-edit',
+    templateUrl: './natureoperation-add-edit.component.html',
+    styleUrl: './natureoperation-add-edit.component.scss',
+    standalone: false
 })
 export class NatureoperationAddEditComponent implements OnInit, OnDestroy {
   id?: any;

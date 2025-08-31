@@ -9,9 +9,10 @@ import {MenuService} from "../../../../crm/services/access/menu.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-menus-list',
-  templateUrl: './menus-list.component.html',
-  styleUrls: ['./menus-list.component.scss']
+    selector: 'app-menus-list',
+    templateUrl: './menus-list.component.html',
+    styleUrls: ['./menus-list.component.scss'],
+    standalone: false
 })
 export class MenusListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

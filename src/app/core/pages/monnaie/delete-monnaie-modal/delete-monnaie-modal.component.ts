@@ -6,9 +6,10 @@ import {MonnaieService} from "../../../../crm/services/monnaie.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-monnaie-modal',
-  templateUrl: './delete-monnaie-modal.component.html',
-  styleUrls: ['./delete-monnaie-modal.component.scss']
+    selector: 'app-delete-monnaie-modal',
+    templateUrl: './delete-monnaie-modal.component.html',
+    styleUrls: ['./delete-monnaie-modal.component.scss'],
+    standalone: false
 })
 export class DeleteMonnaieModalComponent {
   @Input() id: any;

@@ -9,9 +9,10 @@ import {LocalService} from "../../../../services/local.service";
 import {OperationConstatationChargesService} from "../../../services/operation-constatation-charges.service";
 
 @Component({
-  selector: 'app-constatation-charges-list',
-  templateUrl: './constatation-charges-list.component.html',
-  styleUrl: './constatation-charges-list.component.scss'
+    selector: 'app-constatation-charges-list',
+    templateUrl: './constatation-charges-list.component.html',
+    styleUrl: './constatation-charges-list.component.scss',
+    standalone: false
 })
 export class ConstatationChargesListComponent implements OnInit, OnDestroy, AfterViewInit{
 

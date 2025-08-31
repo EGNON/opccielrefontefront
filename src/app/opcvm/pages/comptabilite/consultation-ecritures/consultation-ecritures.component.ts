@@ -23,9 +23,10 @@ import {OperationService} from "../../../services/operation.service";
 import {DetailsEcritureComponent} from "./details-ecriture/details-ecriture.component";
 
 @Component({
-  selector: 'app-consultation-ecritures',
-  templateUrl: './consultation-ecritures.component.html',
-  styleUrl: './consultation-ecritures.component.scss'
+    selector: 'app-consultation-ecritures',
+    templateUrl: './consultation-ecritures.component.html',
+    styleUrl: './consultation-ecritures.component.scss',
+    standalone: false
 })
 export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

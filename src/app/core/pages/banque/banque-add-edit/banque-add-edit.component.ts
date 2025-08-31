@@ -11,9 +11,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {SweetAlertOptions} from "sweetalert2";
 
 @Component({
-  selector: 'app-banque-add-edit',
-  templateUrl: './banque-add-edit.component.html',
-  styleUrl: './banque-add-edit.component.scss'
+    selector: 'app-banque-add-edit',
+    templateUrl: './banque-add-edit.component.html',
+    styleUrl: './banque-add-edit.component.scss',
+    standalone: false
 })
 export class BanqueAddEditComponent implements OnInit, OnDestroy {
   id?: any;

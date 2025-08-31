@@ -7,9 +7,10 @@ import {QualiteService} from "../../../../crm/services/qualite.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-qualite-add-edit',
-  templateUrl: './qualite-add-edit.component.html',
-  styleUrls: ['./qualite-add-edit.component.scss']
+    selector: 'app-qualite-add-edit',
+    templateUrl: './qualite-add-edit.component.html',
+    styleUrls: ['./qualite-add-edit.component.scss'],
+    standalone: false
 })
 export class QualiteAddEditComponent implements OnInit, OnDestroy {
   id?: number;

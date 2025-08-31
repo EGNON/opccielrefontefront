@@ -15,9 +15,10 @@ import moment from "moment";
 import {DeleteModalCirculaire8Component} from "../delete-modal-circulaire8/delete-modal-circulaire8.component";
 
 @Component({
-  selector: 'app-circulaire8-list',
-  templateUrl: './circulaire8-list.component.html',
-  styleUrl: './circulaire8-list.component.scss'
+    selector: 'app-circulaire8-list',
+    templateUrl: './circulaire8-list.component.html',
+    styleUrl: './circulaire8-list.component.scss',
+    standalone: false
 })
 export class Circulaire8ListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

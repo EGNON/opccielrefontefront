@@ -8,9 +8,10 @@ import {PersonnephysiquepaysService} from "../../../../crm/services/personnephys
 import FileSaver from "file-saver";
 
 @Component({
-  selector: 'app-personnephysique-sanctionnee-show',
-  templateUrl: './personnephysique-sanctionnee-show.component.html',
-  styleUrl: './personnephysique-sanctionnee-show.component.scss'
+    selector: 'app-personnephysique-sanctionnee-show',
+    templateUrl: './personnephysique-sanctionnee-show.component.html',
+    styleUrl: './personnephysique-sanctionnee-show.component.scss',
+    standalone: false
 })
 export class PersonnephysiqueSanctionneeShowComponent implements OnInit, OnDestroy{
   qualite: string;

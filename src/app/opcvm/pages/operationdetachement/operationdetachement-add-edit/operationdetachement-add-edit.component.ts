@@ -23,9 +23,10 @@ import {TcnService} from "../../../../titresciel/services/tcn.service";
 import {ObligationService} from "../../../../titresciel/services/obligation.service";
 
 @Component({
-  selector: 'app-operationdetachement-add-edit',
-  templateUrl: './operationdetachement-add-edit.component.html',
-  styleUrl: './operationdetachement-add-edit.component.scss'
+    selector: 'app-operationdetachement-add-edit',
+    templateUrl: './operationdetachement-add-edit.component.html',
+    styleUrl: './operationdetachement-add-edit.component.scss',
+    standalone: false
 })
 export class OperationdetachementAddEditComponent implements OnInit, OnDestroy{
   id?: number;

@@ -6,9 +6,10 @@ import {
 } from "../verificationniveau1modalvde/verificationniveau1modalvde.component";
 
 @Component({
-  selector: 'app-verificationniveau1vde',
-  templateUrl: './verificationniveau1vde.component.html',
-  styleUrl: './verificationniveau1vde.component.scss'
+    selector: 'app-verificationniveau1vde',
+    templateUrl: './verificationniveau1vde.component.html',
+    styleUrl: './verificationniveau1vde.component.scss',
+    standalone: false
 })
 export class Verificationniveau1vdeComponent  implements OnInit{
   constructor(private dialog: MatDialog, private router: Router) {}

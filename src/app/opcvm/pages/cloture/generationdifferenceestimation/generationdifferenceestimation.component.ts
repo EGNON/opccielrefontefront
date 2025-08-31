@@ -7,9 +7,10 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SeanceopcvmService} from "../../../services/seanceopcvm.service";
 
 @Component({
-  selector: 'app-generationdifferenceestimation',
-  templateUrl: './generationdifferenceestimation.component.html',
-  styleUrl: './generationdifferenceestimation.component.scss'
+    selector: 'app-generationdifferenceestimation',
+    templateUrl: './generationdifferenceestimation.component.html',
+    styleUrl: './generationdifferenceestimation.component.scss',
+    standalone: false
 })
 export class GenerationdifferenceestimationComponent implements OnInit{
   currentSeance: any;

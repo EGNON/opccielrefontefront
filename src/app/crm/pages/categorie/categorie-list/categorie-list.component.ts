@@ -10,9 +10,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-categorie-list',
-  templateUrl: './categorie-list.component.html',
-  styleUrls: ['./categorie-list.component.scss']
+    selector: 'app-categorie-list',
+    templateUrl: './categorie-list.component.html',
+    styleUrls: ['./categorie-list.component.scss'],
+    standalone: false
 })
  export class CategorieListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

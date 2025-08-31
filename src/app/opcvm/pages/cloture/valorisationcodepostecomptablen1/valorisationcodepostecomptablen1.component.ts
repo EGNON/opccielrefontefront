@@ -9,9 +9,10 @@ import {of} from "rxjs";
 import {PostecomptableseanceopcvmService} from "../../../services/postecomptableseanceopcvm.service";
 
 @Component({
-  selector: 'app-valorisationcodepostecomptablen1',
-  templateUrl: './valorisationcodepostecomptablen1.component.html',
-  styleUrl: './valorisationcodepostecomptablen1.component.scss'
+    selector: 'app-valorisationcodepostecomptablen1',
+    templateUrl: './valorisationcodepostecomptablen1.component.html',
+    styleUrl: './valorisationcodepostecomptablen1.component.scss',
+    standalone: false
 })
 export class Valorisationcodepostecomptablen1Component implements OnInit{
   currentSeance: any;

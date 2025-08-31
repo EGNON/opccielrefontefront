@@ -14,9 +14,10 @@ import 'datatables.net-buttons/js/buttons.print';
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-registre-confidentiel',
-  templateUrl: './registre-confidentiel.component.html',
-  styleUrl: './registre-confidentiel.component.scss'
+    selector: 'app-registre-confidentiel',
+    templateUrl: './registre-confidentiel.component.html',
+    styleUrl: './registre-confidentiel.component.scss',
+    standalone: false
 })
 export class RegistreConfidentielComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(DataTableDirective, {static: false})

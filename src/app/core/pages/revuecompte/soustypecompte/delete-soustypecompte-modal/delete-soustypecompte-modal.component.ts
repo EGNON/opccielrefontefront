@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {SoustypecompteService} from "../../../../services/revuecompte/soustypecompte.service";
 
 @Component({
-  selector: 'app-delete-soustypecompte-modal',
-  templateUrl: './delete-soustypecompte-modal.component.html',
-  styleUrl: './delete-soustypecompte-modal.component.scss'
+    selector: 'app-delete-soustypecompte-modal',
+    templateUrl: './delete-soustypecompte-modal.component.html',
+    styleUrl: './delete-soustypecompte-modal.component.scss',
+    standalone: false
 })
 export class DeleteSoustypecompteModalComponent implements OnInit{
   @Input() id: number;

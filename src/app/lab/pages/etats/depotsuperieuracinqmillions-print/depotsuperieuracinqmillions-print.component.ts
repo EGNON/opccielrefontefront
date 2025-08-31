@@ -12,9 +12,10 @@ import {ShareService} from "../../../services/share.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-depotsuperieuracinqmillions-print',
-  templateUrl: './depotsuperieuracinqmillions-print.component.html',
-  styleUrl: './depotsuperieuracinqmillions-print.component.scss'
+    selector: 'app-depotsuperieuracinqmillions-print',
+    templateUrl: './depotsuperieuracinqmillions-print.component.html',
+    styleUrl: './depotsuperieuracinqmillions-print.component.scss',
+    standalone: false
 })
 export class DepotsuperieuracinqmillionsPrintComponent implements OnInit, OnDestroy{
   isLoading: boolean;

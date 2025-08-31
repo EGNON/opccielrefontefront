@@ -5,9 +5,10 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 @Component({
-  selector: 'app-compterendu-print',
-  templateUrl: './compterendu-print.component.html',
-  styleUrls: ['./compterendu-print.component.scss']
+    selector: 'app-compterendu-print',
+    templateUrl: './compterendu-print.component.html',
+    styleUrls: ['./compterendu-print.component.scss'],
+    standalone: false
 })
 export class CompterenduPrintComponent implements OnInit{
   personnel$:any;

@@ -13,9 +13,10 @@ import {LangueService} from "../../../services/langue.service";
 import {DeleteLangueModalComponent} from "../delete-langue-modal/delete-langue-modal.component";
 
 @Component({
-  selector: 'app-langue-list',
-  templateUrl: './langue-list.component.html',
-  styleUrl: './langue-list.component.scss'
+    selector: 'app-langue-list',
+    templateUrl: './langue-list.component.html',
+    styleUrl: './langue-list.component.scss',
+    standalone: false
 })
 export class LangueListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

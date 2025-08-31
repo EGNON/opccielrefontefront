@@ -6,9 +6,10 @@ import {QualiteService} from "../../../../crm/services/qualite.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-qualite-modal',
-  templateUrl: './delete-qualite-modal.component.html',
-  styleUrls: ['./delete-qualite-modal.component.scss']
+    selector: 'app-delete-qualite-modal',
+    templateUrl: './delete-qualite-modal.component.html',
+    styleUrls: ['./delete-qualite-modal.component.scss'],
+    standalone: false
 })
 export class DeleteQualiteModalComponent implements OnInit{
   @Input() id: number;

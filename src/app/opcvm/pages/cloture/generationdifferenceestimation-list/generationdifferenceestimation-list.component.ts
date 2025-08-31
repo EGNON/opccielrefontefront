@@ -21,9 +21,10 @@ import {TitreModel} from "../../../../titresciel/models/titre.model";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-generationdifferenceestimation-list',
-  templateUrl: './generationdifferenceestimation-list.component.html',
-  styleUrl: './generationdifferenceestimation-list.component.scss'
+    selector: 'app-generationdifferenceestimation-list',
+    templateUrl: './generationdifferenceestimation-list.component.html',
+    styleUrl: './generationdifferenceestimation-list.component.scss',
+    standalone: false
 })
 export class GenerationdifferenceestimationListComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

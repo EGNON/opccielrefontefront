@@ -24,9 +24,10 @@ import {DroitService} from "../../../../titresciel/services/droit.service";
 import {DroitModel} from "../../../../titresciel/models/droit.model";
 
 @Component({
-  selector: 'app-operationdetachementdroit',
-  templateUrl: './operationdetachementdroit.component.html',
-  styleUrl: './operationdetachementdroit.component.scss'
+    selector: 'app-operationdetachementdroit',
+    templateUrl: './operationdetachementdroit.component.html',
+    styleUrl: './operationdetachementdroit.component.scss',
+    standalone: false
 })
 export class OperationdetachementdroitComponent implements OnInit, OnDestroy{
   id?: number;

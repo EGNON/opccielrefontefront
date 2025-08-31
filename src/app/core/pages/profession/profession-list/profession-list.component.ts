@@ -9,9 +9,10 @@ import {ProfessionService} from "../../../../crm/services/profession.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-profession-list',
-  templateUrl: './profession-list.component.html',
-  styleUrls: ['./profession-list.component.scss']
+    selector: 'app-profession-list',
+    templateUrl: './profession-list.component.html',
+    styleUrls: ['./profession-list.component.scss'],
+    standalone: false
 })
 export class ProfessionListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

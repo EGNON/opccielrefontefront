@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {TypeactionService} from "../../../services/typeaction.service";
 
 @Component({
-  selector: 'app-delete-typeaction-modal',
-  templateUrl: './delete-typeaction-modal.component.html',
-  styleUrl: './delete-typeaction-modal.component.scss'
+    selector: 'app-delete-typeaction-modal',
+    templateUrl: './delete-typeaction-modal.component.html',
+    styleUrl: './delete-typeaction-modal.component.scss',
+    standalone: false
 })
 export class DeleteTypeactionModalComponent implements OnInit{
   @Input() id: number;

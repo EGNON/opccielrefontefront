@@ -8,9 +8,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {TarificationordinaireService} from "../../../services/tarificationordinaire.service";
 
 @Component({
-  selector: 'app-delete-tarificationordinaire-modal',
-  templateUrl: './delete-tarificationordinaire-modal.component.html',
-  styleUrl: './delete-tarificationordinaire-modal.component.scss'
+    selector: 'app-delete-tarificationordinaire-modal',
+    templateUrl: './delete-tarificationordinaire-modal.component.html',
+    styleUrl: './delete-tarificationordinaire-modal.component.scss',
+    standalone: false
 })
 export class DeleteTarificationordinaireModalComponent implements OnInit{
   @Input() id: any;

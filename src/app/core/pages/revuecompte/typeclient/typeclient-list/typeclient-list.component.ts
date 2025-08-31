@@ -10,9 +10,10 @@ import {
 } from "../delete-typeclient-modal/delete-typeclient-modal.component";
 
 @Component({
-  selector: 'app-typeclient-list',
-  templateUrl: './typeclient-list.component.html',
-  styleUrl: './typeclient-list.component.scss'
+    selector: 'app-typeclient-list',
+    templateUrl: './typeclient-list.component.html',
+    styleUrl: './typeclient-list.component.scss',
+    standalone: false
 })
 export class TypeclientListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

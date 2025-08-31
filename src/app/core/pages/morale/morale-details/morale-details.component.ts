@@ -29,9 +29,10 @@ import {SoustypeclientService} from "../../../services/revuecompte/soustypeclien
 import {CategorieclientService} from "../../../services/revuecompte/categorieclient.service";
 
 @Component({
-  selector: 'app-morale-details',
-  templateUrl: './morale-details.component.html',
-  styleUrl: './morale-details.component.scss'
+    selector: 'app-morale-details',
+    templateUrl: './morale-details.component.html',
+    styleUrl: './morale-details.component.scss',
+    standalone: false
 })
 export class MoraleDetailsComponent {
 

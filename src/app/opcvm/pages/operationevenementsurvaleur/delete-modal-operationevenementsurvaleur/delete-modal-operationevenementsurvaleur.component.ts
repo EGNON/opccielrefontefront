@@ -9,9 +9,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {OperationevenementsurvaleurService} from "../../../services/operationevenementsurvaleur.service";
 
 @Component({
-  selector: 'app-delete-modal-operationevenementsurvaleur',
-  templateUrl: './delete-modal-operationevenementsurvaleur.component.html',
-  styleUrl: './delete-modal-operationevenementsurvaleur.component.scss'
+    selector: 'app-delete-modal-operationevenementsurvaleur',
+    templateUrl: './delete-modal-operationevenementsurvaleur.component.html',
+    styleUrl: './delete-modal-operationevenementsurvaleur.component.scss',
+    standalone: false
 })
 export class DeleteModalOperationevenementsurvaleurComponent implements OnInit{
   @Input() id: string;

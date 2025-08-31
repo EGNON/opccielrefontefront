@@ -6,9 +6,10 @@ import {PersonnePhysiqueService} from "../../../../crm/services/personne/personn
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-personne-physique-modal',
-  templateUrl: './delete-personne-physique-modal.component.html',
-  styleUrls: ['./delete-personne-physique-modal.component.scss']
+    selector: 'app-delete-personne-physique-modal',
+    templateUrl: './delete-personne-physique-modal.component.html',
+    styleUrls: ['./delete-personne-physique-modal.component.scss'],
+    standalone: false
 })
 export class DeletePersonnePhysiqueModalComponent implements OnInit{
   @Input() id: number;

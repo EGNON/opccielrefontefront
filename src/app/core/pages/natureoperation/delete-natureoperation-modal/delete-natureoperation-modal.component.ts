@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {NatureoperationService} from "../../../services/natureoperation.service";
 
 @Component({
-  selector: 'app-delete-natureoperation-modal',
-  templateUrl: './delete-natureoperation-modal.component.html',
-  styleUrl: './delete-natureoperation-modal.component.scss'
+    selector: 'app-delete-natureoperation-modal',
+    templateUrl: './delete-natureoperation-modal.component.html',
+    styleUrl: './delete-natureoperation-modal.component.scss',
+    standalone: false
 })
 export class DeleteNatureoperationModalComponent implements OnInit{
   @Input() id: number;

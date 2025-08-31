@@ -9,9 +9,10 @@ import {DeleteCriterealerteModalComponent} from "../delete-criterealerte-modal/d
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-criterealerte-list',
-  templateUrl: './criterealerte-list.component.html',
-  styleUrl: './criterealerte-list.component.scss'
+    selector: 'app-criterealerte-list',
+    templateUrl: './criterealerte-list.component.html',
+    styleUrl: './criterealerte-list.component.scss',
+    standalone: false
 })
 export class CriterealerteListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

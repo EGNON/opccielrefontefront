@@ -27,9 +27,10 @@ import {catchError, filter, finalize, map} from "rxjs/operators";
 import {Qualite} from "../../../../crm/models/qualite.model";
 
 @Component({
-  selector: 'app-personnemorale-sanctionnee-add-edit',
-  templateUrl: './personnemorale-sanctionnee-add-edit.component.html',
-  styleUrl: './personnemorale-sanctionnee-add-edit.component.scss'
+    selector: 'app-personnemorale-sanctionnee-add-edit',
+    templateUrl: './personnemorale-sanctionnee-add-edit.component.html',
+    styleUrl: './personnemorale-sanctionnee-add-edit.component.scss',
+    standalone: false
 })
 export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDestroy, AfterViewInit{
   public paysSettings = {};

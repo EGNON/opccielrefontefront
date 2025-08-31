@@ -15,9 +15,10 @@ import {PageInfoService} from "../../../../template/_metronic/layout";
 import {OpcvmService} from "../../../../core/services/opcvm.service";
 
 @Component({
-  selector: 'app-compterendu-add-edit',
-  templateUrl: './compterendu-add-edit.component.html',
-  styleUrls: ['./compterendu-add-edit.component.scss']
+    selector: 'app-compterendu-add-edit',
+    templateUrl: './compterendu-add-edit.component.html',
+    styleUrls: ['./compterendu-add-edit.component.scss'],
+    standalone: false
 })
 export class CompterenduAddEditComponent implements OnInit, OnDestroy{
   id?: number;

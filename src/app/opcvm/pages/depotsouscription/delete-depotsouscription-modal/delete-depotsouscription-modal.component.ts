@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {DepotsouscriptionService} from "../../../services/depotsouscription.service";
 
 @Component({
-  selector: 'app-delete-depotsouscription-modal',
-  templateUrl: './delete-depotsouscription-modal.component.html',
-  styleUrl: './delete-depotsouscription-modal.component.scss'
+    selector: 'app-delete-depotsouscription-modal',
+    templateUrl: './delete-depotsouscription-modal.component.html',
+    styleUrl: './delete-depotsouscription-modal.component.scss',
+    standalone: false
 })
 export class DeleteDepotsouscriptionModalComponent implements OnInit, OnDestroy{
   @Input() id: number;

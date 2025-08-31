@@ -18,9 +18,10 @@ import {LoaderService} from "../../../../loader.service";
 import {OperationregulecartsoldeService} from "../../../services/operationregulecartsolde.service";
 
 @Component({
-  selector: 'app-regulecartsolde-add-edit',
-  templateUrl: './regulecartsolde-add-edit.component.html',
-  styleUrl: './regulecartsolde-add-edit.component.scss'
+    selector: 'app-regulecartsolde-add-edit',
+    templateUrl: './regulecartsolde-add-edit.component.html',
+    styleUrl: './regulecartsolde-add-edit.component.scss',
+    standalone: false
 })
 export class RegulecartsoldeAddEditComponent implements OnInit, OnDestroy{
   id?: number;

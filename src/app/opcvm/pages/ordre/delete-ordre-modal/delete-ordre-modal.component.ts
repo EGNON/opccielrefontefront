@@ -9,9 +9,10 @@ import {OrdreService} from "../../../services/ordre.service";
 import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-delete-ordre-modal',
-  templateUrl: './delete-ordre-modal.component.html',
-  styleUrl: './delete-ordre-modal.component.scss'
+    selector: 'app-delete-ordre-modal',
+    templateUrl: './delete-ordre-modal.component.html',
+    styleUrl: './delete-ordre-modal.component.scss',
+    standalone: false
 })
 export class DeleteOrdreModalComponent implements OnInit{
   @Input() id: string;

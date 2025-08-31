@@ -10,9 +10,10 @@ import {
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-secteurboursier-list',
-  templateUrl: './secteurboursier-list.component.html',
-  styleUrl: './secteurboursier-list.component.scss'
+    selector: 'app-secteurboursier-list',
+    templateUrl: './secteurboursier-list.component.html',
+    styleUrl: './secteurboursier-list.component.scss',
+    standalone: false
 })
 export class SecteurboursierListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import {AuthService, UserType} from "../../../modules/auth";
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.scss',
+    standalone: false
 })
 export class ProfileComponent {
   currentUser: UserType;

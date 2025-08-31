@@ -14,9 +14,10 @@ import {Actionnaireopcvm} from "../../../models/actionnaireopcvm.model";
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-actionnaireopcvm-add-edit',
-  templateUrl: './actionnaireopcvm-add-edit.component.html',
-  styleUrl: './actionnaireopcvm-add-edit.component.scss'
+    selector: 'app-actionnaireopcvm-add-edit',
+    templateUrl: './actionnaireopcvm-add-edit.component.html',
+    styleUrl: './actionnaireopcvm-add-edit.component.scss',
+    standalone: false
 })
 export class ActionnaireopcvmAddEditComponent implements OnInit, OnDestroy{
   id?: number;

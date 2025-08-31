@@ -8,9 +8,10 @@ import {IbrubriquepositionService} from "../../../../core/services/ibrubriquepos
 import {ActionnaireopcvmService} from "../../../services/actionnaireopcvm.service";
 
 @Component({
-  selector: 'app-delete-actionnaireopcvm-modal',
-  templateUrl: './delete-actionnaireopcvm-modal.component.html',
-  styleUrl: './delete-actionnaireopcvm-modal.component.scss'
+    selector: 'app-delete-actionnaireopcvm-modal',
+    templateUrl: './delete-actionnaireopcvm-modal.component.html',
+    styleUrl: './delete-actionnaireopcvm-modal.component.scss',
+    standalone: false
 })
 export class DeleteActionnaireopcvmModalComponent implements OnInit{
   @Input() id: string;

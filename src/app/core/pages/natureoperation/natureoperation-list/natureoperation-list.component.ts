@@ -9,9 +9,10 @@ import {DeleteNatureoperationModalComponent} from "../delete-natureoperation-mod
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-natureoperation-list',
-  templateUrl: './natureoperation-list.component.html',
-  styleUrl: './natureoperation-list.component.scss'
+    selector: 'app-natureoperation-list',
+    templateUrl: './natureoperation-list.component.html',
+    styleUrl: './natureoperation-list.component.scss',
+    standalone: false
 })
 export class NatureoperationListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

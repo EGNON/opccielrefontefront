@@ -9,9 +9,10 @@ import {PersonneService} from "../../../services/personne/personne.service";
 declare let $: any;
 
 @Component({
-  selector: 'app-rdv-add-edit',
-  templateUrl: './rdv-add-edit.component.html',
-  styleUrl: './rdv-add-edit.component.scss'
+    selector: 'app-rdv-add-edit',
+    templateUrl: './rdv-add-edit.component.html',
+    styleUrl: './rdv-add-edit.component.scss',
+    standalone: false
 })
 export class RdvAddEditComponent implements OnInit, OnDestroy{
   id: number;

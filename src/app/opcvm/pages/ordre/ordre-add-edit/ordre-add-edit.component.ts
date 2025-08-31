@@ -25,9 +25,10 @@ import {PersonnePhysiqueService} from "../../../../crm/services/personne/personn
 import {Natureoperation} from "../../../../core/models/natureoperation.model";
 
 @Component({
-  selector: 'app-ordre-add-edit',
-  templateUrl: './ordre-add-edit.component.html',
-  styleUrl: './ordre-add-edit.component.scss'
+    selector: 'app-ordre-add-edit',
+    templateUrl: './ordre-add-edit.component.html',
+    styleUrl: './ordre-add-edit.component.scss',
+    standalone: false
 })
 export class OrdreAddEditComponent implements OnInit, OnDestroy{
   id?: number;

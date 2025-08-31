@@ -11,9 +11,10 @@ import {PersonnePhysiqueService} from "../../../../crm/services/personne/personn
 import {PersonnephysiquepaysService} from "../../../../crm/services/personnephysiquepays.service";
 
 @Component({
-  selector: 'lab-personne-physique-show',
-  templateUrl: './personne-physique-show.component.html',
-  styleUrl: './personne-physique-show.component.scss'
+    selector: 'lab-personne-physique-show',
+    templateUrl: './personne-physique-show.component.html',
+    styleUrl: './personne-physique-show.component.scss',
+    standalone: false
 })
 export class PersonnePhysiqueShowComponent implements OnInit, OnDestroy{
   qualite: string;

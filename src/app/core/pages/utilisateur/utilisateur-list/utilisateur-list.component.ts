@@ -20,9 +20,10 @@ import {DeleteUtilisateurModalComponent} from "../delete-utilisateur-modal/delet
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-utilisateur-list',
-  templateUrl: './utilisateur-list.component.html',
-  styleUrls: ['./utilisateur-list.component.scss']
+    selector: 'app-utilisateur-list',
+    templateUrl: './utilisateur-list.component.html',
+    styleUrls: ['./utilisateur-list.component.scss'],
+    standalone: false
 })
 export class UtilisateurListComponent implements  OnInit, AfterViewInit, OnDestroy {
   isLoading = false;

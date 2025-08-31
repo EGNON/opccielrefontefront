@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {TypeemissionService} from "../../../services/typeemission.service";
 
 @Component({
-  selector: 'app-delete-typeemission-modal',
-  templateUrl: './delete-typeemission-modal.component.html',
-  styleUrl: './delete-typeemission-modal.component.scss'
+    selector: 'app-delete-typeemission-modal',
+    templateUrl: './delete-typeemission-modal.component.html',
+    styleUrl: './delete-typeemission-modal.component.scss',
+    standalone: false
 })
 export class DeleteTypeemissionModalComponent implements OnInit{
   @Input() id: number;

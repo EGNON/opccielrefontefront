@@ -8,9 +8,10 @@ import FileSaver from "file-saver";
 import {Qualite} from "../../../../crm/models/qualite.model";
 
 @Component({
-  selector: 'app-physique-showing',
-  templateUrl: './physique-showing.component.html',
-  styleUrl: './physique-showing.component.scss'
+    selector: 'app-physique-showing',
+    templateUrl: './physique-showing.component.html',
+    styleUrl: './physique-showing.component.scss',
+    standalone: false
 })
 export class PhysiqueShowingComponent implements OnInit, OnDestroy{
   @Input() _qualite: Qualite;

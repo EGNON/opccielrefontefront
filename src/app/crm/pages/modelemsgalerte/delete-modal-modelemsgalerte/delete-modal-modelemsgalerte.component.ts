@@ -6,9 +6,10 @@ import {ModeleMsgAlerteService} from "../../../services/modelemsgalerte.service"
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-modal-modelemsgalerte',
-  templateUrl: './delete-modal-modelemsgalerte.component.html',
-  styleUrls: ['./delete-modal-modelemsgalerte.component.scss']
+    selector: 'app-delete-modal-modelemsgalerte',
+    templateUrl: './delete-modal-modelemsgalerte.component.html',
+    styleUrls: ['./delete-modal-modelemsgalerte.component.scss'],
+    standalone: false
 })
 export class DeleteModalModelemsgalerteComponent {
   @Input() id: number;

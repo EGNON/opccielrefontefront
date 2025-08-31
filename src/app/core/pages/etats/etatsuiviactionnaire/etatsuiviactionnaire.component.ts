@@ -22,9 +22,10 @@ import {saveAs} from "file-saver";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-etatsuiviactionnaire',
-  templateUrl: './etatsuiviactionnaire.component.html',
-  styleUrl: './etatsuiviactionnaire.component.scss'
+    selector: 'app-etatsuiviactionnaire',
+    templateUrl: './etatsuiviactionnaire.component.html',
+    styleUrl: './etatsuiviactionnaire.component.scss',
+    standalone: false
 })
 export class EtatsuiviactionnaireComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

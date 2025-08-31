@@ -3,9 +3,10 @@ import {Observable, Subject, Subscription, tap} from "rxjs";
 import {ReportingsService} from "../../../services/reportings/reportings.service";
 
 @Component({
-  selector: 'app-suivi-client-sanction',
-  templateUrl: './suivi-client-sanction.component.html',
-  styleUrl: './suivi-client-sanction.component.scss'
+    selector: 'app-suivi-client-sanction',
+    templateUrl: './suivi-client-sanction.component.html',
+    styleUrl: './suivi-client-sanction.component.scss',
+    standalone: false
 })
 export class SuiviClientSanctionComponent implements OnInit, OnDestroy{
   dtOptions: any = {};

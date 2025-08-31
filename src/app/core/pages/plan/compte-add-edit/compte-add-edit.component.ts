@@ -13,9 +13,10 @@ import {ComptecomptableService} from "../../../services/comptecomptable.service"
 import {DegreAddEditComponent} from "../../degre/degre-add-edit/degre-add-edit.component";
 
 @Component({
-  selector: 'app-compte-add-edit',
-  templateUrl: './compte-add-edit.component.html',
-  styleUrl: './compte-add-edit.component.scss'
+    selector: 'app-compte-add-edit',
+    templateUrl: './compte-add-edit.component.html',
+    styleUrl: './compte-add-edit.component.scss',
+    standalone: false
 })
 export class CompteAddEditComponent implements OnInit, OnDestroy {
   id?: any;

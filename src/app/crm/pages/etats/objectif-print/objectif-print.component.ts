@@ -8,9 +8,10 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 @Component({
-  selector: 'app-objectif-print',
-  templateUrl: './objectif-print.component.html',
-  styleUrls: ['./objectif-print.component.scss']
+    selector: 'app-objectif-print',
+    templateUrl: './objectif-print.component.html',
+    styleUrls: ['./objectif-print.component.scss'],
+    standalone: false
 })
 export class ObjectifPrintComponent implements OnInit, OnDestroy{
   isLoading: boolean;

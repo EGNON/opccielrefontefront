@@ -9,9 +9,10 @@ import FileSaver from "file-saver";
 import {CompterenduService} from "../../../services/compterendu.service";
 
 @Component({
-  selector: 'app-compterendu-show',
-  templateUrl: './compterendu-show.component.html',
-  styleUrls: ['./compterendu-show.component.scss']
+    selector: 'app-compterendu-show',
+    templateUrl: './compterendu-show.component.html',
+    styleUrls: ['./compterendu-show.component.scss'],
+    standalone: false
 })
 export class CompterenduShowComponent implements OnInit, OnDestroy{
   qualite: string;

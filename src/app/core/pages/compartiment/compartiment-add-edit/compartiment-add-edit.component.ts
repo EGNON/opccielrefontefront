@@ -13,9 +13,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {CompartimentService} from "../../../services/compartiment.service";
 
 @Component({
-  selector: 'app-compartiment-add-edit',
-  templateUrl: './compartiment-add-edit.component.html',
-  styleUrl: './compartiment-add-edit.component.scss'
+    selector: 'app-compartiment-add-edit',
+    templateUrl: './compartiment-add-edit.component.html',
+    styleUrl: './compartiment-add-edit.component.scss',
+    standalone: false
 })
 export class CompartimentAddEditComponent implements OnInit, OnDestroy {
   id?: any;

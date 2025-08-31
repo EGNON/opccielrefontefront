@@ -14,9 +14,10 @@ import { VerifintentionrachatComponent } from '../verifintentionrachat/verifinte
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-intentionrachat-list',
-  templateUrl: './intentionrachat-list.component.html',
-  styleUrl: './intentionrachat-list.component.scss'
+    selector: 'app-intentionrachat-list',
+    templateUrl: './intentionrachat-list.component.html',
+    styleUrl: './intentionrachat-list.component.scss',
+    standalone: false
 })
 export class IntentionrachatListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

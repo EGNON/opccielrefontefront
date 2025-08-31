@@ -8,9 +8,10 @@ import {ModeetablissementService} from "../../../services/modeetablissement.serv
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-modeetablissement-modal',
-  templateUrl: './delete-modeetablissement-modal.component.html',
-  styleUrl: './delete-modeetablissement-modal.component.scss'
+    selector: 'app-delete-modeetablissement-modal',
+    templateUrl: './delete-modeetablissement-modal.component.html',
+    styleUrl: './delete-modeetablissement-modal.component.scss',
+    standalone: false
 })
 export class DeleteModeetablissementModalComponent implements OnInit{
   @Input() id: number;

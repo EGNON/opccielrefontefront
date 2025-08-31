@@ -17,9 +17,10 @@ import {TypeibService} from "../../../services/typeib.service";
 import {TyperubriqueService} from "../../../services/typerubrique.service";
 
 @Component({
-  selector: 'app-ibrubriqueposition-add-edit',
-  templateUrl: './ibrubriqueposition-add-edit.component.html',
-  styleUrl: './ibrubriqueposition-add-edit.component.scss'
+    selector: 'app-ibrubriqueposition-add-edit',
+    templateUrl: './ibrubriqueposition-add-edit.component.html',
+    styleUrl: './ibrubriqueposition-add-edit.component.scss',
+    standalone: false
 })
 export class IbrubriquepositionAddEditComponent implements OnInit, OnDestroy {
   id?: any;

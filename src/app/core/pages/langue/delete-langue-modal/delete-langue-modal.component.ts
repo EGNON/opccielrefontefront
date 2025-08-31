@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {LangueService} from "../../../services/langue.service";
 
 @Component({
-  selector: 'app-delete-langue-modal',
-  templateUrl: './delete-langue-modal.component.html',
-  styleUrl: './delete-langue-modal.component.scss'
+    selector: 'app-delete-langue-modal',
+    templateUrl: './delete-langue-modal.component.html',
+    styleUrl: './delete-langue-modal.component.scss',
+    standalone: false
 })
 export class DeleteLangueModalComponent  implements OnInit{
   @Input() id: number;

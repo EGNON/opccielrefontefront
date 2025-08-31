@@ -6,9 +6,10 @@ import {PaysService} from "../../../../../crm/services/pays.service";
 import {VilleService} from "../../../../../crm/services/ville.service";
 
 @Component({
-  selector: 'app-step3',
-  templateUrl: './step3.component.html',
-  styleUrl: './step3.component.scss'
+    selector: 'app-step3',
+    templateUrl: './step3.component.html',
+    styleUrl: './step3.component.scss',
+    standalone: false
 })
 export class Step3Component {
   @Input('updateParentModel') updateParentModel: (

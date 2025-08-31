@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {PostecomptableService} from "../../../services/postecomptable.service";
 
 @Component({
-  selector: 'app-delete-postecomptable-modal',
-  templateUrl: './delete-postecomptable-modal.component.html',
-  styleUrl: './delete-postecomptable-modal.component.scss'
+    selector: 'app-delete-postecomptable-modal',
+    templateUrl: './delete-postecomptable-modal.component.html',
+    styleUrl: './delete-postecomptable-modal.component.scss',
+    standalone: false
 })
 export class DeletePostecomptableModalComponent implements OnInit{
   @Input() id: string;

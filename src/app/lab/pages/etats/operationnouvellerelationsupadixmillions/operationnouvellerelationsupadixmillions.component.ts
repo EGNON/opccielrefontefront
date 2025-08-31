@@ -20,9 +20,10 @@ import {Config} from "datatables.net";
 
 // declare var jsPDF: any;
 @Component({
-  selector: 'app-operationnouvellerelationsupadixmillions',
-  templateUrl: './operationnouvellerelationsupadixmillions.component.html',
-  styleUrl: './operationnouvellerelationsupadixmillions.component.scss'
+    selector: 'app-operationnouvellerelationsupadixmillions',
+    templateUrl: './operationnouvellerelationsupadixmillions.component.html',
+    styleUrl: './operationnouvellerelationsupadixmillions.component.scss',
+    standalone: false
 })
 export class OperationnouvellerelationsupadixmillionsComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

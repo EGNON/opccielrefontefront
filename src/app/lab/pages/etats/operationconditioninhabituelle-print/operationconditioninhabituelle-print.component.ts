@@ -11,9 +11,10 @@ import jsPDF from "jspdf";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-operationconditioninhabituelle-print',
-  templateUrl: './operationconditioninhabituelle-print.component.html',
-  styleUrl: './operationconditioninhabituelle-print.component.scss'
+    selector: 'app-operationconditioninhabituelle-print',
+    templateUrl: './operationconditioninhabituelle-print.component.html',
+    styleUrl: './operationconditioninhabituelle-print.component.scss',
+    standalone: false
 })
 export class OperationconditioninhabituellePrintComponent implements OnInit, OnDestroy{
   isLoading: boolean;

@@ -7,9 +7,10 @@ import {ProduitService} from "../../../../crm/services/produit.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-produit-add-edit',
-  templateUrl: './produit-add-edit.component.html',
-  styleUrls: ['./produit-add-edit.component.scss']
+    selector: 'app-produit-add-edit',
+    templateUrl: './produit-add-edit.component.html',
+    styleUrls: ['./produit-add-edit.component.scss'],
+    standalone: false
 })
 export class ProduitAddEditComponent implements OnInit, OnDestroy {
   id?: number;

@@ -9,9 +9,10 @@ import FileSaver from "file-saver";
 import {PersonnelService} from "../../../../crm/services/personne/personnel.service";
 
 @Component({
-  selector: 'app-personnel-show',
-  templateUrl: './personnel-show.component.html',
-  styleUrl: './personnel-show.component.scss'
+    selector: 'app-personnel-show',
+    templateUrl: './personnel-show.component.html',
+    styleUrl: './personnel-show.component.scss',
+    standalone: false
 })
 export class PersonnelShowComponent implements OnInit, OnDestroy{
   qualite: string;

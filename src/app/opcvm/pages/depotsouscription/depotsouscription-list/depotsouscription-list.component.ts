@@ -15,9 +15,10 @@ import {
 } from "../verif-depotsouscription-report/verif-depotsouscription-report.component";
 
 @Component({
-  selector: 'app-depotsouscription-list',
-  templateUrl: './depotsouscription-list.component.html',
-  styleUrl: './depotsouscription-list.component.scss'
+    selector: 'app-depotsouscription-list',
+    templateUrl: './depotsouscription-list.component.html',
+    styleUrl: './depotsouscription-list.component.scss',
+    standalone: false
 })
 export class DepotsouscriptionListComponent implements OnInit, OnDestroy, AfterViewInit {
 

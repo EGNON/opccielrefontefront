@@ -7,9 +7,10 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {PointtresorerieetatComponent} from "../pointtresorerieetat/pointtresorerieetat.component";
 
 @Component({
-  selector: 'app-pointtresorerie',
-  templateUrl: './pointtresorerie.component.html',
-  styleUrl: './pointtresorerie.component.scss'
+    selector: 'app-pointtresorerie',
+    templateUrl: './pointtresorerie.component.html',
+    styleUrl: './pointtresorerie.component.scss',
+    standalone: false
 })
 export class PointtresorerieComponent implements OnInit{
   constructor(

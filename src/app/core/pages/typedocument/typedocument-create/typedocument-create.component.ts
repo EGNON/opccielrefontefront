@@ -4,9 +4,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TypeDocumentService} from "../../../../crm/services/type-document.service";
 
 @Component({
-  selector: 'app-typedocument-create',
-  templateUrl: './typedocument-create.component.html',
-  styleUrls: ['./typedocument-create.component.scss']
+    selector: 'app-typedocument-create',
+    templateUrl: './typedocument-create.component.html',
+    styleUrls: ['./typedocument-create.component.scss'],
+    standalone: false
 })
 export class TypedocumentCreateComponent {
   formData!:FormGroup;

@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {TypegarantService} from "../../../services/typegarant.service";
 
 @Component({
-  selector: 'app-delete-typegarant-modal',
-  templateUrl: './delete-typegarant-modal.component.html',
-  styleUrl: './delete-typegarant-modal.component.scss'
+    selector: 'app-delete-typegarant-modal',
+    templateUrl: './delete-typegarant-modal.component.html',
+    styleUrl: './delete-typegarant-modal.component.scss',
+    standalone: false
 })
 export class DeleteTypegarantModalComponent implements OnInit{
   @Input() id: number;

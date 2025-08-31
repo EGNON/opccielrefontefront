@@ -8,9 +8,10 @@ import {TypeemetteurService} from "../../../services/typeemetteur.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-typeemetteur-list',
-  templateUrl: './typeemetteur-list.component.html',
-  styleUrl: './typeemetteur-list.component.scss'
+    selector: 'app-typeemetteur-list',
+    templateUrl: './typeemetteur-list.component.html',
+    styleUrl: './typeemetteur-list.component.scss',
+    standalone: false
 })
 export class TypeemetteurListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

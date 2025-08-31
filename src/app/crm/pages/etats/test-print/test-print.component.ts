@@ -8,9 +8,10 @@ import {SweetAlertOptions} from "sweetalert2";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-test-print',
-  templateUrl: './test-print.component.html',
-  styleUrls: ['./test-print.component.scss']
+    selector: 'app-test-print',
+    templateUrl: './test-print.component.html',
+    styleUrls: ['./test-print.component.scss'],
+    standalone: false
 })
 export class TestPrintComponent implements OnInit, OnDestroy, AfterViewInit{
 

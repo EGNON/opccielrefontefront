@@ -12,9 +12,10 @@ import {OrdreService} from "../../../services/ordre.service";
 import moment from "moment/moment";
 
 @Component({
-  selector: 'app-ordreencours',
-  templateUrl: './ordreencours.component.html',
-  styleUrl: './ordreencours.component.scss'
+    selector: 'app-ordreencours',
+    templateUrl: './ordreencours.component.html',
+    styleUrl: './ordreencours.component.scss',
+    standalone: false
 })
 export class OrdreencoursComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

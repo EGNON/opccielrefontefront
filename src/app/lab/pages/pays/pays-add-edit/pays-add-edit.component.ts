@@ -11,9 +11,10 @@ import {MonnaieService} from "../../../../crm/services/monnaie.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'lab-pays-add-edit',
-  templateUrl: './pays-add-edit.component.html',
-  styleUrl: './pays-add-edit.component.scss'
+    selector: 'lab-pays-add-edit',
+    templateUrl: './pays-add-edit.component.html',
+    styleUrl: './pays-add-edit.component.scss',
+    standalone: false
 })
 export class PaysAddEditComponent implements OnInit, OnDestroy{
   id?: number;

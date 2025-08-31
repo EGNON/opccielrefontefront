@@ -14,9 +14,10 @@ import {Config} from "datatables.net";
 
 
 @Component({
-  selector: 'app-transaction-list',
-  templateUrl: './transaction-list.component.html',
-  styleUrl: './transaction-list.component.scss'
+    selector: 'app-transaction-list',
+    templateUrl: './transaction-list.component.html',
+    styleUrl: './transaction-list.component.scss',
+    standalone: false
 })
 export class TransactionListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

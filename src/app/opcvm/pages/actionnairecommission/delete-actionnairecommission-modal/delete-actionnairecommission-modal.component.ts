@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {ActionnairecommissionService} from "../../../services/actionnairecommission.service";
 
 @Component({
-  selector: 'app-delete-actionnairecommission-modal',
-  templateUrl: './delete-actionnairecommission-modal.component.html',
-  styleUrl: './delete-actionnairecommission-modal.component.scss'
+    selector: 'app-delete-actionnairecommission-modal',
+    templateUrl: './delete-actionnairecommission-modal.component.html',
+    styleUrl: './delete-actionnairecommission-modal.component.scss',
+    standalone: false
 })
 export class DeleteActionnairecommissionModalComponent implements OnInit{
   @Input() id: string;

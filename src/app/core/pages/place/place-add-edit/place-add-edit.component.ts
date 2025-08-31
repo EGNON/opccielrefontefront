@@ -11,9 +11,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, finalize, first} from "rxjs/operators";
 
 @Component({
-  selector: 'app-place-add-edit',
-  templateUrl: './place-add-edit.component.html',
-  styleUrl: './place-add-edit.component.scss'
+    selector: 'app-place-add-edit',
+    templateUrl: './place-add-edit.component.html',
+    styleUrl: './place-add-edit.component.scss',
+    standalone: false
 })
 export class PlaceAddEditComponent implements OnInit, OnDestroy {
   id?: any;

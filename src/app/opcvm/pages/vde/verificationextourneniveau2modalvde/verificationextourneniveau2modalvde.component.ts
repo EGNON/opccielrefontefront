@@ -23,9 +23,10 @@ import $ from "jquery";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-verificationextourneniveau2modalvde',
-  templateUrl: './verificationextourneniveau2modalvde.component.html',
-  styleUrl: './verificationextourneniveau2modalvde.component.scss'
+    selector: 'app-verificationextourneniveau2modalvde',
+    templateUrl: './verificationextourneniveau2modalvde.component.html',
+    styleUrl: './verificationextourneniveau2modalvde.component.scss',
+    standalone: false
 })
 export class Verificationextourneniveau2modalvdeComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

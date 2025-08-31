@@ -13,9 +13,10 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-transfert-parts',
-  templateUrl: './transfert-parts.component.html',
-  styleUrl: './transfert-parts.component.scss'
+    selector: 'app-transfert-parts',
+    templateUrl: './transfert-parts.component.html',
+    styleUrl: './transfert-parts.component.scss',
+    standalone: false
 })
 export class TransfertPartsComponent implements OnInit, AfterViewInit, OnDestroy{
 

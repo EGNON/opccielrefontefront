@@ -10,9 +10,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-indicateur-list',
-  templateUrl: './indicateur-list.component.html',
-  styleUrls: ['./indicateur-list.component.scss']
+    selector: 'app-indicateur-list',
+    templateUrl: './indicateur-list.component.html',
+    styleUrls: ['./indicateur-list.component.scss'],
+    standalone: false
 })
 export class IndicateurListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

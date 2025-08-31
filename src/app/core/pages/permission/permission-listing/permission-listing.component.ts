@@ -9,9 +9,10 @@ import {PermissionService} from "../../../services/permission.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-permission-listing',
-  templateUrl: './permission-listing.component.html',
-  styleUrls: ['./permission-listing.component.scss']
+    selector: 'app-permission-listing',
+    templateUrl: './permission-listing.component.html',
+    styleUrls: ['./permission-listing.component.scss'],
+    standalone: false
 })
 export class PermissionListingComponent implements OnInit, AfterViewInit, OnDestroy {
 

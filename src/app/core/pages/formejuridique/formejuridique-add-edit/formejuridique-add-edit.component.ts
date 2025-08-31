@@ -13,9 +13,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {FormejuridiqueService} from "../../../../crm/services/formejuridique.service";
 
 @Component({
-  selector: 'app-formejuridique-add-edit',
-  templateUrl: './formejuridique-add-edit.component.html',
-  styleUrl: './formejuridique-add-edit.component.scss'
+    selector: 'app-formejuridique-add-edit',
+    templateUrl: './formejuridique-add-edit.component.html',
+    styleUrl: './formejuridique-add-edit.component.scss',
+    standalone: false
 })
 export class FormejuridiqueAddEditComponent implements OnInit, OnDestroy {
   id?: any;

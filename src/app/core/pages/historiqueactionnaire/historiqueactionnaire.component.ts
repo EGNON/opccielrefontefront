@@ -23,9 +23,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-historiqueactionnaire',
-  templateUrl: './historiqueactionnaire.component.html',
-  styleUrl: './historiqueactionnaire.component.scss'
+    selector: 'app-historiqueactionnaire',
+    templateUrl: './historiqueactionnaire.component.html',
+    styleUrl: './historiqueactionnaire.component.scss',
+    standalone: false
 })
 export class HistoriqueactionnaireComponent {
 

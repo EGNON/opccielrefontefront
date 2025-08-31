@@ -6,9 +6,10 @@ import {PeriodiciteService} from "../../../services/periodicite.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-periodicite-modal',
-  templateUrl: './delete-periodicite-modal.component.html',
-  styleUrls: ['./delete-periodicite-modal.component.scss']
+    selector: 'app-delete-periodicite-modal',
+    templateUrl: './delete-periodicite-modal.component.html',
+    styleUrls: ['./delete-periodicite-modal.component.scss'],
+    standalone: false
 })
 export class DeletePeriodiciteModalComponent implements OnInit{
   @Input() id: number;

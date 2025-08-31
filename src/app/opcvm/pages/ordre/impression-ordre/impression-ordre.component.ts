@@ -11,9 +11,10 @@ import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {SeanceopcvmService} from "../../../services/seanceopcvm.service";
 
 @Component({
-  selector: 'app-impression-ordre',
-  templateUrl: './impression-ordre.component.html',
-  styleUrl: './impression-ordre.component.scss'
+    selector: 'app-impression-ordre',
+    templateUrl: './impression-ordre.component.html',
+    styleUrl: './impression-ordre.component.scss',
+    standalone: false
 })
 export class ImpressionOrdreComponent implements OnInit, OnDestroy {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();

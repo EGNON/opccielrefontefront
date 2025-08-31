@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {SousCategorieService} from "../../../../titresciel/services/souscategorie.service";
 
 @Component({
-  selector: 'app-delete-souscategorie-modal',
-  templateUrl: './delete-souscategorie-modal.component.html',
-  styleUrl: './delete-souscategorie-modal.component.scss'
+    selector: 'app-delete-souscategorie-modal',
+    templateUrl: './delete-souscategorie-modal.component.html',
+    styleUrl: './delete-souscategorie-modal.component.scss',
+    standalone: false
 })
 export class DeleteSouscategorieModalComponent implements OnInit{
   @Input() id: number;

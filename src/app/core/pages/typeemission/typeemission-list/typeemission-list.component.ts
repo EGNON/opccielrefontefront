@@ -8,9 +8,10 @@ import {TypeemissionService} from "../../../services/typeemission.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-typeemission-list',
-  templateUrl: './typeemission-list.component.html',
-  styleUrl: './typeemission-list.component.scss'
+    selector: 'app-typeemission-list',
+    templateUrl: './typeemission-list.component.html',
+    styleUrl: './typeemission-list.component.scss',
+    standalone: false
 })
 export class TypeemissionListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

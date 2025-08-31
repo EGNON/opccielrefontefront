@@ -36,9 +36,10 @@ import {NatureTcnService} from "../../../services/nature-tcn.service";
 import {ModeCalculInteretService} from "../../../services/mode-calcul-interet.service";
 
 @Component({
-  selector: 'app-titres-details',
-  templateUrl: './titres-details.component.html',
-  styleUrl: './titres-details.component.scss'
+    selector: 'app-titres-details',
+    templateUrl: './titres-details.component.html',
+    styleUrl: './titres-details.component.scss',
+    standalone: false
 })
 export class TitresDetailsComponent implements OnInit, AfterViewInit, OnDestroy{
   /********************************** showForm  **********************************

@@ -3,9 +3,10 @@ import html2canvas from 'html2canvas';
 import jsPDF from "jspdf";
 
 @Component({
-  selector: 'app-test-print-2',
-  templateUrl: './test-print-2.component.html',
-  styleUrls: ['./test-print-2.component.scss']
+    selector: 'app-test-print-2',
+    templateUrl: './test-print-2.component.html',
+    styleUrls: ['./test-print-2.component.scss'],
+    standalone: false
 })
 export class TestPrint2Component {
     constructor(private el: ElementRef) {

@@ -9,9 +9,10 @@ import {first} from "rxjs/operators";
 import { OpcvmService } from '../../../../core/services/opcvm.service';
 
 @Component({
-  selector: 'app-ratiosharp',
-  templateUrl: './ratiosharp.component.html',
-  styleUrl: './ratiosharp.component.scss'
+    selector: 'app-ratiosharp',
+    templateUrl: './ratiosharp.component.html',
+    styleUrl: './ratiosharp.component.scss',
+    standalone: false
 })
 export class RatiosharpComponent implements OnInit, OnDestroy, AfterViewInit{
   @ViewChild(DataTableDirective, {static: false})

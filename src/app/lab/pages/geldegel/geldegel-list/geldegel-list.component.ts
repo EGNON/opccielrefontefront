@@ -16,9 +16,10 @@ import {Personne} from "../../../../crm/models/personne/personne.model";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-geldegel-list',
-  templateUrl: './geldegel-list.component.html',
-  styleUrl: './geldegel-list.component.scss'
+    selector: 'app-geldegel-list',
+    templateUrl: './geldegel-list.component.html',
+    styleUrl: './geldegel-list.component.scss',
+    standalone: false
 })
 export class GeldegelListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

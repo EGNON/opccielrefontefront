@@ -16,9 +16,10 @@ import { DepotrachatService } from '../../../services/depotrachat.service';
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-intentionrachat-add-edit',
-  templateUrl: './intentionrachat-add-edit.component.html',
-  styleUrl: './intentionrachat-add-edit.component.scss'
+    selector: 'app-intentionrachat-add-edit',
+    templateUrl: './intentionrachat-add-edit.component.html',
+    styleUrl: './intentionrachat-add-edit.component.scss',
+    standalone: false
 })
 export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   id?: number;

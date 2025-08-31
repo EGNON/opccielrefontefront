@@ -6,9 +6,10 @@ import {IndicateurService} from "../../../services/indicateur.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-indicateur-modal',
-  templateUrl: './delete-indicateur-modal.component.html',
-  styleUrls: ['./delete-indicateur-modal.component.scss']
+    selector: 'app-delete-indicateur-modal',
+    templateUrl: './delete-indicateur-modal.component.html',
+    styleUrls: ['./delete-indicateur-modal.component.scss'],
+    standalone: false
 })
 export class DeleteIndicateurModalComponent implements OnInit{
   @Input() id: number;

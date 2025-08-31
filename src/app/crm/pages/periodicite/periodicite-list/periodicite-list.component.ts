@@ -10,9 +10,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-periodicite-list',
-  templateUrl: './periodicite-list.component.html',
-  styleUrls: ['./periodicite-list.component.scss']
+    selector: 'app-periodicite-list',
+    templateUrl: './periodicite-list.component.html',
+    styleUrls: ['./periodicite-list.component.scss'],
+    standalone: false
 })
 export class PeriodiciteListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

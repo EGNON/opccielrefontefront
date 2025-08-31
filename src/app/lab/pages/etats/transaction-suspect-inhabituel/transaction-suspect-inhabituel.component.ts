@@ -20,9 +20,10 @@ export class TransactionSuspecteInhabituelle {
 }
 
 @Component({
-  selector: 'app-transaction-suspect-inhabituel',
-  templateUrl: './transaction-suspect-inhabituel.component.html',
-  styleUrl: './transaction-suspect-inhabituel.component.scss'
+    selector: 'app-transaction-suspect-inhabituel',
+    templateUrl: './transaction-suspect-inhabituel.component.html',
+    styleUrl: './transaction-suspect-inhabituel.component.scss',
+    standalone: false
 })
 export class TransactionSuspectInhabituelComponent implements OnInit, OnDestroy, AfterViewInit{
   datatable: any;

@@ -11,9 +11,10 @@ import {
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-systemedinformation-list',
-  templateUrl: './systemedinformation-list.component.html',
-  styleUrl: './systemedinformation-list.component.scss'
+    selector: 'app-systemedinformation-list',
+    templateUrl: './systemedinformation-list.component.html',
+    styleUrl: './systemedinformation-list.component.scss',
+    standalone: false
 })
 export class SystemedinformationListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

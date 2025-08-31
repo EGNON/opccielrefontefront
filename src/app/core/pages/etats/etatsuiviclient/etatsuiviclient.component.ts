@@ -22,9 +22,10 @@ import {saveAs} from "file-saver";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-etatsuiviclient',
-  templateUrl: './etatsuiviclient.component.html',
-  styleUrl: './etatsuiviclient.component.scss'
+    selector: 'app-etatsuiviclient',
+    templateUrl: './etatsuiviclient.component.html',
+    styleUrl: './etatsuiviclient.component.scss',
+    standalone: false
 })
 export class EtatsuiviclientComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

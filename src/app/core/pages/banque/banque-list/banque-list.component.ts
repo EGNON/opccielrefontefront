@@ -8,9 +8,10 @@ import {SweetAlertOptions} from "sweetalert2";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-banque-list',
-  templateUrl: './banque-list.component.html',
-  styleUrl: './banque-list.component.scss'
+    selector: 'app-banque-list',
+    templateUrl: './banque-list.component.html',
+    styleUrl: './banque-list.component.scss',
+    standalone: false
 })
 export class BanqueListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

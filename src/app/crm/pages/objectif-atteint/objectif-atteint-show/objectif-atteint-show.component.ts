@@ -7,9 +7,10 @@ import {AffectationService} from "../../../services/affectation.service";
 import FileSaver from "file-saver";
 
 @Component({
-  selector: 'app-objectif-atteint-show',
-  templateUrl: './objectif-atteint-show.component.html',
-  styleUrl: './objectif-atteint-show.component.scss'
+    selector: 'app-objectif-atteint-show',
+    templateUrl: './objectif-atteint-show.component.html',
+    styleUrl: './objectif-atteint-show.component.scss',
+    standalone: false
 })
 export class ObjectifAtteintShowComponent implements OnInit, OnDestroy{
   qualite: string;

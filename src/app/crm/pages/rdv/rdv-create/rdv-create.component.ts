@@ -36,9 +36,10 @@ import {Typemodele} from "../../../models/typemodele.model";
 import tinymce from "tinymce";
 
 @Component({
-  selector: 'app-rdv-create',
-  templateUrl: './rdv-create.component.html',
-  styleUrls: ['./rdv-create.component.scss']
+    selector: 'app-rdv-create',
+    templateUrl: './rdv-create.component.html',
+    styleUrls: ['./rdv-create.component.scss'],
+    standalone: false
 })
 export class RdvCreateComponent implements OnInit, OnDestroy {
   id?: number;

@@ -11,9 +11,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-depotsouscription-add-edit',
-  templateUrl: './depotsouscription-add-edit.component.html',
-  styleUrl: './depotsouscription-add-edit.component.scss'
+    selector: 'app-depotsouscription-add-edit',
+    templateUrl: './depotsouscription-add-edit.component.html',
+    styleUrl: './depotsouscription-add-edit.component.scss',
+    standalone: false
 })
 export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit, OnDestroy{
 

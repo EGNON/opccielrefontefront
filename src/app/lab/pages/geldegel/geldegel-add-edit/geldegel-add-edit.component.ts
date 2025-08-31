@@ -12,9 +12,10 @@ import {PersonnePhysiqueService} from "../../../../crm/services/personne/personn
 import {PersonneMoraleService} from "../../../../crm/services/personne/personne.morale.service";
 
 @Component({
-  selector: 'app-geldegel-add-edit',
-  templateUrl: './geldegel-add-edit.component.html',
-  styleUrl: './geldegel-add-edit.component.scss'
+    selector: 'app-geldegel-add-edit',
+    templateUrl: './geldegel-add-edit.component.html',
+    styleUrl: './geldegel-add-edit.component.scss',
+    standalone: false
 })
 export class GeldegelAddEditComponent implements OnInit, OnDestroy{
   id?: number;

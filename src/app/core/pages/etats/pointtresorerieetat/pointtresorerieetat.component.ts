@@ -4,9 +4,10 @@ import {LibrairiesService} from "../../../../services/librairies.service";
 import {finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-pointtresorerieetat',
-  templateUrl: './pointtresorerieetat.component.html',
-  styleUrl: './pointtresorerieetat.component.scss'
+    selector: 'app-pointtresorerieetat',
+    templateUrl: './pointtresorerieetat.component.html',
+    styleUrl: './pointtresorerieetat.component.scss',
+    standalone: false
 })
 export class PointtresorerieetatComponent implements OnInit{
   downloading:boolean;

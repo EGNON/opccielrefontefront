@@ -11,9 +11,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, finalize, first} from "rxjs/operators";
 
 @Component({
-  selector: 'app-categorieclient-add-edit',
-  templateUrl: './categorieclient-add-edit.component.html',
-  styleUrl: './categorieclient-add-edit.component.scss'
+    selector: 'app-categorieclient-add-edit',
+    templateUrl: './categorieclient-add-edit.component.html',
+    styleUrl: './categorieclient-add-edit.component.scss',
+    standalone: false
 })
 export class CategorieclientAddEditComponent implements OnInit, OnDestroy {
   id?: any;

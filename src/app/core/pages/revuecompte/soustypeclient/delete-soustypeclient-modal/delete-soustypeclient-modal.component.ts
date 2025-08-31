@@ -6,9 +6,10 @@ import {SoustypeclientService} from "../../../../services/revuecompte/soustypecl
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-delete-soustypeclient-modal',
-  templateUrl: './delete-soustypeclient-modal.component.html',
-  styleUrl: './delete-soustypeclient-modal.component.scss'
+    selector: 'app-delete-soustypeclient-modal',
+    templateUrl: './delete-soustypeclient-modal.component.html',
+    styleUrl: './delete-soustypeclient-modal.component.scss',
+    standalone: false
 })
 export class DeleteSoustypeclientModalComponent  implements OnInit{
   @Input() id: number;

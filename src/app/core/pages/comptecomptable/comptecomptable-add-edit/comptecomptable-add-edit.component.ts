@@ -13,9 +13,10 @@ import {PlanService} from "../../../services/plan.service";
 import {Plan} from "../../../models/plan.model";
 
 @Component({
-  selector: 'app-comptecomptable-add-edit',
-  templateUrl: './comptecomptable-add-edit.component.html',
-  styleUrl: './comptecomptable-add-edit.component.scss'
+    selector: 'app-comptecomptable-add-edit',
+    templateUrl: './comptecomptable-add-edit.component.html',
+    styleUrl: './comptecomptable-add-edit.component.scss',
+    standalone: false
 })
 export class ComptecomptableAddEditComponent implements OnInit, OnDestroy {
   id?: any;

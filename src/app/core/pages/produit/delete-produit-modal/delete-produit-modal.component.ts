@@ -6,9 +6,10 @@ import {ProduitService} from "../../../../crm/services/produit.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-produit-modal',
-  templateUrl: './delete-produit-modal.component.html',
-  styleUrls: ['./delete-produit-modal.component.scss']
+    selector: 'app-delete-produit-modal',
+    templateUrl: './delete-produit-modal.component.html',
+    styleUrls: ['./delete-produit-modal.component.scss'],
+    standalone: false
 })
 export class DeleteProduitModalComponent implements OnInit{
   @Input() id: number;

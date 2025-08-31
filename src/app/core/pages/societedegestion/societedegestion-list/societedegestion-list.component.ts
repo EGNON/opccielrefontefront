@@ -11,9 +11,10 @@ import {SweetAlertOptions} from "sweetalert2";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-societedegestion-list',
-  templateUrl: './societedegestion-list.component.html',
-  styleUrl: './societedegestion-list.component.scss'
+    selector: 'app-societedegestion-list',
+    templateUrl: './societedegestion-list.component.html',
+    styleUrl: './societedegestion-list.component.scss',
+    standalone: false
 })
 export class SocietedegestionListComponent implements OnInit, OnDestroy, AfterViewInit{
 

@@ -23,9 +23,10 @@ import {Opcvm} from "../../../../core/models/opcvm";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-operationextournevde-add-edit',
-  templateUrl: './operationextournevde-add-edit.component.html',
-  styleUrl: './operationextournevde-add-edit.component.scss'
+    selector: 'app-operationextournevde-add-edit',
+    templateUrl: './operationextournevde-add-edit.component.html',
+    styleUrl: './operationextournevde-add-edit.component.scss',
+    standalone: false
 })
 export class OperationextournevdeAddEditComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

@@ -6,9 +6,10 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-delete-categorieclient-modal',
-  templateUrl: './delete-categorieclient-modal.component.html',
-  styleUrl: './delete-categorieclient-modal.component.scss'
+    selector: 'app-delete-categorieclient-modal',
+    templateUrl: './delete-categorieclient-modal.component.html',
+    styleUrl: './delete-categorieclient-modal.component.scss',
+    standalone: false
 })
 export class DeleteCategorieclientModalComponent implements OnInit{
   @Input() id: number;

@@ -11,9 +11,10 @@ import {
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-personnemorale-sanctionnee-list',
-  templateUrl: './personnemorale-sanctionnee-list.component.html',
-  styleUrl: './personnemorale-sanctionnee-list.component.scss'
+    selector: 'app-personnemorale-sanctionnee-list',
+    templateUrl: './personnemorale-sanctionnee-list.component.html',
+    styleUrl: './personnemorale-sanctionnee-list.component.scss',
+    standalone: false
 })
 export class PersonnemoraleSanctionneeListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

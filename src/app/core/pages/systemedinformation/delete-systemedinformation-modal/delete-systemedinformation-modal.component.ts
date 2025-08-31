@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {SystemedinformationService} from "../../../../crm/services/systemedinformation.service";
 
 @Component({
-  selector: 'app-delete-systemedinformation-modal',
-  templateUrl: './delete-systemedinformation-modal.component.html',
-  styleUrl: './delete-systemedinformation-modal.component.scss'
+    selector: 'app-delete-systemedinformation-modal',
+    templateUrl: './delete-systemedinformation-modal.component.html',
+    styleUrl: './delete-systemedinformation-modal.component.scss',
+    standalone: false
 })
 export class DeleteSystemedinformationModalComponent implements OnInit{
   @Input() id: number;

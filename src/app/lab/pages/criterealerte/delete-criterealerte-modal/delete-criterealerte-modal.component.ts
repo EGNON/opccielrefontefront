@@ -10,9 +10,10 @@ import {DegreService} from "../../../../crm/services/degre.service";
 import {CritereAlerteService} from "../../../services/criterealerte.service";
 
 @Component({
-  selector: 'app-delete-criterealerte-modal',
-  templateUrl: './delete-criterealerte-modal.component.html',
-  styleUrl: './delete-criterealerte-modal.component.scss'
+    selector: 'app-delete-criterealerte-modal',
+    templateUrl: './delete-criterealerte-modal.component.html',
+    styleUrl: './delete-criterealerte-modal.component.scss',
+    standalone: false
 })
 export class DeleteCriterealerteModalComponent implements OnInit{
   @Input() id: number;

@@ -11,9 +11,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {TypeemetteurService} from "../../../services/typeemetteur.service";
 
 @Component({
-  selector: 'app-typeemetteur-add-edit',
-  templateUrl: './typeemetteur-add-edit.component.html',
-  styleUrl: './typeemetteur-add-edit.component.scss'
+    selector: 'app-typeemetteur-add-edit',
+    templateUrl: './typeemetteur-add-edit.component.html',
+    styleUrl: './typeemetteur-add-edit.component.scss',
+    standalone: false
 })
 export class TypeemetteurAddEditComponent implements OnInit, OnDestroy {
   id?: any;

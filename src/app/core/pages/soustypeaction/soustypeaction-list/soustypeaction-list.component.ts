@@ -8,9 +8,10 @@ import {DeleteSoustypeactionModalComponent} from "../delete-soustypeaction-modal
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-soustypeaction-list',
-  templateUrl: './soustypeaction-list.component.html',
-  styleUrl: './soustypeaction-list.component.scss'
+    selector: 'app-soustypeaction-list',
+    templateUrl: './soustypeaction-list.component.html',
+    styleUrl: './soustypeaction-list.component.scss',
+    standalone: false
 })
 export class SoustypeactionListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

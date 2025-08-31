@@ -16,9 +16,10 @@ import {SweetAlertOptions} from "sweetalert2";
 import {SwalComponent} from "@sweetalert2/ngx-sweetalert2";
 
 @Component({
-  selector: 'app-criterealerte-add-edit',
-  templateUrl: './criterealerte-add-edit.component.html',
-  styleUrl: './criterealerte-add-edit.component.scss'
+    selector: 'app-criterealerte-add-edit',
+    templateUrl: './criterealerte-add-edit.component.html',
+    styleUrl: './criterealerte-add-edit.component.scss',
+    standalone: false
 })
 export class CriterealerteAddEditComponent implements OnInit, OnDestroy {
   id?: number;

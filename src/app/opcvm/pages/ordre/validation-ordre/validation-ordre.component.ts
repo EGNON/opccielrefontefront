@@ -12,9 +12,10 @@ import {NgbActiveModal, NgbDate, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {OrdreService} from "../../../services/ordre.service";
 
 @Component({
-  selector: 'app-validation-ordre',
-  templateUrl: './validation-ordre.component.html',
-  styleUrl: './validation-ordre.component.scss'
+    selector: 'app-validation-ordre',
+    templateUrl: './validation-ordre.component.html',
+    styleUrl: './validation-ordre.component.scss',
+    standalone: false
 })
 export class ValidationOrdreComponent implements OnInit, OnDestroy {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();

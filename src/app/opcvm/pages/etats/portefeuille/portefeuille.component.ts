@@ -21,9 +21,10 @@ import * as FileSaver from 'file-saver';
 import {saveAs} from "file-saver";
 
 @Component({
-  selector: 'app-portefeuille',
-  templateUrl: './portefeuille.component.html',
-  styleUrl: './portefeuille.component.scss'
+    selector: 'app-portefeuille',
+    templateUrl: './portefeuille.component.html',
+    styleUrl: './portefeuille.component.scss',
+    standalone: false
 })
 export class PortefeuilleComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

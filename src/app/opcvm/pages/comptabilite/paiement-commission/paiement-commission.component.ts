@@ -12,9 +12,10 @@ import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {AuthService} from "../../../../core/modules/auth";
 
 @Component({
-  selector: 'app-paiement-commission',
-  templateUrl: './paiement-commission.component.html',
-  styleUrl: './paiement-commission.component.scss'
+    selector: 'app-paiement-commission',
+    templateUrl: './paiement-commission.component.html',
+    styleUrl: './paiement-commission.component.scss',
+    standalone: false
 })
 export class PaiementCommissionComponent implements OnInit, AfterViewInit, OnDestroy{
 

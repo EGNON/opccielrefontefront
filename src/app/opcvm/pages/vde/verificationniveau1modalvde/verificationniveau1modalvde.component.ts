@@ -11,9 +11,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {of} from "rxjs";
 
 @Component({
-  selector: 'app-verificationniveau1modalvde',
-  templateUrl: './verificationniveau1modalvde.component.html',
-  styleUrl: './verificationniveau1modalvde.component.scss'
+    selector: 'app-verificationniveau1modalvde',
+    templateUrl: './verificationniveau1modalvde.component.html',
+    styleUrl: './verificationniveau1modalvde.component.scss',
+    standalone: false
 })
 export class Verificationniveau1modalvdeComponent implements OnInit{
   currentSeance: any;

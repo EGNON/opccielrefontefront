@@ -14,9 +14,10 @@ import {DeleteChargeModalComponent} from "../delete-charge-modal/delete-charge-m
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-charge-list',
-  templateUrl: './charge-list.component.html',
-  styleUrl: './charge-list.component.scss'
+    selector: 'app-charge-list',
+    templateUrl: './charge-list.component.html',
+    styleUrl: './charge-list.component.scss',
+    standalone: false
 })
 export class ChargeListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

@@ -8,9 +8,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {of} from "rxjs";
 
 @Component({
-  selector: 'app-verificationniveau1de',
-  templateUrl: './verificationniveau1de.component.html',
-  styleUrl: './verificationniveau1de.component.scss'
+    selector: 'app-verificationniveau1de',
+    templateUrl: './verificationniveau1de.component.html',
+    styleUrl: './verificationniveau1de.component.scss',
+    standalone: false
 })
 export class Verificationniveau1deComponent implements OnInit{
   currentSeance: any;

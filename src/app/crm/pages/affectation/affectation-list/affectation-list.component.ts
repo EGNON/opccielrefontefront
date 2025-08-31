@@ -12,9 +12,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-affectation-list',
-  templateUrl: './affectation-list.component.html',
-  styleUrls: ['./affectation-list.component.scss']
+    selector: 'app-affectation-list',
+    templateUrl: './affectation-list.component.html',
+    styleUrls: ['./affectation-list.component.scss'],
+    standalone: false
 })
  export class AffectationListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

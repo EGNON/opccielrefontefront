@@ -44,9 +44,10 @@ import {SoustypeclientService} from "../../../services/revuecompte/soustypeclien
 import {CategorieclientService} from "../../../services/revuecompte/categorieclient.service";
 
 @Component({
-  selector: 'app-physique-details',
-  templateUrl: './physique-details.component.html',
-  styleUrl: './physique-details.component.scss'
+    selector: 'app-physique-details',
+    templateUrl: './physique-details.component.html',
+    styleUrl: './physique-details.component.scss',
+    standalone: false
 })
 export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestroy{
 

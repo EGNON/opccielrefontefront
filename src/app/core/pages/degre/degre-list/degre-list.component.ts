@@ -8,9 +8,10 @@ import {DegreService} from "../../../../crm/services/degre.service";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-degre-list',
-  templateUrl: './degre-list.component.html',
-  styleUrls: ['./degre-list.component.scss']
+    selector: 'app-degre-list',
+    templateUrl: './degre-list.component.html',
+    styleUrls: ['./degre-list.component.scss'],
+    standalone: false
 })
 export class DegreListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

@@ -34,9 +34,10 @@ import {Typedocument} from "../../../../crm/models/typedocument.model";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-personne-physique-add-edit',
-  templateUrl: './personne-physique-add-edit.component.html',
-  styleUrl: './personne-physique-add-edit.component.scss'
+    selector: 'app-personne-physique-add-edit',
+    templateUrl: './personne-physique-add-edit.component.html',
+    styleUrl: './personne-physique-add-edit.component.scss',
+    standalone: false
 })
 export class PersonnePhysiqueAddEditComponent implements OnInit, OnDestroy, AfterViewInit{
   public paysSettings = {};

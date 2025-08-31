@@ -11,9 +11,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-rdv-list',
-  templateUrl: './rdv-list.component.html',
-  styleUrls: ['./rdv-list.component.scss']
+    selector: 'app-rdv-list',
+    templateUrl: './rdv-list.component.html',
+    styleUrls: ['./rdv-list.component.scss'],
+    standalone: false
 })
 export class RdvListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

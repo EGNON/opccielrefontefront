@@ -8,9 +8,10 @@ import {DeleteSouscategorieModalComponent} from "../delete-souscategorie-modal/d
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-souscategorie-list',
-  templateUrl: './souscategorie-list.component.html',
-  styleUrl: './souscategorie-list.component.scss'
+    selector: 'app-souscategorie-list',
+    templateUrl: './souscategorie-list.component.html',
+    styleUrl: './souscategorie-list.component.scss',
+    standalone: false
 })
 export class SouscategorieListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

@@ -11,9 +11,10 @@ import {AuthService} from "../../../../core/modules/auth";
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-objectif-atteint-list',
-  templateUrl: './objectif-atteint-list.component.html',
-  styleUrls: ['./objectif-atteint-list.component.scss']
+    selector: 'app-objectif-atteint-list',
+    templateUrl: './objectif-atteint-list.component.html',
+    styleUrls: ['./objectif-atteint-list.component.scss'],
+    standalone: false
 })
 export class ObjectifAtteintListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

@@ -7,9 +7,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {SecteurboursierService} from "../../../services/secteurboursier.service";
 
 @Component({
-  selector: 'app-delete-secteurboursier-modal',
-  templateUrl: './delete-secteurboursier-modal.component.html',
-  styleUrl: './delete-secteurboursier-modal.component.scss'
+    selector: 'app-delete-secteurboursier-modal',
+    templateUrl: './delete-secteurboursier-modal.component.html',
+    styleUrl: './delete-secteurboursier-modal.component.scss',
+    standalone: false
 })
 export class DeleteSecteurboursierModalComponent implements OnInit{
   @Input() id: number;

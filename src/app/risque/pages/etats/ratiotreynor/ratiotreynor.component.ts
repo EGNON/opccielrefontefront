@@ -7,9 +7,10 @@ import { OpcvmService } from '../../../../core/services/opcvm.service';
 import { ReportingsService } from '../../../services/reportings/reportings.service';
 
 @Component({
-  selector: 'app-ratiotreynor',
-  templateUrl: './ratiotreynor.component.html',
-  styleUrl: './ratiotreynor.component.scss'
+    selector: 'app-ratiotreynor',
+    templateUrl: './ratiotreynor.component.html',
+    styleUrl: './ratiotreynor.component.scss',
+    standalone: false
 })
 export class RatiotreynorComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(DataTableDirective, {static: false})

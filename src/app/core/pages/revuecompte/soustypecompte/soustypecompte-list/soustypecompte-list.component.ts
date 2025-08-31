@@ -10,9 +10,10 @@ import {SoustypecompteService} from "../../../../services/revuecompte/soustypeco
 import {DeleteSoustypecompteModalComponent} from "../delete-soustypecompte-modal/delete-soustypecompte-modal.component";
 
 @Component({
-  selector: 'app-soustypecompte-list',
-  templateUrl: './soustypecompte-list.component.html',
-  styleUrl: './soustypecompte-list.component.scss'
+    selector: 'app-soustypecompte-list',
+    templateUrl: './soustypecompte-list.component.html',
+    styleUrl: './soustypecompte-list.component.scss',
+    standalone: false
 })
 export class SoustypecompteListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

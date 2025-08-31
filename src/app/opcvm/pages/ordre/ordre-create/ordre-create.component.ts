@@ -24,9 +24,10 @@ import {PersonnePhysique} from "../../../../crm/models/personne/personne.physiqu
 import {LoaderService} from "../../../../loader.service";
 
 @Component({
-  selector: 'app-ordre-create',
-  templateUrl: './ordre-create.component.html',
-  styleUrl: './ordre-create.component.scss'
+    selector: 'app-ordre-create',
+    templateUrl: './ordre-create.component.html',
+    styleUrl: './ordre-create.component.scss',
+    standalone: false
 })
 export class OrdreCreateComponent implements OnInit, OnDestroy{
   id?: number;

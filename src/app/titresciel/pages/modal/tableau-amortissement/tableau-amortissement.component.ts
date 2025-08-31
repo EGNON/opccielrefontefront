@@ -5,9 +5,10 @@ import {QualiteTitreService} from "../../../services/qualite-titre.service";
 import {TitreService} from "../../../services/titre.service";
 
 @Component({
-  selector: 'app-tableau-amortissement',
-  templateUrl: './tableau-amortissement.component.html',
-  styleUrl: './tableau-amortissement.component.scss'
+    selector: 'app-tableau-amortissement',
+    templateUrl: './tableau-amortissement.component.html',
+    styleUrl: './tableau-amortissement.component.scss',
+    standalone: false
 })
 export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnDestroy {
   id?: number;

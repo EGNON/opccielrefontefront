@@ -8,9 +8,10 @@ import {catchError, finalize} from "rxjs/operators";
 import {of} from "rxjs";
 
 @Component({
-  selector: 'app-valorisationcodepostecomptablen',
-  templateUrl: './valorisationcodepostecomptablen.component.html',
-  styleUrl: './valorisationcodepostecomptablen.component.scss'
+    selector: 'app-valorisationcodepostecomptablen',
+    templateUrl: './valorisationcodepostecomptablen.component.html',
+    styleUrl: './valorisationcodepostecomptablen.component.scss',
+    standalone: false
 })
 export class ValorisationcodepostecomptablenComponent implements OnInit{
   currentSeance: any;

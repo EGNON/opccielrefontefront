@@ -25,9 +25,10 @@ import {OperationdifferenceestimationService} from "../../../services/operationd
 import {OperationChargeEtalerService} from "../../../services/operation-charge-etaler.service";
 
 @Component({
-  selector: 'app-verificationchargeniveau1',
-  templateUrl: './verificationchargeniveau1.component.html',
-  styleUrl: './verificationchargeniveau1.component.scss'
+    selector: 'app-verificationchargeniveau1',
+    templateUrl: './verificationchargeniveau1.component.html',
+    styleUrl: './verificationchargeniveau1.component.scss',
+    standalone: false
 })
 export class Verificationchargeniveau1Component implements OnInit{
   currentSeance: any;

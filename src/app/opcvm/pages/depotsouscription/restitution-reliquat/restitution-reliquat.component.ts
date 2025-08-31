@@ -15,9 +15,10 @@ import Swal from "sweetalert2";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-restitution-reliquat',
-  templateUrl: './restitution-reliquat.component.html',
-  styleUrl: './restitution-reliquat.component.scss'
+    selector: 'app-restitution-reliquat',
+    templateUrl: './restitution-reliquat.component.html',
+    styleUrl: './restitution-reliquat.component.scss',
+    standalone: false
 })
 export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDestroy{
   form: FormGroup;

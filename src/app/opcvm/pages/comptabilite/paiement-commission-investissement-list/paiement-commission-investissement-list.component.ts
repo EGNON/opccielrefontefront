@@ -15,9 +15,10 @@ import {OperationService} from "../../../services/operation.service";
 import {DataTableDirective} from "angular-datatables";
 
 @Component({
-  selector: 'app-paiement-commission-investissement-list',
-  templateUrl: './paiement-commission-investissement-list.component.html',
-  styleUrl: './paiement-commission-investissement-list.component.scss'
+    selector: 'app-paiement-commission-investissement-list',
+    templateUrl: './paiement-commission-investissement-list.component.html',
+    styleUrl: './paiement-commission-investissement-list.component.scss',
+    standalone: false
 })
 export class PaiementCommissionInvestissementListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

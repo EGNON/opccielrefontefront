@@ -20,9 +20,10 @@ import {KeeniconComponent} from "../../../../template/_metronic/shared/keenicon/
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-qualite-list',
-  templateUrl: './qualite-list.component.html',
-  styleUrls: ['./qualite-list.component.scss']
+    selector: 'app-qualite-list',
+    templateUrl: './qualite-list.component.html',
+    styleUrls: ['./qualite-list.component.scss'],
+    standalone: false
 })
 export class QualiteListComponent implements OnInit, OnDestroy, AfterViewInit{
 

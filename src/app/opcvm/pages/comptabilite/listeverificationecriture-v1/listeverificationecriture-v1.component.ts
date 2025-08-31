@@ -22,9 +22,10 @@ import {TypeoperationService} from "../../../../core/services/typeoperation.serv
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-listeverificationecriture-v1',
-  templateUrl: './listeverificationecriture-v1.component.html',
-  styleUrl: './listeverificationecriture-v1.component.scss'
+    selector: 'app-listeverificationecriture-v1',
+    templateUrl: './listeverificationecriture-v1.component.html',
+    styleUrl: './listeverificationecriture-v1.component.scss',
+    standalone: false
 })
 export class ListeverificationecritureV1Component implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

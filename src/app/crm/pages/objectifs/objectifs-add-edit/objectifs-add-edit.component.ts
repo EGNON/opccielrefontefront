@@ -10,9 +10,10 @@ import {ModeleObjectifService} from "../../../services/modele-objectif.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-objectifs-add-edit',
-  templateUrl: './objectifs-add-edit.component.html',
-  styleUrls: ['./objectifs-add-edit.component.scss']
+    selector: 'app-objectifs-add-edit',
+    templateUrl: './objectifs-add-edit.component.html',
+    styleUrls: ['./objectifs-add-edit.component.scss'],
+    standalone: false
 })
 export class ObjectifsAddEditComponent implements OnInit, AfterViewInit, OnDestroy{
   id?: number;

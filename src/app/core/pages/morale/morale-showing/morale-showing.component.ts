@@ -6,9 +6,10 @@ import {PersonneMoraleService} from "../../../../crm/services/personne/personne.
 import {Qualite} from "../../../../crm/models/qualite.model";
 
 @Component({
-  selector: 'app-morale-showing',
-  templateUrl: './morale-showing.component.html',
-  styleUrl: './morale-showing.component.scss'
+    selector: 'app-morale-showing',
+    templateUrl: './morale-showing.component.html',
+    styleUrl: './morale-showing.component.scss',
+    standalone: false
 })
 export class MoraleShowingComponent implements OnInit, OnDestroy{
   @Input() _qualite: Qualite;

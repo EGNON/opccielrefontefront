@@ -8,9 +8,10 @@ import {ModeleecriturenatureoperationService} from "../../../services/modeleecri
 import {DetailmodeleService} from "../../../services/detailmodele.service";
 
 @Component({
-  selector: 'app-delete-modeleecriture-modal',
-  templateUrl: './delete-modeleecriture-modal.component.html',
-  styleUrl: './delete-modeleecriture-modal.component.scss'
+    selector: 'app-delete-modeleecriture-modal',
+    templateUrl: './delete-modeleecriture-modal.component.html',
+    styleUrl: './delete-modeleecriture-modal.component.scss',
+    standalone: false
 })
 export class DeleteModeleecritureModalComponent implements OnInit{
   @Input() id: string;

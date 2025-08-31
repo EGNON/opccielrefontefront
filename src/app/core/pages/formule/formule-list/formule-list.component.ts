@@ -9,9 +9,10 @@ import {DeleteFormuleModalComponent} from "../../formule/delete-formule-modal/de
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-formule-list',
-  templateUrl: './formule-list.component.html',
-  styleUrl: './formule-list.component.scss'
+    selector: 'app-formule-list',
+    templateUrl: './formule-list.component.html',
+    styleUrl: './formule-list.component.scss',
+    standalone: false
 })
 export class FormuleListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

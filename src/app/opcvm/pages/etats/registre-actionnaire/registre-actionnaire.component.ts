@@ -18,9 +18,10 @@ import {LibrairiesService} from "../../../../services/librairies.service";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-registre-actionnaire',
-  templateUrl: './registre-actionnaire.component.html',
-  styleUrl: './registre-actionnaire.component.scss'
+    selector: 'app-registre-actionnaire',
+    templateUrl: './registre-actionnaire.component.html',
+    styleUrl: './registre-actionnaire.component.scss',
+    standalone: false
 })
 export class RegistreActionnaireComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

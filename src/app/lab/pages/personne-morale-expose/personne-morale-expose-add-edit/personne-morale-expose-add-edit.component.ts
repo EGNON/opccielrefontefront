@@ -32,9 +32,10 @@ import {Quartier} from "../../../../crm/models/quartier.model";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-personne-morale-expose-add-edit',
-  templateUrl: './personne-morale-expose-add-edit.component.html',
-  styleUrl: './personne-morale-expose-add-edit.component.scss'
+    selector: 'app-personne-morale-expose-add-edit',
+    templateUrl: './personne-morale-expose-add-edit.component.html',
+    styleUrl: './personne-morale-expose-add-edit.component.scss',
+    standalone: false
 })
 export class PersonneMoraleExposeAddEditComponent implements OnInit, OnDestroy, AfterViewInit{
   public paysSettings = {};

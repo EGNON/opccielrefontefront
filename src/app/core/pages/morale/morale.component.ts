@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-morale',
-  templateUrl: './morale.component.html',
-  styleUrl: './morale.component.scss'
+    selector: 'app-morale',
+    templateUrl: './morale.component.html',
+    styleUrl: './morale.component.scss',
+    standalone: false
 })
 export class MoraleComponent {
 

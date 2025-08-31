@@ -11,9 +11,10 @@ import moment from "moment/moment";
 import {first} from "rxjs/operators";
 
 @Component({
-  selector: 'app-client-print2',
-  templateUrl: './client-print2.component.html',
-  styleUrl: './client-print2.component.scss'
+    selector: 'app-client-print2',
+    templateUrl: './client-print2.component.html',
+    styleUrl: './client-print2.component.scss',
+    standalone: false
 })
 export class ClientPrint2Component implements OnInit, OnDestroy, AfterViewInit{
   baseRoute: string = "";

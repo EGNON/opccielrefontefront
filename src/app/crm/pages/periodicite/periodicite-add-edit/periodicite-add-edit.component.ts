@@ -7,9 +7,10 @@ import {PeriodiciteService} from "../../../services/periodicite.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-periodicite-add-edit',
-  templateUrl: './periodicite-add-edit.component.html',
-  styleUrls: ['./periodicite-add-edit.component.scss']
+    selector: 'app-periodicite-add-edit',
+    templateUrl: './periodicite-add-edit.component.html',
+    styleUrls: ['./periodicite-add-edit.component.scss'],
+    standalone: false
 })
 export class PeriodiciteAddEditComponent implements OnInit, OnDestroy {
   id?: number;

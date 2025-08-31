@@ -8,9 +8,10 @@ import {Profession} from "../../../../crm/models/profession.model";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 @Component({
-  selector: 'app-profession-add-edit',
-  templateUrl: './profession-add-edit.component.html',
-  styleUrls: ['./profession-add-edit.component.scss']
+    selector: 'app-profession-add-edit',
+    templateUrl: './profession-add-edit.component.html',
+    styleUrls: ['./profession-add-edit.component.scss'],
+    standalone: false
 })
 export class ProfessionAddEditComponent implements OnInit, OnDestroy{
   id?: number;

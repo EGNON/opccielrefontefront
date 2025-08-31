@@ -12,9 +12,10 @@ import {
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-modeetablissement-list',
-  templateUrl: './modeetablissement-list.component.html',
-  styleUrl: './modeetablissement-list.component.scss'
+    selector: 'app-modeetablissement-list',
+    templateUrl: './modeetablissement-list.component.html',
+    styleUrl: './modeetablissement-list.component.scss',
+    standalone: false
 })
 export class ModeetablissementListComponent  implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;

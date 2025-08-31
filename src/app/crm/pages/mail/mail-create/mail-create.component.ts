@@ -24,9 +24,10 @@ import {PageInfoService} from "../../../../template/_metronic/layout";
 import {ModeleMsgAlerte} from "../../../models/modelemsgalerte.model";
 
 @Component({
-  selector: 'app-mail-create',
-  templateUrl: './mail-create.component.html',
-  styleUrls: ['./mail-create.component.scss']
+    selector: 'app-mail-create',
+    templateUrl: './mail-create.component.html',
+    styleUrls: ['./mail-create.component.scss'],
+    standalone: false
 })
 export class MailCreateComponent implements OnInit, OnDestroy{
   id?: number;

@@ -10,9 +10,10 @@ import {
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-natureevenement-list',
-  templateUrl: './natureevenement-list.component.html',
-  styleUrl: './natureevenement-list.component.scss'
+    selector: 'app-natureevenement-list',
+    templateUrl: './natureevenement-list.component.html',
+    styleUrl: './natureevenement-list.component.scss',
+    standalone: false
 })
 export class NatureevenementListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

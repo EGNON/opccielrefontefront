@@ -9,9 +9,10 @@ import {TypecompteService} from "../../../../services/revuecompte/typecompte.ser
 import {DeleteTypecompteModalComponent} from "../delete-typecompte-modal/delete-typecompte-modal.component";
 
 @Component({
-  selector: 'app-typecompte-list',
-  templateUrl: './typecompte-list.component.html',
-  styleUrl: './typecompte-list.component.scss'
+    selector: 'app-typecompte-list',
+    templateUrl: './typecompte-list.component.html',
+    styleUrl: './typecompte-list.component.scss',
+    standalone: false
 })
 export class TypecompteListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

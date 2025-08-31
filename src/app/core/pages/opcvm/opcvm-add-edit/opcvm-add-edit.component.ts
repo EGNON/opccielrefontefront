@@ -7,9 +7,10 @@ import {OpcvmService} from "../../../services/opcvm.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 
 @Component({
-  selector: 'app-opcvm-add-edit',
-  templateUrl: './opcvm-add-edit.component.html',
-  styleUrl: './opcvm-add-edit.component.scss'
+    selector: 'app-opcvm-add-edit',
+    templateUrl: './opcvm-add-edit.component.html',
+    styleUrl: './opcvm-add-edit.component.scss',
+    standalone: false
 })
 export class OpcvmAddEditComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy{
   id: number = 0;

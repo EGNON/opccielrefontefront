@@ -23,9 +23,10 @@ import {Typeoperation} from "../../../../core/models/typeoperation.model";
 import {catchError, finalize} from "rxjs/operators";
 
 @Component({
-  selector: 'app-verificationecritureniveau1de',
-  templateUrl: './verificationecritureniveau1de.component.html',
-  styleUrl: './verificationecritureniveau1de.component.scss'
+    selector: 'app-verificationecritureniveau1de',
+    templateUrl: './verificationecritureniveau1de.component.html',
+    styleUrl: './verificationecritureniveau1de.component.scss',
+    standalone: false
 })
 export class Verificationecritureniveau1deComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

@@ -11,9 +11,10 @@ import {catchError, finalize, first} from "rxjs/operators";
 import {TypeemissionService} from "../../../services/typeemission.service";
 
 @Component({
-  selector: 'app-typeemission-add-edit',
-  templateUrl: './typeemission-add-edit.component.html',
-  styleUrl: './typeemission-add-edit.component.scss'
+    selector: 'app-typeemission-add-edit',
+    templateUrl: './typeemission-add-edit.component.html',
+    styleUrl: './typeemission-add-edit.component.scss',
+    standalone: false
 })
 export class TypeemissionAddEditComponent implements OnInit, OnDestroy {
   id?: any;

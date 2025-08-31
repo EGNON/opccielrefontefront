@@ -9,9 +9,10 @@ import {first} from "rxjs/operators";
 import { OpcvmService } from '../../../../core/services/opcvm.service';
 
 @Component({
-  selector: 'app-alpha',
-  templateUrl: './alpha.component.html',
-  styleUrl: './alpha.component.scss'
+    selector: 'app-alpha',
+    templateUrl: './alpha.component.html',
+    styleUrl: './alpha.component.scss',
+    standalone: false
 })
 export class AlphaComponent implements OnInit, OnDestroy, AfterViewInit{
   @ViewChild(DataTableDirective, {static: false})

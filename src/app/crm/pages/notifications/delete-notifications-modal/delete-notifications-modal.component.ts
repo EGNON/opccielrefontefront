@@ -6,9 +6,10 @@ import {AlerteService} from "../../../services/alerte.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-delete-notifications-modal',
-  templateUrl: './delete-notifications-modal.component.html',
-  styleUrls: ['./delete-notifications-modal.component.scss']
+    selector: 'app-delete-notifications-modal',
+    templateUrl: './delete-notifications-modal.component.html',
+    styleUrls: ['./delete-notifications-modal.component.scss'],
+    standalone: false
 })
 export class DeleteNotificationsModalComponent implements OnInit, OnDestroy{
   @Input() id: number;

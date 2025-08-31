@@ -4,9 +4,10 @@ import {tap} from "rxjs/operators";
 import {MsgHelpersService} from "../../../../../../crm/services/notifications/msg-helpers.service";
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    standalone: false
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   @Input() appHeaderDefaulMenuDisplay!: boolean;

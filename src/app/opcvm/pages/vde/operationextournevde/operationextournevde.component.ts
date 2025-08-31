@@ -28,9 +28,10 @@ import {SeanceopcvmService} from "../../../services/seanceopcvm.service";
 import {OperationdifferenceestimationService} from "../../../services/operationdifferenceestimation.service";
 
 @Component({
-  selector: 'app-operationextournevde',
-  templateUrl: './operationextournevde.component.html',
-  styleUrl: './operationextournevde.component.scss'
+    selector: 'app-operationextournevde',
+    templateUrl: './operationextournevde.component.html',
+    styleUrl: './operationextournevde.component.scss',
+    standalone: false
 })
 export class OperationextournevdeComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;

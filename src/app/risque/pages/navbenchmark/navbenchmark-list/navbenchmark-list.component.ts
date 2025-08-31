@@ -17,9 +17,10 @@ import {
 } from "../../../../opcvm/pages/intentionrachat/delete-intentionrachat-modal/delete-intentionrachat-modal.component";
 
 @Component({
-  selector: 'app-navbenchmark-list',
-  templateUrl: './navbenchmark-list.component.html',
-  styleUrl: './navbenchmark-list.component.scss'
+    selector: 'app-navbenchmark-list',
+    templateUrl: './navbenchmark-list.component.html',
+    styleUrl: './navbenchmark-list.component.scss',
+    standalone: false
 })
 export class NavbenchmarkListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

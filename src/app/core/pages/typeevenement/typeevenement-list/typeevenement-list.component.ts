@@ -8,9 +8,10 @@ import {DeleteTypeevenementModalComponent} from "../delete-typeevenement-modal/d
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-typeevenement-list',
-  templateUrl: './typeevenement-list.component.html',
-  styleUrl: './typeevenement-list.component.scss'
+    selector: 'app-typeevenement-list',
+    templateUrl: './typeevenement-list.component.html',
+    styleUrl: './typeevenement-list.component.scss',
+    standalone: false
 })
 export class TypeevenementListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

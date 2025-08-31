@@ -15,9 +15,10 @@ import {
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-profilcommissionsousrach-list',
-  templateUrl: './profilcommissionsousrach-list.component.html',
-  styleUrl: './profilcommissionsousrach-list.component.scss'
+    selector: 'app-profilcommissionsousrach-list',
+    templateUrl: './profilcommissionsousrach-list.component.html',
+    styleUrl: './profilcommissionsousrach-list.component.scss',
+    standalone: false
 })
 export class ProfilcommissionsousrachListComponent implements OnInit, OnDestroy, AfterViewInit {
   isLoading: boolean;

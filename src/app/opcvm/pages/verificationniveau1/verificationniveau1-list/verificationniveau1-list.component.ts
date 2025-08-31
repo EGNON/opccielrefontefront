@@ -11,9 +11,10 @@ import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
 import {LocalService} from "../../../../services/local.service";
 
 @Component({
-  selector: 'app-verificationniveau1-list',
-  templateUrl: './verificationniveau1-list.component.html',
-  styleUrl: './verificationniveau1-list.component.scss'
+    selector: 'app-verificationniveau1-list',
+    templateUrl: './verificationniveau1-list.component.html',
+    styleUrl: './verificationniveau1-list.component.scss',
+    standalone: false
 })
 export class Verificationniveau1ListComponent implements OnInit, OnDestroy {
 @Output() passEntry: EventEmitter<any> = new EventEmitter();

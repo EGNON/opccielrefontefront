@@ -1,7 +1,8 @@
 import {Directive, ElementRef, Input, OnInit} from '@angular/core';
 
 @Directive({
-  selector: '[hasPermission]'
+    selector: '[hasPermission]',
+    standalone: false
 })
 export class HasPermissionDirective implements OnInit{
 

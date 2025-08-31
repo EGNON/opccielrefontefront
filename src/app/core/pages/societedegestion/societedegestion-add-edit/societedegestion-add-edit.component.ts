@@ -19,9 +19,10 @@ import {ResponseModel} from "../../../../crm/models/table.model";
 import {CommuneService} from "../../../../crm/services/commune.service";
 
 @Component({
-  selector: 'app-societedegestion-add-edit',
-  templateUrl: './societedegestion-add-edit.component.html',
-  styleUrl: './societedegestion-add-edit.component.scss'
+    selector: 'app-societedegestion-add-edit',
+    templateUrl: './societedegestion-add-edit.component.html',
+    styleUrl: './societedegestion-add-edit.component.scss',
+    standalone: false
 })
 export class SocietedegestionAddEditComponent implements OnInit, OnDestroy{
 

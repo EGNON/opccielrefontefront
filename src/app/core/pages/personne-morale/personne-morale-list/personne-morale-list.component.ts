@@ -10,9 +10,10 @@ import {PersonneMoraleService} from "../../../../crm/services/personne/personne.
 import {Config} from "datatables.net";
 
 @Component({
-  selector: 'app-personne-morale-list',
-  templateUrl: './personne-morale-list.component.html',
-  styleUrls: ['./personne-morale-list.component.scss']
+    selector: 'app-personne-morale-list',
+    templateUrl: './personne-morale-list.component.html',
+    styleUrls: ['./personne-morale-list.component.scss'],
+    standalone: false
 })
 export class PersonneMoraleListComponent implements OnInit, OnDestroy, AfterViewInit{
 
