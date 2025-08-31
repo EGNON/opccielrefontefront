@@ -1,6 +1,6 @@
 
 import {Inject, Injectable, OnDestroy} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 

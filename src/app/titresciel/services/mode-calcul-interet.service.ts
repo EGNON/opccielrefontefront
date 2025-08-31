@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ResourceService} from "../../crm/services/core/resource.service";
 import {ModeCalculInteretModel} from "../models/mode-calcul-interet.model";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {ResponseModel} from "../../crm/models/table.model";
 

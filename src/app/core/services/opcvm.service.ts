@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ResourceService} from "../../crm/services/core/resource.service";
 import {Opcvm} from "../models/opcvm";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 
 @Injectable({

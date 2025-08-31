@@ -27,7 +27,7 @@ import {
 declare var $:JQueryStatic;
 import "select2";
 import {NumeroCompteDepositaireDirective} from "../numero-compte-depositaire.directive";
-import {HttpClient, HttpEvent, HttpHandler, HttpRequest} from "@angular/common/http";
+import { HttpClient, HttpEvent, HttpHandler, HttpRequest } from "@angular/common/http";
 import {UniqueNumCpteDepositValidators} from "../../../../validators/unique-num-cpte-deposit-validators";
 import {NumbersAuthaurization} from "../../../../validators/numbers-authaurization";
 // import {NumbersAuthaurization} from "../../../../validators/numbers-authaurization";

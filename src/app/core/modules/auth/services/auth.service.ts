@@ -8,7 +8,7 @@ import {environment} from "../../../../../environments/environment";
 import {Utilisateur} from "../../../../crm/models/access/utilisateur.model";
 import {UtilisateurRolePermission} from "../models/utilisateur-role-permission.model";
 import {Opcvm} from "../../../models/opcvm";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 export type UserType = Utilisateur | undefined;
 export type OpcvmType = Opcvm | undefined;

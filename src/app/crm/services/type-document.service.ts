@@ -1,6 +1,6 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {TypeDocument} from "../models/type-document.model";
 import {DataTablesResponse} from "../models/data-tables.response.model";
 import {Typedocument} from "../models/typedocument.model";

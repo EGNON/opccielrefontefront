@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ResourceService} from "../../crm/services/core/resource.service";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Opcvm} from "../../core/models/opcvm";
 import {environment} from "../../../environments/environment";
 import {of} from "rxjs";

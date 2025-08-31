@@ -1,7 +1,7 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {TableService} from "./table.sevice";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {PieceJointe} from "../models/piece-jointe.model";
 import { ResourceService } from './core/resource.service';
 

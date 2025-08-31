@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {HttpBackend, HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AuthModel } from '../../models/auth.model';
 import {environment} from "../../../../../../environments/environment";
 import {Utilisateur} from "../../../../../crm/models/access/utilisateur.model";

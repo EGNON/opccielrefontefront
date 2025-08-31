@@ -1,5 +1,5 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Profession} from "../models/profession.model";
 import {EntityService} from "./entity.service";

@@ -1,6 +1,6 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {TableService} from "../table.sevice";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Personnel} from "../../models/personne/personnel.model";
 import {environment} from "../../../../environments/environment";

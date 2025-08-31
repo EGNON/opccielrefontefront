@@ -2,7 +2,7 @@ import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {TableService} from "./table.sevice";
 import {NbrJour} from "../models/nbr-jour.model";
 import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Temps} from "../models/temps.model";
 import { ResourceService } from './core/resource.service';
 

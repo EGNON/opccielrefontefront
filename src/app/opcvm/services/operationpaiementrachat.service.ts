@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {ResourceService} from "../../crm/services/core/resource.service";
 import {Operationsouscriptionrachat} from "../models/operationsouscriptionrachat.model";
 import {Operationpaiementrachat2} from "../models/operationpaiementrachat2.model";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
 import {ResponseModel} from "../../crm/models/table.model";

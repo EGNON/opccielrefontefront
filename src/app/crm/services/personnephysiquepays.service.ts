@@ -1,5 +1,5 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Periodicite} from "../models/periodicite.model";
 import {TableService} from "./table.sevice";
 import {Affectation} from "../models/affectation.model";

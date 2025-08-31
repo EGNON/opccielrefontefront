@@ -1,7 +1,7 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {EntityService} from "../entity.service";
 import {Role} from "../../models/access/role.model";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {ResourceService} from "../core/resource.service";
 import {Degre} from "../../models/degre.model";

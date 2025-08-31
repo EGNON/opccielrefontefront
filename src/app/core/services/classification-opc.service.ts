@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {ResourceService} from "../../crm/services/core/resource.service";
 import {ClassificationOPC} from "../models/classification-opc";
 import {ResponseModel} from "../../crm/models/table.model";

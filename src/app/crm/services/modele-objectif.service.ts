@@ -1,6 +1,6 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {ModeleObjectif} from "../models/modele-objectif.model";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {DataTablesResponse} from "../models/data-tables.response.model";
 import {ModeleMsgAlerte} from "../models/modelemsgalerte.model";

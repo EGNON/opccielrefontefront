@@ -1,7 +1,7 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {TableService} from "./table.sevice";
 import {Affectation} from "../models/affectation.model";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {DataTablesResponse} from "../models/data-tables.response.model";
 import {environment} from "../../../environments/environment";
 import { ResourceService } from './core/resource.service';

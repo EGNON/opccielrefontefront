@@ -1,5 +1,5 @@
 import {Inject, Injectable, OnDestroy} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Pays} from "../../crm/models/pays.model";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ResourceService} from "../../crm/services/core/resource.service";
 import {ObligationModel} from "../models/obligation.model";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {TitreModel} from "../models/titre.model";
 import {environment} from "../../../environments/environment";
 

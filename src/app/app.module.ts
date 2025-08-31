@@ -1,7 +1,7 @@
 import {NgModule, APP_INITIALIZER, LOCALE_ID} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ClipboardModule } from 'ngx-clipboard';
 import { TranslateModule } from '@ngx-translate/core';
 import { InlineSVGModule } from 'ng-inline-svg-2';
@@ -32,47 +32,41 @@ function appInitializer(authService: AuthService) {
   };
 }
 
-@NgModule({
-  declarations: [AppComponent, SpinnerComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    TranslateModule.forRoot(),
-    HttpClientModule,
-    ClipboardModule,
-    AppRoutingModule,
-    InlineSVGModule.forRoot(),
-    NgbModule,
-    SweetAlert2Module.forRoot(),
-    ReactiveFormsModule,
-    NgApexchartsModule,
-    DirectivesModule,
-    DataTablesModule
-  ],
-  providers: [
-    UniqueNumCpteDepositValidators,
-    NgbActiveModal,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializer,
-      multi: true,
-      deps: [AuthService],
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AppHttpInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
-    },
-    // { provide: NgbDateAdapter, useClass: NgbCustomDateAdapter },
-    {provide: NgbDateParserFormatter, useClass: NgbCustomDateParserFormatter},
-    {provide: LOCALE_ID, useValue: 'fr-FR'},
-    { provide: APP_BASE_HREF, useValue: '/' }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [AppComponent, SpinnerComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        TranslateModule.forRoot(),
+        ClipboardModule,
+        AppRoutingModule,
+        InlineSVGModule.forRoot(),
+        NgbModule,
+        SweetAlert2Module.forRoot(),
+        ReactiveFormsModule,
+        NgApexchartsModule,
+        DirectivesModule,
+        DataTablesModule], providers: [
+        UniqueNumCpteDepositValidators,
+        NgbActiveModal,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: appInitializer,
+            multi: true,
+            deps: [AuthService],
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AppHttpInterceptor,
+            multi: true,
+        },
+        {
+            provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+        },
+        // { provide: NgbDateAdapter, useClass: NgbCustomDateAdapter },
+        { provide: NgbDateParserFormatter, useClass: NgbCustomDateParserFormatter },
+        { provide: LOCALE_ID, useValue: 'fr-FR' },
+        { provide: APP_BASE_HREF, useValue: '/' },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
   constructor() {
     registerLocaleData(fr.default);

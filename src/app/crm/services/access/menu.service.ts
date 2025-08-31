@@ -1,7 +1,7 @@
 import {Inject, Injectable, OnDestroy, OnInit} from '@angular/core';
 import {EntityService} from "../entity.service";
 import {Menu} from "../../models/access/menu.model";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {DataTablesResponse} from "../../models/data-tables.response.model";
 import { ResourceService } from '../core/resource.service';
