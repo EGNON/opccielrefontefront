@@ -7,7 +7,8 @@
       "jquery",
       "@angular/localize",
       "node"
-    ]
+    ],
+    "skipLibCheck": true
   },
   "files": [
     "src/main.ts",

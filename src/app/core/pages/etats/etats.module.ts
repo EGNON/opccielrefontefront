@@ -15,6 +15,9 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { FicheclientComponent } from './ficheclient/ficheclient.component';
 import { EtatsuiviactionnaireComponent } from './etatsuiviactionnaire/etatsuiviactionnaire.component';
 import { EtatsuiviclientComponent } from './etatsuiviclient/etatsuiviclient.component';
+import { Performanceportefeuilleactionnaire } from './performanceportefeuilleactionnaire/performanceportefeuilleactionnaire';
+import { Etatfraisfonctionnement } from './etatfraisfonctionnement/etatfraisfonctionnement';
+import { Evolutionvl } from './evolutionvl/evolutionvl';
 
 
 
@@ -27,7 +30,10 @@ import { EtatsuiviclientComponent } from './etatsuiviclient/etatsuiviclient.comp
     ReleveactionnaireComponent,
     FicheclientComponent,
     EtatsuiviactionnaireComponent,
-    EtatsuiviclientComponent
+    EtatsuiviclientComponent,
+    Performanceportefeuilleactionnaire,
+    Etatfraisfonctionnement,
+    Evolutionvl
   ],
   imports: [
     CommonModule,

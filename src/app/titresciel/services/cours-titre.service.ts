@@ -23,6 +23,21 @@ export class CoursTitreService extends ResourceService<CoursTitreModel>{
   afficherCoursTitre(codePlace: string, params: any) {
     return this.http.post<ResponseModel<CoursTitreModel>>(`${this.API_URL}/maj/cours/${codePlace}`, params);
   }
+ 
+   afficherPlaceCoursTitre(params: any){
+    return this.http.post<ResponseModel<CoursTitreModel>>(`${this.API_URL}/place`, params);
+  }
+
+  afficherCoursTitreNew( params: any) {
+    return this.http.post<ResponseModel<CoursTitreModel>>(`${this.API_URL}/maj/cours`, params);
+  }
+
+  verificationCours( params: any) {
+    return this.http.post<ResponseModel<CoursTitreModel>>(`${this.API_URL}/verificationcours`, params);
+  }
+  validationCours( params: any) {
+    return this.http.post<ResponseModel<CoursTitreModel>>(`${this.API_URL}/validationverificationcours`, params);
+  }
 
   getLastCoursTitre(idTitre: number) {
     return this.http.post<ResponseModel<CoursTitreModel>>(`${this.API_URL}/dernier/cours/${idTitre}`, null);

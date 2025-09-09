@@ -58,13 +58,13 @@ export class AutorisationcrListComponent implements OnInit, OnDestroy, AfterView
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
         const sb = this.entityService.afficherTous(dataTablesParameters)
-          .pipe(
+          /* .pipe(
             filter((resp) => resp.data.length > 0),
             map(n => {
               const newData = n.data.filter(obj => obj.createur?.idPersonne === this.authService.currentUserValue?.id && obj.estValide);
               return {...n, data: newData};
             })
-          )
+          ) */
           .subscribe(resp => {
             callback({
               ...resp,

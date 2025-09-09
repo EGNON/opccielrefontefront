@@ -8,6 +8,9 @@ import {ReleveactionnaireComponent} from "./releveactionnaire/releveactionnaire.
 import {FicheclientComponent} from "./ficheclient/ficheclient.component";
 import {EtatsuiviactionnaireComponent} from "./etatsuiviactionnaire/etatsuiviactionnaire.component";
 import {EtatsuiviclientComponent} from "./etatsuiviclient/etatsuiviclient.component";
+import { Performanceportefeuilleactionnaire } from './performanceportefeuilleactionnaire/performanceportefeuilleactionnaire';
+import { Etatfraisfonctionnement } from './etatfraisfonctionnement/etatfraisfonctionnement';
+import { Evolutionvl } from './evolutionvl/evolutionvl';
 
 const routes: Routes = [
   {
@@ -20,6 +23,9 @@ const routes: Routes = [
       { path: 'ficheclient', component: FicheclientComponent, },
       { path: 'etatsuiviactionnaire', component: EtatsuiviactionnaireComponent, },
       { path: 'etatsuiviclient', component: EtatsuiviclientComponent, },
+      { path: 'etatfraisfonctionnement', component: Etatfraisfonctionnement, },
+      { path: 'performanceportefeuilleactionnaire', component: Performanceportefeuilleactionnaire, },
+      { path: 'evolutionvl', component: Evolutionvl, },
       // { path: 'show/:id', component: SecteurShowComponent, },
       { path: 'formejuridique', redirectTo: '', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' },

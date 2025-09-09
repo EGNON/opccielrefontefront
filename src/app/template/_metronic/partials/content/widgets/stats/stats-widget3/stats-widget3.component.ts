@@ -120,24 +120,24 @@ function getChartOptions(
       },
     },
     states: {
-      normal: {
-        filter: {
-          type: 'none',
-          value: 0,
-        },
-      },
+//       normal: {
+//         filter: {
+//           type: 'none',
+//           value: 0,
+//         },
+//       },
       hover: {
         filter: {
           type: 'none',
           value: 0,
-        },
+        }as any,
       },
       active: {
         allowMultipleDataPointsSelection: false,
         filter: {
           type: 'none',
           value: 0,
-        },
+        }as any,
       },
     },
     tooltip: {

@@ -43,6 +43,24 @@ export class LibrairiesService {
   etatSuiviAtionnaireListe(param: any) {
     return this.http.post<any>(`${this.API_URL}/etatsuiviactionnaire/liste`, param);
   }
+  etatFraisFonctionnement(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etatfraisfonctionnement`, param);
+  }
+  etatfraisfonctionnementEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/etatfraisfonctionnement`, param);
+  }
+  etatfraisfonctionnementListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etatfraisfonctionnement/liste`, param);
+  }
+  evolutionVL(param: any) {
+    return this.http.post<any>(`${this.API_URL}/evolutionvl`, param);
+  }
+  evolutionVLEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/evolutionvl`, param);
+  }
+  evolutionVLListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/evolutionvl/liste`, param);
+  }
   etatSuiviClientEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/etats/etatsuiviclient`, param);
   }
@@ -60,6 +78,10 @@ export class LibrairiesService {
   }
   releveActionnaireEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/etats/releveactionnaire`, param);
+  }
+  
+  performancePortefeuilleActionnaire(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/performanceportefeuilleactionnaire`, param);
   }
   ficheClientEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/etats/ficheclient`,param);

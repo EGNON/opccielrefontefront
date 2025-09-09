@@ -196,42 +196,42 @@ export class OperationnouvellerelationsupadixmillionsComponent implements OnInit
     this.page = 1;
     this.afficherOperation();
   }
-  download()
-  {
-    let doc=new jsPDF('p', 'mm', "a4");
-    (doc as jsPDF & { autoTable: autoTable }).
-    autoTable({html: '#reporting-nouvelle-relation',
-        headStyles : {fillColor : '#414ab1'},
-        startY: 70,
-        margin: { horizontal: 10 },
-        styles: { overflow: "linebreak" },
-        didDrawPage: function (data) {
-
-          // Header
-          doc.setFontSize(15);
-          doc.setTextColor(40);
-          var text="Date:"+new Date()+"\n" +
-            "SAPHIR ASSET MANAGEMENT \n" +
-            "Tél : +229 20 21 35 10/66 18 01 74 \n" +
-            "Addresse: Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL,3ème étage de " +
-            "l'immeuble de la SGI BENIN"
-          doc.text(text, data.settings.margin.left, 22);
-
-          // Footer
-          var str = "Page " + doc.internal.pageSize.getHeight();
-
-          doc.setFontSize(10);
-
-          // jsPDF 1.4+ uses getWidth, <1.4 uses .width
-          var pageSize = doc.internal.pageSize;
-          var pageHeight = pageSize.height
-            ? pageSize.height
-            : pageSize.getHeight();
-          doc.text(str, data.settings.margin.left, pageHeight - 10);
-        }}
-      );
-    doc.save('ok.pdf');
-  }
+//   download()
+//   {
+//     let doc=new jsPDF('p', 'mm', "a4");
+//     (doc as jsPDF & { autoTable: autoTable }).
+//     autoTable({html: '#reporting-nouvelle-relation',
+//         headStyles : {fillColor : '#414ab1'},
+//         startY: 70,
+//         margin: { horizontal: 10 },
+//         styles: { overflow: "linebreak" },
+//         didDrawPage: function (data) {
+//
+//           // Header
+//           doc.setFontSize(15);
+//           doc.setTextColor(40);
+//           var text="Date:"+new Date()+"\n" +
+//             "SAPHIR ASSET MANAGEMENT \n" +
+//             "Tél : +229 20 21 35 10/66 18 01 74 \n" +
+//             "Addresse: Rue du Gouverneur Gal Félix EBOUE R. 5.160 CARRE 211 ST MICHEL,3ème étage de " +
+//             "l'immeuble de la SGI BENIN"
+//           doc.text(text, data.settings.margin.left, 22);
+//
+//           // Footer
+//           var str = "Page " + doc.internal.pageSize.getHeight();
+//
+//           doc.setFontSize(10);
+//
+//           // jsPDF 1.4+ uses getWidth, <1.4 uses .width
+//           var pageSize = doc.internal.pageSize;
+//           var pageHeight = pageSize.height
+//             ? pageSize.height
+//             : pageSize.getHeight();
+//           doc.text(str, data.settings.margin.left, pageHeight - 10);
+//         }}
+//       );
+//     doc.save('ok.pdf');
+//   }
   generateExcelTable() {
     // /* pass here the table id */
     // const tableData = this.excel_table.nativeElement;

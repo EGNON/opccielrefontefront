@@ -20,7 +20,7 @@ import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {TitreModel} from "../../../../titresciel/models/titre.model";
 import {catchError, finalize} from "rxjs/operators";
 import {OperationevenementsurvaleurService} from "../../../services/operationevenementsurvaleur.service";
-import {checkCommonJSModules} from "@angular-devkit/build-angular/src/tools/esbuild/commonjs-checker";
+// import {checkCommonJSModules} from "@angular-devkit/build-angular/src/tools/esbuild/commonjs-checker";
 import {Personne} from "../../../../crm/models/personne/personne.model";
 import {Operationevenementsurvaleur} from "../../../models/operationevenementsurvaleur.model";
 

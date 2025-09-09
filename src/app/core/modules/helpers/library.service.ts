@@ -782,6 +782,29 @@ export class LibraryService implements OnDestroy{
                           translate: '',
                           parent: 'Gestion des titres',
                           children: []
+                        },
+                        {
+                          allow:true,// this.authService.isGrantedRole('ROLE_MAJ_TITRES_VERIF1'),
+                          title: 'Vérification MAJ cours niveau 1',
+                          page: '/titresciel/standard/parametre/instrumentfinancier/titres/cours/verifiationniveau1',
+                          role: 'ROLE_MAJ_TITRES_VERIF1',
+                          dataLink: '',
+                          icon: '',
+                          translate: '',
+                          parent: 'Gestion des titres',
+                          children: []
+                        }
+                        ,
+                        {
+                          allow:true,// this.authService.isGrantedRole('ROLE_MAJ_TITRES_VERIF2'),
+                          title: 'Vérification MAJ cours niveau 2',
+                          page: '/titresciel/standard/parametre/instrumentfinancier/titres/cours/verifiationniveau2',
+                          role: 'ROLE_MAJ_TITRES_VERIF2',
+                          dataLink: '',
+                          icon: '',
+                          translate: '',
+                          parent: 'Gestion des titres',
+                          children: []
                         }
                       ]
                     },
@@ -1701,6 +1724,45 @@ export class LibraryService implements OnDestroy{
                   title: 'Point des actionnaires',
                   page: '/app/standard/etats/etatsuiviactionnaire',
                   role: 'ROLE_ETAT_SUIVIACTIONNAIRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/ficheclient').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_PERFORMANCEPORTEFEUILLEACTIONNAIRE'),
+                  title: 'Performance Portefeuille Actionnaire',
+                  page: '/app/standard/etats/performanceportefeuilleactionnaire',
+                  role: 'ROLE_ETAT_PERFORMANCEPORTEFEUILLEACTIONNAIRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/ficheclient').includes(value.path!)),
+                  children: []
+                } ,
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_FRAISFONCTIONNEMENT'),
+                  title: 'Etat de frais de fonctionnement',
+                  page: '/app/standard/etats/etatfraisfonctionnement',
+                  role: 'ROLE_ETAT_FRAISFONCTIONNEMENT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/ficheclient').includes(value.path!)),
+                  children: []
+                }
+                ,{
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_EVOLUTIONVL'),
+                  title: 'Evolution VL',
+                  page: '/app/standard/etats/evolutionvl',
+                  role: 'ROLE_ETAT_EVOLUTIONVL',
                   icon: '',
                   translate: '',
                   dataLink: '',

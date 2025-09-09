@@ -47,16 +47,17 @@
           <div *ngIf="personneExiste">
             <div class="col-md-12 fv-row">
               <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Personne(s)</label>
+             
               <!--end::Label-->
               <!--begin::Input-->
-              <select
+              <!-- <select
                 class="form-select form-select-sm form-select-solid"
                 id="ComboPersonneExistante" (change)="retournerPersonne()">
                 <option selected>Sélectonnez une personne</option>
                 <option *ngFor="let personne of personnePhysique$"
                         value="{{personne.idPersonne}}">{{personne.denomination}}</option>
-                <!--                <option>Tous</option>-->
-              </select>
+                               <option>Tous</option>-->
+             <!--  </select> -->
             </div>
           </div>
 

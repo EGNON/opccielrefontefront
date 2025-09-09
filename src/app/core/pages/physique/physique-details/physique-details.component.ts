@@ -261,6 +261,7 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
         this.pageInfo.updateTitle(this.title);
         this.entityService.getEntityById(this.id).subscribe((entity) => {
           this.loadFormValues(entity, this._qualite);
+          console.log("entity=",entity)
         });
       }
       else

@@ -15,6 +15,8 @@ import {NumeroPositifValidatorsDirective} from "../../../validators/numero-posit
 import {DirectivesModule} from "../../../directives/directives.module";
 import { TitresMajCoursComponent } from './titres-maj-cours/titres-maj-cours.component';
 import {DataTablesModule} from "angular-datatables";
+import { TitresVerif1 } from './titres-verif1/titres-verif1';
+import { TitresVerif2 } from './titres-verif2/titres-verif2';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import {DataTablesModule} from "angular-datatables";
     TitresListingComponent,
     TitresDetailsComponent,
     TitresShowingComponent,
-    TitresMajCoursComponent
+    TitresMajCoursComponent,
+    TitresVerif1,
+    TitresVerif2
   ],
     imports: [
         CommonModule,

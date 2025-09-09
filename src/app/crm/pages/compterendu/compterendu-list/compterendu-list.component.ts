@@ -52,7 +52,10 @@ export class CompterenduListComponent implements OnInit, OnDestroy, AfterViewIni
             filter((resp) => resp.data.length > 0),
             map(n => {
               const newData = n.data.filter(obj => obj.createur?.idPersonne === this.authService.currentUserValue?.idPersonne);
-              return {...n, data: newData};
+              if(this.authService.currentUserValue?.username!=="admin")
+                return {...n, data: newData};
+              else
+                return {...n, data: n.data};
             })
           )
           .subscribe(resp => {

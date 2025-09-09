@@ -11,6 +11,7 @@ import * as xls from 'xlsx';
 import {TitreService} from "../../../services/titre.service";
 import {LoaderService} from "../../../../loader.service";
 import {IndiceBrvmService} from "../../../services/indice-brvm.service";
+import { AuthService } from '../../../../core/modules/auth/services/auth.service';
 
 @Component({
     selector: 'app-titres-maj-cours',
@@ -50,6 +51,7 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
     private fb: FormBuilder,
     private indiceBrvmService: IndiceBrvmService,
     public titreService: TitreService,
+    private authService: AuthService,
     private coursTitreService: CoursTitreService,
     private placeService: PlaceService,
     private modalService: NgbModal,
@@ -160,7 +162,7 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
   chargerCoursTitre() {
     this.loadingService.setLoading(true);
     this.cours.clear();
-    const place = this.filterForm.get("place").value;
+    let place = this.filterForm.get("place").value;
     const columns: any[] = [
       /*{
         title: 'DATE', data: 'dateCours', render: function (data, type, row) {
@@ -267,6 +269,7 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
               endDate: null
             }
           };
+          place = this.filterForm.get("place").value;
           const sb = this.coursTitreService.afficherCoursTitre(place.codePlace, params).pipe(
             map(resp => resp.data),
           ).subscribe(data => {
@@ -370,6 +373,7 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
       resteDemande: new FormControl(0),
       coursReference: new FormControl(0),
       estValider: new FormControl(false),
+      userLogin:this.authService.currentUserValue?.username
     });
   }
 
@@ -621,11 +625,11 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
   save() {
     this.submitting = true;
     this.submitted = true;
-    this.loadingService.setLoading(true);
+    //this.loadingService.setLoading(true);
 
     if (this.filterForm.invalid) {
       this.submitting = false;
-      this.loadingService.setLoading(false);
+     // this.loadingService.setLoading(false);
       return;
     }
 
@@ -644,13 +648,14 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
     .pipe(
       catchError((err) => {
         this.submitting = false;
-        this.loadingService.setLoading(false);
+        //this.loadingService.setLoading(false);
         return of(err.message);
       }),
       finalize(() => {
         this.submitting = false;
         this.submitted = false;
-        this.loadingService.setLoading(false);
+        alert("Mise à jour des cours effetuée avec succès")
+        //this.loadingService.setLoading(false);
       })
     )
     .subscribe(value => {

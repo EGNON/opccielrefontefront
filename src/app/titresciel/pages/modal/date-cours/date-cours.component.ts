@@ -72,9 +72,13 @@ export class DateCoursComponent implements OnInit, OnDestroy{
       ajax: (dataTablesParameters: any, callback: any) => {
         const params = {
           datatableParameters: dataTablesParameters,
-          beginEndDateParameter: dates
+          dateDebut:new Date(this.dateDebut),
+          dateFin:new Date(this.dateFin),
+          codePlace:this.place.codePlace.trim()
+          //beginEndDateParameter: dates
         };
-        const sb = this.coursTitreService.afficherTous(this.place.codePlace, params).pipe(
+        console.log(params)
+        const sb = this.coursTitreService.afficherPlaceCoursTitre(params).pipe(
           map(resp => resp.data),
           tap(value => console.log("CoursTitres === ", value))
         ).subscribe(data => {

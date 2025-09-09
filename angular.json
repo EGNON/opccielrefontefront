@@ -43,9 +43,14 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "sourceMap": {
+              "scripts": false,
+              "styles": true,
+              "vendor": false
+            },
             "inlineStyleLanguage": "scss",
             "assets": [
-              { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" },
+              { "glob": "**/*", "input": "node_modules/tinymce", "output": "tinymce/" },
               "src/favicon.ico",
               "src/assets"
             ],

@@ -26,7 +26,7 @@
       </tr>
       <tr class="d-flex justify-content-between">
         <th class="fw-bold fs-7 text-uppercase">Date effective promesse</th>
-        <td>{{ compteRendu$.dateEffectivePromesse |date:'dd/MM/yyyy'}}</td>
+        <td>{{ compteRendu$?.dateEffectivePromesse |date:'dd/MM/yyyy'}}</td>
       </tr>
       <tr class="d-flex justify-content-between">
         <th class="fw-bold fs-7 text-uppercase">Date Prochain rendez-vous</th>
@@ -58,11 +58,11 @@
       </tr>
       <tr class="d-flex justify-content-between">
         <th class="fw-bold fs-7 text-uppercase">Produit à souscrire</th>
-        <td>{{ compteRendu$.opcvmASouscrire.denominationOpcvm }}</td>
+        <td>{{ compteRendu$.opcvmASouscrire?.denominationOpcvm }}</td>
       </tr>
       <tr class="d-flex justify-content-between">
         <th class="fw-bold fs-7 text-uppercase">Produit souscrit</th>
-        <td>{{ compteRendu$.opcvmSouscrit.denominationOpcvm}}</td>
+        <td>{{ compteRendu$.opcvmSouscrit?.denominationOpcvm}}</td>
       </tr>
       <tr class="d-flex justify-content-between">
         <th class="fw-bold fs-7 text-uppercase">Rendez-vous</th>

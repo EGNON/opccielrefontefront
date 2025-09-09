@@ -482,6 +482,7 @@ export class OrdreCreateComponent implements OnInit, OnDestroy{
     console.log(this.symbolTitre)
     this.titreService.getById(item.idTitre).subscribe(
       (data)=>{
+        console.log(data.data)
         this.titreSelonId=data.data
         this.entityForm.patchValue({designation:this.titreSelonId.designationTitre})
         this.entityForm.patchValue({cotation:this.titreSelonId.libelleCotation})
