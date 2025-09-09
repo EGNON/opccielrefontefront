@@ -36,7 +36,9 @@ import {Qualite} from "../../../../crm/models/qualite.model";
 })
 export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDestroy, AfterViewInit{
   public paysSettings = {};
+  public personnePhysiqueSettings = {};
   pays: any;
+  personnePhysique2: any;
   qualite: string;
   id?: number;
   isLoading = false;
@@ -69,6 +71,7 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
   paysSelectionne: Pays[] = [];
   fileInfos?: Observable<any>;
   estJuge:any;
+  idPersonne:any;
   etatConversion: boolean = false;
   formData: FormData = new FormData();
   files: File[] = [];
@@ -108,16 +111,17 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
         sexe: [null, Validators.required],
         dateNaissance: [null, Validators.required],
         civilite: [null, Validators.required],
-        lieuNaissance: [null, Validators.required],
+        lieuNaissance: [null],
         paysResidence: [null],
         paysNationalite: [null, Validators.required],
         typePiece: [null],
         dateExpirationPiece: [null],
         documents: this.fb.array([]),
         personnePhysiquePaysDtos:[null],
+        personnePhysique2:[null],
         personnePhysiquePaysDtos2:[null],
         estJuge:[false],
-        estExpose:[false]
+        estExpose:[true]
       }
     );
 
@@ -158,12 +162,30 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
 
     this.getTypeDocumentsAll();
     // this.getPersonnelsAll();
-    //this.getPersonnePhysique()
+    this.getPersonnePhysique()
     this.personneSelect=document.getElementById("ComboPersonneExistanteJuge")
     this.paysSettings = {
       singleSelection: false,
       idField: 'idPays',
       textField: 'libelleFr',
+      enableCheckAll: true,
+      selectAllText: 'Sélectionnez tous',
+      unSelectAllText: 'Ne pas tout sélectionné',
+      allowSearchFilter: true,
+      limitSelection: -1,
+      clearSearchFilter: true,
+      maxHeight: 197,
+      itemsShowLimit: 3,
+      searchPlaceholderText: 'Rechercher un élément',
+      noDataAvailablePlaceholderText: 'Aucune donnée à afficher',
+      closeDropDownOnSelection: false,
+      showSelectedItemsAtTop: false,
+      defaultOpen: false,
+    };
+    this.personnePhysiqueSettings = {
+      singleSelection: true,
+      idField: 'idPersonne',
+      textField: 'denomination',
       enableCheckAll: true,
       selectAllText: 'Sélectionnez tous',
       unSelectAllText: 'Ne pas tout sélectionné',
@@ -186,7 +208,7 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
   }
   nouvellePersonneChange(){
     // @ts-ignore
-    this.nouvellePersonne = document.getElementById("nouvellePersonnePhysiqueJuge").checked;
+    this.nouvellePersonne = document.getElementById("nouvellePersonnePhysiqueExpose").checked;
     if(this.nouvellePersonne)
     {
       this.personneExiste=false;
@@ -196,7 +218,7 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
   personneExistante(){
     // console.log("ok")
     // @ts-ignore
-    this.personneExiste = document.getElementById("personnePhysiqueExistanteJuge").checked;
+    this.personneExiste = document.getElementById("personnePhysiqueExposeExistante").checked;
     console.log(this.personneExiste)
     if(this.personneExiste)
     {
@@ -408,8 +430,9 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
     this.entityForm.patchValue({numeroPiece: entity.numeroPiece});
     this.entityForm.patchValue({lieuNaissance: entity.lieuNaissance});
     this.entityForm.patchValue({estJuge: entity.estJuge});
-    this.entityForm.patchValue({estExpose: entity.estExpose});
+    this.entityForm.patchValue({estExpose:true})// entity.estExpose});
 
+    console.log("doc=",entity)
     //Chargement des documents existants
     if(entity.documents.length==0)
     {// if (entity.documents != null && entity.documents.length > 0) {
@@ -470,10 +493,11 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
   //   this.personnels$ = this.personnelService.items$;
   // }
   getPersonnePhysique(){
-    this.personnephysiqueService.afficherPersonneSelonQualite("actionnaire").subscribe(
+    this.personnephysiqueService.afficherPersonneSelonQualite("actionnaires").subscribe(
       (data)=>{
         this.personnePhysique$=data;
-        console.log(this.personnePhysique$)
+        this.personnePhysique2=data
+        console.log("personne=",this.personnePhysique$)
       }
     )
   }
@@ -481,12 +505,49 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
   {
     this.typeDocuments$ = this.typeDocService.afficherTous();
   }
-
-
-  public onFilterChange(item: any) {
+public onFilterChange(item: any) {
     // console.log('onFilterChange', item);
   }
   public onDropDownClose(item: any) {
+    // console.log('onDropDownClose', item);
+  }
+
+  public onItemSelect2(item: any) {
+    // console.log('onItemSelect', item);
+    let idPersonne=item.idPersonne;
+    this.idPersonne=item.idPersonne
+    this.personnephysiqueService.afficherPersonnePhysiqueSelonId(idPersonne).subscribe(
+      (data)=>{
+        this.personnePhysique=data;
+        //if(!this.nouvellePersonne)
+          this.loadFormValues(data)
+          //this.nouvellePersonne=true
+          ;});
+  }
+  public onDeSelect2(item: any) {
+    // console.log('onDeSelect', item);
+    let idPersonne=item.idPersonne;
+    this.personnephysiqueService.afficherPersonnePhysiqueSelonId(idPersonne).subscribe(
+      (data)=>{
+        this.personnePhysique=data;
+        //if(!this.nouvellePersonne)
+          this.loadFormValuesNew(data)
+        
+          ;});
+    
+  }
+
+  public onSelectAll2(items: any) {
+    // console.log('onSelectAll', items);
+  }
+  public onDeSelectAll2(items: any) {
+    // console.log('onDeSelectAll', items);
+  }
+
+  public onFilterChange2(item: any) {
+    // console.log('onFilterChange', item);
+  }
+  public onDropDownClose2(item: any) {
     // console.log('onDropDownClose', item);
   }
 
@@ -542,6 +603,7 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
           finalize(() => {
             this.isLoading = false;
             this.submitted = false;
+            this.submitting = false;
             //Redirigez vers la liste
             this.router.navigate([`/lab/standard/parametre/personne/physique/sanctionnee`]);
           })
@@ -569,13 +631,16 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
     else
       this.estJuge=true;
     */
+   if(this.nouvellePersonne)
+    this.idPersonne=null;
     let personne=null;
-
+  
     if(this.entityForm.value.personnePhysiquePaysDtos!=null)
     {
       personne={
         ...this.entityForm.value,
         dateNaissance: dateNaiss,
+        idPersonne:this.idPersonne,
         /*nbrEnfant:0,
         nbrPersonneACharge:0,
         autresRevenus:0,
@@ -594,6 +659,7 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
         autresRevenus:0,
         surfaceTotale:0,
         salaire:0,*/
+        idPersonne:this.idPersonne,
         dateNaissance: dateNaiss
       }
 

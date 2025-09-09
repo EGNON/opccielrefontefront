@@ -1,0 +1,175 @@
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="filterForm" enctype="multipart/form-data" class="form mb-5">
+          <div class="row mb-5">
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Début</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       [maxDate]="dateDebMax" #dateDebut="ngbDatepicker" aria-label="Date Début" formControlName="dateDebut"/>
+                <!--end::Input-->
+                <span (click)="dateDebut.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                  <i class="ki-duotone ki-calendar fs-4">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+              </span>
+              </div>
+            </div>
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Fin</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker [minDate]="dateFinMin"
+                       [maxDate]="dateFinMax" #dateFin="ngbDatepicker" aria-label="Date Début" formControlName="dateFin"/>
+                <!--end::Input-->
+                <span (click)="dateFin.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                    <i class="ki-duotone ki-calendar fs-4">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                    </i>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Place</label>
+              <!--end::Label-->
+              <!--begin::Select-->
+              <select class="form-select form-select-sm mb-2" formControlName="place">
+                <option disabled selected [ngValue]="null">Sélectionnez une place...</option>
+                <!--<option *ngIf="entity?.place" disabled [defaultSelected]="true" [ngValue]="entity?.place">
+                  {{ entity?.place?.libellePlace }}
+                </option>-->
+                <option *ngFor="let item of places" [ngValue]="item">
+                  {{ item.libellePlace }}
+                </option>
+              </select>
+              <!--end::Select-->
+            </div>
+            <div class="col-md-2 fv-row">
+              <!--<div style="display: flex; justify-content: space-between;">
+                &lt;!&ndash;begin::Label&ndash;&gt;
+                <label class="required fs-5 fw-semibold mb-2">Date</label>
+                &lt;!&ndash;end::Label&ndash;&gt;
+                <div style="display: flex; align-items: start; justify-content: center;">
+                  <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callDateModal(null)"
+                          style="display: flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                </div>
+              </div>-->
+              <label class="fs-5 fw-semibold mb-2">Date</label>
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       [minDate]="dateCoursMin" [maxDate]="dateCoursMax" #date="ngbDatepicker"
+                       aria-label="Date" formControlName="date" (click)="date.toggle()"/>
+                <!--end::Input-->
+                <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1" (click)="callDateModal(null)"
+                        style="display: flex; align-items: center; justify-content: center;">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <!--<button class="btn btn-sm btn-outline-secondary bi bi-calendar3" (click)="date.toggle()" type="button"></button>-->
+                <!--<span (click)="date.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                    <i class="ki-duotone ki-calendar fs-4">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                    </i>
+                </span>-->
+                 
+              </div>
+              
+            </div>
+            <div class="col-md fv-row d-flex align-items-end">
+                    <button class="btn btn-sm btn-info mb-2" (click)="chargerCoursTitre()">Actualiser</button>
+             </div>
+          </div>
+          <hr>
+          <div class="row mb-5">
+            <div class="card">
+              <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                  <!--begin::Search-->
+                  <div class="d-flex align-items-center position-relative my-1">
+                    <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                    <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12">
+                  </div>
+                  <!--end::Search-->
+                </div>
+                <!--end::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-sm btn-success me-3" (click)="verificationCours()">
+                        <ng-container *ngIf="downloaded">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                      </ng-container>
+                      <ng-container *ngIf="!downloaded">
+                        <span class="indicator-label">Aperçu</span>
+                      </ng-container>
+                    </button>
+                    <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary"
+                            [disabled]="!confirmer" (click)="submitting ? null : validerVerificationCours()">
+                      <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                      </ng-container>
+                      <ng-container *ngIf="!submitting">
+                        <span class="indicator-label">confirmez la vérifiation niveau 1</span>
+                      </ng-container>
+                    </button>
+                  </div>
+                </div>
+                <!--end::Card toolbar-->
+              </div>
+              <div class="card-body pt-0">
+                <div class="table-responsive angular-bootstrap-table" *ngIf="isLoading">
+                  <table datatable [dtOptions]="datatableConfig"  class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                    <thead>
+                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                      <ng-container *ngFor="let column of datatableConfig.columns; let i=index">
+                        <th>{{ column.title }}</th>
+                      </ng-container>
+                    </tr>
+                    </thead>
+                    <tbody class="fw-semibold text-gray-600">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+          
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
