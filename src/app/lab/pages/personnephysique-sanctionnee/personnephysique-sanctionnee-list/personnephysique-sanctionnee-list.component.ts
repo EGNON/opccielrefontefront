@@ -54,7 +54,7 @@ export class PersonnephysiqueSanctionneeListComponent implements OnInit, OnDestr
     this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
-        const sb = this.personnePhysiqueService.getPersonneSanctionnee(dataTablesParameters)
+        const sb = this.personnePhysiqueService.getPersonneExpose(dataTablesParameters)
           .subscribe(resp => {
             callback(resp);
             console.log("Personne=",resp)
@@ -169,8 +169,8 @@ export class PersonnephysiqueSanctionneeListComponent implements OnInit, OnDestr
         actions.push(parentActionStart);
         actions.push(show);
         actions.push(edit);
-        actions.push(separator);
-        actions.push(delete1);
+        /* actions.push(separator);
+        actions.push(delete1); */
         actions.push(parentActionEnd);
 
         return actions.join('');

@@ -35,7 +35,7 @@
                       <span class="indicator-label">Importer les dépôts</span>
                     </button>
                     <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary"
-                            [disabled]="true" (click)="submitting ? null : save()">
+                             (click)="submitting ? null : save()">
                       <ng-container *ngIf="submitting">
                     <span class="indicator-progress" [style.display]="'block'">
                       Patientez svp...
@@ -64,7 +64,7 @@
                 <div class="tab-content pt-5" id="tab-content">
                   <div class="tab-pane active" id="simple-tabpanel-0" role="tabpanel" [attr.aria-labelledby]="'simple-tab-0'">
                     <div class="table-responsive angular-bootstrap-table" *ngIf="isLoading">
-                      <!--<table datatable [dtOptions]="datatableConfigPh" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                      <table datatable [dtOptions]="datatableConfigPh" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
                         <thead>
                         <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                           <ng-container *ngFor="let column of datatableConfigPh.columns; let i=index">
@@ -74,12 +74,12 @@
                         </thead>
                         <tbody class="fw-semibold text-gray-600">
                         </tbody>
-                      </table>-->
+                      </table>
                     </div>
                   </div>
                   <div class="tab-pane" id="simple-tabpanel-1" role="tabpanel" [attr.aria-labelledby]="'simple-tab-1'">
                     <div class="table-responsive angular-bootstrap-table" *ngIf="isLoading">
-                      <!--<table datatable [dtOptions]="datatableConfigPm" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                      <table datatable [dtOptions]="datatableConfigPm" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
                         <thead>
                         <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                           <ng-container *ngFor="let column of datatableConfigPm.columns; let i=index">
@@ -89,7 +89,7 @@
                         </thead>
                         <tbody class="fw-semibold text-gray-600">
                         </tbody>
-                      </table>-->
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -106,7 +106,7 @@
             <!--end::Button-->
             <!--begin::Submit-->
             <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary"
-                    [disabled]="true" (click)="submitting ? null : save()">
+                     (click)="submitting ? null : save()">
               <ng-container *ngIf="submitting">
                     <span class="indicator-progress" [style.display]="'block'">
                       Patientez svp...

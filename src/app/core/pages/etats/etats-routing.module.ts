@@ -11,6 +11,10 @@ import {EtatsuiviclientComponent} from "./etatsuiviclient/etatsuiviclient.compon
 import { Performanceportefeuilleactionnaire } from './performanceportefeuilleactionnaire/performanceportefeuilleactionnaire';
 import { Etatfraisfonctionnement } from './etatfraisfonctionnement/etatfraisfonctionnement';
 import { Evolutionvl } from './evolutionvl/evolutionvl';
+import { Pointsouscriptionrachat } from './pointsouscriptionrachat/pointsouscriptionrachat';
+import { Pointrachat } from './pointrachat/pointrachat';
+import { Pointrepartitionportefeuille } from './pointrepartitionportefeuille/pointrepartitionportefeuille';
+import { Evolutionactifnet } from './evolutionactifnet/evolutionactifnet';
 
 const routes: Routes = [
   {
@@ -26,6 +30,10 @@ const routes: Routes = [
       { path: 'etatfraisfonctionnement', component: Etatfraisfonctionnement, },
       { path: 'performanceportefeuilleactionnaire', component: Performanceportefeuilleactionnaire, },
       { path: 'evolutionvl', component: Evolutionvl, },
+      { path: 'pointsouscription', component: Pointsouscriptionrachat, },
+      { path: 'pointrachat', component: Pointrachat, },
+      { path: 'pointrepartitionportefeuille', component: Pointrepartitionportefeuille, },
+      { path: 'evolutionactifnet', component: Evolutionactifnet, },
       // { path: 'show/:id', component: SecteurShowComponent, },
       { path: 'formejuridique', redirectTo: '', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' },

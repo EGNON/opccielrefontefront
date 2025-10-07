@@ -48,4 +48,12 @@ export class DepotrachatService extends ResourceService<Depotrachat> {
     // console.log("Resource = ", resource);
     return this.http.post<ResponseModel<Depotrachat>>(`${this.API_URL}/datatable/list/${idOpcvm}/${idSeance}/${codeNatureOperation}`, resource)
   }
+  import_DepotRachat_PH(resource: any) {
+    // console.log("Resource = ", resource);
+    return this.http.post<any>(`${this.API_URL}/importdepotph`, resource)
+  }
+  import_DepotRachat_PM(resource: any) {
+    // console.log("Resource = ", resource);
+    return this.http.post<any>(`${this.API_URL}/importdepotpm`, resource)
+  }
 }

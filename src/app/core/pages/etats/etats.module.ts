@@ -18,6 +18,10 @@ import { EtatsuiviclientComponent } from './etatsuiviclient/etatsuiviclient.comp
 import { Performanceportefeuilleactionnaire } from './performanceportefeuilleactionnaire/performanceportefeuilleactionnaire';
 import { Etatfraisfonctionnement } from './etatfraisfonctionnement/etatfraisfonctionnement';
 import { Evolutionvl } from './evolutionvl/evolutionvl';
+import { Pointsouscriptionrachat } from './pointsouscriptionrachat/pointsouscriptionrachat';
+import { Pointrachat } from './pointrachat/pointrachat';
+import { Pointrepartitionportefeuille } from './pointrepartitionportefeuille/pointrepartitionportefeuille';
+import { Evolutionactifnet } from './evolutionactifnet/evolutionactifnet';
 
 
 
@@ -33,7 +37,11 @@ import { Evolutionvl } from './evolutionvl/evolutionvl';
     EtatsuiviclientComponent,
     Performanceportefeuilleactionnaire,
     Etatfraisfonctionnement,
-    Evolutionvl
+    Evolutionvl,
+    Pointsouscriptionrachat,
+    Pointrachat,
+    Pointrepartitionportefeuille,
+    Evolutionactifnet
   ],
   imports: [
     CommonModule,

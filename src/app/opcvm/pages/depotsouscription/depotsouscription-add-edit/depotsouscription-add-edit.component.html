@@ -84,7 +84,7 @@
                 <option *ngIf="entity?.actionnaire" disabled [defaultSelected]="true" [ngValue]="entity?.actionnaire">
                   {{ entity?.actionnaire?.denomination }}
                 </option>
-                <option *ngFor="let item of actionnaires$|async" [ngValue]="item">
+                <option *ngFor="let item of personneActionnaire$" [ngValue]="item">
                   {{ item.denomination }}
                 </option>
               </select>

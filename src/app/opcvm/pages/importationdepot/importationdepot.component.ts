@@ -8,6 +8,8 @@ import {DataTableDirective} from "angular-datatables";
 import {UniqueNumCpteDepositValidators} from "../../../validators/unique-num-cpte-deposit-validators";
 import {PersonneService} from "../../../crm/services/personne/personne.service";
 import {LocalService} from "../../../services/local.service";
+import { LibrairiesService } from '../../../services/librairies.service';
+import { DepotrachatService } from '../../services/depotrachat.service';
 
 @Component({
     selector: 'app-importationdepot',
@@ -19,10 +21,10 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
   submitting = false;
   submitted = false;
   filterForm: FormGroup;
-
+  opcvm2:any;
   isLoading: boolean = false;
   subscriptions: Subscription[] = [];
-
+  distributeurs: any[] = [];
   //DataTable Config
   datatableConfigInit: any = {};
   datatableConfigPh: any = {};
@@ -36,13 +38,16 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
   constructor(
     private localStore: LocalService,
     private loadingService: LoaderService,
+    private librairiesService: LibrairiesService,
     private pers: PersonneService,
+    private depotRachatService: DepotrachatService,
     private fb: FormBuilder,
     private uniqueNumCpteDepositValidators: UniqueNumCpteDepositValidators,) {
   }
 
   ngOnInit(): void {
     const opcvm = this.localStore.getData("currentOpcvm");
+    this.opcvm2=opcvm;
     console.log("Opcvm === ", opcvm);
     this.filterForm = this.fb.group({
       fichier: new FormControl(null),
@@ -260,7 +265,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
 
   refreshTable() {
     if(this.changeTableEvent) {
-      debugger;
+      //debugger;
       this.changeTableEvent.subscribe(data => {
         this.datatableElements.forEach((dtElement: DataTableDirective) => {
           if(dtElement.dtInstance)
@@ -323,11 +328,16 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
                     if(!distributeur)
                       return '';
 
-                    return `<select class="form-select form-select-sm mb-2" formControlName="distributeur">
+                      return `
+                          <select class="form-select form-select-sm mb-2" formControlName="distributeur">
+                            <option value="${distributeur.idPersonne}" selected>${distributeur.denomination}</option>
+                          </select>
+                        `;
+                    /* return `<select class="form-select form-select-sm mb-2" formControlName="distributeur">
                               <option disabled [defaultSelected]="true" [ngValue]="${distributeur}">
                                 ${ distributeur.denomination }
                               </option>
-                            </select>`;
+                            </select>`; */
                   },
                   orderData: [1],
                   orderSequence: ['asc', 'desc'],
@@ -379,6 +389,8 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
                 const phClone: any = data;
                 phForm.patchValue(phClone);
                 self.phList.push(phForm);
+            
+
                 $('td', row).find('input').on('change', (e) => {
                   self.filterForm.patchValue({[e.target.name]: +e.target.value!});
                 });
@@ -463,13 +475,15 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
                 },
               ],
               createdRow: function (row, data, dataIndex, cells) {
-                /*const coursTitreForm = self.createCoursTitreForm();
-                const coursClone: any = data;
-                coursTitreForm.patchValue(coursClone);
-                self.cours.push(coursTitreForm);
+                const pmForm = self.createPmForm();
+                const pmClone: any = data;
+                pmForm.patchValue(pmClone);
+                self.pmList.push(pmForm);
+            
+
                 $('td', row).find('input').on('change', (e) => {
                   self.filterForm.patchValue({[e.target.name]: +e.target.value!});
-                });*/
+                });
               },
             };
             // this.datatableElement.dtInstance.then(dtInstance => {
@@ -487,6 +501,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
   }
 
   loadPhExcelData = (phList: any[]) => {
+    this.localStore.getData("currentOpcvm").idOpcvm
     return phList.map((i) =>
       of(i).pipe(
         // delay(500),
@@ -500,6 +515,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
               mobile2: null,
               fixe1: j[14],
               fixe2: null,
+              opcvm: this.opcvm2,
               emailPerso: j[16],
               emailPro: null,
               typePiece: j[17],
@@ -543,6 +559,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
                   mobile1: j[10],
                   mobile2: null,
                   fixe1: j[9],
+                  opcvm: this.opcvm2,
                   fixe2: null,
                   ifu: null,
                   bp: null,
@@ -556,8 +573,8 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
                   paysResidence: null,
                   //Champs PersonneMorale
                   sigle: null,
-                  raisonSociale: null,
-                  montantSouscrit: j[6]
+                  raisonSociale: j[3],
+                  montantSouscrit: j[5]
                 }))
             )
           }),
@@ -567,6 +584,33 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
   }
 
   save() {
-    return null;
+    
+    console.log("phlist==",this.filterForm.value.phList)
+    console.log("pmlist==",this.filterForm.value.pmList)
+    let message="";
+    //return null;
+    this.submitting=true
+    this.depotRachatService.import_DepotRachat_PH(this.filterForm.value.phList).subscribe
+    (data=>{
+      message=data.data
+      if(message==="Enregistrement effectué avec succès"){
+           this.depotRachatService.import_DepotRachat_PM(this.filterForm.value.pmList).subscribe
+          (data=>{
+            if(data.data===""|| data.data===undefined || data.data===null){
+              alert(message)
+            }
+            else
+              alert(data.data)
+            this.submitting=false
+            window.location.reload();
+          }) 
+      }
+      else
+      {
+        this.submitting=false
+        alert(message)
+      }
+     
+    })
   }
 }

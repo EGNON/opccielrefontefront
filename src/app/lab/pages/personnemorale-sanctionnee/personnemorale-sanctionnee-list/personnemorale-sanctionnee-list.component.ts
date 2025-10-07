@@ -54,7 +54,7 @@ export class PersonnemoraleSanctionneeListComponent implements OnInit, OnDestroy
     this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
-        const sb = this.personneMoraleService.getPersonneSanctionnee(dataTablesParameters)
+        const sb = this.personneMoraleService.getPersonneExpose(dataTablesParameters)
           .subscribe(resp => {
             callback(resp);
             console.log("Personne=",resp)
@@ -137,8 +137,8 @@ export class PersonnemoraleSanctionneeListComponent implements OnInit, OnDestroy
         actions.push(parentActionStart);
         //actions.push(show);
         actions.push(edit);
-        actions.push(separator);
-        actions.push(delete1);
+       /*  actions.push(separator);
+        actions.push(delete1); */
         actions.push(parentActionEnd);
 
         return actions.join('');

@@ -15,20 +15,37 @@
             <!--begin::Col-->
             <!--            <div class="col-md-12 fv-row">-->
             <!--begin::Label-->
-            <div class="d-flex justify-content-sm-start">
-              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
-                <input type="checkbox" checked="checked" formControlName="nouvellePersonne" [value]="false"
+            <div class="d-flex justify-content-sm-start" [hidden]="true">
+              <div [hidden]="true" class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="checkbox" checked="checked"  [value]="false"
                        class="form-check-input ng-untouched ng-pristine ng-valid"
-                       id="nouvellePersonneMoraleJuge" formControlName="estJuge">
+                       id="nouvellePersonneMoraleExpose2" formControlName="estJuge">
                 <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est jugée par des mesures de gel des avoirs</label>
               </div>
-              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
-                <input type="checkbox" formControlName="personneMoraleJugeExistante" [value]="false"
+              <div [hidden]="true" class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="checkbox"  [value]="true"
                        class="form-check-input ng-untouched ng-pristine ng-valid"
-                       id="personneMoraleJugeExistante" formControlName="estExpose" >
+                       id="personneMoraleExposeExistante2" formControlName="estExpose" >
                 <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est politiquement exposé</label>
               </div>
             </div>
+            <div class="row mb-5" *ngIf="!id">
+               <div class="d-flex justify-content-sm-start">
+                  <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                    <input type="radio" checked="checked" [value]="true"
+                          class="form-check-input ng-untouched ng-pristine ng-valid"
+                          id="nouvellePersonneMoraleExpose" name="etat" (change)="nouvellePersonneChange()">
+                    <label class="form-check-label text-gray-700 fw-bold text-nowrap">Nouvelle personne</label>
+                  </div>
+                  <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                    <input type="radio" [value]="false"
+                          class="form-check-input ng-untouched ng-pristine ng-valid"
+                          id="personneMoraleExposeExistante" name="etat" (change)="personneExistante()">
+                    <label class="form-check-label text-gray-700 fw-bold text-nowrap">Personne existante</label>
+                  </div>
+                </div>
+            </div>
+           
           </div>
 
           <div *ngIf="personneExiste">
@@ -36,14 +53,19 @@
               <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Personne(s)</label>
               <!--end::Label-->
               <!--begin::Input-->
-              <select
-                class="form-select form-select-sm form-select-solid"
-                id="ComboPersonneMoraleExistanteJuge" (change)="retournerPersonne()">
-                <option selected>Sélectonnez une personne</option>
-                <option *ngFor="let personne of personneMorale$"
-                        value="{{personne.idPersonne}}">{{personne.denomination}}</option>
-                <!--                <option>Tous</option>-->
-              </select>
+              <ng-multiselect-dropdown
+                [settings]="personneMoraleSettings"
+                [placeholder]="'Sélectionnez un actionnaire'"
+                formControlName="personneMorale2"
+                [data]="personneMorale2"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange2($event)"
+                (onDropDownClose)="onDropDownClose2($event)"
+                (onSelect)="onItemSelect2($event)"
+                (onDeSelect)="onDeSelect2($event)"
+                (onSelectAll)="onSelectAll2($event)"
+                (onDeSelectAll)="onDeSelectAll2($event)">
+              </ng-multiselect-dropdown>
             </div>
           </div>
           <div *ngIf="nouvellePersonne">
@@ -120,7 +142,7 @@
           <!--begin::Action buttons-->
           <div class="d-flex justify-content-end">
             <!--begin::Button-->
-            <a type="reset" routerLink="/lab/standard/parametre/personne/morale/sanctionnee" class="btn btn-sm btn-light me-3">
+            <a type="reset" routerLink="/lab/standard/parametre/personne/morale/expose" class="btn btn-sm btn-light me-3">
               Annuler
             </a>
             <!--end::Button-->
@@ -128,11 +150,15 @@
             <button type="submit" class="btn btn-sm btn-primary"
                     (click)="onSaveEntity()">
               <!--begin::Indicator label-->
-              <span class="indicator-label">Enregistrer</span>
-              <!--end::Indicator label-->
-              <!--begin::Indicator progress-->
-              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
-															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <ng-container *ngIf="submitting">
+                <span class="indicator-progress" [style.display]="'block'">
+                  Patientez svp...
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+              </ng-container>
+              <ng-container *ngIf="!submitting">
+                <span class="indicator-label">Enregistrer</span>
+              </ng-container>
               <!--end::Indicator progress-->
             </button>
             <!--end::Submit-->

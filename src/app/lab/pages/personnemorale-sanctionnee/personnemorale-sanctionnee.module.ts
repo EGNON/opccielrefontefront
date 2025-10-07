@@ -10,6 +10,7 @@ import {EntityCrudModule} from "../../../core/modules/entity-crud/entity-crud.mo
 import {SharedModule} from "../../../template/_metronic/shared/shared.module";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 
 
@@ -28,7 +29,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     SharedModule,
     SweetAlert2Module,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    NgMultiSelectDropDownModule
+]
 })
 export class PersonnemoraleSanctionneeModule { }

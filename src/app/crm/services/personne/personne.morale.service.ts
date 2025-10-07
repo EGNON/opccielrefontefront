@@ -113,12 +113,20 @@ export class PersonneMoraleService extends ResourceService<PersonneMorale> imple
     const url = `${this.API_URL}/datatable-${keyword}/list`;
     return this.http.post<DataTablesResponse<any>>(url, dataTablesParameters);
   }
-  getPersonneSanctionnee(dataTablesParameters: any): Observable<DataTablesResponse<any>> {
-    const url = `${this.API_URL}/datatable/moralesanctionnee`;
+  getPersonneExpose(dataTablesParameters: any): Observable<DataTablesResponse<any>> {
+    const url = `${this.API_URL}/datatable/moraleexpose`;
+    return this.http.post<DataTablesResponse<any>>(url, dataTablesParameters);
+  }
+  getPersonneJuge(dataTablesParameters: any): Observable<DataTablesResponse<any>> {
+    const url = `${this.API_URL}/datatable/moralejuge`;
     return this.http.post<DataTablesResponse<any>>(url, dataTablesParameters);
   }
   afficherPersonneSelonQualite = (keyword: any) => {
     const url = `${this.API_URL}/qualite/${keyword}`;
+    return this.http.get<PersonneMorale[]>(url);
+  }
+  afficherPersonneSelonQualiteLab = (keyword: any) => {
+    const url = `${this.API_URL}/qualitelab/${keyword}`;
     return this.http.get<PersonneMorale[]>(url);
   }
   afficherPersonneSelonQualiteEtat = (keyword: any) => {

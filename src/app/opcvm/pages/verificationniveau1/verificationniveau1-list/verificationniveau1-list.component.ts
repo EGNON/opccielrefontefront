@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbDate, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Config } from 'datatables.net';
-import { Subscription, switchMap } from 'rxjs';
+import { finalize, Subscription, switchMap } from 'rxjs';
 import { SweetAlertOptions } from 'sweetalert2';
 import { AuthService } from '../../../../core/modules/auth';
 import { DepotrachatService } from '../../../services/depotrachat.service';
@@ -22,6 +22,7 @@ export class Verificationniveau1ListComponent implements OnInit, OnDestroy {
 private subscriptions: Subscription[] = [];
   idSeance:number;
   verifier:boolean;
+  valider:boolean;
   verifier_Bouton:boolean;
   id:any[];
   datatableConfig: Config = {};
@@ -150,14 +151,20 @@ private idInAction: number;
 }
   verifiIntentionRachat()
   {
+    this.verifier=true
     this.entityService.verifIntentionRachatN1N2(
-      this.localStore.getData("currentOpcvm").idOpcvm,false,false).subscribe(
+      this.localStore.getData("currentOpcvm").idOpcvm,false,false).pipe(
+        finalize(()=>{
+          this.verifier=false
+        })
+      ).subscribe(
       (data)=>{
         // console.log(data)
       }
     )
   }
   validerRachat(){
+    this.valider=true
     const entity={
       idOpcvm:this.localStore.getData("currentOpcvm").idOpcvm,
       codeNatureOperation:"INT_RACH",
@@ -168,6 +175,8 @@ private idInAction: number;
           .subscribe(
             {
               next: (value) => {
+                this.valider=false
+                alert("Confirmation effectuée avec succès")
                 let currentUrl = this.router.url;
                 this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
                   this.router.navigate([currentUrl]);

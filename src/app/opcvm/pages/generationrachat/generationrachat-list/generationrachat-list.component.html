@@ -156,14 +156,32 @@
     </table>
   <div class="d-flex justify-content-end">
     <button  style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
-            (click)="afficherPrecalcul()">Précalculer
+            (click)="afficherPrecalcul()">
+             <ng-container *ngIf="precalcul">
+                <span class="indicator-progress" [style.display]="'block'">
+                  Patientez svp...
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+              </ng-container>
+              <ng-container *ngIf="!precalcul">
+                <span class="indicator-label">Précalculer</span>
+              </ng-container>
     </button>
     <button  style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
             >Exporter
     </button>
     <button type="submit" style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
             [disabled]="entityForm.invalid"
-    (click)="enregistrer()">Enregistrer
+    (click)="enregistrer()">
+    <ng-container *ngIf="valider">
+      <span class="indicator-progress" [style.display]="'block'">
+        Patientez svp...
+        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+      </span>
+      </ng-container>
+      <ng-container *ngIf="!valider">
+        <span class="indicator-label">Enregistrer</span>
+      </ng-container>
     </button>
     <!--end::Table-->
   </div>

@@ -14,6 +14,7 @@ import {GelDegelService} from "../../../services/geldegel.service";
 import * as XLSX from "xlsx";
 import {Personne} from "../../../../crm/models/personne/personne.model";
 import {Config} from "datatables.net";
+import { Actif } from '../actif/actif';
 
 @Component({
     selector: 'app-geldegel-list',
@@ -68,7 +69,26 @@ export class GeldegelListComponent implements OnInit, OnDestroy, AfterViewInit{
     }
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
-
+callModal(id,bouton) {
+    const modalRef = this.modalService.open(Actif, {
+      backdrop: "static",
+      size: "xs"
+    });
+    //let dateDebut = this.filterForm.get('dateDebut').value;
+    //dateDebut = new Date(dateDebut.year, dateDebut.month - 1, dateDebut.day+1);
+    let dateFin = new Date();
+    //dateFin = new Date();
+    modalRef.componentInstance.idActionnaire = id;
+    modalRef.componentInstance.bouton = bouton;
+    //modalRef.componentInstance.dateDebut = dateDebut.toISOString();
+    modalRef.componentInstance.dateFin = dateFin.toISOString();
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry:any) => {
+      if(bouton==="Geler")
+        this.saveEntity(id);
+      else
+        this.updateEntity(id);
+    });
+  }
   afficherPaysGafi()
   {
     // @ts-ignore
@@ -261,11 +281,11 @@ export class GeldegelListComponent implements OnInit, OnDestroy, AfterViewInit{
             break;
 
           case 'geler':
-            this.saveEntity(id);
+            this.callModal(id,"Geler");
             // closestBtn.classList.addClass('d-none');
             break;
           case 'edit':
-            this.updateEntity(id);
+            this.callModal(id,"Dégeler");
             // this.router.navigate(['edit', id], {relativeTo: this.route});
             break;
 

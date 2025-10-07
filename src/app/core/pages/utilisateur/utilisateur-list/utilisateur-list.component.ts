@@ -77,7 +77,7 @@ export class UtilisateurListComponent implements  OnInit, AfterViewInit, OnDestr
       }
     }
   }
-
+ 
   ngOnInit(): void {
     this.datatableConfig = {
       serverSide: true,

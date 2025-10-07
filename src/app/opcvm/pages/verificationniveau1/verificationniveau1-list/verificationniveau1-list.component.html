@@ -140,11 +140,29 @@
   <div class="d-flex justify-content-end">
     <button [disabled]="verifier_Bouton" style="margin-top: 10px;margin-right: 5px" type="button" class="btn btn-sm btn-success"
             (click)="verifiIntentionRachat()">
-      Aperçu
+      <ng-container *ngIf="verifier">
+          <span class="indicator-progress" [style.display]="'block'">
+            Patientez svp...
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+          </span>
+      </ng-container>
+      <ng-container *ngIf="!verifier">
+        <span class="indicator-label">Aperçu</span>
+      </ng-container>
+      
     </button>
     <button [disabled]="verifier_Bouton" style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
             (click)="validerRachat()"     >
-      Confirmez la vérification niveau 1
+      <ng-container *ngIf="valider">
+          <span class="indicator-progress" [style.display]="'block'">
+            Patientez svp...
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+          </span>
+      </ng-container>
+      <ng-container *ngIf="!valider">
+        <span class="indicator-label">Confirmez la vérification niveau 1</span>
+      </ng-container>
+      
     </button>
     <!--end::Table-->
   </div>

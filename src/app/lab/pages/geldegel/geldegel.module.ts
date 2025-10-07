@@ -13,13 +13,15 @@ import { GeldegelComponent } from './geldegel.component';
 import { GeldegelAddEditComponent } from './geldegel-add-edit/geldegel-add-edit.component';
 import { GeldegelListComponent } from './geldegel-list/geldegel-list.component';
 import { GeldegelShowComponent } from './geldegel-show/geldegel-show.component';
+import { Actif } from './actif/actif';
 
 @NgModule({
   declarations: [
     GeldegelComponent,
     GeldegelAddEditComponent,
     GeldegelListComponent,
-    GeldegelShowComponent
+    GeldegelShowComponent,
+    Actif
   ],
   imports: [
     CommonModule,

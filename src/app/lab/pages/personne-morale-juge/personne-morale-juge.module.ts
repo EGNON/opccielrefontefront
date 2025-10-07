@@ -16,6 +16,7 @@ import {
   PersonneMoraleJugeAddEditComponent
 } from "./personne-morale-juge-add-edit/personne-morale-juge-add-edit.component";
 import { PersonneMoraleJugeShowComponent } from './personne-morale-juge-show/personne-morale-juge-show.component';
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 @NgModule({
   declarations: [
@@ -26,16 +27,17 @@ import { PersonneMoraleJugeShowComponent } from './personne-morale-juge-show/per
     PersonneMoraleJugeShowComponent
   ],
     imports: [
-        CommonModule,
-        WidgetsModule,
-        PersonneMoraleJugeRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        SharedModule,
-        CardsModule,
-        DataTablesModule,
-        EntityCrudModule,
-        SweetAlert2Module,
-    ]
+    CommonModule,
+    WidgetsModule,
+    PersonneMoraleJugeRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    CardsModule,
+    DataTablesModule,
+    EntityCrudModule,
+    SweetAlert2Module,
+    NgMultiSelectDropDownModule
+]
 })
 export class PersonneMoraleJugeModule { }

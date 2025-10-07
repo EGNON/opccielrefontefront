@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output, Renderer2} from '@angular/core';
-import {Subscription} from "rxjs";
+import {finalize, Subscription} from "rxjs";
 import {Operationsouscriptionrachat2} from "../../../models/operationsouscriptionrachat2.model";
 import {Natureoperation} from "../../../../core/models/natureoperation.model";
 import {Config} from "datatables.net";
@@ -41,6 +41,9 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
   natureOperation:Natureoperation;
   datatableConfig: Config = {};
   submitted = false;
+  precalcul = false;
+  valider = false;
+  verifierPrecalcul = false;
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
   operationPaiementRachat$:any;
@@ -141,6 +144,7 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
   }
   verifierPaiementRachat()
   {
+    this.verifierPrecalcul=true
     let jour="0"
     let mois="0"
     let annee="0"
@@ -182,7 +186,9 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
 
     this.operationpaiementrachatService.verifierPaiementRachat(this.localStore.getData("currentOpcvm").idOpcvm,
       this.localStore.getData("currentSeance").idSeanceOpcvm.idSeance,this.entityForm.value.denominationOpcvm,
-      dateOuv,dateFerm).subscribe(
+      dateOuv,dateFerm).pipe(finalize(()=>{
+          this.verifierPrecalcul=false
+      })).subscribe(
       (data)=>{
 
       })
@@ -248,9 +254,13 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
 
   }
   afficherPrecalculPaiementRachat(){
-    this.loadingService.setLoading(true)
+    //this.loadingService.setLoading(true)
+    this.precalcul=true
     this.entityService.precalculPaiementRachat(
-      this.localStore.getData("currentOpcvm").idOpcvm,this.entityForm.value.idSeance).subscribe(
+      this.localStore.getData("currentOpcvm").idOpcvm,this.entityForm.value.idSeance).pipe
+      (finalize(()=>{
+        this.precalcul=false
+      })).subscribe(
       (data)=>{
         this.operationPaiementRachat$=data.data
         //console.log(this.operationPaiementRachat$)
@@ -271,7 +281,7 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
     )
     //console.log(document.getElementById("table_PaiementRachat").getElementsByTagName('tr')[1].cells[0].innerHTML.trim())
 
-    this.loadingService.setLoading(false)
+    //this.loadingService.setLoading(false)
   }
   ngOnDestroy(): void {
     if (this.clickListener) {
@@ -295,7 +305,7 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
       alert("Aucune donnée dans le tableau")
       return
     }
-
+    this.valider=true
     let solde=0
     let totalMontantRachat=0
     if(this.entityForm.value.solde!==null)
@@ -308,10 +318,11 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
     {
       alert("Solde=" + solde + "\n Total Rachat=" +totalMontantRachat +
         "\n Vous ne disposez pas d'assez de liquidité pour effectuer ces paiements");
+        this.valider=false
       return;
     }
 
-    this.loadingService.setLoading(true)
+    //this.loadingService.setLoading(true)
     this.submitted=true
     let i: number = 1;
     let dateOperation: any;
@@ -356,7 +367,9 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
       this.operationPaiementRachatTab.push(this.operationPaiementRachat);
     }
     this.operationpaiementrachatService.creer(this.operationPaiementRachatTab)
-      .subscribe(
+      .pipe(finalize(()=>{
+        this.valider=false
+      })).subscribe(
         {
           next: (value) => {
             let currentUrl = this.router.url;

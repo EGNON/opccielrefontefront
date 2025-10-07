@@ -16,13 +16,13 @@
               <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
                 <input type="checkbox" checked="checked" [value]="false"
                        class="form-check-input ng-untouched ng-pristine ng-valid"
-                       id="nouvellePersonnePhysiqueJuge" formControlName="estJuge">
+                       id="nouvellePersonnePhysiqueExpose2" formControlName="estJuge">
                 <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est jugée par des mesures de gel des avoirs</label>
               </div>
               <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
-                <input type="checkbox" [value]="false"
+                <input type="checkbox" [value]="true"
                        class="form-check-input ng-untouched ng-pristine ng-valid"
-                       id="personnePhysiqueExistanteJuge" formControlName="estExpose">
+                       id="personnePhysiqueExistanteExpose2" formControlName="estExpose">
                 <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est politiquement exposée</label>
               </div>
             </div>
@@ -355,7 +355,7 @@
           <!--begin::Action buttons-->
           <div class="d-flex justify-content-end">
             <!--begin::Button-->
-            <a type="reset" routerLink="/lab/standard/parametre/personne/physique/sanctionnee" class="btn btn-sm btn-light me-3">
+            <a type="reset" routerLink="/lab/standard/parametre/personne/physique/expose" class="btn btn-sm btn-light me-3">
               Annuler
             </a>
             <!--end::Button-->

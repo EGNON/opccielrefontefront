@@ -89,7 +89,7 @@ export class CompterenduAddEditComponent implements OnInit, OnDestroy{
         opcvmSouscrit: [null],
         rdv: [null, Validators.required],
         documents: this.fb.array([]),
-        createur: [this.authService.currentUserValue],
+        idCreateur: [this.authService.currentUserValue?.idPersonne],
         estRappel: [null],
         elementRappel: [null],
       }

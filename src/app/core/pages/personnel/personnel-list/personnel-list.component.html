@@ -19,6 +19,18 @@
         <button type="button" class="btn btn-sm btn-primary" data-action="create">
           Ajouter un Personnel
         </button>
+        <button style="margin-left: 10px;" type="button" class="btn btn-sm btn-success" (click)="exporterExcel()" >
+          <ng-container *ngIf="matrice">
+            <span class="indicator-progress" [style.display]="'block'">
+              Patientez svp...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="!matrice">
+            <span class="indicator-label">Exporter la matrice des habilitations</span>
+          </ng-container>
+          
+        </button>
       </div>
       <!--end::Toolbar-->
     </div>

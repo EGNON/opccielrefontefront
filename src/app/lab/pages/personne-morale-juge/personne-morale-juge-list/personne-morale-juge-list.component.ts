@@ -54,7 +54,7 @@ export class PersonneMoraleJugeListComponent implements OnInit, OnDestroy, After
     this.datatableConfig = {
       serverSide: true,
       ajax: (dataTablesParameters: any, callback) => {
-        const sb = this.personneMoraleService.getPersonnes(dataTablesParameters,"juge")
+        const sb = this.personneMoraleService.getPersonneJuge(dataTablesParameters)
           .subscribe(resp => {
             callback(resp);
             console.log("Personne=",resp)
@@ -85,6 +85,22 @@ export class PersonneMoraleJugeListComponent implements OnInit, OnDestroy, After
           orderData: [1],
           orderSequence: ['asc', 'desc'],
           type: 'string',
+        },
+        {
+          title: 'est jugée', data: 'estJuge', render: function (data, type, row) {
+            // if(row.estGafi==false)
+            return `<div class="badge ${row.estJuge ? 'badge-danger' : 'badge-success'} fw-bold">${row.estJuge ? 'OUI' : 'NON'}</div>`;
+            // else
+            //   return 'OUI';
+          }
+        },
+        {
+          title: 'est exposé', data: 'estExpose', render: function (data, type, row) {
+            // if(row.estGafi==false)
+            return `<div class="badge ${row.estExpose ? 'badge-danger' : 'badge-success'} fw-bold">${row.estExpose ? 'OUI' : 'NON'}</div>`;
+            // else
+            //   return 'OUI';
+          }
         }
       ],
       createdRow: function (row, data, dataIndex) {
@@ -119,10 +135,10 @@ export class PersonneMoraleJugeListComponent implements OnInit, OnDestroy, After
             </div>`;
         const actions = [];
         actions.push(parentActionStart);
-        actions.push(show);
+        //actions.push(show);
         actions.push(edit);
-        actions.push(separator);
-        actions.push(delete1);
+        /* actions.push(separator);
+        actions.push(delete1); */
         actions.push(parentActionEnd);
 
         return actions.join('');
@@ -161,4 +177,5 @@ export class PersonneMoraleJugeListComponent implements OnInit, OnDestroy, After
     });
   }
 }
+
 

@@ -29,6 +29,7 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
   soldeEspece: number = 0;
 
   currentOpcvm: any;
+  personneActionnaire$: any;
   currentSeance: any;
   form: FormGroup;
   private subscriptions: Subscription[] = [];
@@ -121,7 +122,8 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
     this.subscriptions.push(paramSubscription);
 
     this.getPersonnesAll('distributeurs');
-    this.getPersonnesAll('actionnaires');
+    //this.getPersonnesAll('actionnaires');
+    this.afficherActionnaire();
 
     const sb = this.form.get('actionnaire').valueChanges.pipe(
       tap(() => this.loadingService.setLoading(true)),
@@ -198,7 +200,17 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
     const name = qualite[qualite.length-1] === "s" ? `${qualite}$` : `${qualite}s$`;
     this[name] = this.personneService.afficherPersonneSelonQualite(qualite.toUpperCase().trim());
   }
-
+  afficherActionnaire(){
+    this.personneService.afficherPersonneInOpcvmEtStatutCompte(
+      this.localStore.getData("currentOpcvm").idOpcvm
+    ).subscribe(
+      (data)=>{
+        this.personneActionnaire$=data;
+        //this.personneActionnaire=data;
+       // console.log(data)
+      }
+    )
+  }
   loadFormValues(entity: any)
   {
     this.entity = entity;

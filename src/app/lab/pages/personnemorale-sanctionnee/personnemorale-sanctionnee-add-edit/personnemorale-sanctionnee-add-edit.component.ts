@@ -34,7 +34,10 @@ import {Qualite} from "../../../../crm/models/qualite.model";
 })
 export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDestroy, AfterViewInit{
   public paysSettings = {};
+  public personneMoraleSettings = {};
+  idPersonne:any;
   pays: any;
+  personneMorale2: any;
   qualite: string;
   id?: number;
   isLoading = false;
@@ -102,8 +105,9 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
         raisonSociale: [null, Validators.required],
         sigle: [null, Validators.required],
         paysResidence: [null],
+        personneMorale2: [null],
         estJuge:[false],
-        estExpose:[false],
+        estExpose:[true],
       }
     );
 
@@ -136,11 +140,28 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
     // this.getPersonnesAll('distributeur');
     if(this.id==null)
     {
-      this.pageInfo.updateTitle("Ajout de personne morale sanctionnée");
+      this.pageInfo.updateTitle("Ajout de personne morale politiquement exposée");
     }
     else
-      this.pageInfo.updateTitle("Modification de personne morale sanctionnée");
-
+      this.pageInfo.updateTitle("Modification de personne morale politiquement exposée");
+  this.personneMoraleSettings = {
+      singleSelection: true,
+      idField: 'idPersonne',
+      textField: 'denomination',
+      enableCheckAll: true,
+      selectAllText: 'Sélectionnez tous',
+      unSelectAllText: 'Ne pas tout sélectionné',
+      allowSearchFilter: true,
+      limitSelection: -1,
+      clearSearchFilter: true,
+      maxHeight: 197,
+      itemsShowLimit: 3,
+      searchPlaceholderText: 'Rechercher un élément',
+      noDataAvailablePlaceholderText: 'Aucune donnée à afficher',
+      closeDropDownOnSelection: false,
+      showSelectedItemsAtTop: false,
+      defaultOpen: false,
+    };
     this.getPaysAll()
     this.getPersonneMorale()
     this.personneSelect=document.getElementById("ComboPersonneMoraleExistanteJuge")
@@ -153,7 +174,7 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
   }
   nouvellePersonneChange(){
     // @ts-ignore
-    this.nouvellePersonne = document.getElementById("nouvellePersonneMoraleJuge").checked;
+    this.nouvellePersonne = document.getElementById("nouvellePersonneMoraleExpose").checked;
     if(this.nouvellePersonne)
     {
       this.personneExiste=false;
@@ -162,7 +183,7 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
   personneExistante(){
     // console.log("ok")
     // @ts-ignore
-    this.personneExiste = document.getElementById("personneMoraleJugeExistante").checked;
+    this.personneExiste = document.getElementById("personneMoraleExposeExistante").checked;
     console.log(this.personneExiste)
     if(this.personneExiste)
     {
@@ -170,6 +191,39 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
 
     }
   }
+  public onItemSelect2(item: any) {
+    // console.log('onItemSelect', item);
+    let idPersonne=item.idPersonne;
+    this.idPersonne=item.idPersonne
+    this.personneMoraleService.afficherPersonneMoraleSelonId(idPersonne).subscribe(
+      (data)=>{
+        this.personneMorale=data;
+        this.loadFormValues(data)});
+  }
+  public onDeSelect2(item: any) {
+    // console.log('onDeSelect', item);
+    let idPersonne=0;
+    /* this.personneMoraleService.afficherPersonneMoraleSelonId(idPersonne).subscribe(
+      (data)=>{
+        this.personneMorale=data;
+        this.loadFormValuesNew(data)}); */
+    
+  }
+
+  public onSelectAll2(items: any) {
+    // console.log('onSelectAll', items);
+  }
+  public onDeSelectAll2(items: any) {
+    // console.log('onDeSelectAll', items);
+  }
+
+  public onFilterChange2(item: any) {
+    // console.log('onFilterChange', item);
+  }
+  public onDropDownClose2(item: any) {
+    // console.log('onDropDownClose', item);
+  }
+
   retournerPersonne(){
     this.personneSelect=document.getElementById("ComboPersonneMoraleExistanteJuge")
     let idPersonne=this.personneSelect.options[this.personneSelect.selectedIndex].value;
@@ -201,21 +255,18 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
     this.entityForm.patchValue({sigle: entity.sigle});
     this.entityForm.patchValue({paysResidence: entity.paysResidence});
     this.entityForm.patchValue({estJuge: entity.estJuge});
-    this.entityForm.patchValue({estExpose: entity.estExpose});
+    this.entityForm.patchValue({estExpose: true});
     this.entityForm.patchValue({id: entity.idPersonne});
 
     //Chargement des documents existants
-
-
-
-
   }
 
 
   getPersonneMorale(){
-    this.personneMoraleService.afficherPersonneSelonQualite("actionnaire").subscribe(
+    this.personneMoraleService.afficherPersonneSelonQualiteLab("actionnaires").subscribe(
       (data)=>{
         this.personneMorale$=data;
+        this.personneMorale2=data
         //console.log(this.personneMorale$)
       }
     )
@@ -257,7 +308,7 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
 
       this.isLoading = true;
       this.submitted = true;
-
+//      this.submitting=true
       if(this.entityForm.invalid) return;
 
       if(this.entityForm.value.estJuge===false && this.entityForm.value.estExpose===false)
@@ -281,8 +332,9 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
           finalize(() => {
             this.isLoading = false;
             this.submitted = false;
+            this.submitting=false
             //Redirigez vers la liste
-            this.router.navigate([`/lab/standard/parametre/personne/morale/sanctionnee`]);
+            this.router.navigate([`/lab/standard/parametre/personne/morale/expose`]);
           })
         )
         .subscribe(res => {
@@ -297,10 +349,15 @@ export class PersonnemoraleSanctionneeAddEditComponent implements OnInit, OnDest
     //Formatage des dates sous le format souhaité
 
     let personne=null;
-
+  if(this.nouvellePersonne)
+    if(!this.id)
+      this.idPersonne=null;
+    else
+      this.idPersonne=this.id
 
     personne={
-      ...this.entityForm.value
+      ...this.entityForm.value,
+      idPersonne:this.idPersonne
     }
 
     console.log("personne&&&&=",personne)

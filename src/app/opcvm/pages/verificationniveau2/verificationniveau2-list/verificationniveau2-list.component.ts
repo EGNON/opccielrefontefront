@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import {ActivatedRoute, Router } from '@angular/router';
 import {NgbActiveModal, NgbDate, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Config } from 'datatables.net';
-import {Subscription, switchMap } from 'rxjs';
+import {finalize, Subscription, switchMap } from 'rxjs';
 import { SweetAlertOptions } from 'sweetalert2';
 import { AuthService } from '../../../../core/modules/auth';
 import { LoaderService } from '../../../../loader.service';
@@ -24,6 +24,8 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
   idSeance:number;
   nbreLigne: number;
   verifier:boolean;
+  valider:boolean;
+  validerFinal:boolean;
   verifier_Bouton:boolean;
   id:any[];
   datatableConfig: Config = {};
@@ -154,8 +156,12 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
   }
   verifiIntentionRachatN2()
   {
+    this.verifier=true
     this.entityService.verifIntentionRachatN1N2(
-      this.localStore.getData("currentOpcvm").idOpcvm,true,false).subscribe(
+      this.localStore.getData("currentOpcvm").idOpcvm,true,false).pipe
+      (finalize(()=>{
+        this.verifier=false
+      })).subscribe(
       (data)=>{
         // console.log(data)
       }
@@ -163,8 +169,13 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
   }
   verifiIntentionRachatN2_Final()
   {
+    this.validerFinal=true
     this.entityService.verifIntentionRachatN1N2(
-      this.localStore.getData("currentOpcvm").idOpcvm,true,true).subscribe(
+      this.localStore.getData("currentOpcvm").idOpcvm,true,true).pipe(
+        finalize(()=>{
+          this.validerFinal=false
+        })
+      ).subscribe(
       (data)=>{
         // console.log(data)
       }
@@ -177,7 +188,8 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
       niveau:"1",
       userLoginVerif:this.authService.currentUserValue?.denomination
     }*/
-    this.loadingService.setLoading(true);
+    // this.loadingService.setLoading(true);
+    this.valider=true;
     let id=[]
     // @ts-ignore
      this.tableau=document.getElementById("table_Verif2");
@@ -193,7 +205,11 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
     console.log("id=",id)
     //return
 
-    this.entityService.creerOperation(id,this.authService.currentUserValue?.username)
+    this.entityService.creerOperation(id,this.authService.currentUserValue?.username).pipe
+    (finalize(()=>{
+      this.valider=false;
+      alert("Confirmation effectuée avec succès")
+    }))
       .subscribe(
         {
           next: (value) => {

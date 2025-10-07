@@ -136,13 +136,23 @@ export class PersonnePhysiqueService extends ResourceService<PersonnePhysique> i
     return this.http.post<DataTablesResponse<any>>(url, dataTablesParameters);
   }
 
-  getPersonneSanctionnee(dataTablesParameters: any): Observable<DataTablesResponse<any>> {
-    const url = `${this.API_URL}/datatable/physiquesanctionnee`;
+  getPersonneExpose(dataTablesParameters: any): Observable<DataTablesResponse<any>> {
+    const url = `${this.API_URL}/datatable/physiqueexpose`;
+    return this.http.post<DataTablesResponse<any>>(url, dataTablesParameters);
+  }
+
+  getPersonneJuge(dataTablesParameters: any): Observable<DataTablesResponse<any>> {
+    const url = `${this.API_URL}/datatable/physiquejuge`;
     return this.http.post<DataTablesResponse<any>>(url, dataTablesParameters);
   }
 
   afficherPersonneSelonQualite(keyword: any){
     const url = `${this.API_URL}/qualite/${keyword}`;
+    return this.http.get(url);
+  }
+
+  afficherPersonneSelonQualiteLab(keyword: any){
+    const url = `${this.API_URL}/qualitelab/${keyword}`;
     return this.http.get(url);
   }
 
@@ -172,6 +182,10 @@ export class PersonnePhysiqueService extends ResourceService<PersonnePhysique> i
 
   updateFn(formData: any, id: any) {
     return this.http.put<any>(`${this.API_URL}/uploads/file-${id}`, formData);
+  }
+
+  updateFnLab(formData: any, id: any) {
+    return this.http.put<any>(`${this.API_URL}/uploads/filelab-${id}`, formData);
   }
 
   deleteByPersonneAndQualite(idPersonne:number,idQualite:number):Observable<PersonnePhysique>

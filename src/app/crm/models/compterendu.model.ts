@@ -9,6 +9,8 @@ import { ResourceModel } from "./core/resource.model";
 
 export class Compterendu extends ResourceModel<Compterendu>{
   idCR: number;
+  idCreateur: number;
+  creerPar: number;
   dateCR: Date;
   heureDebCR: Time;
   heureFinCR: Time;

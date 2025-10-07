@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import {catchError, finalize, Observable, of, Subscription } from 'rxjs';
@@ -14,6 +14,7 @@ import { PageInfoService } from '../../../../template/_metronic/layout';
 import { Detailprofil } from '../../../models/detailprofil.model';
 import { DepotrachatService } from '../../../services/depotrachat.service';
 import {LocalService} from "../../../../services/local.service";
+import { Personne } from '../../../../crm/models/personne/personne.model';
 
 @Component({
     selector: 'app-intentionrachat-add-edit',
@@ -28,6 +29,8 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   natureOperation:Natureoperation;
   personneDistributeur$: any;
   personneActionnaire$: any;
+  personneActionnaire: any;
+  actionnaireSelectionne: Personne[];
   personne: any;
   objetPart: any;
   objetNanti: any;
@@ -41,6 +44,8 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   entityForm: FormGroup;
   estVerifie2:boolean;
   entity:any;
+  currentSeance: any;
+  public personneSettings = {};
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -60,12 +65,16 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
     this.id2 = this.route.snapshot.params['id2'];
     /*console.log("id=",this.id)
     console.log("id2=",this.id2)*/
+     this.currentSeance = this.localStore.getData("currentSeance");
+    console.log("Séance actuelle === ", this.currentSeance);
+    const dateSeance = new Date(this.currentSeance?.dateFermeture);
     this.entityForm = this.fb.group(
       {
         id: [this.id],
         referencePiece: [null,Validators.required],
         modeVL: [null,Validators.required],
-        dateOperation: [null,Validators.required],
+        dateOperation: [new NgbDate(dateSeance.getFullYear(), dateSeance.getMonth()+1, dateSeance.getDate()),
+                        Validators.required],
         personne: [null,Validators.required],
         actionnaire: [null,Validators.required],
         partDisponible: [null],
@@ -77,6 +86,25 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
     );
     this.afficherActionnaire()
     this.afficherDistributeur()
+    this.actionnaireSelectionne=[]
+    this.personneSettings = {
+      singleSelection: true,
+      idField: 'idPersonne',
+      textField: 'numeroCpteDeposit',
+      enableCheckAll: true,
+      selectAllText: 'Sélectionnez tous',
+      unSelectAllText: 'Ne pas tout sélectionné',
+      allowSearchFilter: true,
+      limitSelection: -1,
+      clearSearchFilter: true,
+      maxHeight: 197,
+      itemsShowLimit: 3,
+      searchPlaceholderText: 'Rechercher un élément',
+      noDataAvailablePlaceholderText: 'Aucune donnée à afficher',
+      closeDropDownOnSelection: false,
+      showSelectedItemsAtTop: false,
+      defaultOpen: false,
+    };
     // this.paysSelect = document.getElementById("ComboPaysLab");
     if(this.id)
     {
@@ -108,14 +136,51 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
     ).subscribe(
       (data)=>{
         this.personneActionnaire$=data;
+        this.personneActionnaire=data;
        // console.log(data)
       }
     )
   }
+  public onFilterChange(item: any) {
+    // console.log('onFilterChange', item);
+  }
+  public onDropDownClose(item: any) {
+    // console.log('onDropDownClose', item);
+  }
+
+  public onItemSelect2(item: any) {
+    // console.log('onItemSelect', item);
+    let idPersonne=item.idPersonne;
+    this.idPersonne=item.idPersonne
+    this.afficherNbrePart(0)
+  }
+  public onDeSelect2(item: any) {
+    // console.log('onDeSelect', item);
+    let idPersonne=item.idPersonne;
+    this.idPersonne=0
+   
+    
+  }
+
+  public onSelectAll2(items: any) {
+    // console.log('onSelectAll', items);
+  }
+  public onDeSelectAll2(items: any) {
+    // console.log('onDeSelectAll', items);
+  }
+
+  public onFilterChange2(item: any) {
+    // console.log('onFilterChange', item);
+  }
+  public onDropDownClose2(item: any) {
+    // console.log('onDropDownClose', item);
+  }
+
+  
   afficherNbrePart(idActionnaire:any){
     //console.log("pass")
     if(idActionnaire===0)
-      idActionnaire=this.entityForm.value.actionnaire.idPersonne
+      idActionnaire=this.idPersonne
     this.loadingService.setLoading(true);
       this.entityService.afficherNbrePart(this.localStore.getData("currentOpcvm").idOpcvm,
         idActionnaire).subscribe(
@@ -137,6 +202,7 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
   quantiteChange(){
     this.entityForm.patchValue({libelleOperation:'RACHAT DE '+this.entityForm.value.quantite+' PART(S)'})
   }
+   get actionnaires(): FormArray { return <FormArray>this.entityForm.get('actionnaire')}
   loadFormValues(entity: any)
   {
     this.entity = entity;
@@ -149,12 +215,18 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
         dateOparation.getFullYear(), dateOparation.getMonth()+1, dateOparation.getDate())});
     //this.entityForm.patchValue({dateOperation: entity.libelleOperation});
     this.entityForm.patchValue({id: entity.idDepotRachat});
-    let quantite:string=entity.quantite
+    let quantite:string=entity.quantite.toLocaleString()
     this.entityForm.patchValue({quantite:quantite.replace('.',',')});
     this.entityForm.patchValue({modeVL: entity.modeVL});
-    this.entityForm.patchValue({actionnaire: entity.actionnaire});
+    // this.entityForm.patchValue({actionnaire: entity.actionnaire});
+    this.actionnaireSelectionne=[];
+      
+    this.actionnaireSelectionne.push(entity.actionnaire)
+      
+      // console.log(this.paysSelectionne)
+      this.actionnaires.patchValue(this.actionnaireSelectionne);
     this.entityForm.patchValue({personne: entity.personne});
-    console.log("actionnaire=",entity.actionnaire)
+    // console.log("actionnaire=",entity.actionnaire)
     this.afficherNbrePart(entity.actionnaire.idPersonne)
   }
 
@@ -206,7 +278,8 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
     let idActionnaire: any;
     if(this.entityForm.controls.actionnaire.value)
     {
-      idActionnaire =this.entityForm.value.actionnaire.idPersonne
+      // idActionnaire =this.entityForm.value.actionnaire.idPersonne
+      idActionnaire =this.idPersonne
     }
 
     let idPersonne: any;
@@ -227,6 +300,8 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
 
     let valeurCodeAnalytique="OPC:" + this.opcvm.idOpcvm +
       ";ACT:" + idActionnaire;
+    let actionnaire=new Personne();
+    actionnaire.idPersonne=idActionnaire;
 
     let ValeurFormule="6:" + quantite;
     const entity: any = {
@@ -254,6 +329,7 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
       ecriture:'A',
       type:'R',
       idActionnaire:idActionnaire,
+      actionnaire:actionnaire,
       idPersonne:idPersonne,
       dateDernModifClient:dateSaisie,
       montant:0,

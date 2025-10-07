@@ -117,7 +117,20 @@
                 <label class="required fs-5 fw-semibold mb-2">Actionnaire</label>
                 <!--end::Label-->
                 <!--begin::Select-->
-                <select class="form-select form-select-sm mb-2" formControlName="actionnaire"
+                <ng-multiselect-dropdown
+                [settings]="personneSettings"
+                [placeholder]="'Sélectionnez un actionnaire'"
+                formControlName="actionnaire"
+                [data]="personneActionnaire"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange2($event)"
+                (onDropDownClose)="onDropDownClose2($event)"
+                (onSelect)="onItemSelect2($event)"
+                (onDeSelect)="onDeSelect2($event)"
+                (onSelectAll)="onSelectAll2($event)"
+                (onDeSelectAll)="onDeSelectAll2($event)">
+              </ng-multiselect-dropdown>
+                <!-- <select class="form-select form-select-sm mb-2" formControlName="actionnaire"
                         [ngClass]="{ 'is-invalid': submitted && f.actionnaire.errors }"
                 (change)="afficherNbrePart(0)">
                   <option disabled [ngValue]="null">Sélectionnez un actionnaire...</option>
@@ -127,7 +140,7 @@
                   <option *ngFor="let item of personneActionnaire$" [ngValue]="item">
                     {{ item.denomination }}
                   </option>
-                </select>
+                </select> -->
                 <!--end::Select-->
                 <div *ngIf="submitted && f.actionnaire.errors" class="invalid-feedback">
                   <div *ngIf="f.actionnaire.errors.required">Ce champs est obligatoire</div>

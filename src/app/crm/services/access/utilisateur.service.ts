@@ -35,4 +35,9 @@ export class UtilisateurService extends ResourceService<Utilisateur> {
     const url = `${this.API_URL}`;
     return this.http.get<DataTablesResponse<any>>(url);
   }
+  exporterExcel() {
+    const url = `${this.API_URL}/exportexcel`;
+    return this.http.get<DataTablesResponse<any>>(url,{
+    responseType: 'blob' as 'json'});
+  }
 }

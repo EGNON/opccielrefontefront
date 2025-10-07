@@ -32,13 +32,13 @@ const LabRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
-    path: 'standard/parametre/personne/physique/sanctionnee',
+    path: 'standard/parametre/personne/physique/expose',
     loadChildren: () =>
       import('./personnephysique-sanctionnee/personnephysique-sanctionnee.module').then((m) => m.PersonnephysiqueSanctionneeModule),
     data: { layout: 'dark-sidebar' },
   },
   {
-    path: 'standard/parametre/personne/morale/sanctionnee',
+    path: 'standard/parametre/personne/morale/expose',
     loadChildren: () =>
       import('./personnemorale-sanctionnee/personnemorale-sanctionnee.module').then((m) => m.PersonnemoraleSanctionneeModule),
     data: { layout: 'dark-sidebar' },

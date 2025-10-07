@@ -55,6 +55,9 @@ export class LibrairiesService {
   evolutionVL(param: any) {
     return this.http.post<any>(`${this.API_URL}/evolutionvl`, param);
   }
+  soldeCompteClient(idActionnaire: any,idOpcvm:any) {
+    return this.http.get<any>(`${this.API_URL}/soldecompteclient/${idActionnaire}/${idOpcvm}`);
+  }
   evolutionVLEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/etats/evolutionvl`, param);
   }
@@ -75,6 +78,33 @@ export class LibrairiesService {
   }
   historiqueActionnaire(param: any) {
     return this.http.post<any>(`${this.API_URL}/historiqueactionnaire`, param);
+  }
+  pointSouscriptionEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/pointrachat`, param);
+  }
+  pointRachatEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/pointsouscription`, param);
+  }
+  pointSousriptionRachat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/pointsouscriptionrachat`, param);
+  }
+  pointSousriptionRachatListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/pointsouscriptionrachat/liste`, param);
+  }
+  evolutionActifNetEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/evolutionactifnet`, param);
+  }
+  pointRepartitionPortefeuilleEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/pointrepartitionportefeuille`, param);
+  }
+  pointRepartitionPortefeuille(param: any) {
+    return this.http.post<any>(`${this.API_URL}/pointrepartitionportefeuille`, param);
+  }
+  pointRepartitionPortefeuilleListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/pointrepartitionportefeuille/liste`, param);
+  }
+  portefeuilleActionnaire(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/portefeuilleactionnaire`, param);
   }
   releveActionnaireEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/etats/releveactionnaire`, param);

@@ -254,6 +254,7 @@ export class PhysiqueListingComponent implements OnInit, AfterViewInit, OnDestro
         const sb = this.entityService.getPersonnes(dataTablesParameters, qualite.libelleQualite)
           .subscribe(resp => {
             console.log("Datatable Res === ", resp);
+            console.log("Libelle === ", qualite.libelleQualite);
             callback(resp);
           });
         this.subscriptions.push(sb);

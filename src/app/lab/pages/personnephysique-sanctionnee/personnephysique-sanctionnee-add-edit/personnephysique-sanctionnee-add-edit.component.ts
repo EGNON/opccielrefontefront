@@ -108,12 +108,12 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
         //Champs Personne Physique
         nom: [null, Validators.required],
         prenom: [null, Validators.required],
-        sexe: [null, Validators.required],
-        dateNaissance: [null, Validators.required],
-        civilite: [null, Validators.required],
+        sexe: [null],
+        dateNaissance: [null],
+        civilite: [null],
         lieuNaissance: [null],
         paysResidence: [null],
-        paysNationalite: [null, Validators.required],
+        paysNationalite: [null],
         typePiece: [null],
         dateExpirationPiece: [null],
         documents: this.fb.array([]),
@@ -155,10 +155,10 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
     this.getPaysAll();
     if(this.id==null)
     {
-      this.pageInfo.updateTitle("Ajout de personne sanctionnée")
+      this.pageInfo.updateTitle("Ajout de personne politiquement exposée")
     }
     else
-      this.pageInfo.updateTitle("Modification de personne sanctionnée")
+      this.pageInfo.updateTitle("Modification de personne politiquement exposée")
 
     this.getTypeDocumentsAll();
     // this.getPersonnelsAll();
@@ -386,6 +386,7 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
     this.entityForm.patchValue({numeroPiece: ""});
     this.entityForm.patchValue({lieuNaissance: ""});
     this.entityForm.patchValue({estExpose: true});
+    this.entityForm.patchValue({estJuge: true});
 
     //Chargement des documents existants
     // entity.documents.removeAll();
@@ -493,7 +494,7 @@ export class PersonnephysiqueSanctionneeAddEditComponent implements OnInit, OnDe
   //   this.personnels$ = this.personnelService.items$;
   // }
   getPersonnePhysique(){
-    this.personnephysiqueService.afficherPersonneSelonQualite("actionnaires").subscribe(
+    this.personnephysiqueService.afficherPersonneSelonQualiteLab("actionnaires").subscribe(
       (data)=>{
         this.personnePhysique$=data;
         this.personnePhysique2=data
@@ -605,7 +606,7 @@ public onFilterChange(item: any) {
             this.submitted = false;
             this.submitting = false;
             //Redirigez vers la liste
-            this.router.navigate([`/lab/standard/parametre/personne/physique/sanctionnee`]);
+            this.router.navigate([`/lab/standard/parametre/personne/physique/expose`]);
           })
         )
         .subscribe(res => {
@@ -632,7 +633,11 @@ public onFilterChange(item: any) {
       this.estJuge=true;
     */
    if(this.nouvellePersonne)
-    this.idPersonne=null;
+    if(!this.id)
+      this.idPersonne=null;
+    else
+      this.idPersonne=this.id
+
     let personne=null;
   
     if(this.entityForm.value.personnePhysiquePaysDtos!=null)
@@ -665,13 +670,13 @@ public onFilterChange(item: any) {
 
     }
 
-    //console.log("personne&&&&=",personne)
+    console.log("personne&&&&=",personne)
     formdata.append("data", JSON.stringify(personne));
 
     //console.log(this.id);
     //console.log("formData",formdata)
     return this.id
-      ? this.entityService.updateFn(formdata,personne.idPersonne)
+      ? this.entityService.updateFnLab(formdata,personne.idPersonne)
       : this.entityService.createFn(formdata);
   }
 

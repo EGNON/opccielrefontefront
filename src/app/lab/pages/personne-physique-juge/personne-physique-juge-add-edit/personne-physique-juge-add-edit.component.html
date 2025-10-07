@@ -11,16 +11,19 @@
           <!--begin::Input-->
           <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid" [value]="id" formControlName="id"/>
           <!--end::Input-->
-          <div class="row mb-5" *ngIf="id">
-            <!--begin::Col-->
-            <!--            <div class="col-md-12 fv-row">-->
-            <!--begin::Label-->
+          <div class="row mb-5" [hidden]="true">
             <div class="d-flex justify-content-sm-start">
               <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
-                <input type="radio" checked="checked" formControlName="estJuge" [value]="true"
+                <input type="checkbox" checked="checked" [value]="true"
                        class="form-check-input ng-untouched ng-pristine ng-valid"
-                       id="estJuge">
-                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est jugé par des mesures de gel d'avoirs</label>
+                       id="nouvellePersonnePhysiqueJuge2" formControlName="estJuge">
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est jugée par des mesures de gel des avoirs</label>
+              </div>
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="checkbox" [value]="false"
+                       class="form-check-input ng-untouched ng-pristine ng-valid"
+                       id="personnePhysiqueExistanteJuge2" formControlName="estExpose">
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est politiquement exposée</label>
               </div>
             </div>
           </div>
@@ -32,31 +35,43 @@
               <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
                 <input type="radio" checked="checked" [value]="true"
                        class="form-check-input ng-untouched ng-pristine ng-valid"
-                       id="nouvellePersonnePhysiqueJuge" name="etatJuge" (change)="nouvellePersonneChange()">
+                       id="nouvellePersonnePhysiqueJuge" name="etat" (change)="nouvellePersonneChange()">
                 <label class="form-check-label text-gray-700 fw-bold text-nowrap">Nouvelle personne</label>
               </div>
               <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
                 <input type="radio" [value]="false"
                        class="form-check-input ng-untouched ng-pristine ng-valid"
-                       id="personnePhysiqueExistanteJuge" name="etatJuge" (change)="personneExistante()">
+                       id="personnePhysiqueJugeExistante" name="etat" (change)="personneExistante()">
                 <label class="form-check-label text-gray-700 fw-bold text-nowrap">Personne existante</label>
               </div>
             </div>
-          </div>
-
+            </div>
           <div *ngIf="personneExiste">
             <div class="col-md-12 fv-row">
               <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Personne(s)</label>
+               <ng-multiselect-dropdown
+                [settings]="personnePhysiqueSettings"
+                [placeholder]="'Sélectionnez un actionnaire'"
+                formControlName="personnePhysique2"
+                [data]="personnePhysique2"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange2($event)"
+                (onDropDownClose)="onDropDownClose2($event)"
+                (onSelect)="onItemSelect2($event)"
+                (onDeSelect)="onDeSelect2($event)"
+                (onSelectAll)="onSelectAll2($event)"
+                (onDeSelectAll)="onDeSelectAll2($event)">
+              </ng-multiselect-dropdown>
               <!--end::Label-->
               <!--begin::Input-->
-              <select
+              <!-- <select
                 class="form-select form-select-sm form-select-solid"
                 id="ComboPersonneExistanteJuge" (change)="retournerPersonne()">
                 <option selected>Sélectonnez une personne</option>
                 <option *ngFor="let personne of personnePhysique$"
                         value="{{personne.idPersonne}}">{{personne.denomination}}</option>
-                <!--                <option>Tous</option>-->
-              </select>
+                                <option>Tous</option>-->
+             <!-- </select> -->
             </div>
           </div>
 
@@ -115,7 +130,7 @@
                     <label class="required fs-5 fw-semibold mb-2">Nom</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input type="text" class="form-control form-control-sm form-control-solid"
+                    <input  type="text" class="form-control form-control-sm form-control-solid"
                            placeholder="" formControlName="nom" [ngClass]="{ 'is-invalid': submitted && f.nom.errors }"/>
                     <!--end::Input-->
                     <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
@@ -189,15 +204,15 @@
                   <!--begin::Col-->
                   <div class="col-md-6 fv-row">
                     <!--begin::Label-->
-                    <label class="required fs-5 fw-semibold mb-2">Lieu de naissance</label>
+                    <label class=" fs-5 fw-semibold mb-2">Lieu de naissance</label>
                     <!--end::Label-->
                     <!--begin::Input-->
                     <input type="text" class="form-control form-control-sm form-control-solid"
-                           placeholder="" formControlName="lieuNaissance" [ngClass]="{ 'is-invalid': submitted && f.lieuNaissance.errors }"/>
+                           placeholder="" formControlName="lieuNaissance" />
                     <!--end::Input-->
-                    <div *ngIf="submitted && f.lieuNaissance.errors" class="invalid-feedback">
+                  <!--   <div *ngIf="submitted && f.lieuNaissance.errors" class="invalid-feedback">
                       <div *ngIf="f.lieuNaissance.errors.required">Le lieu de naisssance est obligatoire</div>
-                    </div>
+                    </div> -->
                   </div>
 
                   <!--begin::Input group-->
@@ -348,11 +363,15 @@
             <button type="submit" class="btn btn-sm btn-primary"
                     (click)="onSaveEntity()">
               <!--begin::Indicator label-->
-              <span class="indicator-label">Enregistrer</span>
-              <!--end::Indicator label-->
-              <!--begin::Indicator progress-->
-              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
-															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <ng-container *ngIf="submitting">
+                <span class="indicator-progress" [style.display]="'block'">
+                  Patientez svp...
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+              </ng-container>
+              <ng-container *ngIf="!submitting">
+                <span class="indicator-label">Enregistrer</span>
+              </ng-container>
               <!--end::Indicator progress-->
             </button>
             <!--end::Submit-->

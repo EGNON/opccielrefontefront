@@ -14,6 +14,7 @@ import { NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { NombreDecimalDirective } from '../../../validators/nombre-decimal.directive';
 import { VerifintentionrachatComponent } from './verifintentionrachat/verifintentionrachat.component';
 import { Verificationniveau1Component } from './verificationniveau1/verificationniveau1.component';
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 
 
@@ -36,6 +37,7 @@ import { Verificationniveau1Component } from './verificationniveau1/verification
     NombreDecimalDirective,
     SweetAlert2Module,
     ReactiveFormsModule,
-  ]
+    NgMultiSelectDropDownModule
+]
 })
 export class IntentionrachatModule { }

@@ -8,7 +8,7 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import {Subscription, switchMap, tap} from "rxjs";
+import {finalize, Subscription, switchMap, tap} from "rxjs";
 import {DataTablesResponse} from "../../../../crm/models/data-tables.response.model";
 import {SwalComponent} from "@sweetalert2/ngx-sweetalert2";
 import {SweetAlertOptions} from "sweetalert2";
@@ -16,6 +16,7 @@ import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {PersonnelService} from "../../../../crm/services/personne/personnel.service";
 import {Config} from "datatables.net";
+import { UtilisateurService } from '../../../../crm/services/access/utilisateur.service';
 
 @Component({
     selector: 'app-personnel-list',
@@ -30,6 +31,7 @@ export class PersonnelListComponent implements OnInit, AfterViewInit, OnDestroy 
   newButtonTitle: string = "Nouveau";
   title: string;
   isLoading: boolean = false;
+  matrice: boolean = false;
   private subscriptions: Subscription[] = [];
   personnes: DataTablesResponse<any>;
 
@@ -48,13 +50,30 @@ export class PersonnelListComponent implements OnInit, AfterViewInit, OnDestroy 
   constructor(
     private renderer: Renderer2,
     public entityService: PersonnelService,
+    public userService: UtilisateurService,
     private route: ActivatedRoute,
     private router: Router,
     private cdr: ChangeDetectorRef,
     private modalService: NgbModal
   ) {
   }
-
+ exporterExcel(){
+    this.matrice=true
+    this.userService.exporterExcel().pipe(
+      finalize(()=>{
+        this.matrice=false
+      })
+    ).subscribe((data: any) => {
+  // Créer un lien de téléchargement
+      const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "matrice_des_habilitations.xlsx"; // Nom du fichier téléchargé
+      a.click();
+      window.URL.revokeObjectURL(url);}
+    )
+  }
   ngAfterViewInit(): void {
     this.renderActionColumn();
     this.clickListener = this.renderer.listen(document, 'click', (event) => {

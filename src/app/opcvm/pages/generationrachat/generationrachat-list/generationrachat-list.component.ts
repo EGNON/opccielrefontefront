@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbDate, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Config } from 'datatables.net';
-import { Subscription, switchMap } from 'rxjs';
+import { finalize, Subscription, switchMap } from 'rxjs';
 import { SweetAlertOptions } from 'sweetalert2';
 import { Natureoperation } from '../../../../core/models/natureoperation.model';
 import { Opcvm } from '../../../../core/models/opcvm';
@@ -30,6 +30,8 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
   idSeance:number;
   nbreLigne:number;
   verifier:boolean;
+  precalcul:boolean;
+  valider:boolean;
   verifier_Bouton:boolean;
   operationSouscriptionRachatTab:Operationsouscriptionrachat2[];
   operationSouscriptionRachat:Operationsouscriptionrachat2;
@@ -44,6 +46,7 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
   depotRachat2$:any;
   swalOptions: SweetAlertOptions = {};
   seance:any;
+  currentSeance: any;
   private clickListener: () => void;
   private idInAction: number;
   entityForm: FormGroup;
@@ -68,6 +71,8 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
     return this.entityForm.controls;
   }
   ngOnInit(): void {
+    this.currentSeance = this.localStore.getData("currentSeance");
+    const dateSeance = new Date(this.currentSeance?.dateFermeture);
     this.entityForm = this.fb.group(
       {
         denominationOpcvm: [null],
@@ -75,7 +80,8 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
         dateOuverture: [null],
         dateFermeture: [null],
         personne: [null],
-        dateOperation: [null,Validators.required],
+        dateOperation: [new NgbDate(dateSeance.getFullYear(), dateSeance.getMonth()+1, dateSeance.getDate()),
+                        Validators.required],
       }
     );
     this.afficherDistributeur()
@@ -100,10 +106,15 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
     })
   }
   afficherPrecalcul(){
-    this.loadingService.setLoading(true)
+    //this.loadingService.setLoading(true)
+    this.precalcul=true
     this.entityService.afficherPrecalculRachat(this.entityForm.value.idSeance,
       this.localStore.getData("currentOpcvm").idOpcvm,
-      this.entityForm.value.personne.idPersonne).subscribe(
+      this.entityForm.value.personne.idPersonne).pipe(
+        finalize(()=>{
+          this.precalcul=false
+        })
+      ).subscribe(
       (data)=>{
         this.depotRachat$=data
       }
@@ -174,7 +185,8 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
       alert("Aucune donnée dans la grille")
       return
     }
-    this.loadingService.setLoading(true)
+    //this.loadingService.setLoading(true)
+    this.valider=true
     this.submitted=true
     let i: number = 1;
     let dateOperation: any;
@@ -265,7 +277,12 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
       this.operationSouscriptionRachatTab.push(this.operationSouscriptionRachat);
     }
     this.operationSouscriptionRachatService.creer(this.operationSouscriptionRachatTab)
-      .subscribe(
+      .pipe(
+        finalize(()=>{
+          this.valider=false
+          alert("Génération effetuée ave succès")
+        })
+      ).subscribe(
         {
           next: (value) => {
             let currentUrl = this.router.url;
@@ -279,7 +296,7 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
           }
         }
       )
-    this.loadingService.setLoading(false)
+    //this.loadingService.setLoading(false)
   }
 }
 

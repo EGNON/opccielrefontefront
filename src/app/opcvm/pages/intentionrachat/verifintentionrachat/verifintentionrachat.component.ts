@@ -22,11 +22,13 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   idSeance:number;
   verifier:boolean;
+  verifierApercu:boolean;
   id:any[];
   datatableConfig: Config = {};
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
   depotRachat$:any;
+  valider:boolean;
   swalOptions: SweetAlertOptions = {};
   seance:any;
   private clickListener: () => void;
@@ -103,8 +105,16 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
   }
   verifiIntentionRachat()
   {
+    this.verifierApercu=true
     this.entityService.verifIntentionRachat(
-      this.localStore.getData("currentOpcvm").idOpcvm,false,false).subscribe(
+      this.localStore.getData("currentOpcvm").idOpcvm,false,false).pipe(
+        finalize(() => {
+          this.verifierApercu = false;
+          this.isLoading = false;
+          //this.router.navigate(['/opcvm/rachat/intentionrachat']);
+        }),
+      )
+      .subscribe(
       (data)=>{
         // console.log(data)
       }
@@ -156,6 +166,7 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
     }
   }
   validerRachat(){
+    this.valider=true
     this.entityService.afficherFT_DepotRachat(
       this.localStore.getData("currentOpcvm").idOpcvm,false,false).subscribe(
       (data)=>{
@@ -167,7 +178,12 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
           this.id.push(this.depotRachat$[i].idDepotRachat)
         }
         //console.log(this.id)
-        this.entityService.modifier(this.id,this.authService.currentUserValue?.username)
+        this.entityService.modifier(this.id,this.authService.currentUserValue?.username).pipe(
+          finalize(()=>{
+              this.valider=false
+              alert("Confirmation effectuée avec succès")
+          })
+        )
           .subscribe(
             {
               next: (value) => {
@@ -175,7 +191,7 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
                 // this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
                 //   this.router.navigate([currentUrl]);
                 // });
-                this.verifier=true
+                this.valider=false
               },
               error: err => {
 

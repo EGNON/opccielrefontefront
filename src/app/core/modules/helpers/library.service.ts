@@ -344,7 +344,7 @@ export class LibraryService implements OnDestroy{
                   children: [
                     {
                       allow: this.authService.isGrantedRole('ROLE_PHYSIQUE'),
-                      title: 'Liste des PP',
+                      title: 'Liste des personnes physiques',
                       page: '/app/standard/parametre/physique',
                       role: 'ROLE_PHYSIQUE',
                       dataLink: '',
@@ -356,8 +356,19 @@ export class LibraryService implements OnDestroy{
                     },
                     {
                       allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_SANCTIONNEE'),
-                      title: 'Liste des sanctionnées',
-                      page: '/lab/standard/parametre/personne/physique/sanctionnee',
+                      title: 'Liste des personnes physiques politiquement exposées',
+                      page: '/lab/standard/parametre/personne/physique/expose',
+                      role: 'ROLE_PHYSIQUE_SANCTIONNEE',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      children: []
+                    }
+                    ,
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_SANCTIONNEE'),
+                      title: 'Liste des personnes physiques jugées par des mesures de gel des avoirs',
+                      page: '/lab/standard/parametre/personne/physique/juge',
                       role: 'ROLE_PHYSIQUE_SANCTIONNEE',
                       dataLink: '',
                       icon: '',
@@ -378,7 +389,7 @@ export class LibraryService implements OnDestroy{
                   children: [
                     {
                       allow: this.authService.isGrantedRole('ROLE_MORALE'),
-                      title: 'Liste des PM',
+                      title: 'Liste des personnes morales',
                       page: '/app/standard/parametre/morale',
                       role: 'ROLE_MORALE',
                       dataLink: '',
@@ -389,8 +400,20 @@ export class LibraryService implements OnDestroy{
                     },
                     {
                       allow: this.authService.isGrantedRole('ROLE_MORALE_SANCTIONNEE'),
-                      title: 'Personne morale sanctionnée',
-                      page: '/lab/standard/parametre/personne/morale/sanctionnee',
+                      title: 'Personnes morales politiquement exposées',
+                      page: '/lab/standard/parametre/personne/morale/expose',
+                      role: 'ROLE_MORALE_SANCTIONNEE',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      parent: 'Personne Morale',
+                      children: []
+                    }
+                    ,
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_MORALE_SANCTIONNEE'),
+                      title: 'Personnes morales jugées par les mesures de gel des avoirs',
+                      page: '/lab/standard/parametre/personne/morale/juge',
                       role: 'ROLE_MORALE_SANCTIONNEE',
                       dataLink: '',
                       icon: '',
@@ -1078,10 +1101,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_ALERTE'),
+                  allow: this.authService.isGrantedRole('ROLE_ALERTE_LAB'),
                   title: 'Critère d\'alerte',
                   page: '/lab/notifications/alertes',
-                  role: 'ROLE_ALERTE',
+                  role: 'ROLE_ALERTE_LAB',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -1489,7 +1512,7 @@ export class LibraryService implements OnDestroy{
                   allow: this.authService.isGrantedRole('ROLE_DEPOT_RECENSE_ANNEE'),
                   title: 'Point des transactions personnes physiques supérieures ou égales à 10 000 000 sur l\'année',
                   page: '/lab/etats/depot-sur-annee-superieur-ou-egal-a-dix-millions/liste',
-                  role: 'ROLE_DEPOT_RECENSE_ESPECE',
+                  role: 'ROLE_DEPOT_RECENSE_ANNEE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -1763,6 +1786,58 @@ export class LibraryService implements OnDestroy{
                   title: 'Evolution VL',
                   page: '/app/standard/etats/evolutionvl',
                   role: 'ROLE_ETAT_EVOLUTIONVL',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/ficheclient').includes(value.path!)),
+                  children: []
+                }
+                ,{
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTSOUSCRIPTION'),
+                  title: 'Point des souscriptions par type de personne',
+                  page: '/app/standard/etats/pointsouscription',
+                  role: 'ROLE_ETAT_POINTSOUSCRIPTION',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/ficheclient').includes(value.path!)),
+                  children: []
+                }
+                ,{
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTRACHAT'),
+                  title: 'Point des rachats par type de personne',
+                  page: '/app/standard/etats/pointrachat',
+                  role: 'ROLE_ETAT_POINTRACHAT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/ficheclient').includes(value.path!)),
+                  children: []
+                }
+                ,{
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTREPARTITIONPORTEFEUILLE'),
+                  title: 'Point Répartition Portefeuille',
+                  page: '/app/standard/etats/pointrepartitionportefeuille',
+                  role: 'ROLE_ETAT_POINTREPARTITIONPORTEFEUILLE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/ficheclient').includes(value.path!)),
+                  children: []
+                }
+                ,{
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_EVOLUTIONACTIFNET'),
+                  title: 'Evolution Actif Net - Nombre de part ',
+                  page: '/app/standard/etats/evolutionactifnet',
+                  role: 'ROLE_ETAT_EVOLUTIONACTIFNET',
                   icon: '',
                   translate: '',
                   dataLink: '',
