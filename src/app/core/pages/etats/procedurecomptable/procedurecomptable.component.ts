@@ -26,7 +26,13 @@ export class ProcedurecomptableComponent implements OnInit{
       finalize(() => {
         this.downloading = false;
       })
-    ).subscribe()
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'procedures_comptables.pdf';
+        a.click();
+      });
   }
 
 }

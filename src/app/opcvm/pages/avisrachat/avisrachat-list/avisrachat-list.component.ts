@@ -280,7 +280,13 @@ export class AvisrachatListComponent implements OnInit, OnDestroy {
       else
         id+=","+this.idOperationTab[l]
     }
-    this.operationsouscriptionrachatService.avisOperationPdf(id).subscribe()
+    this.operationsouscriptionrachatService.avisOperationPdf(id).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'avis_rachat.pdf';
+        a.click();
+      });
     // this.operationsouscriptionrachatService.avisOperation(id).subscribe(
     //   (data)=> {
     //     this.avisOperation$ = data.data

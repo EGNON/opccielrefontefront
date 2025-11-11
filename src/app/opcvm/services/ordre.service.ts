@@ -34,7 +34,9 @@ export class OrdreService extends ResourceService<any> implements OnDestroy{
     return this.http.get<any>(`${this.API_URL}/impression/${idOpcvm}/${idSeance}`);
   }
   apercuOrdreDeBourse(numeroOrdre: any) {
-    return this.http.get<any>(`${this.API_URL}/jasperpdf/ordreDeBourse/${numeroOrdre}`);
+    return this.http.get<any>(`${this.API_URL}/jasperpdf/ordreDeBourse/${numeroOrdre}`
+      , {responseType: 'blob' as any }
+    );
   }
   supprimer(idOrdre: any,userLogin:any) {
     return this.http.delete<any>(`${this.API_URL}/${idOrdre}/${userLogin}`);

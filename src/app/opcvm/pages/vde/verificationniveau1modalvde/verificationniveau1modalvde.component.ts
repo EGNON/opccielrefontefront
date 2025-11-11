@@ -45,11 +45,13 @@ export class Verificationniveau1modalvdeComponent implements OnInit{
       finalize(() => {
         this.exportPdf=false
       })
-    ).subscribe(
-      (data)=>{
-
-      }
-    )
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_extourne_vde_niveau1.pdf';
+        a.click();
+      });
   }
   excelVDE(){
     this.operationExtourneVDEService.excelVDE(this.currentSeance?.idSeanceOpcvm.idSeance,

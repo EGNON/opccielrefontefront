@@ -1,0 +1,224 @@
+<!--begin::Transfert - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5" enctype="multipart/form-data">
+           <div class="row mb-5">
+
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class=" fs-5 fw-semibold mb-2">ANNEE</label>
+              <!--end::Label-->
+              <input  type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="codeExercice"
+                     [ngClass]="{ 'is-invalid': submitted && f.codeExercice.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.codeExercice.errors" class="invalid-feedback">
+                <div *ngIf="f.codeExercice.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date début</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input  type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="dd-mm-yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date operation" aria-describedby="basic-addon6"
+                       formControlName="dateDebut" [ngClass]="{ 'is-invalid': submitted && f.dateOperation.errors }"/>
+                <!--end::Input-->
+                <span (click)="d.toggle()"  class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+
+              <div *ngIf="submitted && f.dateDebut.errors" class="invalid-feedback">
+                <div *ngIf="f.dateDebut.errors.required">La date opération est obligatoire</div>
+              </div>
+            </div>
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date fin</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="dd-mm-yyyy" ngbDatepicker #d2="ngbDatepicker" aria-label="Date REC/LIV PREVU" aria-describedby="basic-addon6"
+                       formControlName="dateFin" [ngClass]="{ 'is-invalid': submitted && f.dateReceptionLivraisonPrevu.errors }"/>
+                <!--end::Input-->
+                <span (click)="d2.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+
+              <div *ngIf="submitted && f.dateFin.errors" class="invalid-feedback">
+                <div *ngIf="f.dateFin.errors.required">La date fin est obligatoire</div>
+              </div>
+            </div>
+
+            <!--end::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Date cloture</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <div class="input-group mb-0">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm form-control-solid"
+                       placeholder="dd-mm-yyyy" ngbDatepicker #d3="ngbDatepicker" aria-label="Date REC/LIV PREVU" aria-describedby="basic-addon6"
+                       formControlName="dateCloture" [ngClass]="{ 'is-invalid': submitted && f.dateReceptionLivraisonPrevu.errors }"/>
+                <!--end::Input-->
+                <span (click)="d3.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
+                      <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                  </span>
+              </div>
+
+              <div *ngIf="submitted && f.dateCloture.errors" class="invalid-feedback">
+                <div *ngIf="f.dateCloture.errors.required">La date cloture est obligatoire</div>
+              </div>
+            </div>
+            <!--end::Col-->
+             <div class="col-md-3 fv-row">
+                <div style="display: flex; justify-content: space-between;">
+                  <!--begin::Label-->
+                  <label class="fs-5 fw-semibold mb-2">Plan</label>
+                  <!--end::Label-->
+                </div>
+            <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="plan"
+                        [ngClass]="{ 'is-invalid': submitted && f.plan.errors }">
+                  <option disabled selected [ngValue]="null">Sélectionnez un plan...</option>
+                  <option *ngIf="entity?.plan" [defaultSelected]="true" disabled [ngValue]="entity?.plan">
+                    {{ entity?.plan?.codePlan }}
+                  </option>
+                  <option *ngFor="let item of plan$" [ngValue]="item">
+                    {{ item.codePlan }}
+                  </option>
+<!--                  <option [value]="1">RECOMMANDATION</option>-->
+<!--                  <option [value]="2">PROSPECTION</option>-->
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.modeEtablissementDto.errors" class="invalid-feedback">
+                  <div *ngIf="f.modeEtablissementDto.errors.required">Le mode d'établissement est obligatoire</div>
+                </div>
+            </div>
+          </div>
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <!--            <div class="col-md-12 fv-row">-->
+            <!--begin::Label-->
+            <div class="d-flex justify-content-sm-start">
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="radio" checked="checked" formControlName="estBloque" [value]="false"
+                       class="form-check-input ng-untouched ng-pristine ng-valid"
+                       id="estBloque"  name="etat">
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">BLOQUE?</label>
+              </div>
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="radio" formControlName="estCourant" [value]="true"
+                       class="form-check-input ng-untouched ng-pristine ng-valid"
+                       id="estCourant"  name="etat" >
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">COURANT?</label>
+              </div>
+              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input type="radio" formControlName="estFerme" [value]="false"
+                       class="form-check-input ng-untouched ng-pristine ng-valid"
+                       id="estFerme"  name="etat" >
+                <label class="form-check-label text-gray-700 fw-bold text-nowrap">FERME?</label>
+              </div>
+            </div>
+          </div>
+
+        <div class="row mb-5">
+              <!--begin::Col-->
+              <div class="col-md-4 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Déclassement</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="declassement"
+                        [ngClass]="{ 'is-invalid': submitted && f.declassement.errors }">
+                  <option disabled value="null">Sélectionnez un déclassement...</option>
+                  <option ngValue="AUCUN DECLASSEMENT">AUCUN DECLASSEMENT</option>
+                  <option ngValue="AVEC REPORT A NOUVEAU">AVEC REPORT A NOUVEAU</option>
+                  <option ngValue="SANS REPORT A NOUVEAU">SANS REPORT A NOUVEAU</option>
+                </select>
+                <!--end::Select-->
+                <div *ngIf="submitted && f.declassement.errors" class="invalid-feedback">
+                  <div *ngIf="f.declassement.errors.required">Le declassement est obligatoire</div>
+                </div>
+              </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+             <div class="col-md-4 fv-row">
+              <!--begin::Label-->
+              <label class=" fs-5 fw-semibold mb-2">Taux Ben</label>
+              <!--end::Label-->
+              <input  type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="tauxBenefice"
+                     [ngClass]="{ 'is-invalid': submitted && f.tauxBenefice.errors }"/>
+              <!--end::Input-->
+              <!-- <div *ngIf="submitted && f.tauxBenefice.errors" class="invalid-feedback">
+                <div *ngIf="f.tauxBenefice.errors.required">Ce champs est obligatoire</div>
+              </div> -->
+            </div>
+              <!--end::Col-->
+              <!--begin::Col-->
+             <div class="col-md-4 fv-row">
+              <!--begin::Label-->
+              <label class=" fs-5 fw-semibold mb-2">Montant minimum</label>
+              <!--end::Label-->
+              <input  type="text" class="form-control form-control-sm"
+                     placeholder="Ex : XXXXXXXXX" formControlName="montantMinimum"
+                     [ngClass]="{ 'is-invalid': submitted && f.montantMinimum.errors }"/>
+              <!--end::Input-->
+              <!-- <div *ngIf="submitted && f.montantMinimum.errors" class="invalid-feedback">
+                <div *ngIf="f.montantMinimum.errors.required">Ce champs est obligatoire</div>
+              </div> -->
+            </div>
+              <!--end::Col-->
+            </div>
+
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/opcvm/comptabilite/regulecartsolde/liste" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="entityForm.invalid" (click)="onSaveEntity()">
+              <ng-container *ngIf="submitting">
+                  <span class="indicator-progress" [style.display]="'block'">
+                    Patientez svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                  </span>
+              </ng-container>
+              <ng-container *ngIf="!submitting">
+                <span class="indicator-label">Enregistrer</span>
+              </ng-container>
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Constatation Charges - Apply-->

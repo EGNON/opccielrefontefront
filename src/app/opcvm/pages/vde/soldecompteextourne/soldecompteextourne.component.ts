@@ -41,9 +41,13 @@ export class SoldecompteextourneComponent implements OnInit{
       finalize(() => {
         this.verification=false
       })
-    ).subscribe(
-
-    )
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'solde_compte_extourne.pdf';
+        a.click();
+      });
   }
   modifier(){
     const entity={

@@ -161,11 +161,13 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
       this.localStore.getData("currentOpcvm").idOpcvm,true,false).pipe
       (finalize(()=>{
         this.verifier=false
-      })).subscribe(
-      (data)=>{
-        // console.log(data)
-      }
-    )
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verif_intention_rachat_niveau1.pdf';
+        a.click();
+      });
   }
   verifiIntentionRachatN2_Final()
   {
@@ -175,11 +177,13 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
         finalize(()=>{
           this.validerFinal=false
         })
-      ).subscribe(
-      (data)=>{
-        // console.log(data)
-      }
-    )
+      ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verif_intention_rachat_final.pdf';
+        a.click();
+      });
   }
   validerRachat(){
    /* const entity={

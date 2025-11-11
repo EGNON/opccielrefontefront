@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {finalize, Observable, Subscription} from "rxjs";
 import {Personne} from "../../../models/personne/personne.model";
 import {PersonnePhysiqueService} from "../../../services/personne/personne.physique.service";
 import {ActivatedRoute} from "@angular/router";
@@ -22,6 +22,7 @@ export class FichekycPrintComponent implements OnInit, OnDestroy{
   personnesSelonId$: any;
   title: string;
   isLoading: boolean = false;
+  download: boolean = false;
   private subscriptions: Subscription[] = [];
   // personnes: DataTablesResponse<any>;
 
@@ -104,12 +105,18 @@ export class FichekycPrintComponent implements OnInit, OnDestroy{
   }
   get personne(): FormArray { return <FormArray>this.formData.get('personne')}
   imprimer(){
+    this.download=true
     //this.idPersonne=this.selectPersonne.options[this.selectPersonne.selectedIndex].value;
-    this.personnePhysiqueService.afficherFicheKYC(this.idPersonne).subscribe(
-      (data)=>{
-
-      }
-    )
+    this.personnePhysiqueService.afficherFicheKYC(this.idPersonne).pipe
+          (finalize(()=>{
+            this.download=false;
+          })).subscribe((blob) => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'fiche_kyc.pdf';
+            a.click();
+          });
   }
   afficherClientSelonIdQualite(){
     //this.idPersonne=this.selectPersonne.options[this.selectPersonne.selectedIndex].value;

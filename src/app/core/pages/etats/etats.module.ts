@@ -22,6 +22,7 @@ import { Pointsouscriptionrachat } from './pointsouscriptionrachat/pointsouscrip
 import { Pointrachat } from './pointrachat/pointrachat';
 import { Pointrepartitionportefeuille } from './pointrepartitionportefeuille/pointrepartitionportefeuille';
 import { Evolutionactifnet } from './evolutionactifnet/evolutionactifnet';
+import { PortefeuilleactionnaireF1 } from './portefeuilleactionnaire-f1/portefeuilleactionnaire-f1';
 
 
 
@@ -41,7 +42,8 @@ import { Evolutionactifnet } from './evolutionactifnet/evolutionactifnet';
     Pointsouscriptionrachat,
     Pointrachat,
     Pointrepartitionportefeuille,
-    Evolutionactifnet
+    Evolutionactifnet,
+    PortefeuilleactionnaireF1
   ],
   imports: [
     CommonModule,

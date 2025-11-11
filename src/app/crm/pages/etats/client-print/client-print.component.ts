@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription, switchMap} from "rxjs";
+import {finalize, Observable, Subscription, switchMap} from "rxjs";
 import {Personne} from "../../../models/personne/personne.model";
 import {PersonnePhysiqueService} from "../../../services/personne/personne.physique.service";
 import {PersonneMoraleService} from "../../../services/personne/personne.morale.service";
@@ -19,6 +19,7 @@ export class ClientPrintComponent implements OnInit, OnDestroy{
   baseRoute: string = "";
   qualite?: string | null;
   entity: any;
+  download:boolean;
   dateJour:Date;
   newButtonTitle: string = "Nouveau";
   personnes$: any;
@@ -77,23 +78,34 @@ export class ClientPrintComponent implements OnInit, OnDestroy{
     }
   }
   imprimer(){
+     this.download=true
     this.prospect=this.selectProspect.options[this.selectProspect.selectedIndex].text;
     if(this.prospect=="Personne physique"){
       this.qualite="actionnaires".toUpperCase();
-      this.personnePhysiqueService.afficherPersonneSelonQualiteEtat(this.qualite).subscribe(
-        (data=>{
-
-        })
-      )
+      this.personnePhysiqueService.afficherPersonneSelonQualiteEtat(this.qualite).pipe
+      (finalize(()=>{
+        this.download=false;
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'client_physique.pdf';
+        a.click();
+      });
     }
     else
     {
       this.qualite="actionnaires".toUpperCase();
-      this.personneMoraleService.afficherPersonneSelonQualiteEtat(this.qualite).subscribe(
-        (data=>{
-
-        })
-      )
+      this.personneMoraleService.afficherPersonneSelonQualiteEtat(this.qualite).pipe
+      (finalize(()=>{
+        this.download=false;
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'client_Morale.pdf';
+        a.click();
+      });
     }
   }
   ngOnDestroy(): void {

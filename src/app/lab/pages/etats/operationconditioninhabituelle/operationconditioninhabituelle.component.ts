@@ -8,7 +8,7 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {finalize, Observable, Subscription} from "rxjs";
 import {SweetAlertOptions} from "sweetalert2";
 import {DataTableDirective} from "angular-datatables";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -39,6 +39,7 @@ export class OperationconditioninhabituelleComponent implements OnInit, OnDestro
   exercice$:any;
   operationSouscriptionRachat$:any;
   annee:any;
+  download:boolean;
   selectAnnee:any;
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
@@ -98,13 +99,19 @@ export class OperationconditioninhabituelleComponent implements OnInit, OnDestro
     )
   }
   imprimer(){
+    this.download=true
     this.selectAnnee=document.getElementById('comboAnneeInhabituelle')
     this.annee=this.selectAnnee.options[this.selectAnnee.selectedIndex].text;
-    this.operationService.afficherTransactionInhabituelleEtat(this.annee).subscribe(
-      (data)=>{
-        // this.operationSouscriptionRachat$=data;
-      }
-    )
+    this.operationService.afficherTransactionInhabituelleEtat(this.annee).pipe
+    (finalize(()=>{
+      this.download=false;
+    })).subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'operation_condition_inhabituelle.pdf';
+      a.click();
+    });
   }
   public dtInit(): void {
     if (this.isDtInit) {

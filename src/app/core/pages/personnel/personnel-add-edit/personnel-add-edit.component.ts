@@ -166,6 +166,7 @@ export class PersonnelAddEditComponent implements OnInit, AfterViewInit, OnDestr
       ...this.entityForm.value,
       dateNaissance: dateNaiss
     }
+    console.log(entity)
     return this.id
       ? this.entityService.update(entity)
       : this.entityService.create(entity);

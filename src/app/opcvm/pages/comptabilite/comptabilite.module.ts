@@ -31,6 +31,8 @@ import { PaiementCommissionInvestissementListComponent } from './paiement-commis
 import { PaiementCommissionInvestissementAddEditComponent } from './paiement-commission-investissement-add-edit/paiement-commission-investissement-add-edit.component';
 import { EcritureManuelComponent } from './ecriture-manuel/ecriture-manuel.component';
 import { OperationdetachementdroitComponent } from './operationdetachementdroit/operationdetachementdroit.component';
+import { ExerciceList } from './exercice-list/exercice-list';
+import { ExerciceAddEdit } from './exercice-add-edit/exercice-add-edit';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { OperationdetachementdroitComponent } from './operationdetachementdroit/
     PaiementCommissionInvestissementListComponent,
     PaiementCommissionInvestissementAddEditComponent,
     EcritureManuelComponent,
-    OperationdetachementdroitComponent
+    OperationdetachementdroitComponent,
+    ExerciceList,
+    ExerciceAddEdit
   ],
     imports: [
         CommonModule,

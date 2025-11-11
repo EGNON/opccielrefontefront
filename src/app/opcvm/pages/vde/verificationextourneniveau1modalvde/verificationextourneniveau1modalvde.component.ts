@@ -265,14 +265,13 @@ export class Verificationextourneniveau1modalvdeComponent implements OnInit, Aft
       finalize(() => {
         this.downloading=false
       })
-    ).subscribe(
-      (data)=>{
-        console.log(data.data)
-
-        console.log(this.downloading)
-        // this.verificationNiveau$=data.data
-      }
-    );
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_ecriture_extourne_vde_niveau1.pdf';
+        a.click();
+      });
     // this.downloading=false
   }
   validationEcritureNiveau1(){

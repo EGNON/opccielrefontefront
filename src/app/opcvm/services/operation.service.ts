@@ -58,7 +58,9 @@ export class OperationService extends ResourceService<any> implements OnDestroy{
     return this.http.post<any>(`${this.API_URL}/verificationecritureniveau2/${codeTypeOperation}`, parameters);
   }
   apercuVerificationEritureNiveau(parameters: any,niveau:any,codeTypeOperation:any) {
-    return this.http.post<any>(`${this.API_URL}/jasperpdf/verificationecriture/${niveau}/${codeTypeOperation}`, parameters);
+    return this.http.post<any>(`${this.API_URL}/jasperpdf/verificationecriture/${niveau}/${codeTypeOperation}`, parameters
+      , {responseType: 'blob' as any }
+    );
   }
 
   afficherDetailsEcriture(idOperation: number) {

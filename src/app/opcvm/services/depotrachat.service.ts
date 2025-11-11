@@ -36,10 +36,14 @@ export class DepotrachatService extends ResourceService<Depotrachat> {
   }
   verifIntentionRachat(idOpcvm:any,niveau1:any,niveau2:any){
     // verifintrach/{idOpcvm}/{niveau1}/{niveau2}
-    return this.http.get<any>(`${this.API_URL}/verifintrach/${idOpcvm}/${niveau1}/${niveau2}`)
+    return this.http.get<any>(`${this.API_URL}/verifintrach/${idOpcvm}/${niveau1}/${niveau2}`,
+       {responseType: 'blob' as any }
+    )
   }
   verifIntentionRachatN1N2(idOpcvm:any,niveau1:any,niveau2:any){
-    return this.http.get<any>(`${this.API_URL}/verifintrachN1/${idOpcvm}/${niveau1}/${niveau2}`)
+    return this.http.get<any>(`${this.API_URL}/verifintrachN1/${idOpcvm}/${niveau1}/${niveau2}`,
+       {responseType: 'blob' as any }
+    )
   }
   afficherPrecalculRachat(idSeance:any,idOpcvm:any,idPersonne:any){
     return this.http.get<any>(`${this.API_URL}/precalculrachat/${idSeance}/${idOpcvm}/${idPersonne}`)

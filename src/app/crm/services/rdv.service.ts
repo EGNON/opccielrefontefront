@@ -34,7 +34,9 @@ export class RdvService extends ResourceService<RDV> implements OnDestroy{
   }
   afficherListeEtat(etat:string)
   {
-    return this.http.get<RDV>(environment.apiUrl + `/rdvs/listerdvs/${etat}`);
+    return this.http.get<any>(environment.apiUrl + `/rdvs/listerdvs/${etat}`,
+      {responseType: 'blob' as any }
+    );
   }
   afficherRDVSelonPersonnel(idPersonnel:number)
   {

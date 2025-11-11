@@ -232,9 +232,27 @@
         <a (click)="afficherClient()" style="margin-right: 5px;margin-left: 5px;margin-top: 20px"
            class="btn btn-sm btn-primary">Valider</a>
         <button  *ngIf="prospect=='Personne physique'" class="btn btn-sm btn-primary"
-                 (click)="imprimer()" style="margin-top: 20px">Imprimer</button>
+                 (click)="imprimer()" style="margin-top: 20px">  <ng-container *ngIf="download">
+          <span class="indicator-progress" [style.display]="'block'">
+            Patientez svp...
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+          </span>
+          </ng-container>
+          <ng-container *ngIf="!download">
+            <span class="indicator-label">Imprimer</span>
+        </ng-container></button>
         <button  *ngIf="prospect=='Personne morale'" class="btn btn-sm btn-primary"
-                 (click)="imprimer()" style="margin-top: 20px">Imprimer</button>
+                 (click)="imprimer()" style="margin-top: 20px">  
+          <ng-container *ngIf="download">
+            <span class="indicator-progress" [style.display]="'block'">
+              Patientez svp...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="!download">
+            <span class="indicator-label">Imprimer</span>
+        </ng-container>
+      </button>
         <!--          </div>-->
         </div>
       </div>

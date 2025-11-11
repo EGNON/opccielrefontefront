@@ -21,10 +21,14 @@ export class OperationsouscriptionrachatService extends ResourceService<Operatio
       return this.http.get<any>(`${this.API_URL}/avisoperation/${idOperation}`)
   }
   avisOperationPdf(idOperation:any){
-      return this.http.get<any>(`${this.API_URL}/jasperpdf/avisoperation/${idOperation}`)
+      return this.http.get<any>(`${this.API_URL}/jasperpdf/avisoperation/${idOperation}`
+        , {responseType: 'blob' as any }
+      )
   }
   avisOperationPdf2(idOperation:any){
-      return this.http.get<any>(`${this.API_URL}/jasperpdf/avisoperation2/${idOperation}`)
+      return this.http.get<any>(`${this.API_URL}/jasperpdf/avisoperation2/${idOperation}`
+       
+      )
   }
 
   creer(operationSouscriptionRachat:any){
@@ -36,6 +40,8 @@ export class OperationsouscriptionrachatService extends ResourceService<Operatio
   }
 
   telechargerAvisSouscription(data: any) {
-    return this.http.post<any>(`${this.API_URL}/jasperpdf/export/avis/souscription`, data);
+    return this.http.post<any>(`${this.API_URL}/jasperpdf/export/avis/souscription`, data
+      , {responseType: 'blob' as any }
+    );
   }
 }

@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {finalize, Observable, Subscription} from "rxjs";
 import {SweetAlertOptions} from "sweetalert2";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../../core/modules/auth";
@@ -33,6 +33,7 @@ private subscriptions: Subscription[] = [];
   datatableConfig: Config = {};
 
   imprimer:boolean;
+  download:boolean;
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
   depotRachat$:any;
@@ -233,13 +234,19 @@ afficherDepot()
     });
   }
   imprimerDepot(){
+    this.download=true;
     this.selectExercie=document.getElementById('comboExerciceCinq')
     this.codeExercice=this.selectExercie.options[this.selectExercie.selectedIndex].text;
-    this.operationService.afficherOperationSupCinqMillionsEtat(this.codeExercice).subscribe(
-      (data)=>{
-        //this.depotRachat$=data;
-      }
-    )
+    this.operationService.afficherOperationSupCinqMillionsEtat(this.codeExercice).pipe
+    (finalize(()=>{
+      this.download=false;
+    })).subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'depot_sup_cinq_millions.pdf';
+      a.click();
+    });
   }
   public openPDF(): void {
     let DATA: any = document.getElementById('reporting-sup-cinq-millions');

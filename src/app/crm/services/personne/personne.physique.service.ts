@@ -116,11 +116,11 @@ export class PersonnePhysiqueService extends ResourceService<PersonnePhysique> i
   }
   afficherPersonnePhysiqueNayantPasInvestiEtat (qualite: string,dateDebut:Date,dateFin:Date )  {
     const url = `${this.API_URL}/investietat/`+qualite+'/'+dateDebut+'/'+dateFin;
-    return this.http.get<PersonnePhysique[]>(url);
+    return this.http.get<any>(url,{responseType: 'blob' as any });
   }
   afficherFicheKYC(id: number)
   {
-    return this.http.get<PersonnePhysique>(`${this.API_URL}/fichekyc/${id}`)
+    return this.http.get<any>(`${this.API_URL}/fichekyc/${id}`,{responseType: 'blob' as any })
   }
   getEntityById(id: any): Observable<PersonnePhysique> {
     const url = `${this.API_URL}/${id}`;
@@ -158,7 +158,7 @@ export class PersonnePhysiqueService extends ResourceService<PersonnePhysique> i
 
   afficherPersonneSelonQualiteEtat(keyword: any){
     const url = `${this.API_URL}/qualite/etat/${keyword}`;
-    return this.http.get(url);
+    return this.http.get<any>(url,{responseType: 'blob' as any });
   }
 
   afficherPersonnePhysiqueSelonQualite(keyword: any){

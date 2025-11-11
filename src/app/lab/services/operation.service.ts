@@ -27,7 +27,9 @@ export class OperationService extends EntityService<Operation> implements OnDest
   }
   afficherListeDepotRecenseSurAnneeEtat(codeExercice:number)
   {
-    return this.http.get<Operation[]>(`${this.API_URL}/depotsuranneeetat/${codeExercice}`);
+    return this.http.get<any>(`${this.API_URL}/depotsuranneeetat/${codeExercice}`
+      ,{responseType: 'blob' as any }
+    );
   }
   afficherOperationSupDixMillions(codeExercice:number)
   {
@@ -35,7 +37,9 @@ export class OperationService extends EntityService<Operation> implements OnDest
   }
   afficherOperationSupDixMillionsEtat(codeExercice:number)
   {
-    return this.http.get<Operation[]>(`${this.API_URL}/operationsupdixmillionsetat/${codeExercice}`);
+    return this.http.get<any>(`${this.API_URL}/operationsupdixmillionsetat/${codeExercice}`
+      ,{responseType: 'blob' as any }
+    );
   }
   afficherOperationSupCinqMillions(codeExercice:number)
   {
@@ -43,7 +47,9 @@ export class OperationService extends EntityService<Operation> implements OnDest
   }
   afficherOperationSupCinqMillionsEtat(codeExercice:number)
     {
-      return this.http.get<Operation[]>(`${this.API_URL}/operationsupcinqmillionsetat/${codeExercice}`);
+      return this.http.get<any>(`${this.API_URL}/operationsupcinqmillionsetat/${codeExercice}`
+        ,{responseType: 'blob' as any }
+      );
     }
 
   afficherOperationNouvelleRelationSupADixMillions(annee:number)
@@ -52,7 +58,9 @@ export class OperationService extends EntityService<Operation> implements OnDest
   }
   afficherOperationNouvelleRelationSupADixMillionsEtat(annee:number)
   {
-    return this.http.get<Operation[]>(`${this.API_URL}/nouvellerelationetat/${annee}`);
+    return this.http.get<any>(`${this.API_URL}/nouvellerelationetat/${annee}`
+      ,{responseType: 'blob' as any }
+    );
   }
   afficherTransactionInhabituelle(annee:number)
   {
@@ -60,7 +68,9 @@ export class OperationService extends EntityService<Operation> implements OnDest
   }
   afficherTransactionInhabituelleEtat(annee:number)
   {
-    return this.http.get<Operation[]>(`${this.API_URL}/transactioninhabituelleetat/${annee}`);
+    return this.http.get<any>(`${this.API_URL}/transactioninhabituelleetat/${annee}`
+      ,{responseType: 'blob' as any }
+    );
   }
   afficherTransactionNormale(annee:number)
   {
@@ -68,7 +78,9 @@ export class OperationService extends EntityService<Operation> implements OnDest
   }
   afficherTransactionNormaleEtat(annee:number)
   {
-    return this.http.get<Operation[]>(`${this.API_URL}/transactionnormaleetat/${annee}`);
+    return this.http.get<any>(`${this.API_URL}/transactionnormaleetat/${annee}`
+      ,{responseType: 'blob' as any }
+    );
   }
 
 }

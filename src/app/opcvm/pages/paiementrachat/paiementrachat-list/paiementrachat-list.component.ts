@@ -188,10 +188,13 @@ export class PaiementrachatListComponent implements OnInit, OnDestroy {
       this.localStore.getData("currentSeance").idSeanceOpcvm.idSeance,this.entityForm.value.denominationOpcvm,
       dateOuv,dateFerm).pipe(finalize(()=>{
           this.verifierPrecalcul=false
-      })).subscribe(
-      (data)=>{
-
-      })
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_paiement_rachat.pdf';
+        a.click();
+      });
   }
   verificationMiseAffectationEnAttente(){
     this.miseEnAffectationService.verificationMiseAffectationEnAttente(this.localStore.getData("currentOpcvm").idOpcvm)

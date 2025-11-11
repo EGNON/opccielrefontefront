@@ -147,7 +147,16 @@
       <a (click)="afficherCompteRendu()" style="margin-right: 5px;margin-left: 5px;margin-top: 25px"  class="btn btn-sm btn-primary">Valider</a>
       <button   class="btn btn-sm btn-primary"
                (click)="imprimer()"
-               style="margin-top: 25px">Imprimer</button>
+               style="margin-top: 25px"> 
+        <ng-container *ngIf="download">
+            <span class="indicator-progress" [style.display]="'block'">
+              Patientez svp...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="!download">
+          <span class="indicator-label">Imprimer</span>
+        </ng-container></button>
     </div>
     <!--end::Card toolbar-->
   </div>

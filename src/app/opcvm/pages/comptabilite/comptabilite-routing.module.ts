@@ -25,6 +25,8 @@ import {
 } from "./paiement-commission-investissement-add-edit/paiement-commission-investissement-add-edit.component";
 import {EcritureManuelComponent} from "./ecriture-manuel/ecriture-manuel.component";
 import {OperationdetachementdroitComponent} from "./operationdetachementdroit/operationdetachementdroit.component";
+import { ExerciceList } from './exercice-list/exercice-list';
+import { ExerciceAddEdit } from './exercice-add-edit/exercice-add-edit';
 
 const routes: Routes = [
   {
@@ -49,6 +51,9 @@ const routes: Routes = [
       { path: 'regulecartsolde/liste/new', component: RegulecartsoldeAddEditComponent},
       { path: 'regulecartsolde/liste/edit/:id', component: RegulecartsoldeAddEditComponent},
       { path: 'consultation', redirectTo: 'consultation/ecritures', pathMatch: 'full' },
+      { path: 'exercice/liste', component: ExerciceList},
+      { path: 'exercice/liste/new', component: ExerciceAddEdit},
+      { path: 'exercice/liste/edit/:id/:id2', component: ExerciceAddEdit},
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
   },

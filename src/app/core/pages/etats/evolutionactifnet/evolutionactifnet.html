@@ -22,6 +22,19 @@
                 <!--end::Input-->
               </div>
             </div>
+            <div class="col-md-4 fv-row">
+              <button style="margin-top: 30px;" type="button" class="btn btn-sm btn-info me-3" (click)="downloading ? null : telecharger()">
+              <ng-container *ngIf="downloading">
+                <span class="indicator-progress" [style.display]="'block'">
+                  Patientez svp...
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+              </ng-container>
+              <ng-container *ngIf="!downloading">
+                <span class="indicator-label">Imprimer</span>
+              </ng-container>
+            </button>
+            </div>
             
           </div>
           <hr>
@@ -41,17 +54,7 @@
                 <!--begin::Card toolbar-->
                 <div class="card-toolbar">
                   <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-sm btn-info me-3" (click)="downloading ? null : telecharger()">
-                      <ng-container *ngIf="downloading">
-                        <span class="indicator-progress" [style.display]="'block'">
-                          Patientez svp...
-                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                        </span>
-                      </ng-container>
-                      <ng-container *ngIf="!downloading">
-                        <span class="indicator-label">Imprimer</span>
-                      </ng-container>
-                    </button>
+                    
                    <!--  <button type="button" class="btn btn-sm btn-info me-3" (click)="export ? null : exportExcel()">
                       <ng-container *ngIf="export">
                         <span class="indicator-progress" [style.display]="'block'">

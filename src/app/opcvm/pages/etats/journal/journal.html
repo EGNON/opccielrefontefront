@@ -1,0 +1,84 @@
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <!--end::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date début</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateDebut="ngbDatepicker" aria-label="Date début"
+                       formControlName="dateDebut" (click)="dateDebut.toggle()"/>
+                <!--end::Input-->
+              </div>
+            </div>
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date fin</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateFin="ngbDatepicker" aria-label="Date fin"
+                       formControlName="dateFin" (click)="dateFin.toggle()"/>
+                <!--end::Input-->
+              </div>
+              </div>
+              <div class="col-md-3 fv-row">
+                <!--begin::Label-->
+                <label class="required fs-5 fw-semibold mb-2">Journal</label>
+                <!--end::Label-->
+                <!--begin::Select-->
+                <ng-multiselect-dropdown
+                [settings]="journalSettings"
+                [placeholder]="'Sélectionnez un libellé'"
+                formControlName="journal"
+                [data]="journal"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange2($event)"
+                (onDropDownClose)="onDropDownClose2($event)"
+                (onSelect)="onItemSelect2($event)"
+                (onDeSelect)="onDeSelect2($event)"
+                (onSelectAll)="onSelectAll2($event)"
+                (onDeSelectAll)="onDeSelectAll2($event)">
+              </ng-multiselect-dropdown>
+              </div>
+                <div class="col-md-3 fv-row">
+               <button style="margin-top: 30px;" type="button" class="btn btn-sm btn-info me-3" (click)="downloading ? null : telecharger()">
+                  <ng-container *ngIf="downloading">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                  </ng-container>
+                  <ng-container *ngIf="!downloading">
+                    <span class="indicator-label">Imprimer</span>
+                  </ng-container>
+                </button>
+            </div>
+              <!--end::Col-->
+            </div>
+          
+         
+          <hr>
+          
+        
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>

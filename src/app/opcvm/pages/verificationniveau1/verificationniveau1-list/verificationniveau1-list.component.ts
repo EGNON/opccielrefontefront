@@ -157,11 +157,13 @@ private idInAction: number;
         finalize(()=>{
           this.verifier=false
         })
-      ).subscribe(
-      (data)=>{
-        // console.log(data)
-      }
-    )
+      ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verif_intention_rachat_niveau1.pdf';
+        a.click();
+      });
   }
   validerRachat(){
     this.valider=true

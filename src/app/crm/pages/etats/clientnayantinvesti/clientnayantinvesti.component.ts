@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {finalize, Observable, Subscription} from "rxjs";
 import {Personne} from "../../../models/personne/personne.model";
 import {PersonnePhysiqueService} from "../../../services/personne/personne.physique.service";
 import {PersonneMoraleService} from "../../../services/personne/personne.morale.service";
@@ -25,6 +25,7 @@ export class ClientnayantinvestiComponent implements OnInit, OnDestroy{
   title: string;
   prospect: string;
   isLoading: boolean = false;
+  download: boolean = false;
   private subscriptions: Subscription[] = [];
   personnes: DataTablesResponse<any>;
   formData:FormGroup;
@@ -91,25 +92,39 @@ export class ClientnayantinvestiComponent implements OnInit, OnDestroy{
     }
   }
   imprimer(){
+    this.download=true
     this.prospect=this.selectProspect.options[this.selectProspect.selectedIndex].text;
     this.dateDebut=this.formData.get('dateDebut')?.value+"T00:00:00";
     this.dateFin=this.formData.get('dateFin')?.value+"T23:59:59";
     if(this.prospect=="Personne physique"){
       this.qualite="actionnaires".toUpperCase();
-      this.personnePhysiqueService.afficherPersonnePhysiqueNayantPasInvestiEtat(this.qualite,this.dateDebut,this.dateFin).subscribe(
-        (data)=>{
-
-        }
-      )
+      this.personnePhysiqueService.
+      afficherPersonnePhysiqueNayantPasInvestiEtat(this.qualite,
+        this.dateDebut,this.dateFin).pipe
+      (finalize(()=>{
+        this.download=false;
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'client_physique_n_ayant_pas_investi.pdf';
+        a.click();
+      });
     }
     else
     {
       this.qualite="actionnaires".toUpperCase()
-      this.personneMoraleService.afficherPersonneMoraleNayantPasInvestiEtat(this.qualite,this.dateDebut,this.dateFin).subscribe(
-        (data)=>{
-
-        }
-      )
+      this.personneMoraleService.afficherPersonneMoraleNayantPasInvestiEtat(this.qualite,
+        this.dateDebut,this.dateFin).pipe
+      (finalize(()=>{
+        this.download=false;
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'client_morale_n_ayant_pas_investi.pdf';
+        a.click();
+      });
     }
   }
   ngOnDestroy(): void {

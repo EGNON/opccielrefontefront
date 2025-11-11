@@ -3,6 +3,7 @@ import {PersonnelService} from "../../../services/personne/personnel.service";
 import {CompterenduService} from "../../../services/compterendu.service";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { finalize } from 'rxjs';
 
 @Component({
     selector: 'app-compterendu-print',
@@ -20,6 +21,7 @@ export class CompterenduPrintComponent implements OnInit{
   personnelSelectionnee:any;
   denomination:string;
   afficherTous:boolean;
+  download:boolean;
   @Input() selectedItem: any;
   constructor(
     public compteRenduService: CompterenduService,
@@ -58,6 +60,7 @@ export class CompterenduPrintComponent implements OnInit{
 
   }
   imprimer(){
+    this.download=true
     this.denomination=this.selectPersonnel.options[this.selectPersonnel.selectedIndex].text;
     if(this.denomination!="Tous"){
       this.personnelSelectionnee=this.selectPersonnel.options[this.selectPersonnel.selectedIndex].value;
@@ -67,12 +70,16 @@ export class CompterenduPrintComponent implements OnInit{
     else
       this.idUtilisateur=null;
 
-      this.compteRenduService.afficherEtat(this.idUtilisateur).subscribe(
-        (data) => {
-          // this.compteRendu$=data;
-          console.log("pass" ,data)
-        }
-      );
+      this.compteRenduService.afficherEtat(this.idUtilisateur).pipe
+      (finalize(()=>{
+        this.download=false;
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'comptes_rendus.pdf';
+        a.click();
+      });
 
 
   }

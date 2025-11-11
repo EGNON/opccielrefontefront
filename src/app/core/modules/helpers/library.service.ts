@@ -164,174 +164,6 @@ export class LibraryService implements OnDestroy{
                   parent: 'Paramètre',
                   children: []
                 },
-                /*{
-                  allow: null,
-                  title: 'Personne',
-                  dataLink: '/app/standard/parametre/personne',
-                  icon: '',
-                  page: '',
-                  translate: '',
-                  role: '',
-                  parent: 'Paramètre',
-                  children: [
-                    {
-                      allow: null,
-                      title: 'Physique',
-                      dataLink: '/app/standard/parametre/personne/physique',
-                      icon: '',
-                      page: '',
-                      translate: '',
-                      role: '',
-                      parent: 'Personne',
-                      children: [
-                        {
-                          allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_PROSPECT'),
-                          title: 'Prospect',
-                          page: '/app/standard/parametre/personne/physique/prospect',
-                          role: 'ROLE_PHYSIQUE_PROSPECT',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Physique',
-                          children: []
-                        },
-                        {
-                          allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_ACTIONNAIRE'),
-                          title: 'Actionnaire',
-                          page: '/app/standard/parametre/personne/physique/actionnaire',
-                          role: 'ROLE_PHYSIQUE_ACTIONNAIRE',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Physique',
-                          children: []
-                        },
-                        {
-                          allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_DISTRIBUTEUR'),
-                          title: 'Distributeur',
-                          page: '/app/standard/parametre/personne/physique/distributeur',
-                          role: 'ROLE_PHYSIQUE_DISTRIBUTEUR',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Physique',
-                          children: []
-                        },
-                        /!*{
-                          allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_EXPOSE'),
-                          title: 'Personne politiquement exposée',
-                          page: '/lab/standard/parametre/personne/physique/politiquementexpose',
-                          role: 'ROLE_PHYSIQUE_EXPOSE',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Physique',
-                          children: []
-                        },
-                        {
-                          allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_JUGE'),
-                          title: 'Personne jugée par des mesures de gel d\''+'avoirs',
-                          page: '/lab/standard/parametre/personne/physique/juge',
-                          role: 'ROLE_PHYSIQUE_JUGE',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Physique',
-                          children: []
-                        },*!/
-                        {
-                          allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_SANCTIONNEE'),
-                          title: 'Personne physique sanctionnée',
-                          page: '/lab/standard/parametre/personne/physique/sanctionnee',
-                          role: 'ROLE_PHYSIQUE_SANCTIONNEE',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Physique',
-                          children: []
-                        }
-                      ]
-                    },
-                    {
-                      allow: null,
-                      title: 'Morale',
-                      dataLink: '/app/standard/parametre/personne/morale',
-                      icon: '',
-                      page: '',
-                      translate: '',
-                      role: '',
-                      parent: 'Personne',
-                      children: [
-                        {
-                          allow: this.authService.isGrantedRole('ROLE_MORALE_PROSPECT'),
-                          title: 'Prospect',
-                          page: '/app/standard/parametre/personne/morale/prospect',
-                          role: 'ROLE_MORALE_PROSPECT',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Morale',
-                          children: []
-                        },
-                        {
-                          allow: this.authService.isGrantedRole('ROLE_MORALE_ACTIONNAIRE'),
-                          title: 'Actionnaire',
-                          page: '/app/standard/parametre/personne/morale/actionnaire',
-                          role: 'ROLE_MORALE_ACTIONNAIRE',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Morale',
-                          children: []
-                        },
-                        {
-                          allow: this.authService.isGrantedRole('ROLE_MORALE_DISTRIBUTEUR'),
-                          title: 'Distributeur',
-                          page: '/app/standard/parametre/personne/morale/distributeur',
-                          role: 'ROLE_MORALE_DISTRIBUTEUR',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Morale',
-                          children: []
-                        },
-                        /!*{
-                          allow: this.authService.isGrantedRole('ROLE_MORALE_EXPOSE'),
-                          title: 'Personne politiquement exposée',
-                          page: '/lab/standard/parametre/personne/morale/politiquementexpose',
-                          role: 'ROLE_MORALE_EXPOSE',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Morale',
-                          children: []
-                        },
-                        {
-                          allow: this.authService.isGrantedRole('ROLE_MORALE_JUGE'),
-                          title: 'Personne jugée par des mesures de gel d\''+'avoirs',
-                          page: '/lab/standard/parametre/personne/morale/juge',
-                          role: 'ROLE_MORALE_JUGE',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Morale',
-                          children: []
-                        },*!/
-                        {
-                          allow: this.authService.isGrantedRole('ROLE_MORALE_SANCTIONNEE'),
-                          title: 'Personne morale sanctionnée',
-                          page: '/lab/standard/parametre/personne/morale/sanctionnee',
-                          role: 'ROLE_MORALE_SANCTIONNEE',
-                          dataLink: '',
-                          icon: '',
-                          translate: '',
-                          parent: 'Morale',
-                          children: []
-                        }
-                      ]
-                    }
-                  ]
-                },*/
                 {
                   allow: null,
                   title: 'Personne Physique',
@@ -353,31 +185,10 @@ export class LibraryService implements OnDestroy{
                       parent: 'Personne Physique',
                       route: null,
                       children: []
-                    },
-                    {
-                      allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_SANCTIONNEE'),
-                      title: 'Liste des personnes physiques politiquement exposées',
-                      page: '/lab/standard/parametre/personne/physique/expose',
-                      role: 'ROLE_PHYSIQUE_SANCTIONNEE',
-                      dataLink: '',
-                      icon: '',
-                      translate: '',
-                      children: []
-                    }
-                    ,
-                    {
-                      allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_SANCTIONNEE'),
-                      title: 'Liste des personnes physiques jugées par des mesures de gel des avoirs',
-                      page: '/lab/standard/parametre/personne/physique/juge',
-                      role: 'ROLE_PHYSIQUE_SANCTIONNEE',
-                      dataLink: '',
-                      icon: '',
-                      translate: '',
-                      children: []
                     }
                   ]
                 },
-                {
+                 {
                   allow: null,
                   title: 'Personne Morale',
                   dataLink: '',
@@ -397,32 +208,7 @@ export class LibraryService implements OnDestroy{
                       translate: '',
                       parent: 'Personne Morale',
                       children: []
-                    },
-                    {
-                      allow: this.authService.isGrantedRole('ROLE_MORALE_SANCTIONNEE'),
-                      title: 'Personnes morales politiquement exposées',
-                      page: '/lab/standard/parametre/personne/morale/expose',
-                      role: 'ROLE_MORALE_SANCTIONNEE',
-                      dataLink: '',
-                      icon: '',
-                      translate: '',
-                      parent: 'Personne Morale',
-                      children: []
-                    }
-                    ,
-                    {
-                      allow: this.authService.isGrantedRole('ROLE_MORALE_SANCTIONNEE'),
-                      title: 'Personnes morales jugées par les mesures de gel des avoirs',
-                      page: '/lab/standard/parametre/personne/morale/juge',
-                      role: 'ROLE_MORALE_SANCTIONNEE',
-                      dataLink: '',
-                      icon: '',
-                      translate: '',
-                      parent: 'Personne Morale',
-                      children: []
-                    }
-                  ]
-                },
+                    }]},
                 {
                   allow: this.authService.isGrantedRole('ROLE_SOCIETE_GESTION'),
                   title: 'Société de Gestion',
@@ -500,17 +286,7 @@ export class LibraryService implements OnDestroy{
                   parent: 'Paramètre',
                   children: []
                 },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_PAYS_GAFI'),
-                  title: 'Pays GAFI',
-                  icon: '',
-                  page: '/lab/standard/parametre/pays',
-                  role: 'ROLE_PAYS_GAFI',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Paramètre',
-                  children: []
-                },
+                
                 {
                   allow: this.authService.isGrantedRole('ROLE_LANGUE'),
                   title: 'Langue',
@@ -631,8 +407,8 @@ export class LibraryService implements OnDestroy{
                   dataLink: '',
                   parent: 'Paramètre',
                   children: []
-                },
-                {
+                }
+                /*{
                   allow: null,
                   title: 'Instruments financiers',
                   dataLink: '/app/standard/parametre/instumentfinancier',
@@ -832,13 +608,728 @@ export class LibraryService implements OnDestroy{
                       ]
                     },
                   ]
-                }
+                }*/
                 ,
+                
                 {
+                  allow: null,
+                  title: 'Nomenclature',
+                  dataLink: '/app/standard/parametre/nomenclature',
+                  icon: '',
+                  page: '',
+                  translate: '',
+                  role: '',
+                  parent: 'Paramètre',
+                  children: [
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_TYPECOMPTE'),
+                      title: 'Type compte',
+                      page: '/app/standard/parametre/nomenclature/typecompte',
+                      role: 'ROLE_TYPECOMPTE',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      parent: 'Nomenclature',
+                      children: []
+                    },
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_SOUSTYPECOMPTE'),
+                      title: 'Sous type compte',
+                      page: '/app/standard/parametre/nomenclature/soustypecompte',
+                      role: 'ROLE_SOUSTYPECOMPTE',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      parent: 'Nomenclature',
+                      children: []
+                    },
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_TYPECLIENT'),
+                      title: 'Type client',
+                      page: '/app/standard/parametre/nomenclature/typeclient',
+                      role: 'ROLE_TYPECLIENT',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      parent: 'Nomenclature',
+                      children: []
+                    },
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_SOUSTYPECLIENT'),
+                      title: 'Sous type client',
+                      page: '/app/standard/parametre/nomenclature/soustypeclient',
+                      role: 'ROLE_SOUSTYPECLIENT',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      parent: 'Nomenclature',
+                      children: []
+                    },
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_CATEGORIECLIENT'),
+                      title: 'Catégorie client',
+                      page: '/app/standard/parametre/nomenclature/categorieclient',
+                      role: 'ROLE_CATEGORIECLIENT',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      parent: 'Nomenclature',
+                      children: []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        
+        {
+          allow: null,
+          type: 'section',
+          title: 'APPLICATION',
+          icon: '',
+          page: '',
+          translate: '',
+          role: '',
+          dataLink: '',
+          parent: null,
+          children: [
+            {
+              allow: null,
+              title: 'CRM',
+              icon: 'element-7',
+              dataLink: '/crm/rendezvous',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_PLANIFICATION_RDV'),
+                  title: 'Plannifier un RDV',
+                  page: '/crm/rendezvous/rdv',
+                  role: 'ROLE_PLANIFICATION_RDV',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Rendez-vous',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/rendezvous/rdv').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_COMPTE_RENDU'),
+                  title: 'Compte Rendu',
+                  page: '/crm/rendezvous/compterendu',
+                  role: 'ROLE_COMPTE_RENDU',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Rendez-vous',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/rendezvous/compterendu').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_AUTORISATION_CR'),
+                  title: 'Autorisation CR',
+                  page: '/crm/rendezvous/autorisationcr',
+                  role: 'ROLE_AUTORISATION_CR',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Rendez-vous',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/rendezvous/autorisationcr').includes(value.path!)),
+                  children: []
+                },
+                {
+              allow: null,
+              title: 'Notifications',
+              icon: '',
+              dataLink: '/crm/notifications',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_MODELE_MSG_ALERTE'),
+                  title: 'Modèle message alerte',
+                  page: '/crm/notifications/modelemsgalerte',
+                  role: 'ROLE_MODELE_MSG_ALERTE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Notifications',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/notifications/modelemsgalerte').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ALERTE'),
+                  title: 'Alertes',
+                  page: '/crm/notifications/alertes',
+                  role: 'ROLE_ALERTE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Notifications',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/notifications/alertes').includes(value.path!)),
+                  children: []
+                },
+               
+                {
+                  allow: this.authService.isGrantedRole('ROLE_MAIL'),
+                  title: 'Mail',
+                  page: '/crm/notifications/mail',
+                  role: 'ROLE_MAIL',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Notifications',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/notifications/mail').includes(value.path!)),
+                  children: []
+                }
+              ]
+            },
+                 {
+                  allow: null,
+                  title: 'Objectifs',
+                  icon: '',
+                  dataLink: '/crm/objectifs',
+                  page: '',
+                  translate: '',
+                  role: '',
+                  parent: 'APPLICATION',
+                  children: [
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_OBJECTIF_A_AFFECTER'),
+                      title: 'Définition des objectifs',
+                      page: '/crm/objectifs/objectifaffecter',
+                      role: 'ROLE_OBJECTIF_A_AFFECTER',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Objectifs',
+                      route: CrmRouting.find((value, index, obj) =>
+                        ('/crm/objectifs/objectifaffecter').includes(value.path!)),
+                      children: []
+                    },
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_AFFECTATION_OBJECTIF'),
+                      title: 'Affectation des objectifs',
+                      page: '/crm/objectifs/affectation',
+                      role: 'ROLE_AFFECTATION_OBJECTIF',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Objectifs',
+                      route: CrmRouting.find((value, index, obj) =>
+                        ('/crm/objectifs/affectation').includes(value.path!)),
+                      children: []
+                    },
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_OBJECTIF_ATTEINT'),
+                      title: 'Mes objectifs atteints',
+                      page: '/crm/objectifs/objectifatteint',
+                      role: 'ROLE_OBJECTIF_ATTEINT',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Objectifs',
+                      route: CrmRouting.find((value, index, obj) =>
+                        ('/crm/objectifs/objectifatteint').includes(value.path!)),
+                      children: []
+                    }
+                  ]
+                },
+                {
+              allow: null,
+              title: 'Etats & Statistiques',
+              icon: 'printer',
+              dataLink: '/crm/etats',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'REPORTINGS',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_RDV_PLAN'),
+                  title: 'Liste des RDV planifiés',
+                  page: '/crm/etats/rdv/liste',
+                  role: 'ROLE_RDV_PLAN',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/etats/rdv/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_LISTE_CR'),
+                  title: 'Liste des comptes rendus',
+                  page: '/crm/etats/cr/liste',
+                  role: 'ROLE_LISTE_CR',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/etats/cr/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_LISTE_PROSPECT'),
+                  title: 'Liste des prospects',
+                  page: '/crm/etats/prospect/liste',
+                  role: 'ROLE_LISTE_PROSPECT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/etats/prospect/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_FICHE_KYC'),
+                  title: 'Edition de la fiche KYC',
+                  page: '/crm/etats/client/fichekyc',
+                  role: 'ROLE_FICHE_KYC',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/etats/client/fichekyc').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_CLIENT_PAS_INVESTI'),
+                  title: 'Clients n\'ayant pas investi sur une période donnée',
+                  page: '/crm/etats/client/nayantpasinvesti',
+                  role: 'ROLE_CLIENT_PAS_INVESTI',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/etats/client/nayantpasinvesti').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_CLIENT_PORTEFEUILLE'),
+                  title: 'Liste des clients en portefeuille',
+                  page: '/crm/etats/client/liste',
+                  role: 'ROLE_CLIENT_PORTEFEUILLE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/etats/client/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_POINT_SOUSCRIPTION'),
+                  title: 'Point des souscriptions apportées sur une période donnée',
+                  page: '/crm/etats/produitsouscrit/liste',
+                  role: 'ROLE_POINT_SOUSCRIPTION',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/etats/produitsouscrit/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_POINT_OBJECTIF_AFFECTE'),
+                  title: 'Point périodique des objectifs',
+                  page: '/crm/etats/objectif/liste',
+                  role: 'ROLE_POINT_OBJECTIF_AFFECTE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: CrmRouting.find((value, index, obj) =>
+                    ('/crm/etats/objectif/liste').includes(value.path!)),
+                  children: []
+                }
+            
+              ]
+            }
+              ]
+            },
+          
+            {
+              allow: null,
+              title: 'LAB',
+              icon: 'calendar',
+              page: '',
+              role: '',
+              translate: '',
+              dataLink: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_PAYS_GAFI'),
+                  title: 'Pays GAFI',
+                  icon: '',
+                  page: '/lab/standard/parametre/pays',
+                  role: 'ROLE_PAYS_GAFI',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Paramètre',
+                  children: []
+                },
+                
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_SANCTIONNEE'),
+                      title: 'Liste des personnes physiques politiquement exposées',
+                      page: '/lab/standard/parametre/personne/physique/expose',
+                      role: 'ROLE_PHYSIQUE_SANCTIONNEE',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      children: []
+                    }
+                    ,
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_PHYSIQUE_SANCTIONNEE'),
+                      title: 'Liste des personnes physiques jugées par des mesures de gel des avoirs',
+                      page: '/lab/standard/parametre/personne/physique/juge',
+                      role: 'ROLE_PHYSIQUE_SANCTIONNEE',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      children: []
+                    }
+                 ,
+               
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_MORALE_SANCTIONNEE'),
+                      title: 'Personnes morales politiquement exposées',
+                      page: '/lab/standard/parametre/personne/morale/expose',
+                      role: 'ROLE_MORALE_SANCTIONNEE',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      parent: 'Personne Morale',
+                      children: []
+                    }
+                    ,
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_MORALE_SANCTIONNEE'),
+                      title: 'Personnes morales jugées par les mesures de gel des avoirs',
+                      page: '/lab/standard/parametre/personne/morale/juge',
+                      role: 'ROLE_MORALE_SANCTIONNEE',
+                      dataLink: '',
+                      icon: '',
+                      translate: '',
+                      parent: 'Personne Morale',
+                      children: []
+                    }
+                 ,
+                {
+                  allow: this.authService.isGrantedRole('ROLE_GELDEGEL'),
+                  title: 'Geler ou dégeler un avoir',
+                  page: '/lab/geldegel',
+                  role: 'ROLE_GELDEGEL',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Gel/dégel',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/geldegel').includes(value.path!)),
+                  children: []
+                },
+                 {
+                  allow: this.authService.isGrantedRole('ROLE_ALERTE_LAB'),
+                  title: 'Critère d\'alerte',
+                  page: '/lab/notifications/alertes',
+                  role: 'ROLE_ALERTE_LAB',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Notifications',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/notifications/alertes').includes(value.path!)),
+                  children: []
+                },
+            {
+              allow: null,
+              title: 'Etats & Statistiques',
+              icon: 'printer',
+              dataLink: '/crm/etats',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'REPORTINGS',
+              children: [              
+                {
+                  allow: this.authService.isGrantedRole('ROLE_OPERATION_CLIENT_OCCASIONNEL'),
+                  title: 'Recensement des opérations effectuées par un même client, qu\'il soit occasionnel ou habituel',
+                  page: '/lab/etats/recensement/operation-client/liste',
+                  role: 'ROLE_OPERATION_CLIENT_OCCASIONNEL',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/etats/recensement/operation-client/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_TRANSACTION_SUSPECTE_INHABITUELLE'),
+                  title: 'Identification des transactions à caractère suspect ou inhabituel ',
+                  page: '/lab/etats/identification/operation-suspecte/inhabituelle/liste',
+                  role: 'ROLE_TRANSACTION_SUSPECTE_INHABITUELLE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/etats/identification/operation-suspecte/inhabituelle/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_SUIVI_CLIENT_SANCTION'),
+                  title: 'Suivi d’un client inscrit sur une ' +
+                    'liste de sanctions financières ciblé du conseil de sécurité des états unies',
+                  page: '/lab/etats/sanction/suivi-client/liste',
+                  role: 'ROLE_SUIVI_CLIENT_SANCTION',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/etats/sanction/suivi-client/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_REGISTRE_CONFIDENTIEL'),
+                  title: 'Régistre confidentiel',
+                  page: '/lab/etats/registre/confidentiel',
+                  role: 'ROLE_REGISTRE_CONFIDENTIEL',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/etats/registre/confidentiel').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_DEPOT_SUPERIEUR_A_CINQ_MILLIONS'),
+                  title: 'Opérations effectuées par des personnes physiques et supérieure à 5 millions',
+                  page: '/lab/etats/depot-superieur-a-cinq-millions/liste',
+                  role: 'ROLE_DEPOT_SUPERIEUR_A_CINQ_MILLIONS',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/etats/depot-superieur-a-cinq-millions/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_DEPOT_RECENSE_ESPECE'),
+                  title: 'Détermination du solde global de l\'ensemble des comptes détenus par un même client',
+                  page: '/lab/etats/depot-espece-sur-annee/liste',
+                  role: 'ROLE_DEPOT_RECENSE_ESPECE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/etats/depot-espece-sur-annee/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_DEPOT_RECENSE_ANNEE'),
+                  title: 'Point des transactions personnes physiques supérieures ou égales à 10 000 000 sur l\'année',
+                  page: '/lab/etats/depot-sur-annee-superieur-ou-egal-a-dix-millions/liste',
+                  role: 'ROLE_DEPOT_RECENSE_ANNEE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/etats/depot-sur-annee-superieur-ou-egal-a-dix-millions/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_OPERATION_NOUVELLE_RELATION'),
+                  title: 'Point des transactions personnes physiques supérieures ou égales à 10 000 000 constituants des nouvelles relations d\'affaires sur l\'année',
+                  page: '/lab/etats/operation-constituant-de-nouvelle-relation-superieur-ou-egal-a-dix-millions/liste',
+                  role: 'ROLE_OPERATION_NOUVELLE_RELATION',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/etats/operation-constituant-de-nouvelle-relation-superieur-ou-egal-a-dix-millions/liste').includes(value.path!)),
+                  children: []
+                },
+              
+                {
+                  allow: this.authService.isGrantedRole('ROLE_OPERATION_CONDITION_INHABITUELLE'),
+                  title: 'Point des transactions personnes physiques supérieures \n' +
+                    '            ou égales à 10 000 000 effectuées dans les conditions inhabituelles sur l\'année',
+                  page: '/lab/etats/operation-effectuee-condition-inhabituelle-superieur-ou-egal-a-dix-millions/liste',
+                  role: 'ROLE_OPERATION_CONDITION_INHABITUELLE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/etats/operation-effectuee-condition-inhabituelle-superieur-ou-egal-a-dix-millions/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_OPERATION_CONDITION_NORMALE'),
+                  title: 'Point des transactions personnes physiques supérieures ou égales à' +
+                    ' 50 000 000 effectuées dans les conditions normales sur l\'année',
+                  page: '/lab/etats/operation-effectuee-condition-normale-superieur-ou-egal-a-cinquante-millions/liste',
+                  role: 'ROLE_OPERATION_CONDITION_NORMALE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/etats/operation-effectuee-condition-normale-superieur-ou-egal-a-cinquante-millions/liste').includes(value.path!)),
+                  children: []
+                }    
+              ]
+            }
+          ]
+            },
+            {
+              allow: null,
+              title: 'Risque',
+              icon: 'graph-up',
+              page: '',
+              role: '',
+              translate: '',
+              dataLink: '',
+              parent: 'APPLICATION',
+              children: [
+                {
+                  allow: this.authService.isGrantedRole('ROLE_NAVBENCHMARK'),
+                  title: 'NavBenchMark',
+                  page: '/risque/navbenchmark/liste',
+                  role: 'ROLE_NAVBENCHMARK',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Risque',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/navbenchmark/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_VOLATILITE'),
+                  title: 'Volatilité FCP',
+                  page: '/risque/etats/volatilite/fcp',
+                  role: 'ROLE_ETAT_VOLATILITE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/volatilite/fcp').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_ALPHA'),
+                  title: 'Alpha',
+                  page: '/risque/etats/alpha/liste',
+                  role: 'ROLE_ETAT_ALPHA',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/alpha/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_RATIO_SHARP'),
+                  title: 'Ratio de sharp',
+                  page: '/risque/etats/ratiosharp/liste',
+                  role: 'ROLE_ETAT_RATIO_SHARP',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/ratiosharp/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_CORRELATION'),
+                  title: 'Corrélation',
+                  page: '/risque/etats/correlation/liste',
+                  role: 'ROLE_ETAT_CORRELATION',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/correlation/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_COVARIANCE'),
+                  title: 'Covariance',
+                  page: '/risque/etats/covariance/liste',
+                  role: 'ROLE_ETAT_COVARIANCE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/covariance/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_BETA'),
+                  title: 'Bêta',
+                  page: '/risque/etats/beta/liste',
+                  role: 'ROLE_ETAT_BETA',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/beta/liste').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_RATIOTREYNOR'),
+                  title: 'Ratio de Treynor',
+                  page: '/risque/etats/ratiotreynor/liste',
+                  role: 'ROLE_ETAT_RATIOTREYNOR',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: RisqueRouting.find((value, index, obj) =>
+                    ('/risque/etats/ratiotreynor/liste').includes(value.path!)),
+                  children: []
+                }
+              ]
+            },
+             {
                   allow: null,
                   title: 'Comptabilité',
                   dataLink: '/app/standard/parametre/comptabilite',
-                  icon: '',
+                  icon: 'wallet',
                   page: '',
                   translate: '',
                   role: '',
@@ -980,306 +1471,209 @@ export class LibraryService implements OnDestroy{
                       ]
                     }
                   ]
-                }
+          }
                 ,
-                {
-                  allow: null,
-                  title: 'Nomenclature',
-                  dataLink: '/app/standard/parametre/nomenclature',
-                  icon: '',
-                  page: '',
-                  translate: '',
-                  role: '',
-                  parent: 'Paramètre',
-                  children: [
-                    {
-                      allow: this.authService.isGrantedRole('ROLE_TYPECOMPTE'),
-                      title: 'Type compte',
-                      page: '/app/standard/parametre/nomenclature/typecompte',
-                      role: 'ROLE_TYPECOMPTE',
-                      dataLink: '',
-                      icon: '',
-                      translate: '',
-                      parent: 'Nomenclature',
-                      children: []
-                    },
-                    {
-                      allow: this.authService.isGrantedRole('ROLE_SOUSTYPECOMPTE'),
-                      title: 'Sous type compte',
-                      page: '/app/standard/parametre/nomenclature/soustypecompte',
-                      role: 'ROLE_SOUSTYPECOMPTE',
-                      dataLink: '',
-                      icon: '',
-                      translate: '',
-                      parent: 'Nomenclature',
-                      children: []
-                    },
-                    {
-                      allow: this.authService.isGrantedRole('ROLE_TYPECLIENT'),
-                      title: 'Type client',
-                      page: '/app/standard/parametre/nomenclature/typeclient',
-                      role: 'ROLE_TYPECLIENT',
-                      dataLink: '',
-                      icon: '',
-                      translate: '',
-                      parent: 'Nomenclature',
-                      children: []
-                    },
-                    {
-                      allow: this.authService.isGrantedRole('ROLE_SOUSTYPECLIENT'),
-                      title: 'Sous type client',
-                      page: '/app/standard/parametre/nomenclature/soustypeclient',
-                      role: 'ROLE_SOUSTYPECLIENT',
-                      dataLink: '',
-                      icon: '',
-                      translate: '',
-                      parent: 'Nomenclature',
-                      children: []
-                    },
-                    {
-                      allow: this.authService.isGrantedRole('ROLE_CATEGORIECLIENT'),
-                      title: 'Catégorie client',
-                      page: '/app/standard/parametre/nomenclature/categorieclient',
-                      role: 'ROLE_CATEGORIECLIENT',
-                      dataLink: '',
-                      icon: '',
-                      translate: '',
-                      parent: 'Nomenclature',
-                      children: []
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
+             {
           allow: null,
-          type: 'section',
-          title: 'APPLICATION',
-          icon: '',
+          title: 'Titres',
+          dataLink: '/app/standard/parametre/instumentfinancier',
+          icon: 'message-text-2',
           page: '',
           translate: '',
           role: '',
-          dataLink: '',
-          parent: null,
+          parent: 'Paramètre',
           children: [
             {
-              allow: null,
-              title: 'Notifications',
-              icon: 'message-text-2',
-              dataLink: '/crm/notifications',
-              page: '',
-              translate: '',
-              role: '',
-              parent: 'APPLICATION',
-              children: [
-                {
-                  allow: this.authService.isGrantedRole('ROLE_MODELE_MSG_ALERTE'),
-                  title: 'Modèle message alerte',
-                  page: '/crm/notifications/modelemsgalerte',
-                  role: 'ROLE_MODELE_MSG_ALERTE',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Notifications',
-                  route: CrmRouting.find((value, index, obj) =>
-                    ('/crm/notifications/modelemsgalerte').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_ALERTE'),
-                  title: 'Alertes',
-                  page: '/crm/notifications/alertes',
-                  role: 'ROLE_ALERTE',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Notifications',
-                  route: CrmRouting.find((value, index, obj) =>
-                    ('/crm/notifications/alertes').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_ALERTE_LAB'),
-                  title: 'Critère d\'alerte',
-                  page: '/lab/notifications/alertes',
-                  role: 'ROLE_ALERTE_LAB',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Notifications',
-                  route: LabRouting.find((value, index, obj) =>
-                    ('/lab/notifications/alertes').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_MAIL'),
-                  title: 'Mail',
-                  page: '/crm/notifications/mail',
-                  role: 'ROLE_MAIL',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Notifications',
-                  route: CrmRouting.find((value, index, obj) =>
-                    ('/crm/notifications/mail').includes(value.path!)),
-                  children: []
-                }
-              ]
-            },
-            {
-              allow: null,
-              title: 'Rendez-vous',
-              icon: 'element-7',
-              dataLink: '/crm/rendezvous',
-              page: '',
-              translate: '',
-              role: '',
-              parent: 'APPLICATION',
-              children: [
-                {
-                  allow: this.authService.isGrantedRole('ROLE_PLANIFICATION_RDV'),
-                  title: 'Plannifier un RDV',
-                  page: '/crm/rendezvous/rdv',
-                  role: 'ROLE_PLANIFICATION_RDV',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Rendez-vous',
-                  route: CrmRouting.find((value, index, obj) =>
-                    ('/crm/rendezvous/rdv').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_COMPTE_RENDU'),
-                  title: 'Compte Rendu',
-                  page: '/crm/rendezvous/compterendu',
-                  role: 'ROLE_COMPTE_RENDU',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Rendez-vous',
-                  route: CrmRouting.find((value, index, obj) =>
-                    ('/crm/rendezvous/compterendu').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_AUTORISATION_CR'),
-                  title: 'Autorisation CR',
-                  page: '/crm/rendezvous/autorisationcr',
-                  role: 'ROLE_AUTORISATION_CR',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Rendez-vous',
-                  route: CrmRouting.find((value, index, obj) =>
-                    ('/crm/rendezvous/autorisationcr').includes(value.path!)),
-                  children: []
-                }
-              ]
-            },
-            {
-              allow: null,
-              title: 'Objectifs',
-              icon: 'calendar',
-              dataLink: '/crm/objectifs',
-              page: '',
-              translate: '',
-              role: '',
-              parent: 'APPLICATION',
-              children: [
-                {
-                  allow: this.authService.isGrantedRole('ROLE_OBJECTIF_A_AFFECTER'),
-                  title: 'Définition des objectifs',
-                  page: '/crm/objectifs/objectifaffecter',
-                  role: 'ROLE_OBJECTIF_A_AFFECTER',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Objectifs',
-                  route: CrmRouting.find((value, index, obj) =>
-                    ('/crm/objectifs/objectifaffecter').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_AFFECTATION_OBJECTIF'),
-                  title: 'Affectation des objectifs',
-                  page: '/crm/objectifs/affectation',
-                  role: 'ROLE_AFFECTATION_OBJECTIF',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Objectifs',
-                  route: CrmRouting.find((value, index, obj) =>
-                    ('/crm/objectifs/affectation').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_OBJECTIF_ATTEINT'),
-                  title: 'Mes objectifs atteints',
-                  page: '/crm/objectifs/objectifatteint',
-                  role: 'ROLE_OBJECTIF_ATTEINT',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Objectifs',
-                  route: CrmRouting.find((value, index, obj) =>
-                    ('/crm/objectifs/objectifatteint').includes(value.path!)),
-                  children: []
-                }
-              ]
-            },
-            {
-              allow: null,
-              title: 'Gel/dégel',
-              icon: 'calendar',
-              page: '',
-              role: '',
-              translate: '',
+              allow: this.authService.isGrantedRole('ROLE_COMPARTIMENT'),
+              title: 'Compartiment',
+              page: '/app/standard/parametre/instrumentfinancier/compartiment',
+              role: 'ROLE_COMPARTIMENT',
               dataLink: '',
-              parent: 'APPLICATION',
-              children: [
-                {
-                  allow: this.authService.isGrantedRole('ROLE_GELDEGEL'),
-                  title: 'Geler ou dégeler un avoir',
-                  page: '/lab/geldegel',
-                  role: 'ROLE_GELDEGEL',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Gel/dégel',
-                  route: LabRouting.find((value, index, obj) =>
-                    ('/lab/geldegel').includes(value.path!)),
-                  children: []
-                }
-              ]
-            },
-            {
-              allow: null,
-              title: 'Risque',
               icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_NATUREEVENEMENT'),
+              title: 'Nature évènement',
+              page: '/app/standard/parametre/instrumentfinancier/natureevenement',
+              role: 'ROLE_NATUREEVENEMENT',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_SECTEURBOURSIER'),
+              title: 'Secteur boursier',
+              page: '/app/standard/parametre/instrumentfinancier/secteurboursier',
+              role: 'ROLE_SECTEURBOURSIER',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_SOUSTYPEACTION'),
+              title: 'Sous type action',
+              page: '/app/standard/parametre/instrumentfinancier/soustypeaction',
+              role: 'ROLE_SOUSTYPEACTION',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_TYPEACTION'),
+              title: 'Type action',
+              page: '/app/standard/parametre/instrumentfinancier/typeaction',
+              role: 'ROLE_TYPEACTION',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_TYPEEMETTEUR'),
+              title: 'Type emetteur',
+              page: '/app/standard/parametre/instrumentfinancier/typeemetteur',
+              role: 'ROLE_TYPEEMETTEUR',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_TYPEEMISSION'),
+              title: 'Type emission',
+              page: '/app/standard/parametre/instrumentfinancier/typeemission',
+              role: 'ROLE_TYPEEMISSION',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_TYPEEVENEMENT'),
+              title: 'Type évènement',
+              page: '/app/standard/parametre/instrumentfinancier/typeevenement',
+              role: 'ROLE_TYPEEVENEMENT',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_TYPEGARANT'),
+              title: 'Type garant',
+              page: '/app/standard/parametre/instrumentfinancier/typegarant',
+              role: 'ROLE_TYPEGARANT',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_TYPEOBLIGATION'),
+              title: 'Type obligation',
+              page: '/app/standard/parametre/instrumentfinancier/typeobligation',
+              role: 'ROLE_TYPEOBLIGATION',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_PLACE'),
+              title: 'Place boursière',
+              page: '/app/standard/parametre/instrumentfinancier/place',
+              role: 'ROLE_PLACE',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: this.authService.isGrantedRole('ROLE_BANQUE'),
+              title: 'Banque',
+              page: '/app/standard/parametre/instrumentfinancier/banque',
+              role: 'ROLE_BANQUE',
+              dataLink: '',
+              icon: '',
+              translate: '',
+              parent: 'Instruments financiers',
+              children: []
+            },
+            {
+              allow: null,
+              title: 'Gestion des titres',
               page: '',
               role: '',
+              dataLink: '/titresciel/standard/parametre/instrumentfinancier',
+              icon: '',
               translate: '',
-              dataLink: '',
-              parent: 'APPLICATION',
+              parent: 'Instruments financiers',
               children: [
                 {
-                  allow: this.authService.isGrantedRole('ROLE_NAVBENCHMARK'),
-                  title: 'NavBenchMark',
-                  page: '/risque/navbenchmark/liste',
-                  role: 'ROLE_NAVBENCHMARK',
+                  allow: this.authService.isGrantedRole('ROLE_TITRES'),
+                  title: 'Liste des titres',
+                  page: '/titresciel/standard/parametre/instrumentfinancier/titres',
+                  role: 'ROLE_TITRES',
+                  dataLink: '',
                   icon: '',
                   translate: '',
+                  parent: 'Gestion des titres',
+                  children: []
+                },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_MAJ_TITRES'),
+                  title: 'MAJ cours',
+                  page: '/titresciel/standard/parametre/instrumentfinancier/titres/maj/cours',
+                  role: 'ROLE_MAJ_TITRES',
                   dataLink: '',
-                  parent: 'Risque',
-                  route: RisqueRouting.find((value, index, obj) =>
-                    ('/risque/navbenchmark/liste').includes(value.path!)),
+                  icon: '',
+                  translate: '',
+                  parent: 'Gestion des titres',
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_MAJ_TITRES_VERIF1'),
+                  title: 'Vérification MAJ cours niveau 1',
+                  page: '/titresciel/standard/parametre/instrumentfinancier/titres/cours/verifiationniveau1',
+                  role: 'ROLE_MAJ_TITRES_VERIF1',
+                  dataLink: '',
+                  icon: '',
+                  translate: '',
+                  parent: 'Gestion des titres',
+                  children: []
+                }
+                ,
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_MAJ_TITRES_VERIF2'),
+                  title: 'Vérification MAJ cours niveau 2',
+                  page: '/titresciel/standard/parametre/instrumentfinancier/titres/cours/verifiationniveau2',
+                  role: 'ROLE_MAJ_TITRES_VERIF2',
+                  dataLink: '',
+                  icon: '',
+                  translate: '',
+                  parent: 'Gestion des titres',
                   children: []
                 }
               ]
-            }
+            },
+          ]
+        }
           ]
         },
         {
@@ -1303,7 +1697,7 @@ export class LibraryService implements OnDestroy{
               role: '',
               parent: 'REPORTINGS',
               children: [
-                {
+                /*{
                   allow: this.authService.isGrantedRole('ROLE_RDV_PLAN'),
                   title: 'Liste des RDV planifiés',
                   page: '/crm/etats/rdv/liste',
@@ -1428,7 +1822,7 @@ export class LibraryService implements OnDestroy{
                   dataLink: '',
                   parent: 'Etats & Statistiques',
                   children: []
-                },*/
+                },
                 {
                   allow: this.authService.isGrantedRole('ROLE_OPERATION_CLIENT_OCCASIONNEL'),
                   title: 'Recensement des opérations effectuées par un même client, qu\'il soit occasionnel ou habituel',
@@ -1572,98 +1966,7 @@ export class LibraryService implements OnDestroy{
                   route: LabRouting.find((value, index, obj) =>
                     ('/lab/etats/operation-effectuee-condition-normale-superieur-ou-egal-a-cinquante-millions/liste').includes(value.path!)),
                   children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_ETAT_VOLATILITE'),
-                  title: 'Volatilité FCP',
-                  page: '/risque/etats/volatilite/fcp',
-                  role: 'ROLE_ETAT_VOLATILITE',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Etats & Statistiques',
-                  route: RisqueRouting.find((value, index, obj) =>
-                    ('/risque/etats/volatilite/fcp').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_ETAT_ALPHA'),
-                  title: 'Alpha',
-                  page: '/risque/etats/alpha/liste',
-                  role: 'ROLE_ETAT_ALPHA',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Etats & Statistiques',
-                  route: RisqueRouting.find((value, index, obj) =>
-                    ('/risque/etats/alpha/liste').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_ETAT_RATIO_SHARP'),
-                  title: 'Ratio de sharp',
-                  page: '/risque/etats/ratiosharp/liste',
-                  role: 'ROLE_ETAT_RATIO_SHARP',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Etats & Statistiques',
-                  route: RisqueRouting.find((value, index, obj) =>
-                    ('/risque/etats/ratiosharp/liste').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_ETAT_CORRELATION'),
-                  title: 'Corrélation',
-                  page: '/risque/etats/correlation/liste',
-                  role: 'ROLE_ETAT_CORRELATION',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Etats & Statistiques',
-                  route: RisqueRouting.find((value, index, obj) =>
-                    ('/risque/etats/correlation/liste').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_ETAT_COVARIANCE'),
-                  title: 'Covariance',
-                  page: '/risque/etats/covariance/liste',
-                  role: 'ROLE_ETAT_COVARIANCE',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Etats & Statistiques',
-                  route: RisqueRouting.find((value, index, obj) =>
-                    ('/risque/etats/covariance/liste').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_ETAT_BETA'),
-                  title: 'Bêta',
-                  page: '/risque/etats/beta/liste',
-                  role: 'ROLE_ETAT_BETA',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Etats & Statistiques',
-                  route: RisqueRouting.find((value, index, obj) =>
-                    ('/risque/etats/beta/liste').includes(value.path!)),
-                  children: []
-                },
-                {
-                  allow: this.authService.isGrantedRole('ROLE_ETAT_RATIOTREYNOR'),
-                  title: 'Ratio de Treynor',
-                  page: '/risque/etats/ratiotreynor/liste',
-                  role: 'ROLE_ETAT_RATIOTREYNOR',
-                  icon: '',
-                  translate: '',
-                  dataLink: '',
-                  parent: 'Etats & Statistiques',
-                  route: RisqueRouting.find((value, index, obj) =>
-                    ('/risque/etats/ratiotreynor/liste').includes(value.path!)),
-                  children: []
-                },
+                },*/
                 {
                   allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTRESORERIE'),
                   title: 'Point de la trésorerie des fonds',
@@ -1715,6 +2018,33 @@ export class LibraryService implements OnDestroy{
                   route: Routing.find((value, index, obj) =>
                     ('/app/standard/etats/releveactionnaire').includes(value.path!)),
                   children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_RELEVEACTIONNAIRE'),
+                  title: 'Portefeuille actionnaire',
+                  page: '',
+                  role: '',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/app/standard/etats/releveactionnaire').includes(value.path!)),
+                  children: [
+                    {
+                        allow:true,// this.authService.isGrantedRole('ROLE_ETAT_PORTEFEUILLEACTIONNAIREF1'),
+                        title: 'Format 1',
+                        page: '/app/standard/etats/portefeuilleactionnairef1',
+                        role: 'ROLE_ETAT_PORTEFEUILLEACTIONNAIREF1',
+                        icon: '',
+                        translate: '',
+                        dataLink: '',
+                        parent: 'Etats & Statistiques',
+                        route: Routing.find((value, index, obj) =>
+                          ('/app/standard/etats/releveactionnaire').includes(value.path!)),
+                        children: []
+                      },
+                  ]
                 },
                 {
                   allow:true,// this.authService.isGrantedRole('ROLE_ETAT_FICHECLIENT'),
@@ -2325,7 +2655,20 @@ export class LibraryService implements OnDestroy{
               translate: '',
               role: '',
               parent: 'APPLICATION',
-              children: [
+              children: [              
+                    {
+                      allow:true,// this.authService.isGrantedRole('ROLE_EXERCICE'),
+                      title: 'Exercice',
+                      page: '/opcvm/comptabilite/exercice/liste',
+                      role: 'ROLE_EXERCICE',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Comptabilité',
+                      children: []
+                    }
+                  
+                ,
                 {
                   allow: true,
                   title: 'Vérification des écritures comptables',
@@ -2699,7 +3042,8 @@ export class LibraryService implements OnDestroy{
                   dataLink: '',
                   parent: 'CIRCULAIRES',
                   children: []
-                },
+                }
+                /*,
                 {
                   allow: this.authService.isGrantedRole('ROLE_EVT_AVIS'),
                   title: 'Avis evenement sur valeur',
@@ -2710,7 +3054,7 @@ export class LibraryService implements OnDestroy{
                   dataLink: '',
                   parent: 'Evenement sur valeur',
                   children: []
-                }
+                }*/
               ]
             },
             {
@@ -2934,6 +3278,500 @@ export class LibraryService implements OnDestroy{
                   dataLink: '',
                   parent: 'Etats & Statistiques',
                   children: []
+                }
+                ,{
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RELEVEPARTFCP'),
+                  title: 'Relevé part FCP',
+                  page: '/opcvm/etats/relevepartfcp',
+                  role: 'ROLE_CONSULTATION_RELEVEPARTFCP',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: []
+                }
+                ,{
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RELEVEPARTACTIONNAIRE'),
+                  title: 'Relevé part actionnaire',
+                  page: '/opcvm/etats/relevepartactionnaire',
+                  role: 'ROLE_CONSULTATION_RELEVEPARTACTIONNAIRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: []
+                }
+                ,{
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_JOURNAL'),
+                  title: 'Journal',
+                  page: '/opcvm/etats/journal',
+                  role: 'ROLE_CONSULTATION_JOURNAL',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: []
+                }
+                ,{
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_SOLDECOMPTECOMPTABLE'),
+                  title: 'Sode des comptes comptables',
+                  page: '/opcvm/etats/soldecomptecomptable',
+                  role: 'ROLE_CONSULTATION_SOLDECOMPTECOMPTABLE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: []
+                }
+                ,{
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BALANCE'),
+                  title: 'Balance',
+                  page: '/opcvm/etats/balance',
+                  role: 'ROLE_CONSULTATION_BALANCE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: []
+                }
+                ,{
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BALANCEAVANTINVENTAIRE'),
+                  title: 'Balance avant inventaire',
+                  page: '/opcvm/etats/balanceavantinventaire',
+                  role: 'ROLE_CONSULTATION_BALANCEAVANTINVENTAIRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: []
+                }
+                ,{
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BALANCEAVANTINVENTAIRE'),
+                  title: 'Point des souscriptions',
+                  page: '',
+                  role: '',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: [
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_SOUSCRIPTIONDETAILLE'),
+                      title: 'Point détaillé',
+                      page: '/opcvm/etats/souscriptiondetaille',
+                      role: 'ROLE_CONSULTATION_SOUSCRIPTIONDETAILLE',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        
+                      ]
+                    },
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_SOUSCRIPTIONGLOBAL'),
+                      title: 'Point global',
+                      page: '/opcvm/etats/souscriptionglobal',
+                      role: 'ROLE_CONSULTATION_SOUSCRIPTIONGLOBAL',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        
+                      ]
+                    }
+                  ]
+                }
+                ,{
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BALANCEAVANTINVENTAIRE'),
+                  title: 'Eats financiers',
+                  page: '',
+                  role: '',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: [
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
+                      title: 'Annuel',
+                      page: '',
+                      role: '',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        {
+                          allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
+                          title: 'Format N1',
+                          page: '',
+                          role: '',
+                          icon: '',
+                          translate: '',
+                          dataLink: '',
+                          parent: 'Etats & Statistiques',
+                          children: [
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANANNUELF1'),
+                              title: 'Bilan',
+                              page: '/opcvm/etats/etatsfinanciers/bilanannuelf1',
+                              role: 'ROLE_CONSULTATION_BILANANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RESULTATANNUELF1'),
+                              title: 'Résultat',
+                              page: '/opcvm/etats/etatsfinanciers/resultatannuelF1',
+                              role: 'ROLE_CONSULTATION_RESULTATANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF1'),
+                              title: 'Etat de variation de l\'Actif Net',
+                              page: '/opcvm/etats/etatsfinanciers/etatvariationactifnetannuelf1',
+                              role: 'ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF1'),
+                              title: 'Notes sur les revenus du portefeuille titre',
+                              page: '/opcvm/etats/etatsfinanciers/notesrevenusportefeuilletitreannuelf1',
+                              role: 'ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF1'),
+                              title: 'Notes sur les revenus des placements monétaires',
+                              page: '/opcvm/etats/etatsfinanciers/notesrevenusplacementmonetaireannuelf1',
+                              role: 'ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF1'),
+                              title: 'Notes sur les sommes distribuables',
+                              page: '/opcvm/etats/etatsfinanciers/notessommesdistribuablesannuelf1',
+                              role: 'ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DONNEESRATIOSANNUELF1'),
+                              title: 'Données par action et ratios pertinents',
+                              page: '/opcvm/etats/etatsfinanciers/donneesratiosannuelf1',
+                              role: 'ROLE_CONSULTATION_DONNEESRATIOSANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ENGAGEMENTHORSBILANANNUELF1'),
+                              title: 'Engagement hors bilan',
+                              page: '/opcvm/etats/etatsfinanciers/engagementhorsbilanannuelf1',
+                              role: 'ROLE_CONSULTATION_ENGAGEMENTHORSBILANANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
+                          title: 'Format N2',
+                          page: '',
+                          role: '',
+                          icon: '',
+                          translate: '',
+                          dataLink: '',
+                          parent: 'Etats & Statistiques',
+                          children: [
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANANNUELF2'),
+                              title: 'Bilan',
+                              page: '/opcvm/etats/etatsfinanciersformat2/bilanannuelf2',
+                              role: 'ROLE_CONSULTATION_BILANANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            },
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RESULTATANNUELF2'),
+                              title: 'Résultat',
+                              page: '/opcvm/etats/etatsfinanciersformat2/resultatannuelf2',
+                              role: 'ROLE_CONSULTATION_RESULTATANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF2'),
+                              title: 'Etat de variation de l\'Actif Net',
+                              page: '/opcvm/etats/etatsfinanciersformat2/etatvariationactifnetannuelf2',
+                              role: 'ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF2'),
+                              title: 'Notes sur les revenus du portefeuille titre',
+                              page: '/opcvm/etats/etatsfinanciersformat2/notesrevenusportefeuilletitreannuelf2',
+                              role: 'ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }                        
+                            ,
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF2'),
+                              title: 'Notes sur les revenus des placements monétaires',
+                              page: '/opcvm/etats/etatsfinanciersformat2/notesrevenusplacementmonetaireannuelf2',
+                              role: 'ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF2'),
+                              title: 'Notes sur les sommes distribuables',
+                              page: '/opcvm/etats/etatsfinanciersformat2/notessommesdistribuablesannuelf2',
+                              role: 'ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DONNEESRATIOSANNUELF2'),
+                              title: 'Données par action et ratios pertinents',
+                              page: '/opcvm/etats/etatsfinanciersformat2/donneesratiosannuelf2',
+                              role: 'ROLE_CONSULTATION_DONNEESRATIOSANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                          ]
+                        }
+                        ,
+                        {
+                          allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
+                          title: 'Annexes',
+                          page: '',
+                          role: '',
+                          icon: '',
+                          translate: '',
+                          dataLink: '',
+                          parent: 'Etats & Statistiques',
+                          children: [
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEETATFINANCIERANNUEL'),
+                              title: 'Note aux états financiers annuels',
+                              page: '/opcvm/etats/etatsfinanciersannexes/noteetatsfinanciersannuels',
+                              role: 'ROLE_CONSULTATION_NOTEETATFINANCIERANNUEL',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATENTREEPORTEFEUILLETITRE'),
+                              title: 'Etat des entrées en portefeuille titre',
+                              page: '/opcvm/etats/etatsfinanciersannexes/entreesportefeuilletitre',
+                              role: 'ROLE_CONSULTATION_ETATENTREEPORTEFEUILLETITRE',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATSORTIEPORTEFEUILLETITRE'),
+                              title: 'Etat des sorties en portefeuille titre',
+                              page: '/opcvm/etats/etatsfinanciersannexes/sortiesportefeuilletitre',
+                              role: 'ROLE_CONSULTATION_ETATSORTIEPORTEFEUILLETITRE',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPORTEFEUILLETITREANNUEL'),
+                              title: 'Note sur le portefeuille titres annuel',
+                              page: '/opcvm/etats/etatsfinanciersannexes/notesportefeuilletitreannuel',
+                              role: 'ROLE_CONSULTATION_NOTEPORTEFEUILLETITREANNUEL',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIREANNUEL'),
+                              title: 'Note sur les placements monétaires annuel',
+                              page: '/opcvm/etats/etatsfinanciersannexes/notesplacementsmonetaireannuel',
+                              role: 'ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIREANNUEL',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTECAPITALANNUEL'),
+                              title: 'Note sur le capital',
+                              page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesnotesurlecapital',
+                              role: 'ROLE_CONSULTATION_NOTECAPITALANNUEL',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ADMISECOTE'),
+                              title: 'Action admise à la cote',
+                              page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesactionadmisecote',
+                              role: 'ROLE_CONSULTATION_ADMISECOTE',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_REMUNERATION'),
+                              title: 'Rémunération du gestionnaire et du dépositaire',
+                              page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesremunerationgestionnairedepositaire',
+                              role: 'ROLE_CONSULTATION_REMUNERATION',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      allow: true,
+                      title: 'Trimestriel',
+                      page: '',
+                      role: '',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                            {
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANTRIMESTRIEL'),
+                            title: 'Bilan trimestriel',
+                            page: '/opcvm/etats/trimestriel/bilan',
+                            role: 'ROLE_CONSULTATION_BILANTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                      ]
+                    }
+                  ]
                 }
               ]
             },

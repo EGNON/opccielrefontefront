@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {finalize, Observable, Subscription} from "rxjs";
 import {SweetAlertOptions} from "sweetalert2";
 import {DataTableDirective} from "angular-datatables";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -35,6 +35,7 @@ export class OperationnouvellerelationsupadixmillionsComponent implements OnInit
   exercice$:any;
   operationSouscriptionRachat$:any;
   annee:any;
+  download:boolean;
   selectAnnee:any;
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
@@ -92,13 +93,19 @@ export class OperationnouvellerelationsupadixmillionsComponent implements OnInit
     )
   }
   imprimer(){
+    this.download=true
     this.selectAnnee=document.getElementById('comboAnnee')
     this.annee=this.selectAnnee.options[this.selectAnnee.selectedIndex].text;
-    this.operationService.afficherOperationNouvelleRelationSupADixMillionsEtat(this.annee).subscribe(
-      (data)=>{
-        // this.operationSouscriptionRachat$=data;
-      }
-    )
+    this.operationService.afficherOperationNouvelleRelationSupADixMillionsEtat(this.annee).pipe
+    (finalize(()=>{
+      this.download=false;
+    })).subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'operation_nouvelle_relation.pdf';
+      a.click();
+    });
   }
   public dtInit(): void {
     if (this.isDtInit) {

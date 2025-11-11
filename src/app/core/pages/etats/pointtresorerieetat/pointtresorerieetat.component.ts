@@ -26,7 +26,13 @@ export class PointtresorerieetatComponent implements OnInit{
       finalize(() => {
         this.downloading = false;
       })
-    ).subscribe()
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'point_tresorerie.pdf';
+        a.click();
+      });
   }
 
 }

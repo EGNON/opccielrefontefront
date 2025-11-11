@@ -369,16 +369,12 @@ export class HistoriqueactionnaireListComponent implements OnInit, AfterViewInit
           this.downloaded = false;
         })
       )
-      .subscribe((response: any) => {
-        console.log("Ici le retour attendu !!", response);
-        /*const linkSource =
-          'data:application/octet-stream;base64,' + response.data;
-        const downloadLink = document.createElement('a');
-        const fileName = 'listVerifDepot.pdf';
-
-        downloadLink.href = linkSource;
-        downloadLink.download = fileName;
-        downloadLink.click();*/
+      .subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'historique_actionnaire.pdf';
+        a.click();
       });
     this.subscriptions.push(sb);
   }

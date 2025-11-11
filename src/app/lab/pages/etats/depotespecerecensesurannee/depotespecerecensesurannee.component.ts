@@ -8,7 +8,7 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {finalize, Observable, Subscription} from "rxjs";
 import {SweetAlertOptions} from "sweetalert2";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../../core/modules/auth";
@@ -42,6 +42,7 @@ export class DepotespecerecensesuranneeComponent implements OnInit, OnDestroy, A
   exercice$:any;
   depotRachat$:any;
   codeExercice:any;
+  download:boolean;
   selectExercie:any;
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
@@ -99,13 +100,19 @@ export class DepotespecerecensesuranneeComponent implements OnInit, OnDestroy, A
     )
   }
   imprimer(){
+    this.download=true
     this.selectExercie=document.getElementById('comboExercice')
     this.codeExercice=this.selectExercie.options[this.selectExercie.selectedIndex].text;
-    this.operationService.afficherListeDepotRecenseSurAnneeEtat(this.codeExercice).subscribe(
-      (data)=>{
-        // this.depotRachat$=data;
-      }
-    )
+    this.operationService.afficherListeDepotRecenseSurAnneeEtat(this.codeExercice).pipe
+    (finalize(()=>{
+      this.download=false;
+    })).subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'depot_recense_sur_annee.pdf';
+      a.click();
+    });
   }
   public dtInit(): void {
     if (this.isDtInit) {

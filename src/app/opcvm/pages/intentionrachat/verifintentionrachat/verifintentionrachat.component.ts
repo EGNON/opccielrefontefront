@@ -114,11 +114,13 @@ export class VerifintentionrachatComponent implements OnInit, OnDestroy {
           //this.router.navigate(['/opcvm/rachat/intentionrachat']);
         }),
       )
-      .subscribe(
-      (data)=>{
-        // console.log(data)
-      }
-    )
+     .subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verif_intention_rachat.pdf';
+        a.click();
+      });
   }
   ngOnDestroy(): void {
     if (this.clickListener) {

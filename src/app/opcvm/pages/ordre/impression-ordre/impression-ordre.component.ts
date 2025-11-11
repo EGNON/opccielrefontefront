@@ -92,11 +92,13 @@ export class ImpressionOrdreComponent implements OnInit, OnDestroy {
     //   else
     //     this.numeroOrdre=this.numeroOrdre+";"+this.idOrdreTab[i]
     // }
-    this.entityService.apercuOrdreDeBourse(this.idOrdreTab).subscribe(
-      (data)=>{
-
-      }
-    )
+    this.entityService.apercuOrdreDeBourse(this.idOrdreTab).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ordre_de_bourse.pdf';
+        a.click();
+      });
   }
   public onFilterChange(item: any) {
     // console.log('onFilterChange', item);

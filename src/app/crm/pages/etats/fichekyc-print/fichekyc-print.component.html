@@ -50,7 +50,16 @@
 <!--                      class="btn btn-sm btn-primary"-->
 <!--                      style="margin-top: 30px">Imprimer</button>-->
               <button class="btn btn-sm btn-primary"
-                      style="margin-top: 30px" (click)="imprimer()">Imprimer</button>
+                      style="margin-top: 30px" (click)="imprimer()">  
+                <ng-container *ngIf="download">
+                <span class="indicator-progress" [style.display]="'block'">
+                  Patientez svp...
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+                </ng-container>
+                <ng-container *ngIf="!download">
+                  <span class="indicator-label">Imprimer</span>
+              </ng-container></button>
               <!--end::Add Monnaie-->
             </div>
 <!--            </div>-->

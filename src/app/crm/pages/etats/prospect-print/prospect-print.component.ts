@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription, switchMap} from "rxjs";
+import {finalize, Observable, Subscription, switchMap} from "rxjs";
 import {Personne} from "../../../models/personne/personne.model";
 import {PersonnePhysiqueService} from "../../../services/personne/personne.physique.service";
 import {ActivatedRoute} from "@angular/router";
@@ -24,6 +24,7 @@ export class ProspectPrintComponent implements OnInit, OnDestroy{
   title: string;
   prospect: string;
   isLoading: boolean = false;
+  download: boolean = false;
   dateJour:Date;
   private subscriptions: Subscription[] = [];
   personnes: DataTablesResponse<any>;
@@ -62,23 +63,34 @@ export class ProspectPrintComponent implements OnInit, OnDestroy{
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
   imprimer(){
+    this.download=true;
     this.prospect=this.selectProspect.options[this.selectProspect.selectedIndex].text;
     if(this.prospect=="Personne physique"){
       this.qualite="prospect";
-      this.personnePhysiqueService.afficherPersonneSelonQualiteEtat(this.qualite).subscribe(
-        (data=>{
-
-        })
-      )
+      this.personnePhysiqueService.afficherPersonneSelonQualiteEtat(this.qualite).pipe
+      (finalize(()=>{
+        this.download=false
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'prospect_physiques.pdf';
+        a.click();
+      });
     }
     else
     {
       this.qualite="prospect"
-      this.personneMoraleService.afficherPersonneSelonQualiteEtat(this.qualite).subscribe(
-        (data=>{
-
-        })
-      )
+      this.personneMoraleService.afficherPersonneSelonQualiteEtat(this.qualite).pipe
+      (finalize(()=>{
+        this.download=false;
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'prospect_morales.pdf';
+        a.click();
+      });
     }
   }
   convertToPDF() {

@@ -15,6 +15,7 @@ import { Pointsouscriptionrachat } from './pointsouscriptionrachat/pointsouscrip
 import { Pointrachat } from './pointrachat/pointrachat';
 import { Pointrepartitionportefeuille } from './pointrepartitionportefeuille/pointrepartitionportefeuille';
 import { Evolutionactifnet } from './evolutionactifnet/evolutionactifnet';
+import { PortefeuilleactionnaireF1 } from './portefeuilleactionnaire-f1/portefeuilleactionnaire-f1';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'pointtresorerie', component: PointtresorerieetatComponent, },
       { path: 'procedurecomptable', component: ProcedurecomptableComponent, },
       { path: 'releveactionnaire', component: ReleveactionnaireComponent, },
+      { path: 'portefeuilleactionnairef1', component: PortefeuilleactionnaireF1, },
       { path: 'ficheclient', component: FicheclientComponent, },
       { path: 'etatsuiviactionnaire', component: EtatsuiviactionnaireComponent, },
       { path: 'etatsuiviclient', component: EtatsuiviclientComponent, },

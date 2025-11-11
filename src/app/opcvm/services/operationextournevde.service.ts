@@ -19,7 +19,9 @@ export class OperationextournevdeService extends ResourceService<Operationextour
 
   }
   verifVDE(idSeance:any,idOpcvm:any,estVerifie:any,estVerifie1:any,estVerifie2:any,niveau:any){
-      return this.http.get<any>(`${this.API_URL}/jasperpdf/vde/${idSeance}/${idOpcvm}/${estVerifie}/${estVerifie1}/${estVerifie2}/${niveau}`);
+      return this.http.get<any>(`${this.API_URL}/jasperpdf/vde/${idSeance}/${idOpcvm}/${estVerifie}/${estVerifie1}/${estVerifie2}/${niveau}`
+        , {responseType: 'blob' as any }
+      );
 
   }
   excelVDE(idSeance:any,idOpcvm:any,estVerifie:any,estVerifie1:any,estVerifie2:any,niveau:any):Observable<Blob>{
@@ -29,7 +31,9 @@ export class OperationextournevdeService extends ResourceService<Operationextour
 
   }
   soldeCompteExtourne(obj:any){
-      return this.http.post<any>(`${this.API_URL}/jasperpdf/vde/soldecompteextourne`,obj);
+      return this.http.post<any>(`${this.API_URL}/jasperpdf/vde/soldecompteextourne`,obj,
+         {responseType: 'blob' as any }
+      );
 
   }
   modifier(operationEtourneVDE:any,niveau:any){

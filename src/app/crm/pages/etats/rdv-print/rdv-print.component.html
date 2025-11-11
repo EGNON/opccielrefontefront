@@ -25,10 +25,30 @@
       <a (click)="afficherRDV()" style="margin-right: 5px;margin-left: 5px;margin-top: 25px"  class="btn btn-sm btn-primary">Valider</a>
       <button  *ngIf="!afficherTous" class="btn btn-sm btn-primary"
                (click)="imprimer('0')"
-               style="margin-top: 25px">Imprimer</button>
+               style="margin-top: 25px">
+            <ng-container *ngIf="download">
+            <span class="indicator-progress" [style.display]="'block'">
+              Patientez svp...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+            </ng-container>
+            <ng-container *ngIf="!download">
+              <span class="indicator-label">Imprimer</span>
+            </ng-container>
+    </button>
       <button  *ngIf="afficherTous" class="btn btn-sm btn-primary"
                (click)="imprimer('tous')"
-               style="margin-top: 25px">Imprimer</button>
+               style="margin-top: 25px"> 
+        <ng-container *ngIf="download">
+          <span class="indicator-progress" [style.display]="'block'">
+            Patientez svp...
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+          </span>
+          </ng-container>
+          <ng-container *ngIf="!download">
+            <span class="indicator-label">Imprimer</span>
+        </ng-container>
+      </button>
 <!--        <button  *ngIf="!afficherTous" class="btn btn-sm btn-primary"-->
 <!--               (click)="downloadPdf('reporting-rdv-not','alldata-rdv-not')"-->
 <!--               style="margin-top: 25px">Imprimer</button>-->

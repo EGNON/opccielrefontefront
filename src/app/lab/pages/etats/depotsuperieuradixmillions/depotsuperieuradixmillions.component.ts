@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {finalize, Observable, Subscription} from "rxjs";
 import {SweetAlertOptions} from "sweetalert2";
 import {DataTableDirective} from "angular-datatables";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -31,6 +31,7 @@ export class DepotsuperieuradixmillionsComponent implements OnInit, OnDestroy, A
   exercice$:any;
   operationSouscriptionRachat$:any;
   codeExercice:any;
+  download:boolean;
   selectExercie:any;
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
@@ -87,13 +88,19 @@ export class DepotsuperieuradixmillionsComponent implements OnInit, OnDestroy, A
     )
   }
   imprimer(){
+    this.download=true
     this.selectExercie=document.getElementById('comboExercice2')
     this.codeExercice=this.selectExercie.options[this.selectExercie.selectedIndex].text;
-    this.operationService.afficherOperationSupDixMillionsEtat(this.codeExercice).subscribe(
-      (data)=>{
-        // this.operationSouscriptionRachat$=data;
-      }
-    )
+    this.operationService.afficherOperationSupDixMillionsEtat(this.codeExercice).pipe
+    (finalize(()=>{
+      this.download=false;
+    })).subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'depot_superieur_a_dix_millions.pdf';
+      a.click();
+    });
   }
   public dtInit(): void {
     if (this.isDtInit) {

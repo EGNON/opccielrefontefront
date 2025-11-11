@@ -24,10 +24,12 @@ export class ObjectifAffecteService extends ResourceService<ObjectifAffecte> imp
   }
   afficherObjectifPrevu(idPersonnel:number,beginEndDate:any)
   {
-    return this.http.post<Affectation[]>(`${this.API_URL}`+'/objectifprevu/'+idPersonnel,beginEndDate);
+    return this.http.post<any>(`${this.API_URL}`+
+      '/objectifprevu/'+idPersonnel,beginEndDate,{responseType: 'blob' as any });
   }
   afficherObjectifReel(idPersonnel:number,beginEndDate:any)
   {
-    return this.http.post<Affectation[]>(`${this.API_URL}`+'/objectifreel/'+idPersonnel,beginEndDate);
+    return this.http.post<any>(`${this.API_URL}`
+      +'/objectifreel/'+idPersonnel,beginEndDate,{responseType: 'blob' as any });
   }
 }

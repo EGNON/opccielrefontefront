@@ -33,6 +33,13 @@
                        formControlName="endDate" (click)="dateFin.toggle()"/>
                 <!--end::Input-->
               </div>
+               
+            </div>
+            <div class="col-md-4 fv-row">
+              <button style="margin-top: 30px;" [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary me-3" (click)="submitting ? null : toutDecocher()">
+                Tout décocher
+              </button>
+                    
             </div>
           </div>
           <hr>
@@ -47,7 +54,7 @@
                     <input type="text" class="form-control form-control-sm"
                     formControlName="search">
                     <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1"
-                            style="margin-left: 25px display: flex; align-items: center; justify-content: center;"
+                            style="margin-left: 25px ;display:flex; align-items : center; justify-content: center;"
                     (click)="rechercherActionnaire()">
                       <i class="fa fa-search"></i>
                     </button>

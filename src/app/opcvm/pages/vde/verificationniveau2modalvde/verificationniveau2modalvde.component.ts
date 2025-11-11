@@ -39,11 +39,13 @@ export class Verificationniveau2modalvdeComponent implements OnInit{
       finalize(() => {
         this.exportPdf=false
       })
-    ).subscribe(
-      (data)=>{
-        // this.exportPdf=false
-      }
-    )
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_extourne_vde_niveau2.pdf';
+        a.click();
+      });
   }
   exportExcel() {
     this.export=true

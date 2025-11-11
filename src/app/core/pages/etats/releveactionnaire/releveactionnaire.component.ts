@@ -391,6 +391,10 @@ export class ReleveactionnaireComponent implements OnInit, AfterViewInit, AfterC
     // this.afficherListe("l");
     this.afficherActionnaire()
   }
+  toutDecocher() {
+    // this.afficherListe("l");
+    document.location.reload();
+  }
 
   telecharger() {
     this.downloading = true;
@@ -426,18 +430,12 @@ export class ReleveactionnaireComponent implements OnInit, AfterViewInit, AfterC
           this.downloaded = false;
         })
       )
-      .subscribe((response: any) => {
-        console.log("Ici le retour attendu !!", response);
-        this.idActionnaireTab=[]
-        console.log(this.idActionnaireTab)
-        /*const linkSource =
-          'data:application/octet-stream;base64,' + response.data;
-        const downloadLink = document.createElement('a');
-        const fileName = 'listVerifDepot.pdf';
-
-        downloadLink.href = linkSource;
-        downloadLink.download = fileName;
-        downloadLink.click();*/
+      .subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'releve_actionnaire.pdf';
+        a.click();
       });
     this.subscriptions.push(sb);
   }

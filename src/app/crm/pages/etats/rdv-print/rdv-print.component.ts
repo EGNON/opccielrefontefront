@@ -5,6 +5,7 @@ import {RdvService} from "../../../services/rdv.service";
 import {PdfService} from "../../../services/pdfservice.service";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { finalize } from 'rxjs';
 
 @Component({
     selector: 'app-rdv-print',
@@ -18,6 +19,7 @@ export class RdvPrintComponent implements OnInit{
   rdv$:any;
   dateJour:Date;
   idPersonnel:number;
+  download:boolean;
   selectPersonnel:any;
   personnelSelectionnee:any;
   denomination:string;
@@ -108,16 +110,24 @@ export class RdvPrintComponent implements OnInit{
     });
   }
   imprimer(etat:string){
+    this.download=true
     if(etat=="0"){
       etat=this.idPersonnel.toString();
     }
     else
       etat="tous"
-    this.rdvService.afficherListeEtat(etat).subscribe(
-      (data)=>{
+    this.rdvService.afficherListeEtat(etat).pipe
+    (finalize(()=>{
+      this.download=false;
+    })
 
-      }
-    );
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'rendez-vous-planifiés.pdf';
+        a.click();
+      });
   }
   async downloadPdf(name:any,alldata:any) {
     var data = document.getElementById(name);

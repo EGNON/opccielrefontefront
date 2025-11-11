@@ -6,6 +6,7 @@ import {PeriodiciteService} from "../../../services/periodicite.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { finalize } from 'rxjs';
 
 @Component({
     selector: 'app-objectif-print',
@@ -25,6 +26,7 @@ export class ObjectifPrintComponent implements OnInit, OnDestroy{
   formData:FormGroup;
   etatFourni:boolean;
   etatPrevu:boolean;
+  download:boolean;
   periodicite$:any;
   constructor(
     public objectifAffecteService: ObjectifAffecteService,
@@ -96,7 +98,7 @@ export class ObjectifPrintComponent implements OnInit, OnDestroy{
     )
   }
   imprimer(){
-
+    this.download=true
     let startDate: any;
     let endDate: any;
     if (this.formData.controls.startDate.value) {
@@ -118,19 +120,29 @@ export class ObjectifPrintComponent implements OnInit, OnDestroy{
     this.idPersonne=this.selectPersonnel.options[this.selectPersonnel.selectedIndex].value;
     // this.idPeriodicite=this.selectPeriodicite.options[this.selectPeriodicite.selectedIndex].value;
     if(this.etatPrevu){
-      this.objectifAffecteService.afficherObjectifPrevu(this.idPersonne,dates).subscribe(
-        (data)=>{
-
-        }
-      )
+      this.objectifAffecteService.afficherObjectifPrevu(this.idPersonne,dates).pipe
+      (finalize(()=>{
+        this.download=false;
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'objectif_prevu.pdf';
+        a.click();
+      });
     }
     else
     {
-      this.objectifAffecteService.afficherObjectifReel(this.idPersonne,dates).subscribe(
-        (data)=>{
-
-        }
-      )
+      this.objectifAffecteService.afficherObjectifReel(this.idPersonne,dates).pipe
+      (finalize(()=>{
+        this.download=false;
+      })).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'objectif_reel.pdf';
+        a.click();
+      });
     }
   }
   afficherPersonnel(){

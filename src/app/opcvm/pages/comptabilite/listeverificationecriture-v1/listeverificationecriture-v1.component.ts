@@ -259,14 +259,13 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
         codeTypeOperation:null
       };
     console.log(param)
-    this.operationService.apercuVerificationEritureNiveau(param,1,null).subscribe(
-      (data)=>{
-        console.log(data.data)
-
-        console.log(this.downloading)
-        // this.verificationNiveau$=data.data
-      }
-    );
+    this.operationService.apercuVerificationEritureNiveau(param,1,null).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_ecriture_niveau1.pdf';
+        a.click();
+      });
     this.downloading=false
   }
   validationEcritureNiveau1(){

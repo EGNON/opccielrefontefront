@@ -34,7 +34,7 @@ export class CompterenduService extends ResourceService<Compterendu> implements 
   }
   afficherEtat(idUtilisateur: string)
   {
-    return this.http.get<Compterendu[]>(`${this.API_URL}/cr/`+idUtilisateur);
+    return this.http.get<any>(`${this.API_URL}/cr/`+idUtilisateur,{responseType: 'blob' as any });
   }
   afficherCompteRenduTous()
   {
