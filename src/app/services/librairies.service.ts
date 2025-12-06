@@ -474,6 +474,16 @@ export class LibrairiesService {
       ,{responseType: 'blob' as any }
     );
   }
+  portefeuilleActionnaireF2(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/portefeuilleactionnaireformat2`, param
+      ,{responseType: 'blob' as any }
+    );
+  }
+  portefeuilleActionnaireAnnee(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/portefeuilleactionnairefinannee`, param
+      ,{responseType: 'blob' as any }
+    );
+  }
   releveActionnaireEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/etats/releveactionnaire`, param
       ,{responseType: 'blob' as any }

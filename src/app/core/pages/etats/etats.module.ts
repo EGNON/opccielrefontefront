@@ -23,6 +23,8 @@ import { Pointrachat } from './pointrachat/pointrachat';
 import { Pointrepartitionportefeuille } from './pointrepartitionportefeuille/pointrepartitionportefeuille';
 import { Evolutionactifnet } from './evolutionactifnet/evolutionactifnet';
 import { PortefeuilleactionnaireF1 } from './portefeuilleactionnaire-f1/portefeuilleactionnaire-f1';
+import { PortefeuilleactionnaireF2 } from './portefeuilleactionnaire-f2/portefeuilleactionnaire-f2';
+import { PortefeuilleactionnaireAnnee } from './portefeuilleactionnaire-annee/portefeuilleactionnaire-annee';
 
 
 
@@ -43,7 +45,9 @@ import { PortefeuilleactionnaireF1 } from './portefeuilleactionnaire-f1/portefeu
     Pointrachat,
     Pointrepartitionportefeuille,
     Evolutionactifnet,
-    PortefeuilleactionnaireF1
+    PortefeuilleactionnaireF1,
+    PortefeuilleactionnaireF2,
+    PortefeuilleactionnaireAnnee
   ],
   imports: [
     CommonModule,

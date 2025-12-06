@@ -16,6 +16,8 @@ import { Pointrachat } from './pointrachat/pointrachat';
 import { Pointrepartitionportefeuille } from './pointrepartitionportefeuille/pointrepartitionportefeuille';
 import { Evolutionactifnet } from './evolutionactifnet/evolutionactifnet';
 import { PortefeuilleactionnaireF1 } from './portefeuilleactionnaire-f1/portefeuilleactionnaire-f1';
+import { PortefeuilleactionnaireF2 } from './portefeuilleactionnaire-f2/portefeuilleactionnaire-f2';
+import { PortefeuilleactionnaireAnnee } from './portefeuilleactionnaire-annee/portefeuilleactionnaire-annee';
 
 const routes: Routes = [
   {
@@ -26,6 +28,8 @@ const routes: Routes = [
       { path: 'procedurecomptable', component: ProcedurecomptableComponent, },
       { path: 'releveactionnaire', component: ReleveactionnaireComponent, },
       { path: 'portefeuilleactionnairef1', component: PortefeuilleactionnaireF1, },
+      { path: 'portefeuilleactionnairef2', component: PortefeuilleactionnaireF2, },
+      { path: 'portefeuilleactionnaireannee', component: PortefeuilleactionnaireAnnee, },
       { path: 'ficheclient', component: FicheclientComponent, },
       { path: 'etatsuiviactionnaire', component: EtatsuiviactionnaireComponent, },
       { path: 'etatsuiviclient', component: EtatsuiviclientComponent, },
