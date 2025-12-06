@@ -131,8 +131,16 @@ export class LibrairiesService {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannexesnotesetatsfinanciers`, param, 
       {responseType: 'blob' as any });
   }
+  etatfinanciertrimestrielbilantrimestrielEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielbilantrimestriel`, param, 
+      {responseType: 'blob' as any });
+  }
   notesrevenusportefeuilletitreannuelf1Etat(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannuelf1notesrevenusportefeuilletitre`, param, 
+      {responseType: 'blob' as any });
+  }
+  etatfinancierannexesactionadmisecote(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannexesactionadmisecote`, param, 
       {responseType: 'blob' as any });
   }
   notesrevenusportefeuilletitreannuelf2Etat(param: any) {
@@ -141,6 +149,10 @@ export class LibrairiesService {
   }
   notesportefeuilletitreannuelEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannexesnoteportefeuilletitresannuel`, param, 
+      {responseType: 'blob' as any });
+  }
+  noterevenusplacementsmonetaires(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielnotesrevenusplacementsmonetaires`, param, 
       {responseType: 'blob' as any });
   }
   notessommesdistribuablesannuelf1Etat(param: any) {
@@ -155,6 +167,10 @@ export class LibrairiesService {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannexesnotesurlecapital`, param, 
       {responseType: 'blob' as any });
   }
+  tableauanalysevl(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrieltableauanalysevl`, param, 
+      {responseType: 'blob' as any });
+  }
   engagementhorsbilanannuelf1Etat(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannuelf1engagementhorsbilan`, param, 
       {responseType: 'blob' as any });
@@ -163,12 +179,36 @@ export class LibrairiesService {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannexesremunerationgestionnairedepositaire`, param, 
       {responseType: 'blob' as any });
   }
+  noteportefeuilletitre(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielnoteportefeuilletitre`, param, 
+      {responseType: 'blob' as any });
+  }
+  noteplacementsmonetaires(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielnoteplacementsmonetaires`, param, 
+      {responseType: 'blob' as any });
+  }
+  actionsadmisescote(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielactionsadmisescote`, param, 
+      {responseType: 'blob' as any });
+  }
+  noteetatsfinanciers(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielnoteetatsfinanciers`, param, 
+      {responseType: 'blob' as any });
+  }
+  etatmensuelsouscription(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrieletatmensuelsouscriptions`, param, 
+      {responseType: 'blob' as any });
+  }
+  notesurlecapital(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielnotecapital`, param, 
+      {responseType: 'blob' as any });
+  }
   donneesratiosannuelf1Etat(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannuelf1donneesactionratiospertinents`, param, 
       {responseType: 'blob' as any });
   }
-  etatfinancierannexesactionadmisecote(param: any) {
-    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannexesactionadmisecote`, param, 
+  montantfraisgestion(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielmontantfraisgestion`, param, 
       {responseType: 'blob' as any });
   }
   donneesratiosannuelf2Etat(param: any) {
@@ -187,6 +227,10 @@ export class LibrairiesService {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannexesnoteplacementsmonetairesannuel`, param, 
       {responseType: 'blob' as any });
   }
+  noterevenusportefeuilletitremonetaires(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielnoterevenusportefeuilletitre`, param, 
+      {responseType: 'blob' as any });
+  }
   resultatAnnuelF1Etat(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannuelf1resultat`, param, 
       {responseType: 'blob' as any });
@@ -197,6 +241,10 @@ export class LibrairiesService {
   }
   entreesportefeuilletitre(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannexesetatsentreesportefeuilletitre`, param, 
+      {responseType: 'blob' as any });
+  }
+  etatfinanciertrimestrielcompteresultat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielcompteresultat`, param, 
       {responseType: 'blob' as any });
   }
   etatvariationactifnetannuelf1Etat(param: any) {
@@ -211,11 +259,118 @@ export class LibrairiesService {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannexesetatsortiesportefeuilletitre`, param, 
       {responseType: 'blob' as any });
   }
+  etatfinanciertrimestrielvariationactifnet(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielvariationactifnet`, param, 
+      {responseType: 'blob' as any });
+  }
   relevePartActionnaire(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/relevepartactionnaire`, param);
   }
   relevePartActionnaireEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/relevepartactionnaire`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  declarationCommissionSurActif(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/declarationcommissionactif`, param);
+  }
+  declarationCommissionSurActifListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/declarationcommissionactif/liste`, param);
+  }
+  declarationCommissionSurActifEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/declarationcommissionactif`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  grandlivreListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/grandlivre/liste`, param);
+  }
+  grandlivreEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/grandlivre`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  grandlivreEtatExcel(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/excel/grandlivre`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+ liste_verif_SouscriptionEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/documentseancelisteverificationsouscription`, param, 
+      {responseType: 'blob' as any });
+  }
+ liste_verif_RachatEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/documentseancelisteverificationrachats`, param, 
+      {responseType: 'blob' as any });
+  }
+ liste_verif_EcritureEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/documentseancelisteverificationecriture`, param, 
+      {responseType: 'blob' as any });
+  }
+ liste_verif_Ecriture_VDEEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/documentseancelisteverificationecriturevde`, param, 
+      {responseType: 'blob' as any });
+  }
+ liste_verif_Ecriture_CHARGEEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/documentseancelisteverificationecriturecharge`, param, 
+      {responseType: 'blob' as any });
+  }
+ liste_verif_vdeEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/documentseancelisteverificationvde`, param, 
+      {responseType: 'blob' as any });
+  }
+ liste_verif_chargeEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/documentseancelisteverificationcharge`, param, 
+      {responseType: 'blob' as any });
+  }
+ liste_verif_codePosteEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/documentseancelisteverificationcodeposte`, param, 
+      {responseType: 'blob' as any });
+  }
+  operationTransfertPart(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/operationtransfertpart`, param);
+  }
+  historiqueVL(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/historiquevl/liste`, param);
+  }
+  avistransfertpartListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/avistransfertpart/liste`, param);
+  }
+  avistransfertpartEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/avistransfertpart`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  pointinvestissement(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/pointinvestissement`, param);
+  }
+  pointinvestissementListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/pointinvestissement/liste`, param);
+  }
+  pointinvestissementEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/pointinvestissement`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  previsionnelremboursements(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/previsionnelremboursements`, param);
+  }
+  previsionnelremboursementsListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/previsionnelremboursements/liste`, param);
+  }
+  previsionnelremboursementsEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/previsionnelremboursements`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  suiviecheancetitre(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/suiviecheancetitre`, param);
+  }
+  suiviecheancetitreListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/suiviecheancetitre/liste`, param);
+  }
+  suiviecheancetitreEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/suiviecheancetitre`, param,
       {responseType: 'blob' as any }
     );
   }

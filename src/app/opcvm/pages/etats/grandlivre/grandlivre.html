@@ -1,0 +1,228 @@
+<div class="card card-flush">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-2 fv-row">
+                  <!--begin::Label-->
+                  <label class="fs-5 fw-semibold mb-2">Exercice</label>
+                  <!--end::Label-->
+                <!--begin::Select-->
+                <select class="form-select form-select-sm mb-2" formControlName="exercice2"
+                     (change)="exerciceChange()" >
+                  <option disabled selected [ngValue]="null">Sélectionnez un exercice...</option>
+                  <option *ngFor="let item of exercice$" [ngValue]="item">
+                    {{ item.codeExercice }}
+                  </option>
+                </select>
+                <!--end::Select-->
+               
+            </div>
+            <!--end::Col-->
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date début</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateDebut="ngbDatepicker" aria-label="Date Estimation"
+                       formControlName="dateDebut" (click)="dateDebut.toggle()"/>
+                <!--end::Input-->
+              </div>
+            </div>
+            <div class="col-md-2 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date fin</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateFin="ngbDatepicker" aria-label="Date Estimation"
+                       formControlName="dateFin" (click)="dateFin.toggle()"/>
+                <!--end::Input-->
+              </div>
+            </div>
+           <div class="col-md-3 fv-row">
+              <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Comptes</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <ng-multiselect-dropdown
+                [settings]="compteSettings"
+                [placeholder]="'Sélectionnez un compte'"
+                formControlName="compteComptable"
+                [data]="compteComptable"
+                [disabled]="false"
+                (onFilterChange)="onFilterChange2($event)"
+                (onDropDownClose)="onDropDownClose2($event)"
+                (onSelect)="onItemSelect2($event)"
+                (onDeSelect)="onDeSelect2($event)"
+                (onSelectAll)="onSelectAll2($event)"
+                (onDeSelectAll)="onDeSelectAll2($event)">
+              </ng-multiselect-dropdown>
+            </div>
+              <div class="col-md-3 fv-row">
+                  <!--begin::Label-->
+                 <div style="margin-top: 30px;" class="d-flex justify-content-sm-start" >
+              <div  class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                <input  type="checkbox" checked="checked"  [value]="false"
+                       class="form-check-input ng-untouched ng-pristine ng-valid"
+                       id="echue" formControlName="estCocher">
+                <label  class="form-check-label text-gray-700 fw-bold text-nowrap">Tous les cptes</label>
+              </div>
+              </div>
+              </div>
+              
+          </div>
+          <hr>
+          <div class="row mb-5">
+            <div class="card">
+              <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                  <!--begin::Search-->
+                  <div class="d-flex align-items-center position-relative my-1">
+                    <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                    <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12">
+                  </div>
+                  <!--end::Search-->
+                </div>
+                <!--end::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                  <div class="d-flex justify-content-end">
+                    <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary me-3" (click)="submitting ? null : actualiser()">
+                      <ng-container *ngIf="submitting">
+                    <span class="indicator-progress" [style.display]="'block'">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                      </ng-container>
+                      <ng-container *ngIf="!submitting">
+                        <span class="indicator-label">Actualiser</span>
+                      </ng-container>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-info me-3" (click)="downloading ? null : telecharger()">
+                      <ng-container *ngIf="downloading">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!downloading">
+                        <span class="indicator-label">Imprimer</span>
+                      </ng-container>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-warning" (click)="exportExcel2()">
+                      <ng-container *ngIf="export">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!export">
+                        <span class="indicator-label">Exporter</span>
+                      </ng-container>
+                    </button>
+                  </div>
+                </div>
+                <!--end::Card toolbar-->
+              </div>
+              <div class="card-body pt-0">
+               <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                    <th>DATE</th>
+                    <th>JOURNAL</th>
+                    <th>REFERENCE</th>
+                    <th>DEBIT</th>
+                    <th>CREDIT</th>
+                    <th>SOLDE</th>
+                    <th>LIBELLÉ</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <!-- Boucle principale -->
+                    <ng-container *ngFor="let node of data">
+                    <ng-container 
+                        *ngTemplateOutlet="rowTemplate; context:{ $implicit: node, level:0 }">
+                    </ng-container>
+                    </ng-container>
+
+                </tbody>
+                </table>
+
+
+                <!-- =========================== -->
+                <!-- TEMPLATE RÉCURSIF           -->
+                <!-- =========================== -->
+                <ng-template #rowTemplate let-node let-level="level">
+
+                <!-- CAS 1 : LIGNE DE GROUPE -->
+                <tr *ngIf="node.children">
+                    <td colspan="7">
+
+                    <!-- Indentation -->
+                    <span [style.marginLeft.px]="level * 20"></span>
+
+                    <!-- Bouton +/- -->
+                    <button class="btn btn-sm btn-secondary"
+                            (click)="node.expanded = !node.expanded">
+                        {{ node.expanded ? "▼" : "▶" }}
+                    </button>
+
+                    <!-- Label du groupe -->
+                    <strong class="ms-2">{{ node.label }}</strong>
+                    </td>
+                </tr>
+
+
+                <!-- CAS 2 : LIGNE DE DONNÉES RÉELLES -->
+                <tr *ngIf="!node.children">
+                    <!-- Indentation appliquée à la première colonne -->
+                    <td>
+                    <span [style.marginLeft.px]="level * 20"></span>
+                    {{ node.date }}
+                    </td>
+
+                    <td>{{ node.journal }}</td>
+                    <td>{{ node.reference }}</td>
+                    <td>{{ node.debit | number:'1.0-0' }}</td>
+                    <td>{{ node.credit | number:'1.0-0' }}</td>
+                    <td>{{ node.solde | number:'1.0-0' }}</td>
+                    <td>{{ node.libelle }}</td>
+                </tr>
+
+
+                <!-- Récursion sur les enfants -->
+                <ng-container *ngIf="node.expanded">
+                    <ng-container *ngFor="let child of node.children">
+                    <ng-container 
+                        *ngTemplateOutlet="rowTemplate; context:{ $implicit: child, level: level+1 }">
+                    </ng-container>
+                    </ng-container>
+                </ng-container>
+
+                </ng-template>
+
+
+              </div>
+            </div>
+          </div>
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>

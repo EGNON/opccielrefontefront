@@ -9,20 +9,29 @@
         <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
           <div class="row mb-5">
             <!--begin::Col-->
-            <!--            <div class="col-md-12 fv-row">-->
-            <!--begin::Label-->
-            <div class="d-flex justify-content-sm-start">
-              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
-                <input type="radio" checked="checked"  [value]="true"
-                       class="form-check-input ng-untouched ng-pristine ng-valid"
-                       id="fichePhysique" formControlName="estPH">
-                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Physique</label>
+            <!--end::Col-->
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date début</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateDebut="ngbDatepicker" aria-label="Date Estimation"
+                       formControlName="dateDebut" (click)="dateDebut.toggle()"/>
+                <!--end::Input-->
               </div>
-              <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
-                <input type="radio" [value]="false"
-                       class="form-check-input ng-untouched ng-pristine ng-valid"
-                       id="ficheMorale" formControlName="estPH" >
-                <label class="form-check-label text-gray-700 fw-bold text-nowrap">Morale</label>
+            </div>
+            <div class="col-md-3 fv-row">
+              <!--begin::Label-->
+              <label class="fs-5 fw-semibold mb-2">Date fin</label>
+              <!--end::Label-->
+              <div class="input-group input-group-sm">
+                <!--begin::Input-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateFin="ngbDatepicker" aria-label="Date Estimation"
+                       formControlName="dateFin" (click)="dateFin.toggle()"/>
+                <!--end::Input-->
               </div>
             </div>
           </div>
@@ -34,14 +43,8 @@
                 <div class="card-title">
                   <!--begin::Search-->
                   <div class="d-flex align-items-center position-relative my-1">
-                    <!--                    <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>-->
-                    <input type="text" class="form-control form-control-sm"
-                           formControlName="search">
-                    <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1"
-                            style="margin-left: 25px ;display: flex; align-items: center; justify-content: center;"
-                            (click)="rechercherActionnaire()">
-                      <i class="fa fa-search"></i>
-                    </button>
+                    <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+                    <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12">
                   </div>
                   <!--end::Search-->
                 </div>
@@ -71,7 +74,7 @@
                         <span class="indicator-label">Imprimer</span>
                       </ng-container>
                     </button>
-                    <button type="button" class="btn btn-sm btn-info me-3" (click)="export ? null : exportExcel()">
+                    <button type="button" class="btn btn-sm btn-warning" (click)="exportExcel()">
                       <ng-container *ngIf="export">
                         <span class="indicator-progress" [style.display]="'block'">
                           Patientez svp...
@@ -82,29 +85,15 @@
                         <span class="indicator-label">Exporter</span>
                       </ng-container>
                     </button>
-                    <!--<button type="button" class="btn btn-sm btn-warning">
-                      <ng-container *ngIf="downloading">
-                        <span class="indicator-progress" [style.display]="'block'">
-                          Patientez svp...
-                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                        </span>
-                      </ng-container>
-                      <ng-container *ngIf="!downloading">
-                        <span class="indicator-label">Envoyer</span>
-                      </ng-container>
-                    </button>-->
                   </div>
                 </div>
                 <!--end::Card toolbar-->
               </div>
-              <!--              <div class="card-body pt-0">-->
-
-              <!--              </div>-->
+          
             </div>
           </div>
         </form>
-        <!--end::Form-->
-        <div class="card-body overflow-auto">
+          <div class="card-body overflow-auto">
           <table class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" id="table_AvisOperation">
             <thead>
             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
@@ -114,33 +103,39 @@
                 </div>
               </th>
               <th style="width: 10%">ID</th>
-              <th style="width: 10%">N°COMPTE SGI</th>
-              <th style="width: 30%">NOM / SIGLE</th>
-              <th style="width: 30%">PRENOMS / RAISON SOCIALE</th>
-              <th style="width: 15%">STATUT</th>
+              <th style="width: 10%">DATE OPERATION</th>
+              <th style="width: 30%">DEMANDEUR</th>
+              <th style="width: 30%">QTE INITIALE</th>
+              <th style="width: 15%">CUMP</th>
+              <th style="width: 15%">BENEFICIAIRE</th>
+              <th style="width: 15%">QTE INITIALE</th>
+              <th style="width: 15%">QTE TRANSFERT</th>
 
 
             </tr>
             </thead>
             <tbody class="fw-semibold text-gray-600">
-            <tr *ngFor="let actionnaire of actionnaire$ | paginate
+            <tr *ngFor="let operationTransfertPart of operationTransfert$ | paginate
               : {
                   itemsPerPage: tableSize,
                   currentPage: page,
                   totalItems: count
                 };
           let i = index">
-              <td *ngIf="actionnaire.typePersonne===typePersonne">
+              <td >
                 <!--              <div class="form-check form-check-sm form-check-custom form-check-solid">-->
                 <input class="form-check-input" type="checkbox" value="1"
-                       [(ngModel)]="actionnaire.isSelected" (change)="getIdActionnaire(actionnaire.isSelected, actionnaire.idPersonne)" />
+                       [(ngModel)]="operationTransfertPart.isSelected" (change)="getIdOperation(operationTransfertPart.isSelected, operationTransfertPart.idOperation)" />
                 <!--              </div>-->
               </td>
-              <td *ngIf="actionnaire.typePersonne===typePersonne">{{actionnaire.idPersonne}}</td>
-              <td *ngIf="actionnaire.typePersonne===typePersonne">{{ actionnaire.numCompteDepositaire}}</td>
-              <td *ngIf="actionnaire.typePersonne===typePersonne">{{ actionnaire.nomSigle}}</td>
-              <td *ngIf="actionnaire.typePersonne===typePersonne">{{ actionnaire.prenomRaison}}</td>
-              <td *ngIf="actionnaire.typePersonne===typePersonne">{{ actionnaire.statutCompte }}</td>
+              <td >{{operationTransfertPart.idOperation}}</td>
+              <td >{{ operationTransfertPart.dateOperation | date:'dd/MM/yyy'}}</td>
+              <td >{{ operationTransfertPart.demandeur}}</td>
+              <td >{{ operationTransfertPart.qteInitialeD}}</td>
+              <td >{{ operationTransfertPart.cumpEntre }}</td>
+              <td >{{ operationTransfertPart.beneficiaire }}</td>
+              <td >{{ operationTransfertPart.qteInitialeB }}</td>
+              <td >{{ operationTransfertPart.qteTransfert }}</td>
             </tr>
             </tbody>
           </table>
@@ -153,6 +148,7 @@
             </pagination-controls>
           </div>
         </div>
+        <!--end::Form-->
       </div>
       <!--end::Content-->
     </div>

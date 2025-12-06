@@ -249,9 +249,9 @@ export class TarificationordinaireListComponent implements OnInit, OnDestroy, Af
       {
         title: 'Dénominaton', data: 'denomination', render: function (data:any, type:any, full:any) {
           if(lib==='sgi')
-            return full.personne?.denomination || '';
+            return full.registraire?.raisonSociale || '';
           else if(lib==='depositaire')
-            return full.personne?.denomination || '';
+            return full.depositaire?.denomination || '';
           else
             return full.place?.libellePlace;
         }

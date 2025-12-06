@@ -17,6 +17,15 @@ import { Rachatglobal } from './rachatglobal/rachatglobal';
 import { Bilanannuelf1 } from './bilanannuelf1/bilanannuelf1';
 import { Bilanannuelf2 } from './bilanannuelf2/bilanannuelf2';
 import { Bilanannuelannexe } from './bilanannuelannexe/bilanannuelannexe';
+import { Bilantrimestriel } from './bilantrimestriel/bilantrimestriel';
+import { Bilansemestrel } from './bilansemestrel/bilansemestrel';
+import { DeclarartionCommissionActif } from './declarartion-commission-actif/declarartion-commission-actif';
+import { PointInvestissement } from './point-investissement/point-investissement';
+import { PrevisionnelRemboursement } from './previsionnel-remboursement/previsionnel-remboursement';
+import { SuiviEcheanceTitre } from './suivi-echeance-titre/suivi-echeance-titre';
+import { Avistransfertpart } from './avistransfertpart/avistransfertpart';
+import { Grandlivre } from './grandlivre/grandlivre';
+import { Documentsseance } from './documentsseance/documentsseance';
 
 const routes: Routes = [
   {
@@ -39,6 +48,15 @@ const routes: Routes = [
       { path: 'etatsfinanciers/:libelle', component: Bilanannuelf1, },
       { path: 'etatsfinanciersformat2/:libelle', component: Bilanannuelf2, },
       { path: 'etatsfinanciersannexes/:libelle', component: Bilanannuelannexe, },
+      { path: 'trimestriel/:libelle', component: Bilantrimestriel, },
+      { path: 'semestriel/:libelle', component: Bilansemestrel, },
+      { path: 'declarationscommissionsuractif', component: DeclarartionCommissionActif, },
+      { path: 'pointinvestissement', component: PointInvestissement, },
+      { path: 'previonnelremboursement', component: PrevisionnelRemboursement, },
+      { path: 'suiviecheancetitre', component: SuiviEcheanceTitre, },
+      { path: 'avistransfertpart', component: Avistransfertpart, },
+      { path: 'grandlivre', component: Grandlivre, },
+      { path: 'documentsseance/:libelle', component: Documentsseance, },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
   },

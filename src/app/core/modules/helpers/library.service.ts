@@ -2794,6 +2794,735 @@ export class LibraryService implements OnDestroy{
                   parent: 'Comptabilité',
                   children: []
                 }
+                ,{
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BALANCEAVANTINVENTAIRE'),
+                  title: 'Etats financiers',
+                  page: '',
+                  role: '',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Comptabilité',
+                  children: [
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
+                      title: 'Annuel',
+                      page: '',
+                      role: '',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        {
+                          allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
+                          title: 'Format N1',
+                          page: '',
+                          role: '',
+                          icon: '',
+                          translate: '',
+                          dataLink: '',
+                          parent: 'Etats & Statistiques',
+                          children: [
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANANNUELF1'),
+                              title: 'Bilan',
+                              page: '/opcvm/etats/etatsfinanciers/bilanannuelf1',
+                              role: 'ROLE_CONSULTATION_BILANANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RESULTATANNUELF1'),
+                              title: 'Résultat',
+                              page: '/opcvm/etats/etatsfinanciers/resultatannuelF1',
+                              role: 'ROLE_CONSULTATION_RESULTATANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF1'),
+                              title: 'Etat de variation de l\'Actif Net',
+                              page: '/opcvm/etats/etatsfinanciers/etatvariationactifnetannuelf1',
+                              role: 'ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF1'),
+                              title: 'Notes sur les revenus du portefeuille titre',
+                              page: '/opcvm/etats/etatsfinanciers/notesrevenusportefeuilletitreannuelf1',
+                              role: 'ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF1'),
+                              title: 'Notes sur les revenus des placements monétaires',
+                              page: '/opcvm/etats/etatsfinanciers/notesrevenusplacementmonetaireannuelf1',
+                              role: 'ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF1'),
+                              title: 'Notes sur les sommes distribuables',
+                              page: '/opcvm/etats/etatsfinanciers/notessommesdistribuablesannuelf1',
+                              role: 'ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DONNEESRATIOSANNUELF1'),
+                              title: 'Données par action et ratios pertinents',
+                              page: '/opcvm/etats/etatsfinanciers/donneesratiosannuelf1',
+                              role: 'ROLE_CONSULTATION_DONNEESRATIOSANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ENGAGEMENTHORSBILANANNUELF1'),
+                              title: 'Engagement hors bilan',
+                              page: '/opcvm/etats/etatsfinanciers/engagementhorsbilanannuelf1',
+                              role: 'ROLE_CONSULTATION_ENGAGEMENTHORSBILANANNUELF1',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
+                          title: 'Format N2',
+                          page: '',
+                          role: '',
+                          icon: '',
+                          translate: '',
+                          dataLink: '',
+                          parent: 'Etats & Statistiques',
+                          children: [
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANANNUELF2'),
+                              title: 'Bilan',
+                              page: '/opcvm/etats/etatsfinanciersformat2/bilanannuelf2',
+                              role: 'ROLE_CONSULTATION_BILANANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            },
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RESULTATANNUELF2'),
+                              title: 'Résultat',
+                              page: '/opcvm/etats/etatsfinanciersformat2/resultatannuelf2',
+                              role: 'ROLE_CONSULTATION_RESULTATANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF2'),
+                              title: 'Etat de variation de l\'Actif Net',
+                              page: '/opcvm/etats/etatsfinanciersformat2/etatvariationactifnetannuelf2',
+                              role: 'ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF2'),
+                              title: 'Notes sur les revenus du portefeuille titre',
+                              page: '/opcvm/etats/etatsfinanciersformat2/notesrevenusportefeuilletitreannuelf2',
+                              role: 'ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }                        
+                            ,
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF2'),
+                              title: 'Notes sur les revenus des placements monétaires',
+                              page: '/opcvm/etats/etatsfinanciersformat2/notesrevenusplacementmonetaireannuelf2',
+                              role: 'ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF2'),
+                              title: 'Notes sur les sommes distribuables',
+                              page: '/opcvm/etats/etatsfinanciersformat2/notessommesdistribuablesannuelf2',
+                              role: 'ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DONNEESRATIOSANNUELF2'),
+                              title: 'Données par action et ratios pertinents',
+                              page: '/opcvm/etats/etatsfinanciersformat2/donneesratiosannuelf2',
+                              role: 'ROLE_CONSULTATION_DONNEESRATIOSANNUELF2',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                          ]
+                        }
+                        ,
+                        {
+                          allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
+                          title: 'Annexes',
+                          page: '',
+                          role: '',
+                          icon: '',
+                          translate: '',
+                          dataLink: '',
+                          parent: 'Etats & Statistiques',
+                          children: [
+                            {
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEETATFINANCIERANNUEL'),
+                              title: 'Note aux états financiers annuels',
+                              page: '/opcvm/etats/etatsfinanciersannexes/noteetatsfinanciersannuels',
+                              role: 'ROLE_CONSULTATION_NOTEETATFINANCIERANNUEL',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATENTREEPORTEFEUILLETITRE'),
+                              title: 'Etat des entrées en portefeuille titre',
+                              page: '/opcvm/etats/etatsfinanciersannexes/entreesportefeuilletitre',
+                              role: 'ROLE_CONSULTATION_ETATENTREEPORTEFEUILLETITRE',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATSORTIEPORTEFEUILLETITRE'),
+                              title: 'Etat des sorties en portefeuille titre',
+                              page: '/opcvm/etats/etatsfinanciersannexes/sortiesportefeuilletitre',
+                              role: 'ROLE_CONSULTATION_ETATSORTIEPORTEFEUILLETITRE',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPORTEFEUILLETITREANNUEL'),
+                              title: 'Note sur le portefeuille titres annuel',
+                              page: '/opcvm/etats/etatsfinanciersannexes/notesportefeuilletitreannuel',
+                              role: 'ROLE_CONSULTATION_NOTEPORTEFEUILLETITREANNUEL',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIREANNUEL'),
+                              title: 'Note sur les placements monétaires annuel',
+                              page: '/opcvm/etats/etatsfinanciersannexes/notesplacementsmonetaireannuel',
+                              role: 'ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIREANNUEL',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTECAPITALANNUEL'),
+                              title: 'Note sur le capital',
+                              page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesnotesurlecapital',
+                              role: 'ROLE_CONSULTATION_NOTECAPITALANNUEL',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ADMISECOTE'),
+                              title: 'Action admise à la cote',
+                              page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesactionadmisecote',
+                              role: 'ROLE_CONSULTATION_ADMISECOTE',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                            ,{
+                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_REMUNERATION'),
+                              title: 'Rémunération du gestionnaire et du dépositaire',
+                              page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesremunerationgestionnairedepositaire',
+                              role: 'ROLE_CONSULTATION_REMUNERATION',
+                              icon: '',
+                              translate: '',
+                              dataLink: '',
+                              parent: 'Etats & Statistiques',
+                              children: [
+                                
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    ,
+                    {
+                      allow: true,
+                      title: 'Trimestriel',
+                      page: '',
+                      role: '',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                            {
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANTRIMESTRIEL'),
+                            title: 'Bilan trimestriel',
+                            page: '/opcvm/etats/trimestriel/bilan',
+                            role: 'ROLE_CONSULTATION_BILANTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_COMPTERESULTATTRIMESTRIEL'),
+                            title: 'Compte de résultat',
+                            page: '/opcvm/etats/trimestriel/compteresultat',
+                            role: 'ROLE_CONSULTATION_COMPTERESULTATTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETTRIMESTRIEL'),
+                            title: 'Etat de variation de l\'Actif Net',
+                            page: '/opcvm/etats/trimestriel/variationactifnet',
+                            role: 'ROLE_CONSULTATION_VARIATIONACTIFNETTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEREVENUSPLACEMENTSMONETAIRESTRIMESTRIEL'),
+                            title: 'Note sur les revenus des placements monétaires',
+                            page: '/opcvm/etats/trimestriel/noterevenusplacementsmonetaires',
+                            role: 'ROLE_CONSULTATION_NOTEREVENUSPLACEMENTSMONETAIRESTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEREVENUSPORTEFEUILLETITRETRIMESTRIEL'),
+                            title: 'Note sur les revenus du portefeuille titre',
+                            page: '/opcvm/etats/trimestriel/noterevenusportefeuilletitremonetaires',
+                            role: 'ROLE_CONSULTATION_NOTEREVENUSPORTEFEUILLETITRETRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_TABLEAUANALYSEVLTRIMESTRIEL'),
+                            title: 'Tableau d\'analyse de la VL',
+                            page: '/opcvm/etats/trimestriel/tableauanalysevl',
+                            role: 'ROLE_CONSULTATION_TABLEAUANALYSEVLTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_MONTANTFRAISGESTIONTRIMESTRIEL'),
+                            title: 'Montant des frais de gestion',
+                            page: '/opcvm/etats/trimestriel/montantfraisgestion',
+                            role: 'ROLE_CONSULTATION_MONTANTFRAISGESTIONTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPORTEFEUILLETITRETRIMESTRIEL'),
+                            title: 'Note sur le portefeuille titre',
+                            page: '/opcvm/etats/trimestriel/noteportefeuilletitre',
+                            role: 'ROLE_CONSULTATION_NOTEPORTEFEUILLETITRETRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIRESTRIMESTRIEL'),
+                            title: 'Note sur les placements monétaires',
+                            page: '/opcvm/etats/trimestriel/noteplacementsmonetaires',
+                            role: 'ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIRESTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ACTIONSADMISESCOTETRIMESTRIEL'),
+                            title: 'Actions admises à la cote',
+                            page: '/opcvm/etats/trimestriel/actionsadmisescote',
+                            role: 'ROLE_CONSULTATION_ACTIONSADMISESCOTETRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESURCAPITALTRIMESTRIEL'),
+                            title: 'Note sur le capital ',
+                            page: '/opcvm/etats/trimestriel/notesurlecapital',
+                            role: 'ROLE_CONSULTATION_NOTESURCAPITALTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEETATFINANCIERTRIMESTRIEL'),
+                            title: 'Notes aux états financiers',
+                            page: '/opcvm/etats/trimestriel/noteetatsfinanciers',
+                            role: 'ROLE_CONSULTATION_NOTEETATFINANCIERTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATMENSUELSOUSTRIMESTRIEL'),
+                            title: 'Etat mensuel des souscriptions',
+                            page: '/opcvm/etats/trimestriel/etatmensuelsouscription',
+                            role: 'ROLE_CONSULTATION_ETATMENSUELSOUSTRIMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                      ]
+                    }
+                    ,
+                    {
+                      allow: true,
+                      title: 'Semestriel',
+                      page: '',
+                      role: '',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                            {
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANSEMESTRIEL'),
+                            title: 'Bilan semestriel',
+                            page: '/opcvm/etats/semestriel/bilan',
+                            role: 'ROLE_CONSULTATION_BILANSEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_COMPTERESULTATSEMESTRIEL'),
+                            title: 'Compte de résultat',
+                            page: '/opcvm/etats/semestriel/compteresultat',
+                            role: 'ROLE_CONSULTATION_COMPTERESULTATSEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                          //   ,{
+                          //   allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETSEMESTRIEL'),
+                          //   title: 'Etat de variation de l\'Actif Net',
+                          //   page: '/opcvm/etats/semestriel/variationactifnet',
+                          //   role: 'ROLE_CONSULTATION_VARIATIONACTIFNETSEMESTRIEL',
+                          //   icon: '',
+                          //   translate: '',
+                          //   dataLink: '',
+                          //   parent: 'Etats & Statistiques',
+                          //   children: [
+                              
+                          //   ]
+                          // }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEREVENUSPLACEMENTSMONETAIRESSEMESTRIEL'),
+                            title: 'Note sur les revenus des placements monétaires',
+                            page: '/opcvm/etats/semestriel/noterevenusplacementsmonetaires',
+                            role: 'ROLE_CONSULTATION_NOTEREVENUSPLACEMENTSMONETAIRESSEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEREVENUSPORTEFEUILLETITRESEMESTRIEL'),
+                            title: 'Note sur les revenus du portefeuille titre',
+                            page: '/opcvm/etats/semestriel/noterevenusportefeuilletitremonetaires',
+                            role: 'ROLE_CONSULTATION_NOTEREVENUSPORTEFEUILLETITRESEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_TABLEAUANALYSEVLSEMESTRIEL'),
+                            title: 'Tableau d\'analyse de la VL',
+                            page: '/opcvm/etats/semestriel/tableauanalysevl',
+                            role: 'ROLE_CONSULTATION_TABLEAUANALYSEVLSEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                          //   ,{
+                          //   allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_MONTANTFRAISGESTIONTRIMESTRIEL'),
+                          //   title: 'Montant des frais de gestion',
+                          //   page: '/opcvm/etats/semestriel/montantfraisgestion',
+                          //   role: 'ROLE_CONSULTATION_MONTANTFRAISGESTIONTRIMESTRIEL',
+                          //   icon: '',
+                          //   translate: '',
+                          //   dataLink: '',
+                          //   parent: 'Etats & Statistiques',
+                          //   children: [
+                              
+                          //   ]
+                          // }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPORTEFEUILLETITRESEMESTRIEL'),
+                            title: 'Note sur le portefeuille titre',
+                            page: '/opcvm/etats/semestriel/noteportefeuilletitre',
+                            role: 'ROLE_CONSULTATION_NOTEPORTEFEUILLETITRESEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIRESSEMESTRIEL'),
+                            title: 'Note sur les placements monétaires',
+                            page: '/opcvm/etats/semestriel/noteplacementsmonetaires',
+                            role: 'ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIRESSEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ACTIONSADMISESCOTESEMESTRIEL'),
+                            title: 'Actions admises à la cote',
+                            page: '/opcvm/etats/semestriel/actionsadmisescote',
+                            role: 'ROLE_CONSULTATION_ACTIONSADMISESCOTESEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESURCAPITALSEMESTRIEL'),
+                            title: 'Note sur le capital ',
+                            page: '/opcvm/etats/semestriel/notesurlecapital',
+                            role: 'ROLE_CONSULTATION_NOTESURCAPITALSEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEETATFINANCIERSEMESTRIEL'),
+                            title: 'Notes aux états financiers',
+                            page: '/opcvm/etats/semestriel/noteetatsfinanciers',
+                            role: 'ROLE_CONSULTATION_NOTEETATFINANCIERSEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                            ,{
+                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATMENSUELSOUSSEMESTRIEL'),
+                            title: 'Etat mensuel des souscriptions',
+                            page: '/opcvm/etats/semestriel/etatmensuelsouscription',
+                            role: 'ROLE_CONSULTATION_ETATMENSUELSOUSSEMESTRIEL',
+                            icon: '',
+                            translate: '',
+                            dataLink: '',
+                            parent: 'Etats & Statistiques',
+                            children: [
+                              
+                            ]
+                          }
+                      ]
+                    }
+                  ]
+                }
               ]
             }
             ,
@@ -3346,6 +4075,17 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_GRANDLIVRE'),
+                  title: 'Grand livre',
+                  page: '/opcvm/etats/grandlivre',
+                  role: 'ROLE_CONSULTATION_GRANDLIVRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: []
+                }
+                ,{
                   allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BALANCEAVANTINVENTAIRE'),
                   title: 'Point des souscriptions',
                   page: '',
@@ -3385,7 +4125,7 @@ export class LibraryService implements OnDestroy{
                 }
                 ,{
                   allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BALANCEAVANTINVENTAIRE'),
-                  title: 'Eats financiers',
+                  title: 'Point des rachats',
                   page: '',
                   role: '',
                   icon: '',
@@ -3395,384 +4135,226 @@ export class LibraryService implements OnDestroy{
                   children: [
                     {
                       allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
-                      title: 'Annuel',
-                      page: '',
-                      role: '',
+                      title: 'Point détaillé',
+                      page: '/opcvm/etats/rachatdetaille',
+                      role: 'ROLE_CONSULTATION_RACHATDETAILLE',
                       icon: '',
                       translate: '',
                       dataLink: '',
                       parent: 'Etats & Statistiques',
                       children: [
-                        {
-                          allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
-                          title: 'Format N1',
-                          page: '',
-                          role: '',
-                          icon: '',
-                          translate: '',
-                          dataLink: '',
-                          parent: 'Etats & Statistiques',
-                          children: [
-                            {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANANNUELF1'),
-                              title: 'Bilan',
-                              page: '/opcvm/etats/etatsfinanciers/bilanannuelf1',
-                              role: 'ROLE_CONSULTATION_BILANANNUELF1',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RESULTATANNUELF1'),
-                              title: 'Résultat',
-                              page: '/opcvm/etats/etatsfinanciers/resultatannuelF1',
-                              role: 'ROLE_CONSULTATION_RESULTATANNUELF1',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF1'),
-                              title: 'Etat de variation de l\'Actif Net',
-                              page: '/opcvm/etats/etatsfinanciers/etatvariationactifnetannuelf1',
-                              role: 'ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF1',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF1'),
-                              title: 'Notes sur les revenus du portefeuille titre',
-                              page: '/opcvm/etats/etatsfinanciers/notesrevenusportefeuilletitreannuelf1',
-                              role: 'ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF1',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF1'),
-                              title: 'Notes sur les revenus des placements monétaires',
-                              page: '/opcvm/etats/etatsfinanciers/notesrevenusplacementmonetaireannuelf1',
-                              role: 'ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF1',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF1'),
-                              title: 'Notes sur les sommes distribuables',
-                              page: '/opcvm/etats/etatsfinanciers/notessommesdistribuablesannuelf1',
-                              role: 'ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF1',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DONNEESRATIOSANNUELF1'),
-                              title: 'Données par action et ratios pertinents',
-                              page: '/opcvm/etats/etatsfinanciers/donneesratiosannuelf1',
-                              role: 'ROLE_CONSULTATION_DONNEESRATIOSANNUELF1',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ENGAGEMENTHORSBILANANNUELF1'),
-                              title: 'Engagement hors bilan',
-                              page: '/opcvm/etats/etatsfinanciers/engagementhorsbilanannuelf1',
-                              role: 'ROLE_CONSULTATION_ENGAGEMENTHORSBILANANNUELF1',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
-                          title: 'Format N2',
-                          page: '',
-                          role: '',
-                          icon: '',
-                          translate: '',
-                          dataLink: '',
-                          parent: 'Etats & Statistiques',
-                          children: [
-                            {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANANNUELF2'),
-                              title: 'Bilan',
-                              page: '/opcvm/etats/etatsfinanciersformat2/bilanannuelf2',
-                              role: 'ROLE_CONSULTATION_BILANANNUELF2',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            },
-                            {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RESULTATANNUELF2'),
-                              title: 'Résultat',
-                              page: '/opcvm/etats/etatsfinanciersformat2/resultatannuelf2',
-                              role: 'ROLE_CONSULTATION_RESULTATANNUELF2',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,
-                            {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF2'),
-                              title: 'Etat de variation de l\'Actif Net',
-                              page: '/opcvm/etats/etatsfinanciersformat2/etatvariationactifnetannuelf2',
-                              role: 'ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF2',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,
-                            {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF2'),
-                              title: 'Notes sur les revenus du portefeuille titre',
-                              page: '/opcvm/etats/etatsfinanciersformat2/notesrevenusportefeuilletitreannuelf2',
-                              role: 'ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF2',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }                        
-                            ,
-                            {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF2'),
-                              title: 'Notes sur les revenus des placements monétaires',
-                              page: '/opcvm/etats/etatsfinanciersformat2/notesrevenusplacementmonetaireannuelf2',
-                              role: 'ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF2',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,
-                            {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF2'),
-                              title: 'Notes sur les sommes distribuables',
-                              page: '/opcvm/etats/etatsfinanciersformat2/notessommesdistribuablesannuelf2',
-                              role: 'ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF2',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,
-                            {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DONNEESRATIOSANNUELF2'),
-                              title: 'Données par action et ratios pertinents',
-                              page: '/opcvm/etats/etatsfinanciersformat2/donneesratiosannuelf2',
-                              role: 'ROLE_CONSULTATION_DONNEESRATIOSANNUELF2',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                          ]
-                        }
-                        ,
-                        {
-                          allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
-                          title: 'Annexes',
-                          page: '',
-                          role: '',
-                          icon: '',
-                          translate: '',
-                          dataLink: '',
-                          parent: 'Etats & Statistiques',
-                          children: [
-                            {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEETATFINANCIERANNUEL'),
-                              title: 'Note aux états financiers annuels',
-                              page: '/opcvm/etats/etatsfinanciersannexes/noteetatsfinanciersannuels',
-                              role: 'ROLE_CONSULTATION_NOTEETATFINANCIERANNUEL',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATENTREEPORTEFEUILLETITRE'),
-                              title: 'Etat des entrées en portefeuille titre',
-                              page: '/opcvm/etats/etatsfinanciersannexes/entreesportefeuilletitre',
-                              role: 'ROLE_CONSULTATION_ETATENTREEPORTEFEUILLETITRE',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATSORTIEPORTEFEUILLETITRE'),
-                              title: 'Etat des sorties en portefeuille titre',
-                              page: '/opcvm/etats/etatsfinanciersannexes/sortiesportefeuilletitre',
-                              role: 'ROLE_CONSULTATION_ETATSORTIEPORTEFEUILLETITRE',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPORTEFEUILLETITREANNUEL'),
-                              title: 'Note sur le portefeuille titres annuel',
-                              page: '/opcvm/etats/etatsfinanciersannexes/notesportefeuilletitreannuel',
-                              role: 'ROLE_CONSULTATION_NOTEPORTEFEUILLETITREANNUEL',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIREANNUEL'),
-                              title: 'Note sur les placements monétaires annuel',
-                              page: '/opcvm/etats/etatsfinanciersannexes/notesplacementsmonetaireannuel',
-                              role: 'ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIREANNUEL',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTECAPITALANNUEL'),
-                              title: 'Note sur le capital',
-                              page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesnotesurlecapital',
-                              role: 'ROLE_CONSULTATION_NOTECAPITALANNUEL',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ADMISECOTE'),
-                              title: 'Action admise à la cote',
-                              page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesactionadmisecote',
-                              role: 'ROLE_CONSULTATION_ADMISECOTE',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                            ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_REMUNERATION'),
-                              title: 'Rémunération du gestionnaire et du dépositaire',
-                              page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesremunerationgestionnairedepositaire',
-                              role: 'ROLE_CONSULTATION_REMUNERATION',
-                              icon: '',
-                              translate: '',
-                              dataLink: '',
-                              parent: 'Etats & Statistiques',
-                              children: [
-                                
-                              ]
-                            }
-                          ]
-                        }
+                        
                       ]
                     },
                     {
-                      allow: true,
-                      title: 'Trimestriel',
-                      page: '',
-                      role: '',
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATGLOBAL'),
+                      title: 'Point global',
+                      page: '/opcvm/etats/rachatglobal',
+                      role: 'ROLE_CONSULTATION_RACHATGLOBAL',
                       icon: '',
                       translate: '',
                       dataLink: '',
                       parent: 'Etats & Statistiques',
                       children: [
-                            {
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANTRIMESTRIEL'),
-                            title: 'Bilan trimestriel',
-                            page: '/opcvm/etats/trimestriel/bilan',
-                            role: 'ROLE_CONSULTATION_BILANTRIMESTRIEL',
-                            icon: '',
-                            translate: '',
-                            dataLink: '',
-                            parent: 'Etats & Statistiques',
-                            children: [
-                              
-                            ]
-                          }
+                        
                       ]
                     }
                   ]
                 }
+                ,
+                {
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DECLARATIONCOMMISSIONACTIF'),
+                  title: 'Déclarations commissions sur actifs',
+                  page: '/opcvm/etats/declarationscommissionsuractif',
+                  role: 'ROLE_CONSULTATION_DECLARATIONCOMMISSIONACTIF',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: [
+                    
+                  ]
+                }         
+                ,
+                {
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_POINTINVESTISSEMENT'),
+                  title: 'Point des investissements / désinvestissements sur une période',
+                  page: '/opcvm/etats/pointinvestissement',
+                  role: 'ROLE_CONSULTATION_POINTINVESTISSEMENT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: [
+                    
+                  ]
+                }         
+                ,
+                {
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_PREVISIONNELREMBOURSEMENT'),
+                  title: 'Prévisionnel des remboursements',
+                  page: '/opcvm/etats/previonnelremboursement',
+                  role: 'ROLE_CONSULTATION_PREVISIONNELREMBOURSEMENT',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: [
+                    
+                  ]
+                }         
+                ,
+                {
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_SUIVIECHEANCETITRE'),
+                  title: 'Suivi échéance des titres',
+                  page: '/opcvm/etats/suiviecheancetitre',
+                  role: 'ROLE_CONSULTATION_SUIVIECHEANCETITRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: [
+                    
+                  ]
+                }         
+                ,
+                {
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_AVISTRANSFERTPART'),
+                  title: 'Avis de transfert de parts',
+                  page: '/opcvm/etats/avistransfertpart',
+                  role: 'ROLE_CONSULTATION_AVISTRANSFERTPART',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: [
+                    
+                  ]
+                }         
+                ,
+                {
+                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_AVISTRANSFERTPART'),
+                  title: 'Documents de séance',
+                  page: '',
+                  role: '',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  children: [
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_SOUSCRIPTIONS'),
+                      title: 'Liste de vérification des souscriptions',
+                      page: '/opcvm/etats/documentsseance/verif_souscription',
+                      role: 'ROLE_CONSULTATION_DS_SOUSCRIPTIONS',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        
+                      ]
+                    }    
+                    , 
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_RACHATS'),
+                      title: 'Liste de vérification des rachats',
+                      page: '/opcvm/etats/documentsseance/verif_rachat',
+                      role: 'ROLE_CONSULTATION_DS_RACHATS',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        
+                      ]
+                    }     
+                    , 
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_ECRITURES'),
+                      title: 'Liste de vérification des écritures',
+                      page: '/opcvm/etats/documentsseance/verif_ecriture',
+                      role: 'ROLE_CONSULTATION_DS_ECRITURES',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        
+                      ]
+                    }     
+                    , 
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_VDE'),
+                      title: 'Liste de vérification des VDE',
+                      page: '/opcvm/etats/documentsseance/verif_vde',
+                      role: 'ROLE_CONSULTATION_DS_VDE',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        
+                      ]
+                    }     
+                    , 
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_ECRITURE_VDE'),
+                      title: 'Liste de vérification des écritures de VDE',
+                      page: '/opcvm/etats/documentsseance/verif_ecriture_vde',
+                      role: 'ROLE_CONSULTATION_DS_ECRITURE_VDE',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        
+                      ]
+                    }     
+                    , 
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_CHARGE'),
+                      title: 'Liste de vérification des Charges',
+                      page: '/opcvm/etats/documentsseance/verif_charge',
+                      role: 'ROLE_CONSULTATION_DS_CHARGE',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        
+                      ]
+                    }     
+                    , 
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_ECRITURE_CHARGE'),
+                      title: 'Liste de vérification des écritures des Charges',
+                      page: '/opcvm/etats/documentsseance/verif_ecriture_charge',
+                      role: 'ROLE_CONSULTATION_DS_ECRITURE_CHARGE',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        
+                      ]
+                    }     
+                    , 
+                    {
+                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_CODE_POSTE'),
+                      title: 'Liste de vérification des codes postes',
+                      page: '/opcvm/etats/documentsseance/verif_code_poste',
+                      role: 'ROLE_CONSULTATION_DS_CODE_POSTE',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Etats & Statistiques',
+                      children: [
+                        
+                      ]
+                    }     
+                  ]
+                }         
               ]
             },
           ]
