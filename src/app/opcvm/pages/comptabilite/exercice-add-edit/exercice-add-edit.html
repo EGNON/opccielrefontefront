@@ -32,7 +32,7 @@
                 <!--begin::Input-->
                 <input  type="text" class="form-control form-control-sm form-control-solid"
                        placeholder="dd-mm-yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date operation" aria-describedby="basic-addon6"
-                       formControlName="dateDebut" [ngClass]="{ 'is-invalid': submitted && f.dateOperation.errors }"/>
+                       formControlName="dateDebut" [ngClass]="{ 'is-invalid': submitted && f.dateDebut.errors }"/>
                 <!--end::Input-->
                 <span (click)="d.toggle()"  class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
                       <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
@@ -52,7 +52,7 @@
                 <!--begin::Input-->
                 <input type="text" class="form-control form-control-sm form-control-solid"
                        placeholder="dd-mm-yyyy" ngbDatepicker #d2="ngbDatepicker" aria-label="Date REC/LIV PREVU" aria-describedby="basic-addon6"
-                       formControlName="dateFin" [ngClass]="{ 'is-invalid': submitted && f.dateReceptionLivraisonPrevu.errors }"/>
+                       formControlName="dateFin" [ngClass]="{ 'is-invalid': submitted && f.dateFin.errors }"/>
                 <!--end::Input-->
                 <span (click)="d2.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
                       <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
@@ -74,7 +74,7 @@
                 <!--begin::Input-->
                 <input type="text" class="form-control form-control-sm form-control-solid"
                        placeholder="dd-mm-yyyy" ngbDatepicker #d3="ngbDatepicker" aria-label="Date REC/LIV PREVU" aria-describedby="basic-addon6"
-                       formControlName="dateCloture" [ngClass]="{ 'is-invalid': submitted && f.dateReceptionLivraisonPrevu.errors }"/>
+                       formControlName="dateCloture" [ngClass]="{ 'is-invalid': submitted && f.dateCloture.errors }"/>
                 <!--end::Input-->
                 <span (click)="d3.toggle()" class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon7">
                       <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
@@ -106,8 +106,8 @@
 <!--                  <option [value]="2">PROSPECTION</option>-->
                 </select>
                 <!--end::Select-->
-                <div *ngIf="submitted && f.modeEtablissementDto.errors" class="invalid-feedback">
-                  <div *ngIf="f.modeEtablissementDto.errors.required">Le mode d'établissement est obligatoire</div>
+                <div *ngIf="submitted && f.plan.errors" class="invalid-feedback">
+                  <div *ngIf="f.plan.errors.required">Le mode d'établissement est obligatoire</div>
                 </div>
             </div>
           </div>
