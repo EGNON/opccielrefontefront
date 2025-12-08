@@ -2044,6 +2044,33 @@ export class LibraryService implements OnDestroy{
                           ('/app/standard/etats/releveactionnaire').includes(value.path!)),
                         children: []
                       },
+                      {
+                        allow:true,// this.authService.isGrantedRole('ROLE_ETAT_PORTEFEUILLEACTIONNAIREF2'),
+                        title: 'Format 2',
+                        page: '/app/standard/etats/portefeuilleactionnairef2',
+                        role: 'ROLE_ETAT_PORTEFEUILLEACTIONNAIREF2',
+                        icon: '',
+                        translate: '',
+                        dataLink: '',
+                        parent: 'Etats & Statistiques',
+                        route: Routing.find((value, index, obj) =>
+                          ('/app/standard/etats/releveactionnaire').includes(value.path!)),
+                        children: []
+                      },
+                      {
+                        allow:true,// this.authService.isGrantedRole('ROLE_ETAT_PORTEFEUILLEACTIONNAIREANNEE'),
+                        title: 'Fin annee',
+                        page: '/app/standard/etats/portefeuilleactionnaireannee',
+                        role: 'ROLE_ETAT_PORTEFEUILLEACTIONNAIREANNEE',
+                        icon: '',
+                        translate: '',
+                        dataLink: '',
+                        parent: 'Etats & Statistiques',
+                        route: Routing.find((value, index, obj) =>
+                          ('/app/standard/etats/releveactionnaire').includes(value.path!)),
+                        children: []
+                      },
+      
                   ]
                 },
                 {
@@ -4354,7 +4381,20 @@ export class LibraryService implements OnDestroy{
                       ]
                     }     
                   ]
-                }         
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_COMPOSITIONDETAILLEACTIF'),
+                  title: 'Composition detaillee de l\'actif',
+                  page: '/opcvm/etats/compositiondetailleactif',
+                  role: 'ROLE_ETAT_COMPOSITIONDETAILLEACTIF',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/opcvm/etats/compositiondetailleactif').includes(value.path!)),
+                  children: []
+                }       
               ]
             },
           ]

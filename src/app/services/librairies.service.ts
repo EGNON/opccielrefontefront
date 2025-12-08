@@ -282,6 +282,11 @@ export class LibrairiesService {
       {responseType: 'blob' as any }
     );
   }
+  compositiondetailleactif(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/compositiondetailleactif`, param,
+      {responseType: 'blob' as any }
+    );
+  }
   grandlivreListe(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/grandlivre/liste`, param);
   }
@@ -471,6 +476,16 @@ export class LibrairiesService {
   }
   portefeuilleActionnaire(param: any) {
     return this.http.post<any>(`${this.API_URL}/etats/portefeuilleactionnaire`, param
+      ,{responseType: 'blob' as any }
+    );
+  }
+  portefeuilleActionnaireF2(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/portefeuilleactionnaireformat2`, param
+      ,{responseType: 'blob' as any }
+    );
+  }
+  portefeuilleActionnaireAnnee(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/portefeuilleactionnairefinannee`, param
       ,{responseType: 'blob' as any }
     );
   }

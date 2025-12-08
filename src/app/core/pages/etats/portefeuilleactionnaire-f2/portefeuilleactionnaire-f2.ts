@@ -1,27 +1,26 @@
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableDirective } from 'angular-datatables';
 import { Config, Api } from 'datatables.net';
 import saveAs from 'file-saver';
-import moment from 'moment';
 import { Subject, Subscription, catchError, of, finalize } from 'rxjs';
-import { AuthService } from '../../../../core/modules/auth';
-import { JournalService } from '../../../../core/services/journal.service';
-import { Personne } from '../../../../crm/models/personne/personne.model';
+import { ExerciceService } from '../../../../opcvm/services/exercice.service';
 import { LibrairiesService } from '../../../../services/librairies.service';
 import { LocalService } from '../../../../services/local.service';
-import { ExerciceService } from '../../../services/exercice.service';
+import { AuthService } from '../../../modules/auth';
+import * as XLSX from "xlsx";
 
 @Component({
-  selector: 'app-compositiondetailleactif',
+  selector: 'app-portefeuilleactionnaire-f2',
   standalone: false,
-  templateUrl: './compositiondetailleactif.html',
-  styleUrl: './compositiondetailleactif.scss'
+  templateUrl: './portefeuilleactionnaire-f2.html',
+  styleUrl: './portefeuilleactionnaire-f2.scss'
 })
-export class Compositiondetailleactif implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
+export class PortefeuilleactionnaireF2 implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
   form: FormGroup;
-
+  idActionnaireTab:any[]
   currentOpcvm: any;
   currentSeance: any;
   currentUser: any;
@@ -31,51 +30,51 @@ export class Compositiondetailleactif implements OnInit, AfterViewInit, AfterCon
   downloaded = false;
   submitting = false;
   submitted = false;
-  dateDebut:any;
-  dateFin:any;
-  annee:number;
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 10;
+  tableSizes: any = [3, 6, 9, 12];
+
   //DataTable Config
   datatableConfig: Config = {};
   dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective, {static: false}) datatableElement: DataTableDirective;
+  private clickListener: () => void;
+  private idInAction: number;
 
   isLoading: boolean = false;
   subscriptions: Subscription[] = [];
-   public journalSettings = {};
-  actionnaireSelectionne: Personne[];  
-  exercice$: any;
-  exercice: any;
-  journal: any;
-  codeJournal:any;
-  actionnaire:any;
-
   allData:any;
+  actionnaire$:any;
+  dateDebut:Date;
   constructor(
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
     private authService: AuthService,
     private localStore: LocalService,
-    public journalService: JournalService,
     private libService: LibrairiesService,
+    private router: Router,
+    private route: ActivatedRoute,
     private exerciceService: ExerciceService,
     public renderer: Renderer2) {
     this.currentUser = this.authService.currentUserValue;
     this.currentOpcvm = this.localStore.getData("currentOpcvm");
     this.currentSeance = this.localStore.getData("currentSeance");
-
-
-   
-    
+    // this.exerciceService.afficherExerciceCourant(this.currentOpcvm?.idOpcvm).subscribe(
+    //   (data)=>{
+    //     if(data.data.length==0)
+    //       this.dateDebut=new Date(this.currentSeance?.dateFermeture);
+    //     else
+    //       this.dateDebut=new Date(data.data.dateDebut);
+    //   }
+    // )
   }
- 
 
   ngAfterContentInit(): void {
   }
 
-  ngAfterViewInit(): void {
-    this.dtTrigger.next(null);
-  }
+
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sb => sb.unsubscribe());
@@ -84,14 +83,18 @@ export class Compositiondetailleactif implements OnInit, AfterViewInit, AfterCon
   ngOnInit(): void {
 
     const dateOuv = new Date(this.currentSeance?.dateOuverture);
-    this.dateDebut=new Date(this.currentSeance?.dateFermeture);
-    const dateFin = new Date(this.currentSeance?.dateFermeture);
+    this.dateDebut=new Date();
+    const dateFin = new Date();
     this.form = this.fb.group({
-      frequence: [],
-      dateEstimation: [
-       new NgbDate(this.dateDebut.getFullYear(), this.dateDebut.getMonth()+1, this.dateDebut.getDate()), Validators.required
+      endDate: [
+        new NgbDate(dateFin.getFullYear(), dateFin.getMonth()+1, dateFin.getDate()), Validators.required
       ],
+      startDate: [
+        new NgbDate(this.dateDebut.getFullYear(), this.dateDebut.getMonth()+1, this.dateDebut.getDate()), Validators.required
+      ],
+      search:[null]
     });
+    this.idActionnaireTab=[];
     this.dtOptions = {
       // dom: 'Bfrtip',
       dom: "<'row'<'col-sm-12'tr>>" +
@@ -172,140 +175,55 @@ export class Compositiondetailleactif implements OnInit, AfterViewInit, AfterCon
         }
       },
     };
-    //this.actualiser();
+    this.afficherActionnaire();
   }
-
-  afficherListe(prefix: string) {
-    const self = this;
-    let columns: any[] = [
-     
-      {
-        title: 'N°', data: 'num', render: function (data, type, row) {
-          return row.num
-        },
-      },
-      {
-        title: 'DATE ESTIMATION', data: 'dateEstimation', render: function (data, type, row) {
-          return moment(row.dateEstimation).format("DD/MM/YYYY")
-        },
-      },
-      {
-        title: 'ACTIONS', data: 'actions', render: function (data, type, row) {
-          return row.actions;
-        },
-      },
-      {
-        title: 'OBLIGATIONS', data: 'obligations', render: function (data, type, row) {
-          return row.obligations;
-        },
-      },
-      {
-        title: 'OPC', data: 'partOPC', render: function (data, type, row) {
-          return row.partOPC;
-        },
-      },
-      {
-        title: 'AUTRES', data: 'autres', render: function (data, type, row) {
-          return row.autres;
-        },
-      },
-      {
-        title: 'Total Hors part OPC', data: 'totalHorsPartOPC', render: function (data, type, row) {
-          return row.totalHorsPartOPC;
-        },
-      },
-      {
-        title: 'TOTAL GENERAL', data: 'totalGeneral', render: function (data, type, row) {
-          return row.totalGeneral;
-        },
-      },
-      {
-        title: 'COMMISSIONS', data: 'commission', render: function (data, type, row) {
-          return row.commission;
-        },
-      },
-
-    ];
-    this.datatableConfig = {
-      processing: true,
-      serverSide: true,
-      ajax: (dataTablesParameters: any, callback) => {
-        let idOpcvm = this.currentOpcvm?.idOpcvm;
-        let param = {
-          idActionnaire:this.codeJournal,
-          idOpcvm: idOpcvm,
-          ...this.form.value,
-          datatableParameters: dataTablesParameters
-        };
-        if (prefix.toLowerCase() === "l") {
-          param = {
-            ...param,
-            anneeExo:this.annee,
-            taux:param.taux.replace(',','.'),
-            dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
-            dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
-          };
-          console.log(param);
-          const sb = this.libService.declarationCommissionSurActif(param)
-            .subscribe(resp => {
-              console.log("Retour releve === ", resp.data);
-              callback(resp.data);
-            });
-          this.subscriptions.push(sb);
-        }
-        else {
-          callback({
-            draw: dataTablesParameters.draw,
-            recordsTotal: 1,
-            recordsFiltered: 1,
-            data: []
-          });
-        }
-      },
-      columns: columns,
-      // drawCallback: function(settings) {
-      //   // @ts-ignore
-      //   let api = this.api();
-      //   let rows = api.rows({ page: 'current' }).nodes();
-      //   let last = null;
-
-      //   api.column(0, { page: 'current' }).data().each(function(group, i) {
-      //     if (last !== group) {
-      //       $(rows).eq(i).before(
-      //         `<tr class="group"><td colspan="${api.columns().count()}"><b>${group}</b></td></tr>`
-      //       );
-      //       last = group;
-      //     }
-      //   });
-      // },
-      createdRow: function (row, data: any, dataIndex) {},
-    };
-    this.dtOptions = {
-      ...this.dtOptions,
-      ...this.datatableConfig,
-    };
-    this.rerender();
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.afficherActionnaire();
   }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.afficherActionnaire();
+  }
+  afficherActionnaire(){
+    this.libService.afficherPersonnePhysiqueMorale().subscribe(
+      (data)=>{
+        this.actionnaire$=data.data
+      }
+    )
+  }
+  rechercherActionnaire(){
+    let valeur=this.form.value.search
+    if(valeur!==undefined && valeur!==null)
+    this.libService.rechercherPersonnePhysiqueMorale(valeur).subscribe(
+      (data)=>{
+        this.actionnaire$=data.data
+      }
+    )
+  }
+  
+  getIdActionnaire(isSelected, idActionnaire){
+    console.log(isSelected, idActionnaire)
 
-  rerender(): void {
-    try {
-      this.datatableElement.dtInstance.then((dtInstance: Api) => {
-        dtInstance.destroy();
-        this.dtTrigger.next(null);
-      });
-    } catch (err) {
-      // console.log(err);
+    if(isSelected==true) {
+      let index=this.idActionnaireTab.indexOf(idActionnaire)
+      if(index===-1)
+        this.idActionnaireTab.push(idActionnaire)
     }
+    else
+    {
+      let index=this.idActionnaireTab.indexOf(idActionnaire)
+      if(index!==-1)
+        this.idActionnaireTab.splice(index,1)
+    }
+    console.log(this.idActionnaireTab)
   }
-
-
-  actualiser() {
-    this.afficherListe("l");
-  }
-
-  telecharger() {
-    this.downloading = true;
-    const formValue = this.form.value;
+  
+  exportExcel() {
+    this.export=true
+    // 1️⃣ Définir les entêtes
+    const headers = ['ID','N°COMPTE SGI','NOM / SIGLE','PRENOMS / RAISON SOCIALE','STATUT'];
     let idOpcvm = this.currentOpcvm?.idOpcvm;
     let param = {
       idOpcvm: idOpcvm,
@@ -313,10 +231,67 @@ export class Compositiondetailleactif implements OnInit, AfterViewInit, AfterCon
     };
     param = {
       ...param,
-      dateEstimation: new Date(param.dateEstimation.year, param.dateEstimation.month - 1, param.dateEstimation.day + 1),
+      dateDebut: new Date(param.startDate.year, param.startDate.month - 1, param.startDate.day + 1),
+      dateFin: new Date(param.endDate.year, param.endDate.month - 1, param.endDate.day + 1),
+    }
+    this.libService.afficherPersonnePhysiqueMorale().subscribe(
+      (data)=>{
+        this.allData=data.data;
+        const exportData = this.allData.map(item => ({
+          'ID': item.idPersonne,
+          'N°COMPTE SGI':item.numCompteDepositaire,
+          'NOM / SIGLE': item.nomSigle,
+          'PRENOMS / RAISON SOCIALE': item.prenomRaison,
+          'STATUT': item.statutCompte,
+        }));
+
+        // 3️⃣ Convertir en feuille Excel
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData, { header: headers });
+
+        // 4️⃣ Créer le classeur
+        const wb: XLSX.WorkBook = { Sheets: { 'Données': ws }, SheetNames: ['Données'] };
+
+        // 5️⃣ Exporter
+        const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+        saveAs(blob, 'actionnaires.xlsx');
+        this.export=false
       }
+    )
+    // 2️⃣ Mapper les données avec les entêtes
+
+  }
+
+  actualiser() {
+    // this.afficherListe("l");
+    this.afficherActionnaire()
+  }
+
+  telecharger() {
+    this.downloading = true;
+    let i=0
+    let idActionnaire=""
+    for(i===0;i<this.idActionnaireTab.length;i++){
+      if(i===0)
+        idActionnaire=this.idActionnaireTab[i]
+      else
+        idActionnaire=this.idActionnaireTab[i]+";"+idActionnaire
+    }
+    const formValue = this.form.value;
+   // let idOpcvm = this.currentOpcvm?.idOpcvm;
+    let param = {
+     // idOpcvm: idOpcvm,
+      ...this.form.value,
+    };
+    param = {
+      ...param,
+      idActionnaire:idActionnaire,
+      dateDebutEstimation: new Date(param.startDate.year, param.startDate.month - 1, param.startDate.day + 1),
+      dateEstimation: new Date(param.endDate.year, param.endDate.month - 1, param.endDate.day + 1),
+    }
+    console.log(param)
     //.subscribe
-    const sb = this.libService.compositiondetailleactif(param)
+    const sb = this.libService.portefeuilleActionnaireF2(param)
       .pipe(
         catchError((err) => {
           this.downloading = false;
@@ -331,9 +306,15 @@ export class Compositiondetailleactif implements OnInit, AfterViewInit, AfterCon
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'declaration_commission_actif.pdf';
+        a.download = 'portefeuille_actionnaire_F2.pdf';
         a.click();
       });
     this.subscriptions.push(sb);
+  }
+ toutDecocher(){
+  document.location.reload();
+ }
+  ngAfterViewInit(): void {
+  
   }
 }
