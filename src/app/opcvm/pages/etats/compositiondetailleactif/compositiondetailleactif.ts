@@ -87,13 +87,8 @@ export class Compositiondetailleactif implements OnInit, AfterViewInit, AfterCon
     this.dateDebut=new Date(this.currentSeance?.dateFermeture);
     const dateFin = new Date(this.currentSeance?.dateFermeture);
     this.form = this.fb.group({
-      exercice2:[null],
-      taux:[0],
-      trimestre:[1],
-      dateFin: [
-        new NgbDate(dateFin.getFullYear(), dateFin.getMonth()+1, dateFin.getDate()), Validators.required
-      ],
-      dateDebut: [
+      frequence: [],
+      dateEstimation: [
        new NgbDate(this.dateDebut.getFullYear(), this.dateDebut.getMonth()+1, this.dateDebut.getDate()), Validators.required
       ],
     });
@@ -318,13 +313,10 @@ export class Compositiondetailleactif implements OnInit, AfterViewInit, AfterCon
     };
     param = {
       ...param,
-      taux:param.taux.replace(',','.'),
-      anneeExo:this.annee,
-      dateDebut: new Date(param.dateDebut.year, param.dateDebut.month - 1, param.dateDebut.day + 1),
-      dateFin: new Date(param.dateFin.year, param.dateFin.month - 1, param.dateFin.day + 1),
-    }
+      dateEstimation: new Date(param.dateEstimation.year, param.dateEstimation.month - 1, param.dateEstimation.day + 1),
+      }
     //.subscribe
-    const sb = this.libService.declarationCommissionSurActifEtat(param)
+    const sb = this.libService.compositiondetailleactif(param)
       .pipe(
         catchError((err) => {
           this.downloading = false;

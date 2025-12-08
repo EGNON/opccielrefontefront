@@ -26,6 +26,7 @@ import { SuiviEcheanceTitre } from './suivi-echeance-titre/suivi-echeance-titre'
 import { Avistransfertpart } from './avistransfertpart/avistransfertpart';
 import { Grandlivre } from './grandlivre/grandlivre';
 import { Documentsseance } from './documentsseance/documentsseance';
+import { Compositiondetailleactif } from './compositiondetailleactif/compositiondetailleactif';
 
 const routes: Routes = [
   {
@@ -57,6 +58,7 @@ const routes: Routes = [
       { path: 'avistransfertpart', component: Avistransfertpart, },
       { path: 'grandlivre', component: Grandlivre, },
       { path: 'documentsseance/:libelle', component: Documentsseance, },
+      { path: 'compositiondetailleactif', component: Compositiondetailleactif, },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
   },

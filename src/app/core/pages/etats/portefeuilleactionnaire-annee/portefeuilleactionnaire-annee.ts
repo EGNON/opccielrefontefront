@@ -235,8 +235,8 @@ export class PortefeuilleactionnaireAnnee implements OnInit, AfterViewInit, Afte
       dateFin: new Date(param.endDate.year, param.endDate.month - 1, param.endDate.day + 1),
     }
     this.libService.afficherPersonnePhysiqueMorale().subscribe(
-      (data)=>{
-        this.allData=data.data;
+      (dataN)=>{
+        this.allData=dataN.data;
         const exportData = this.allData.map(item => ({
           'ID': item.idPersonne,
           'N°COMPTE SGI':item.numCompteDepositaire,

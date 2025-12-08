@@ -282,6 +282,11 @@ export class LibrairiesService {
       {responseType: 'blob' as any }
     );
   }
+  compositiondetailleactif(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/compositiondetailleactif`, param,
+      {responseType: 'blob' as any }
+    );
+  }
   grandlivreListe(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/grandlivre/liste`, param);
   }
