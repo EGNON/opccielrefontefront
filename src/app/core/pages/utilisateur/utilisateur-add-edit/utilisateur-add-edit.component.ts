@@ -129,6 +129,7 @@ export class UtilisateurAddEditComponent implements OnInit, AfterViewInit, OnDes
         paysResidence: [null],
         mobile2: [null],
         estActif: [null, Validators.required],
+        estCommercial: [false],
         emailPro: [null, Validators.email],
         emailPerso: [null, Validators.email],
         // utilisateurRoles: [null],
@@ -511,6 +512,7 @@ export class UtilisateurAddEditComponent implements OnInit, AfterViewInit, OnDes
     this.entityForm.patchValue({statutMatrimonial: entity.statutMatrimonial});
     this.entityForm.patchValue({mobile1: entity.mobile1});
     this.entityForm.patchValue({mobile2: entity.mobile2});
+    this.entityForm.patchValue({estCommercial: entity.estCommercial});
     this.entityForm.patchValue({username: entity.username});
     this.entityForm.patchValue({password: entity.password});
     this.entityForm.patchValue({paysNationalite: entity.paysNationalite});

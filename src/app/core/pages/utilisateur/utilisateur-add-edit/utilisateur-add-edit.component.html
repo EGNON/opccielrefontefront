@@ -7,14 +7,26 @@
       <div class="flex-lg-row-fluid me-0 me-lg-0">
         <!--begin::Form-->
         <form [formGroup]="entityForm" class="form mb-5">
-          <div class="row mb-0">
-            <label class="col-lg-2 col-form-label fw-bold fs-6">Est actif ?</label>
+          <div class="row mb-5">
+            <div class="col-md-6 fv-row">
+              <label class="col-lg-6 col-form-label fw-bold fs-6">Est actif ?</label>
+              <div class="col-lg-10 d-flex align-items-center">
+                <div class="form-check form-check-solid form-switch fv-row">
+                  <input type="checkbox" formControlName="estActif" class="form-check-input w-45px h-30px">
+                  <label class="form-check-label"></label>
+                </div>
+              </div>
+              </div>
+
+           <div class="col-md-6 fv-row">
+            <label class="col-lg-6 col-form-label fw-bold fs-6">Est un commercial ?</label>
             <div class="col-lg-10 d-flex align-items-center">
               <div class="form-check form-check-solid form-switch fv-row">
-                <input type="checkbox" formControlName="estActif" class="form-check-input w-45px h-30px">
+                <input type="checkbox" formControlName="estCommercial" class="form-check-input w-45px h-30px">
                 <label class="form-check-label"></label>
               </div>
             </div>
+          </div>
           </div>
           <hr>
           <!--begin::Input group-->

@@ -24,6 +24,7 @@ export class DepotRachatService extends EntityService<DepotRachat> implements On
   {
     return this.http.post<DataTablesResponse<DepotRachat>>(`${this.API_URL}/datatable/list`, datatableRequest);
   }
+  
   afficherOperationSupereurACinqMillions()
   {
     return this.http.get<DepotRachat>(`${this.API_URL}/liste`);

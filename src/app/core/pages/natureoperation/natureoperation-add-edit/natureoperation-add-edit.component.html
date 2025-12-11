@@ -47,7 +47,7 @@
                       [ngClass]="{ 'is-invalid': submitted && f.typeOperation.errors }">
                 <option selected>Sélectionnez un type opération...</option>
                 <option [defaultSelected]="true" [ngValue]="entity?.typeOperation" [disabled]="true">
-                  {{ entity?.typeOperation?.libelleTypeOperation }}
+                 {{ entity?.typeOperation?.libelleTypeOperation }}
                 </option>
                 <option *ngFor="let item of typeOperation$" [ngValue]="item">
                   {{ item.libelleTypeOperation }}
@@ -68,10 +68,10 @@
                       >
                 <option selected>Sélectionnez un journal...</option>
                 <option [defaultSelected]="true" [ngValue]="entity?.journal" [disabled]="true">
-                  {{ entity?.journal?.libelleJournal }}
+                  {{ entity?.journal?.codeJournal }}-{{ entity?.journal?.libelleJournal }}
                 </option>
                 <option *ngFor="let item of journal" [ngValue]="item">
-                  {{ item.libelleJournal }}
+                  {{ item.codeJournal }}-{{ item.libelleJournal }}
                 </option>
               </select>
               <!--end::Select-->

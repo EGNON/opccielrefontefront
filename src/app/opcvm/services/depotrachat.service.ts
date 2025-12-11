@@ -22,6 +22,9 @@ export class DepotrachatService extends ResourceService<Depotrachat> {
   creerOperation(id:any,userLogin:any){
     return this.http.post<Depotrachat>(`${this.API_URL}/creer/${id}/${userLogin}`,null)
   }
+  creerDepotRachatTransfert(depotRachat:any){
+    return this.http.post<Depotrachat>(`${this.API_URL}/transfert`,depotRachat)
+  }
   afficherTous(){
     return this.http.get<any>(`${this.API_URL}`)
   }
@@ -30,6 +33,9 @@ export class DepotrachatService extends ResourceService<Depotrachat> {
   }
   afficherNbrePart(idOpcvm:any,idActionnaire:any){
     return this.http.get<any>(`${this.API_URL}/${idOpcvm}/${idActionnaire}`)
+  }
+   calculer(resource: any) {
+    return this.http.post<any>(`${this.API_URL}/calculer`, resource);
   }
   afficherFT_DepotRachat(idOpcvm:any,niveau1:any,niveau2:any){
     return this.http.get<any>(`${this.API_URL}/depotrachat/${idOpcvm}/${niveau1}/${niveau2}`)
@@ -40,10 +46,23 @@ export class DepotrachatService extends ResourceService<Depotrachat> {
        {responseType: 'blob' as any }
     )
   }
+  afficherSouscriptionTransfertTitre(idOpcvm:any,niveau1:any,niveau2:any){
+    return this.http.get<any>(`${this.API_URL}/depotrachattransfert/${idOpcvm}/${niveau1}/${niveau2}`)
+  }
+  verifSouscriptionTransfertTitre(idOpcvm:any,niveau1:any,niveau2:any){
+    // verifintrach/{idOpcvm}/{niveau1}/{niveau2}
+    return this.http.get<any>(`${this.API_URL}/verifsoustransferttitre/${idOpcvm}/${niveau1}/${niveau2}`,
+       {responseType: 'blob' as any }
+    )
+  }
   verifIntentionRachatN1N2(idOpcvm:any,niveau1:any,niveau2:any){
     return this.http.get<any>(`${this.API_URL}/verifintrachN1/${idOpcvm}/${niveau1}/${niveau2}`,
        {responseType: 'blob' as any }
     )
+  }
+  afficherDepotRachatTransfert(datatableRequest: any,idOpcvm:any,idSeance:any): Observable<ResponseModel<Depotrachat>>
+  {
+    return this.http.post<ResponseModel<Depotrachat>>(`${this.API_URL}/transfert/datatable/list/${idOpcvm}/${idSeance}`, datatableRequest);
   }
   afficherPrecalculRachat(idSeance:any,idOpcvm:any,idPersonne:any){
     return this.http.get<any>(`${this.API_URL}/precalculrachat/${idSeance}/${idOpcvm}/${idPersonne}`)

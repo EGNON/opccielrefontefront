@@ -2639,10 +2639,10 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [
                 {
-                  allow: this.authService.isGrantedRole('ROLE_IMPORT_DEPOT_SOUS'),
+                  allow:true,// this.authService.isGrantedRole('ROLE_SOUS_TRANSFERT_TITRE'),
                   title: 'Souscription par transfert de titre',
-                  page: '#',
-                  role: 'ROLE_IMPORT_DEPOT_SOUS',
+                  page: '/opcvm/souscriptiontransferttitre',
+                  role: 'ROLE_SOUS_TRANSFERT_TITRE',
                   icon: '',
                   translate: '',
                   dataLink: '',

@@ -97,6 +97,12 @@ const OpcvmRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
+    path: 'souscriptiontransferttitre',
+    // canActivate: [OpcvmAuthGuard],
+    loadChildren: () => import('./souscription-transfert-titre/souscription-transfert-titre-module').then((m) => m.SouscriptionTransfertTitreModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
     path: 'comptabilite',
     // canActivate: [OpcvmAuthGuard],
     loadChildren: () => import('./comptabilite/comptabilite.module').then((m) => m.ComptabiliteModule),

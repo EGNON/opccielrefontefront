@@ -331,7 +331,7 @@ export class Compositiondetailleactif implements OnInit, AfterViewInit, AfterCon
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'declaration_commission_actif.pdf';
+        a.download = 'composition_detaille_actif.pdf';
         a.click();
       });
     this.subscriptions.push(sb);
