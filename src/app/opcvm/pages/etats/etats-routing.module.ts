@@ -27,6 +27,9 @@ import { Avistransfertpart } from './avistransfertpart/avistransfertpart';
 import { Grandlivre } from './grandlivre/grandlivre';
 import { Documentsseance } from './documentsseance/documentsseance';
 import { Compositiondetailleactif } from './compositiondetailleactif/compositiondetailleactif';
+import { PointActifNetPartVl } from './point-actif-net-part-vl/point-actif-net-part-vl';
+import { PointRemboursementEffectuePeriode } from './point-remboursement-effectue-periode/point-remboursement-effectue-periode';
+import { PointPeriodiqueDeLaTafa } from './point-periodique-de-la-tafa/point-periodique-de-la-tafa';
 
 const routes: Routes = [
   {
@@ -59,6 +62,9 @@ const routes: Routes = [
       { path: 'grandlivre', component: Grandlivre, },
       { path: 'documentsseance/:libelle', component: Documentsseance, },
       { path: 'compositiondetailleactif', component: Compositiondetailleactif, },
+      { path: 'pointactifnetpartvl', component: PointActifNetPartVl, },
+      { path: 'pointremboursementeffectueperiode', component: PointRemboursementEffectuePeriode, },
+      { path: 'pointperiodiquetafa', component: PointPeriodiqueDeLaTafa, },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
   },

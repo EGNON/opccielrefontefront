@@ -1,0 +1,102 @@
+<!--begin::Body-->
+    <div class="card-body p-lg-5">
+        <!--begin::Layout-->
+        <div class="d-flex flex-column flex-lg-row mb-0">
+        <!--begin::Content-->
+        <div class="flex-lg-row-fluid me-0 me-lg-0">
+            <!--begin::Form-->
+            <form [formGroup]="form" enctype="multipart/form-data" class="form mb-5">
+                <div class="card-toolbar">
+                    <div class="d-flex justify-content-end">
+                        <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary me-3" (click)="submitting ? null : actualiser()">
+                            <ng-container *ngIf="submitting">
+                        <span class="indicator-progress" [style.display]="'block'">
+                            Patientez svp...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                            </ng-container>
+                            <ng-container *ngIf="!submitting">
+                            <span class="indicator-label">Actualiser</span>
+                            </ng-container>
+                        </button>
+                        <!-- <button type="button" class="btn btn-sm btn-info me-3" (click)="downloading ? null : telecharger()">
+                            <ng-container *ngIf="downloading">
+                            <span class="indicator-progress" [style.display]="'block'">
+                                Patientez svp...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                            </ng-container>
+                            <ng-container *ngIf="!downloading">
+                            <span class="indicator-label">Imprimer</span>
+                            </ng-container>
+                        </button> -->
+                        <button type="button" class="btn btn-sm btn-info me-3" (click)="export ? null : exportExcel()">
+                            <ng-container *ngIf="export">
+                            <span class="indicator-progress" [style.display]="'block'">
+                                Patientez svp...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                            </ng-container>
+                            <ng-container *ngIf="!export">
+                            <span class="indicator-label">Exporter</span>
+                            </ng-container>
+                        </button>
+                        <!--<button type="button" class="btn btn-sm btn-warning">
+                            <ng-container *ngIf="downloading">
+                            <span class="indicator-progress" [style.display]="'block'">
+                                Patientez svp...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                            </ng-container>
+                            <ng-container *ngIf="!downloading">
+                            <span class="indicator-label">Envoyer</span>
+                            </ng-container>
+                        </button>-->
+                    </div>
+                </div>
+                <!--end::Card toolbar-->
+                <div class="card-body overflow-auto">
+                    <table class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" id="table_AvisOperation">
+                        <thead>
+                        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                        <!-- <th class="w-10px pe-2">
+                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                            <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="1" />
+                            </div>
+                        </th> -->
+                        <th style="width: 10%">ID SEANCE</th>
+                        <th style="width: 30%">DATE SEANCE</th>
+                        <th style="width: 30%">ACTIF NET</th>
+                        <th style="width: 30%">NOMBRE DE PART EN CIRCULATION</th>
+                        <th style="width: 15%">VL</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody class="fw-semibold text-gray-600">
+                        <tr *ngFor="let pointActifNetPartVl of pointActifNetPartVl$">
+                        <!-- -->
+                        <td >{{pointActifNetPartVl.idSeance}}</td>
+                        <td >{{ pointActifNetPartVl.dateValeur | date:'dd/MM/yyy'}}</td>
+                        <td >{{ pointActifNetPartVl.actifNet}}</td>
+                        <td >{{ pointActifNetPartVl.npc}}</td>
+                        <td>{{ pointActifNetPartVl.vl}}</td>
+                        <!-- <td>
+                            <button class="btn btn-primary btn-sm"
+                                    (click)="telechargerDocuments(historiqueVL)">
+                            Imprimer
+                            </button>
+                        </td> -->
+                        </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+        <!--end::Content-->
+        </div>
+        <!--end::Layout-->
+    </div>
+<!--end::Body-->

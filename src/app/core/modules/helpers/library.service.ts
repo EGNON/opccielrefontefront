@@ -4394,7 +4394,46 @@ export class LibraryService implements OnDestroy{
                   route: Routing.find((value, index, obj) =>
                     ('/opcvm/etats/compositiondetailleactif').includes(value.path!)),
                   children: []
-                }       
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTACTIFNETPARTVL'),
+                  title: 'Point Actif Net Part Vl',
+                  page: '/opcvm/etats/pointactifnetpartvl',
+                  role: 'ROLE_ETAT_POINTACTIFNETPARTVL',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/opcvm/etats/pointactifnetpartvl').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTREMBOURSEMENTEFFECTUEPERIODE'),
+                  title: 'Point des remboursements effectues sur une periode',
+                  page: '/opcvm/etats/pointremboursementeffectueperiode',
+                  role: 'ROLE_ETAT_POINTREMBOURSEMENTEFFECTUEPERIODE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/opcvm/etats/pointremboursementeffectueperiode').includes(value.path!)),
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTPERIODIQUETAFA'),
+                  title: 'Point periodique de la tafa',
+                  page: '/opcvm/etats/pointperiodiquetafa',
+                  role: 'ROLE_ETAT_POINTPERIODIQUETAFA',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Etats & Statistiques',
+                  route: Routing.find((value, index, obj) =>
+                    ('/opcvm/etats/pointperiodiquetafa').includes(value.path!)),
+                  children: []
+                }      
               ]
             },
           ]
