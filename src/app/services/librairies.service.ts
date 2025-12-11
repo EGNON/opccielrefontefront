@@ -282,10 +282,35 @@ export class LibrairiesService {
       {responseType: 'blob' as any }
     );
   }
+  pointRemboursementEffectuePeriode(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/pointremboursementeffectueperiode`, param);
+  }
+  pointRemboursementEffectuePeriodeListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/pointremboursementeffectueperiode/liste`, param);
+  }
+  pointRemboursementEffectuePeriodeEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/pointremboursementeffectueperiode`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  pointPeriodiqueTafa(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/pointperiodiquetafa`, param);
+  }
+  pointPeriodiqueTafaListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/pointperiodiquetafa/liste`, param);
+  }
+  pointPeriodiqueTafaEtat(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/pointperiodiquetafa`, param,
+      {responseType: 'blob' as any }
+    );
+  }
   compositiondetailleactif(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/compositiondetailleactif`, param,
       {responseType: 'blob' as any }
     );
+  }
+  pointActifNetPartVlListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/pointactifnetpartvl/liste`, param);
   }
   grandlivreListe(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/grandlivre/liste`, param);

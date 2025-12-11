@@ -36,6 +36,9 @@ import { NgxPaginationModule } from "ngx-pagination";
 import { Grandlivre } from './grandlivre/grandlivre';
 import { Documentsseance } from './documentsseance/documentsseance';
 import { Compositiondetailleactif } from './compositiondetailleactif/compositiondetailleactif';
+import { PointActifNetPartVl } from './point-actif-net-part-vl/point-actif-net-part-vl';
+import { PointRemboursementEffectuePeriode } from './point-remboursement-effectue-periode/point-remboursement-effectue-periode';
+import { PointPeriodiqueDeLaTafa } from './point-periodique-de-la-tafa/point-periodique-de-la-tafa';
 
 
 @NgModule({
@@ -66,7 +69,10 @@ import { Compositiondetailleactif } from './compositiondetailleactif/composition
     Avistransfertpart,
     Grandlivre,
     Documentsseance,
-    Compositiondetailleactif
+    Compositiondetailleactif,
+    PointActifNetPartVl,
+    PointRemboursementEffectuePeriode,
+    PointPeriodiqueDeLaTafa
   ],
     imports: [
     CommonModule,
