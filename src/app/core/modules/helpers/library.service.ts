@@ -1648,10 +1648,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_MAJ_TITRES_VERIF1'),
+                  allow: this.authService.isGrantedRole('ROLE_MAJ_COURS_TITRES_VERIF1'),
                   title: 'Vérification MAJ cours niveau 1',
                   page: '/titresciel/standard/parametre/instrumentfinancier/titres/cours/verifiationniveau1',
-                  role: 'ROLE_MAJ_TITRES_VERIF1',
+                  role: 'ROLE_MAJ_COURS_TITRES_VERIF1',
                   dataLink: '',
                   icon: '',
                   translate: '',
@@ -1660,10 +1660,10 @@ export class LibraryService implements OnDestroy{
                 }
                 ,
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_MAJ_TITRES_VERIF2'),
+                  allow: this.authService.isGrantedRole('ROLE_MAJ_COURS_TITRES_VERIF2'),
                   title: 'Vérification MAJ cours niveau 2',
                   page: '/titresciel/standard/parametre/instrumentfinancier/titres/cours/verifiationniveau2',
-                  role: 'ROLE_MAJ_TITRES_VERIF2',
+                  role: 'ROLE_MAJ_COURS_TITRES_VERIF2',
                   dataLink: '',
                   icon: '',
                   translate: '',
@@ -1968,7 +1968,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },*/
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTRESORERIE'),
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_POINTRESORERIE'),
                   title: 'Point de la trésorerie des fonds',
                   page: '/app/standard/etats/pointtresorerie',
                   role: 'ROLE_ETAT_POINTRESORERIE',
@@ -1981,7 +1981,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_PROEDURECOMPTABLE'),
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_PROEDURECOMPTABLE'),
                   title: 'Procédures comptables',
                   page: '/app/standard/etats/procedurecomptable',
                   role: 'ROLE_ETAT_PROEDURECOMPTABLE',
@@ -1994,7 +1994,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_HISTORIQUEACTIONNAIRE'),
+                  allow:this.authService.isGrantedRole('ROLE_ETAT_HISTORIQUEACTIONNAIRE'),
                   title: 'Historique actionnaires',
                   page: '/app/standard/historiqueactionnaire/liste',
                   role: 'ROLE_ETAT_HISTORIQUEACTIONNAIRE',
@@ -2007,7 +2007,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_RELEVEACTIONNAIRE'),
+                  allow:this.authService.isGrantedRole('ROLE_ETAT_RELEVEACTIONNAIRE'),
                   title: 'Relevé actionnaire',
                   page: '/app/standard/etats/releveactionnaire',
                   role: 'ROLE_ETAT_RELEVEACTIONNAIRE',
@@ -2032,7 +2032,7 @@ export class LibraryService implements OnDestroy{
                     ('/app/standard/etats/releveactionnaire').includes(value.path!)),
                   children: [
                     {
-                        allow:true,// this.authService.isGrantedRole('ROLE_ETAT_PORTEFEUILLEACTIONNAIREF1'),
+                        allow: this.authService.isGrantedRole('ROLE_ETAT_PORTEFEUILLEACTIONNAIREF1'),
                         title: 'Format 1',
                         page: '/app/standard/etats/portefeuilleactionnairef1',
                         role: 'ROLE_ETAT_PORTEFEUILLEACTIONNAIREF1',
@@ -2045,7 +2045,7 @@ export class LibraryService implements OnDestroy{
                         children: []
                       },
                       {
-                        allow:true,// this.authService.isGrantedRole('ROLE_ETAT_PORTEFEUILLEACTIONNAIREF2'),
+                        allow:this.authService.isGrantedRole('ROLE_ETAT_PORTEFEUILLEACTIONNAIREF2'),
                         title: 'Format 2',
                         page: '/app/standard/etats/portefeuilleactionnairef2',
                         role: 'ROLE_ETAT_PORTEFEUILLEACTIONNAIREF2',
@@ -2058,7 +2058,7 @@ export class LibraryService implements OnDestroy{
                         children: []
                       },
                       {
-                        allow:true,// this.authService.isGrantedRole('ROLE_ETAT_PORTEFEUILLEACTIONNAIREANNEE'),
+                        allow: this.authService.isGrantedRole('ROLE_ETAT_PORTEFEUILLEACTIONNAIREANNEE'),
                         title: 'Fin annee',
                         page: '/app/standard/etats/portefeuilleactionnaireannee',
                         role: 'ROLE_ETAT_PORTEFEUILLEACTIONNAIREANNEE',
@@ -2074,7 +2074,7 @@ export class LibraryService implements OnDestroy{
                   ]
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_FICHECLIENT'),
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_FICHECLIENT'),
                   title: 'Fiche client',
                   page: '/app/standard/etats/ficheclient',
                   role: 'ROLE_ETAT_FICHECLIENT',
@@ -2087,7 +2087,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_SUIVICLIENT'),
+                  allow:this.authService.isGrantedRole('ROLE_ETAT_SUIVICLIENT'),
                   title: 'Etat de suivi des clients',
                   page: '/app/standard/etats/etatsuiviclient',
                   role: 'ROLE_ETAT_SUIVICLIENT',
@@ -2100,10 +2100,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_SUIVIACTIONNAIRE'),
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_POINTACTIONNAIRE'),
                   title: 'Point des actionnaires',
                   page: '/app/standard/etats/etatsuiviactionnaire',
-                  role: 'ROLE_ETAT_SUIVIACTIONNAIRE',
+                  role: 'ROLE_ETAT_POINTACTIONNAIRE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2113,7 +2113,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_PERFORMANCEPORTEFEUILLEACTIONNAIRE'),
+                  allow:this.authService.isGrantedRole('ROLE_ETAT_PERFORMANCEPORTEFEUILLEACTIONNAIRE'),
                   title: 'Performance Portefeuille Actionnaire',
                   page: '/app/standard/etats/performanceportefeuilleactionnaire',
                   role: 'ROLE_ETAT_PERFORMANCEPORTEFEUILLEACTIONNAIRE',
@@ -2126,7 +2126,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 } ,
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_FRAISFONCTIONNEMENT'),
+                  allow:this.authService.isGrantedRole('ROLE_ETAT_FRAISFONCTIONNEMENT'),
                   title: 'Etat de frais de fonctionnement',
                   page: '/app/standard/etats/etatfraisfonctionnement',
                   role: 'ROLE_ETAT_FRAISFONCTIONNEMENT',
@@ -2139,7 +2139,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_EVOLUTIONVL'),
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_EVOLUTIONVL'),
                   title: 'Evolution VL',
                   page: '/app/standard/etats/evolutionvl',
                   role: 'ROLE_ETAT_EVOLUTIONVL',
@@ -2152,10 +2152,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTSOUSCRIPTION'),
+                  allow:this.authService.isGrantedRole('ROLE_ETAT_POINTSOUSCRIPTION_TYPEPERSONNE'),
                   title: 'Point des souscriptions par type de personne',
                   page: '/app/standard/etats/pointsouscription',
-                  role: 'ROLE_ETAT_POINTSOUSCRIPTION',
+                  role: 'ROLE_ETAT_POINTSOUSCRIPTION_TYPEPERSONNE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2165,10 +2165,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTRACHAT'),
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_POINTRACHAT_TYPEPERSONNE'),
                   title: 'Point des rachats par type de personne',
                   page: '/app/standard/etats/pointrachat',
-                  role: 'ROLE_ETAT_POINTRACHAT',
+                  role: 'ROLE_ETAT_POINTRACHAT_TYPEPERSONNE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2178,7 +2178,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTREPARTITIONPORTEFEUILLE'),
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_POINTREPARTITIONPORTEFEUILLE'),
                   title: 'Point Répartition Portefeuille',
                   page: '/app/standard/etats/pointrepartitionportefeuille',
                   role: 'ROLE_ETAT_POINTREPARTITIONPORTEFEUILLE',
@@ -2191,7 +2191,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_EVOLUTIONACTIFNET'),
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_EVOLUTIONACTIFNET'),
                   title: 'Evolution Actif Net - Nombre de part ',
                   page: '/app/standard/etats/evolutionactifnet',
                   role: 'ROLE_ETAT_EVOLUTIONACTIFNET',
@@ -2382,7 +2382,7 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [
                 {
-                  allow: this.authService.isGrantedRole('ROLE_CONSTITUTION_CAPITAL'),
+                  allow:false,// this.authService.isGrantedRole('ROLE_CONSTITUTION_CAPITAL'),
                   title: 'Constitution de capital',
                   page: '#',
                   role: 'ROLE_CONSTITUTION_CAPITAL',
@@ -2393,7 +2393,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_VERIF_NIV1_CC'),
+                  allow:false,// this.authService.isGrantedRole('ROLE_VERIF_NIV1_CC'),
                   title: 'Vérification Niveau 1 (CC)',
                   page: '#',
                   role: 'ROLE_VERIF_NIV1_CC',
@@ -2404,7 +2404,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_VERIF_NIV2_CC'),
+                  allow:false,// this.authService.isGrantedRole('ROLE_VERIF_NIV2_CC'),
                   title: 'Vérification Niveau 2 (CC)',
                   page: '#',
                   role: 'ROLE_VERIF_NIV2_CC',
@@ -2415,7 +2415,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_VALO_POSTE_COMPTABLE'),
+                  allow:false,// this.authService.isGrantedRole('ROLE_VALO_POSTE_COMPTABLE'),
                   title: 'Valorisation des postes comptables',
                   page: '#',
                   role: 'ROLE_VALO_POSTE_COMPTABLE',
@@ -2426,7 +2426,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_VERIF_NIV1_PC'),
+                  allow:false,// this.authService.isGrantedRole('ROLE_VERIF_NIV1_PC'),
                   title: 'Vérification Niveau 1 (PC)',
                   page: '#',
                   role: 'ROLE_VERIF_NIV1_PC',
@@ -2437,7 +2437,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_VERIF_NIV2_PC'),
+                  allow:false,// this.authService.isGrantedRole('ROLE_VERIF_NIV2_PC'),
                   title: 'Vérification Niveau 2 (PC)',
                   page: '#',
                   role: 'ROLE_VERIF_NIV2_PC',
@@ -2448,7 +2448,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_CLOTURE_SEANCE0'),
+                  allow:false,// this.authService.isGrantedRole('ROLE_CLOTURE_SEANCE0'),
                   title: 'Clôture de la séance 0',
                   page: '#',
                   role: 'ROLE_CLOTURE_SEANCE0',
@@ -2639,7 +2639,7 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_SOUS_TRANSFERT_TITRE'),
+                  allow: this.authService.isGrantedRole('ROLE_SOUS_TRANSFERT_TITRE'),
                   title: 'Souscription par transfert de titre',
                   page: '/opcvm/souscriptiontransferttitre',
                   role: 'ROLE_SOUS_TRANSFERT_TITRE',
@@ -2650,10 +2650,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_DEPOT_SOUS'),
+                  allow: this.authService.isGrantedRole('ROLE_SOUS_TRANSFERT_TITRE_VERIF_N1'),
                   title: 'Vérification Niveau 1',
-                  page: '#',
-                  role: 'ROLE_DEPOT_SOUS',
+                  page: '/opcvm/souscriptiontransferttitre/verificationniveau1',
+                  role: 'ROLE_SOUS_TRANSFERT_TITRE_VERIF_N1',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -2661,16 +2661,16 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: this.authService.isGrantedRole('ROLE_DEPOT_SOUS'),
+                  allow: this.authService.isGrantedRole('ROLE_SOUS_TRANSFERT_TITRE_VERIF_N2'),
                   title: 'Vérification Niveau 2',
-                  page: '#',
-                  role: 'ROLE_DEPOT_SOUS',
+                  page: '/opcvm/souscriptiontransferttitre/verificationniveau2',
+                  role: 'ROLE_SOUS_TRANSFERT_TITRE_VERIF_N2',
                   icon: '',
                   translate: '',
                   dataLink: '',
                   parent: 'Souscription par transfert de titre',
                   children: []
-                },
+                }
               ]
             },
             {
@@ -2684,9 +2684,22 @@ export class LibraryService implements OnDestroy{
               parent: 'APPLICATION',
               children: [              
                     {
-                      allow:true,// this.authService.isGrantedRole('ROLE_EXERCICE'),
+                      allow: this.authService.isGrantedRole('ROLE_EXERCICE'),
                       title: 'Exercice',
                       page: '/opcvm/comptabilite/exercice/liste',
+                      role: 'ROLE_EXERCICE',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Comptabilité',
+                      children: []
+                    }
+                  
+                    ,
+                    {
+                      allow: this.authService.isGrantedRole('ROLE_EXERCICE'),
+                      title: 'Cloture exercice',
+                      page: '/opcvm/comptabilite/clotureexercice',
                       role: 'ROLE_EXERCICE',
                       icon: '',
                       translate: '',
@@ -2852,7 +2865,7 @@ export class LibraryService implements OnDestroy{
                           parent: 'Etats & Statistiques',
                           children: [
                             {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANANNUELF1'),
+                              allow: this.authService.isGrantedRole('ROLE_CONSULTATION_BILANANNUELF1'),
                               title: 'Bilan',
                               page: '/opcvm/etats/etatsfinanciers/bilanannuelf1',
                               role: 'ROLE_CONSULTATION_BILANANNUELF1',
@@ -2865,7 +2878,7 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RESULTATANNUELF1'),
+                              allow: this.authService.isGrantedRole('ROLE_CONSULTATION_RESULTATANNUELF1'),
                               title: 'Résultat',
                               page: '/opcvm/etats/etatsfinanciers/resultatannuelF1',
                               role: 'ROLE_CONSULTATION_RESULTATANNUELF1',
@@ -2878,7 +2891,7 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF1'),
+                              allow: this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF1'),
                               title: 'Etat de variation de l\'Actif Net',
                               page: '/opcvm/etats/etatsfinanciers/etatvariationactifnetannuelf1',
                               role: 'ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF1',
@@ -2891,10 +2904,10 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF1'),
+                              allow: this.authService.isGrantedRole('ROLE_NOTESREVENUSPORTEFEUILLETITREANNUELF1'),
                               title: 'Notes sur les revenus du portefeuille titre',
                               page: '/opcvm/etats/etatsfinanciers/notesrevenusportefeuilletitreannuelf1',
-                              role: 'ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF1',
+                              role: 'ROLE_NOTESREVENUSPORTEFEUILLETITREANNUELF1',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -2904,10 +2917,10 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF1'),
+                              allow: this.authService.isGrantedRole('ROLE_NOTESREVENUSPLACEMENTANNUELF1'),
                               title: 'Notes sur les revenus des placements monétaires',
                               page: '/opcvm/etats/etatsfinanciers/notesrevenusplacementmonetaireannuelf1',
-                              role: 'ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF1',
+                              role: 'ROLE_NOTESREVENUSPLACEMENTANNUELF1',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -2917,10 +2930,10 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF1'),
+                              allow: this.authService.isGrantedRole('ROLE_NOTESSOMMEDISTRIBUABLEANNUELF1'),
                               title: 'Notes sur les sommes distribuables',
                               page: '/opcvm/etats/etatsfinanciers/notessommesdistribuablesannuelf1',
-                              role: 'ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF1',
+                              role: 'ROLE_NOTESSOMMEDISTRIBUABLEANNUELF1',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -2930,10 +2943,10 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DONNEESRATIOSANNUELF1'),
+                              allow: this.authService.isGrantedRole('ROLE_DONNEESRATIOSANNUELF1'),
                               title: 'Données par action et ratios pertinents',
                               page: '/opcvm/etats/etatsfinanciers/donneesratiosannuelf1',
-                              role: 'ROLE_CONSULTATION_DONNEESRATIOSANNUELF1',
+                              role: 'ROLE_DONNEESRATIOSANNUELF1',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -2943,10 +2956,10 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ENGAGEMENTHORSBILANANNUELF1'),
+                              allow: this.authService.isGrantedRole('ROLE_ENGAGEMENTHORSBILANANNUELF1'),
                               title: 'Engagement hors bilan',
                               page: '/opcvm/etats/etatsfinanciers/engagementhorsbilanannuelf1',
-                              role: 'ROLE_CONSULTATION_ENGAGEMENTHORSBILANANNUELF1',
+                              role: 'ROLE_ENGAGEMENTHORSBILANANNUELF1',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -2968,10 +2981,10 @@ export class LibraryService implements OnDestroy{
                           parent: 'Etats & Statistiques',
                           children: [
                             {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANANNUELF2'),
+                              allow: this.authService.isGrantedRole('ROLE_BILANANNUELF2'),
                               title: 'Bilan',
                               page: '/opcvm/etats/etatsfinanciersformat2/bilanannuelf2',
-                              role: 'ROLE_CONSULTATION_BILANANNUELF2',
+                              role: 'ROLE_BILANANNUELF2',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -2981,10 +2994,10 @@ export class LibraryService implements OnDestroy{
                               ]
                             },
                             {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RESULTATANNUELF2'),
+                              allow: this.authService.isGrantedRole('ROLE_RESULTATANNUELF2'),
                               title: 'Résultat',
                               page: '/opcvm/etats/etatsfinanciersformat2/resultatannuelf2',
-                              role: 'ROLE_CONSULTATION_RESULTATANNUELF2',
+                              role: 'ROLE_RESULTATANNUELF2',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -2995,10 +3008,10 @@ export class LibraryService implements OnDestroy{
                             }
                             ,
                             {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF2'),
+                              allow: this.authService.isGrantedRole('ROLE_VARIATIONACTIFNETANNUELF2'),
                               title: 'Etat de variation de l\'Actif Net',
                               page: '/opcvm/etats/etatsfinanciersformat2/etatvariationactifnetannuelf2',
-                              role: 'ROLE_CONSULTATION_VARIATIONACTIFNETANNUELF2',
+                              role: 'ROLE_VARIATIONACTIFNETANNUELF2',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -3009,10 +3022,10 @@ export class LibraryService implements OnDestroy{
                             }
                             ,
                             {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF2'),
+                              allow: this.authService.isGrantedRole('ROLE_NOTESREVENUSPORTEFEUILLETITREANNUELF2'),
                               title: 'Notes sur les revenus du portefeuille titre',
                               page: '/opcvm/etats/etatsfinanciersformat2/notesrevenusportefeuilletitreannuelf2',
-                              role: 'ROLE_CONSULTATION_NOTESREVENUSPORTEFEUILLETITREANNUELF2',
+                              role: 'ROLE_NOTESREVENUSPORTEFEUILLETITREANNUELF2',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -3023,10 +3036,10 @@ export class LibraryService implements OnDestroy{
                             }                        
                             ,
                             {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF2'),
+                              allow: this.authService.isGrantedRole('ROLE_NOTESREVENUSPLACEMENTANNUELF2'),
                               title: 'Notes sur les revenus des placements monétaires',
                               page: '/opcvm/etats/etatsfinanciersformat2/notesrevenusplacementmonetaireannuelf2',
-                              role: 'ROLE_CONSULTATION_NOTESREVENUSPLACEMENTANNUELF2',
+                              role: 'ROLE_NOTESREVENUSPLACEMENTANNUELF2',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -3037,10 +3050,10 @@ export class LibraryService implements OnDestroy{
                             }
                             ,
                             {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF2'),
+                              allow: this.authService.isGrantedRole('ROLE_NOTESSOMMEDISTRIBUABLEANNUELF2'),
                               title: 'Notes sur les sommes distribuables',
                               page: '/opcvm/etats/etatsfinanciersformat2/notessommesdistribuablesannuelf2',
-                              role: 'ROLE_CONSULTATION_NOTESSOMMEDISTRIBUABLEANNUELF2',
+                              role: 'ROLE_NOTESSOMMEDISTRIBUABLEANNUELF2',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -3051,10 +3064,10 @@ export class LibraryService implements OnDestroy{
                             }
                             ,
                             {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DONNEESRATIOSANNUELF2'),
+                              allow: this.authService.isGrantedRole('ROLE_DONNEESRATIOSANNUELF2'),
                               title: 'Données par action et ratios pertinents',
                               page: '/opcvm/etats/etatsfinanciersformat2/donneesratiosannuelf2',
-                              role: 'ROLE_CONSULTATION_DONNEESRATIOSANNUELF2',
+                              role: 'ROLE_DONNEESRATIOSANNUELF2',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -3077,10 +3090,10 @@ export class LibraryService implements OnDestroy{
                           parent: 'Etats & Statistiques',
                           children: [
                             {
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEETATFINANCIERANNUEL'),
+                              allow: this.authService.isGrantedRole('ROLE_NOTEETATFINANCIERANNUEL'),
                               title: 'Note aux états financiers annuels',
                               page: '/opcvm/etats/etatsfinanciersannexes/noteetatsfinanciersannuels',
-                              role: 'ROLE_CONSULTATION_NOTEETATFINANCIERANNUEL',
+                              role: 'ROLE_NOTEETATFINANCIERANNUEL',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -3090,7 +3103,7 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATENTREEPORTEFEUILLETITRE'),
+                              allow: this.authService.isGrantedRole('ROLE_ETATENTREEPORTEFEUILLETITRE'),
                               title: 'Etat des entrées en portefeuille titre',
                               page: '/opcvm/etats/etatsfinanciersannexes/entreesportefeuilletitre',
                               role: 'ROLE_CONSULTATION_ETATENTREEPORTEFEUILLETITRE',
@@ -3103,10 +3116,10 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATSORTIEPORTEFEUILLETITRE'),
+                              allow: this.authService.isGrantedRole('ROLE_ETATSORTIEPORTEFEUILLETITRE'),
                               title: 'Etat des sorties en portefeuille titre',
                               page: '/opcvm/etats/etatsfinanciersannexes/sortiesportefeuilletitre',
-                              role: 'ROLE_CONSULTATION_ETATSORTIEPORTEFEUILLETITRE',
+                              role: 'ROLE_ETATSORTIEPORTEFEUILLETITRE',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -3116,10 +3129,10 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPORTEFEUILLETITREANNUEL'),
+                              allow: this.authService.isGrantedRole('ROLE_NOTEPORTEFEUILLETITREANNUEL'),
                               title: 'Note sur le portefeuille titres annuel',
                               page: '/opcvm/etats/etatsfinanciersannexes/notesportefeuilletitreannuel',
-                              role: 'ROLE_CONSULTATION_NOTEPORTEFEUILLETITREANNUEL',
+                              role: 'ROLE_NOTEPORTEFEUILLETITREANNUEL',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -3129,10 +3142,10 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIREANNUEL'),
+                              allow: this.authService.isGrantedRole('ROLE_NOTEPLACEMENTSMONETAIREANNUEL'),
                               title: 'Note sur les placements monétaires annuel',
                               page: '/opcvm/etats/etatsfinanciersannexes/notesplacementsmonetaireannuel',
-                              role: 'ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIREANNUEL',
+                              role: 'ROLE_NOTEPLACEMENTSMONETAIREANNUEL',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -3142,10 +3155,10 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTECAPITALANNUEL'),
+                              allow: this.authService.isGrantedRole('ROLE_NOTECAPITALANNUEL'),
                               title: 'Note sur le capital',
                               page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesnotesurlecapital',
-                              role: 'ROLE_CONSULTATION_NOTECAPITALANNUEL',
+                              role: 'ROLE_NOTECAPITALANNUEL',
                               icon: '',
                               translate: '',
                               dataLink: '',
@@ -3155,7 +3168,7 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ADMISECOTE'),
+                              allow: this.authService.isGrantedRole('ROLE_CONSULTATION_ADMISECOTE'),
                               title: 'Action admise à la cote',
                               page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesactionadmisecote',
                               role: 'ROLE_CONSULTATION_ADMISECOTE',
@@ -3168,7 +3181,7 @@ export class LibraryService implements OnDestroy{
                               ]
                             }
                             ,{
-                              allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_REMUNERATION'),
+                              allow: this.authService.isGrantedRole('ROLE_REMUNERATION_GEST'),
                               title: 'Rémunération du gestionnaire et du dépositaire',
                               page: '/opcvm/etats/etatsfinanciersannexes/etatfinancierannexesremunerationgestionnairedepositaire',
                               role: 'ROLE_CONSULTATION_REMUNERATION',
@@ -3196,10 +3209,10 @@ export class LibraryService implements OnDestroy{
                       parent: 'Etats & Statistiques',
                       children: [
                             {
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANTRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_BILANTRIMESTRIEL'),
                             title: 'Bilan trimestriel',
                             page: '/opcvm/etats/trimestriel/bilan',
-                            role: 'ROLE_CONSULTATION_BILANTRIMESTRIEL',
+                            role: 'ROLE_BILANTRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3209,10 +3222,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_COMPTERESULTATTRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_COMPTERESULTATTRIMESTRIEL'),
                             title: 'Compte de résultat',
                             page: '/opcvm/etats/trimestriel/compteresultat',
-                            role: 'ROLE_CONSULTATION_COMPTERESULTATTRIMESTRIEL',
+                            role: 'ROLE_COMPTERESULTATTRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3222,10 +3235,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_VARIATIONACTIFNETTRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_VARIATIONACTIFNETTRIMESTRIEL'),
                             title: 'Etat de variation de l\'Actif Net',
                             page: '/opcvm/etats/trimestriel/variationactifnet',
-                            role: 'ROLE_CONSULTATION_VARIATIONACTIFNETTRIMESTRIEL',
+                            role: 'ROLE_VARIATIONACTIFNETTRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3235,10 +3248,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEREVENUSPLACEMENTSMONETAIRESTRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTEREVENUSPLACEMENTSMONETAIRESTRIM'),
                             title: 'Note sur les revenus des placements monétaires',
                             page: '/opcvm/etats/trimestriel/noterevenusplacementsmonetaires',
-                            role: 'ROLE_CONSULTATION_NOTEREVENUSPLACEMENTSMONETAIRESTRIMESTRIEL',
+                            role: 'ROLE_NOTEREVENUSPLACEMENTSMONETAIRESTRIM',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3248,10 +3261,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEREVENUSPORTEFEUILLETITRETRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTEREVENUSPORTEFEUILLETITRETRIM'),
                             title: 'Note sur les revenus du portefeuille titre',
                             page: '/opcvm/etats/trimestriel/noterevenusportefeuilletitremonetaires',
-                            role: 'ROLE_CONSULTATION_NOTEREVENUSPORTEFEUILLETITRETRIMESTRIEL',
+                            role: 'ROLE_NOTEREVENUSPORTEFEUILLETITRETRIM',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3261,10 +3274,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_TABLEAUANALYSEVLTRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_TABLEAUANALYSEVLTRIMESTRIEL'),
                             title: 'Tableau d\'analyse de la VL',
                             page: '/opcvm/etats/trimestriel/tableauanalysevl',
-                            role: 'ROLE_CONSULTATION_TABLEAUANALYSEVLTRIMESTRIEL',
+                            role: 'ROLE_TABLEAUANALYSEVLTRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3274,10 +3287,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_MONTANTFRAISGESTIONTRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_MONTANTFRAISGESTIONTRIMESTRIEL'),
                             title: 'Montant des frais de gestion',
                             page: '/opcvm/etats/trimestriel/montantfraisgestion',
-                            role: 'ROLE_CONSULTATION_MONTANTFRAISGESTIONTRIMESTRIEL',
+                            role: 'ROLE_MONTANTFRAISGESTIONTRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3287,10 +3300,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPORTEFEUILLETITRETRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTEPORTEFEUILLETITRETRIMESTRIEL'),
                             title: 'Note sur le portefeuille titre',
                             page: '/opcvm/etats/trimestriel/noteportefeuilletitre',
-                            role: 'ROLE_CONSULTATION_NOTEPORTEFEUILLETITRETRIMESTRIEL',
+                            role: 'ROLE_NOTEPORTEFEUILLETITRETRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3300,10 +3313,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIRESTRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTEPLACEMENTSMONETAIRESTRIMESTRIEL'),
                             title: 'Note sur les placements monétaires',
                             page: '/opcvm/etats/trimestriel/noteplacementsmonetaires',
-                            role: 'ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIRESTRIMESTRIEL',
+                            role: 'ROLE_NOTEPLACEMENTSMONETAIRESTRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3313,10 +3326,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ACTIONSADMISESCOTETRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_ACTIONSADMISESCOTETRIMESTRIEL'),
                             title: 'Actions admises à la cote',
                             page: '/opcvm/etats/trimestriel/actionsadmisescote',
-                            role: 'ROLE_CONSULTATION_ACTIONSADMISESCOTETRIMESTRIEL',
+                            role: 'ROLE_ACTIONSADMISESCOTETRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3326,10 +3339,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESURCAPITALTRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTESURCAPITALTRIMESTRIEL'),
                             title: 'Note sur le capital ',
                             page: '/opcvm/etats/trimestriel/notesurlecapital',
-                            role: 'ROLE_CONSULTATION_NOTESURCAPITALTRIMESTRIEL',
+                            role: 'ROLE_NOTESURCAPITALTRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3339,10 +3352,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEETATFINANCIERTRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTEETATFINANCIERTRIMESTRIEL'),
                             title: 'Notes aux états financiers',
                             page: '/opcvm/etats/trimestriel/noteetatsfinanciers',
-                            role: 'ROLE_CONSULTATION_NOTEETATFINANCIERTRIMESTRIEL',
+                            role: 'ROLE_NOTEETATFINANCIERTRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3352,10 +3365,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATMENSUELSOUSTRIMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_ETATMENSUELSOUSTRIMESTRIEL'),
                             title: 'Etat mensuel des souscriptions',
                             page: '/opcvm/etats/trimestriel/etatmensuelsouscription',
-                            role: 'ROLE_CONSULTATION_ETATMENSUELSOUSTRIMESTRIEL',
+                            role: 'ROLE_ETATMENSUELSOUSTRIMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3378,10 +3391,10 @@ export class LibraryService implements OnDestroy{
                       parent: 'Etats & Statistiques',
                       children: [
                             {
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BILANSEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_BILANSEMESTRIEL'),
                             title: 'Bilan semestriel',
                             page: '/opcvm/etats/semestriel/bilan',
-                            role: 'ROLE_CONSULTATION_BILANSEMESTRIEL',
+                            role: 'ROLE_BILANSEMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3391,10 +3404,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_COMPTERESULTATSEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_COMPTERESULTATSEMESTRIEL'),
                             title: 'Compte de résultat',
                             page: '/opcvm/etats/semestriel/compteresultat',
-                            role: 'ROLE_CONSULTATION_COMPTERESULTATSEMESTRIEL',
+                            role: 'ROLE_COMPTERESULTATSEMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3417,10 +3430,10 @@ export class LibraryService implements OnDestroy{
                           //   ]
                           // }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEREVENUSPLACEMENTSMONETAIRESSEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTEREVENUPLACEMENTMONETAIRE_SEM'),
                             title: 'Note sur les revenus des placements monétaires',
                             page: '/opcvm/etats/semestriel/noterevenusplacementsmonetaires',
-                            role: 'ROLE_CONSULTATION_NOTEREVENUSPLACEMENTSMONETAIRESSEMESTRIEL',
+                            role: 'ROLE_NOTEREVENUPLACEMENTMONETAIRE_SEM',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3430,10 +3443,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEREVENUSPORTEFEUILLETITRESEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTEREVENUSPORTEFEUILLETITRESEMESTRIEL'),
                             title: 'Note sur les revenus du portefeuille titre',
                             page: '/opcvm/etats/semestriel/noterevenusportefeuilletitremonetaires',
-                            role: 'ROLE_CONSULTATION_NOTEREVENUSPORTEFEUILLETITRESEMESTRIEL',
+                            role: 'ROLE_NOTEREVENUSPORTEFEUILLETITRESEMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3443,10 +3456,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_TABLEAUANALYSEVLSEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_TABLEAUANALYSEVLSEMESTRIEL'),
                             title: 'Tableau d\'analyse de la VL',
                             page: '/opcvm/etats/semestriel/tableauanalysevl',
-                            role: 'ROLE_CONSULTATION_TABLEAUANALYSEVLSEMESTRIEL',
+                            role: 'ROLE_TABLEAUANALYSEVLSEMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3469,10 +3482,10 @@ export class LibraryService implements OnDestroy{
                           //   ]
                           // }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPORTEFEUILLETITRESEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTEPORTEFEUILLETITRESEMESTRIEL'),
                             title: 'Note sur le portefeuille titre',
                             page: '/opcvm/etats/semestriel/noteportefeuilletitre',
-                            role: 'ROLE_CONSULTATION_NOTEPORTEFEUILLETITRESEMESTRIEL',
+                            role: 'ROLE_NOTEPORTEFEUILLETITRESEMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3482,10 +3495,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIRESSEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTEPLACEMENTSMONETAIRESSEMESTRIEL'),
                             title: 'Note sur les placements monétaires',
                             page: '/opcvm/etats/semestriel/noteplacementsmonetaires',
-                            role: 'ROLE_CONSULTATION_NOTEPLACEMENTSMONETAIRESSEMESTRIEL',
+                            role: 'ROLE_NOTEPLACEMENTSMONETAIRESSEMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3495,10 +3508,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ACTIONSADMISESCOTESEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_ACTIONSADMISESCOTESEMESTRIEL'),
                             title: 'Actions admises à la cote',
                             page: '/opcvm/etats/semestriel/actionsadmisescote',
-                            role: 'ROLE_CONSULTATION_ACTIONSADMISESCOTESEMESTRIEL',
+                            role: 'ROLE_ACTIONSADMISESCOTESEMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3508,10 +3521,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTESURCAPITALSEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTESURCAPITALSEMESTRIEL'),
                             title: 'Note sur le capital ',
                             page: '/opcvm/etats/semestriel/notesurlecapital',
-                            role: 'ROLE_CONSULTATION_NOTESURCAPITALSEMESTRIEL',
+                            role: 'ROLE_NOTESURCAPITALSEMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3521,10 +3534,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_NOTEETATFINANCIERSEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_NOTEETATFINANCIERSEMESTRIEL'),
                             title: 'Notes aux états financiers',
                             page: '/opcvm/etats/semestriel/noteetatsfinanciers',
-                            role: 'ROLE_CONSULTATION_NOTEETATFINANCIERSEMESTRIEL',
+                            role: 'ROLE_NOTEETATFINANCIERSEMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -3534,10 +3547,10 @@ export class LibraryService implements OnDestroy{
                             ]
                           }
                             ,{
-                            allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_ETATMENSUELSOUSSEMESTRIEL'),
+                            allow: this.authService.isGrantedRole('ROLE_ETATMENSUELSOUSSEMESTRIEL'),
                             title: 'Etat mensuel des souscriptions',
                             page: '/opcvm/etats/semestriel/etatmensuelsouscription',
-                            role: 'ROLE_CONSULTATION_ETATMENSUELSOUSSEMESTRIEL',
+                            role: 'ROLE_ETATMENSUELSOUSSEMESTRIEL',
                             icon: '',
                             translate: '',
                             dataLink: '',
@@ -4003,10 +4016,10 @@ export class LibraryService implements OnDestroy{
               parent: 'REPORTINGS',
               children: [
                 {
-                  allow: true,//this.authService.isGrantedRole('ROLE_REG_ACT'),
+                  allow: this.authService.isGrantedRole('ROLE_REGISTRE_ACT'),
                   title: 'Régistre actionnaire',
                   page: '/opcvm/etats/registre/actionnaire',
-                  role: 'ROLE_REG_ACT',
+                  role: 'ROLE_REGISTRE_ACT',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -4014,7 +4027,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_PORTEFEUILLE'),
+                  allow: this.authService.isGrantedRole('ROLE_CONSULTATION_PORTEFEUILLE'),
                   title: 'Consultation portefeuille',
                   page: '/opcvm/etats/portefeuille',
                   role: 'ROLE_CONSULTATION_PORTEFEUILLE',
@@ -4025,7 +4038,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RELEVETITREFCP'),
+                  allow: this.authService.isGrantedRole('ROLE_CONSULTATION_RELEVETITREFCP'),
                   title: 'Relevé Titre',
                   page: '/opcvm/etats/relevetitrefcp',
                   role: 'ROLE_CONSULTATION_RELEVETITREFCP',
@@ -4036,7 +4049,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RELEVEPARTFCP'),
+                  allow: this.authService.isGrantedRole('ROLE_CONSULTATION_RELEVEPARTFCP'),
                   title: 'Relevé part FCP',
                   page: '/opcvm/etats/relevepartfcp',
                   role: 'ROLE_CONSULTATION_RELEVEPARTFCP',
@@ -4047,10 +4060,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RELEVEPARTACTIONNAIRE'),
+                  allow: this.authService.isGrantedRole('ROLE_RELEVEPARTACTIONNAIRE'),
                   title: 'Relevé part actionnaire',
                   page: '/opcvm/etats/relevepartactionnaire',
-                  role: 'ROLE_CONSULTATION_RELEVEPARTACTIONNAIRE',
+                  role: 'ROLE_RELEVEPARTACTIONNAIRE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -4058,7 +4071,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_JOURNAL'),
+                  allow: this.authService.isGrantedRole('ROLE_CONSULTATION_JOURNAL'),
                   title: 'Journal',
                   page: '/opcvm/etats/journal',
                   role: 'ROLE_CONSULTATION_JOURNAL',
@@ -4069,10 +4082,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_SOLDECOMPTECOMPTABLE'),
-                  title: 'Sode des comptes comptables',
+                  allow: this.authService.isGrantedRole('ROLE_SOLDECOMPTECOMPTABLE'),
+                  title: 'Solde des comptes comptables',
                   page: '/opcvm/etats/soldecomptecomptable',
-                  role: 'ROLE_CONSULTATION_SOLDECOMPTECOMPTABLE',
+                  role: 'ROLE_SOLDECOMPTECOMPTABLE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -4080,7 +4093,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BALANCE'),
+                  allow: this.authService.isGrantedRole('ROLE_CONSULTATION_BALANCE'),
                   title: 'Balance',
                   page: '/opcvm/etats/balance',
                   role: 'ROLE_CONSULTATION_BALANCE',
@@ -4091,10 +4104,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_BALANCEAVANTINVENTAIRE'),
+                  allow: this.authService.isGrantedRole('ROLE_BALANCEAVANTINVENTAIRE'),
                   title: 'Balance avant inventaire',
                   page: '/opcvm/etats/balanceavantinventaire',
-                  role: 'ROLE_CONSULTATION_BALANCEAVANTINVENTAIRE',
+                  role: 'ROLE_BALANCEAVANTINVENTAIRE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -4102,7 +4115,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 }
                 ,{
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_GRANDLIVRE'),
+                  allow: this.authService.isGrantedRole('ROLE_CONSULTATION_GRANDLIVRE'),
                   title: 'Grand livre',
                   page: '/opcvm/etats/grandlivre',
                   role: 'ROLE_CONSULTATION_GRANDLIVRE',
@@ -4123,10 +4136,10 @@ export class LibraryService implements OnDestroy{
                   parent: 'Etats & Statistiques',
                   children: [
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_SOUSCRIPTIONDETAILLE'),
+                      allow: this.authService.isGrantedRole('ROLE_SOUSCRIPTIONDETAILLE'),
                       title: 'Point détaillé',
                       page: '/opcvm/etats/souscriptiondetaille',
-                      role: 'ROLE_CONSULTATION_SOUSCRIPTIONDETAILLE',
+                      role: 'ROLE_SOUSCRIPTIONDETAILLE',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4136,10 +4149,10 @@ export class LibraryService implements OnDestroy{
                       ]
                     },
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_SOUSCRIPTIONGLOBAL'),
+                      allow: this.authService.isGrantedRole('ROLE_SOUSCRIPTIONGLOBAL'),
                       title: 'Point global',
                       page: '/opcvm/etats/souscriptionglobal',
-                      role: 'ROLE_CONSULTATION_SOUSCRIPTIONGLOBAL',
+                      role: 'ROLE_SOUSCRIPTIONGLOBAL',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4161,10 +4174,10 @@ export class LibraryService implements OnDestroy{
                   parent: 'Etats & Statistiques',
                   children: [
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATDETAILLE'),
+                      allow: this.authService.isGrantedRole('ROLE_RACHATDETAILLE'),
                       title: 'Point détaillé',
                       page: '/opcvm/etats/rachatdetaille',
-                      role: 'ROLE_CONSULTATION_RACHATDETAILLE',
+                      role: 'ROLE_RACHATDETAILLE',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4174,10 +4187,10 @@ export class LibraryService implements OnDestroy{
                       ]
                     },
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_RACHATGLOBAL'),
+                      allow: this.authService.isGrantedRole('ROLE_RACHATGLOBAL'),
                       title: 'Point global',
                       page: '/opcvm/etats/rachatglobal',
-                      role: 'ROLE_CONSULTATION_RACHATGLOBAL',
+                      role: 'ROLE_RACHATGLOBAL',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4190,10 +4203,10 @@ export class LibraryService implements OnDestroy{
                 }
                 ,
                 {
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DECLARATIONCOMMISSIONACTIF'),
+                  allow: this.authService.isGrantedRole('ROLE_DECLARATIONCOMMISSIONACTIF'),
                   title: 'Déclarations commissions sur actifs',
                   page: '/opcvm/etats/declarationscommissionsuractif',
-                  role: 'ROLE_CONSULTATION_DECLARATIONCOMMISSIONACTIF',
+                  role: 'ROLE_DECLARATIONCOMMISSIONACTIF',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -4204,10 +4217,10 @@ export class LibraryService implements OnDestroy{
                 }         
                 ,
                 {
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_POINTINVESTISSEMENT'),
+                  allow: this.authService.isGrantedRole('ROLE_POINTINVESTISSEMENT'),
                   title: 'Point des investissements / désinvestissements sur une période',
                   page: '/opcvm/etats/pointinvestissement',
-                  role: 'ROLE_CONSULTATION_POINTINVESTISSEMENT',
+                  role: 'ROLE_POINTINVESTISSEMENT',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -4218,10 +4231,10 @@ export class LibraryService implements OnDestroy{
                 }         
                 ,
                 {
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_PREVISIONNELREMBOURSEMENT'),
+                  allow: this.authService.isGrantedRole('ROLE_PREVISIONNELREMBOURSEMENT'),
                   title: 'Prévisionnel des remboursements',
                   page: '/opcvm/etats/previonnelremboursement',
-                  role: 'ROLE_CONSULTATION_PREVISIONNELREMBOURSEMENT',
+                  role: 'ROLE_PREVISIONNELREMBOURSEMENT',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -4232,10 +4245,10 @@ export class LibraryService implements OnDestroy{
                 }         
                 ,
                 {
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_SUIVIECHEANCETITRE'),
+                  allow: this.authService.isGrantedRole('ROLE_SUIVIECHEANCETITRE'),
                   title: 'Suivi échéance des titres',
                   page: '/opcvm/etats/suiviecheancetitre',
-                  role: 'ROLE_CONSULTATION_SUIVIECHEANCETITRE',
+                  role: 'ROLE_SUIVIECHEANCETITRE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -4246,10 +4259,10 @@ export class LibraryService implements OnDestroy{
                 }         
                 ,
                 {
-                  allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_AVISTRANSFERTPART'),
+                  allow: this.authService.isGrantedRole('ROLE_AVISTRANSFERTPART'),
                   title: 'Avis de transfert de parts',
                   page: '/opcvm/etats/avistransfertpart',
-                  role: 'ROLE_CONSULTATION_AVISTRANSFERTPART',
+                  role: 'ROLE_AVISTRANSFERTPART',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -4270,10 +4283,10 @@ export class LibraryService implements OnDestroy{
                   parent: 'Etats & Statistiques',
                   children: [
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_SOUSCRIPTIONS'),
+                      allow: this.authService.isGrantedRole('ROLE_DOC_SEANCE_SOUSCRIPTIONS'),
                       title: 'Liste de vérification des souscriptions',
                       page: '/opcvm/etats/documentsseance/verif_souscription',
-                      role: 'ROLE_CONSULTATION_DS_SOUSCRIPTIONS',
+                      role: 'ROLE_DOC_SEANCE_SOUSCRIPTIONS',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4284,10 +4297,10 @@ export class LibraryService implements OnDestroy{
                     }    
                     , 
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_RACHATS'),
+                      allow: this.authService.isGrantedRole('ROLE_DOC_SEANCE_RACHATS'),
                       title: 'Liste de vérification des rachats',
                       page: '/opcvm/etats/documentsseance/verif_rachat',
-                      role: 'ROLE_CONSULTATION_DS_RACHATS',
+                      role: 'ROLE_DOC_SEANCE_RACHATS',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4298,10 +4311,10 @@ export class LibraryService implements OnDestroy{
                     }     
                     , 
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_ECRITURES'),
+                      allow: this.authService.isGrantedRole('ROLE_DOC_SEANCE_ECRITURES'),
                       title: 'Liste de vérification des écritures',
                       page: '/opcvm/etats/documentsseance/verif_ecriture',
-                      role: 'ROLE_CONSULTATION_DS_ECRITURES',
+                      role: 'ROLE_DOC_SEANCE_ECRITURES',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4312,10 +4325,10 @@ export class LibraryService implements OnDestroy{
                     }     
                     , 
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_VDE'),
+                      allow: this.authService.isGrantedRole('ROLE_DOC_SEANCE_VDE'),
                       title: 'Liste de vérification des VDE',
                       page: '/opcvm/etats/documentsseance/verif_vde',
-                      role: 'ROLE_CONSULTATION_DS_VDE',
+                      role: 'ROLE_DOC_SEANCE_VDE',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4326,10 +4339,10 @@ export class LibraryService implements OnDestroy{
                     }     
                     , 
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_ECRITURE_VDE'),
+                      allow: this.authService.isGrantedRole('ROLE_DOC_SEANCE_ECRITURE_VDE'),
                       title: 'Liste de vérification des écritures de VDE',
                       page: '/opcvm/etats/documentsseance/verif_ecriture_vde',
-                      role: 'ROLE_CONSULTATION_DS_ECRITURE_VDE',
+                      role: 'ROLE_DOC_SEANCE_ECRITURE_VDE',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4340,10 +4353,10 @@ export class LibraryService implements OnDestroy{
                     }     
                     , 
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_CHARGE'),
+                      allow: this.authService.isGrantedRole('ROLE_DOC_SEANCE_CHARGE'),
                       title: 'Liste de vérification des Charges',
                       page: '/opcvm/etats/documentsseance/verif_charge',
-                      role: 'ROLE_CONSULTATION_DS_CHARGE',
+                      role: 'ROLE_DOC_SEANCE_CHARGE',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4354,10 +4367,10 @@ export class LibraryService implements OnDestroy{
                     }     
                     , 
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_ECRITURE_CHARGE'),
+                      allow: this.authService.isGrantedRole('ROLE_DOC_SEANCE_ECRITURE_CHARGE'),
                       title: 'Liste de vérification des écritures des Charges',
                       page: '/opcvm/etats/documentsseance/verif_ecriture_charge',
-                      role: 'ROLE_CONSULTATION_DS_ECRITURE_CHARGE',
+                      role: 'ROLE_DOC_SEANCE_ECRITURE_CHARGE',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4368,10 +4381,10 @@ export class LibraryService implements OnDestroy{
                     }     
                     , 
                     {
-                      allow: true,//this.authService.isGrantedRole('ROLE_CONSULTATION_DS_CODE_POSTE'),
+                      allow: this.authService.isGrantedRole('ROLE_DOC_SEANCE_CODE_POSTE'),
                       title: 'Liste de vérification des codes postes',
                       page: '/opcvm/etats/documentsseance/verif_code_poste',
-                      role: 'ROLE_CONSULTATION_DS_CODE_POSTE',
+                      role: 'ROLE_DOC_SEANCE_CODE_POSTE',
                       icon: '',
                       translate: '',
                       dataLink: '',
@@ -4383,7 +4396,7 @@ export class LibraryService implements OnDestroy{
                   ]
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_COMPOSITIONDETAILLEACTIF'),
+                  allow: this.authService.isGrantedRole('ROLE_ETAT_COMPOSITIONDETAILLEACTIF'),
                   title: 'Composition detaillee de l\'actif',
                   page: '/opcvm/etats/compositiondetailleactif',
                   role: 'ROLE_ETAT_COMPOSITIONDETAILLEACTIF',
@@ -4396,7 +4409,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTACTIFNETPARTVL'),
+                  allow:this.authService.isGrantedRole('ROLE_ETAT_POINTACTIFNETPARTVL'),
                   title: 'Point Actif Net Part Vl',
                   page: '/opcvm/etats/pointactifnetpartvl',
                   role: 'ROLE_ETAT_POINTACTIFNETPARTVL',
@@ -4409,10 +4422,10 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTREMBOURSEMENTEFFECTUEPERIODE'),
+                  allow: this.authService.isGrantedRole('ROLE_POINTREMBOURSEMENTEFFECTUEPERIODE'),
                   title: 'Point des remboursements effectues sur une periode',
                   page: '/opcvm/etats/pointremboursementeffectueperiode',
-                  role: 'ROLE_ETAT_POINTREMBOURSEMENTEFFECTUEPERIODE',
+                  role: 'ROLE_POINTREMBOURSEMENTEFFECTUEPERIODE',
                   icon: '',
                   translate: '',
                   dataLink: '',
@@ -4422,7 +4435,7 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
-                  allow:true,// this.authService.isGrantedRole('ROLE_ETAT_POINTPERIODIQUETAFA'),
+                  allow:this.authService.isGrantedRole('ROLE_ETAT_POINTPERIODIQUETAFA'),
                   title: 'Point periodique de la tafa',
                   page: '/opcvm/etats/pointperiodiquetafa',
                   role: 'ROLE_ETAT_POINTPERIODIQUETAFA',

@@ -175,7 +175,7 @@ export class PointPeriodiqueDeLaTafa implements OnInit, AfterViewInit, AfterCont
     let columns: any[] = [
       {
         title: 'DATE OPERATION', data: 'dateOperation', render: function (data, type, row) {
-          return row.dateOperation
+          return moment(row.dateOperation).format("DD/MM/YYYY")
         },
       },
       {
@@ -190,7 +190,7 @@ export class PointPeriodiqueDeLaTafa implements OnInit, AfterViewInit, AfterCont
       },
       {
         title: 'TYPE OPERATION', data: 'typeOperation', render: function (data, type, row) {
-          return row.typeOperation;
+          return row.codeNatureOperation == "SOUS_PART"?"SOUSCRIPTION":"RACHAT";
         },
       },
       {

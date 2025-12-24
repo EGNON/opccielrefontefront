@@ -1,23 +1,23 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import {ActivatedRoute, Router } from '@angular/router';
-import {NgbActiveModal, NgbDate, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbActiveModal, NgbModal, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { Config } from 'datatables.net';
-import {finalize, Subscription, switchMap } from 'rxjs';
+import { Subscription, switchMap, finalize } from 'rxjs';
 import { SweetAlertOptions } from 'sweetalert2';
 import { AuthService } from '../../../../core/modules/auth';
 import { LoaderService } from '../../../../loader.service';
+import { LocalService } from '../../../../services/local.service';
 import { DepotrachatService } from '../../../services/depotrachat.service';
 import { SeanceopcvmService } from '../../../services/seanceopcvm.service';
-import {LocalService} from "../../../../services/local.service";
 
 @Component({
-    selector: 'app-verificationniveau2-list',
-    templateUrl: './verificationniveau2-list.component.html',
-    styleUrl: './verificationniveau2-list.component.scss',
-    standalone: false
+  selector: 'app-verifsouscriptiontransferttitre-n2',
+  standalone: false,
+  templateUrl: './verifsouscriptiontransferttitre-n2.html',
+  styleUrl: './verifsouscriptiontransferttitre-n2.scss'
 })
-export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
+export class VerifsouscriptiontransferttitreN2 implements OnInit, OnDestroy {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   isLoading: boolean;
   private subscriptions: Subscription[] = [];
@@ -82,13 +82,13 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
           this.entityForm.patchValue({dateFermeture: new NgbDate(
               dateFermeture.getFullYear(), dateFermeture.getMonth()+1, dateFermeture.getDate())});
 
-          return this.entityService.verifierIntentionRachatRestant(
+          return this.entityService.verifSouscriptionTransfertTitre2(
             this.localStore.getData("currentOpcvm").idOpcvm
-            ,this.idSeance,"INT_RACH",true,false,false);
+            ,false,false,true);
         })
       ).subscribe(resp=> {
-      this.depotRachat$=resp.data
-      if(this.depotRachat$.length!==0)
+      this.depotRachat$=resp
+      if(this.depotRachat$!==null)
       {
         this.verifier=true
         this.verifier_Bouton=true
@@ -96,7 +96,7 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
       else{
         this.verifier=false;
         this.verifier_Bouton=false;
-        this.entityService.afficherFT_DepotRachat(
+        this.entityService.afficherSouscriptionTransfertTitre(
           this.localStore.getData("currentOpcvm").idOpcvm,true,false).subscribe(
           (data)=>{
             this.depotRachat2$=data;
@@ -110,54 +110,14 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.clickListener) {
-      this.clickListener();
-    }
-    this.subscriptions.forEach((sb) => sb.unsubscribe());
+   
   }
 
-  renderActionColumn(): void {
-    if (this.datatableConfig.columns) {
-      let actions = this.datatableConfig.columns[this.datatableConfig.columns?.length-1];
-      actions.render = (data: any, type: any, full: any) => {
-        const parentActionStart = `
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                      Action
-                    </button>
-                    <ul class="dropdown-menu">`;
-        const show = `
-                <li>
-                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idDepotRachat}">Afficher</a>
-                </li>`;
-        const edit = `
-                <li>
-                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idDepotRachat}"
-                    data-id2="${full.idSeance}">Modifier</a>
-                </li>`;
-        const separator = `<li><hr class="dropdown-divider"></li>`;
-        const delete1 = `<li>
-                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idDepotRachat}"
-                    >Supprimer</a>
-                </li>`;
-        const parentActionEnd = `</ul>
-            </div>`;
-        const actions = [];
-        actions.push(parentActionStart);
-        // actions.push(show);
-        actions.push(edit);
-        actions.push(separator);
-        actions.push(delete1);
-        actions.push(parentActionEnd);
-
-        return actions.join('');
-      }
-    }
-  }
-  verifiIntentionRachatN2()
+  
+  verifSouscriptionTransfertTitreN2()
   {
     this.verifier=true
-    this.entityService.verifIntentionRachatN1N2(
+    this.entityService.verifSouscriptionTRansfertTitreVerifN1N2(
       this.localStore.getData("currentOpcvm").idOpcvm,true,false).pipe
       (finalize(()=>{
         this.verifier=false
@@ -165,14 +125,14 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'verif_intention_rachat_niveau2.pdf';
+        a.download = 'verif_souscription_transfert_titre_niveau2.pdf';
         a.click();
       });
   }
-  verifiIntentionRachatN2_Final()
+  verifSouscriptionTransfertTitreN2_Final()
   {
     this.validerFinal=true
-    this.entityService.verifIntentionRachatN1N2(
+    this.entityService.verifSouscriptionTRansfertTitreVerifN1N2(
       this.localStore.getData("currentOpcvm").idOpcvm,true,true).pipe(
         finalize(()=>{
           this.validerFinal=false
@@ -181,7 +141,7 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'verif_intention_rachat_final.pdf';
+        a.download = 'verif_souscription_transfert_titre_final.pdf';
         a.click();
       });
   }
@@ -196,15 +156,15 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
     this.valider=true;
     let id=[]
     // @ts-ignore
-     this.tableau=document.getElementById("table_Verif2");
-    this.nbreLigne = document.getElementById("table_Verif2").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
+     this.tableau=document.getElementById("table_Verif_Sous2");
+    this.nbreLigne = document.getElementById("table_Verif_Sous2").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
     let i: number = 1;
     //        console.log(this.nbreLigne);
     for (i === 1; i < this.nbreLigne; i++) {
       // @ts-ignore
       //console.log(document.getElementById("table_Verif2").getElementsByTagName('tr')[i].cells[0].Value)
       // @ts-ignore
-      id.push(document.getElementById("table_Verif2").getElementsByTagName('tr')[i].cells[0].innerHTML);
+      id.push(document.getElementById("table_Verif_Sous2").getElementsByTagName('tr')[i].cells[0].innerHTML);
     }
     console.log("id=",id)
     //return

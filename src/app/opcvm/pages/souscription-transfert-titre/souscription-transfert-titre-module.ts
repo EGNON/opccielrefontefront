@@ -12,6 +12,8 @@ import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { NombreDecimalDirective } from "../../../validators/nombre-decimal.directive";
 import { Verifsouscriptiontransferttitre } from './verifsouscriptiontransferttitre/verifsouscriptiontransferttitre';
+import { VerifsouscriptiontransferttitreN1N2 } from './verifsouscriptiontransferttitre-n1-n2/verifsouscriptiontransferttitre-n1-n2';
+import { VerifsouscriptiontransferttitreN2 } from './verifsouscriptiontransferttitre-n2/verifsouscriptiontransferttitre-n2';
 
 
 
@@ -20,7 +22,9 @@ import { Verifsouscriptiontransferttitre } from './verifsouscriptiontransferttit
     SouscriptionTransfertTitre,
     SouscriptionTransfertTitreList,
     SouscriptionTransfertTitreAddEdit,
-    Verifsouscriptiontransferttitre
+    Verifsouscriptiontransferttitre,
+    VerifsouscriptiontransferttitreN1N2,
+    VerifsouscriptiontransferttitreN2
   ],
   imports: [
     CommonModule,

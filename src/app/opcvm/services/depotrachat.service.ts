@@ -19,6 +19,9 @@ export class DepotrachatService extends ResourceService<Depotrachat> {
   verifIntRachN1(obj:any){
     return this.http.post<Depotrachat>(`${this.API_URL}/modifier`,obj)
   }
+  verifSouscriptionTransfertTitreN1(obj:any){
+    return this.http.post<Depotrachat>(`${this.API_URL}/modifier`,obj)
+  }
   creerOperation(id:any,userLogin:any){
     return this.http.post<Depotrachat>(`${this.API_URL}/creer/${id}/${userLogin}`,null)
   }
@@ -55,8 +58,18 @@ export class DepotrachatService extends ResourceService<Depotrachat> {
        {responseType: 'blob' as any }
     )
   }
+  verifSouscriptionTransfertTitre2(idOpcvm:any,niveau1:any,niveau2:any,estVerifier:any){
+    // verifintrach/{idOpcvm}/{niveau1}/{niveau2}
+    return this.http.get<any>(`${this.API_URL}/verifsoustransferttitre/${idOpcvm}/${niveau1}/${niveau2}/${estVerifier}`
+    )
+  }
   verifIntentionRachatN1N2(idOpcvm:any,niveau1:any,niveau2:any){
     return this.http.get<any>(`${this.API_URL}/verifintrachN1/${idOpcvm}/${niveau1}/${niveau2}`,
+       {responseType: 'blob' as any }
+    )
+  }
+  verifSouscriptionTRansfertTitreVerifN1N2(idOpcvm:any,niveau1:any,niveau2:any){
+    return this.http.get<any>(`${this.API_URL}/verifSouscriptionTRansfertTitreVerifN1N2/${idOpcvm}/${niveau1}/${niveau2}`,
        {responseType: 'blob' as any }
     )
   }

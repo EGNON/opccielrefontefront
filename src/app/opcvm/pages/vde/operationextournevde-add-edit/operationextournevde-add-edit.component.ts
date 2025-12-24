@@ -405,6 +405,7 @@ export class OperationextournevdeAddEditComponent implements OnInit, AfterViewIn
         (data)=>{
           this.downloading=false
           this.generer()
+          alert("Extourne effectuée avec succès")
         }
       );
     this.subscriptions.push(sb);

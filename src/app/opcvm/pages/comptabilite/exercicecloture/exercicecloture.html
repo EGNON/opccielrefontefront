@@ -1,0 +1,178 @@
+<div class="card">
+    <div class="card-body p-lg-5 ">
+        <div class="d-flex flex-column flex-lg-row mb-0">
+            <div class="flex-lg-row-fluid me-0 me-lg-0">
+                <div *ngIf="nbreSuivant===1">
+                    <form [formGroup]="form">
+                        <fieldset class="border rounded-3 p-3 ">
+                            <legend class="float-none w-auto px-3">INFO OPCVM</legend>
+                            
+                            <div class="row mb-5">
+                                <div class="col-md-4 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2 ">SIGLE</label>
+                                    <input type="text" class="form-control form-control-sm " 
+                                        [ngClass]="{'is-is-invalid':submitted && f.sigle.errors}" 
+                                        formControlName="sigle"/>
+                                </div>
+                                <div class="col-md-4 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2 ">DESIGNATION</label>
+                                    <input type="text" class="form-control form-control-sm "
+                                    formControlName="designation"
+                                    [ngClass]="{'is-invalid': submitted && f.designation.errors}"/>
+                                </div>
+                                <div class="col-md-4 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2">TYPE AFFECTATION</label>
+                                    <input type="text" class="form-control form-control-sm "
+                                    formControlName="codeTypeAffectation"
+                                    [ngClass]="{'is-invalid': submitted && f.codeTypeAffectation.errors}"/>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="border rounded-3 p-3 ">
+                            <legend class="float-none w-auto px-3 ">INFO EXERCICE</legend>
+                            <div class="row mb-5">
+                                <div class="col-md-2 fv-row" >
+                                    <label class="fs-5 fw-semibold mb-2">ANNEE</label>
+                                    <input type="text" class="form-control form-control-sm "
+                                    formControlName="codeExercice" 
+                                    [ngClass]="{'is-invalid': submitted && f.codeExercice.errors}"/>
+                                </div>
+                                <div class="col-md-2  fv-row">
+                                    <label class="fs-5 fw-semibold mb-2 ">DATE DEBUT</label>
+                                    <div class="input-group mb-0">
+                                        <!--begin::Input-->
+                                        <input  type="text" class="form-control form-control-sm form-control-solid"
+                                            placeholder="dd-mm-yyyy" ngbDatepicker #d="ngbDatepicker" aria-label="Date operation" aria-describedby="basic-addon6"
+                                            formControlName="dateDebut" [ngClass]="{ 'is-invalid': submitted && f.dateDebut.errors }"/>
+                                        <!--end::Input-->
+                                        <span (click)="d.toggle()"  class="btn btn-sm btn-outline-secondary input-group-text" id="basic-addon6">
+                                            <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2  fv-row">
+                                    <label class="fs-5 fw-semibold mb-2 ">DATE FIN</label>
+                                    <div class="input-group mb-0">
+                                        <input type="text" class="form-control form-control-sm form-control-solid"
+                                        placeholder="dd-mm-yyyy" ngbDatepicker #d2="ngbDatepicker" formControlName="dateFin" aria-describedby="basic-addon7">
+                                        <span (click)="d2.toggle()" class="btn btn-sm tn-outline-secondary input-group-text">
+                                            <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2  fv-row">
+                                    <label class="fs-5 fw-semibold mb-2 ">DATE CLOTURE</label>
+                                    <div class="input-group mb-0">
+                                        <input type="text" class="form-control form-control-sm form-control-solid"
+                                        placeholder="dd-mm-yyyy" ngbDatepicker #d3="ngbDatepicker" formControlName="dateCloture" aria-describedby="basic-addon8">
+                                        <span (click)="d3.toggle()" class="btn btn-sm btn-outline-secondary input-group-text">
+                                            <i class="ki-duotone ki-calendar fs-4"><span class="path1"></span><span class="path2"></span></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2">TAUX BEN</label>
+                                    <input type="text" class=" form-control form-control-sm" 
+                                    formControlName="tauxBen"/>
+                                </div>
+                                <div class="col-md-2 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2">MONTANT MINIMUM</label>
+                                    <input type="text" class=" form-control form-control-sm" 
+                                    formControlName="montantMinimum"/>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class=" col-md-4 fv-row ">
+                                    <label class="fs-5 fw-semibold  mb-2">TYPE OPERATION</label>
+                                    <select formControlName="typeOperation" class="form-select
+                                    form-select-sm mb-2 " (change)="typeOperationChange()">
+                                    <option ngValue="DECLASSEMENT">DECLASSEMENT</option>
+                                    <option ngValue="CAPITALISATION PARTIELLE">CAPITALISATION PARTIELLE</option>
+                                    <option ngValue="CAPITALISATION TOTALE">CAPITALISATION TOTALE</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 fv-row " >
+                                    <label class="fs-5 fw-semibold  mb-2">RAN</label>
+                                    <input type="text" class=" form-control form-control-sm" 
+                                    formControlName="ran"/>
+                                </div>
+                                <div class="col-md-4 fv-row " >
+                                    <label class="fs-5 fw-semibold  mb-2">MONTANT A CAPITALISER</label>
+                                    <input type="text" class=" form-control form-control-sm" 
+                                    formControlName="montantAcapitaliser"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border rounded-3 p-3 ">
+                            <legend class="float-none w-auto px-3">DETAIL PLAN</legend>
+                            
+                            <div class="row mb-5">
+                                <div class="col-md-2 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2 ">CODE</label>
+                                    <input type="text" class="form-control form-control-sm " 
+                                        [ngClass]="{'is-is-invalid':submitted && f.codePlan.errors}" 
+                                        formControlName="codePlan"/>
+                                </div>
+                                <div class="col-md-2 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2 ">LIBELLE</label>
+                                    <input type="text" class="form-control form-control-sm "
+                                    formControlName="libelle"
+                                    [ngClass]="{'is-invalid': submitted && f.libelle.errors}"/>
+                                </div>
+                                <div class="col-md-2 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2">CPTE CAPITAL</label>
+                                    <input type="text" class="form-control form-control-sm "
+                                    formControlName="cpteCapital"
+                                    />
+                                </div>
+                                <div class="col-md-2 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2">CPTE BENEFICE</label>
+                                    <input type="text" class="form-control form-control-sm "
+                                    formControlName="cpteBenefice"
+                                    />
+                                </div>
+                                <div class="col-md-2 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2">CPTE PERTE</label>
+                                    <input type="text" class="form-control form-control-sm "
+                                    formControlName="cptePerte"
+                                    />
+                                </div>
+                                <div class="col-md-2 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2">CPTE DISTRIBUTION</label>
+                                    <input type="text" class="form-control form-control-sm "
+                                    formControlName="cpteDistribution"
+                                    />
+                                </div>
+                            </div>
+                        </fieldset>
+
+                         <div class="separator mb-8"></div>
+                        <!--end::Separator-->
+                        <!--begin::Action buttons-->
+                        <div class="d-flex justify-content-end">
+                            <!--begin::Button-->
+                            <a type="reset" routerLink="/opcvm/comptabilite/regulecartsolde/liste" class="btn btn-sm btn-light me-3">
+                            Annuler
+                            </a>
+                            <!--end::Button-->
+                            <!--begin::Submit-->
+                            <button type="submit" class="btn btn-sm btn-primary" (click)="suivant()" >
+                            <ng-container *ngIf="submitting">
+                                <span class="indicator-progress" [style.display]="'block'">
+                                    Patientez svp...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="!submitting">
+                                <span class="indicator-label">Suivant</span>
+                            </ng-container>
+                            </button>
+                            <!--end::Submit-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

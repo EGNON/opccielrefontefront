@@ -33,6 +33,7 @@ import { EcritureManuelComponent } from './ecriture-manuel/ecriture-manuel.compo
 import { OperationdetachementdroitComponent } from './operationdetachementdroit/operationdetachementdroit.component';
 import { ExerciceList } from './exercice-list/exercice-list';
 import { ExerciceAddEdit } from './exercice-add-edit/exercice-add-edit';
+import { Exercicecloture } from './exercicecloture/exercicecloture';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ExerciceAddEdit } from './exercice-add-edit/exercice-add-edit';
     EcritureManuelComponent,
     OperationdetachementdroitComponent,
     ExerciceList,
-    ExerciceAddEdit
+    ExerciceAddEdit,
+    Exercicecloture
   ],
     imports: [
         CommonModule,

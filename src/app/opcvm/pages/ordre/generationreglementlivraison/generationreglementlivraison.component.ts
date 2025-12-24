@@ -50,6 +50,7 @@ export class GenerationreglementlivraisonComponent implements OnInit, OnDestroy 
   seance:any;
   estAfficher:boolean;
   estEnAttente:boolean;
+  afficherBouton:boolean;
   private clickListener: () => void;
   private idInAction: number;
   entityForm: FormGroup;
@@ -103,6 +104,12 @@ export class GenerationreglementlivraisonComponent implements OnInit, OnDestroy 
       (data)=>{
         this.avisOperationBourse$=data.data
          console.log(this.avisOperationBourse$)
+         if(this.avisOperationBourse$.length===0)
+         {
+          this.afficherBouton=true
+         }
+         else
+          this.afficherBouton=false
       }
     )
   }

@@ -33,7 +33,8 @@ export class CoursTitreService extends ResourceService<CoursTitreModel>{
   }
 
   verificationCours( params: any) {
-    return this.http.post<ResponseModel<CoursTitreModel>>(`${this.API_URL}/verificationcours`, params);
+    return this.http.post<ResponseModel<CoursTitreModel>>(`${this.API_URL}/verificationcours`,
+       params,{responseType: 'blob' as any });
   }
   validationCours( params: any) {
     return this.http.post<ResponseModel<CoursTitreModel>>(`${this.API_URL}/validationverificationcours`, params);

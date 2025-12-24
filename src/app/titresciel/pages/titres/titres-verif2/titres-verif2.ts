@@ -366,9 +366,13 @@ export class TitresVerif2 implements OnInit, AfterViewInit, OnDestroy{
           //this.downloading = false;
           this.downloaded = false;
         })
-      ).subscribe(data => {
-            
-          });
+      ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_cours_titre_niveau2.pdf';
+        a.click();
+      });
   }
   validerVerificationCours(){
     this.submitting = true;
