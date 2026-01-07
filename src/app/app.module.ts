@@ -21,6 +21,7 @@ import {DirectivesModule} from "./directives/directives.module";
 import {DataTablesModule} from "angular-datatables";
 import { SpinnerComponent } from './spinner/spinner.component';
 import {LoadingInterceptor} from "./loading.interceptor";
+import { AccountModule } from './template/modules/account/account.module';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -44,6 +45,7 @@ function appInitializer(authService: AuthService) {
         ReactiveFormsModule,
         NgApexchartsModule,
         DirectivesModule,
+        AccountModule,
         DataTablesModule], providers: [
         UniqueNumCpteDepositValidators,
         NgbActiveModal,

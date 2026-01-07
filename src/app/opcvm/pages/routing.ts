@@ -109,6 +109,12 @@ const OpcvmRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
+    path: 'affectation_resultat',
+    // canActivate: [OpcvmAuthGuard],
+    loadChildren: () => import('./affectationresultat/affectationresultat-module').then((m) => m.AffectationresultatModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
     path: 'vde',
     // canActivate: [OpcvmAuthGuard],
     loadChildren: () => import('./vde/vde.module').then((m) => m.VDEModule),

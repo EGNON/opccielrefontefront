@@ -35,6 +35,9 @@ export class OperationService extends ResourceService<any> implements OnDestroy{
   afficherListeOperations(parameters: any) {
     return this.http.post<any>(`${this.API_URL}`, parameters);
   }
+  afficherListeOperationsResultat(parameters: any) {
+    return this.http.post<any>(`${this.API_URL}/resultat`, parameters);
+  }
   afficherComSurInvestissement(parameters: any) {
     return this.http.post<any>(`${this.API_URL}/commissioninvestissement/liste`, parameters);
   }

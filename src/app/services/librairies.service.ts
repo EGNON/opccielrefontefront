@@ -454,6 +454,12 @@ export class LibrairiesService {
   etatSuiviClientListe(param: any) {
     return this.http.post<any>(`${this.API_URL}/etatsuiviclient/liste`, param);
   }
+  ligneMvtClotureExercice(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/lignemvtclotureexercice`, param);
+  }
+  clotureExercice(param: any,userLogin:any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/clotureexercice/${userLogin}`, param);
+  }
   pointTresorerie(param: any) {
     return this.http.post<any>(`${this.API_URL}/etats/pointtresorerie`, param
       ,{responseType: 'blob' as any }

@@ -3,6 +3,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile-details',
+  standalone:false,
   templateUrl: './profile-details.component.html',
 })
 export class ProfileDetailsComponent implements OnInit, OnDestroy {

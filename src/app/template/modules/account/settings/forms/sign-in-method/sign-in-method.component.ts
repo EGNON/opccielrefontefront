@@ -3,6 +3,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sign-in-method',
+  standalone:false,
   templateUrl: './sign-in-method.component.html',
 })
 export class SignInMethodComponent implements OnInit, OnDestroy {

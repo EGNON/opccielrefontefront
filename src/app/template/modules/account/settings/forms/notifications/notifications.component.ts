@@ -3,6 +3,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-notifications',
+  standalone:false,
   templateUrl: './notifications.component.html',
 })
 export class NotificationsComponent implements OnInit, OnDestroy {

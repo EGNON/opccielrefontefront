@@ -3,6 +3,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-connected-accounts',
+  standalone:false,
   templateUrl: './connected-accounts.component.html',
 })
 export class ConnectedAccountsComponent implements OnInit, OnDestroy {

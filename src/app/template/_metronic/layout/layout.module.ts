@@ -10,7 +10,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationModule } from '../../modules/i18n';
 import { LayoutComponent } from './layout.component';
-import { ExtrasModule } from '../partials';
+import { ExtrasModule } from '../partials/layout/extras/extras.module';
 import { Routing } from '../../../routing';
 import { HeaderComponent } from './components/header/header.component';
 import { ContentComponent } from './components/content/content.component';
@@ -20,11 +20,14 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { PageTitleComponent } from './components/header/page-title/page-title.component';
 import { HeaderMenuComponent } from './components/header/header-menu/header-menu.component';
+import { DrawersModule } from '../partials/layout/drawers/drawers.module';
+import { ModalsModule } from '../partials/layout/modals/modals.module';
+import { EngagesModule } from '../partials/layout/engages/engages.module';
 import {
-  DrawersModule,
+  // DrawersModule,
   DropdownMenusModule,
-  ModalsModule,
-  EngagesModule,
+  // ModalsModule,
+  // EngagesModule,
 } from '../partials';
 import { EngagesComponent } from '../partials/layout/engages/engages.component';
 import { ThemeModeModule } from '../partials/layout/theme-mode-switcher/theme-mode.module';

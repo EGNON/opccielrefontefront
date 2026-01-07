@@ -2675,6 +2675,29 @@ export class LibraryService implements OnDestroy{
             },
             {
               allow: null,
+              title: 'Affectation du résultat',
+              icon: 'element-7',
+              dataLink: '',
+              page: '',
+              translate: '',
+              role: '',
+              parent: 'APPLICATION',
+              children: [              
+                    {
+                      allow:true,// this.authService.isGrantedRole('ROLE_Tableau_Affectation'),
+                      title: 'Tableau d\'affectation du résultat',
+                      page: '/opcvm/affectation_resultat/tableau',
+                      role: 'ROLE_Tableau_Affectation',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Affectation du résultats',
+                      children: []
+                    }
+                  ]
+                },
+            {
+              allow: null,
               title: 'Comptabilité',
               icon: 'element-7',
               dataLink: '',

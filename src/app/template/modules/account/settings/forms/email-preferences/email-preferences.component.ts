@@ -3,6 +3,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-email-preferences',
+  standalone:false,
   templateUrl: './email-preferences.component.html',
 })
 export class EmailPreferencesComponent implements OnInit, OnDestroy {
