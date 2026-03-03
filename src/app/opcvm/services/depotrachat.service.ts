@@ -43,6 +43,10 @@ export class DepotrachatService extends ResourceService<Depotrachat> {
   afficherFT_DepotRachat(idOpcvm:any,niveau1:any,niveau2:any){
     return this.http.get<any>(`${this.API_URL}/depotrachat/${idOpcvm}/${niveau1}/${niveau2}`)
   }
+  afficherFT_DepotRachatSous(idOpcvm:any,niveau1:any,niveau2:any){
+    return this.http.get<any>(`${this.API_URL}/depotrachatsous/${idOpcvm}?niveau1=${niveau1}
+      &niveau2=${niveau2}`)
+  }
   verifIntentionRachat(idOpcvm:any,niveau1:any,niveau2:any){
     // verifintrach/{idOpcvm}/{niveau1}/{niveau2}
     return this.http.get<any>(`${this.API_URL}/verifintrach/${idOpcvm}/${niveau1}/${niveau2}`,

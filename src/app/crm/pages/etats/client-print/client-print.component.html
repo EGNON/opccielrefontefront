@@ -207,6 +207,17 @@
             <span class="indicator-label">Imprimer</span>
         </ng-container>
       </button>
+      <button style="margin-left: 5px;"  class="btn btn-sm btn-primary" (click)="export()">
+          <ng-container *ngIf="exported">
+            <span class="indicator-progress" [style.display]="'block'">
+              Patientez svp...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="!exported">
+            <span class="indicator-label">Exporter</span>
+        </ng-container>
+      </button>
       <!--          </div>-->
       <!--        </div>-->
       <!--      </div>-->
@@ -248,8 +259,9 @@
       <!--              <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="1" />-->
       <!--            </div>-->
       <!--          </th>-->
+      <th width="5%">N°COMPTE</th>
       <th width="20%">NOM</th>
-      <th width="30%">PRENOM(S)</th>
+      <th width="25%">PRENOM(S)</th>
       <th width="20%">SEXE</th>
       <th width="15%">MOBILE 1</th>
       <th width="15%">MOBILE 2</th>
@@ -257,6 +269,11 @@
     </thead>
     <tbody>
     <tr *ngFor="let item of personnes$ | async">
+      <td>
+        <div class="d-flex align-items-center">
+          {{ item.numeroCpteDeposit }}
+        </div>
+      </td>
       <td>
         <div class="d-flex align-items-center">
           {{ item.nom }}
@@ -323,6 +340,7 @@
         <!--              <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="1" />-->
         <!--            </div>-->
         <!--          </th>-->
+        <th class="min-w-100px">N°COMPTE</th>
         <th class="min-w-200px">SIGLE</th>
         <th class="min-w-200px">RAISON SOCIALE</th>
         <th class="min-w-200px">SITE WEB</th>
@@ -335,6 +353,11 @@
         <!--              <input class="form-check-input" type="checkbox" value="1" />-->
         <!--            </div>-->
         <!--          </td>-->
+                  <td>
+        <div class="d-flex align-items-center">
+          {{ item.numeroCpteDeposit }}
+        </div>
+      </td>
         <td>
           <div class="d-flex align-items-center" [innerHTML]="item.sigle">
 

@@ -87,14 +87,14 @@
                         <span class="indicator-label">Enregistrer</span>
                       </ng-container>
                     </button>
-                    <button type="button" class="btn btn-sm btn-warning">
-                      <ng-container *ngIf="downloading">
+                    <button type="button" class="btn btn-sm btn-warning" (click)="exportExcel()">
+                      <ng-container *ngIf="export">
                         <span class="indicator-progress" [style.display]="'block'">
                           Patientez svp...
                           <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                         </span>
                       </ng-container>
-                      <ng-container *ngIf="!downloading">
+                      <ng-container *ngIf="!export">
                         <span class="indicator-label">Exporter</span>
                       </ng-container>
                     </button>

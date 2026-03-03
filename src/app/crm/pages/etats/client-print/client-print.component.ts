@@ -8,7 +8,8 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import {DataTablesResponse} from "../../../models/data-tables.response.model";
 import {Config} from "datatables.net";
-
+import * as XLSX from "xlsx";
+import saveAs from 'file-saver';
 @Component({
     selector: 'app-client-print',
     templateUrl: './client-print.component.html',
@@ -20,6 +21,7 @@ export class ClientPrintComponent implements OnInit, OnDestroy{
   qualite?: string | null;
   entity: any;
   download:boolean;
+  exported:boolean;
   dateJour:Date;
   newButtonTitle: string = "Nouveau";
   personnes$: any;
@@ -28,6 +30,7 @@ export class ClientPrintComponent implements OnInit, OnDestroy{
   isLoading: boolean = false;
   private subscriptions: Subscription[] = [];
   personnes: DataTablesResponse<any>;
+  allData:any;
 
   datatableConfig: Config = {};
   afficherPersonnePhysique:boolean;
@@ -91,6 +94,7 @@ export class ClientPrintComponent implements OnInit, OnDestroy{
         a.href = url;
         a.download = 'client_physique.pdf';
         a.click();
+        this.download=false;
       });
     }
     else
@@ -105,6 +109,72 @@ export class ClientPrintComponent implements OnInit, OnDestroy{
         a.href = url;
         a.download = 'client_Morale.pdf';
         a.click();
+        this.download=false;
+      });
+    }
+  }
+  export(){
+     this.exported=true
+    this.prospect=this.selectProspect.options[this.selectProspect.selectedIndex].text;
+    
+    if(this.prospect=="Personne physique"){
+      this.qualite="actionnaires".toUpperCase();
+       const headers = ['N°COMPTE','NOM','PRENOM(S)','SEXE','MOBILE 1','MOBILE 2'];
+          
+      this.personnePhysiqueService.afficherPersonneSelonQualite(this.qualite).pipe
+      (finalize(()=>{
+        this.download=false;
+      })).subscribe((data) => {
+        this.allData=data;
+              const exportData = this.allData.map(item => ({
+                'N°COMPTE': item.numeroCpteDeposit,
+                'NOM': item.nom,
+                'PRENOM(S)':item.prenom,
+                'SEXE': item.sexe,
+                'MOBILE 1': item.mobile1,
+                'MOBILE 2':item.mobile2,
+              }));
+      
+              // 3️⃣ Convertir en feuille Excel
+              const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData, { header: headers });
+      
+              // 4️⃣ Créer le classeur
+              const wb: XLSX.WorkBook = { Sheets: { 'Personne physique': ws }, SheetNames: ['Données'] };
+      
+              // 5️⃣ Exporter
+              const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+              const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+              saveAs(blob, 'personne_physique.xlsx');
+              this.exported=false
+      });
+    }
+    else
+    {
+      const headers = ['N°COMPTE','SIGLE','RAISON SOCIALE','SITE WEB'];
+      this.qualite="actionnaires".toUpperCase();
+      this.personneMoraleService.afficherPersonneSelonQualite(this.qualite).pipe
+      (finalize(()=>{
+        this.download=false;
+      })).subscribe((data) => {
+       this.allData=data;
+              const exportData = this.allData.map(item => ({
+                'N°COMPTE': item.numeroCpteDeposit,
+                'SIGLE': item.sigle,
+                'RAISON SOCIALE':item.raisonSociale,
+                'SITE WEB': item.siteWeb,
+              }));
+      
+              // 3️⃣ Convertir en feuille Excel
+              const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData, { header: headers });
+      
+              // 4️⃣ Créer le classeur
+              const wb: XLSX.WorkBook = { Sheets: { 'Personne morale': ws }, SheetNames: ['Données'] };
+      
+              // 5️⃣ Exporter
+              const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+              const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+              saveAs(blob, 'personne_morale.xlsx');
+              this.exported=false
       });
     }
   }

@@ -14,9 +14,10 @@ export class DetailprofilService extends ResourceService<Detailprofil> {
     return this.http.get<any>(`${this.API_URL}/liste`)
   }
   supprimer(codeProfil:any,idOpcvm:any){
-    return this.http.delete<any>(`${this.API_URL}/${codeProfil}/${idOpcvm}`)
+    return this.http.delete<any>(`${this.API_URL}?codeProfil=${codeProfil}&idOpcvm=${idOpcvm}`)
   }
   afficherSelonProfilOpcvm(codeProfil:any,idOpcvm:any){
-    return this.http.get<any>(`${this.API_URL}/${codeProfil}/${idOpcvm}`)
+    return this.http.get<any>(`${this.API_URL}/detailprofilselonid?codeProfil=${codeProfil}
+      &idOpcvm=${idOpcvm}`)
   }
 }

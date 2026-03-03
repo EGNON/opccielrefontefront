@@ -108,11 +108,11 @@ export class ProfilcommissionsousrachListComponent implements OnInit, OnDestroy,
                 </li>`;
         const edit = `
                 <li>
-                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.codeProfil}">Modifier</a>
+                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.codeProfil.trim()}">Modifier</a>
                 </li>`;
         const separator = `<li><hr class="dropdown-divider"></li>`;
         const delete1 = `<li>
-                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.codeProfil}"
+                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.codeProfil.trim()}"
                     data-id2="${full.opcvm.idOpcvm}">Supprimer</a>
                 </li>`;
         const parentActionEnd = `</ul>

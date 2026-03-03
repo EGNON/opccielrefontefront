@@ -297,15 +297,21 @@ export class Verificationecriturechargeniveau1Component implements OnInit, After
       codeTypeOperation:"CHARGE"
     };
     console.log(param)
-    this.operationService.apercuVerificationEritureNiveau(param,1,"CHARGE").subscribe(
-      (data)=>{
-        console.log(data.data)
-
-        console.log(this.downloading)
-        // this.verificationNiveau$=data.data
-      }
-    );
-    this.downloading=false
+    this.operationService.apercuVerificationEritureNiveau(param,1,"CHARGE").pipe(
+      catchError((err) => {
+        this.downloading=false
+        return of(err.message);
+      }),
+      finalize(() => {
+        this.downloading=false
+      })
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_ecriture_charge_niveau1.pdf';
+        a.click();
+      });
   }
   validationEcritureNiveau1(){
     this.valider=true

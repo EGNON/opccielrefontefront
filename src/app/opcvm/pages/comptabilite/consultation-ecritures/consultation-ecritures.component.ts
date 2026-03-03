@@ -306,7 +306,7 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
                 self.renderer.setStyle(value.parentElement,'color', 'white');
                 self.renderer.setStyle(value.parentElement,'fontWeight', 'bold');*/
                 value.setAttribute("style", "color: white;");
-                value.parentElement.setAttribute("style", "background-color:darkblue; font-weight: bold;");
+                value.parentElement.setAttribute("style", "background-color:grey; font-weight: bold; color: white;");
               });
               $(row).after(newTr);
             });

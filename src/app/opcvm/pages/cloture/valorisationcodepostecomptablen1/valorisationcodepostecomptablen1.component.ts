@@ -48,28 +48,45 @@ export class Valorisationcodepostecomptablen1Component implements OnInit{
     this.downloading=true
     this.posteComptableSeanceOpcvmService.verifierPosteComptableNiveau(
       this.localStore.getData("currentOpcvm")?.idOpcvm,this.currentSeance?.idSeanceOpcvm.idSeance+1,false,false,1,12)
-      .pipe(
-        catchError((err) => {
-          this.submitted = false;
-          // this.loadingService.setLoading(false);
-          return of(err.message);
-        }),
-        finalize(() => {
-          // this.submitting = false;
-          // this.submitted = false;
-          // this.loadingService.setLoading(false);
-          // window.location.reload();
-          this.downloading=false
-        })
-      ).subscribe(
-      (data)=>{
-        if (data.data !== "" && data.data!=undefined)
-        {
-          alert(data.data);
-        }
-        // this.downloading=false;
-      }
-    )
+       .pipe(
+    catchError((err) => {
+      this.downloading = false;
+      alert("Erreur serveur");
+      return of(null);
+    }),
+    finalize(() => {
+      this.downloading = false;
+    })
+  ).subscribe((response: any) => {
+
+    if (!response) return;
+
+    const contentType = response.headers.get('content-type');
+
+    // ✅ Si c'est un PDF → téléchargement
+    if (contentType === 'application/pdf') {
+
+      const blob = new Blob([response.body], { type: 'application/pdf' });
+      const fileURL = window.URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = fileURL;
+      a.download = 'verification_niveau1_pc.pdf';
+      a.click();
+
+      window.URL.revokeObjectURL(fileURL);
+
+    } 
+    // ✅ Sinon → message texte
+    else {
+      const reader = new FileReader();
+      reader.onload = () => {
+        alert(reader.result);
+      };
+      reader.readAsText(response.body);
+    }
+
+  });
   }
   save() {
     // return;

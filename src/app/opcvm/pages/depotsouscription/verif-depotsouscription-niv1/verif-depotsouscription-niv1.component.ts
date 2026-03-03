@@ -308,4 +308,56 @@ export class VerifDepotsouscriptionNiv1Component implements OnInit, OnDestroy{
         this.modal.dismiss();
       });
   }
+   validerConfirmation(){
+    this.submitting = true;
+    this.submitted = true;
+    this.loadingService.setLoading(true);
+
+    if (this.form.invalid) {
+      this.submitting = false;
+      this.loadingService.setLoading(false);
+      return;
+    }
+    const entity={
+      idOpcvm:this.localStore.getData("currentOpcvm").idOpcvm,
+      codeNatureOperation:"DEP_SOUS",
+      niveau:"1",
+      userLoginVerif:this.authService.currentUserValue?.username
+    }
+    this.entityService.confirmerListeVerifDepot(entity)
+    .pipe(
+        catchError((err) => {
+          this.submitting = false;
+          this.disableSaveBtn = false;
+          this.loadingService.setLoading(false);
+          return of(err.message);
+        }),
+        finalize(() => {
+          this.submitting = false;
+          this.submitted = false;
+          this.disableSaveBtn = true;
+          this.loadingService.setLoading(false);
+          window.location.reload();
+        })
+      )
+      .subscribe(value => {
+        this.modal.dismiss();
+      });
+          // .subscribe(
+          //   {
+          //     next: (value) => {
+          //       this.valider=false
+          //       alert("Confirmation effectuée avec succès")
+          //       let currentUrl = this.router.url;
+          //       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+          //         this.router.navigate([currentUrl]);
+          //         this.verifier_Bouton=true
+          //       });
+          //     },
+          //     error: err => {
+
+          //     }
+          //   }
+          // )
+  }
 }

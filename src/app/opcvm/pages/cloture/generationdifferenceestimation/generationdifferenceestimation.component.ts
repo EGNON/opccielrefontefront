@@ -45,13 +45,20 @@ export class GenerationdifferenceestimationComponent implements OnInit{
   }
   generationDifferenceEstimation(){
     this.downloading=true
+    console.log(this.entityForm.value.estEnCloture)
     this.operationDifferenceEstimationService.generationDifferenceEstimation(
       this.localStore.getData("currentOpcvm")?.idOpcvm,this.entityForm.value.estEnCloture).subscribe(
       (data)=>{
-        if(data.data=!true)
+        console.log(data.data);
+        if(data.data!=="Lors de la cloture de séance,aucune autre opération ne pourra etre éffectuée.")
             alert(data.data);
         else
-          alert("Vous pouvez passer maintenant aux autres étapes de la clôture")
+        {
+          alert(data.data+"\nVeuillez passer après avoir cliqué sur ok à la génération des différences estimations")
+          // alert("Vous pouvez passer maintenant aux autres étapes de la clôture")
+           window.location.reload();
+        }
+          
         this.downloading=false;
       }
     )

@@ -30,10 +30,15 @@ export class OperationChargeEtalerService extends ResourceService<any> implement
     return this.http.post<any>(`${this.API_URL}/creer`, parameters);
   }
   verifier(idSeance: any,idOpcvm:any) {
-    return this.http.get<any>(`${this.API_URL}/jasperpdf/verifier/${idSeance}/${idOpcvm}`);
+    return this.http.get<any>(`${this.API_URL}/jasperpdf/verifier/${idSeance}/${idOpcvm}`
+      , {responseType: 'blob' as any }
+    );
   }
   verifierChargeNiveau(idSeance: any,idOpcvm:any,estVerifie1:any,estVerifie2:any,niveau:any,niv:any) {
-    return this.http.get<any>(`${this.API_URL}/jasperpdf/charge/${idSeance}/${idOpcvm}/${estVerifie1}/${estVerifie2}/${niveau}/${niv}`);
+    return this.http.get<any>(`${this.API_URL}/jasperpdf/charge/${idSeance}/${idOpcvm}/${estVerifie1}/${estVerifie2}/${niveau}/${niv}`
+      , {responseType: 'blob' as any,
+    observe: 'response' }
+    );
   }
   validerNiveau(obj: any) {
     return this.http.post<any>(`${this.API_URL}/validerniveau`,obj);

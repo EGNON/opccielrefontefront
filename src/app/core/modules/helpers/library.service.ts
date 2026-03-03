@@ -387,6 +387,28 @@ export class LibraryService implements OnDestroy{
                   children: []
                 },
                 {
+                  allow:true,// this.authService.isGrantedRole('ROLE_JOURSFERIES'),
+                  title: 'Parametrages jours fériés',
+                  icon: '',
+                  page: '/app/standard/parametre/joursferies',
+                  role: 'ROLE_JOURSFERIES',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Paramètre',
+                  children: []
+                },
+                {
+                  allow:true,// this.authService.isGrantedRole('ROLE_DEFINITION_ARRONDI'),
+                  title: 'Définition arrondi',
+                  icon: '',
+                  page: '/app/standard/parametre/definitionarrondi',
+                  role: 'ROLE_DEFINITION_ARRONDI',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Paramètre',
+                  children: []
+                },
+                {
                   allow: this.authService.isGrantedRole('ROLE_SYSTEMEDINFORMATION'),
                   title: "Système d'information",
                   icon: '',
@@ -2694,6 +2716,87 @@ export class LibraryService implements OnDestroy{
                       parent: 'Affectation du résultats',
                       children: []
                     }
+                    ,{
+                      allow:true,// this.authService.isGrantedRole('ROLE_Tableau_Affectation'),
+                      title: 'Décision du CA/AG',
+                      page: '',
+                      role: '',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Affectation du résultats',
+                      children: [
+                            {
+                          allow:true,// this.authService.isGrantedRole('ROLE_Mise_Affectation'),
+                          title: 'Mise en affectation',
+                          page: '/opcvm/affectation_resultat/miseenaffectation',
+                          role: 'ROLE_Mise_Affectation',
+                          icon: '',
+                          translate: '',
+                          dataLink: '',
+                          parent: 'Décision du CA/AG',
+                          children: []
+                        }
+                           , {
+                          allow:true,// this.authService.isGrantedRole('ROLE_DECISISON_DIST'),
+                          title: 'Enregistrement décision',
+                          page: '/opcvm/affectation_resultat/decisiondistribution',
+                          role: 'ROLE_DECISISON_DIST',
+                          icon: '',
+                          translate: '',
+                          dataLink: '',
+                          parent: 'Décision du CA/AG',
+                          children: []
+                        }
+                      ]
+                    },
+                    {
+                      allow:true,// this.authService.isGrantedRole('ROLE_Phase_Detachement'),
+                      title: 'Phase de détachement du coupon',
+                      page: '/opcvm/affectation_resultat/phasedetachementcoupon',
+                      role: 'ROLE_Phase_Detachement',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Affectation du résultats',
+                      children: []
+                    }
+                    ,
+                    {
+                      allow:true,// this.authService.isGrantedRole('ROLE_Detachement_effectue'),
+                      title: 'Liste des détachements effectués',
+                      page: '/opcvm/affectation_resultat/detachementeffectue',
+                      role: 'ROLE_Detachement_effectue',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Affectation du résultats',
+                      children: []
+                    }
+                    ,
+                    {
+                      allow:true,// this.authService.isGrantedRole('ROLE_Phase_paiement'),
+                      title: 'Phase de paiement',
+                      page: '/opcvm/affectation_resultat/phasepaiement',
+                      role: 'ROLE_Phase_paiement',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Affectation du résultats',
+                      children: []
+                    }
+                    ,
+                    {
+                      allow:true,// this.authService.isGrantedRole('ROLE_Avis_paiement'),
+                      title: 'Avis de paiement',
+                      page: '/opcvm/affectation_resultat/avispaiement',
+                      role: 'ROLE_Avis_paiement',
+                      icon: '',
+                      translate: '',
+                      dataLink: '',
+                      parent: 'Affectation du résultats',
+                      children: []
+                    }
                   ]
                 },
             {
@@ -3905,7 +4008,7 @@ export class LibraryService implements OnDestroy{
                 },
                 {
                   allow: this.authService.isGrantedRole('ROLE_VERIF_ECRITURE_NIVEAU2_DE'),
-                  title: 'Vérification niveau 1 jeux d\'écritures (DE)',
+                  title: 'Vérification niveau 2 jeux d\'écritures (DE)',
                   page: '/opcvm/cloture/verificationecritureniveu2de',
                   role: 'ROLE_VERIF_ECRITURE_NIVEAU2_DE',
                   icon: '',

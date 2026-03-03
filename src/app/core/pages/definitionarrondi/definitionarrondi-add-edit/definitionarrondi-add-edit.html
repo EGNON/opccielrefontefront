@@ -1,0 +1,158 @@
+<!--begin::Careers - Apply-->
+<div class="card">
+  <!--begin::Body-->
+  <div class="card-body p-lg-5">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row mb-0">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid me-0 me-lg-0">
+        <!--begin::Form-->
+        <form [formGroup]="entityForm" class="form mb-5">
+          <!--begin::Input group-->
+          <div class="row mb-5">
+            <!--begin::Col-->
+            <div class="col-md-4 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Code</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="codeDefinitionArrondi"
+                     [ngClass]="{ 'is-invalid': submitted && f.codeDefinitionArrondi.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.codeDefinitionArrondi.errors" class="invalid-feedback">
+                <div *ngIf="f.codeDefinitionArrondi.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+
+            <div class="col-md-4 fv-row">
+              <!--begin::Label-->
+              <label class="required fs-5 fw-semibold mb-2">Libelle</label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="text" class="form-control form-control-sm form-control-solid"
+                     placeholder="" formControlName="libelleDefinitionArrondi"
+                     [ngClass]="{ 'is-invalid': submitted && f.libelleDefinitionArrondi.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.libelleDefinitionArrondi.errors" class="invalid-feedback">
+                <div *ngIf="f.libelleDefinitionArrondi.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            
+            <!--begin::Col-->
+            <div class="col-md-4 fv-row">
+             
+              <label class=" form-check-label text-gray-700 fw-bold text-nowrap" style="margin-top: 35px">
+               par defaut
+              </label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <input type="checkbox" class="form-check-input ng-untouched ng-pristine ng-valid"
+                     checked   formControlName="estParDefaut" style="margin-top: 35px"
+                     [ngClass]="{ 'is-invalid': submitted && f.estParDefaut.errors }"/>
+              <!--end::Input-->
+              <div *ngIf="submitted && f.estParDefaut.errors" class="invalid-feedback">
+                <div *ngIf="f.estParDefaut.errors.required">Ce champs est obligatoire</div>
+              </div>
+            </div>
+            </div>
+<!--            </div>-->
+            <!--end::Col-->
+            <div class="row mb-5">
+            <!--begin::Col-->
+                <div class="col-md-4 fv-row">
+                <fieldset class="fieldset-custom">
+                    <legend>ARRONDIS</legend>
+                    <div class="d-flex flex-column justify-content-sm-start">
+
+                  <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10 mb-2">
+                    <input type="radio" checked="checked" value="I"
+                          class="form-check-input ng-untouched ng-pristine ng-valid"
+                          formControlName="arrondis" name="arrondis" (change)="normalChanged()">
+                    <label class="form-check-label text-gray-700 fw-bold text-nowrap">INFERIEURE</label>
+                  </div>
+                  <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10 mb-2">
+                    <input type="radio" value="S"
+                          class="form-check-input ng-untouched ng-pristine ng-valid"
+                         formControlName="arrondis" name="arrondis" (change)="normalChanged()">
+                    <label class="form-check-label text-gray-700 fw-bold text-nowrap">SUPERIEURE</label>
+                  </div>
+                  <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10 mb-2">
+                    <input type="radio" value="N"
+                          class="form-check-input ng-untouched ng-pristine ng-valid"
+                         formControlName="arrondis" name="arrondis" (change)="normalChanged()">
+                    <label class="form-check-label text-gray-700 fw-bold text-nowrap">NORMAL</label>
+                  </div>
+                </div>
+                </fieldset>
+                </div>
+                <div class="col-md-6 fv-row">
+                <fieldset class="fieldset-custom">
+                    <legend> </legend>
+                    <div class="d-flex  justify-content-sm-start">
+                        <input appNombreDecimal style="height: 25px;width: 30px;margin-left: 30px;margin-bottom: 5px;" type="text"
+                        placeholder="" formControlName="nbreDecimaux"
+                        [ngClass]="{ 'is-invalid': submitted && f.nbreDecimaux.errors }"/>
+                    <!--end::Input-->
+                    <div *ngIf="submitted && f.nbreDecimaux.errors" class="invalid-feedback">
+                        <div *ngIf="f.nbreDecimaux.errors.required">Ce champs est obligatoire</div>
+                    </div>
+                    <label class=" fs-5 fw-semibold mb-2">APRES LA VIRGULE</label>
+                    </div>
+                    <!--begin::Input-->
+                    
+                
+              <div class="d-flex flex-column justify-content-sm-start">
+                <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10 mb-2">
+                    <input type="radio" checked="checked" value="I"
+                          class="form-check-input ng-untouched ng-pristine ng-valid"
+                          formControlName="arrondisNormal" name="arrondisNormal">
+                    <label class="form-check-label text-gray-700 fw-bold text-nowrap">INFERIEURE</label>
+                  </div>
+                  <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10 mb-2">
+                    <input type="radio" value="S"
+                          class="form-check-input ng-untouched ng-pristine ng-valid"
+                         formControlName="arrondisNormal" name="arrondisNormal" >
+                    <label class="form-check-label text-gray-700 fw-bold text-nowrap">SUPERIEURE</label>
+                  </div>
+                </div>
+                </fieldset>
+                </div>
+            </div>
+
+          
+          <!--end::Input group-->
+          <!--begin::Separator-->
+          <div class="separator mb-8"></div>
+          <!--end::Separator-->
+          <!--begin::Action buttons-->
+          <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <a type="reset" routerLink="/app/standard/parametre/definitionarrondi" class="btn btn-sm btn-light me-3">
+              Annuler
+            </a>
+            <!--end::Button-->
+            <!--begin::Submit-->
+            <button type="submit" class="btn btn-sm btn-primary" (click)="onSaveEntity()"
+                    [disabled]="entityForm.invalid">
+              <!--begin::Indicator label-->
+              <span class="indicator-label">Enregistrer</span>
+              <!--end::Indicator label-->
+              <!--begin::Indicator progress-->
+              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              <!--end::Indicator progress-->
+            </button>
+            <!--end::Submit-->
+          </div>
+          <!--end::Action buttons-->
+        </form>
+        <!--end::Form-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Body-->
+</div>
+<!--end::Careers - Apply-->

@@ -61,6 +61,27 @@ const CoreRouting: Routes = [
     data: { layout: 'dark-sidebar', role: 'ROLE_FORMEJURIDIQUE' },
   },
   {
+    path: 'standard/parametre/joursferies',
+    canActivate: [checkRoleAccessGuard, checkPermissionAccessGuard],
+    // canActivateChild: [checkPermissionAccessGuard],
+    loadChildren: () => import('./parametrejoursferies/parametrejoursferies-module').then((m) => m.ParametrejoursferiesModule),
+    data: { layout: 'dark-sidebar', role: 'ROLE_JOURSFERIES' },
+  },
+  {
+    path: 'standard/parametre/definitionarrondi',
+    canActivate: [checkRoleAccessGuard, checkPermissionAccessGuard],
+    // canActivateChild: [checkPermissionAccessGuard],
+    loadChildren: () => import('./definitionarrondi/definitionarrondi-module').then((m) => m.DefinitionarrondiModule),
+    data: { layout: 'dark-sidebar', role: 'ROLE_DEFINITION_ARRONDI' },
+  },
+  {
+    path: 'standard/parametre/joursferies',
+    canActivate: [checkRoleAccessGuard, checkPermissionAccessGuard],
+    // canActivateChild: [checkPermissionAccessGuard],
+    loadChildren: () => import('./parametrejoursferies/parametrejoursferies-module').then((m) => m.ParametrejoursferiesModule),
+    data: { layout: 'dark-sidebar', role: 'ROLE_JOURSFERIES' },
+  },
+  {
     path: 'standard/parametre/langue',
     canActivate: [checkRoleAccessGuard, checkPermissionAccessGuard],
     // canActivateChild: [checkPermissionAccessGuard],

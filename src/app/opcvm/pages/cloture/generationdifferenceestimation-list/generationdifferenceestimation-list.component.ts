@@ -19,6 +19,9 @@ import {LocalService} from "../../../../services/local.service";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {TitreModel} from "../../../../titresciel/models/titre.model";
 import {catchError, finalize} from "rxjs/operators";
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
+import {saveAs} from "file-saver";
 
 @Component({
     selector: 'app-generationdifferenceestimation-list',
@@ -58,7 +61,8 @@ export class GenerationdifferenceestimationListComponent implements OnInit, Afte
   desactiveBouton:boolean;
   isLoading: boolean = false;
   subscriptions: Subscription[] = [];
-
+  allData:any;
+  export:boolean=false;
   [key: string]: any;
 
   constructor(
@@ -442,6 +446,140 @@ export class GenerationdifferenceestimationListComponent implements OnInit, Afte
     this.rerenderVDE();
     // this.cdr.detectChanges();
   }
+   exportExcel() {
+      this.export=true
+      let columns: any[] = [
+      {
+        title: 'ID', data: 'idTitre', render: function (data, type, row) {
+          return row.idTitre;
+        },
+      },
+      {
+        title: 'Symbole.', data: 'symbol', render: function (data, type, row) {
+          return row.symbolTitre;
+        },
+      },
+      {
+        title: 'QTE.', data: 'qteDetenue', render: function (data, type, row) {
+          return row.qteDetenue;
+        },
+      },
+      {
+        title: 'Cours.', data: 'cours', render: function (data, type, row) {
+          return row.cours;
+        },
+      },
+      {
+        title: 'Cump T.', data: 'cumpT', render: function (data, type, row) {
+          return row.cumpT;
+        },
+      },
+      {
+        title: 'Cump reel.', data: 'cumpReel', render: function (data, type, row) {
+          return row.cumpReel;
+        },
+      },
+      {
+        title: '+/- Value.', data: 'plusOuMoinsValue', render: function (data, type, row) {
+          return row.plusOuMoinsValue;
+        },
+      },
+      {
+        title: 'NB Jours couru', data: 'nbreJourCourus', render: function (data, type, row) {
+          return row.nbreJourCourus;
+        },
+      },
+      {
+        title: 'INT courru.', data: 'interetCourus', render: function (data, type, row) {
+          return row.interetCourus;
+        },
+      },
+      {
+        title: 'VDE COURS.', data: 'valeurVDECours', render: function (data, type, row) {
+          return row.valeurVDECours;
+        },
+      },
+      {
+        title: 'VDE INTERET', data: 'valeurVDEInteret', render: function (data, type, row) {
+          return row.valeurVDEInteret
+        },
+      },
+      {
+        title: 'IRVM', data: 'irvm', render: function (data, type, row) {
+          return row.irvm
+        },
+      },
+      {
+        title: 'ID OP COURS', data: 'idOpCours', render: function (data, type, row) {
+          return row.idOpCours
+        },
+      },
+      {
+        title: 'ID OP INTERET', data: 'idOpInteret', render: function (data, type, row) {
+          return row.idOpInteret
+        },
+      }
+    ];
+      // 1️⃣ Définir les entêtes
+      const headers = ['ID','Symbole','QTE','Cours','Cump T.','Cump reel.',
+        '+/- Value.','NB Jours couru','INT courru.','VDE COURS.','VDE INTERET',
+        'IRVM','ID OP COURS','ID OP INTERET'];
+      let idOpcvm = this.currentOpcvm?.idOpcvm;
+        let idSeance = this.idSeance-1
+        let dateOperation=new Date()
+        if(this.form.controls.dateOperation.value)
+        {
+          dateOperation = new Date(
+            this.form.controls.dateOperation.value.year,
+            this.form.controls.dateOperation.value.month-1,
+            this.form.controls.dateOperation.value.day+1);
+        }
+        let param = {
+          idOpcvm: idOpcvm,
+          idSeance:this.idSeance,
+          dateSeance:dateOperation,
+        };
+
+
+        console.log(param);
+        const sb = this.operationDifferenceEstimationService.exporterDifferenceEstimation(param)
+          .subscribe(
+        (data)=>{
+          this.allData=data.data;
+          console.log("all=",this.allData)
+          const exportData = this.allData.map(item => ({
+            'ID': item.idTitre,
+            'Symbole': item.symbolTitre,
+            'QTE': item.qteDetenue,
+            'Cours': item.cours,
+            'Cump T.': item.cumpT,
+            'Cump reel.': item.cumpReel,
+            '+/- Value.': item.plusOuMoinsValue,
+            'NB Jours couru': item.nbreJourCourus,
+            'INT courru.': item.interetCourus,
+            'VDE COURS.': item.valeurVDECours,
+            'VDE INTERET': item.valeurVDEInteret,
+            'IRVM': item.irvm,
+            'ID OP COURS': item.idOpCours,
+            'ID OP INTERET': item.idOpInteret,
+          }));
+  
+          // 3️⃣ Convertir en feuille Excel
+          const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData, { header: headers });
+  
+          // 4️⃣ Créer le classeur
+          const wb: XLSX.WorkBook = { Sheets: { 'Données': ws }, SheetNames: ['Données'] };
+  
+          // 5️⃣ Exporter
+          const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+          const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+          saveAs(blob, 'difference_estimation.xlsx');
+          this.export=false
+        }
+      )
+      // 2️⃣ Mapper les données avec les entêtes
+  
+    }
   get sous(): FormArray {
     return <FormArray>this.form.get('sous');
   }

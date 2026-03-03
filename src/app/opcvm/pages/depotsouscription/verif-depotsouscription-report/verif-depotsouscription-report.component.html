@@ -40,7 +40,7 @@
             </ng-container>
           </button>
           <!--begin::Add user-->
-          <button type="submit" class="btn btn-sm btn-success" [disabled]="disableSaveBtn" (click)="confirmer($event)">
+          <button type="submit" class="btn btn-sm btn-success" [disabled]="disableSaveBtn" (click)="validerVerification()">
             <ng-container *ngIf="submitting">
                     <span class="indicator-progress" [style.display]="'block'">
                       Patientez svp...

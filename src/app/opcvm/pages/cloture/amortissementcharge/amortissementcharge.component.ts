@@ -549,24 +549,20 @@ export class AmortissementchargeComponent implements OnInit, AfterViewInit, Afte
     this.operationChargeAEtalerService.verifier(this.idSeance,
       this.localStore.getData("currentOpcvm")?.idOpcvm)
       .pipe(
-        catchError((err) => {
-          this.downloading = false;
-          // this.loadingService.setLoading(false);
-          return of(err.message);
-        }),
-        finalize(() => {
-          // this.submitting = false;
-          // this.submitted = false;
-          // this.loadingService.setLoading(false);
-          // window.location.reload();
-          this.downloading=false
-        })
-      ).subscribe(
-      (data)=>{
-
-        // this.downloading=false;
-      }
-    )
+      catchError((err) => {
+        this.downloading=false
+        return of(err.message);
+      }),
+      finalize(() => {
+        this.downloading=false
+      })
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_amortissement_charge.pdf';
+        a.click();
+      });
   }
   public onFilterChange(item: any) {
     // console.log('onFilterChange', item);

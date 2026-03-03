@@ -23,6 +23,9 @@ export class ExerciceService extends ResourceService<any> implements OnDestroy{
   afficherExerciceCourant(idOpcvm:any){
     return this.http.get<any>(`${this.API_URL}/courant/${idOpcvm}`);
   }
+  afficherExerciceClos(idOpcvm:any){
+    return this.http.get<any>(`${this.API_URL}/clos/${idOpcvm}`);
+  }
   afficherExercice(idOpcvm:any){
     return this.http.get<any>(`${this.API_URL}/${idOpcvm}`);
   }

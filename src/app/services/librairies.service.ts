@@ -320,6 +320,47 @@ export class LibrairiesService {
       {responseType: 'blob' as any }
     );
   }
+  dividendeActionnaire(codeExercice: any,idOpcvm:any) {
+    return this.http.get<any>(`${this.API_URL}/dividendeactionnaire/${codeExercice}/${idOpcvm}`);
+  }
+  phasePaiement(codeExercice: any,idOpcvm:any) {
+    return this.http.get<any>(`${this.API_URL}/phasepaiement/${codeExercice}/${idOpcvm}`);
+  }
+  paiementDividende(codeExercice: any,idOpcvm:any) {
+    return this.http.get<any>(`${this.API_URL}/operationpaiementdividendeliste/${codeExercice}/${idOpcvm}`);
+  }
+  detachementCoupon(codeExercice: any,idOpcvm:any) {
+    return this.http.get<any>(`${this.API_URL}/detachementcoupon/${codeExercice}/${idOpcvm}`);
+  }
+  precalculPhaseDetachement(param: any) {
+    return this.http.post<any>(`${this.API_URL}/precalculphasedetachement`, param);
+  }
+  imprimerPhaseDetachement(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/phasedetachement`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+   imprimerAvisPaiement(idOperation:any){
+      return this.http.get<any>(`${this.API_URL}/jasperpdf/avispaiement/${idOperation}`
+        , {responseType: 'blob' as any }
+      )
+  }
+  imprimerPhasePaiement(codeExercice: any,idOpcvm:any) {
+    return this.http.get<any>(`${this.API_URL}/opcvm/etats/phasepaiement/${codeExercice}/${idOpcvm}`, 
+      {responseType: 'blob' as any }
+    );
+  }
+  soldeToutCompte2(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/soldetoutcompte`, param);
+  }
+  enregsitrerPhaseDetachement(param: any,userLogin:any) {
+    return this.http.post<any>(`${this.API_URL}/phasedetachement/enregistrer/${userLogin}`, param
+    );
+  }
+  enregsitrerOperationPaiementDividende(codeExercice: any,idOpcvm:any,userLogin:any) {
+    return this.http.post<any>(`${this.API_URL}/operationpaiementdividende/${codeExercice}/${idOpcvm}/${userLogin}`, null
+    );
+  }
   grandlivreEtatExcel(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/excel/grandlivre`, param,
       {responseType: 'blob' as any }
@@ -376,6 +417,36 @@ export class LibrairiesService {
   }
   pointinvestissementListe(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/pointinvestissement/liste`, param);
+  }
+  afficherJoursFeries(param: any) {
+    return this.http.post<any>(`${this.API_URL}/joursferies`, param);
+  }
+  enregistrerJoursFeries(param: any) {
+    return this.http.post<any>(`${this.API_URL}/joursferies/enregistrer`, param);
+  }
+  modifierJoursFeries(param: any) {
+    return this.http.put<any>(`${this.API_URL}/joursferies/modifier`, param);
+  }
+  supprimerJoursFeries(userLogin: any,numLigne:any) {
+    return this.http.delete<any>(`${this.API_URL}/joursferies/supprimer/${userLogin}/${numLigne}`);
+  }
+  afficherJoursFeriesById(numLigne: any) {
+    return this.http.get<any>(`${this.API_URL}/joursferies/${numLigne}`);
+  }
+  afficherDefinitionArrondi(param: any) {
+    return this.http.post<any>(`${this.API_URL}/definitionarrondi`, param);
+  }
+  enregistrerDefinitionArrondi(param: any) {
+    return this.http.post<any>(`${this.API_URL}/definitionarrondi/enregistrer`, param);
+  }
+  modifierDefinitionArrondi(param: any) {
+    return this.http.put<any>(`${this.API_URL}/definitionarrondi/modifier`, param);
+  }
+  supprimerDefinitionArrondi(userLogin: any,numLigne:any) {
+    return this.http.delete<any>(`${this.API_URL}/definitionarrondi/supprimer/${userLogin}/${numLigne}`);
+  }
+  afficherDefinitionArrondiById(numLigne: any) {
+    return this.http.get<any>(`${this.API_URL}/definitionarrondi/${numLigne}`);
   }
   pointinvestissementEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/pointinvestissement`, param,
@@ -459,6 +530,30 @@ export class LibrairiesService {
   }
   clotureExercice(param: any,userLogin:any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/clotureexercice/${userLogin}`, param);
+  }
+  precalculMiseEnAffectation(param: any) {
+    return this.http.post<any>(`${this.API_URL}/miseenaffectation/precalcul`, param);
+  }
+  creerMiseEnAffectation(param: any) {
+    return this.http.post<any>(`${this.API_URL}/miseenaffectation/creer`, param);
+  }
+  afficherMiseEnAffectation(param: any) {
+    return this.http.post<any>(`${this.API_URL}/miseenaffectation/afficher`, param);
+  }
+  verificationMiseEnAffectation(id: any) {
+    return this.http.get<any>(`${this.API_URL}/verificationmiseenaffectation/${id}`);
+  }
+  verificationMiseEnAffectationObjet(id: any) {
+    return this.http.get<any>(`${this.API_URL}/objet/verificationmiseenaffectation/${id}`);
+  }
+  enregistrerDecisionDistribution(param: any) {
+    return this.http.post<any>(`${this.API_URL}/decisiondistribution/enregistrer`, param);
+  }
+  datatTableList(param: any,idOpcvm:any) {
+    return this.http.post<any>(`${this.API_URL}/decisiondistribution/datatable/list/${idOpcvm}`, param);
+  }
+  afficherDecisionDistribution(id: any) {
+    return this.http.get<any>(`${this.API_URL}/decisiondistribution/${id}`);
   }
   pointTresorerie(param: any) {
     return this.http.post<any>(`${this.API_URL}/etats/pointtresorerie`, param

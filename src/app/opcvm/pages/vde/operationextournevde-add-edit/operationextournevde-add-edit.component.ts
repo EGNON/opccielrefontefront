@@ -42,6 +42,7 @@ export class OperationextournevdeAddEditComponent implements OnInit, AfterViewIn
   submitting = false;
   seance : any;
   operationDifferenceEstimation$ : any;
+  operationDifferenceEstimation : any;
   idSeance : number;
   idOpcvm: number;
   opcvm: Opcvm;
@@ -283,6 +284,7 @@ export class OperationextournevdeAddEditComponent implements OnInit, AfterViewIn
         }
       },
     };
+    this.operationDifferenceEstimation$=[]
     // this.afficherSeance();
     this.generer()
     // this.afficherListe("l");
@@ -309,8 +311,8 @@ export class OperationextournevdeAddEditComponent implements OnInit, AfterViewIn
         const sb = this.operationDifferenceEstimationService.afficherListe(idOpcvm,this.idSeance-1)
           .subscribe(
             (data)=>{
-              this.operationDifferenceEstimation$=data.data
-              console.log(this.operationDifferenceEstimation$)
+              this.operationDifferenceEstimation=data.data
+              console.log(this.operationDifferenceEstimation)
             }
           );
 

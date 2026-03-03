@@ -23,6 +23,10 @@ export class OperationdifferenceestimationService extends ResourceService<any> {
     return this.http.post<any>(`${this.API_URL}/differenceestimation`, parameters);
 
   }
+  exporterDifferenceEstimation(parameters:any){
+    return this.http.post<any>(`${this.API_URL}/differenceestimation/liste`, parameters);
+
+  }
   enregistrer(parameters:any){
     return this.http.post<any>(`${this.API_URL}/enregistrerdifferenceestimation`, parameters);
 

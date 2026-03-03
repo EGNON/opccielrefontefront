@@ -11,6 +11,7 @@ import {catchError, finalize} from "rxjs/operators";
 import {LoaderService} from "../../../../loader.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../../core/modules/auth";
+import { DepotrachatService } from '../../../services/depotrachat.service';
 
 @Component({
     selector: 'app-verif-depotsouscription-report',
@@ -34,7 +35,10 @@ export class VerifDepotsouscriptionReportComponent implements OnInit, OnDestroy{
 
   datatableConfig: Config = {};
   dtOptions: any = {};
-
+  id:any[];
+  // Reload emitter inside datatable
+  reloadEvent: EventEmitter<boolean> = new EventEmitter();
+  depotRachat$:any;
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -43,6 +47,7 @@ export class VerifDepotsouscriptionReportComponent implements OnInit, OnDestroy{
     private localStore: LocalService,
     private authService: AuthService,
     private entityService: DepotsouscriptionService,
+    private entityServiceDR: DepotrachatService,
     private router: Router,
     private route: ActivatedRoute,
     public modal: NgbActiveModal,) {
@@ -60,7 +65,7 @@ export class VerifDepotsouscriptionReportComponent implements OnInit, OnDestroy{
     this.form = this.fb.group({
       depots: this.fb.array([this.createListeVerifDepotForm()]),
     });
-
+    this.id=[]
     this.dtOptions = {
       // dom: 'Bfrtip',
       dom: "<'row'<'col-sm-12'tr>>" +
@@ -278,7 +283,58 @@ export class VerifDepotsouscriptionReportComponent implements OnInit, OnDestroy{
       });
     this.subscriptions.push(sb);
   }
+validerVerification(){
+    this.submitting = true;
+    this.submitted = true;
+    this.loadingService.setLoading(true);
 
+    if (this.form.invalid) {
+      this.submitting = false;
+      this.loadingService.setLoading(false);
+      return;
+    }
+    this.entityServiceDR.afficherFT_DepotRachatSous(
+      this.localStore.getData("currentOpcvm").idOpcvm,false,false).subscribe(
+      (data)=>{
+        this.depotRachat$=data;
+        let i=0;
+        this.id=[];
+        //console.log(this.depotRachat$)
+        for(i===0;i<this.depotRachat$.length;i++){
+          this.id.push(this.depotRachat$[i].idDepotRachat)
+        }
+        //console.log(this.id)
+        this.entityServiceDR.modifier(this.id,this.authService.currentUserValue?.username).pipe(
+          finalize(()=>{
+             
+              alert("Confirmation effectuée avec succès")
+              this.submitting = false;
+              this.submitted = false;
+              this.disableSaveBtn = true;
+              this.loadingService.setLoading(false);
+              window.location.reload();
+          })
+        )
+          .subscribe(
+            {
+              next: (value) => {
+                // let currentUrl = this.router.url;
+                // this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                //   this.router.navigate([currentUrl]);
+                // });
+                // this.valider=false
+                this.loadingService.setLoading(false);
+              },
+              error: err => {
+
+              }
+            }
+          )
+
+        // this.afficherVerificationIntentionRachat()
+      }
+    )
+  }
   confirmer($event: any) {
     this.submitting = true;
     this.submitted = true;

@@ -74,7 +74,10 @@ export class OperationService extends ResourceService<any> implements OnDestroy{
   }
 
   verifierEtape(niveau: any,idOpcvm: any,idSeance: any,estVerifie1: any,estVerifie2: any,niv: any) {
-    return this.http.get<any>(`${this.API_URL}/verifieretape/${niveau}/${idOpcvm}/${idSeance}/${estVerifie1}/${estVerifie2}/${niv}`);
+    return this.http.get<any>(`${this.API_URL}/verifieretape/${niveau}/${idOpcvm}/${idSeance}/${niv}?estVerifie1=${estVerifie1}&estVerifie2=${estVerifie2}`,
+  { responseType: 'blob' as any,
+    observe: 'response'
+  });
   }
   etape(niveau: any,idOpcvm: any) {
     return this.http.get<any>(`${this.API_URL}/verifieretape/${niveau}/${idOpcvm}`);

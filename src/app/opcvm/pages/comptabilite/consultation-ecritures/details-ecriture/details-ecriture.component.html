@@ -17,8 +17,8 @@
             <tr>
               <td [ngClass]="detail.numeroCompte.trim() === total ? 'cell-total' : ''">{{ detail.numeroCompte }}</td>
               <td>{{ detail.libelleCompteComptable }}</td>
-              <td class="text-end min-w-10px">{{ detail.debit | number: '.2' }}</td>
-              <td class="text-end min-w-10px">{{ detail.credit | number: '.2' }}</td>
+              <td class="text-end min-w-10px">{{ detail.debit | number: '.4' }}</td>
+              <td class="text-end min-w-10px">{{ detail.credit | number: '.4' }}</td>
             </tr>
           </ng-container>
         </tbody>

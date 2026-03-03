@@ -14,13 +14,13 @@ export class ProfilcommissionsousrachService extends ResourceService<Profilcommi
     return this.http.get<any>(`${this.API_URL}`)
   }
   supprimer(codeProfil:any,idOpcvm:any){
-    return this.http.delete<any>(`${this.API_URL}/${codeProfil}/${idOpcvm}`)
+    return this.http.delete<any>(`${this.API_URL}?codeProfil=${codeProfil}&idOpcvm=${idOpcvm}`)
   }
   modifier(codeProfil:any,idOpcvm:any,profilCOmmissionSousRach:any){
-    return this.http.put<any>(`${this.API_URL}/${codeProfil}/${idOpcvm}`,profilCOmmissionSousRach)
+    return this.http.put<any>(`${this.API_URL}?codeProfil=${codeProfil}&idOpcvm=${idOpcvm}`,profilCOmmissionSousRach)
   }
   afficherSelonProfilOpcvm(codeProfil:any,idOpcvm:any){
-    return this.http.get<any>(`${this.API_URL}/${codeProfil}/${idOpcvm}`)
+    return this.http.get<any>(`${this.API_URL}/profilselonid?codeProfil=${codeProfil}&idOpcvm=${idOpcvm}`)
   }
   afficherSelonTypeCommissionOpcvm(typeCommission:any,idOpcvm:any){
     return this.http.get<any>(`${this.API_URL}/liste/${typeCommission}/${idOpcvm}`)

@@ -297,15 +297,22 @@ export class Verificationecritureniveau2deComponent implements OnInit, AfterView
       codeTypeOperation:"DE"
     };
     console.log(param)
-    this.operationService.apercuVerificationEritureNiveau(param,2,"DE").subscribe(
-      (data)=>{
-        console.log(data.data)
-
-        console.log(this.downloading)
-        // this.verificationNiveau$=data.data
-      }
-    );
-    this.downloading=false
+    this.operationService.apercuVerificationEritureNiveau(param,2,"DE").pipe(
+      catchError((err) => {
+        this.downloading=false
+        return of(err.message);
+      }),
+      finalize(() => {
+        this.downloading=false
+      })
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_ecriture_de_niveau2.pdf';
+        a.click();
+      });
+    
   }
   validationEcritureNiveau1(){
     this.valider=true

@@ -68,7 +68,7 @@ export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestr
     if(this.id)
     {
       this.pageInfo.updateTitle("Modification de profil'")
-      const sb = this.entityService.afficherSelonProfilOpcvm(this.id,
+      const sb = this.entityService.afficherSelonProfilOpcvm(encodeURIComponent(this.id),
         this.localStore.getData("currentOpcvm")?.idOpcvm)
         .subscribe((entity)=>{
           console.log("profil=",entity.data)
@@ -89,7 +89,7 @@ export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestr
     this.entityForm.patchValue({id: entity.codeProfil});
     this.entityForm.patchValue({typeCommission: entity.typeCommission});
     this.entityForm.patchValue({standard: entity.standard});
-    this.detailProfilService.afficherSelonProfilOpcvm(entity.codeProfil,
+    this.detailProfilService.afficherSelonProfilOpcvm(encodeURIComponent(entity.codeProfil.trim()),
       this.localStore.getData("currentOpcvm")?.idOpcvm).subscribe(
       (data)=>{
         this.detailProfil$=data.data;
@@ -300,7 +300,7 @@ export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestr
 
           this.nbreLigne = document.getElementById("table_DetailProfil").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
           let i: number = 1;
-          this.detailProfilService.supprimer(this.entityForm.value.codeProfil,
+          this.detailProfilService.supprimer(encodeURIComponent(this.entityForm.value.codeProfil),
             this.localStore.getData("currentOpcvm")?.idOpcvm).subscribe();
           //        console.log(this.nbreLigne);
           for (i === 1; i < this.nbreLigne; i++) {
@@ -337,7 +337,7 @@ export class ProfilcommissionsousrachAddEditComponent implements OnInit, OnDestr
     };
     console.log("act1",entity)
     return this.id
-      ? this.entityService.modifier(this.entityForm.value.codeProfil,
+      ? this.entityService.modifier(encodeURIComponent(this.entityForm.value.codeProfil),
         this.localStore.getData("currentOpcvm")?.idOpcvm,entity)
       : this.entityService.create(entity);
   }
