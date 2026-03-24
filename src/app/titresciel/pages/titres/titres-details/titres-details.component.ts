@@ -112,9 +112,9 @@ export class TitresDetailsComponent implements OnInit, AfterViewInit, OnDestroy{
     this.getTypesTitreAll();
     this.getTypeEmissionAll();
     this.getSecteurAll();
-    this.getPersonnesAll('emetteur');
-    this.getPersonnesAll('registraire');
-    this.getPersonnesAll('depositaire');
+    this.getPersonnesAll('emetteurs');
+    this.getPersonnesAll('registraires');
+    this.getPersonnesAll('depositaires');
     this.getPersonnesAll('banques');
     this.getPlaceAll();
     this.getTypeObligationAll();
@@ -142,6 +142,14 @@ export class TitresDetailsComponent implements OnInit, AfterViewInit, OnDestroy{
             const date = new Date(value);
             value = new NgbDate(date.getFullYear(), date.getMonth()+1, date.getDate())
           }
+          if (typeof value === "string") {
+            value = value.trim();
+          }
+          if (typeof value === "number") {
+            value = value.toString().replace('.', ',');
+          }
+          // if(value===0)
+          //   value="0"
           this.form.patchValue({[key]: value});
         }
       });
@@ -348,6 +356,79 @@ export class TitresDetailsComponent implements OnInit, AfterViewInit, OnDestroy{
         const date = new Date(value.year, value.month-1, value.day+1);
         titre = {...titre, [key]: date};
       }
+    }
+    let valeur:string=""
+    if(this.form.value.borneInferieurFluctuation)
+    {
+      valeur=this.form.value.borneInferieurFluctuation
+    }
+    else
+      valeur="0"
+    let mBorneInferieurFluctuation:number=Number(valeur.replace(',','.'))
+
+    if(this.form.value.borneSuperieurFluctuation)
+    {
+       valeur=this.form.value.borneSuperieurFluctuation
+    }
+    else
+      valeur="0"
+    
+    let mborneSuperieurFluctuation:number=Number(valeur.replace(',','.'))
+
+    if(this.form.value.irvm)
+    {
+       valeur=this.form.value.irvm
+    }
+    else
+      valeur="0"
+     
+    let mirvm:number=Number(valeur.replace(',','.'))
+
+    if(this.form.value.tauxBrut)
+    {
+       valeur=this.form.value.tauxBrut
+    }
+    else
+      valeur="0"
+
+     
+    let mtauxBrut:number=Number(valeur.replace(',','.'))
+
+    if(this.form.value.tauxFiscaliteLocale)
+    {
+        valeur=this.form.value.tauxFiscaliteLocale
+    }
+    else
+      valeur="0"
+   
+    let mtauxFiscaliteLocale:number=Number(valeur.replace(',','.'))
+
+    if(this.form.value.tauxFiscalitePays)
+    {
+        valeur=this.form.value.tauxFiscalitePays
+    }
+    else
+      valeur="0"
+     
+    let mtauxFiscalitePays:number=Number(valeur.replace(',','.'))
+
+    if(this.form.value.tauxNet)
+    {
+        valeur=this.form.value.tauxNet
+    }
+    else
+      valeur="0"
+     
+    let mtauxNet:number=Number(valeur.replace(',','.'))
+
+    titre={...titre,
+      borneInferieurFluctuation:mBorneInferieurFluctuation,
+      borneSuperieurFluctuation:mborneSuperieurFluctuation,
+      irvm:mirvm,
+      tauxBrut:mtauxBrut,
+      tauxFiscaliteLocale:mtauxFiscaliteLocale,
+      tauxFiscalitePays:mtauxFiscalitePays,
+      tauxNet:mtauxNet
     }
     console.log("Submit form === ", titre);
     if(this.id) {

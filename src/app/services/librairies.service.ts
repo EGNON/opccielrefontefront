@@ -662,4 +662,43 @@ export class LibrairiesService {
   soldeToutCompte(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/solde/tout/compte`, param);
   }
+
+  tableauAmortissement(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/titre/tableauamortissement/${param}`,null
+      ,{responseType: 'blob' as any }
+    );
+  }
+  ficheAction(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/titre/ficheaction/${param}`,null
+      ,{responseType: 'blob' as any }
+    );
+  }
+  ficheDroit(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/titre/fichedroit/${param}`,null
+      ,{responseType: 'blob' as any }
+    );
+  }
+  ficheObligation(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/titre/ficheobligation/${param}`,null
+      ,{responseType: 'blob' as any }
+    );
+  }
+  ficheOpc(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/titre/ficheopc/${param}`,null
+      ,{responseType: 'blob' as any }
+    );
+  }
+  ficheTcn(param: any) {
+    return this.http.post<any>(`${this.API_URL}/etats/titre/fichetcn/${param}`,null
+      ,{responseType: 'blob' as any }
+    );
+  }
+  listeOrdreDeBourse(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/listeordredebourse`,param
+    );
+  }
+  enregistrerordrerelache(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/enregistrerordrerelache`,param
+    );
+  }
 }

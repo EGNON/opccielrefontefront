@@ -17,6 +17,7 @@ import { TitresMajCoursComponent } from './titres-maj-cours/titres-maj-cours.com
 import {DataTablesModule} from "angular-datatables";
 import { TitresVerif1 } from './titres-verif1/titres-verif1';
 import { TitresVerif2 } from './titres-verif2/titres-verif2';
+import { NombreDecimalDirective } from "../../../validators/nombre-decimal.directive";
 
 
 @NgModule({
@@ -30,17 +31,18 @@ import { TitresVerif2 } from './titres-verif2/titres-verif2';
     TitresVerif2
   ],
     imports: [
-        CommonModule,
-        TitresRoutingModule,
-        EntityCrudModule,
-        SharedModule,
-        SweetAlert2Module,
-        FormsModule,
-        NgbInputDatepicker,
-        NumeroPositifValidatorsDirective,
-        ReactiveFormsModule,
-        DirectivesModule,
-        DataTablesModule
-    ]
+    CommonModule,
+    TitresRoutingModule,
+    EntityCrudModule,
+    SharedModule,
+    SweetAlert2Module,
+    FormsModule,
+    NgbInputDatepicker,
+    NumeroPositifValidatorsDirective,
+    ReactiveFormsModule,
+    DirectivesModule,
+    DataTablesModule,
+    NombreDecimalDirective
+]
 })
 export class TitresModule { }

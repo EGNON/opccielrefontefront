@@ -139,7 +139,7 @@
               <label class="fs-5 fw-semibold mb-2">Nominal</label>
               <!--end::Label-->
               <!--begin::Input-->
-              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="nominal"/>
+              <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="nominal"/>
               <!--end::Input-->
             </div>
             <!--end::Col-->
@@ -167,7 +167,7 @@
               <label class="fs-5 fw-semibold mb-2">Lot Minimum</label>
               <!--end::Label-->
               <!--begin::Input-->
-              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="lotMinimum"/>
+              <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="lotMinimum"/>
               <!--end::Input-->
             </div>
             <!--end::Col-->
@@ -326,7 +326,7 @@
               <label class="fs-5 fw-semibold mb-2">Fisc. Pays</label>
               <!--end::Label-->
               <!--begin::Input-->
-              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxFiscalitePays"/>
+              <input appNombreDecimal type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxFiscalitePays"/>
               <!--end::Input-->
             </div>
             <!--end::Col-->
@@ -336,7 +336,7 @@
               <label class="fs-5 fw-semibold mb-2">Fisc. Locale</label>
               <!--end::Label-->
               <!--begin::Input-->
-              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxFiscaliteLocale"/>
+              <input appNombreDecimal type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxFiscaliteLocale"/>
               <!--end::Input-->
             </div>
             <!--end::Col-->
@@ -354,7 +354,7 @@
               <label class="fs-5 fw-semibold mb-2">Irvm</label>
               <!--end::Label-->
               <!--begin::Input-->
-              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="irvm"/>
+              <input appNombreDecimal type="text" class="form-control form-control-sm" placeholder="" formControlName="irvm"/>
               <!--end::Input-->
             </div>
             <!--end::Col-->
@@ -364,7 +364,7 @@
               <label class="fs-5 fw-semibold mb-2">Borne Inf. Fluc.</label>
               <!--end::Label-->
               <!--begin::Input-->
-              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="borneInferieurFluctuation"/>
+              <input appNombreDecimal type="text" class="form-control form-control-sm" placeholder="" formControlName="borneInferieurFluctuation"/>
               <!--end::Input-->
             </div>
             <!--end::Col-->
@@ -374,7 +374,7 @@
               <label class="fs-5 fw-semibold mb-2">Borne Sup. Fluc.</label>
               <!--end::Label-->
               <!--begin::Input-->
-              <input type="text" class="form-control form-control-sm" placeholder="" formControlName="borneSuperieurFluctuation"/>
+              <input appNombreDecimal type="text" class="form-control form-control-sm" placeholder="" formControlName="borneSuperieurFluctuation"/>
               <!--end::Input-->
             </div>
             <!--end::Col-->
@@ -396,7 +396,7 @@
                 <label class="fs-5 fw-semibold mb-2">Taux Brut</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxBrut"/>
+                <input appNombreDecimal type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxBrut"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -406,7 +406,7 @@
                 <label class="fs-5 fw-semibold mb-2">Taux Net</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxNet"/>
+                <input appNombreDecimal type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxNet"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -464,7 +464,7 @@
                 <label class="fs-5 fw-semibold mb-2">Nombre Titres</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm"
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm"
                        placeholder="" formControlName="nombreTitre"/>
                 <!--end::Input-->
               </div>
@@ -493,7 +493,7 @@
                 <label class="fs-5 fw-semibold mb-2">Durée</label>
                 <div class="input-group input-group-sm mb-2">
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="dureeNbre"/>
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="dureeNbre"/>
                   <!--end::Input-->
                   <div class="input-group-append">
                     <!--begin::Select-->
@@ -510,7 +510,7 @@
                 <label class="fs-5 fw-semibold mb-2">Périodicité</label>
                 <div class="input-group input-group-sm mb-2">
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteNbre"/>
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteNbre"/>
                   <!--end::Input-->
                   <div class="input-group-append">
                     <!--begin::Select-->
@@ -527,7 +527,7 @@
                 <label class="fs-5 fw-semibold mb-2">Différé</label>
                 <div class="input-group input-group-sm mb-2">
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="differeNbre"/>
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="differeNbre"/>
                   <!--end::Input-->
                   <div class="input-group-append">
                     <!--begin::Select-->
@@ -567,10 +567,10 @@
                 <select class="form-select form-select-sm mb-2" formControlName="typeAmortissement">
                   <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
                   <option *ngIf="entity?.typeAmortissement" disabled [defaultSelected]="true" [ngValue]="entity?.typeAmortissement">
-                    {{ entity?.typeAmortissement?.libelleTypeAmortissement }}
+                    {{ entity?.typeAmortissement?.libelleAmortissement }}
                   </option>
                   <option *ngFor="let item of typeAmortissements" [ngValue]="item">
-                    {{ item.libelleTypeAmortissement }}
+                    {{ item.libelleAmortissement }}
                   </option>
                 </select>
                 <!--end::Select-->
@@ -584,7 +584,7 @@
                 <label class="fs-5 fw-semibold mb-2">Usance</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="0" formControlName="usance"/>
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="0" formControlName="usance"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -596,7 +596,7 @@
                 <label class="fs-5 fw-semibold mb-2">Durée</label>
                 <div class="input-group input-group-sm mb-2">
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="dureeNbre"/>
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="dureeNbre"/>
                   <!--end::Input-->
                   <div class="input-group-append">
                     <!--begin::Select-->
@@ -613,7 +613,7 @@
                 <label class="fs-5 fw-semibold mb-2">Périodicité</label>
                 <div class="input-group input-group-sm mb-2">
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteNbre"/>
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteNbre"/>
                   <!--end::Input-->
                   <div class="input-group-append">
                     <!--begin::Select-->
@@ -630,7 +630,7 @@
                 <label class="fs-5 fw-semibold mb-2">Différé</label>
                 <div class="input-group input-group-sm mb-2">
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="differeNbre"/>
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="differeNbre"/>
                   <!--end::Input-->
                   <div class="input-group-append">
                     <!--begin::Select-->
@@ -670,10 +670,10 @@
                 <select class="form-select form-select-sm mb-2" formControlName="typeAmortissement">
                   <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
                   <option *ngIf="entity?.typeAmortissement" disabled [defaultSelected]="true" [ngValue]="entity?.typeAmortissement">
-                    {{ entity?.typeAmortissement?.libelleTypeAmortissement }}
+                    {{ entity?.typeAmortissement?.libelleAmortissement }}
                   </option>
                   <option *ngFor="let item of typeAmortissements" [ngValue]="item">
-                    {{ item.libelleTypeAmortissement }}
+                    {{ item.libelleAmortissement }}
                   </option>
                 </select>
                 <!--end::Select-->
@@ -751,7 +751,7 @@
                 <label class="fs-5 fw-semibold mb-2">Usance</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="0" formControlName="usance"/>
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="0" formControlName="usance"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -801,7 +801,7 @@
                 <label class="fs-5 fw-semibold mb-2">Per</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="Per" formControlName="per"/>
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="Per" formControlName="per"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -811,7 +811,7 @@
                 <label class="fs-5 fw-semibold mb-2">Nominal non versé</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="Nominal non versé"
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="Nominal non versé"
                        formControlName="nominalNonVerse"/>
                 <!--end::Input-->
               </div>
@@ -876,7 +876,7 @@
                 <label class="fs-5 fw-semibold mb-2">Cours théo.</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="coursTheorique"/>
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="coursTheorique"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -886,7 +886,7 @@
                 <label class="fs-5 fw-semibold mb-2">P.U Sousc.</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="prixUnitaireSouscription"/>
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="prixUnitaireSouscription"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -896,7 +896,7 @@
                 <label class="fs-5 fw-semibold mb-2">Cours Ex. Drt.</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="coursActionExDroit"/>
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="coursActionExDroit"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -943,13 +943,13 @@
                 <label class="fs-5 fw-semibold mb-2">Parité</label>
                 <!--end::Label-->
                 <div class="input-group input-group-sm mb-2">
-                  <input type="text" aria-label="Nbr action" class="form-control form-control-sm" formControlName="pariteAncienNbre">
+                  <input appNumeroPositifValidators type="text" aria-label="Nbr action" class="form-control form-control-sm" formControlName="pariteAncienNbre">
                   <span class="input-group-text">action anc. à</span>
-                  <input type="text" aria-label="Prix action" class="form-control form-control-sm" formControlName="pariteAncienCours">
+                  <input appNumeroPositifValidators type="text" aria-label="Prix action" class="form-control form-control-sm" formControlName="pariteAncienCours">
                   <span class="input-group-text">pour</span>
-                  <input type="text" aria-label="Nbr action" class="form-control form-control-sm" formControlName="pariteNouveauNbre">
+                  <input appNumeroPositifValidators type="text" aria-label="Nbr action" class="form-control form-control-sm" formControlName="pariteNouveauNbre">
                   <span class="input-group-text">action nouv. à</span>
-                  <input type="text" aria-label="Prix action" class="form-control form-control-sm" formControlName="pariteNouveauCours">
+                  <input appNumeroPositifValidators type="text" aria-label="Prix action" class="form-control form-control-sm" formControlName="pariteNouveauCours">
                 </div>
               </div>
             </div>
@@ -983,10 +983,10 @@
                 <select class="form-select form-select-sm mb-2" formControlName="typeAffectationTitre">
                   <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
                   <option *ngIf="entity?.typeAffectationTitre" disabled [defaultSelected]="true" [ngValue]="entity?.typeAffectationTitre">
-                    {{ entity?.typeAffectationTitre?.libelleTypeAffectation }}
+                    {{ entity?.typeAffectationTitre?.libelleTypeAffectationVL }}
                   </option>
                   <option *ngFor="let item of typeAffectationTitres" [ngValue]="item">
-                    {{ item.libelleTypeAffectation }}
+                    {{ item.libelleTypeAffectationVL }}
                   </option>
                 </select>
                 <!--end::Select-->
@@ -1016,7 +1016,7 @@
                 <label class="fs-5 fw-semibold mb-2">Vl. origine</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="vlOrigine"/>
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="vlOrigine"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -1025,7 +1025,7 @@
                 <label class="fs-5 fw-semibold mb-2">Périodicité</label>
                 <div class="input-group input-group-sm mb-2">
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteVlNbre"/>
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteVlNbre"/>
                   <!--end::Input-->
                   <div class="input-group-append">
                     <!--begin::Select-->
@@ -1052,7 +1052,7 @@
                 <label class="fs-5 fw-semibold mb-2">Taux Brut</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxBrut"/>
+                <input appNombreDecimal type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxBrut"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -1062,7 +1062,7 @@
                 <label class="fs-5 fw-semibold mb-2">Taux Net</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxNet"/>
+                <input appNombreDecimal type="text" class="form-control form-control-sm" placeholder="" formControlName="tauxNet"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->
@@ -1084,7 +1084,7 @@
                 <label class="fs-5 fw-semibold mb-2">Durée</label>
                 <div class="input-group input-group-sm mb-2">
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="dureeNbre"/>
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="dureeNbre"/>
                   <!--end::Input-->
                   <div class="input-group-append">
                     <!--begin::Select-->
@@ -1101,7 +1101,7 @@
                 <label class="fs-5 fw-semibold mb-2">Périodicité</label>
                 <div class="input-group input-group-sm mb-2">
                   <!--begin::Input-->
-                  <input type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteNbre"/>
+                  <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="" formControlName="periodiciteNbre"/>
                   <!--end::Input-->
                   <div class="input-group-append">
                     <!--begin::Select-->
@@ -1188,7 +1188,7 @@
                 <label class="fs-5 fw-semibold mb-2">Usance</label>
                 <!--end::Label-->
                 <!--begin::Input-->
-                <input type="text" class="form-control form-control-sm" placeholder="0" formControlName="usance"/>
+                <input appNumeroPositifValidators type="text" class="form-control form-control-sm" placeholder="0" formControlName="usance"/>
                 <!--end::Input-->
               </div>
               <!--end::Col-->

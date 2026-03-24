@@ -3881,6 +3881,18 @@ export class LibraryService implements OnDestroy{
                     }
                   ]
                 }
+                ,
+                {
+                  allow:true,//this.authService.isGrantedRole('ROLE_RELACHEMENT_ORDRE'),
+                  title: 'Relachement d\'ordre',
+                  page: '/opcvm/ordre/liste/relachementordre',
+                  role: 'ROLE_RELACHEMENT_ORDRE',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Ordre de bourse',
+                  children: []
+                }
               ]
             },
             {

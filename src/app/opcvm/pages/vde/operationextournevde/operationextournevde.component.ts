@@ -26,6 +26,8 @@ import {DataTableDirective} from "angular-datatables";
 // import any = jasmine.any;
 import {SeanceopcvmService} from "../../../services/seanceopcvm.service";
 import {OperationdifferenceestimationService} from "../../../services/operationdifferenceestimation.service";
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 @Component({
     selector: 'app-operationextournevde',
@@ -286,7 +288,34 @@ export class OperationextournevdeComponent implements OnInit, AfterViewInit, Aft
      this.afficherListe()
     // this.afficherListe("l");
   }
+// exportToExcel(): void {
+// this.downloading=true;
+//   const dataToExport = this.posteComptableSeanceOpcvm$.map(obj => ({
+//     Code: obj.codePosteComptable,
+//     Libelle: obj.libellePosteComptable,
+//     Formule: obj.formuleSysteme,
+//     Valeur: obj.valeur,
+//     //CodePlan: obj.plan ? obj.plan.codePlan : ''
+//   }));
 
+//   const worksheet: XLSX.WorkSheet =
+//       XLSX.utils.json_to_sheet(dataToExport);
+
+//   const workbook: XLSX.WorkBook = {
+//     Sheets: { 'Postes Comptables': worksheet },
+//     SheetNames: ['Postes Comptables']
+//   };
+
+//   const excelBuffer: any =
+//       XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+//   const blob: Blob = new Blob([excelBuffer], {
+//     type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+//   });
+
+//   saveAs(blob, 'poste_comptable.xlsx');
+//   this.downloading=false
+// }
   afficherNatureOperationListe() {
     this["natureOps$"] = this.natureOpService.afficherTous();
   }

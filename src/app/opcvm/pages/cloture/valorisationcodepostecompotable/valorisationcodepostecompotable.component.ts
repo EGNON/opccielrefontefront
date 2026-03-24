@@ -370,7 +370,7 @@ this.downloading=true;
       dateOperation = new Date(
         this.form.controls.dateOperation.value.year,
         this.form.controls.dateOperation.value.month-1,
-        this.form.controls.dateOperation.value.day+1);
+        this.form.controls.dateOperation.value.day);
     }
     this.opcvm=new Opcvm();
     this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm").idOpcvm

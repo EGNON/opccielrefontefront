@@ -18,6 +18,7 @@ import {ReglementlivraisonComponent} from "./reglementlivraison/reglementlivrais
 import {
   GenerationreglementlivraisonComponent
 } from "./generationreglementlivraison/generationreglementlivraison.component";
+import { Relachementordre } from "./relachementordre/relachementordre";
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'liste/new', component: OrdreCreateComponent, },
       { path: 'liste/validation', component: ValidationOrdreComponent, },
       { path: 'liste/impression', component: ImpressionOrdreComponent, },
+      { path: 'liste/relachementordre', component: Relachementordre, },
       { path: 'liste/edit/:id', component: OrdreCreateComponent, },
       // { path: 'show/:id', component: IntentionrachatShowComponent, },
       { path: 'ordre', redirectTo: '', pathMatch: 'full' },

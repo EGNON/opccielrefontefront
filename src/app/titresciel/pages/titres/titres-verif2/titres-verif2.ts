@@ -348,11 +348,20 @@ export class TitresVerif2 implements OnInit, AfterViewInit, OnDestroy{
   verificationCours(){
     this.downloaded = true;
     let place = this.filterForm.value.place;
+    let estVerifie2=false
+    if(this.confirmer===false)
+    {
+      estVerifie2=true
+    }
+    else
+    {
+      estVerifie2=false
+    }
     const params = {
             dateDebut:this.dateCours,
             codePlace:place.codePlace,
             estVerifie1:true,
-            estVerifie2:false,
+            estVerifie2:estVerifie2,
             niveau:2,
             userLogin:this.authService.currentUserValue?.username
           };

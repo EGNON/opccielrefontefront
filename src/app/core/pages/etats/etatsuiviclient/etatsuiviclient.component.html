@@ -10,21 +10,21 @@
           <div class="row mb-5">
             <!--begin::Col-->
             <!--end::Col-->
-<!--            <div class="col-md-4 fv-row">-->
-<!--              &lt;!&ndash;begin::Label&ndash;&gt;-->
-<!--              <label class="fs-5 fw-semibold mb-2">Date début</label>-->
+           <div class="col-md-4 fv-row">
+            
+              <label class="fs-5 fw-semibold mb-2">Date début</label>
 <!--              &lt;!&ndash;end::Label&ndash;&gt;-->
-<!--              <div class="input-group input-group-sm">-->
+              <div class="input-group input-group-sm">
 <!--                &lt;!&ndash;begin::Input&ndash;&gt;-->
-<!--                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker-->
-<!--                       #dateDebut="ngbDatepicker" aria-label="Date début"-->
-<!--                       formControlName="startDate" (click)="dateDebut.toggle()"/>-->
+                <input type="text" class="form-control form-control-sm" placeholder="dd/mm/yyyy" ngbDatepicker
+                       #dateDebut="ngbDatepicker" aria-label="Date début"
+                       formControlName="startDate" (click)="dateDebut.toggle()"/>
 <!--                &lt;!&ndash;end::Input&ndash;&gt;-->
-<!--              </div>-->
-<!--            </div>-->
+              </div>
+            </div> 
             <div class="col-md-4 fv-row">
               <!--begin::Label-->
-              <label class="fs-5 fw-semibold mb-2">Date édition</label>
+              <label class="fs-5 fw-semibold mb-2">Date fin</label>
               <!--end::Label-->
               <div class="input-group input-group-sm">
                 <!--begin::Input-->
@@ -47,7 +47,7 @@
                     <input type="text" class="form-control form-control-sm"
                            formControlName="search">
                     <button type="button" class="btn btn-sm btn-primary pt-2 pb-2 ps-2 pe-1 me-1"
-                            style="margin-left: 25px display: flex; align-items: center; justify-content: center;"
+                            style="margin-left: 25px; display: flex; align-items: center; justify-content: center;"
                             (click)="rechercherActionnaire()">
                       <i class="fa fa-search"></i>
                     </button>

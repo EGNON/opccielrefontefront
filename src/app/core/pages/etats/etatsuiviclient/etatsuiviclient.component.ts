@@ -411,7 +411,7 @@ export class EtatsuiviclientComponent implements OnInit, AfterViewInit, AfterCon
     param = {
       ...param,
       idActionnaire:idActionnaire,
-      // dateDebut: new Date(param.startDate.year, param.startDate.month - 1, param.startDate.day + 1),
+      dateDebut: new Date(param.startDate.year, param.startDate.month - 1, param.startDate.day + 1),
       dateFin: new Date(param.endDate.year, param.endDate.month - 1, param.endDate.day + 1),
     }
     //.subscribe

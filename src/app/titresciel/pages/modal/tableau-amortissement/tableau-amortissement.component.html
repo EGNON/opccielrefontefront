@@ -247,6 +247,18 @@
     </div>
     <div class="d-flex justify-content-end">
       <!--begin::Button-->
+      <a type="button" class="btn btn-sm btn-primary me-3" *ngIf="this.echeances.controls.length > 0 && canDelete"
+      (click)="imprimerTableauAmortissement()">
+         <ng-container *ngIf="print">
+              <span class="indicator-progress" [style.display]="'block'">
+                Patientez svp...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+              </span>
+        </ng-container>
+        <ng-container *ngIf="!print">
+          <span class="indicator-label">Imprimer tableau d'amortissement</span>
+        </ng-container>
+      </a>
       <a type="button" class="btn btn-sm btn-danger me-3" *ngIf="this.echeances.controls.length > 0 && canDelete"
       (click)="supprimerEcheances()">
         Supprimer

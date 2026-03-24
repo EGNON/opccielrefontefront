@@ -3,6 +3,9 @@ import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {NgbActiveModal, NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {QualiteTitreService} from "../../../services/qualite-titre.service";
 import {TitreService} from "../../../services/titre.service";
+import { LibrairiesService } from '../../../../services/librairies.service';
+import { finalize } from 'rxjs';
+import { AuthService } from '../../../../core/modules/auth';
 
 @Component({
     selector: 'app-tableau-amortissement',
@@ -16,7 +19,7 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
   periodeRestant: boolean = false;
   nbrePeriodeRestant: number = 0;
   nbreligneDiffere: number = 0;
-
+  print:boolean=false
   qualite: string = "";
   qualites$: any;
   titre$: any;
@@ -30,6 +33,8 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
 
   constructor(private fb: FormBuilder,
               public entityService: TitreService,
+              public librairieService: LibrairiesService,
+              public authService: AuthService,
               private qualiteService: QualiteTitreService,
               private cdr: ChangeDetectorRef,
               public modal: NgbActiveModal) {
@@ -83,6 +88,10 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
   }
 
   determinerNbreEcheances(muniteDuree: string, mduree: number = 0, munitePeriode: string, mperiode: number = 1) {
+    munitePeriode = munitePeriode?.trim().toUpperCase();
+    muniteDuree = muniteDuree?.trim().toUpperCase();
+    console.log("muniteDuree=",muniteDuree)
+    console.log("munitePeriode=",munitePeriode)
     let nbreEcheances = 1;
     try {
       switch (munitePeriode) {
@@ -141,6 +150,7 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
   }
 
   determinationTauxPeriode(mtauxNet: number, mperiode: number = 1, munitePeriode: string) {
+    munitePeriode = munitePeriode?.trim().toUpperCase();
     let tauxPeriode = 0;
     switch (munitePeriode) {
       case 'JOURS':
@@ -194,15 +204,17 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
           this.echeances.push(echeanceForm);
         });
       }
-
+        console.log("length=",this.echeances.length)
       if(estGenere) {
         const nbreLignes = this.determinerNbreEcheances(uniteDuree, duree, unitePeriode, periode);
         if (differe != 0) {
           this.nbreligneDiffere = this.determinerNbreEcheances(uniteDiffere, differe, unitePeriode, periode);
         }
-        const tauxPeriode = this.determinationTauxPeriode(tauxNet, periode, unitePeriode);
+        let tauxPeriode = this.determinationTauxPeriode(tauxNet, periode, unitePeriode);
         this.echeances.clear();
         let j = 1;
+        console.log("nbreLigne=",nbreLignes)
+        console.log("tauxPeriode=",tauxPeriode)
         for (let i = 0; i < nbreLignes; i++) {
           let nouvelleDateEcheance = datePremPaiement;
           //Détermination de la date d'échéance
@@ -249,9 +261,9 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
           this.echeances.push(echeance);
           let lignePrecedente = i === 0 ? this.echeances.controls[i].value : this.echeances.controls[i-1].value;
           let ligne = this.echeances.controls[i].value;
-          if (typeAmortissement.codeTypeAmortissement.trim() != "IF") {
-            if (modeAmortissement.libelleModeAmortissement.trim() == "SUR QUANTITE") {
-              if (typeAmortissement.codeTypeAmortissement.trim() != "ANC") {
+          if (typeAmortissement.codeTypeAmortissement.trim() !== "IF") {
+            if (modeAmortissement.libelleModeAmortissement.trim() === "SUR QUANTITE") {
+              if (typeAmortissement.codeTypeAmortissement.trim() !== "ANC") {
                 if (i !== 0) {
                   ligne.nombreTitre = lignePrecedente.nombreTitre - lignePrecedente.nombreTitreAmorti;
                   ligne.capital = ligne.nombreTitre * nominal;
@@ -303,7 +315,7 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
                   ligne.montantFinPeriode = lignePrecedente.montantFinPeriode - ligne.montantRembourse;
                 }
                 else {
-                  if (this.nbreligneDiffere != 0) {
+                  if (this.nbreligneDiffere !== 0) {
                     ligne.nombreTitreAmorti = 0;
                     ligne.montantRembourse = 0;
                   }
@@ -316,7 +328,7 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
               }
             }
             else {
-              if (typeAmortissement.codeTypeAmortissement.trim() != "ANC") {
+              if (typeAmortissement.codeTypeAmortissement.trim() !== "ANC") {
                 if (i !== 0) {
                   ligne.nombreTitre = lignePrecedente.nombreTitre - lignePrecedente.nombreTitreAmorti;
                   ligne.capital = lignePrecedente.capital - lignePrecedente.montantRembourse;
@@ -343,7 +355,7 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
                   ligne.montantFinPeriode = lignePrecedente.montantFinPeriode - ligne.montantRembourse;
                 }
                 else {
-                  if (this.nbreligneDiffere != 0) {
+                  if (this.nbreligneDiffere !== 0) {
                     ligne.montantRembourse = 0;
                   }
                   else {
@@ -376,7 +388,7 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
                 }
                 else {
                   ligne.nombreTitreAmorti = 0;
-                  if (this.nbreligneDiffere != 0) {
+                  if (this.nbreligneDiffere !== 0) {
                     ligne.montantRembourse = 0;
                   }
                   else {
@@ -388,7 +400,47 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
             }
           }
           else {
-            console.log("Je suis ici sur In Fine");
+            if(nbreLignes===1){
+                ligne.annuiteTotale=ligne.interet
+            }
+            else
+            {
+              if(i===0){
+                ligne.nombreTitreAmorti=0
+                ligne.montantRembourse=0
+                ligne.annuiteTotale=ligne.montantRembourse+ligne.interet
+                ligne.montantFinPeriode=ligne.capital-ligne.montantRembourse
+              }
+              else
+              {
+                ligne.nombreTitre=this.echeances.controls[i-1].value.nombreTitre
+                ligne.capital=ligne.nombreTitre*nominal
+                ligne.interet=ligne.capital*tauxPeriode/100
+                ligne.nombreTitreAmorti=0
+                ligne.montantRembourse=0
+                ligne.annuiteTotale=ligne.montantRembourse+ligne.interet
+                ligne.montantFinPeriode=this.echeances.controls[i-1].value.montantFinPeriode-ligne.montantRembourse
+
+                if(j===nbreLignes){
+                  if(this.periodeRestant===true){
+                      tauxPeriode=this.determinationTauxPeriode(tauxNet,this.nbrePeriodeRestant,unitePeriode);
+                      // this.echeances.controls[i].value.interet=tauxPeriode*this.echeances.controls[i].value.capital/100
+                      ligne.interet=tauxPeriode*ligne.capital/100
+                  }
+                  else{
+                      ligne.interet=tauxPeriode*ligne.capital/100
+                      // this.echeances.controls[i].value.interet=tauxPeriode*this.echeances.controls[i].value.capital/100
+                  }
+                     console.log("pass")
+                ligne.nombreTitreAmorti=ligne.nombreTitre
+                ligne.montantRembourse=ligne.capital
+                ligne.montantFinPeriode=this.echeances.controls[i-1].value.montantFinPeriode-ligne.montantRembourse
+                ligne.annuiteTotale=ligne.montantRembourse+ligne.interet
+              }
+              }
+              
+            }
+
           }
           ligne.tauxAmortissement = ligne.montantRembourse / ligne.capital;
           this.echeances.controls[i].patchValue(ligne);
@@ -398,7 +450,23 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
       this.cdr.detectChanges();
     });
   }
-
+  imprimerTableauAmortissement()
+  {
+    console.log("id=",this.id)
+    this.print=true
+    this.librairieService.tableauAmortissement(
+      this.id).pipe(
+        finalize(()=>{
+          this.print=false
+        })
+      ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'tableau_amortissement.pdf';
+        a.click();
+      });
+  }
   genererTabAmortissements() {
     this.afficherListeEcheances(true);
     this.editable = false;
@@ -431,6 +499,10 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
         const newValue = value.map((el: any) => {
           let newEl = {
             ...el,
+             dateCreationServeur:new Date(),
+          dateDernModifServeur:new Date(),
+          supprimer:false,
+          userLogin:this.authService.currentUserValue?.username
           };
           for (const cle in newEl) {
             let valeur = newEl[cle];
@@ -449,7 +521,12 @@ export class TableauAmortissementComponent implements OnInit, AfterViewInit, OnD
           }
           return newEl;
         });
-        titre = {...titre, [key]: newValue};
+        titre = {...titre, [key]: newValue,
+          dateCreationServeur:new Date(),
+          dateDernModifServeur:new Date(),
+          supprimer:false,
+          userLogin:this.authService.currentUserValue?.username
+        };
       }
     }
     this.entityService.updateFn(titre, this.qualite).subscribe((resp: any) => {

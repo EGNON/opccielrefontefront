@@ -16,12 +16,13 @@ import {SweetAlertOptions} from "sweetalert2";
 import {NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 import {ActivatedRoute, Router} from "@angular/router";
-import {map} from "rxjs/operators";
+import {finalize, map} from "rxjs/operators";
 import { ChangerQualitePersonneComponent } from "../../../../core/pages/modal/changer-qualite-personne/changer-qualite-personne.component";
 import {QualiteTitreModel} from "../../../models/qualite-titre.model";
 import {QualiteTitreService} from "../../../services/qualite-titre.service";
 import {TitreService} from "../../../services/titre.service";
 import {TableauAmortissementComponent} from "../../modal/tableau-amortissement/tableau-amortissement.component";
+import { LibrairiesService } from '../../../../services/librairies.service';
 
 @Component({
     selector: 'app-titres-listing',
@@ -78,6 +79,7 @@ export class TitresListingComponent implements OnInit, OnDestroy, AfterViewInit{
     private pageInfo: PageInfoService,
     private renderer: Renderer2,
     public entityService: TitreService,
+    public librairieService: LibrairiesService,
     private qualiteService: QualiteTitreService,
     private route: ActivatedRoute,
     private router: Router,
@@ -190,12 +192,18 @@ export class TitresListingComponent implements OnInit, OnDestroy, AfterViewInit{
                 <li>
                     <a type="button" class="dropdown-item"  data-qualite="${this.qualite.libelleQualite}" data-action="tabamorti" data-id="${full.idTitre}">Tableau d'amortissement</a>
                 </li>`;
+
+        const fiche = `
+                <li>
+                    <a type="button" class="dropdown-item"  data-qualite="${this.qualite.libelleQualite}" data-action="fiche" data-id="${full.idTitre}">Fiche titre</a>
+                </li>`;
         const parentActionEnd = `</ul></div>`;
         const actions = [];
         actions.push(parentActionStart);
         actions.push(show);
         actions.push(edit);
         actions.push(tabAmorti);
+        actions.push(fiche);
         // actions.push(autresQualites);
         actions.push(separator);
         actions.push(delete1);
@@ -259,6 +267,12 @@ export class TitresListingComponent implements OnInit, OnDestroy, AfterViewInit{
         });*/
         break;
 
+      case 'fiche':
+       
+          this.imprimerFiche(qualite,id);
+        
+        break;
+
       case 'delete':
         this.supprimer(id.toString());
         break;
@@ -268,7 +282,81 @@ export class TitresListingComponent implements OnInit, OnDestroy, AfterViewInit{
   retourAlaListe(showForm: any) {
     this.showForm.next(showForm);
   }
-
+  imprimerFiche(qualite:string,id:any){
+    const libelle=qualite.toLowerCase();
+    switch(libelle){
+      case "actions":
+         this.librairieService.ficheAction(
+              id).pipe(
+                finalize(()=>{
+                  
+                })
+              ).subscribe((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'fiche_Action.pdf';
+                a.click();
+              });
+              break;
+      case "obligations":
+         this.librairieService.ficheObligation(
+              id).pipe(
+                finalize(()=>{
+                  
+                })
+              ).subscribe((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'fiche_Obligation.pdf';
+                a.click();
+              });
+              break;
+      case "droits":
+         this.librairieService.ficheDroit(
+              id).pipe(
+                finalize(()=>{
+                  
+                })
+              ).subscribe((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'fiche_Droit.pdf';
+                a.click();
+              });
+              break;
+      case "tcn":
+         this.librairieService.ficheTcn(
+              id).pipe(
+                finalize(()=>{
+                  
+                })
+              ).subscribe((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'fiche_Tcn.pdf';
+                a.click();
+              });
+              break;
+      case "opc":
+         this.librairieService.ficheOpc(
+              id).pipe(
+                finalize(()=>{
+                  
+                })
+              ).subscribe((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'fiche_Opc.pdf';
+                a.click();
+              });
+              break;
+    }
+  }
   changerQualite(qualite: any, index: number) {
     const lib = qualite.libelleQualite;
     this.qualite = qualite;

@@ -25,6 +25,8 @@ import {
 import {NumeroPositifValidatorsDirective} from "../../../validators/numero-positif-validators.directive";
 import { ReglementlivraisonComponent } from './reglementlivraison/reglementlivraison.component';
 import { GenerationreglementlivraisonComponent } from './generationreglementlivraison/generationreglementlivraison.component';
+import { Relachementordre } from './relachementordre/relachementordre';
+import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -39,21 +41,23 @@ import { GenerationreglementlivraisonComponent } from './generationreglementlivr
     ValidationOrdreComponent,
     ImpressionOrdreComponent,
     ReglementlivraisonComponent,
-    GenerationreglementlivraisonComponent
+    GenerationreglementlivraisonComponent,
+    Relachementordre
   ],
     imports: [
-        CommonModule,
-        RouterOutlet,
-        EntityCrudModule,
-        SharedModule,
-        OrdreRoutingModule,
-        SweetAlert2Module,
-        NombreDecimalDirective,
-        ReactiveFormsModule,
-        NgbInputDatepicker,
-        FormsModule,
-        NgMultiSelectDropDownModule,
-        NumeroPositifValidatorsDirective
-    ]
+    CommonModule,
+    RouterOutlet,
+    EntityCrudModule,
+    SharedModule,
+    OrdreRoutingModule,
+    SweetAlert2Module,
+    NombreDecimalDirective,
+    ReactiveFormsModule,
+    NgbInputDatepicker,
+    FormsModule,
+    NgMultiSelectDropDownModule,
+    NumeroPositifValidatorsDirective,
+    DataTablesModule
+]
 })
 export class OrdreModule { }

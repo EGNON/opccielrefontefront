@@ -67,6 +67,7 @@ export class OrdreCreateComponent implements OnInit, OnDestroy{
   enabledCoursLimite:boolean;
   @Input() nb: number;
   private subscriptions: Subscription[] = [];
+currentSeance: any;
 
   constructor(
     private localStore: LocalService,
@@ -82,14 +83,18 @@ export class OrdreCreateComponent implements OnInit, OnDestroy{
     public loadingService: LoaderService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute) {
+       this.currentSeance = this.localStore.getData("currentSeance");
+    }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    const dateSeance = new Date(this.currentSeance?.dateFermeture);
     this.entityForm = this.fb.group(
       {
         id: [this.id],
-        dateOrdre: [new Date(),Validators.required],
+        dateOrdre: [
+         new NgbDate(dateSeance.getFullYear(), dateSeance.getMonth()+1, dateSeance.getDate()) ,Validators.required],
         personne: [null,Validators.required],
         signataire: [null,Validators.required],
         // souscription: [null],
@@ -105,7 +110,7 @@ export class OrdreCreateComponent implements OnInit, OnDestroy{
         accepterPerte: [false],
         quantiteLimite: [null],
         coursLimite: [null],
-        dateLimite: [new Date(),Validators.required],
+        dateLimite: [new NgbDate(dateSeance.getFullYear(), dateSeance.getMonth()+1, dateSeance.getDate()),Validators.required],
         montantBrut: [null],
         interet: [null],
         commissionPlace: [null],
