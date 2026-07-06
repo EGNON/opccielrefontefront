@@ -880,7 +880,7 @@ export class LibraryService implements OnDestroy{
               children: [
                 {
                   allow: this.authService.isGrantedRole('ROLE_RDV_PLAN'),
-                  title: 'Liste des RDV planifiés',
+                  title: 'Liste des RDV réalisés',
                   page: '/crm/etats/rdv/liste',
                   role: 'ROLE_RDV_PLAN',
                   icon: '',
@@ -3950,18 +3950,18 @@ export class LibraryService implements OnDestroy{
                   parent: 'CIRCULAIRES',
                   children: []
                 }
-                /*,
+                ,
                 {
-                  allow: this.authService.isGrantedRole('ROLE_EVT_AVIS'),
-                  title: 'Avis evenement sur valeur',
-                  page: '/opcvm/avisevenementsurvaleur/liste',
-                  role: 'ROLE_EVT_AVIS',
+                  allow: this.authService.isGrantedRole('ROLE_CIRCULAIRE8'),
+                  title: 'CIRCULAIRE N°9/CREPMF/2022',
+                  page: '/opcvm/circulaire9',
+                  role: 'ROLE_CIRCULAIRE8',
                   icon: '',
                   translate: '',
                   dataLink: '',
-                  parent: 'Evenement sur valeur',
+                  parent: 'CIRCULAIRES',
                   children: []
-                }*/
+                }
               ]
             },
             {

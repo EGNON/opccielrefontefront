@@ -179,6 +179,10 @@ export class LibrairiesService {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinancierannexesremunerationgestionnairedepositaire`, param, 
       {responseType: 'blob' as any });
   }
+  circulaire8(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/circulaire8`, param, 
+      {responseType: 'blob' as any });
+  }
   noteportefeuilletitre(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/etatfinanciertrimestrielnoteportefeuilletitre`, param, 
       {responseType: 'blob' as any });
@@ -477,6 +481,16 @@ export class LibrairiesService {
   }
   journalEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/journal`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  circulaire9(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/circulaire9`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  ecriturePrint(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/consultationecriture`,param,
       {responseType: 'blob' as any }
     );
   }

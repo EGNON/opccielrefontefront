@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {Subscription} from "rxjs";
+import {finalize, Subscription} from "rxjs";
 import {Config} from "datatables.net";
 import {SweetAlertOptions} from "sweetalert2";
 import {LocalService} from "../../../../services/local.service";
@@ -13,6 +13,8 @@ import {
 import {Infoscirculaire8Service} from "../../../services/infoscirculaire8.service";
 import moment from "moment";
 import {DeleteModalCirculaire8Component} from "../delete-modal-circulaire8/delete-modal-circulaire8.component";
+import { LibrairiesService } from '../../../../services/librairies.service';
+import { LoaderService } from '../../../../loader.service';
 
 @Component({
     selector: 'app-circulaire8-list',
@@ -39,6 +41,8 @@ export class Circulaire8ListComponent implements OnInit, OnDestroy, AfterViewIni
     private router: Router,
     private renderer: Renderer2,
     public entityService: Infoscirculaire8Service,
+    public libaririeService: LibrairiesService,
+    public loaderService: LoaderService,
     public authService: AuthService,
     private modalService: NgbModal) {
   }
@@ -85,7 +89,30 @@ export class Circulaire8ListComponent implements OnInit, OnDestroy, AfterViewIni
     }
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
+imprimer(dateDebut:Date,dateFin:Date,idOpcvm:number){
+  this.loaderService.setLoading(false); 
+  this.loaderService.setLoading(true);  
+  const entity={
+      dateDebut:dateDebut,
+      dateFin:dateFin,
+      idOpcvm:idOpcvm
+    }
 
+    this.libaririeService.circulaire8(
+        entity).pipe(
+          finalize(()=>{
+           this.loaderService.setLoading(false);
+          })
+        ).subscribe((blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'circulaire8.pdf';
+          a.click();
+        });
+        
+    
+  }
   renderActionColumn(): void {
     if (this.datatableConfig.columns) {
       let actions = this.datatableConfig.columns[this.datatableConfig.columns?.length-1];
@@ -105,6 +132,11 @@ export class Circulaire8ListComponent implements OnInit, OnDestroy, AfterViewIni
                     <a type="button" class="dropdown-item" data-action="edit" data-id="${full.numLigne}"
                     >Modifier</a>
                 </li>`;
+        const print = `
+                <li>
+                    <a type="button" class="dropdown-item" data-action="print" data-id2="${full.dateDebut}" data-id3="${full.dateFin}"
+                    >Imprimer</a>
+                </li>`;
         const separator = `<li><hr class="dropdown-divider"></li>`;
         const delete1 = `<li>
                     <a type="button" class="dropdown-item" data-action="delete" data-id="${full.numLigne}"
@@ -118,6 +150,7 @@ export class Circulaire8ListComponent implements OnInit, OnDestroy, AfterViewIni
         actions.push(edit);
         actions.push(separator);
         actions.push(delete1);
+        actions.push(print);
         actions.push(parentActionEnd);
 
         return actions.join('');
@@ -136,9 +169,10 @@ export class Circulaire8ListComponent implements OnInit, OnDestroy, AfterViewIni
     this.clickListener = this.renderer.listen(document, 'click', (event) => {
       const closestBtn = event.target.closest('.btn, .dropdown-item');
       if (closestBtn) {
-        const {action, id} = closestBtn.dataset;
+        const {action, id,id2,id3} = closestBtn.dataset;
         this.idInAction = id;
-
+        const dateDebut=id2;
+        const dateFin=id3;
         switch (action) {
           case 'view':
             this.router.navigate(['show', id], {relativeTo: this.route});
@@ -154,6 +188,12 @@ export class Circulaire8ListComponent implements OnInit, OnDestroy, AfterViewIni
 
           case 'delete':
             this.supprimer(id);
+            break;
+
+          case 'print':
+            console.log(dateDebut)
+            console.log(dateFin)
+            this.imprimer(dateDebut,dateFin,this.localStore.getData("currentOpcvm")?.idOpcvm);
             break;
         }
       }

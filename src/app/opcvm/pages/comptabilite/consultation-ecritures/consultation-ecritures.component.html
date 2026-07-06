@@ -85,7 +85,7 @@
                   <!--begin::Search-->
                   <div class="d-flex align-items-center position-relative my-1">
                     <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
-                    <input type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12">
+                    <input #searchInput type="text" data-action="filter" class="form-control form-control-sm form-control-sm form-control-solid w-250px ps-12">
                   </div>
                   <!--end::Search-->
                 </div>
@@ -104,7 +104,7 @@
                         <span class="indicator-label">Actualiser</span>
                       </ng-container>
                     </button>
-                    <button type="button" class="btn btn-sm btn-info me-3">
+                    <button type="button" class="btn btn-sm btn-info me-3" (click)="generatePdf()">
                       <ng-container *ngIf="downloading">
                         <span class="indicator-progress" [style.display]="'block'">
                           Patientez svp...

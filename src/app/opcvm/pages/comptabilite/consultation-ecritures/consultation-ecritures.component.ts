@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
   Renderer2,
@@ -11,7 +12,7 @@ import {
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Api, Config} from "datatables.net";
-import {Subject, Subscription} from "rxjs";
+import {of, Subject, Subscription} from "rxjs";
 import {DataTableDirective} from "angular-datatables";
 import {AuthService} from "../../../../core/modules/auth";
 import {LocalService} from "../../../../services/local.service";
@@ -21,6 +22,9 @@ import $ from "jquery";
 import {NatureoperationService} from "../../../../core/services/natureoperation.service";
 import {OperationService} from "../../../services/operation.service";
 import {DetailsEcritureComponent} from "./details-ecriture/details-ecriture.component";
+import { fromEvent } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
+import { LibrairiesService } from '../../../../services/librairies.service';
 
 @Component({
     selector: 'app-consultation-ecritures',
@@ -50,14 +54,16 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
 
   isLoading: boolean = false;
   subscriptions: Subscription[] = [];
-
+  @ViewChild('searchInput')
+  searchInput!: ElementRef;
   [key: string]: any;
-
+selectedOperations: number[] = [];
   constructor(
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
     private authService: AuthService,
     private localStore: LocalService,
+    private librairiesService: LibrairiesService,
     private natureOpService: NatureoperationService,
     private operationService: OperationService,
     public renderer: Renderer2) {
@@ -72,6 +78,22 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
       console.log(table);
       this.table = table;
     });*/
+    fromEvent(this.searchInput.nativeElement, 'keyup')
+  .pipe(
+    debounceTime(500),
+    distinctUntilChanged()
+  )
+  .subscribe(() => {
+
+    this.datatableElement.dtInstance.then((dtInstance: Api) => {
+
+      dtInstance.search(
+        this.searchInput.nativeElement.value
+      ).draw();
+
+    });
+
+  });
   }
 
   ngOnDestroy(): void {
@@ -186,6 +208,14 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
     let columns: any[] = [
       {
         sortable: false,
+        title: `<input type="checkbox" id="check-all">`,
+        class: 'text-center min-w-25px',
+        render: (data: any, type: any, full: any) => {
+          return `<input type="checkbox" class="row-checkbox" value="${full.idOperation}">`;
+        }
+      },
+      {
+        sortable: false,
         title: ``,
         class: 'row-details cursor-pointer text-center min-w-10px',
         render: (data: any, type: any, full: any) => {
@@ -297,7 +327,7 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
           if(!(existedTr.attr("id") && existedTr.attr("id") == `detail-${data.idOperation}`)) {
             self.operationService.afficherDetailsEcriture(data.idOperation).subscribe(resp => {
               //Changer l'icône du boutton
-              $(row).find("td:first").html("<i class='fa fa-minus'></i>");
+              $(row).find("td:eq(1)").html("<i class='fa fa-minus'></i>");
               const a = self.operationService.appendDialogComponentToBody(resp.data, data.idOperation);
               const newTr = a.querySelector(`#detail-${data.idOperation}`);
               newTr.classList.add("active");
@@ -314,16 +344,18 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
           else {
             console.log("Liste classe === ", existedTr.attr("class"));
             if(existedTr.attr("class").includes("active")) {
-              $(row).find("td:first").html("<i class='fa fa-plus'></i>");
+              $(row).find("td:eq(1)").html("<i class='fa fa-plus'></i>");
               existedTr.removeClass("active");
               existedTr.hide();
             }
             else {
-              $(row).find("td:first").html("<i class='fa fa-minus'></i>");
+              $(row).find("td:eq(1)").html("<i class='fa fa-minus'></i>");
               existedTr.addClass("active");
               existedTr.show();
             }
           }
+
+          
           /*//Générer le composant Detail en passant le paramètre idOperation
           const componentRef = self.operationService.afficherComposantDetails(self.detailsComponentContainer, data.idOperation);
           //Récupérer l'élément detail dans la constante tableDetail
@@ -335,6 +367,20 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
           const a = self.operationService.appendDialogComponentToBody(data.idOperation);
           console.log("Html View === ", a);*/
         });
+        $(row).find('.row-checkbox').on('change', (e) => {
+
+            const checked =(e.target as HTMLInputElement).checked;;
+
+            if (checked) {
+              self.selectedOperations.push(data.idOperation);
+            } else {
+              self.selectedOperations =
+                self.selectedOperations.filter(
+                  id => id !== data.idOperation
+                );
+            }
+            console.log(self.selectedOperations)
+          });
       },
     };
     this.dtOptions = {
@@ -344,7 +390,42 @@ export class ConsultationEcrituresComponent implements OnInit, AfterViewInit, Af
     this.rerender();
     // this.cdr.detectChanges();
   }
-
+generatePdf(){
+      this.downloading=true
+      //this.nbreLigne = document.getElementById("table_AvisOperation").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
+     if(this.selectedOperations.length===0){
+       alert("Veuillez cocher les opérations s'il vous plait")
+       return
+     }
+      let id=""
+      let l=0
+      for(l===0;l<this.selectedOperations.length;l++){
+        if(l===0)
+          id=this.selectedOperations[l].toString();
+        else
+          id+=";"+this.selectedOperations[l].toString()
+      }
+      console.log("id=",id)
+      let param={idOpcvm:this.currentOpcvm?.idOpcvm,
+        idOperation:id
+      }
+      this.librairiesService.ecriturePrint(param).pipe(
+          catchError((err) => {
+            this.downloading = false;
+            return of(err.message);
+          }),
+          finalize(() => {
+            this.downloading = false;
+          })
+        ).subscribe((blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'ecritures_comptables.pdf';
+          a.click();
+        });
+  
+  }
   rerender(): void {
     try {
       this.datatableElement.dtInstance.then((dtInstance: Api) => {

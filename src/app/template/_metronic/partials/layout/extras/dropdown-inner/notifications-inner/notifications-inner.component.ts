@@ -3,6 +3,7 @@ import { LayoutService } from '../../../../../layout';
 import {MessageBox} from "../../../../../../../crm/models/message-box.model";
 import {Observable, Subscription} from "rxjs";
 import {DomSanitizer} from "@angular/platform-browser";
+import { NotificationSoundService } from '../../../../../../../services/notificationsound.service';
 
 export type NotificationsTabsType =
   | 'kt_topbar_notifications_1'
@@ -40,14 +41,30 @@ export class NotificationsInnerComponent implements OnInit {
 
   private subscriptions: Subscription[] = [];
 
-  constructor() {}
+  constructor(private notificationSound: NotificationSoundService) {}
 
   ngOnInit(): void {
-    const sb = this.notifications.subscribe(data => {
-      this.counter = data.length;
-      this.alerts = data;
-      // console.log(data);
-    });
+    // const sb = this.notifications.subscribe(data => {
+    //   this.counter = data.length;
+    //   this.alerts = data;
+    //   this.notificationSound.playNotificationSound();
+    //   // console.log(data);
+    // });
+    let previousCount = 0;   // On garde en mémoire le nombre précédent
+
+  const sb = this.notifications.subscribe(data => {
+    const currentCount = data?.length || 0;
+    this.alerts = data || [];
+    this.counter = currentCount;
+
+    // Joue le son UNIQUEMENT s'il y a AU MOINS une nouvelle notification
+    if (currentCount > previousCount) {
+      this.notificationSound.playNotificationSound();
+    }
+
+    // Mise à jour du compteur précédent
+    previousCount = currentCount;
+  });
     this.subscriptions.push(sb);
   }
 

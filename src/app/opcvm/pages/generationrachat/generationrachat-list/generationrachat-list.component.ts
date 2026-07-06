@@ -233,7 +233,7 @@ export class GenerationrachatListComponent implements OnInit, OnDestroy {
       this.operationSouscriptionRachat.regulExoDistribution=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[17].innerHTML)
       this.operationSouscriptionRachat.montantDepose=0
       this.operationSouscriptionRachat.montantConvertiEnPart=0
-      this.operationSouscriptionRachat.nombrePartSousRachat=0
+      this.operationSouscriptionRachat.nombrePartSousRachat=Number(document.getElementById("table_OperationSousRach").getElementsByTagName('tr')[i].cells[4].innerHTML)
       this.operationSouscriptionRachat.dateValeur =dateOperation;
       this.operationSouscriptionRachat.ecriture = "A";
       this.operationSouscriptionRachat.estRetrocede = false;

@@ -38,7 +38,7 @@ export class AvisSouscriptionComponent implements OnInit, AfterViewInit, OnDestr
 
   isLoading: boolean = false;
   subscriptions: Subscription[] = [];
-
+  idOperationTab:any[];
   [key: string]: any;
 
   constructor(
@@ -167,6 +167,7 @@ export class AvisSouscriptionComponent implements OnInit, AfterViewInit, OnDestr
           const sb = this.entityService.listeOpSousRach(param)
           .subscribe(resp => {
             callback(resp.data);
+            console.log(resp.data)
           });
           this.subscriptions.push(sb);
         }
@@ -219,9 +220,35 @@ export class AvisSouscriptionComponent implements OnInit, AfterViewInit, OnDestr
     }
     // this.cdr.detectChanges();
   }
-
+listeOperationSouscriptionRachat(){
+    let startDate=new Date();
+    let endDate=new Date();
+    if(this.form.controls.dateDebut.value)
+    {
+      startDate = new Date(
+        this.form.controls.dateDebut.value.year,
+        this.form.controls.dateDebut.value.month-1,
+        this.form.controls.dateDebut.value.day+1);
+    }
+    if(this.form.controls.dateFin.value)
+    {
+      endDate = new Date(
+        this.form.controls.dateFin.value.year,
+        this.form.controls.dateFin.value.month-1,
+        this.form.controls.dateFin.value.day+1);
+    }
+    const beginEndDate={startDate,endDate}
+    this.entityService.listeOperationSouscriptionRachat(this.localStore.getData("currentOpcvm").idOpcvm,
+      "SOUS_PART".trim(),beginEndDate).subscribe(
+      (data)=>{
+        this.operationSouscriptionRachat$=data.data
+        console.log(this.operationSouscriptionRachat$)
+      }
+    )
+  }
   actualiser() {
-    this.afficherListe("l");
+    // this.afficherListe("l");
+    this.listeOperationSouscriptionRachat();
   }
 
   telecharger() {
@@ -274,14 +301,26 @@ export class AvisSouscriptionComponent implements OnInit, AfterViewInit, OnDestr
 
   ngOnDestroy(): void {
   }
+ getIdOperation(isSelected, idOperation){
+    console.log(isSelected, idOperation)
 
+    if(isSelected==true)
+      this.idOperationTab.push(idOperation)
+    else
+    {
+      let index=this.idOperationTab.indexOf(idOperation)
+      if(index!==-1)
+        this.idOperationTab.splice(index,1)
+    }
+    console.log(this.idOperationTab)
+  }
   ngOnInit(): void {
     const dateOuv = new Date(this.currentSeance?.dateOuverture);
     const dateSeance = new Date(this.currentSeance?.dateFermeture);
     this.form = this.fb.group({
       idSeance: [this.currentSeance?.idSeanceOpcvm?.idSeance],
       dateDebut: [
-        new NgbDate(dateOuv.getFullYear(), dateOuv.getMonth()+1, dateOuv.getDate()), Validators.required
+        new NgbDate(dateSeance.getFullYear(), dateSeance.getMonth()+1, dateSeance.getDate()), Validators.required
       ],
       dateFin: [
         new NgbDate(dateSeance.getFullYear(), dateSeance.getMonth()+1, dateSeance.getDate()), Validators.required
@@ -368,7 +407,71 @@ export class AvisSouscriptionComponent implements OnInit, AfterViewInit, OnDestr
         }
       },
     };
-    this.afficherListe("l");
+    // this.afficherListe("l");
+    this.idOperationTab=[]
+    this.listeOperationSouscriptionRachat();
     this.listeAvisForm = this.createListeAvisForm();
+  }
+  generatePdf(){
+    this.downloading=true
+    //this.nbreLigne = document.getElementById("table_AvisOperation").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
+   if(this.idOperationTab.length===0){
+     alert("Veuillez cocher les opérations s'il vous plait")
+     return
+   }
+    let id=""
+    let l=0
+    for(l===0;l<this.idOperationTab.length;l++){
+      if(l===0)
+        id=this.idOperationTab[l]
+      else
+        id+=","+this.idOperationTab[l]
+    }
+    this.entityService.avisOperationSouscriptionPdf(id).pipe(
+        catchError((err) => {
+          this.downloading = false;
+          return of(err.message);
+        }),
+        finalize(() => {
+          this.downloading = false;
+        })
+      ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'avis_souscription.pdf';
+        a.click();
+      });
+
+}
+envoyer(){
+   
+    //this.nbreLigne = document.getElementById("table_AvisOperation").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
+    if(this.idOperationTab.length===0){
+      alert("Veuillez cocher les opérations s'il vous plait")
+      return
+    }
+     this.submitted=true
+   
+    // this.loadingService.setLoading(true);
+    let id=""
+    let l=0
+    for(l===0;l<this.idOperationTab.length;l++){
+      if(l===0)
+        id=this.idOperationTab[l]
+      else
+        id+=","+this.idOperationTab[l]
+    }
+    this.entityService.avisOperationPdfSouscription2(id).subscribe(
+      (data)=>{
+        alert("Envoi effectué avec succès")
+         this.submitted=false
+      }
+    )
+    // this.loadingService.setLoading(false);
+
+    let fToByte:any[]=[];
+    let fFileName:any[]=[];
+
   }
 }

@@ -607,8 +607,16 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
       }
       else
       {
-        this.submitting=false
-        alert(message)
+        this.depotRachatService.import_DepotRachat_PM(this.filterForm.value.pmList).subscribe
+          (data=>{
+            if(data.data===""|| data.data===undefined || data.data===null){
+              alert(message)
+            }
+            else
+              alert(data.data)
+            this.submitting=false
+            window.location.reload();
+          }) 
       }
      
     })

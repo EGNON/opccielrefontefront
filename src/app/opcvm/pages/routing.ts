@@ -20,6 +20,12 @@ const OpcvmRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
+    path: 'circulaire9',
+    loadChildren: () =>
+      import('./circulaire9/circulaire9-module').then((m) => m.Circulaire9Module),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
     path: 'standard/actionnaireopcvm',
     loadChildren: () =>
       import('./actionnaireopcvm/actionnaireopcvm.module').then((m) => m.ActionnaireopcvmModule),

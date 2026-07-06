@@ -1,17 +1,7 @@
-<!--begin::Careers - Apply-->
-<swal #noticeSwal [swalOptions]="swalOptions">
-</swal>
-<div class="card card-flush" xmlns="http://www.w3.org/1999/html">
-  <!--begin::Body-->
-  <div class="card-body p-lg-5">
-    <!--begin::Layout-->
-    <div class="d-flex flex-column flex-lg-row mb-0">
-      <!--begin::Content-->
-      <div class="flex-lg-row-fluid me-0 me-lg-0">
-        <!--begin::Form-->
-        <form [formGroup]="critereAlerteForm" enctype="multipart/form-data" class="form mb-5">
-          <!--begin::Input-->
-          <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid" [value]="id" formControlName="id"/>
+<swal #noticeSwal [swalOptions]="swalOptions"></swal>
+
+<form [formGroup]="critereAlerteForm">
+ <input *ngIf="id" type="hidden" class="form-control form-control-sm form-control-solid" [value]="id" formControlName="id"/>
           <!--end::Input-->
           <div class="row mb-5">
             <div class="col-md-6 fv-row">
@@ -48,154 +38,192 @@
             </div>
           </div>
 
-          <div class="row mb-5">
-            <div class="col-md-12 fv-row">
-              <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Description</label>
-              <!--end::Label-->
-              <!--begin::Input-->
-              <textarea type="text" class="form-control form-control-sm form-control-solid" style="height: 75px"
-                        placeholder="" formControlName="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
-              </textarea>
-              <!--end::Input-->
-              <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                <div *ngIf="f.description.errors.required">Ce champs est obligatoire</div>
-              </div>
-            </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col-sm-12 fv-row">
-              <div class="alert alert-info d-flex align-items-center" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
-                  <use xlink:href="#info-fill"/>
-                </svg>
-                Construction de l'expression
-              </div>
-            </div>
-          </div>
-          <div class="row mb-5">
-              <div class="col-md-3 fv-row">
-                <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Critère(s)</label>
-                <!--end::Label-->
-                <!--begin::Input-->
-                <select
-                  class="form-select form-select-sm form-select-solid"
-                  id="ComboCritere" formControlName="critere" >
-                  <option selected>Sélectonnez un critère</option>
-                  <option>Montant de la transaction</option>
-                  <option>Quantité de part</option>
-                  <option>Pays de résidence</option>
-                  <option>Type de client</option>
-                  <option>devise</option>
-                  <option>client</option>
-                </select>
-              </div>
-            <div class="col-md-2 fv-row">
-              <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Opérateur(s)</label>
-              <!--end::Label-->
-              <!--begin::Input-->
-              <select
-                class="form-select form-select-sm form-select-solid"
-                id="ComboOperateur" formControlName="operateur">
-                <option selected>Sélectonnez un opérateur</option>
-                <option><</option>
-                <option>></option>
-                <option>=</option>
-                <option>>=</option>
-                <option><=</option>
-              </select>
-            </div>
+  <!-- ===================== DESCRIPTION ===================== -->
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
 
-            <div class="col-md-3 fv-row">
-              <label style="margin-top: 10px" class=" fs-5 fw-semibold mb-2">Valeur</label>
-              <!--end::Label-->
-              <!--begin::Input-->
-              <input type="text" class="form-control form-control-sm form-control-solid"
-                     placeholder="" id="valeur" formControlName="valeur"/>
-              <!--end::Input-->
-            </div>
-            <div class="col-md-1 fv-row">
-              <button  class="btn btn-sm btn-primary" (click)="parentheseOuvrante()">
-                (
-              </button>
-              <button Style="margin-top: 25px" class="btn btn-sm btn-primary" (click)="parentheseFermante()">
-                )
-              </button>
-            </div>
-            <div class="col-md-1 fv-row">
-              <button  class="btn btn-sm btn-primary" (click)="et()">
-                ET
-              </button>
-              <button Style="margin-top: 25px" class="btn btn-sm btn-primary" (click)="ou()">
-                OU
-              </button>
-            </div>
-            <div class="col-md-2 fv-row">
-              <button  class="btn btn-sm btn-primary" style="margin-top: 30px" (click)="ajouter()">
-                  Ajouter
-              </button>
-            </div>
-          </div>
+      <label class="form-label fw-bold">Description</label>
 
-          <div class="row mb-5">
-            <div class="col-md-12 fv-row">
-              <div style="display: flex; justify-content: space-between;">
-                <!--begin::Label-->
-                <label style="margin-top: 10px" class="required fs-5 fw-semibold mb-2">Expression</label>
-                <!--end::Label-->
-                <div style="display: flex; align-items: center; justify-content: center;">
-                  <button type="button" class="btn btn-sm btn-success pt-2 pb-2 ps-2 pe-1 me-1"
-                          style="display: flex; align-items: center; justify-content: center;" (click)="effacer()">
-                    Effacer</button>
-                </div>
-              </div>
+      <textarea
+        type="text"
+        class="form-control border border-1 border-secondary-subtle"
+        style="height: 80px"
+        formControlName="description"
+        [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+      </textarea>
 
-              <!--end::Label-->
-              <!--begin::Input-->
-              <textarea type="text" class="form-control form-control-sm form-control-solid" style="height: 55px"
-                     placeholder="" formControlName="expression" id="expression" [ngClass]="{ 'is-invalid': submitted && f.expression.errors }">
-              </textarea>
-                <!--end::Input-->
-              <div *ngIf="submitted && f.expression.errors" class="invalid-feedback">
-                <div *ngIf="f.expression.errors.required">Ce champs est obligatoire</div>
-              </div>
-            </div>
-          </div>
-          <!--begin::Col-->
-          <!--end::Col-->
-          <!--            </div>-->
-          <!--end::Input group-->
-          <!--begin::Separator-->
-          <div class="separator mb-8"></div>
-          <!--end::Separator-->
-          <!--begin::Action buttons-->
-          <div class="d-flex justify-content-end">
-            <!--begin::Button-->
-            <a type="reset" routerLink="/lab/notifications/alertes" class="btn btn-sm btn-light me-3">
-              Annuler
-            </a>
-            <!--end::Button-->
-            <!--begin::Submit-->
-            <button type="submit" class="btn btn-sm btn-primary"
-                    (click)="onSaveCritereAlerte()">
-              <!--begin::Indicator label-->
-              <span class="indicator-label">Enregistrer</span>
-              <!--end::Indicator label-->
-              <!--begin::Indicator progress-->
-              <span *ngIf="submitting" class="indicator-progress">Veuillez patienter svp...
-															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-              <!--end::Indicator progress-->
-            </button>
-            <!--end::Submit-->
-          </div>
-
-          <!--end::Action buttons-->
-        </form>
-        <!--end::Form-->
+      <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+        <div *ngIf="f.description.errors.required">Ce champ est obligatoire</div>
       </div>
-      <!--end::Content-->
+
     </div>
-    <!--end::Layout-->
   </div>
-  <!--end::Body-->
-</div>
-<!--end::Careers - Apply-->
+
+  <!-- ===================== CONSTRUCTION EXPRESSION ===================== -->
+  <div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-header bg-light">
+      <h5 class="mb-0">Construction de l'expression</h5>
+    </div>
+
+    <div class="card-body">
+
+      <div class="alert alert-info d-flex align-items-center mb-4">
+        <i class="fas fa-info-circle me-2"></i>
+        Construction de la règle d’alerte
+      </div>
+
+      <div class="row g-3 align-items-end">
+
+        <!-- Critère -->
+        <div class="col-md-3">
+          <label class="form-label fw-semibold">Critère(s)</label>
+          <select
+            class="form-select form-select-solid"
+            id="ComboCritere"
+            formControlName="critere">
+
+            <option selected>Sélectionnez un critère</option>
+            <option>Montant de la transaction</option>
+            <option>Quantité de part</option>
+            <option>Pays de résidence</option>
+            <option>Type de client</option>
+            <option>devise</option>
+            <option>client</option>
+
+          </select>
+        </div>
+
+        <!-- Opérateur -->
+        <div class="col-md-2">
+          <label class="form-label fw-semibold">Opérateur</label>
+          <select
+            class="form-select form-select-solid"
+            id="ComboOperateur"
+            formControlName="operateur">
+
+            <option selected>Sélectionnez</option>
+            <option><</option>
+            <option>></option>
+            <option>=</option>
+            <option>>=</option>
+            <option><=</option>
+
+          </select>
+        </div>
+
+        <!-- Valeur -->
+        <div class="col-md-2">
+          <label class="form-label fw-semibold">Valeur</label>
+          <input
+            type="text"
+            class="form-control border border-1 border-secondary-subtle"
+            id="valeur"
+            formControlName="valeur">
+        </div>
+
+        <!-- Boutons -->
+        <div class="col-md-5">
+
+          <div class="d-flex flex-wrap gap-2">
+
+            <button type="button"
+                    class="btn btn-light-primary"
+                    (click)="parentheseOuvrante()">
+              (
+            </button>
+
+            <button type="button"
+                    class="btn btn-light-primary"
+                    (click)="parentheseFermante()">
+              )
+            </button>
+
+            <button type="button"
+                    class="btn btn-light-success"
+                    (click)="et()">
+              ET
+            </button>
+
+            <button type="button"
+                    class="btn btn-light-warning"
+                    (click)="ou()">
+              OU
+            </button>
+
+            <button type="button"
+                    class="btn btn-primary"
+                    (click)="ajouter()">
+              Ajouter
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== EXPRESSION ===================== -->
+  <div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-header d-flex justify-content-between align-items-center bg-light">
+
+      <h5 class="mb-0">Expression</h5>
+
+      <button type="button"
+              class="btn btn-sm btn-light-danger"
+              (click)="effacer()">
+        Effacer
+      </button>
+
+    </div>
+
+    <div class="card-body">
+
+      <textarea
+        type="text"
+        class="form-control border border-1 border-secondary-subtle font-monospace"
+        style="height: 90px"
+        formControlName="expression"
+        id="expression"
+        [ngClass]="{ 'is-invalid': submitted && f.expression.errors }">
+      </textarea>
+
+      <div *ngIf="submitted && f.expression.errors" class="invalid-feedback">
+        <div *ngIf="f.expression.errors.required">Ce champ est obligatoire</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== ACTIONS ===================== -->
+  <div class="card border-0 shadow-sm">
+
+    <div class="card-body d-flex justify-content-end gap-3">
+
+      <a routerLink="/lab/notifications/alertes"
+         class="btn btn-light">
+        Annuler
+      </a>
+
+      <button type="submit"
+              class="btn btn-primary"
+              (click)="onSaveCritereAlerte()">
+
+        <span class="indicator-label">Enregistrer</span>
+
+        <span *ngIf="submitting" class="indicator-progress">
+          Veuillez patienter...
+          <span class="spinner-border spinner-border-sm ms-2"></span>
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+</form>

@@ -151,11 +151,27 @@
       <button [disabled]="save"   style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
               (click)="listeOperationSouscriptionRachat()">Actualiser
       </button>
-      <button  style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
-             (click)="generatePdf()">Aperçu
-      </button>
+      <button type="button" class="btn btn-sm btn-info" style="margin-left: 5px;" (click)="generatePdf()">
+          <ng-container *ngIf="downloading">
+            <span class="indicator-progress" [style.display]="'block'">
+              Patientez svp...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="!downloading">
+            <span class="indicator-label">Aperçu</span>
+          </ng-container>
+        </button>
       <button  type="submit" style="margin-top: 10px;margin-left: 10px" type="button" class="btn btn-sm btn-primary"
-               (click)="envoyer()">Envoyer
+               (click)="envoyer()"><ng-container *ngIf="submitted">
+            <span class="indicator-progress" [style.display]="'block'">
+              Patientez svp...
+              <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="!submitted">
+            <span class="indicator-label">Envoyer</span>
+          </ng-container>
       </button>
       <!--end::Table-->
 

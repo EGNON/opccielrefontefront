@@ -25,8 +25,18 @@ export class OperationsouscriptionrachatService extends ResourceService<Operatio
         , {responseType: 'blob' as any }
       )
   }
+  avisOperationSouscriptionPdf(idOperation:any){
+      return this.http.get<any>(`${this.API_URL}/jasperpdf/avisoperationsouscription/${idOperation}`
+        , {responseType: 'blob' as any }
+      )
+  }
   avisOperationPdf2(idOperation:any){
       return this.http.get<any>(`${this.API_URL}/jasperpdf/avisoperation2/${idOperation}`
+       
+      )
+  }
+  avisOperationPdfSouscription2(idOperation:any){
+      return this.http.get<any>(`${this.API_URL}/jasperpdf/avisoperationsouscription2/${idOperation}`
        
       )
   }
