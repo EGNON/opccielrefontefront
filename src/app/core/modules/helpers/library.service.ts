@@ -1070,6 +1070,19 @@ export class LibraryService implements OnDestroy{
                     ('/lab/geldegel').includes(value.path!)),
                   children: []
                 },
+                {
+                  allow: this.authService.isGrantedRole('ROLE_GELDEGEL'),
+                  title: 'Vérifier la liste des personnes sanctionnées',
+                  page: '/lab/listesanction',
+                  role: 'ROLE_GELDEGEL',
+                  icon: '',
+                  translate: '',
+                  dataLink: '',
+                  parent: 'Gel/dégel',
+                  route: LabRouting.find((value, index, obj) =>
+                    ('/lab/geldegel').includes(value.path!)),
+                  children: []
+                },
                  {
                   allow: this.authService.isGrantedRole('ROLE_ALERTE_LAB'),
                   title: 'Critère d\'alerte',

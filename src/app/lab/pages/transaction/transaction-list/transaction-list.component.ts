@@ -1,16 +1,19 @@
-import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {Subscription, switchMap, tap} from "rxjs";
+import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {fromEvent, Subscription, switchMap, tap} from "rxjs";
 import {SweetAlertOptions} from "sweetalert2";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {
   DeleteCriterealerteModalComponent
 } from "../../criterealerte/delete-criterealerte-modal/delete-criterealerte-modal.component";
-import {filter, finalize, map} from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, filter, finalize, map} from "rxjs/operators";
 import {CryptageService} from "../../../services/cryptage.service";
 import {TransactionService} from "../../../services/transaction.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
-import {Config} from "datatables.net";
+import DataTables, {Config} from "datatables.net";
+import moment from 'moment';
+import { DataTableDirective } from 'angular-datatables';
+import { CritereAlerteService } from '../../../services/criterealerte.service';
 
 
 @Component({
@@ -22,13 +25,14 @@ import {Config} from "datatables.net";
 export class TransactionListComponent implements OnInit, OnDestroy, AfterViewInit{
   isLoading: boolean;
   private subscriptions: Subscription[] = [];
-
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
   datatableConfig: Config = {};
   // Reload emitter inside datatable
   reloadEvent: EventEmitter<boolean> = new EventEmitter();
   critere:string;
   swalOptions: SweetAlertOptions = {};
-
+private currentSearch?: Subscription;
   private clickListener: () => void;
   private idInAction: number;
   change:boolean;
@@ -38,6 +42,7 @@ export class TransactionListComponent implements OnInit, OnDestroy, AfterViewIni
     private router: Router,
     private renderer: Renderer2,
     public entityService: TransactionService,
+    public critereAlerteService: CritereAlerteService,
     public pageInfo:PageInfoService,
     public cryptageService: CryptageService,
     private modalService: NgbModal) {
@@ -50,131 +55,59 @@ export class TransactionListComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   ngOnInit(): void {
-    this.pageInfo.updateTitle("Résultats de l'alerte")
+   
     // window.location.reload()
+  this.initDatatable();
 
+  this.route.queryParams
+    .pipe(filter(params => params.critere))
+    .subscribe(params => {
+
+      this.critere = params.critere;
+
+      console.log("Critère =", this.critere);
+
+      this.critereAlerteService.getById(Number(this.critere)).subscribe(
+      (data)=> {
+         this.pageInfo.updateTitle("Résultats de l'alerte("+data.data.description+")")
+      }
+    )
+      this.reloadEvent.emit(true);
+
+    });
+    
   }
-  afficherTransaction()
-  {
-    // popular
-    this.change=false
-    // let columns: any[];
-    // columns=[
-    //   {
-    //     title: 'Dénomination', data: 'denomination', render: function (data, type, row) {
-    //       return row.denomination;
-    //     }
-    //   }
-    //   ,{
-    //   title: 'Type FCP', data: 'denominationOpcvm', render: function (data, type, row) {
-    //     return row.denominationOpcvm;
-    //   }
-    // },
-    //   {
-    //     title: 'Montant', data: 'montant', render: function (data, type, row) {
-    //       return new Intl.NumberFormat('fr-FR').format(row.montant);
-    //     }
-    //   },
-    //   {
-    //     title: 'Qté part', data: 'qtePart', render: function (data, type, row) {
-    //       return row.qtePart;
-    //     }
-    //   },
-    //   {
-    //     title: 'Pays de résidence', data: 'nomPays', render: function (data, type, row) {
-    //       return row.nomPays;
-    //     }
-    //   }
-    // ]
-    //
-    // this.route.queryParams.pipe(
-    //   filter(params => params.critere))
-    //   .subscribe(params => {
-    //     console.log(params); // { order: "popular" }
-    //
-    //     this.critere = params.critere;
-    //     console.log("ettoi===", this.critere);
-    //   })
-    // console.log(this.critere)
-    // // this.critere=this.route.snapshot.paramMap.get('critere');
-    //     let config = {
-    //       serverSide: true,
-    //       ajax: (dataTablesParameters: any, callback: any) => {
-    //         const sb= this.entityService.datatable_Transaction(dataTablesParameters,this.critere)
-    //           .subscribe(resp => {
-    //             callback(resp.data);
-    //             console.log("data==",resp.data)
-    //           });
-    //         this.subscriptions.push(sb);
-    //       },
-    //       columns: columns,
-    //       createdRow: function (row: any, data: any, dataIndex: any) {
-    //         //console.log($(row));
-    //         // $(row).find('input[type=checkbox]').on('click', () => {});
-    //       },
-    //     };
-    //     this.datatableConfig = config;
-    //     this.change=true
-    //
-    //     return config;
+  initDatatable() {
 
+  this.datatableConfig = {
 
+    serverSide: true,
+    // processing: true,
+    // searchDelay: 500,
+    ajax: (dataTablesParameters, callback) => {
 
-    this.route.queryParams.pipe(
-      filter(params => params.critere))
-      .subscribe(params => {
-        console.log(params); // { order: "popular" }
+      console.log("Critère envoyé :", this.critere);
 
-        this.critere = params.critere;
-        console.log("ettoi===", this.critere); // popular
-      })
-          this.datatableConfig = {
-            serverSide: true,
-            ajax: (dataTablesParameters: any, callback) => {
-              console.log("PARAMS === ", dataTablesParameters);
+      if (this.currentSearch) {
+      this.currentSearch.unsubscribe();
+    }
 
-              // @ts-ignore
-              // this.critere = "U2FsdGVkX19hOdv1GAmnr/V3MT+HJ7td+eoNG2U8ptiPirOHxKFM1etOs+0Dm8DpI5vzTpZyAKB3XZgSbGVENw=="
-              // this.critere = this.decode(this.critere.replaceAll(' ','+'))
-              // console.log("decrypt=",this.critere)
-              // let dCritere=this.cryptageService.decryptData(this.critere)
-              // console.log("critere=",dCritere)
-              // // @ts-ignore
-              // this.critere=dCritere
-              const sb= this.entityService.datatable_Transaction(dataTablesParameters,this.critere)
-                // .pipe(
-                //   finalize(() => {
-                //     let currentUrl = this.router.url;
-                //     this.router.navigateByUrl('/',{skipLocationChange:true}).then(()=>{
-                //     this.router.navigate([`/${currentUrl}`]).then(()=>{
-                //       console.log(`After navigation I am on:${this.router.url}`)
-                //     })
-                //   })
-                //   //   location.href="/#"+this.router.url;
-                //   })
-                // )
-                .subscribe(resp => {
-                  callback(resp.data);
-                  console.log("critere=",resp)
-                });
+    this.currentSearch =this.entityService
+          .datatable_Transaction(dataTablesParameters, this.critere)
+           .subscribe({
+        next: (resp) => {
+          callback(resp.data);
+        }
+      });
 
-              // .subscribe(
-              //   {
-              //     next: (resp) => {
-              //       callback(resp.data);
-              //       let currentUrl = this.router.url;
-              //       console.log(currentUrl)
-              //       this.router.navigateByUrl('/', {skipLocationChange: false}).then(() => {
-              //         this.router.navigate([currentUrl]);
-              //       });
-              //     },
-              //     error: err => {
-              //     }
-              //   }
-              // )
-              this.subscriptions.push(sb);
-            },
-            columns: [
+    },
+
+     columns: [
+                {
+                  title: 'Date opération', data: 'dateOperation', render: function (data, type, row) {
+                    return moment(row.dateOperation).format('DD/MM/YYYY');
+                  }
+                },
                 {
                   title: 'Dénomination', data: 'denomination', render: function (data, type, row) {
                     return row.denomination;
@@ -183,6 +116,82 @@ export class TransactionListComponent implements OnInit, OnDestroy, AfterViewIni
                 ,{
                 title: 'Type FCP', data: 'denominationOpcvm', render: function (data, type, row) {
                   return row.denominationOpcvm;
+                }
+              }
+                ,{
+                title: 'Nature opération', data: 'libelleNatureOperation', render: function (data, type, row) {
+                  return row.libelleNatureOperation;
+                }
+              },
+                {
+                  title: 'Montant', data: 'montant', render: function (data, type, row) {
+                    return new Intl.NumberFormat('fr-FR').format(row.montant);
+                  }
+                },
+                {
+                  title: 'Qté part', data: 'qtePart', render: function (data, type, row) {
+                    return row.qtePart;
+                  }
+                },
+                {
+                  title: 'Pays de résidence', data: 'nomPays', render: function (data, type, row) {
+                    return row.nomPays;
+                  }
+                }
+              ],
+
+  };
+
+}
+  afficherTransaction()
+  {
+    // popular
+    this.change=false
+
+    this.route.queryParams.pipe(
+      filter(params => params.critere))
+      .subscribe(params => {
+        console.log(params); // { order: "popular" }
+
+        this.critere = params.critere;
+
+        this.reloadEvent.emit(true);
+
+        console.log("ettoi===", this.critere); // popular
+      })
+          this.datatableConfig = {
+            serverSide: true,
+            ajax: (dataTablesParameters: any, callback) => {
+              console.log("PARAMS === ", dataTablesParameters);
+              const sb= this.entityService.datatable_Transaction(dataTablesParameters,this.critere)
+                
+                .subscribe(resp => {
+                  callback(resp.data);
+                  console.log("critere=",resp)
+                });
+
+             
+              this.subscriptions.push(sb);
+            },
+            columns: [
+                {
+                  title: 'Date opération', data: 'dateOperation', render: function (data, type, row) {
+                    return moment(row.dateOperation).format('DD/MM/YYYY');
+                  }
+                },
+                {
+                  title: 'Dénomination', data: 'denomination', render: function (data, type, row) {
+                    return row.denomination;
+                  }
+                }
+                ,{
+                title: 'Type FCP', data: 'denominationOpcvm', render: function (data, type, row) {
+                  return row.denominationOpcvm;
+                }
+              }
+                ,{
+                title: 'Nature opération', data: 'libelleNatureOperation', render: function (data, type, row) {
+                  return row.libelleNatureOperation;
                 }
               },
                 {
@@ -269,6 +278,25 @@ export class TransactionListComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   ngAfterViewInit(): void {
+    // this.dtElement.dtInstance.then((dtInstance: any) => {
+
+    //   const input = $('.dataTables_filter input')[0];
+
+    //   if (!input) {
+    //     return;
+    //   }
+
+    //   fromEvent(input, 'keyup')
+    //     .pipe(
+    //       map((event: any) => event.target.value),
+    //       debounceTime(5000),
+    //       distinctUntilChanged()
+    //     )
+    //     .subscribe(value => {
+    //       dtInstance.search(value).draw();
+    //     });
+
+    // });
     this.clickListener = this.renderer.listen(document, 'click', (event) => {
       const closestBtn = event.target.closest('.btn');
       if (closestBtn) {

@@ -183,7 +183,7 @@
                 [ngValue]="defaultValues.personneIntervenant">
           {{ defaultValues.personneIntervenant.denomination }}
         </option>
-        <option *ngFor="let item of depositaires$|async" [ngValue]="item">
+        <option *ngFor="let item of registraires$|async" [ngValue]="item">
           {{ item.denomination }}
         </option>
       </select>

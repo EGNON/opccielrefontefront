@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ChargeListComponent, } ,
       { path: 'new', component: ChargeAddEditComponent, },
-      { path: 'edit/:id', component: ChargeAddEditComponent, },
+      { path: 'edit/:id/:id2', component: ChargeAddEditComponent, },
       // { path: 'show/:id', component: ChargeShowComponent, },
       { path: 'Charge', redirectTo: '', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' },

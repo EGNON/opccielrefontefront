@@ -68,10 +68,10 @@
         <option disabled selected [ngValue]="null">Sélectionnez un type...</option>
         <option *ngIf="defaultValues.typeAffectationTitre" disabled [defaultSelected]="true"
                 [ngValue]="defaultValues.typeAffectationTitre">
-          {{ defaultValues.typeAffectationTitre.libelleTypeAffectation }}
+          {{ defaultValues.typeAffectationTitre.libelleTypeAffectationVL }}
         </option>
         <option *ngFor="let item of typeAffectation$|async" [ngValue]="item">
-          {{ item.libelleTypeAffectation }}
+          {{ item.libelleTypeAffectationVL }}
         </option>
       </select>
       <div class="fv-plugins-message-container invalid-feedback"

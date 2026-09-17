@@ -30,4 +30,9 @@ export class OperationConstatationChargesService extends ResourceService<any> im
   afficherConstatationCharge(idOpcvm:any,idSeance:any) {
     return this.http.get<any>(`${this.API_URL}/liste/${idOpcvm}/${idSeance}`)
   }
+  printConstatationCharge(idOpcvm:any,idSeance:any) {
+    return this.http.get<any>(`${this.API_URL}/print/${idOpcvm}/${idSeance}`,
+      {responseType: 'blob' as any }
+    )
+  }
 }

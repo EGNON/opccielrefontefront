@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   countAlerte$ = new BehaviorSubject(0);
   tabAlertes$ = new BehaviorSubject<never[]>([]);
 
-  private readonly INTERVAL = 10000;
+  private readonly INTERVAL = 1000;
   private subscriptions: Subscription[] = [];
 
   constructor(private msgHelpersService: MsgHelpersService) {}

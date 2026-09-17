@@ -36,8 +36,10 @@ export class NotificationsInnerComponent implements OnInit {
 
   activeTabId: NotificationsTabsType = 'kt_topbar_notifications_1';
   alerts: Array<MessageBox>;
+  notificationsRecentes: Array<MessageBox>;
 
   counter: number = 0;
+  afficher4: number = -4;
 
   private subscriptions: Subscription[] = [];
 
@@ -53,8 +55,13 @@ export class NotificationsInnerComponent implements OnInit {
     let previousCount = 0;   // On garde en mémoire le nombre précédent
 
   const sb = this.notifications.subscribe(data => {
-    const currentCount = data?.length || 0;
-    this.alerts = data || [];
+   this.alerts = data || [];
+    this.notificationsRecentes = this.alerts
+    .slice(this.afficher4)
+    .reverse();
+
+    const currentCount = this.notificationsRecentes?.length || 0;
+    
     this.counter = currentCount;
 
     // Joue le son UNIQUEMENT s'il y a AU MOINS une nouvelle notification
@@ -67,7 +74,65 @@ export class NotificationsInnerComponent implements OnInit {
   });
     this.subscriptions.push(sb);
   }
+  afficher(nbre:string){
+    let previousCount = 0;   // On garde en mémoire le nombre précédent
 
+  const sb = this.notifications.subscribe(data => {
+   this.alerts = data || [];
+   if(nbre==="-4"){
+    this.afficher4=-4;
+    this.notificationsRecentes = this.alerts
+        .slice(this.afficher4)
+        .reverse();
+   }
+   else
+   {
+    this.afficher4=data?.length;
+    this.notificationsRecentes = this.alerts
+        .slice(0,this.afficher4)
+        .reverse();
+   }
+   
+
+    const currentCount = this.notificationsRecentes?.length || 0;
+    
+    this.counter = currentCount;
+
+    // Joue le son UNIQUEMENT s'il y a AU MOINS une nouvelle notification
+    if (currentCount > previousCount) {
+      this.notificationSound.playNotificationSound();
+    }
+
+    // Mise à jour du compteur précédent
+    previousCount = currentCount;
+  });
+    this.subscriptions.push(sb);
+
+  }
+   afficherTout(){
+    let previousCount = 0;   // On garde en mémoire le nombre précédent
+
+  const sb = this.notifications.subscribe(data => {
+   this.alerts = data || [];
+    this.notificationsRecentes = this.alerts
+    .slice(0,data?.length)
+    .reverse();
+
+    const currentCount = this.notificationsRecentes?.length || 0;
+    
+    this.counter = currentCount;
+
+    // Joue le son UNIQUEMENT s'il y a AU MOINS une nouvelle notification
+    if (currentCount > previousCount) {
+      this.notificationSound.playNotificationSound();
+    }
+
+    // Mise à jour du compteur précédent
+    previousCount = currentCount;
+  });
+    this.subscriptions.push(sb);
+
+  }
   ngOnDestroy(): void {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }

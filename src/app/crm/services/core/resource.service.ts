@@ -72,6 +72,7 @@ export abstract class ResourceService<T extends ResourceModel<T>> {
     // console.log("Resource = ", resource);
     // console.log(`${this.API_URL}/datatable?critere=${critere.replaceAll('"','')}`)
     // let url=`${this.API_URL}/datatable/list/${critere.replaceAll('"','')}`
+     console.log('Appel HTTP, critere =', critere);
     return this.httpClient
       .post<ResponseModel<T>>(`${this.API_URL}/datatable?critere=${critere}`, resource)
       /*.pipe(

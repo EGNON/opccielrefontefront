@@ -225,6 +225,7 @@ afficherExercice(){
         }
       },
     };
+    this.allData=[]
     this.afficherListeVide("l");
     // this.actualiser();
   }
@@ -498,6 +499,7 @@ afficherExercice(){
     this.libService.balanceListe(param).subscribe(
       (data)=>{
         this.allData=data.data;
+        console.log(this.allData)
         const exportData = this.allData.map(item => ({
           'N°Compte': item.numCompteComptable,
           'LIBELLE': item.libelleCompteComptable,

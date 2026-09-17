@@ -276,6 +276,41 @@ export class VerifDepotsouscriptionNiv2Component implements OnInit, OnDestroy{
       });
     this.subscriptions.push(sb);
   }
+  telechargerFinal() {
+    this.downloading = true;
+    const downloadRequest = {
+      idOpcvm: this.currentOpcvm?.idOpcvm,
+      idSeance: this.currentSeance?.idSeanceOpcvm?.idSeance,
+      niveau: 2,
+      user: {
+        idPersonne: this.currentUser?.idPersonne,
+        denomination: this.currentUser?.denomination
+      },
+    };
+    const sb = this.entityService.telechargerListeDepotFinal(downloadRequest)
+      .pipe(
+        catchError((err) => {
+          this.downloading = false;
+          return of(err.message);
+        }),
+        finalize(() => {
+          this.downloading = false;
+          this.downloaded = false;
+          window.location.reload();
+        })
+      )
+      .subscribe((response: any) => {
+        const linkSource =
+          'data:application/octet-stream;base64,' + response.data;
+        const downloadLink = document.createElement('a');
+        const fileName = 'listVerif2Depot.pdf';
+
+        downloadLink.href = linkSource;
+        downloadLink.download = fileName;
+        downloadLink.click();
+      });
+    this.subscriptions.push(sb);
+  }
 
   confirmer($event: any) {
     this.submitting = true;
@@ -311,7 +346,8 @@ export class VerifDepotsouscriptionNiv2Component implements OnInit, OnDestroy{
             confirmButtonText: "Ok"
           }).then((result) => {
             if (result.isConfirmed) {
-              window.location.reload();
+              this.telechargerFinal();
+              
             }
           });
         })

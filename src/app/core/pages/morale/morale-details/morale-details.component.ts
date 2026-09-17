@@ -139,8 +139,8 @@ export class MoraleDetailsComponent {
         bp: [null],
         distributeur: [null],
         secteur: [null, Validators.required],
-        emailPerso: [null, Validators.email],
-        emailPro: [null, Validators.email],
+        emailPerso: ['', Validators.email],
+        emailPro: ['', Validators.email],
         numeroCpteDeposit: [
           null,
           [Validators.required], //sync validators
@@ -156,6 +156,7 @@ export class MoraleDetailsComponent {
         estConvertie: [this.etatConversion],
         statutPersonnes: this.fb.array([this.createStatutPersonneForm()]),
         sousTypeClient: [null],
+        estActifPersonne: [false],
         categorieClient: [null]
       };
       this.pmForm = {
@@ -431,6 +432,7 @@ export class MoraleDetailsComponent {
     this.form.patchValue({prenomContact: entity.prenomContact});
     this.form.patchValue({telContact: entity.telContact});
     this.form.patchValue({emailContact: entity.emailContact});
+    this.form.patchValue({estActifPersonne: entity.estActifPersonne});
     this.form.patchValue({titreContact: entity.titreContact});
     this.form.patchValue({numeroCpteDeposit: entity.numeroCpteDeposit});
     this.form.patchValue({sousTypeClient: entity.sousTypeClient});

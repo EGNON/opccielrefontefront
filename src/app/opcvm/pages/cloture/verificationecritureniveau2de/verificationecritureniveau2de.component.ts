@@ -59,6 +59,7 @@ export class Verificationecritureniveau2deComponent implements OnInit, AfterView
   @ViewChild('mySelect') mySelect!: ElementRef<HTMLSelectElement>;
   isLoading: boolean = false;
   subscriptions: Subscription[] = [];
+  idOperationEcriture:string;
 
   [key: string]: any;
 
@@ -314,6 +315,46 @@ export class Verificationecritureniveau2deComponent implements OnInit, AfterView
       });
     
   }
+  apercuFinal() {
+    this.downloading=true
+    let idOpcvm = this.currentOpcvm?.idOpcvm;
+    let idSeance = this.currentSeance?.idSeanceOpcvm?.idSeance;
+    let param = {
+      idOpcvm: idOpcvm,
+      ...this.form.value
+    };
+    let estVerifie2:boolean=false;
+    
+      estVerifie2=true
+    
+    param = {
+      ...param,
+      dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
+      dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
+      estVerifie1:true,
+      estVerifie2:estVerifie2,
+      idSeance:0,
+      codeTypeOperation:"DE",
+      idOperationEcriture:this.idOperationEcriture
+    };
+    console.log(param)
+    this.operationService.apercuVerificationEritureNiveau(param,2,"DE").pipe(
+      catchError((err) => {
+        this.downloading=false
+        return of(err.message);
+      }),
+      finalize(() => {
+        this.downloading=false
+      })
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_ecriture_de_niveau2_finale.pdf';
+        a.click();
+      });
+    
+  }
   validationEcritureNiveau1(){
     this.valider=true
     let idOpcvm = this.currentOpcvm?.idOpcvm;
@@ -342,6 +383,10 @@ export class Verificationecritureniveau2deComponent implements OnInit, AfterView
     console.log("option=",options)
     for (let i = 0; i < options.length; i++) {
       this.idOperation.push(options[i].innerHTML)
+      if(i===0)
+        this.idOperationEcriture=options[i].innerHTML
+      else
+        this.idOperationEcriture+=";"+options[i].innerHTML
       // console.log(options[i].value, options[i].text);
     }
     console.log("idoperation=",this.idOperation)
@@ -352,6 +397,7 @@ export class Verificationecritureniveau2deComponent implements OnInit, AfterView
         console.log("reponse=",data.data)
         this.valider=false
         alert("Validation des écritures effectuée avec succès")
+        this.apercuFinal()
       }
     )
     // const sb = this.operationService.afficherListeVerificationEritureListe(param)

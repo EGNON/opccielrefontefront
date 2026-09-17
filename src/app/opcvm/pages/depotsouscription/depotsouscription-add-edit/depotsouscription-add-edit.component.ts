@@ -9,6 +9,7 @@ import {LoaderService} from "../../../../loader.service";
 import {LocalService} from "../../../../services/local.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
+import { AuthService } from '../../../../core/modules/auth';
 
 @Component({
     selector: 'app-depotsouscription-add-edit',
@@ -42,6 +43,7 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
     private personneService: PersonneService,
     private fb: FormBuilder,
     private pageInfo: PageInfoService,
+    private authService: AuthService,
     private loadingService: LoaderService,
     private router: Router,
     private route: ActivatedRoute
@@ -252,7 +254,8 @@ export class DepotsouscriptionAddEditComponent implements OnInit, AfterViewInit,
       dateVerification1: futureDate,
       dateVerification2: futureDate,
       valeurFormule: `2:${entity.montant}`,
-      valeurCodeAnalytique: `OPC:${this.currentOpcvm?.idOpcvm};ACT:${entity.actionnaire?.idPersonne}`
+      valeurCodeAnalytique: `OPC:${this.currentOpcvm?.idOpcvm};ACT:${entity.actionnaire?.idPersonne}`,
+      userLogin:this.authService.currentUserValue.username
     }
     console.log("Send form === ", entity);
     if(this.id) {

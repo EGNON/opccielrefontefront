@@ -77,11 +77,22 @@ export class PaiementChargesComponent implements OnInit, AfterViewInit, OnDestro
     this.idSeance=item.idSeance
     this.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm
     this.afficherListeCharges()
+    this.seanceOpcvmService.afficherSelonId(this.idOpcvm,this.idSeance).subscribe(
+      (data)=>{
+         const dateSeance = new Date(data.data.dateFermeture);
+    this.form.patchValue({dateOperation:new NgbDate(dateSeance.getFullYear(), dateSeance.getMonth()+1, dateSeance.getDate())})
+      }
+    )
+     
+      
+    
 
   }
   public onDeSelect(item: any) {
     this.idSeance=0
     this.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm
+     const dateSeance = new Date(this.currentSeance?.dateFermeture);
+    this.form.patchValue({dateOperation:new NgbDate(dateSeance.getFullYear(), dateSeance.getMonth()+1, dateSeance.getDate())})
     this.operationConstationCharge$=null
   }
 
@@ -137,6 +148,27 @@ export class PaiementChargesComponent implements OnInit, AfterViewInit, OnDestro
         console.log(this.operationConstationCharge$)
       }
     )
+  }
+  generatePdf(){
+      this.downloading=true
+      //this.nbreLigne = document.getElementById("table_AvisOperation").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
+     
+      this.operationConstatationChargesService.printConstatationCharge(this.idOpcvm,this.idSeance).pipe(
+          catchError((err) => {
+            this.downloading = false;
+            return of(err.message);
+          }),
+          finalize(() => {
+            this.downloading = false;
+          })
+        ).subscribe((blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'charges.pdf';
+          a.click();
+        });
+  
   }
   getIdOperation(isSelected, idOperation){
      // console.log(isSelected, idOperation)
@@ -203,7 +235,7 @@ export class PaiementChargesComponent implements OnInit, AfterViewInit, OnDestro
           this.idSeance=0
           this.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm
           this.operationConstationCharge$=null
-          alert("Enregistrement effectué avec succès.Veuillez.")
+          alert("Enregistrement effectué avec succès.")
           this.afficherListeCharges()
           this.router.navigate(['/opcvm/comptabilite/paiement/charges/liste']);
 

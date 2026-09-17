@@ -90,6 +90,54 @@ export class Verificationniveau2deComponent implements OnInit{
   });
 
 }
+  verificationNiveau1DeFinal() {
+
+  this.downloading = true;
+
+   this.operationService.verifierEtape(3,
+      this.localStore.getData("currentOpcvm")?.idOpcvm,this.currentSeance?.idSeanceOpcvm.idSeance,true,true,2)
+      .pipe(
+    catchError((err) => {
+      this.downloading = false;
+      alert("Erreur serveur");
+      return of(null);
+    }),
+    finalize(() => {
+      this.downloading = false;
+      window.location.reload();
+    })
+  ).subscribe((response: any) => {
+
+    if (!response) return;
+
+    const contentType = response.headers.get('content-type');
+
+    // ✅ Si c'est un PDF → téléchargement
+    if (contentType === 'application/pdf') {
+
+      const blob = new Blob([response.body], { type: 'application/pdf' });
+      const fileURL = window.URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = fileURL;
+      a.download = 'verification_niveau2_de_finale.pdf';
+      a.click();
+
+      window.URL.revokeObjectURL(fileURL);
+
+    } 
+    // ✅ Sinon → message texte
+    else {
+      const reader = new FileReader();
+      reader.onload = () => {
+        alert(reader.result);
+      };
+      reader.readAsText(response.body);
+    }
+
+  });
+
+}
   // verificationNiveau1De(){
   //   this.downloading=true
   //   this.operationService.verifierEtape(3,
@@ -142,7 +190,7 @@ export class Verificationniveau2deComponent implements OnInit{
           // this.submitting = false;
           this.submitted = false;
           // this.loadingService.setLoading(false);
-          window.location.reload();
+          this.verificationNiveau1DeFinal()
         })
       )
       .subscribe(value => {

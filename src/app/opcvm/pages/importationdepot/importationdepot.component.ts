@@ -10,6 +10,7 @@ import {PersonneService} from "../../../crm/services/personne/personne.service";
 import {LocalService} from "../../../services/local.service";
 import { LibrairiesService } from '../../../services/librairies.service';
 import { DepotrachatService } from '../../services/depotrachat.service';
+import { AuthService } from '../../../core/modules/auth';
 
 @Component({
     selector: 'app-importationdepot',
@@ -40,6 +41,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
     private loadingService: LoaderService,
     private librairiesService: LibrairiesService,
     private pers: PersonneService,
+    private authService: AuthService,
     private depotRachatService: DepotrachatService,
     private fb: FormBuilder,
     private uniqueNumCpteDepositValidators: UniqueNumCpteDepositValidators,) {
@@ -197,7 +199,8 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
       statutPersonnes: this.fb.array([this.createStatutPersonneForm()]),
       //Champs PersonneMorale
       sigle: [null, Validators.required],
-      raisonSociale: [null, Validators.required]
+      raisonSociale: [null, Validators.required],
+      userLogin:[this.authService.currentUserValue.username]
     });
   }
 
@@ -249,6 +252,7 @@ export class ImportationdepotComponent implements OnInit, OnDestroy{
       paysResidence: [null],
       nomMere: [null],
       prenomsMere: [null],
+      userLogin:[this.authService.currentUserValue.username],
       numeroCpteDeposit: [
         null,
         [Validators.required], //sync validators

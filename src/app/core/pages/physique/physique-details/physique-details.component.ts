@@ -161,9 +161,9 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
         dateExpirationPiece: [null],
         modeEtablissement: [null],
         modeEtablissementDto: [null],
-        emailPerso: [null, Validators.email],
-        emailPro: [null, Validators.email],
-        domicile: [null],
+        emailPerso: ['', Validators.email],
+        emailPro: ['', Validators.email],
+        domicile: [''],
         distributeur: [null],
         documents: this.fb.array([]),
         // statutPersonnes: this.fb.array([]),
@@ -220,6 +220,8 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
         secteurEmp: [null],
         paysNationalite: [null, Validators.required],
         langue: [null],
+        estMineur: [false],
+        estActifPersonne: [false],
         teint: [null],
         exposeMotif: [null],
         sousTypeClient: [null],
@@ -238,7 +240,7 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
         libelleQualite: $tab[0].textContent
       };
       this.qualite = $tab[0].textContent.toLowerCase();
-      // console.log("Tab === ", $tab[0].textContent);
+       console.log("Tab === ", $tab[0].textContent.toLowerCase());
       if(!this.id || (this.id && this.etatConversion))
       {
         this.statutPersonnes.clear();
@@ -576,6 +578,8 @@ export class PhysiqueDetailsComponent implements OnInit, AfterViewInit, OnDestro
     this.form.patchValue({ppe2: entity.ppe2});
     this.form.patchValue({ppe3: entity.ppe3});
     this.form.patchValue({ppe4: entity.ppe4});
+    this.form.patchValue({estMineur: entity.estMineur});
+    this.form.patchValue({estActifPersonne: entity.estActifPersonne});
 
     //Chargements des statuts
     const statuts = entity.statutPersonnes;

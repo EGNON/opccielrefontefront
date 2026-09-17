@@ -113,7 +113,9 @@ export class VolatiliteComponent implements OnInit, AfterViewInit{
         { title: "SEANCE N1" },
         { title: "VL N1" },
         {
-          title: "DATES", data: null, render: function (data: any, type: any, row: any) {
+          title: "DATES", 
+          data: null, 
+          render: function (data: any, type: any, row: any) {
             return moment(data[8]).format('DD/MM/YYYY');
           }
         },
@@ -123,7 +125,12 @@ export class VolatiliteComponent implements OnInit, AfterViewInit{
         { title: "PERFORMANCE N1" },
         { title: "PERFORMANCE" },
         { title: "RENTABILITE MOYENNE %" },
-        { title: "VARIANCE" },
+        { title: "VARIANCE",
+          data: null, 
+          render: function (data: any, type: any, row: any) {
+            return Number(data[15]).toFixed(10);
+          }
+         },
         { title: "ECART TYPE (VOLATILITE)" },
         { title: "ECART TYPE BASE DE 100" }
       ],

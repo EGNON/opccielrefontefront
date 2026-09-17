@@ -113,16 +113,16 @@ export class ChargeListComponent implements OnInit, OnDestroy, AfterViewInit {
                     <ul class="dropdown-menu">`;
         const show = `
                 <li>
-                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idCharge}">Afficher</a>
+                    <a type="button" class="dropdown-item" data-action="view" data-id="${full.idCharge.idOpcvm}" data-id2="${full.idCharge.codeCharge.trim()}">Afficher</a>
                 </li>`;
         const edit = `
                 <li>
-                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idCharge}"
+                    <a type="button" class="dropdown-item" data-action="edit" data-id="${full.idCharge.idOpcvm}" data-id2="${full.idCharge.codeCharge.trim()}"
                     >Modifier</a>
                 </li>`;
         const separator = `<li><hr class="dropdown-divider"></li>`;
         const delete1 = `<li>
-                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idCharge}"
+                    <a type="button" class="dropdown-item" data-action="delete" data-id="${full.idCharge.idOpcvm}" data-id2="${full.idCharge.codeCharge.trim()}"
                     >Supprimer</a>
                 </li>`;
         const parentActionEnd = `</ul>
@@ -151,7 +151,7 @@ export class ChargeListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.clickListener = this.renderer.listen(document, 'click', (event) => {
       const closestBtn = event.target.closest('.btn, .dropdown-item');
       if (closestBtn) {
-        const {action, id} = closestBtn.dataset;
+        const {action, id,id2} = closestBtn.dataset;
         this.idInAction = id;
 
         switch (action) {
@@ -164,7 +164,7 @@ export class ChargeListComponent implements OnInit, OnDestroy, AfterViewInit {
             break;
 
           case 'edit':
-            this.router.navigate(['edit', id], {relativeTo: this.route});
+            this.router.navigate(['edit', id,id2], {relativeTo: this.route});
             break;
 
           case 'delete':

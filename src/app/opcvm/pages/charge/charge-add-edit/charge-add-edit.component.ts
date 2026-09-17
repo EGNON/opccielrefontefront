@@ -26,7 +26,7 @@ import {LocalService} from "../../../../services/local.service";
 export class ChargeAddEditComponent implements OnInit, OnDestroy{
   qualite: string;
   id?: number;
-  id2?: number;
+  id2?: string;
   id3?: number;
   monnaies$: Observable<Monnaie[]>;
   opcvm:Opcvm;
@@ -61,6 +61,7 @@ export class ChargeAddEditComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    this.id2 = this.route.snapshot.params['id2'];
     this.entityForm = this.fb.group(
       {
         id: [this.id],
@@ -80,9 +81,14 @@ export class ChargeAddEditComponent implements OnInit, OnDestroy{
     if(this.id)
     {
       this.pageInfo.updateTitle("Modification de charge à étaler")
-      const sb = this.entityService.getById(this.id)
+      let param={
+        idOpcvm:this.id,
+        codeCharge:this.id2.trim()
+      }
+      const sb = this.entityService.afficherSelonIdOpcvmEtCodeCharge(param)
         .subscribe((entity)=>{
           this.entity=entity.data;
+          console.log(entity.data)
           this.loadFormValues(entity.data);
         });
       this.subscriptions.push(sb);
@@ -96,8 +102,8 @@ export class ChargeAddEditComponent implements OnInit, OnDestroy{
     let taux=entity.montant;
     this.entity = entity;
     this.entityForm.patchValue({montant:taux.toString().replace('.',',')});
-    this.entityForm.patchValue({codeCharge:entity.codeCharge});
-    this.entityForm.patchValue({typeCharge:entity.typeCharge});
+    this.entityForm.patchValue({codeCharge:entity.idCharge.codeCharge.trim()});
+    this.entityForm.patchValue({typeCharge:entity.typeCharge.trim()});
     this.appliquerTypeCharge()
     this.entityForm.patchValue({appliquerSurActifNet:entity.appliquerSurActifNet});
     this.entityForm.patchValue({natureOperation:entity.natureOperation});

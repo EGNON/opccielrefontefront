@@ -178,14 +178,14 @@ export class EntityCrudComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
 
-    /*if (this.reload) {
+    if (this.reload) {
       this.reload.subscribe(data => {
         this.modalService.dismissAll();
         this.datatableElement.dtInstance.then(dtInstance => {
           dtInstance.ajax.reload();
         });
       });
-    }*/
+    }
   }
 
   renderActionColumn(): void {
@@ -281,7 +281,7 @@ export class EntityCrudComponent implements OnInit, AfterViewInit, OnDestroy {
   triggerFilter() {
     fromEvent<KeyboardEvent>(document, 'keyup')
       .pipe(
-        //debounceTime(50),
+        debounceTime(1000),
         map(event => {
           const target = event.target as HTMLElement;
           const action = target.getAttribute('data-action');

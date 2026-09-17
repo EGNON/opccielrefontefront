@@ -4,9 +4,9 @@
     Vous avez reçu <span class="fs-8 opacity-75 ps-3">{{ counter }} notifications</span>
   </h3>
 </div>
-<ng-container *ngIf="alerts.length > 0; else noDataError">
+<ng-container *ngIf="notificationsRecentes.length > 0; else noDataError">
   <div class="scroll-y mh-325px my-5 px-8">
-    <div *ngFor="let alert of alerts" class="d-flex flex-stack py-4">
+    <div *ngFor="let alert of notificationsRecentes" class="d-flex flex-stack py-4">
       <div class="d-flex align-items-center">
         <div class="symbol symbol-35px me-4">
             <span class="symbol-label" [ngClass]="'bg-light-success'">
@@ -28,9 +28,14 @@
     </div>
   </div>
   <div class="py-3 text-center border-top">
-    <a routerLink="/crafted/pages/profile" class="btn btn-color-gray-600 btn-active-color-primary">
-      Tout voir <app-keenicon name="arrow-right" class="fs-5"></app-keenicon>
+    <a (click)="afficher4==-4?afficher('5'):afficher('-4')" class="btn btn-color-gray-600 btn-active-color-primary">
+       <app-keenicon name="arrow-right" class="fs-5"></app-keenicon>
+       {{afficher4==-4?'Tout voir'
+       :'Quatre dernières'}}
     </a>
+    <!-- <a routerLink="/crafted/pages/profile" class="btn btn-color-gray-600 btn-active-color-primary">
+      Tout voir <app-keenicon name="arrow-right" class="fs-5"></app-keenicon>
+    </a> -->
   </div>
 </ng-container>
 <ng-template #noDataError>

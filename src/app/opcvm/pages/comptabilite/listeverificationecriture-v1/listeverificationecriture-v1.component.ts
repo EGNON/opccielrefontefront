@@ -265,8 +265,9 @@ export class ListeverificationecritureV1Component implements OnInit, AfterViewIn
         a.href = url;
         a.download = 'verification_ecriture_niveau1.pdf';
         a.click();
+        this.downloading=false
       });
-    this.downloading=false
+    
   }
   validationEcritureNiveau1(){
     this.valider=true

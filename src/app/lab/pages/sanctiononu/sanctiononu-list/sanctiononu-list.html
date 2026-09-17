@@ -1,0 +1,174 @@
+<div class="card">
+
+  <div class="card-header">
+    <h3>Contrôle des sanctions</h3>
+  </div>
+
+  <div class="card-body">
+
+    <div class="mb-4">
+      <label class="form-label">
+        Fichier Excel
+      </label>
+
+      <input
+        type="file"
+        class="form-control"
+        accept=".xlsx,.xls"
+        (change)="chargerExcel($event)">
+    </div>
+
+    <div *ngIf="listeNoms.length > 0">
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <strong>
+          {{ listeNoms.length }} noms trouvés
+        </strong>
+
+        <button
+            type="button"
+            class="btn btn-primary"
+            [disabled]="verificationEnCours || listeNoms.length === 0"
+            (click)="verifier()">
+
+            <span *ngIf="!verificationEnCours">
+                Vérifier
+            </span>
+
+            <span *ngIf="verificationEnCours">
+                Vérification en cours...
+            </span>
+
+            </button>
+
+      </div>
+
+      <div class="table-responsive">
+
+        <table class="table table-bordered table-hover">
+
+          <thead>
+            <tr>
+              <th style="width: 80px;">#</th>
+              <th>Nom</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let nom of listeNoms; let i = index">
+
+              <td>{{ i + 1 }}</td>
+
+              <td>{{ nom }}</td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+<div
+  class="mt-5"
+  *ngIf="resultats.length > 0">
+
+  <div class="d-flex justify-content-between mb-3">
+
+    <h4>
+      Correspondances trouvées
+    </h4>
+
+    <span class="badge bg-danger">
+      {{ resultats.length }}
+    </span>
+
+  </div>
+
+  <div class="table-responsive">
+
+    <table class="table table-bordered table-hover">
+
+      <thead>
+
+        <tr>
+
+          <th>#</th>
+
+          <th>Nom recherché</th>
+
+          <th>Client</th>
+
+          <!-- <th>Type</th> -->
+
+          <th>ID Personne</th>
+
+          <!-- <th>Score</th> -->
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr
+          *ngFor="
+            let resultat of resultats;
+            let i = index
+          ">
+
+          <td>
+            {{ i + 1 }}
+          </td>
+
+          <td>
+            {{ resultat.nomSanction }}
+          </td>
+
+          <td>
+            {{ resultat.nomRecherche }}
+          </td>
+
+          <!-- <td>
+
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-warning':
+                  resultat.typePersonne === 'PHYSIQUE',
+
+                'bg-info':
+                  resultat.typePersonne === 'MORALE'
+              }">
+
+              {{ resultat.typePersonne }}
+
+            </span>
+
+          </td> -->
+
+          <td>
+            {{ resultat.idPersonne }}
+          </td>
+
+          <!-- <td>
+            <strong>
+              {{ resultat.score }} %
+            </strong>
+          </td> -->
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+</div>

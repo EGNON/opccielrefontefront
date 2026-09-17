@@ -182,6 +182,8 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
     if(idActionnaire===0)
       idActionnaire=this.idPersonne
     this.loadingService.setLoading(true);
+    console.log("idactionnaire=",idActionnaire)
+    console.log("idopcvm=",this.localStore.getData("currentOpcvm").idOpcvm)
       this.entityService.afficherNbrePart(this.localStore.getData("currentOpcvm").idOpcvm,
         idActionnaire).subscribe(
         (data)=>{
@@ -311,9 +313,9 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
       natureOperation:this.natureOperation,
       quantite:quantite,
       dateOperation:dateOperation,
-      dateValeur:dateSaisie,
+      dateValeur:dateOperation,
       dateSaisie:dateSaisie,
-      datePiece:dateSaisie,
+      datePiece:dateOperation,
       estOD:false,
       estVerifie1:false,
       estVerifie2:false,
@@ -340,7 +342,8 @@ export class IntentionrachatAddEditComponent implements OnInit, OnDestroy{
       interetPrecompte:0,
       nomVerificateur:"",
       valeurCodeAnalytique:valeurCodeAnalytique,
-      valeurFormule:ValeurFormule
+      valeurFormule:ValeurFormule,
+      userLogin:this.authService.currentUserValue.username
     };
    // console.log("act1",entity)
     return this.id

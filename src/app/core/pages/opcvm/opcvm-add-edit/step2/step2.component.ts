@@ -43,7 +43,7 @@ export class Step2Component implements OnInit, OnDestroy{
         this.defaultValues.dureeMinimalPlacement,
         [Validators.required],
       ],
-      uniteDureeMinimalPlacement: [this.defaultValues.uniteDureeMinimalPlacement, [Validators.required]],
+      uniteDureeMinimalPlacement: [this.defaultValues.uniteDureeMinimalPlacement.trim(), [Validators.required]],
       valeurMinimalPlacement: [this.defaultValues.valeurMinimalPlacement, [Validators.required]],
       typeAffectationTitre: [this.defaultValues.typeAffectationTitre, [Validators.required]],
       periodiciteCalculValeurLiquidativeOpcvm: [
@@ -51,18 +51,18 @@ export class Step2Component implements OnInit, OnDestroy{
         [Validators.required]
       ],
       unitePeriodiciteCalculValeurLiquidative: [
-        this.defaultValues.unitePeriodiciteCalculValeurLiquidative,
+        this.defaultValues.unitePeriodiciteCalculValeurLiquidative.trim(),
         [Validators.required]
       ],
       debutExerciceActuelOpcvm: [new NgbDate(dateDebExo.getFullYear(), dateDebExo.getMonth()+1, dateDebExo.getDate())],
-      finExerciceActuelOpcvm: [null],
-      tauxTAF: [this.defaultValues.tauxTAF],
+      finExerciceActuelOpcvm: [new NgbDate(dateDebExo.getFullYear(), dateDebExo.getMonth()+1, dateDebExo.getDate())],
+      tauxTAF: [this.defaultValues.tauxTAF.toString()],
       appliqueeTAF: [this.defaultValues.appliqueeTAF],
       appliqueeTVA: [this.defaultValues.appliqueeTVA],
-      tauxRetrocessionSouscription: [this.defaultValues.tauxRetrocessionSouscription, [Validators.required]],
-      tauxRetrocessionRachat: [this.defaultValues.tauxRetrocessionRachat, [Validators.required]],
-      tauxCommissionSouscription: [this.defaultValues.tauxCommissionSouscription, [Validators.required]],
-      tauxCommissionRachat: [this.defaultValues.tauxCommissionRachat, [Validators.required]],
+      tauxRetrocessionSouscription: [this.defaultValues.tauxRetrocessionSouscription.toString(), [Validators.required]],
+      tauxRetrocessionRachat: [this.defaultValues.tauxRetrocessionRachat.toString(), [Validators.required]],
+      tauxCommissionSouscription: [this.defaultValues.tauxCommissionSouscription.toString(), [Validators.required]],
+      tauxCommissionRachat: [this.defaultValues.tauxCommissionRachat.toString(), [Validators.required]],
       visaNoteInformation: [this.defaultValues.visaNoteInformation, [Validators.required]],
     });
 

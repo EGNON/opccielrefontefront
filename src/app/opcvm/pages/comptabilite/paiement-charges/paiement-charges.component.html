@@ -75,7 +75,7 @@
         </td>
         <td [hidden]="true">{{avisOperationBourse.idOperation}}</td>
         <td >{{avisOperationBourse.designation}}</td>
-        <td >{{avisOperationBourse.dateSolde|date: 'dd/MM/YYYY' }}</td>
+        <td >{{avisOperationBourse.dateSolde|date: 'dd/MM/yyyy' }}</td>
         <td >{{avisOperationBourse.montant|number }}</td>
         <td >{{avisOperationBourse.montantCharge|number }}</td>
         <td [innerHtml]="avisOperationBourse.estPayee?'PAYE':'NON PAYE'"></td>
@@ -87,11 +87,19 @@
   <!--  </div>-->
   <!--  <div *ngIf="exerciceEnCours">-->
   <div  class="d-flex justify-content-end">
-    <button   style="margin-top: 10px;margin-right: 5px" type="button" class="btn btn-sm btn-primary"
+    <button   style="margin-top: 10px;margin-right: 5px" type="button" class="btn btn-sm btn-primary btn-custom"
               (click)="save()">Enregistrer
     </button>
-    <button   style="margin-top: 10px" type="button" class="btn btn-sm btn-primary"
-              (click)="save()">Imprimer
+    <button type="button" style="margin-top: 10px" class="btn btn-sm btn-info btn-custom" (click)="generatePdf()">
+      <ng-container *ngIf="downloading">
+        <span class="indicator-progress" [style.display]="'block'">
+          Patientez svp...
+          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+        </span>
+      </ng-container>
+      <ng-container *ngIf="!downloading">
+        <span class="indicator-label">Imprimer</span>
+      </ng-container>
     </button>
     <!--end::Table-->
 

@@ -55,9 +55,9 @@ export class Step1Component implements OnInit, AfterViewInit, OnChanges, OnDestr
     this.formeJuridiqueOpc$ = this.getAllFormeJuridiqueOpc().pipe(
       map(resp => resp.data)
     );
-    this.getPersonnesAll('emetteur');
+    this.getPersonnesAll('emetteurs');
     this.getPersonnesAll('gestionnaires');
-    this.getPersonnesAll('depositaire');
+    this.getPersonnesAll('registraires');
   }
 
   getPersonnesAll(qualite: any = null)
@@ -67,6 +67,7 @@ export class Step1Component implements OnInit, AfterViewInit, OnChanges, OnDestr
     this[name] = this.personneService.afficherPersonneSelonQualite(qualite.toUpperCase().trim()).pipe(
       tap(resp => console.log(qualite, " === ", resp))
     );
+    //console.log("this.name",this[name])
   }
 
   initForm() {

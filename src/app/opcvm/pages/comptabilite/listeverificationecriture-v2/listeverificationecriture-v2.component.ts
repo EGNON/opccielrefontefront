@@ -46,6 +46,7 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
   apercuGrise:boolean;
   verifierGrise:boolean;
   idOperation:any[];
+  idOperationEcriture:string;
   //DataTable Config
   datatableConfig: Config = {};
   dtOptions: any = {};
@@ -262,8 +263,42 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
         a.href = url;
         a.download = 'verification_ecriture_niveau2.pdf';
         a.click();
+        this.downloading=false
       });
-    this.downloading=false
+    
+  }
+  apercuFinal() {
+    this.downloading=true
+    let idOpcvm = this.currentOpcvm?.idOpcvm;
+    let idSeance = this.currentSeance?.idSeanceOpcvm?.idSeance;
+    let param = {
+      idOpcvm: idOpcvm,
+      ...this.form.value
+    };
+    let estVerifie2:boolean=true;
+   
+      // estVerifie2=true
+    
+    param = {
+      ...param,
+      dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
+      dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
+      estVerifie1:true,
+      idSeance:0,
+      estVerifie2:estVerifie2,
+      codeTypeOperation:null,
+      idOperationEcriture:this.idOperationEcriture
+    };
+    console.log(param)
+    this.operationService.apercuVerificationEritureFinal(param,2,null).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_ecriture_niveau2_Finale.pdf';
+        a.click();
+        this.downloading=false
+      });
+    
   }
   validationEcritureNiveau2(){
     this.valider=true
@@ -291,8 +326,13 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
     console.log(this.form.value);
     const options = this.mySelect.nativeElement.options;
     console.log("option=",options)
+    this.idOperationEcriture=""
     for (let i = 0; i < options.length; i++) {
       this.idOperation.push(options[i].innerHTML)
+      if(i===0)
+        this.idOperationEcriture=options[i].innerHTML
+      else
+        this.idOperationEcriture+=";"+options[i].innerHTML
       // console.log(options[i].value, options[i].text);
     }
     console.log("idoperation=",this.idOperation)
@@ -303,6 +343,7 @@ export class ListeverificationecritureV2Component implements OnInit, AfterViewIn
         console.log("reponse=",data.data)
         this.valider=false
         alert("Validation des écritures effectuée avec succès")
+        this.apercuFinal()
       }
     )
     // const sb = this.operationService.afficherListeVerificationEritureListe(param)

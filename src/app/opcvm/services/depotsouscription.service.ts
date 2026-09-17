@@ -40,6 +40,9 @@ export class DepotsouscriptionService extends ResourceService<any> implements On
   telechargerListeDepot(downloadRequest: any) {
     return this.http.post<any>(`${this.API_URL}/download/liste/verification/depot`, downloadRequest);
   }
+  telechargerListeDepotFinal(downloadRequest: any) {
+    return this.http.post<any>(`${this.API_URL}/download/liste/verification/depot/niveau2`, downloadRequest);
+  }
 
   confirmerListeVerifDepot(listeDepots: any) {
     return this.http.post<any>(`${this.API_URL}/confirmer/liste/verification/depots/tous`, listeDepots);

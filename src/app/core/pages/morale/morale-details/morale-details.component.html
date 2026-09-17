@@ -58,9 +58,16 @@
                   <div *ngIf="f.distributeur.errors.required">Ce champs est obligatoire</div>
                 </div>
               </div>
+               <div class="col-md-2 fv-row">
+                   <div class="form-check form-check-custom form-check-success form-check-solid form-check-sm ms-10">
+                      <input type="checkbox" checked="checked" formControlName="estActifPersonne" [value]="false"
+                             class="form-check-input ng-untouched ng-pristine ng-valid">
+                      <label class="form-check-label text-gray-700 fw-bold text-nowrap">Est actif?</label>
+                    </div>
+              </div>
               <!--end::Col-->
               <!--begin::Col-->
-              <div *ngIf=" qualite === 'actionnaires'" class="col-md-6 fv-row">
+              <div *ngIf=" qualite === 'actionnaires'">
               <div class="col-md-6 fv-row">
                 <!--begin::Label-->
                 <label class="required fs-5 fw-semibold mb-2" [ngClass]="{'required': qualite === 'actionnaires'}">N° compte dépositaire</label>

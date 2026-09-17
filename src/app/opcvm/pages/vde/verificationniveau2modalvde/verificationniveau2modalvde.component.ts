@@ -15,6 +15,7 @@ import {of} from "rxjs";
 export class Verificationniveau2modalvdeComponent implements OnInit{
   currentSeance: any;
   export = false;
+  valider = false;
   exportPdf = false;
   constructor(
     private localStore: LocalService,
@@ -47,6 +48,25 @@ export class Verificationniveau2modalvdeComponent implements OnInit{
         a.click();
       });
   }
+  verifVDEFinal(){
+    this.exportPdf=true
+    this.operationExtourneVDEService.verifVDE(this.currentSeance?.idSeanceOpcvm.idSeance,
+      this.localStore.getData("currentOpcvm")?.idOpcvm,false,true,true,2).pipe(
+      catchError((err) => {
+        this.exportPdf=false
+        return of(err.message);
+      }),
+      finalize(() => {
+        this.exportPdf=false
+      })
+    ).subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'verification_extourne_vde_niveau2_finale.pdf';
+        a.click();
+      });
+  }
   exportExcel() {
     this.export=true
     // 1️⃣ Définir les entêtes
@@ -67,6 +87,7 @@ export class Verificationniveau2modalvdeComponent implements OnInit{
 
   }
   modifier(){
+    this.valider=true
     const entity={
       idSeance:this.currentSeance?.idSeanceOpcvm.idSeance,
       idOpcvm: this.localStore.getData("currentOpcvm")?.idOpcvm,
@@ -78,6 +99,8 @@ export class Verificationniveau2modalvdeComponent implements OnInit{
     this.operationExtourneVDEService.modifier(entity,2).subscribe(
       (data)=>{
         alert('La confirmation a été effectuée')
+        this.valider=false
+        this.verifVDEFinal()
       }
     )
   }

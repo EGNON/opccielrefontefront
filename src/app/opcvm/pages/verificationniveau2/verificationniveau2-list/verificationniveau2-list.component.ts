@@ -171,11 +171,16 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
   }
   verifiIntentionRachatN2_Final()
   {
-    this.validerFinal=true
+    // this.validerFinal=true
+    this.verifier=true
     this.entityService.verifIntentionRachatN1N2(
       this.localStore.getData("currentOpcvm").idOpcvm,true,true).pipe(
         finalize(()=>{
-          this.validerFinal=false
+          this.verifier=false
+          let currentUrl = this.router.url;
+            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+              this.router.navigate([currentUrl]);
+            });
         })
       ).subscribe((blob) => {
         const url = window.URL.createObjectURL(blob);
@@ -213,14 +218,15 @@ export class Verificationniveau2ListComponent implements OnInit, OnDestroy {
     (finalize(()=>{
       this.valider=false;
       alert("Confirmation effectuée avec succès")
+      this.verifiIntentionRachatN2_Final()
     }))
       .subscribe(
         {
           next: (value) => {
-            let currentUrl = this.router.url;
-            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-              this.router.navigate([currentUrl]);
-            });
+            // let currentUrl = this.router.url;
+            // this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            //   this.router.navigate([currentUrl]);
+            // });
           },
           error: err => {
 

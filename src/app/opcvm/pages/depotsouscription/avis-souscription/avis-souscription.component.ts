@@ -417,6 +417,7 @@ listeOperationSouscriptionRachat(){
     //this.nbreLigne = document.getElementById("table_AvisOperation").getElementsByTagName('tr').length;//[0].getElementsByTagName('td').length;
    if(this.idOperationTab.length===0){
      alert("Veuillez cocher les opérations s'il vous plait")
+      this.downloading=false
      return
    }
     let id=""

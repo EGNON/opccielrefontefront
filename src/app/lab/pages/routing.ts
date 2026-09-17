@@ -50,6 +50,12 @@ const LabRouting: Routes = [
     data: { layout: 'dark-sidebar' },
   },
   {
+    path: 'listesanction',
+    loadChildren: () =>
+      import('./sanctiononu/sanctiononu-module').then((m) => m.SanctiononuModule),
+    data: { layout: 'dark-sidebar' },
+  },
+  {
     path: 'notifications/alertes',
     loadChildren: () =>
       import('./criterealerte/criterealerte.module').then((m) => m.CriterealerteModule),

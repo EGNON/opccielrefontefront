@@ -19,13 +19,13 @@ export class OperationextournevdeService extends ResourceService<Operationextour
 
   }
   verifVDE(idSeance:any,idOpcvm:any,estVerifie:any,estVerifie1:any,estVerifie2:any,niveau:any){
-      return this.http.get<any>(`${this.API_URL}/jasperpdf/vde/${idSeance}/${idOpcvm}/${estVerifie}/${estVerifie1}/${estVerifie2}/${niveau}`
+      return this.http.get<any>(`${this.API_URL}/jasperpdf/vde/${idSeance}/${idOpcvm}/${niveau}?estVerifie1=${estVerifie1}&estVerifie2=${estVerifie2}&estVerifie=${estVerifie}`
         , {responseType: 'blob' as any }
       );
 
   }
   excelVDE(idSeance:any,idOpcvm:any,estVerifie:any,estVerifie1:any,estVerifie2:any,niveau:any):Observable<Blob>{
-      return this.http.get<any>(`${this.API_URL}/excel/vde/${idSeance}/${idOpcvm}/${estVerifie}/${estVerifie1}/${estVerifie2}/${niveau}`,{
+      return this.http.get<any>(`${this.API_URL}/excel/vde/${idSeance}/${idOpcvm}/${niveau}?estVerifie1=${estVerifie1}&estVerifie2=${estVerifie2}&estVerifie=${estVerifie}`,{
         responseType: 'blob' as 'json' // 🔑 très important
       });
 
