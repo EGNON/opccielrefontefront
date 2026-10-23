@@ -290,12 +290,13 @@ afficherdistributeur(){
           idActionnaire:this.codePlan,
           idOpcvm: idOpcvm,
           ...this.form.value,
+          idPersonne:this.form.value.distributeur==null?null:this.form.value.distributeur.idPersonne,
           datatableParameters: dataTablesParameters
         };
         if (prefix.toLowerCase() === "l") {
           param = {
             ...param,
-            idPersonne:this.form.value.distributeur==null?null:this.form.value.distributeur.idPersonne,
+            
             dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
             dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
           };
@@ -410,12 +411,12 @@ afficherdistributeur(){
           idActionnaire:this.codePlan,
           idOpcvm: idOpcvm,
           ...this.form.value,
+          idPersonne:-1,
           datatableParameters: dataTablesParameters
         };
         if (prefix.toLowerCase() === "l") {
           param = {
             ...param,
-            idPersonne:-1,
             dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
             dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
           };

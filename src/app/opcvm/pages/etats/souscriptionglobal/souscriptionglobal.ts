@@ -232,10 +232,10 @@ afficherdistributeur(){
 
   afficherListe(prefix: string) {
     const self = this;
-    if(this.form.value.distributeur==null){
-      alert("Veuillez choisir un distributeur")
-      return;
-    }
+    // if(this.form.value.distributeur==null){
+    //   alert("Veuillez choisir un distributeur")
+    //   return;
+    // }
      let columns: any[] = [
     
       {
@@ -243,16 +243,16 @@ afficherdistributeur(){
           return row.raisonSociale;
         },
       },
-      {
-        title: 'DATE OPER.', data: 'dateOperation', render: function (data, type, row) {
-          return moment(row.dateOperation).format("DD/MM/YYYY");
-        },
-      },
-      {
-        title: 'TYPE', data: 'libelleTypePersonne', render: function (data, type, row) {
-          return row.libelleTypePersonne;
-        },
-      },
+      // {
+      //   title: 'DATE OPER.', data: 'dateOperation', render: function (data, type, row) {
+      //     return moment(row.dateOperation).format("DD/MM/YYYY");
+      //   },
+      // },
+      // {
+      //   title: 'TYPE', data: 'libelleTypePersonne', render: function (data, type, row) {
+      //     return row.libelleTypePersonne;
+      //   },
+      // },
       // {
       //   title: 'ACTIONNAIRE', data: 'personne', render: function (data, type, row) {
       //     return row.personne;
@@ -293,16 +293,20 @@ afficherdistributeur(){
           idActionnaire:this.codePlan,
           idOpcvm: idOpcvm,
           ...this.form.value,
+          idPersonne:this.form.value.distributeur===null?null:this.form.value.distributeur.idPersonne,
           datatableParameters: dataTablesParameters
         };
         if (prefix.toLowerCase() === "l") {
           param = {
             ...param,
-            idPersonne:this.form.value.distributeur==null?null:this.form.value.distributeur.idPersonne,
+            idPersonne:this.form.value.distributeur===null?null:this.form.value.distributeur.idPersonne,
             dateDebut: new Date(param.dateDebut.year, param.dateDebut.month-1, param.dateDebut.day+1),
             dateFin: new Date(param.dateFin.year, param.dateFin.month-1, param.dateFin.day+1),
           };
+          // console.log("pass");
+          // console.log(this.form.value.distributeur);
           console.log(param);
+          
           const sb = this.libService.souscriptionglobal(param)
             .subscribe(resp => {
               console.log("Retour releve === ", resp.data);
@@ -363,16 +367,16 @@ afficherdistributeur(){
           return row.raisonSociale;
         },
       },
-      {
-        title: 'DATE OPER.', data: 'dateOperation', render: function (data, type, row) {
-          return moment(row.dateOperation).format("DD/MM/YYYY");
-        },
-      },
-      {
-        title: 'TYPE', data: 'libelleTypePersonne', render: function (data, type, row) {
-          return row.libelleTypePersonne;
-        },
-      },
+      // {
+      //   title: 'DATE OPER.', data: 'dateOperation', render: function (data, type, row) {
+      //     return moment(row.dateOperation).format("DD/MM/YYYY");
+      //   },
+      // },
+      // {
+      //   title: 'TYPE', data: 'libelleTypePersonne', render: function (data, type, row) {
+      //     return row.libelleTypePersonne;
+      //   },
+      // },
       // {
       //   title: 'ACTIONNAIRE', data: 'personne', render: function (data, type, row) {
       //     return row.personne;
@@ -413,6 +417,7 @@ afficherdistributeur(){
           idActionnaire:this.codePlan,
           idOpcvm: idOpcvm,
           ...this.form.value,
+          idPersonne:-1,
           datatableParameters: dataTablesParameters
         };
         if (prefix.toLowerCase() === "l") {
@@ -581,10 +586,10 @@ afficherdistributeur(){
     //this.afficherListeVide("l");
   }
   telecharger() {
-     if(this.form.value.distributeur==null){
-      alert("Veuillez choisir un distributeur")
-      return;
-    }
+    //  if(this.form.value.distributeur==null){
+    //   alert("Veuillez choisir un distributeur")
+    //   return;
+    // }
     this.downloading = true;
     const formValue = this.form.value;
     let idOpcvm = this.currentOpcvm?.idOpcvm;

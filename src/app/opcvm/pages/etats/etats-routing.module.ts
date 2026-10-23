@@ -30,6 +30,9 @@ import { Compositiondetailleactif } from './compositiondetailleactif/composition
 import { PointActifNetPartVl } from './point-actif-net-part-vl/point-actif-net-part-vl';
 import { PointRemboursementEffectuePeriode } from './point-remboursement-effectue-periode/point-remboursement-effectue-periode';
 import { PointPeriodiqueDeLaTafa } from './point-periodique-de-la-tafa/point-periodique-de-la-tafa';
+import { Releve } from './releve/releve';
+import { Historiquevl } from './historiquevl/historiquevl';
+import { Controlprofil } from './controlprofil/controlprofil';
 
 const routes: Routes = [
   {
@@ -38,12 +41,15 @@ const routes: Routes = [
     children: [
       { path: 'registre/actionnaire', component: RegistreActionnaireComponent, },
       { path: 'portefeuille', component: PortefeuilleComponent, },
+      { path: 'consultationreleve', component: Releve, },
       { path: 'relevetitrefcp', component: RelevetitrefcpComponent, },
       { path: 'relevepartfcp', component: Relevepartfcp, },
       { path: 'relevepartactionnaire', component: Relevepartactionnaire, },
       { path: 'journal', component: Journal, },
+      { path: 'historiquevl', component: Historiquevl, },
       { path: 'soldecomptecomptable', component: Soldecomptecomtable, },
       { path: 'balance', component: Balance, },
+      { path: 'controlprofil', component: Controlprofil, },
       { path: 'balanceavantinventaire', component: Balanceavantinventaire, },
       { path: 'souscriptiondetaille', component: Souscriptiondetaille, },
       { path: 'souscriptionglobal', component: Souscriptionglobal, },

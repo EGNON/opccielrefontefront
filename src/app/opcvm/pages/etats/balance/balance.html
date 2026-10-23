@@ -75,7 +75,7 @@
                 <!--begin::Card toolbar-->
                 <div class="card-toolbar">
                   <div class="d-flex justify-content-end">
-                    <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary me-3" (click)="submitting ? null : actualiser()">
+                    <button type="button" class="btn btn-sm btn-primary me-3" (click)=" afficherBalance()">
                       <ng-container *ngIf="submitting">
                     <span class="indicator-progress" [style.display]="'block'">
                       Patientez svp...
@@ -124,9 +124,96 @@
                 <!--end::Card toolbar-->
               </div>
               <div class="card-body pt-0">
+              <!--begin::Table-->
+              <table class="table table-head-custom table-vertical-center overflow-hidden align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table">
+                <thead>
+                <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                  <th class="w-10px pe-2">
+                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                      <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_ecommerce_products_table .form-check-input" value="1" />
+                    </div>
+                  </th>
+                  <th style="width: 13%">N°Compte</th>
+                  <th style="width: 25%">LIBELLE</th>
+                  <th style="width: 10%">DEB. PERIODE (D).</th>
+                  <th style="width: 20%">DEB. PERIODE (C)</th>
+                  <th style="width: 10%">MVT PERIODE (D)</th>
+                  <th style="width: 10%">MVT PERIODE (C)</th>
+                  <th style="width: 12%">FIN PERIODE (D)</th>
+                  <th style="width: 12%">FIN PERIODE (C)</th>
+
+                </tr>
+                </thead>
+                <tbody class="fw-semibold text-gray-600">
+                <tr *ngFor="let balance of balance$ | paginate
+                      : {
+                          itemsPerPage: tableSize,
+                          currentPage: page,
+                          totalItems: count
+                        };
+                  let i = index">
+                  <td>
+                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                      <input class="form-check-input" type="checkbox" value="1" />
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      {{ balance.numCompteComptable }}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      {{ balance.libelleCompteComptable }}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      {{ balance.debutD |number}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      {{ balance.debutC |number }}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      {{ balance.mvtPeriodeD |number}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      {{ balance.mvtPeriodeC |number}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      {{ balance.debit |number}}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      {{ balance.credit |number}}
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-center">
+                <pagination-controls
+                  previousLabel="Précédent"
+                  nextLabel="Suivant"
+                  (pageChange)="onTableDataChange($event)"
+                >
+                </pagination-controls>
+              </div>
+              <!--end::Table-->
+            </div>
+              <!-- <div class="card-body pt-0">
                 <div class="table-responsive angular-bootstrap-table">
                   <!--                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">-->
-                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                  <!-- <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
                     <thead>
                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                       <ng-container *ngFor="let column of dtOptions.columns; let i=index">
@@ -139,7 +226,7 @@
                   </table>
                   <div #details class="details hidden"></div>
                 </div>
-              </div>
+              </div>  -->
             </div>
           </div>
         </form>

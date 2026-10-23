@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableDirective } from 'angular-datatables';
@@ -10,7 +10,7 @@ import { Personne } from '../../../../crm/models/personne/personne.model';
 import { LibrairiesService } from '../../../../services/librairies.service';
 import { LocalService } from '../../../../services/local.service';
 import { ExerciceService } from '../../../services/exercice.service';
-import * as XLSX from "xlsx";
+import * as XLSX from 'xlsx-js-style';
 @Component({
   selector: 'app-balance',
   standalone: false,
@@ -23,13 +23,17 @@ export class Balance implements OnInit, AfterViewInit, AfterContentInit, OnDestr
   currentOpcvm: any;
   currentSeance: any;
   currentUser: any;
-
+reloadEvent: EventEmitter<boolean> = new EventEmitter();
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 10;
+  tableSizes: any = [3, 6, 9, 12];
   downloading = false;
   export = false;
   downloaded = false;
   submitting = false;
   submitted = false;
-
+  balance$:any
   //DataTable Config
   datatableConfig: Config = {};
   dtOptions: any = {};
@@ -109,17 +113,53 @@ export class Balance implements OnInit, AfterViewInit, AfterContentInit, OnDestr
   public onDropDownClose2(item: any) {
     // console.log('onDropDownClose', item);
   }
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.afficherBalance();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.afficherBalance();
+  }
+  afficherBalance(){
+    this.submitting=true
+    const idOpcvm = this.currentOpcvm?.idOpcvm;
 
-afficherExercice(){
-    this.exerciceService.afficherExercice(this.localStore.getData("currentOpcvm").idOpcvm
-    ).subscribe(
+    let param = {
+      idOpcvm: idOpcvm,
+      ...this.form.value,
+      codePlan: this.form.value.exercice.plan.codePlan,
+      dateDebut: new Date(
+        this.form.value.dateDebut.year,
+        this.form.value.dateDebut.month - 1,
+        this.form.value.dateDebut.day + 1
+      ),
+      dateFin: new Date(
+        this.form.value.dateFin.year,
+        this.form.value.dateFin.month - 1,
+        this.form.value.dateFin.day + 1
+      )
+    };
+    console.log("pass")
+    this.libService.balanceListe(param).subscribe(
       (data)=>{
-        this.exercice$=data;
-        this.exercice=data;
-       console.log("exercice=",data)
+        this.balance$=data.data
+        this.submitting=false
+        console.log("passons")
       }
     )
   }
+  afficherExercice(){
+      this.exerciceService.afficherExercice(this.localStore.getData("currentOpcvm").idOpcvm
+      ).subscribe(
+        (data)=>{
+          this.exercice$=data;
+          this.exercice=data;
+        console.log("exercice=",data)
+        }
+      )
+    }
   ngAfterContentInit(): void {
   }
 
@@ -270,7 +310,7 @@ afficherExercice(){
         },
       },
       {
-        title: 'FIN PERIODE (C)', data: 'credit', render: function (data, type, row) {
+        title: 'c', data: 'credit', render: function (data, type, row) {
           return row.credit;
         },
       },
@@ -439,68 +479,86 @@ afficherExercice(){
  
   exportExcel() {
     this.export=true
-    let columns: any[] = [
-    
-      {
-        title: 'N°Compte', data: 'numCompteComptable', render: function (data, type, row) {
-          return row.numCompteComptable;
-        },
-      },
-      {
-        title: 'LIBELLE', data: 'libelleCompteComptable', render: function (data, type, row) {
-          return row.libelleCompteComptable;
-        },
-      },
-      {
-        title: 'DEB. PERIODE (D).', data: 'debutD', render: function (data, type, row) {
-          return row.debutD;
-        },
-      },
-      {
-        title: 'DEB. PERIODE (C)', data: 'debutC', render: function (data, type, row) {
-          return row.debutC;
-        },
-      },
-      {
-        title: 'MVT PERIODE (D)', data: 'mvtPeriodeCD', render: function (data, type, row) {
-          return row.mvtPeriodeD;
-        },
-      },
-      {
-        title: 'MVT PERIODE (C)', data: 'mvtPeriodeC', render: function (data, type, row) {
-          return row.mvtPeriodeC;
-        },
-      },
-      {
-        title: 'FIN PERIODE (D)', data: 'debit', render: function (data, type, row) {
-          return row.debit;
-        },
-      },
-      {
-        title: 'FIN PERIODE (C)', data: 'credit', render: function (data, type, row) {
-          return row.credit;
-        },
-      },
-    ];
+   
     // 1️⃣ Définir les entêtes
-    const headers = ['N°Compte','LIBELLE','DEB. PERIODE (D).','DEB. PERIODE (C)',
-      'MVT PERIODE (D)','MVT PERIODE (C)','FIN PERIODE (D)','FIN PERIODE (C)'];
-    let idOpcvm = this.currentOpcvm?.idOpcvm;
+    // const headers = ['N°Compte','LIBELLE','DEB. PERIODE (D).','DEB. PERIODE (C)',
+    //   'MVT PERIODE (D)','MVT PERIODE (C)','FIN PERIODE (D)','FIN PERIODE (C)'];
+    // let idOpcvm = this.currentOpcvm?.idOpcvm;
+    // let param = {
+    //   idOpcvm: idOpcvm,
+    //   ...this.form.value,
+    // };
+    //   param = {
+    //     ...param,
+    //     codePlan:this.form.value.exercice.plan.codePlan,
+    //     dateDebut: new Date(param.dateDebut.year, param.dateDebut.month - 1, param.dateDebut.day + 1),
+    //      dateFin: new Date(param.dateFin.year, param.dateFin.month - 1, param.dateFin.day + 1),
+    //   }
+    // this.libService.balanceListe(param).subscribe(
+    //   (data)=>{
+    //     this.allData=data.data;
+    //     console.log(this.allData)
+    //     const exportData = this.allData.map(item => ({
+    //       'N°Compte': item.numCompteComptable,
+    //       'LIBELLE': item.libelleCompteComptable,
+    //       'DEB. PERIODE (D).': item.debutD,
+    //       'DEB. PERIODE (C)': item.debutC,
+    //       'MVT PERIODE (D)': item.mvtPeriodeD,
+    //       'MVT PERIODE (C)': item.mvtPeriodeC,
+    //       'FIN PERIODE (D)': item.debit,
+    //       'FIN PERIODE (C)': item.credit,
+          
+    //     }));
+
+    //     // 3️⃣ Convertir en feuille Excel
+    //     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData, { header: headers });
+
+    //     // 4️⃣ Créer le classeur
+    //     const wb: XLSX.WorkBook = { Sheets: { 'Données': ws }, SheetNames: ['Données'] };
+
+    //     // 5️⃣ Exporter
+    //     const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    //     const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    //     saveAs(blob, 'balance.xlsx');
+    //     this.export=false
+    //   }
+    // )
+    // 2️⃣ Mapper les données avec les entêtes
+
+        const headers = [
+      'N°Compte',
+      'LIBELLE',
+      'DEB. PERIODE (D).',
+      'DEB. PERIODE (C)',
+      'MVT PERIODE (D)',
+      'MVT PERIODE (C)',
+      'FIN PERIODE (D)',
+      'FIN PERIODE (C)'
+    ];
+
+    const idOpcvm = this.currentOpcvm?.idOpcvm;
+
     let param = {
       idOpcvm: idOpcvm,
       ...this.form.value,
+      codePlan: this.form.value.exercice.plan.codePlan,
+      dateDebut: new Date(
+        this.form.value.dateDebut.year,
+        this.form.value.dateDebut.month - 1,
+        this.form.value.dateDebut.day + 1
+      ),
+      dateFin: new Date(
+        this.form.value.dateFin.year,
+        this.form.value.dateFin.month - 1,
+        this.form.value.dateFin.day + 1
+      )
     };
-      param = {
-        ...param,
-        codePlan:this.form.value.exercice.plan.codePlan,
-        dateDebut: new Date(param.dateDebut.year, param.dateDebut.month - 1, param.dateDebut.day + 1),
-         dateFin: new Date(param.dateFin.year, param.dateFin.month - 1, param.dateFin.day + 1),
-      }
-    this.libService.balanceListe(param).subscribe(
-      (data)=>{
-        this.allData=data.data;
-        console.log(this.allData)
-        const exportData = this.allData.map(item => ({
+
+    // this.libService.balanceListe(param).subscribe({
+    //   next: (data) => {
+    //     this.allData = data.data;
+        const exportData = this.balance$.map(item => ({
+        // const exportData = this.allData.map(item => ({
           'N°Compte': item.numCompteComptable,
           'LIBELLE': item.libelleCompteComptable,
           'DEB. PERIODE (D).': item.debutD,
@@ -508,29 +566,157 @@ afficherExercice(){
           'MVT PERIODE (D)': item.mvtPeriodeD,
           'MVT PERIODE (C)': item.mvtPeriodeC,
           'FIN PERIODE (D)': item.debit,
-          'FIN PERIODE (C)': item.credit,
-          
+          'FIN PERIODE (C)': item.credit
         }));
 
-        // 3️⃣ Convertir en feuille Excel
-        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData, { header: headers });
+        // 1. Créer la feuille Excel
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+          exportData,
+          { header: headers }
+        );
 
-        // 4️⃣ Créer le classeur
-        const wb: XLSX.WorkBook = { Sheets: { 'Données': ws }, SheetNames: ['Données'] };
+        // 2. Définir la largeur des colonnes
+        ws['!cols'] = [
+          { wch: 16 }, // N°Compte
+          { wch: 45 }, // LIBELLE
+          { wch: 22 }, // DEB. PERIODE (D).
+          { wch: 22 }, // DEB. PERIODE (C)
+          { wch: 22 }, // MVT PERIODE (D)
+          { wch: 22 }, // MVT PERIODE (C)
+          { wch: 22 }, // FIN PERIODE (D)
+          { wch: 22 }  // FIN PERIODE (C)
+        ];
 
-        // 5️⃣ Exporter
-        const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-        const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+        // 3. Définir les bordures et les styles
+        const range = XLSX.utils.decode_range(ws['!ref'] || 'A1');
+
+        for (let row = range.s.r; row <= range.e.r; row++) {
+          for (let col = range.s.c; col <= range.e.c; col++) {
+            const cellAddress = XLSX.utils.encode_cell({
+              r: row,
+              c: col
+            });
+
+            const cell = ws[cellAddress];
+
+            if (!cell) continue;
+
+            if (row === 0) {
+              // En-tête
+              cell.s = {
+                font: {
+                  name: 'Verdana',
+                  sz: 10,
+                  bold: true,
+                  color: { rgb: '2B2C3C' }
+                },
+                fill: {
+                  patternType: 'solid',
+                  fgColor: { rgb: 'D9EAF7' }
+                },
+                alignment: {
+                  horizontal: 'center',
+                  vertical: 'center',
+                  wrapText: true
+                },
+                border: {
+                  top: {
+                    style: 'thin',
+                    color: { rgb: 'A6B9C9' }
+                  },
+                  bottom: {
+                    style: 'thin',
+                    color: { rgb: 'A6B9C9' }
+                  },
+                  left: {
+                    style: 'thin',
+                    color: { rgb: 'D0DCE5' }
+                  },
+                  right: {
+                    style: 'thin',
+                    color: { rgb: 'D0DCE5' }
+                  }
+                }
+              };
+            } else {
+              // Lignes de données : alternance blanc et bleu clair
+              const couleurFond = row % 2 === 0
+                ? 'E5F5FF'
+                : 'FFFFFF';
+
+              cell.s = {
+                font: {
+                  name: 'Verdana',
+                  sz: 10,
+                  color: { rgb: '000000' }
+                },
+                fill: {
+                  patternType: 'solid',
+                  fgColor: { rgb: couleurFond }
+                },
+                alignment: {
+                  horizontal: col === 1 ? 'left' : 'right',
+                  vertical: 'center'
+                },
+                border: {
+                  bottom: {
+                    style: 'thin',
+                    color: { rgb: 'DCEAF2' }
+                  },
+                  left: {
+                    style: 'thin',
+                    color: { rgb: 'E1E8ED' }
+                  },
+                  right: {
+                    style: 'thin',
+                    color: { rgb: 'E1E8ED' }
+                  }
+                }
+              };
+
+              // Format numérique pour les colonnes de montants
+              if (col >= 2) {
+                cell.z = '#,##0.00';
+              }
+            }
+          }
+        }
+
+        // 4. Hauteur des lignes
+        ws['!rows'] = [
+          { hpt: 28 },
+          ...Array.from(
+            { length: Math.max(0, range.e.r) },
+            () => ({ hpt: 20 })
+          )
+        ];
+
+        // 5. Créer le classeur Excel
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+
+        XLSX.utils.book_append_sheet(wb, ws, 'Balance');
+
+        // 6. Générer le fichier Excel
+        const excelBuffer = XLSX.write(wb, {
+          bookType: 'xlsx',
+          type: 'array'
+        });
+
+        const blob = new Blob(
+          [excelBuffer],
+          { type: 'application/octet-stream' }
+        );
+
         saveAs(blob, 'balance.xlsx');
-        this.export=false
-      }
-    )
-    // 2️⃣ Mapper les données avec les entêtes
+
+        this.export = false;
+      
+    
 
   }
 
   actualiser() {
-    this.afficherListe("l");
+    this.afficherBalance;
   }
   exerciceChange(){
     console.log("date",this.form.value.exercice.codeExercice)
@@ -559,8 +745,8 @@ afficherExercice(){
        dateFin: new Date(param.dateFin.year, param.dateFin.month - 1, param.dateFin.day + 1),
     }
     //.subscribe
-    console.log(param);
-    const sb = this.libService.balanceEtat(param)
+    // console.log(this.balance$);
+    const sb = this.libService.balanceEtat(this.balance$)
       .pipe(
         catchError((err) => {
           this.downloading = false;

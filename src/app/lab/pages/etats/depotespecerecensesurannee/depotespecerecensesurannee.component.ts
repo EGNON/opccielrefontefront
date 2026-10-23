@@ -20,7 +20,7 @@ import jsPDF from "jspdf";
 import {ShareService} from "../../../services/share.service";
 import {PageInfoService} from "../../../../template/_metronic/layout";
 import {OperationService} from "../../../services/operation.service";
-import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx-js-style';
 import * as FileSaver from 'file-saver';
 import {Config} from "datatables.net";
 
@@ -286,6 +286,137 @@ export class DepotespecerecensesuranneeComponent implements OnInit, OnDestroy, A
       XLSX.Table2SheetOpts);
     XLSX.writeFile(wb, `${fileName}.xlsx`);
   }
+  exporterExcel(): void {
+      const donneesExcel = this.depotRachat$.map(operation => ({
+        'Date opération': operation.dateOperation
+          ? new Date(operation.dateOperation).toLocaleDateString('fr-FR')
+          : '',
+  
+        'Actionnaire': operation.denomination ?? '',
+  
+        'Montant déposé': operation.montantDepose ?? 0,
+  
+        'Type de FCP': operation.denominationOpcvm ?? '',
+  
+        'Total': operation.total ?? 0,
+  
+        // 'Date première souscription': operation.datePremiereSouscription
+        //   ? new Date(operation.datePremiereSouscription).toLocaleDateString('fr-FR')
+        //   : ''
+      }));
+  
+      const feuille: XLSX.WorkSheet = XLSX.utils.json_to_sheet(donneesExcel);
+  
+      // Largeur des colonnes
+      feuille['!cols'] = [
+        { wch: 18 }, // Date opération
+        { wch: 35 }, // Dénomination
+        { wch: 20 }, // Montant déposé
+        { wch: 30 }, // OPCVM
+        { wch: 20 }, // Total
+        // { wch: 25 }  // Date première souscription
+      ];
+  
+      // Récupérer les dimensions de la feuille
+      const plage = XLSX.utils.decode_range(feuille['!ref'] || 'A1');
+  
+      // Mise en forme de toutes les cellules
+      for (let ligne = plage.s.r; ligne <= plage.e.r; ligne++) {
+        for (let colonne = plage.s.c; colonne <= plage.e.c; colonne++) {
+          const adresse = XLSX.utils.encode_cell({
+            r: ligne,
+            c: colonne
+          });
+  
+          const cellule = feuille[adresse];
+  
+          if (!cellule) continue;
+  
+          if (ligne === 0) {
+            // En-têtes
+            cellule.s = {
+              font: {
+                name: 'Verdana',
+                sz: 10,
+                bold: true,
+                color: { rgb: '2B2C3C' }
+              },
+              fill: {
+                patternType: 'solid',
+                fgColor: { rgb: 'FFFFFF' }
+              },
+              alignment: {
+                horizontal: 'center',
+                vertical: 'center',
+                wrapText: true
+              },
+              border: {
+                bottom: {
+                  style: 'thin',
+                  color: { rgb: 'D5DDE5' }
+                }
+              }
+            };
+          } else {
+            // Alternance blanc / bleu clair
+            const couleurFond =
+              ligne % 2 === 0 ? 'E5F5FF' : 'FFFFFF';
+  
+            cellule.s = {
+              font: {
+                name: 'Verdana',
+                sz: 10,
+                color: { rgb: '000000' }
+              },
+              fill: {
+                patternType: 'solid',
+                fgColor: { rgb: couleurFond }
+              },
+              alignment: {
+                horizontal: colonne === 2 || colonne === 4
+                  ? 'right'
+                  : 'left',
+                vertical: 'center'
+              },
+              border: {
+                bottom: {
+                  style: 'hair',
+                  color: { rgb: 'DCEAF2' }
+                }
+              }
+            };
+  
+            // Format des montants
+            if (colonne === 2 || colonne === 4) {
+              cellule.z = '#,##0.00';
+            }
+          }
+        }
+      }
+  
+      // Hauteur des lignes
+      feuille['!rows'] = [
+        { hpt: 24 },
+        ...Array.from(
+          { length: Math.max(0, plage.e.r) },
+          () => ({ hpt: 19 })
+        )
+      ];
+  
+      // Créer le fichier Excel
+      const classeur = XLSX.utils.book_new();
+  
+      XLSX.utils.book_append_sheet(
+        classeur,
+        feuille,
+        'feuille1'
+      );
+  
+      XLSX.writeFile(
+        classeur,
+        'Détermination du solde global de l\'ensemble des comptes détenus par un même client.xlsx'
+      );
+    }
   public exportAsExcelFile(data: { [key: string]: any }[], name?: string): void {
     // const timeSpan = new Date().toISOString();
     // const fileName = `${name}-${timeSpan}`;

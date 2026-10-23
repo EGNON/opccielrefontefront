@@ -158,13 +158,13 @@ export class Detachementeffectue implements OnInit, AfterViewInit, AfterContentI
                 console.log(this.detacementCoupon$)
                 if(this.detacementCoupon$.length!=0)
                 {
-                  this.form.patchValue({regul:this.detacementCoupon$[0].regBeneficeEnInstanceAffectation})
+                  this.form.patchValue({regul:this.detacementCoupon$[0].regBeneficeEnInstanceAffectation.toString()})
                   this.form.patchValue({totalDistribuer:((this.detacementCoupon$[0].totalDistribue))})
                   this.form.patchValue({totalADistribuer:((this.detacementCoupon$[0].totalADistribuer))})
                   this.form.patchValue({montantDistribue:((this.detacementCoupon$[0].montantDistribue))})
                   this.form.patchValue({nombrePartEnCirculaion:((this.detacementCoupon$[0].nombrePartEnCirculaion))})
                   this.form.patchValue({couponUnitaire:((this.detacementCoupon$[0].couponUnitaire))})
-                  this.form.patchValue({reste:((this.detacementCoupon$[0].reste))})
+                  this.form.patchValue({reste:((this.detacementCoupon$[0].reste).toString())})
 
                       const sb = this.libService.dividendeActionnaire(this.codeExercice,idOpcvm)
                       .subscribe(resp => {
@@ -280,7 +280,7 @@ afficherexercice(){
     //   dateFin: new Date(param.dateFin.year, param.dateFin.month - 1, param.dateFin.day + 1),
     // }
     //.subscribe
-    const sb = this.libService.imprimerPhaseDetachement(param)
+    const sb = this.libService.imprimerDividendeActionnaire(param)
       .pipe(
         catchError((err) => {
           this.downloading = false;

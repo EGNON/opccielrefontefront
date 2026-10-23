@@ -50,6 +50,7 @@ export class OrdreencoursComponent implements OnInit, OnDestroy, AfterViewInit {
         const sb = this.entityService.afficherOrdreEnCours(dataTablesParameters,this.localStore.getData("currentOpcvm")?.idOpcvm)
           .subscribe(resp => {
             callback(resp.data);
+            console.log(resp.data)
           });
         this.subscriptions.push(sb);
       },
@@ -71,7 +72,7 @@ export class OrdreencoursComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         {
           title: 'Symbole', data: 'symbolTitre', render: function (data, type, row) {
-            return row.titre.symbolTitre;
+            return row.titre===null?'': row.titre.symbolTitre;
           }
         },
         {
@@ -86,7 +87,7 @@ export class OrdreencoursComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         {
           title: 'Type ordre', data: 'libelleTypeOrdre', render: function (data, type, row) {
-            return row.typeOrdre.libelleTypeOrdre;
+            return row.typeOrdre===null?'': row.typeOrdre.libelleTypeOrdre;
           }
         },
       ],

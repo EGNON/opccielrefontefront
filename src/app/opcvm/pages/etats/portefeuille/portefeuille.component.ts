@@ -16,7 +16,7 @@ import {LocalService} from "../../../../services/local.service";
 import {LibrairiesService} from "../../../../services/librairies.service";
 import {NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {catchError, finalize} from "rxjs/operators";
-import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx-js-style';
 import * as FileSaver from 'file-saver';
 import {saveAs} from "file-saver";
 
@@ -296,9 +296,9 @@ export class PortefeuilleComponent implements OnInit, AfterViewInit, AfterConten
         ...param,
         dateOperation: new Date(param.dateEstimation.year, param.dateEstimation.month - 1, param.dateEstimation.day + 1),
       }
-    this.libService.portefeuilleListe(param).subscribe(
-      (data)=>{
-        this.allData=data.data;
+    this.libService.portefeuilleListe(param).subscribe({
+         next: (data) => {
+        this.allData = data.data;
         const exportData = this.allData.map(item => ({
           'RUBRIQUE': item.typeRubrique,
           'CLASSE': item.classeTitre,
@@ -314,19 +314,170 @@ export class PortefeuilleComponent implements OnInit, AfterViewInit, AfterConten
           'Espece': item.soldeEspReel,
         }));
 
-        // 3️⃣ Convertir en feuille Excel
-        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData, { header: headers });
+        // // 3️⃣ Convertir en feuille Excel
+        // const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData, { header: headers });
 
-        // 4️⃣ Créer le classeur
-        const wb: XLSX.WorkBook = { Sheets: { 'Données': ws }, SheetNames: ['Données'] };
+        // // 4️⃣ Créer le classeur
+        // const wb: XLSX.WorkBook = { Sheets: { 'Données': ws }, SheetNames: ['Données'] };
 
-        // 5️⃣ Exporter
-        const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-        const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
-        saveAs(blob, 'portefeuille.xlsx');
-        this.export=false
-      }
-    )
+        // // 5️⃣ Exporter
+        // const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        // const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+        // saveAs(blob, 'portefeuille.xlsx');
+        // this.export=false
+         // 1. Créer la feuille Excel
+                const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+                  exportData,
+                  { header: headers }
+                );
+        
+                // 2. Définir la largeur des colonnes
+                ws['!cols'] = [
+                  { wch: 16 }, // N°Compte
+                  { wch: 45 }, // LIBELLE
+                  { wch: 22 }, // DEB. PERIODE (D).
+                  { wch: 22 }, // DEB. PERIODE (C)
+                  { wch: 22 }, // MVT PERIODE (D)
+                  { wch: 22 }, // MVT PERIODE (C)
+                  { wch: 22 }, // FIN PERIODE (D)
+                  { wch: 22 },  // FIN PERIODE (C)
+                  { wch: 22 },  // FIN PERIODE (C)
+                  { wch: 22 },  // FIN PERIODE (C)
+                  { wch: 22 },  // FIN PERIODE (C)
+                  { wch: 22 }  // FIN PERIODE (C)
+                ];
+        
+                // 3. Définir les bordures et les styles
+                const range = XLSX.utils.decode_range(ws['!ref'] || 'A1');
+        
+                for (let row = range.s.r; row <= range.e.r; row++) {
+                  for (let col = range.s.c; col <= range.e.c; col++) {
+                    const cellAddress = XLSX.utils.encode_cell({
+                      r: row,
+                      c: col
+                    });
+        
+                    const cell = ws[cellAddress];
+        
+                    if (!cell) continue;
+        
+                    if (row === 0) {
+                      // En-tête
+                      cell.s = {
+                        font: {
+                          name: 'Verdana',
+                          sz: 10,
+                          bold: true,
+                          color: { rgb: '2B2C3C' }
+                        },
+                        fill: {
+                          patternType: 'solid',
+                          fgColor: { rgb: 'D9EAF7' }
+                        },
+                        alignment: {
+                          horizontal: 'center',
+                          vertical: 'center',
+                          wrapText: true
+                        },
+                        border: {
+                          top: {
+                            style: 'thin',
+                            color: { rgb: 'A6B9C9' }
+                          },
+                          bottom: {
+                            style: 'thin',
+                            color: { rgb: 'A6B9C9' }
+                          },
+                          left: {
+                            style: 'thin',
+                            color: { rgb: 'D0DCE5' }
+                          },
+                          right: {
+                            style: 'thin',
+                            color: { rgb: 'D0DCE5' }
+                          }
+                        }
+                      };
+                    } else {
+                      // Lignes de données : alternance blanc et bleu clair
+                      const couleurFond = row % 2 === 0
+                        ? 'E5F5FF'
+                        : 'FFFFFF';
+        
+                      cell.s = {
+                        font: {
+                          name: 'Verdana',
+                          sz: 10,
+                          color: { rgb: '000000' }
+                        },
+                        fill: {
+                          patternType: 'solid',
+                          fgColor: { rgb: couleurFond }
+                        },
+                        alignment: {
+                          horizontal: col === 1 ? 'left' : 'right',
+                          vertical: 'center'
+                        },
+                        border: {
+                          bottom: {
+                            style: 'thin',
+                            color: { rgb: 'DCEAF2' }
+                          },
+                          left: {
+                            style: 'thin',
+                            color: { rgb: 'E1E8ED' }
+                          },
+                          right: {
+                            style: 'thin',
+                            color: { rgb: 'E1E8ED' }
+                          }
+                        }
+                      };
+        
+                      // Format numérique pour les colonnes de montants
+                      if (col >= 2) {
+                        cell.z = '#,##0.00';
+                      }
+                    }
+                  }
+                }
+        
+                // 4. Hauteur des lignes
+                ws['!rows'] = [
+                  { hpt: 28 },
+                  ...Array.from(
+                    { length: Math.max(0, range.e.r) },
+                    () => ({ hpt: 20 })
+                  )
+                ];
+        
+                // 5. Créer le classeur Excel
+                const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        
+                XLSX.utils.book_append_sheet(wb, ws, 'Portefeuille');
+        
+                // 6. Générer le fichier Excel
+                const excelBuffer = XLSX.write(wb, {
+                  bookType: 'xlsx',
+                  type: 'array'
+                });
+        
+                const blob = new Blob(
+                  [excelBuffer],
+                  { type: 'application/octet-stream' }
+                );
+        
+                saveAs(blob, 'portefeuille.xlsx');
+        
+                this.export = false;
+              },
+              error: (err) => {
+                console.error('Erreur lors de l’export de la balance :', err);
+                this.export = false;
+              }
+          });
+      
+    
     // 2️⃣ Mapper les données avec les entêtes
 
   }

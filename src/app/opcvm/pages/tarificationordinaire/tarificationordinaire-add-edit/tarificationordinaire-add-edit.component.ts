@@ -172,7 +172,7 @@ export class TarificationordinaireAddEditComponent implements OnInit, OnDestroy{
     if(this.qualite==="sgi")
     {
       const sb  = this.personneService.afficherPersonneSelonQualite(
-        "registraire").subscribe(
+        "registraires").subscribe(
         (data)=>{
           this.personne$=data
         }
@@ -181,7 +181,7 @@ export class TarificationordinaireAddEditComponent implements OnInit, OnDestroy{
     else
     {
       const sb  = this.personneService.afficherPersonneSelonQualite(
-        "depositaire").subscribe(
+        "depositaires").subscribe(
         (data)=>{
           this.personne$=data
         }

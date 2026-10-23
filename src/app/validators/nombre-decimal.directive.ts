@@ -60,7 +60,14 @@ export class NombreDecimalDirective {
   }
 }
 
-function filterValue(value:any): string {
-  return value.replace(/[^0-9\\,]*/g, '');
-}
+// function filterValue(value:any): string {
+//   return value.replace(/[^0-9\\,]*/g, '');
+// }
+function filterValue(value: any): string {
+  value = value.replace(/[^0-9.,]/g, '');
 
+  // Autoriser un seul point OU une seule virgule
+  const match = value.match(/^(\d*)([.,]?)(\d*)/);
+
+  return match ? match[1] + match[2] + match[3] : '';
+}

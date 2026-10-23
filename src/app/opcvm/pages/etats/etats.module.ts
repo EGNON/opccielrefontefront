@@ -39,6 +39,9 @@ import { Compositiondetailleactif } from './compositiondetailleactif/composition
 import { PointActifNetPartVl } from './point-actif-net-part-vl/point-actif-net-part-vl';
 import { PointRemboursementEffectuePeriode } from './point-remboursement-effectue-periode/point-remboursement-effectue-periode';
 import { PointPeriodiqueDeLaTafa } from './point-periodique-de-la-tafa/point-periodique-de-la-tafa';
+import { Releve } from './releve/releve';
+import { Historiquevl } from './historiquevl/historiquevl';
+import { Controlprofil } from './controlprofil/controlprofil';
 
 
 @NgModule({
@@ -72,7 +75,10 @@ import { PointPeriodiqueDeLaTafa } from './point-periodique-de-la-tafa/point-per
     Compositiondetailleactif,
     PointActifNetPartVl,
     PointRemboursementEffectuePeriode,
-    PointPeriodiqueDeLaTafa
+    PointPeriodiqueDeLaTafa,
+    Releve,
+    Historiquevl,
+    Controlprofil
   ],
     imports: [
     CommonModule,

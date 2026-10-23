@@ -13,6 +13,7 @@ import { LocalService } from '../../../../services/local.service';
 import { ExerciceService } from '../../../services/exercice.service';
 import * as XLSX from "xlsx";
 import saveAs from 'file-saver';
+import { LoaderService } from '../../../../loader.service';
 @Component({
   selector: 'app-phasepaiement',
   standalone: false,
@@ -70,6 +71,7 @@ export class Phasepaiement implements OnInit, AfterViewInit, AfterContentInit, O
     private fb: FormBuilder,
     private authService: AuthService,
     private localStore: LocalService,
+    private loaderService: LoaderService,
     public journalService: JournalService,
      private route: ActivatedRoute,
     private libService: LibrairiesService,
@@ -106,9 +108,9 @@ export class Phasepaiement implements OnInit, AfterViewInit, AfterContentInit, O
     // });
     this.form = this.fb.group({
      exercice:[null],
-     solde:[0],
+     solde:['0'],
      banque:[null],
-     totalDistribuer:[0],
+     totalDistribuer:['0'],
     });
     this.exerciceSettings = {
       singleSelection: true,
@@ -182,13 +184,16 @@ export class Phasepaiement implements OnInit, AfterViewInit, AfterContentInit, O
   banqueChange()
   {
     if(this.form.value.banque==="Depositaire"){
+      this.loaderService.setLoading(true)
       this.titreSolde="SOLDE DU COMPTE 1231000"
                   let dateEstimation: any;
              
-                    dateEstimation = new Date(
-                      this.dateFin.year,
-                      this.dateFin.month-1,
-                      this.dateFin.day+1);
+                    // dateEstimation = new Date(
+                    //   this.dateFin.year,
+                    //   this.dateFin.month-1,
+                    //   this.dateFin.day+1);
+
+                       dateEstimation = this.dateFin;
                   
                   let entity={
                     codePlan:"PCIA",
@@ -196,18 +201,20 @@ export class Phasepaiement implements OnInit, AfterViewInit, AfterContentInit, O
                     idOpcvm:this.currentOpcvm.idOpcvm,
                     dateEstimation:dateEstimation
                   }
+                  console.log(entity)
                   this.libService.soldeToutCompte2(entity).subscribe
                   ((data)=>{
                     let solde :number=0
+                    console.log(data.data)
                     if(data.data.length!=0)
                     {
-                      solde =data.data.soldeReel
-                      this.form.patchValue({solde:solde})
+                      solde =data.data[0].soldeReel
+                      this.form.patchValue({solde:Math.round(solde).toString()})
                     }
                     else
                       this.form.patchValue({solde:"0"})
                       
-                   
+                   this.loaderService.setLoading(false)
                     
                   })
               }

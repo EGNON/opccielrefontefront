@@ -233,10 +233,10 @@ afficherdistributeur(){
 
   afficherListe(prefix: string) {
     const self = this;
-    if(this.form.value.distributeur==null){
-      alert("Veuillez choisir un distributeur")
-      return;
-    }
+    // if(this.form.value.distributeur==null){
+    //   alert("Veuillez choisir un distributeur")
+    //   return;
+    // }
      let columns: any[] = [
     
       {
@@ -244,16 +244,16 @@ afficherdistributeur(){
           return row.raisonSociale;
         },
       },
-      {
-        title: 'DATE OPER.', data: 'dateOperation', render: function (data, type, row) {
-          return moment(row.dateOperation).format("DD/MM/YYYY");
-        },
-      },
-      {
-        title: 'TYPE', data: 'libelleTypePersonne', render: function (data, type, row) {
-          return row.libelleTypePersonne;
-        },
-      },
+      // {
+      //   title: 'DATE OPER.', data: 'dateOperation', render: function (data, type, row) {
+      //     return moment(row.dateOperation).format("DD/MM/YYYY");
+      //   },
+      // },
+      // {
+      //   title: 'TYPE', data: 'libelleTypePersonne', render: function (data, type, row) {
+      //     return row.libelleTypePersonne;
+      //   },
+      // },
       // {
       //   title: 'ACTIONNAIRE', data: 'personne', render: function (data, type, row) {
       //     return row.personne;
@@ -289,6 +289,7 @@ afficherdistributeur(){
         let param = {
           idActionnaire:this.codePlan,
           idOpcvm: idOpcvm,
+          idPersonne:this.form.value.distributeur==null?null:this.form.value.distributeur.idPersonne,
           ...this.form.value,
           datatableParameters: dataTablesParameters
         };
@@ -360,16 +361,16 @@ afficherdistributeur(){
           return row.raisonSociale;
         },
       },
-      {
-        title: 'DATE OPER.', data: 'dateOperation', render: function (data, type, row) {
-          return moment(row.dateOperation).format("DD/MM/YYYY");
-        },
-      },
-      {
-        title: 'TYPE', data: 'libelleTypePersonne', render: function (data, type, row) {
-          return row.libelleTypePersonne;
-        },
-      },
+      // {
+      //   title: 'DATE OPER.', data: 'dateOperation', render: function (data, type, row) {
+      //     return moment(row.dateOperation).format("DD/MM/YYYY");
+      //   },
+      // },
+      // {
+      //   title: 'TYPE', data: 'libelleTypePersonne', render: function (data, type, row) {
+      //     return row.libelleTypePersonne;
+      //   },
+      // },
       // {
       //   title: 'ACTIONNAIRE', data: 'personne', render: function (data, type, row) {
       //     return row.personne;
@@ -405,6 +406,7 @@ afficherdistributeur(){
           idActionnaire:this.codePlan,
           idOpcvm: idOpcvm,
           ...this.form.value,
+          idPersonne:-1,
           datatableParameters: dataTablesParameters
         };
         if (prefix.toLowerCase() === "l") {

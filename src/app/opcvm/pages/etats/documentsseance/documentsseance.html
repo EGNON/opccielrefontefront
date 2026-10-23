@@ -35,12 +35,29 @@
               <td >{{ historiqueVL.dateFermetureSeance | date:'dd/MM/yyy'}}</td>
               <td >{{ historiqueVL.valeurLiquidative}}</td>
               <td>{{ historiqueVL.estEnCours ? 'Oui' : 'Non' }}</td>
+              
               <td>
-                <button class="btn btn-primary btn-sm"
-                        (click)="telechargerDocuments(historiqueVL)">
-                Imprimer
+                <button
+                  class="btn btn-primary btn-sm"
+                  (click)="telechargerDocuments(historiqueVL)">
+
+                  <ng-container
+                    *ngIf="idSeanceEnCoursImpression === historiqueVL.idSeance; else boutonImprimer">
+
+                    <span class="indicator-progress" style="display: block">
+                      Patientez svp...
+                      <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+
+                  </ng-container>
+
+                  <ng-template #boutonImprimer>
+                    <span class="indicator-label">Imprimer</span>
+                  </ng-template>
+
                 </button>
-            </td>
+              </td>
+
             </tr>
             </tbody>
           </table>

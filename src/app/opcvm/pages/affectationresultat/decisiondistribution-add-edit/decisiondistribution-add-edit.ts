@@ -73,12 +73,12 @@ export class DecisiondistributionAddEdit implements OnInit, OnDestroy{
             dateSeance.getDate()),Validators.required],
           dateDetachement: [new NgbDate(dateSeance.getFullYear(),dateSeance.getMonth()+1,
             dateSeance.getDate()),Validators.required],
-          resultat: [0,Validators.required],
-          aDistribueEnpourcentage: [0,Validators.required],
-          montantDistribue: [0,Validators.required],
-          montantNonDistribue: [0,Validators.required],
-          nbrePartEnCirculation: [0,Validators.required],
-          coupUnitaireADistribuer: [0,Validators.required],
+          resultat: ['0',Validators.required],
+          aDistribueEnpourcentage: ['0',Validators.required],
+          montantDistribue: ['0',Validators.required],
+          montantNonDistribue: ['0',Validators.required],
+          nbrePartEnCirculation: ['0',Validators.required],
+          coupUnitaireADistribuer: ['0',Validators.required],
           statutMontNonDistribue: [null,Validators.required],
           
         }
@@ -87,7 +87,7 @@ export class DecisiondistributionAddEdit implements OnInit, OnDestroy{
       (data)=>{
           this.entity=data.data
           console.log(this.entity)
-           this.entityForm.patchValue({resultat: this.entity.resultat});
+           this.entityForm.patchValue({resultat: this.entity.beneInstAffectation});
            this.entityForm.patchValue({nbrePartEnCirculation: this.entity.nbrePartEnCirculation});
            if (Number(this.entity.resultat) < 0)
             {
@@ -110,12 +110,16 @@ export class DecisiondistributionAddEdit implements OnInit, OnDestroy{
 
   onCouponKeyPress($event) {
     this.coupon=$event.target.value
+    this.coupon=Number(this.coupon.toString().replace(',','.'))
     this.calculer()
   }
   calculer(){
-      let meb_Adistribuer = Number(this.entityForm.value.nbrePartEnCirculation) * this.coupon;
-      let meb_Pourcentage = Number(meb_Adistribuer) * 100 / Number(this.entityForm.value.resultat);
-      let meb_NonDistribuer =  Number(this.entityForm.value.resultat) - Number(meb_Adistribuer);
+      //let meb_Adistribuer = Number(this.entityForm.value.nbrePartEnCirculation) * this.coupon;
+      let meb_Adistribuer = Math.round(
+        Number(this.entityForm.value.nbrePartEnCirculation.toString().replace(',','.')) * this.coupon
+      );
+      let meb_Pourcentage = (Number(meb_Adistribuer) * 100 / Number(this.entityForm.value.resultat)).toFixed(4);
+      let meb_NonDistribuer =  Math.round(Number(this.entityForm.value.resultat.toString().replace(',','.')) - Number(meb_Adistribuer));
       
       this.entityForm.patchValue({montantDistribue: meb_Adistribuer});
       this.entityForm.patchValue({aDistribueEnpourcentage: meb_Pourcentage});
@@ -155,7 +159,8 @@ export class DecisiondistributionAddEdit implements OnInit, OnDestroy{
  
   onSaveEntity()
   {
-    
+    // console.log(this.entityForm.value.coupUnitaireADistribuer.toString().replace(',','.'))
+    // return
     this.isLoading = true;
     this.submitted = true;
     this.saveBouton=true
@@ -219,12 +224,16 @@ export class DecisiondistributionAddEdit implements OnInit, OnDestroy{
      
     const entity: any = {
       ...this.entityForm.value,
+      coupUnitaireADistribuer:this.entityForm.value.coupUnitaireADistribuer.toString().replace(',','.'),
+      aDistribueEnpourcentage:this.entityForm.value.aDistribueEnpourcentage.toString().replace(',','.'),
+      nbrePartEnCirculation:this.entityForm.value.nbrePartEnCirculation.toString().replace(',','.'),
       idOpcvm:this.currentOpcvm.idOpcvm,
       dateDetachement:dateDetachement,
       dateDecision:dateDecision,
       idSeance:this.currentSeance?.idSeanceOpcvm.idSeance,
       userLogin:this.currentUser.username
     };
+    
     return this.id
         ? this.entityService.enregistrerDecisionDistribution(entity)
         : this.entityService.enregistrerDecisionDistribution (entity);

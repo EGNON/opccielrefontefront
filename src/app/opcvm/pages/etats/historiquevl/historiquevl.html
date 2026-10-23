@@ -1,0 +1,151 @@
+
+<div class="card card-flush h-100">
+
+  <!-- En-tête -->
+  <div class="card-header border-0 pt-4 pb-2">
+    <div class="card-title">
+      <h3 class="fw-bold text-gray-800 fs-5 mb-0">
+        <i class="ki-duotone ki-notepad fs-2 me-2 text-primary">
+          <span class="path1"></span>
+          <span class="path2"></span>
+        </i>
+        Historique VL
+      </h3>
+    </div>
+  </div>
+
+  <div class="card-body pt-2 d-flex flex-column">
+    
+
+    <!-- FILTRES -->
+     
+        <div class="col-12 col-md-6 col-lg-8">
+          <div class="d-flex flex-wrap gap-2">
+
+            <button type="button"
+                    class="btn btn-sm btn-primary"
+                    (click)="afficher()">
+              <i class="ki-duotone ki-check-circle fs-4 me-1">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              <ng-container *ngIf="estAfficher">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!estAfficher">
+                        <span class="indicator-label">Afficher</span>
+            </ng-container>
+            </button>
+
+            <button type="button"
+                    class="btn btn-sm btn-light-primary"
+                    (click)="apercu()">
+              <i class="ki-duotone ki-eye fs-4 me-1">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              <ng-container *ngIf="downloading">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!downloading">
+                        <span class="indicator-label">Aperçu</span>
+            </ng-container>
+              
+            </button>
+
+            <button type="button"
+                    class="btn btn-sm btn-light-success"
+                    (click)="export()">
+              <i class="ki-duotone ki-file-down fs-4 me-1">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              Exporter
+            </button>
+
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- RÉCAPITULATIF -->
+    <div class="row g-3 mb-4">
+
+     
+
+    </div>
+
+    <!-- GRILLE HTML -->
+    <div class="table-responsive releve-table-container">
+
+      <table class="table table-row-bordered
+                    table-row-gray-300
+                    table-hover
+                    align-middle
+                    gs-0 gy-1 gx-2
+                    releve-table mb-0">
+
+        <thead>
+          <tr class="text-gray-700 fw-semibold bg-light">
+            <th class="id-column">N°.</th>
+            <th class="date-column">DATE OUV.</th>
+            <th class="date-column">DATE FERM</th>
+            <th class="text-end amount-column">ACTIF NET</th>
+            <th class="text-end amount-column">VL</th>
+            
+        
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let mouvement of listeMouvements">
+            <td class="id-column"
+            >
+              {{ formaterMontant( mouvement.idSeance) }}
+            </td>
+
+            <td class="text-nowrap">
+              {{ formaterDate(mouvement.dateOuvertureSeance )}}
+            </td>
+
+            <td class="text-nowrap"
+                >
+              {{ formaterDate(mouvement.dateFermetureSeance )}}
+            </td>
+
+            <td class="text-end text-nowrap">
+              {{ formaterMontant(mouvement.actifNet) }}
+            </td>
+            
+            <td class="text-end text-nowrap">
+              {{ formaterMontant(mouvement.valeurLiquidative) }}
+            </td>
+         
+          </tr>
+
+          <tr *ngIf="listeMouvements.length === 0">
+            <td colspan="6"
+                class="text-center text-gray-500 py-10">
+              <i class="ki-duotone ki-information-2 fs-2 me-2">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              Aucun mouvement à afficher
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+ 
+

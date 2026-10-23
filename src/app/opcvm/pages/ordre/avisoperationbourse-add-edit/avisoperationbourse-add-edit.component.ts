@@ -195,19 +195,45 @@ export class AvisoperationbourseAddEditComponent implements OnInit, OnDestroy{
   }
 
   get f() { return this.entityForm.controls; }
-  onCoursKeyPress($event) {
-    this.coursLimite=$event.target.value
+  onCoursKeyPress($event:Event) {
+    const input = $event.target as HTMLInputElement;
+    this.coursLimite=input.value
     this.calculer()
   }
-  onQuantiteKeyPress($event) {
-    this.quantiteLimite=$event.target.value
+  onQuantiteKeyPress($event:Event) {
+    const input = $event.target as HTMLInputElement;
+    this.quantiteLimite=input.value
     this.calculer()
   }
   calculer(){
     // console.log(this.entityForm.controls.dateOperation.value)
     this.loadingService.setLoading(true)
 
-    if(Number(this.coursLimite)===0 || Number(this.quantiteLimite===0)){
+   const coursBrut = this.entityForm.get('coursLimite')?.value;
+  const quantiteBrute = this.entityForm.get('quantiteLimite')?.value;
+
+  // Convertir les virgules décimales en points
+  const cours = Number(
+    String(coursBrut ?? '')
+      .trim()
+      .replace(/\s/g, '')
+      .replace(',', '.')
+  );
+
+  const quantite = Number(
+    String(quantiteBrute ?? '')
+      .trim()
+      .replace(/\s/g, '')
+      .replace(',', '.')
+  );
+
+  // Synchroniser les propriétés utilisées ailleurs
+  this.coursLimite = cours;
+  this.quantiteLimite = quantite;
+    if (!Number.isFinite(cours) ||
+      !Number.isFinite(quantite) ||
+      cours === 0 ||
+      quantite === 0){
       this.entityForm.patchValue({montantBrut:"0"})
       this.entityForm.patchValue({interet:"0"})
       this.entityForm.patchValue({commissionPlace:"0"})
@@ -310,15 +336,22 @@ export class AvisoperationbourseAddEditComponent implements OnInit, OnDestroy{
             }
           }
           let valeur =0
-          this.formuleService.cump(this.localStore.getData("currentOpcvm")?.idOpcvm,
-          this.entityForm.value.idTitre, dateOperation).subscribe(
+          let param={
+            idOpcvm:this.localStore.getData("currentOpcvm")?.idOpcvm,
+            idTitre:obj.titre.idTitre,
+            dateOperation:dateOperation
+          }
+          this.formuleService.cump(param).subscribe(
             (data)=>{
               valeur=data.data
+              console.log(valeur)
+              this.entityForm.patchValue({cump: valeur.toString()});
+              this.calculer();
+              this.loadingService.setLoading(false)
             }
           );
-          this.entityForm.patchValue({cump: valeur.toString()});
-          this.calculer();
-          this.loadingService.setLoading(false)
+          
+          
         }
       }
     )

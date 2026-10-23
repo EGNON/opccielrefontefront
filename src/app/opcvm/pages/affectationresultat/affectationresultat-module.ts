@@ -18,6 +18,7 @@ import { Phasedetachement } from './phasedetachement/phasedetachement';
 import { Detachementeffectue } from './detachementeffectue/detachementeffectue';
 import { Phasepaiement } from './phasepaiement/phasepaiement';
 import { Paiementdividende } from './paiementdividende/paiementdividende';
+import { NombreDecimalDirective } from '../../../validators/nombre-decimal.directive';
 // import { RouterModule, RouterOutlet } from '@angular/router';
 // import {RouterModule, RouterOutlet} from "@angular/router";
 
@@ -47,7 +48,8 @@ import { Paiementdividende } from './paiementdividende/paiementdividende';
     NgbDatepickerModule,
     NgMultiSelectDropDownModule,
     EntityCrudModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    NombreDecimalDirective
 ]
 })
 export class AffectationresultatModule { }

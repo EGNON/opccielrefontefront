@@ -188,11 +188,11 @@ currentSeance: any;
     this.entityForm.patchValue({quantiteLimite:"0"})
     this.entityForm.patchValue({coursLimite:"0"})
     let date=new Date()
-    this.entityForm.patchValue({dateOrdre: new NgbDate(
-        date.getFullYear(), date.getMonth()+1, date.getDate())});
+    // this.entityForm.patchValue({dateOrdre: new NgbDate(
+    //     date.getFullYear(), date.getMonth()+1, date.getDate())});
 
-    this.entityForm.patchValue({dateLimite: new NgbDate(
-        date.getFullYear(), date.getMonth()+1, date.getDate())});
+    // this.entityForm.patchValue({dateLimite: new NgbDate(
+    //     date.getFullYear(), date.getMonth()+1, date.getDate())});
 
     // this.paysSelect = document.getElementById("ComboPaysLab");
     if(this.id)
@@ -385,17 +385,43 @@ currentSeance: any;
   public onDeSelectAllP(items: any) {
     // console.log('onDeSelectAll', items);
   }
-  onCoursKeyPress($event) {
-    this.coursLimite=$event.target.value
+  onCoursKeyPress($event:Event) {
+    const input = $event.target as HTMLInputElement;
+    this.coursLimite=input.value.toString().replace(',','.')
     this.calculer()
   }
-  onQuantiteKeyPress($event) {
-    this.quantiteLimite=$event.target.value
+  onQuantiteKeyPress($event:Event) {
+    const input = $event.target as HTMLInputElement;
+    this.quantiteLimite=input.value.toString().replace(',','.')
     this.calculer()
   }
   calculer(){
     this.loadingService.setLoading(true)
-    if(Number(this.coursLimite)===0 || Number(this.quantiteLimite===0)){
+      const coursBrut = this.entityForm.get('coursLimite')?.value;
+  const quantiteBrute = this.entityForm.get('quantiteLimite')?.value;
+
+  // Convertir les virgules décimales en points
+  const cours = Number(
+    String(coursBrut ?? '')
+      .trim()
+      .replace(/\s/g, '')
+      .replace(',', '.')
+  );
+
+  const quantite = Number(
+    String(quantiteBrute ?? '')
+      .trim()
+      .replace(/\s/g, '')
+      .replace(',', '.')
+  );
+
+  // Synchroniser les propriétés utilisées ailleurs
+  this.coursLimite = cours;
+  this.quantiteLimite = quantite;
+    if (!Number.isFinite(cours) ||
+      !Number.isFinite(quantite) ||
+      cours === 0 ||
+      quantite === 0){
       this.entityForm.patchValue({montantBrut:"0"})
       this.entityForm.patchValue({interet:"0"})
       this.entityForm.patchValue({commissionPlace:"0"})
@@ -430,8 +456,8 @@ currentSeance: any;
     this.opcvm.idOpcvm=this.localStore.getData("currentOpcvm")?.idOpcvm;
     const entity={
       ...this.entityForm.value,
-      coursLimite:Number(this.coursLimite),
-      quantiteLimite:Number(this.quantiteLimite),
+      coursLimite:Number(this.coursLimite.toString().replace(',','.')),
+      quantiteLimite:Number(this.quantiteLimite.toString().replace(',','.')),
       dateOrdre:dateOrdre,
       dateLimite:dateLimite,
       titre:this.titreModel,

@@ -109,6 +109,9 @@ export class LibrairiesService {
   rachatglobalListe(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/pointrachatglobal/liste`, param);
   }
+  releveListe(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/releve/liste`, param);
+  }
   balance(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/balance`, param);
   }
@@ -344,6 +347,11 @@ export class LibrairiesService {
       {responseType: 'blob' as any }
     );
   }
+  imprimerDividendeActionnaire(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/dividendeActionnaire`, param,
+      {responseType: 'blob' as any }
+    );
+  }
    imprimerAvisPaiement(idOperation:any){
       return this.http.get<any>(`${this.API_URL}/jasperpdf/avispaiement/${idOperation}`
         , {responseType: 'blob' as any }
@@ -413,6 +421,16 @@ export class LibrairiesService {
   }
   avistransfertpartEtat(param: any) {
     return this.http.post<any>(`${this.API_URL}/opcvm/etats/avistransfertpart`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  controlProfil(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/controlprofil`, param,
+      {responseType: 'blob' as any }
+    );
+  }
+  historiqueVLPrint(param: any) {
+    return this.http.post<any>(`${this.API_URL}/opcvm/etats/historiquevl`, param,
       {responseType: 'blob' as any }
     );
   }

@@ -54,7 +54,7 @@ export class OrdreAddEditComponent implements OnInit, OnDestroy{
   entity:any;
   @Input() nb: number;
   private subscriptions: Subscription[] = [];
-
+currentSeance: any;
   constructor(
     private localStore: LocalService,
     public entityService: OrdreService,
@@ -68,14 +68,17 @@ export class OrdreAddEditComponent implements OnInit, OnDestroy{
     public pageInfo: PageInfoService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute) {
+      this.currentSeance = this.localStore.getData("currentSeance");
+    }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+     const dateSeance = new Date(this.currentSeance?.dateFermeture);
     this.entityForm = this.fb.group(
       {
         id: [this.id],
-        dateOrdre: [new Date(),Validators.required],
+        dateOrdre: [new NgbDate(dateSeance.getFullYear(), dateSeance.getMonth()+1, dateSeance.getDate()) ,Validators.required],
         personne: [null,Validators.required],
         // souscription: [null],
         // achat: [null],

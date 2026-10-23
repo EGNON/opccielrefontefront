@@ -75,7 +75,7 @@
                 <!--begin::Card toolbar-->
                 <div class="card-toolbar">
                   <div class="d-flex justify-content-end">
-                    <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary me-3" (click)="submitting ? null : actualiser()">
+                    <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary me-3" (click)="actualiser()">
                       <ng-container *ngIf="submitting">
                     <span class="indicator-progress" [style.display]="'block'">
                       Patientez svp...

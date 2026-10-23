@@ -12,7 +12,7 @@ import { Personne } from '../../../../crm/models/personne/personne.model';
 import { LibrairiesService } from '../../../../services/librairies.service';
 import { LocalService } from '../../../../services/local.service';
 import { ExerciceService } from '../../../services/exercice.service';
-import * as XLSX from "xlsx";
+ import * as XLSX from 'xlsx-js-style';
 import { ComptecomptableService } from '../../../../core/services/comptecomptable.service';
 export interface GroupNode {
   label: string;
@@ -512,106 +512,107 @@ afficherExercice(){
       // console.log(err);
     }
   }
-  exportExcel() {
-    this.export=true
-    let columns: any[] = [
+  // exportExcel() {
+  //   this.export=true
+  //   let columns: any[] = [
      
-      {
-        title: 'N°', data: 'num', render: function (data, type, row) {
-          return row.num
-        },
-      },
-      {
-        title: 'DATE ESTIMATION', data: 'dateEstimation', render: function (data, type, row) {
-          return moment(row.dateEstimation).format("DD/MM/YYYY")
-        },
-      },
-      {
-        title: 'ACTIONS', data: 'actions', render: function (data, type, row) {
-          return row.actions;
-        },
-      },
-      {
-        title: 'OBLIGATIONS', data: 'obligations', render: function (data, type, row) {
-          return row.obligations;
-        },
-      },
-      {
-        title: 'OPC', data: 'partOPC', render: function (data, type, row) {
-          return row.partOPC;
-        },
-      },
-      {
-        title: 'AUTRES', data: 'autres', render: function (data, type, row) {
-          return row.autres;
-        },
-      },
-      {
-        title: 'Total Hors part OPC', data: 'totalHorsPartOPC', render: function (data, type, row) {
-          return row.totalHorsPartOPC;
-        },
-      },
-      {
-        title: 'TOTAL GENERAL', data: 'totalGeneral', render: function (data, type, row) {
-          return row.totalGeneral;
-        },
-      },
-      {
-        title: 'COMMISSIONS', data: 'commission', render: function (data, type, row) {
-          return row.commission;
-        },
-      },
+  //     {
+  //       title: 'N°', data: 'num', render: function (data, type, row) {
+  //         return row.num
+  //       },
+  //     },
+  //     {
+  //       title: 'DATE ESTIMATION', data: 'dateEstimation', render: function (data, type, row) {
+  //         return moment(row.dateEstimation).format("DD/MM/YYYY")
+  //       },
+  //     },
+  //     {
+  //       title: 'ACTIONS', data: 'actions', render: function (data, type, row) {
+  //         return row.actions;
+  //       },
+  //     },
+  //     {
+  //       title: 'OBLIGATIONS', data: 'obligations', render: function (data, type, row) {
+  //         return row.obligations;
+  //       },
+  //     },
+  //     {
+  //       title: 'OPC', data: 'partOPC', render: function (data, type, row) {
+  //         return row.partOPC;
+  //       },
+  //     },
+  //     {
+  //       title: 'AUTRES', data: 'autres', render: function (data, type, row) {
+  //         return row.autres;
+  //       },
+  //     },
+  //     {
+  //       title: 'Total Hors part OPC', data: 'totalHorsPartOPC', render: function (data, type, row) {
+  //         return row.totalHorsPartOPC;
+  //       },
+  //     },
+  //     {
+  //       title: 'TOTAL GENERAL', data: 'totalGeneral', render: function (data, type, row) {
+  //         return row.totalGeneral;
+  //       },
+  //     },
+  //     {
+  //       title: 'COMMISSIONS', data: 'commission', render: function (data, type, row) {
+  //         return row.commission;
+  //       },
+  //     },
 
-    ];
-    // 1️⃣ Définir les entêtes
-    const headers = ['N°','DATE ESTIMATION','ACTIONS','OBLIGATIONS','OPC','AUTRES','Total Hors part OPC',
-      'TOTAL GENERAL','COMMISSIONS'
-    ];
-    let idOpcvm = this.currentOpcvm?.idOpcvm;
-    let param = {
-      idOpcvm: idOpcvm,
-      ...this.form.value,
-    };
-      param = {
-        ...param,
-        taux:param.taux.replace(',','.'),
-        anneeExo:this.annee,
-        dateDebut: new Date(param.dateDebut.year, param.dateDebut.month - 1, param.dateDebut.day + 1),
-        dateFin: new Date(param.dateFin.year, param.dateFin.month - 1, param.dateFin.day + 1),
-      }
-    this.libService.declarationCommissionSurActifListe(param).subscribe(
-      (data)=>{
-        this.allData=data.data;
-        const exportData = this.allData.map(item => ({
-          'N°': item.num,
-          'DATE ESTIMATION':moment(item.dateEstimation).format('DD/MM/YYYY'),
-          'ACTIONS': item.actions,
-          'OBLIGATIONS': item.obligations,
-          'OPC': item.partOPC,
-          'AUTRES': item.autres,
-          'Total Hors part OPC': item.totalHorsPartOPC,
-          'TOTAL GENERAL': item.totalGeneral,
-          'COMMISSIONS': item.commission,
-        }));
+  //   ];
+  //   // 1️⃣ Définir les entêtes
+  //   const headers = ['N°','DATE ESTIMATION','ACTIONS','OBLIGATIONS','OPC','AUTRES','Total Hors part OPC',
+  //     'TOTAL GENERAL','COMMISSIONS'
+  //   ];
+  //   let idOpcvm = this.currentOpcvm?.idOpcvm;
+  //   let param = {
+  //     idOpcvm: idOpcvm,
+  //     ...this.form.value,
+  //   };
+  //     param = {
+  //       ...param,
+  //       taux:param.taux.replace(',','.'),
+  //       anneeExo:this.annee,
+  //       dateDebut: new Date(param.dateDebut.year, param.dateDebut.month - 1, param.dateDebut.day + 1),
+  //       dateFin: new Date(param.dateFin.year, param.dateFin.month - 1, param.dateFin.day + 1),
+  //     }
+  //   this.libService.declarationCommissionSurActifListe(param).subscribe(
+  //     (data)=>{
+  //       this.allData=data.data;
+  //       const exportData = this.allData.map(item => ({
+  //         'N°': item.num,
+  //         'DATE ESTIMATION':moment(item.dateEstimation).format('DD/MM/YYYY'),
+  //         'ACTIONS': item.actions,
+  //         'OBLIGATIONS': item.obligations,
+  //         'OPC': item.partOPC,
+  //         'AUTRES': item.autres,
+  //         'Total Hors part OPC': item.totalHorsPartOPC,
+  //         'TOTAL GENERAL': item.totalGeneral,
+  //         'COMMISSIONS': item.commission,
+  //       }));
 
-        // 3️⃣ Convertir en feuille Excel
-        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData, { header: headers });
+  //       // 3️⃣ Convertir en feuille Excel
+  //       const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData, { header: headers });
 
-        // 4️⃣ Créer le classeur
-        const wb: XLSX.WorkBook = { Sheets: { 'Données': ws }, SheetNames: ['Données'] };
+  //       // 4️⃣ Créer le classeur
+  //       const wb: XLSX.WorkBook = { Sheets: { 'Données': ws }, SheetNames: ['Données'] };
 
-        // 5️⃣ Exporter
-        const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-        const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
-        saveAs(blob, 'declaration_commission_sur_actif.xlsx');
-        this.export=false
-      }
-    )
-    // 2️⃣ Mapper les données avec les entêtes
+  //       // 5️⃣ Exporter
+  //       const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+  //       const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+  //       saveAs(blob, 'declaration_commission_sur_actif.xlsx');
+  //       this.export=false
+  //     }
+  //   )
+  //   // 2️⃣ Mapper les données avec les entêtes
 
-  }
+  // }
 
   actualiser() {
+    this.submitting=true
     let idOpcvm = this.currentOpcvm?.idOpcvm;
         let param = {
           idActionnaire:this.codeJournal,
@@ -634,8 +635,169 @@ afficherExercice(){
               console.log("retour",resp.data)
               //this.data = this.buildHierarchy(resp.data);
               this.data = this.buildTree(resp.data);
+              this.submitting=false
             });
   }
+ 
+
+exportExcel() {
+  if (!this.data || this.data.length === 0) {
+    console.warn('Aucune donnée à exporter');
+    return;
+  }
+  this.export=true
+  // --- Construction des lignes plates (tout déplié) ---
+  const rows: any[] = [];
+  const headerStyle = {
+  font: { bold: true, color: { rgb: 'FFFFFF' }, sz: 11 },
+  fill: { fgColor: { rgb: '1F4E79' } },
+  alignment: { horizontal: 'center', vertical: 'center' },
+  border: {
+    top: { style: 'thin', color: { rgb: '000000' } },
+    bottom: { style: 'thin', color: { rgb: '000000' } },
+    left: { style: 'thin', color: { rgb: '000000' } },
+    right: { style: 'thin', color: { rgb: '000000' } }
+  }
+};
+
+const compteStyle = {
+  font: { bold: true, color: { rgb: 'FFFFFF' }, sz: 12 },
+  fill: { fgColor: { rgb: '2E75B6' } },
+  alignment: { horizontal: 'left', vertical: 'center' }
+};
+
+const analytiqueStyle = {
+  font: { bold: true, color: { rgb: '1F4E79' }, sz: 11 },
+  fill: { fgColor: { rgb: 'D6EAF8' } },
+  alignment: { horizontal: 'left', vertical: 'center' }
+};
+
+const evenRowStyle = {
+  fill: { fgColor: { rgb: 'F2F2F2' } },
+  border: {
+    top: { style: 'thin', color: { rgb: 'D9D9D9' } },
+    bottom: { style: 'thin', color: { rgb: 'D9D9D9' } },
+    left: { style: 'thin', color: { rgb: 'D9D9D9' } },
+    right: { style: 'thin', color: { rgb: 'D9D9D9' } }
+  }
+};
+
+const oddRowStyle = {
+  fill: { fgColor: { rgb: 'FFFFFF' } },
+  border: {
+    top: { style: 'thin', color: { rgb: 'D9D9D9' } },
+    bottom: { style: 'thin', color: { rgb: 'D9D9D9' } },
+    left: { style: 'thin', color: { rgb: 'D9D9D9' } },
+    right: { style: 'thin', color: { rgb: 'D9D9D9' } }
+  }
+};
+  let rowIndex = 0; // pour le zebra
+
+  // En-tête principal
+  rows.push([
+    { v: 'Date', t: 's', s: headerStyle },
+    { v: 'Journal', t: 's', s: headerStyle },
+    { v: 'Référence', t: 's', s: headerStyle },
+    { v: 'Libellé', t: 's', s: headerStyle },
+    { v: 'Débit', t: 's', s: headerStyle },
+    { v: 'Crédit', t: 's', s: headerStyle },
+    { v: 'Solde', t: 's', s: headerStyle },
+  ]);
+  rowIndex++;
+
+  this.data.forEach((compte: any) => {
+    // Ligne de groupe COMPTE
+    rows.push([
+      {
+        v: compte.label,
+        t: 's',
+        s: compteStyle
+      }
+    ]);
+    // Fusionner la cellule sur toute la largeur
+    // (on le fera après avec merges)
+    rowIndex++;
+
+    compte.children.forEach((analytique: any) => {
+      // Ligne de groupe ANALYTIQUE
+      rows.push([
+        {
+          v: '   ' + analytique.label, // indentation visuelle
+          t: 's',
+          s: analytiqueStyle
+        }
+      ]);
+      rowIndex++;
+
+      // Lignes de détail
+      analytique.children.forEach((line: any) => {
+        const isEven = rowIndex % 2 === 0;
+        const cellStyle = isEven ? evenRowStyle : oddRowStyle;
+
+        rows.push([
+          { v: line.date, t: 's', s: cellStyle },
+          { v: line.journal ?? '', t: 's', s: cellStyle },
+          { v: line.reference ?? '', t: 's', s: cellStyle },
+          { v: line.libelle ?? '', t: 's', s: cellStyle },
+          { v: line.debit ?? 0, t: 'n', s: { ...cellStyle, alignment: { horizontal: 'right' }, numFmt: '#,##0.00' } },
+          { v: line.credit ?? 0, t: 'n', s: { ...cellStyle, alignment: { horizontal: 'right' }, numFmt: '#,##0.00' } },
+          { v: line.solde ?? 0, t: 'n', s: { ...cellStyle, alignment: { horizontal: 'right' }, numFmt: '#,##0.00' } },
+        ]);
+        rowIndex++;
+      });
+    });
+  });
+
+  // --- Création du workbook ---
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+
+  // Largeurs de colonnes
+  ws['!cols'] = [
+    { wch: 14 }, // Date
+    { wch: 12 }, // Journal
+    { wch: 16 }, // Référence
+    { wch: 45 }, // Libellé
+    { wch: 14 }, // Débit
+    { wch: 14 }, // Crédit
+    { wch: 14 }, // Solde
+  ];
+
+  // Merges pour les lignes de groupe (Compte + Analytique)
+  const merges: XLSX.Range[] = [];
+  let currentRow = 1; // après l'en-tête
+
+  this.data.forEach((compte: any) => {
+    // Ligne COMPTE
+    merges.push({
+      s: { r: currentRow, c: 0 },
+      e: { r: currentRow, c: 6 }
+    });
+    currentRow++;
+
+    compte.children.forEach((analytique: any) => {
+      // Ligne ANALYTIQUE
+      merges.push({
+        s: { r: currentRow, c: 0 },
+        e: { r: currentRow, c: 6 }
+      });
+      currentRow++;
+
+      // Lignes de détail
+      currentRow += analytique.children.length;
+    });
+    this.export=false
+  });
+
+  ws['!merges'] = merges;
+
+  // Création du fichier
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Grand Livre');
+
+  // Génération du fichier
+  const fileName = `Grand_Livre_${moment().format('YYYYMMDD_HHmm')}.xlsx`;
+  XLSX.writeFile(wb, fileName);
+}
  exportExcel2() {
     this.export=true
     // 1️⃣ Définir les entêtes

@@ -199,7 +199,7 @@
                 <!--end::Label-->
                 <!--begin::Input-->
                 <input appNombreDecimal type="text" class="form-control form-control-sm"
-                   (keyup)="onQuantiteKeyPress($event)"    placeholder="Ex : XXXXXXXXX" formControlName="quantiteLimite"/>
+                   (input)="onQuantiteKeyPress($event)"    placeholder="Ex : XXXXXXXXX" formControlName="quantiteLimite"/>
                 <!--end::Input-->
                 <!--                <div *ngIf="submitted && f.quantiteLimite.errors" class="invalid-feedback">-->
                 <!--                  <div *ngIf="f.quantiteLimite.errors.required">Ce champs est obligatoire</div>-->
@@ -213,7 +213,7 @@
                 <!--end::Label-->
                 <!--begin::Input-->
                 <input [readOnly]="enabledCoursLimite" appNombreDecimal type="text" class="form-control form-control-sm"
-                      (keyup)="onCoursKeyPress($event)" placeholder="Ex : XXXXXXXXX" formControlName="coursLimite"/>
+                      (input)="onCoursKeyPress($event)" placeholder="Ex : XXXXXXXXX" formControlName="coursLimite"/>
                 <!--end::Input-->
                 <!--                <div *ngIf="submitted && f.coursLimite.errors" class="invalid-feedback">-->
                 <!--                  <div *ngIf="f.coursLimite.errors.required">Ce champs est obligatoire</div>-->

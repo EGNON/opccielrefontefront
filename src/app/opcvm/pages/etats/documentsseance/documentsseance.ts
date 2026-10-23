@@ -28,7 +28,7 @@ export class Documentsseance implements OnInit, AfterViewInit, AfterContentInit,
   currentSeance: any;
   currentUser: any;
  libelle:string;
-
+idSeanceEnCoursImpression:any
   downloading = false;
   export = false;
   downloaded = false;
@@ -333,6 +333,7 @@ export class Documentsseance implements OnInit, AfterViewInit, AfterContentInit,
           finalize(() => {
             this.downloading = false;
             this.downloaded = false;
+            this.idSeanceEnCoursImpression=null
           })
         )
          .subscribe((blob) => {
@@ -371,6 +372,7 @@ export class Documentsseance implements OnInit, AfterViewInit, AfterContentInit,
           finalize(() => {
             this.downloading = false;
             this.downloaded = false;
+            this.idSeanceEnCoursImpression=null
           })
         )
          .subscribe((blob) => {
@@ -409,6 +411,7 @@ export class Documentsseance implements OnInit, AfterViewInit, AfterContentInit,
           finalize(() => {
             this.downloading = false;
             this.downloaded = false;
+            this.idSeanceEnCoursImpression=null
           })
         )
          .subscribe((blob) => {
@@ -446,6 +449,7 @@ export class Documentsseance implements OnInit, AfterViewInit, AfterContentInit,
           finalize(() => {
             this.downloading = false;
             this.downloaded = false;
+            this.idSeanceEnCoursImpression=null
           })
         )
          .subscribe((blob) => {
@@ -484,6 +488,7 @@ export class Documentsseance implements OnInit, AfterViewInit, AfterContentInit,
           finalize(() => {
             this.downloading = false;
             this.downloaded = false;
+            this.idSeanceEnCoursImpression=null
           })
         )
          .subscribe((blob) => {
@@ -525,6 +530,7 @@ export class Documentsseance implements OnInit, AfterViewInit, AfterContentInit,
           finalize(() => {
             this.downloading = false;
             this.downloaded = false;
+            this.idSeanceEnCoursImpression=null
           })
         )
          .subscribe((blob) => {
@@ -566,6 +572,7 @@ export class Documentsseance implements OnInit, AfterViewInit, AfterContentInit,
           finalize(() => {
             this.downloading = false;
             this.downloaded = false;
+            this.idSeanceEnCoursImpression=null
           })
         )
          .subscribe((blob) => {
@@ -607,6 +614,7 @@ export class Documentsseance implements OnInit, AfterViewInit, AfterContentInit,
           finalize(() => {
             this.downloading = false;
             this.downloaded = false;
+            this.idSeanceEnCoursImpression=null
           })
         )
          .subscribe((blob) => {
@@ -619,6 +627,7 @@ export class Documentsseance implements OnInit, AfterViewInit, AfterContentInit,
       this.subscriptions.push(sb);
     }
 telechargerDocuments(data:any){
+  this.idSeanceEnCoursImpression=data.idSeance
     switch (this.libelle.toLowerCase()) {
       case 'verif_souscription':
         this.verif_souscription(data);

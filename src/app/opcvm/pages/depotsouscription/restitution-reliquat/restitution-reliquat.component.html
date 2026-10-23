@@ -93,10 +93,10 @@
                 <!--begin::Card toolbar-->
                 <div class="card-toolbar">
                   <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-sm btn-info me-3" (click)="precalcul()">
+                    <button  type="button" class="btn btn-sm btn-info me-3" (click)="precalcul()">
                       <span class="indicator-label">Précalculer</span>
                     </button>
-                    <button [type]="submitting ? 'button' : 'submit'" class="btn btn-sm btn-primary me-3" (click)="submitting ? null : save()">
+                    <button [disabled]="boutonGrise"  [type]="submitting ? 'button' : 'submit'"  class="btn btn-sm btn-primary me-3" (click)="submitting ? null : save()">
                       <ng-container *ngIf="submitting">
                     <span class="indicator-progress" [style.display]="'block'">
                       Patientez svp...

@@ -284,6 +284,7 @@ afficherdistributeur(){
         let param = {
           idActionnaire:this.codePlan,
           idOpcvm: idOpcvm,
+          idPersonne:this.form.value.distributeur==null?null:this.form.value.distributeur.idPersonne,
           ...this.form.value,
           datatableParameters: dataTablesParameters
         };
@@ -399,6 +400,7 @@ afficherListeVide(prefix: string) {
         let param = {
           idActionnaire:this.codePlan,
           idOpcvm: idOpcvm,
+          idPersonne:-1,
           ...this.form.value,
           datatableParameters: dataTablesParameters
         };

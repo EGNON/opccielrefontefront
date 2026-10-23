@@ -37,7 +37,7 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
 
   isLoading: boolean = false;
   subscriptions: Subscription[] = [];
-
+  coursCharges: any[] = [];
   //DataTable Config
   datatableConfigInit: any = {};
   datatableConfig: any = {};
@@ -431,21 +431,44 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
           ...this.datatableConfigInit,
           paging: false,
           processing: true,
+          
           ajax: (dataTablesParameters: any, callback: any) => {
             arraySource
               .pipe(
-                map(cours => cours.filter(c => +c.idCoursTitre.idTitre! > 0)),
+                map(cours =>
+                  cours.filter(c => +c.idCoursTitre.idTitre! > 0)
+                )
               )
               .subscribe((cours) => {
+                // Conserve les mêmes objets que ceux affichés dans le tableau.
+                self.coursCharges = cours;
+
                 callback({
-                  data: cours,
+                  data: self.coursCharges,
                   draw: dataTablesParameters.draw,
-                  recordsFiltered: cours.length,
-                  recordsTotal: cours.length
+                  recordsFiltered: self.coursCharges.length,
+                  recordsTotal: self.coursCharges.length
                 });
+
                 self.loadingService.setLoading(false);
               });
           },
+
+          // ajax: (dataTablesParameters: any, callback: any) => {
+          //   arraySource
+          //     .pipe(
+          //       map(cours => cours.filter(c => +c.idCoursTitre.idTitre! > 0)),
+          //     )
+          //     .subscribe((cours) => {
+          //       callback({
+          //         data: cours,
+          //         draw: dataTablesParameters.draw,
+          //         recordsFiltered: cours.length,
+          //         recordsTotal: cours.length
+          //       });
+          //       self.loadingService.setLoading(false);
+          //     });
+          // },
           columns: [
             /*{
               title: 'ID', data: 'idTitre', render: function (data:any, type:any, full:any) {
@@ -536,14 +559,29 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
             }
           ],
           createdRow: function (row, data, dataIndex, cells) {
-            const coursTitreForm = self.createCoursTitreForm();
-            const coursClone: any = data;
-            coursTitreForm.patchValue(coursClone);
-            self.cours.push(coursTitreForm);
-            $('td', row).find('input').on('change', (e) => {
-              self.filterForm.patchValue({[e.target.name]: +e.target.value!});
+            // Chaque ligne conserve une référence vers son objet cours.
+            $('td', row).find('input').on('change', function (this: HTMLInputElement) {
+              const champ = this.name;
+              const valeur = this.value.trim();
+
+              // Met à jour directement l'objet correspondant à la ligne.
+              (data as any)[champ] = valeur === '' ? 0 : Number(valeur);
+
+              console.log(
+                `Cours ${dataIndex} - ${champ} =`,
+                (data as any)[champ]
+              );
             });
           },
+          // createdRow: function (row, data, dataIndex, cells) {
+          //   const coursTitreForm = self.createCoursTitreForm();
+          //   const coursClone: any = data;
+          //   coursTitreForm.patchValue(coursClone);
+          //   self.cours.push(coursTitreForm);
+          //   $('td', row).find('input').on('change', (e) => {
+          //     self.filterForm.patchValue({[e.target.name]: +e.target.value!});
+          //   });
+          // },
         };
       };
       // this.save();
@@ -554,7 +592,15 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
       console.log("Aucun fichier sélectionné");
     }
   }
+  private valeurNumerique(valeur: any): number {
+  if (valeur === undefined || valeur === null || valeur === '') {
+    return 0;
+  }
 
+  const nombre = Number(valeur);
+
+  return Number.isFinite(nombre) ? nombre : 0;
+}
   loadExcelData = (dateCours: Date) => {
     return this.coursTitres.map((i) =>
       of(i).pipe(
@@ -575,9 +621,9 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
               valTransiger: j[19],
               coursVeille: 0,
               ouverture: j[10],
-              haut: j[13],
+              haut:j[13],
               bas: j[14],
-              coursSeance: j[11], //A déterminer
+              coursSeance:j[11], //A déterminer
               variation: j[12],
               nbreTrans: j[17],
               resteOffre: 0,
@@ -641,33 +687,59 @@ export class TitresMajCoursComponent implements OnInit, AfterViewInit, OnDestroy
         });
       this.subscriptions.push(sb);
     }
-
+    //console.log("coursTitres=",this.filterForm.value.coursTitres)
+    
     //Enregistrement des cours
     const place = this.filterForm.value.place;
-    this.coursTitreService.saveAll(this.filterForm.value.coursTitres, place ? place.codePlace : "")
-    .pipe(
-      catchError((err) => {
-        this.submitting = false;
-        //this.loadingService.setLoading(false);
-        return of(err.message);
-      }),
-      finalize(() => {
-        this.submitting = false;
-        this.submitted = false;
-        alert("Mise à jour des cours effetuée avec succès")
-        //this.loadingService.setLoading(false);
-      })
-    )
-    .subscribe(value => {
-      console.log("Submit form === ", value);
-    });
+    console.log('Cours à enregistrer :', this.coursCharges);
+    
+    this.coursTitreService
+      .saveAll(
+        this.coursCharges,
+        place ? place.codePlace : ''
+      )
+      .pipe(
+        finalize(() => {
+          this.submitting = false;
+          this.submitted = false;
+        })
+      )
+      .subscribe({
+        next: (value) => {
+          console.log('Enregistrement réussi :', value);
+          alert('Mise à jour des cours effectuée avec succès');
+        },
+        error: (err) => {
+          console.error('Erreur lors de l’enregistrement :', err);
+          alert('Erreur lors de la mise à jour des cours');
+        }
+      });
+    // this.coursTitreService.saveAll(this.filterForm.value.coursTitres, place ? place.codePlace : "")
+    // .pipe(
+    //   catchError((err) => {
+    //     this.submitting = false;
+    //     //this.loadingService.setLoading(false);
+    //     return of(err.message);
+    //   }),
+    //   finalize(() => {
+    //     this.submitting = false;
+    //     this.submitted = false;
+    //     alert("Mise à jour des cours effetuée avec succès")
+    //     //this.loadingService.setLoading(false);
+    //   })
+    // )
+    // .subscribe(value => {
+    //   console.log("Submit form === ", value);
+    // });
   }
 
+  // renderForm(): boolean {
+  //   // console.log(this.cours);
+  //   return this.cours.controls.length <= 1;
+  // }
   renderForm(): boolean {
-    // console.log(this.cours);
-    return this.cours.controls.length <= 1;
+    return this.coursCharges.length === 0 || this.submitting;
   }
-
   triggerFilter() {
     fromEvent<KeyboardEvent>(document, 'keyup')
       .pipe(

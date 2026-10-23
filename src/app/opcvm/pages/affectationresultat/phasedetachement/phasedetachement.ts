@@ -177,10 +177,7 @@ get reste(): number {
               this.form.patchValue({montantDistribue:this.precalculPhaseDetachement$[0].montantDistribue})
               let dateEstimation: any;
              
-                dateEstimation = new Date(
-                  this.dateFin.year,
-                  this.dateFin.month-1,
-                  this.dateFin.day+1);
+                dateEstimation = this.dateFin;
               
               let entity={
                 codePlan:"PCIA",
@@ -195,10 +192,10 @@ get reste(): number {
                 {
                    regul =data.data.soldeReel
                 }
-                  this.form.patchValue({regul:regul})
-                  this.form.patchValue({totalADistribuer:(Number(this.precalculPhaseDetachement$[0].montantDistribue)+regul)})
-                  this.form.patchValue({nombrePartEnCirculaion:((this.precalculPhaseDetachement$[0].nombrePartEnCirculaion))})
-                  this.form.patchValue({couponUnitaire:((this.precalculPhaseDetachement$[0].couponUnitaire))})
+                  this.form.patchValue({regul:regul.toString()})
+                  this.form.patchValue({totalADistribuer:(Number(this.precalculPhaseDetachement$[0].montantDistribue)+regul).toString()})
+                  this.form.patchValue({nombrePartEnCirculaion:((this.precalculPhaseDetachement$[0].nombrePartEnCirculaion)).toString()})
+                  this.form.patchValue({couponUnitaire:((this.precalculPhaseDetachement$[0].couponUnitaire)).toString()})
                   this.totalAdistribuer=(Number(this.precalculPhaseDetachement$[0].montantDistribue)+regul)
                   this.submitting=false
                 
@@ -322,7 +319,14 @@ afficherexercice(){
 
    onSaveEntity()
     {
-      
+     if (this.reste < 0)
+      {
+        this.submitted = false;
+        this.isLoading = false;
+        this.saveBouton=false
+         alert( "Le montant à distribuer ne peut etre inférieur au total distribuer")
+          return;
+      } 
       this.isLoading = true;
       this.submitted = true;
       this.saveBouton=true

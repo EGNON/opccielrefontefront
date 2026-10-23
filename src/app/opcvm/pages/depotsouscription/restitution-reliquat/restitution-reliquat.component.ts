@@ -31,6 +31,7 @@ export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDe
   downloaded = false;
   submitting = false;
   submitted = false;
+  boutonGrise = true;
 
   //DataTable Config
   datatableConfig: Config = {};
@@ -90,6 +91,7 @@ export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDe
             dataTablesParameters, this.currentOpcvm?.idOpcvm, this.form.value.idSeance)
             .subscribe(resp => {
               callback(resp.data);
+              this.boutonGrise=false
             });
           this.subscriptions.push(sb);
         }
@@ -102,6 +104,7 @@ export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDe
           )
           .subscribe(resp => {
             callback(resp.data);
+            this.boutonGrise=true
           });
           this.subscriptions.push(sb);
         }
@@ -186,8 +189,22 @@ export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDe
       this.loadingService.setLoading(false);
       return;
     }
-
-    this.reliquatService.enregistrerTous(this.form.value.restitutionReliquats)
+      let dateOperation: any;
+      if (this.form.controls.dateOperation.value) {
+        dateOperation = new Date(
+          this.form.controls.dateOperation.value.year,
+          this.form.controls.dateOperation.value.month-1,
+          this.form.controls.dateOperation.value.day+1);
+      }
+      let param={
+        idSeance:this.form.value.idSeance,
+        opcvm:{
+          idOpcvm:this.currentOpcvm.idOpcvm
+        },
+        dateOperation:dateOperation,
+        userLogin:this.currentUser.username
+      }
+    this.reliquatService.enregistrerTous(param)
       .pipe(
         catchError((err) => {
           this.submitting = false;
@@ -198,7 +215,7 @@ export class RestitutionReliquatComponent implements OnInit, AfterViewInit, OnDe
           this.submitting = false;
           this.submitted = false;
           this.loadingService.setLoading(false);
-          this.afficherListe("");
+          this.afficherListe("l");
           // window.location.reload();
         })
       )

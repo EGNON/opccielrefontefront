@@ -1,0 +1,71 @@
+
+<div class="card card-flush h-100">
+
+  <!-- En-tête -->
+  <div class="card-header border-0 pt-4 pb-2">
+    <div class="card-title">
+      <h3 class="fw-bold text-gray-800 fs-5 mb-0">
+        <i class="ki-duotone ki-notepad fs-2 me-2 text-primary">
+          <span class="path1"></span>
+          <span class="path2"></span>
+        </i>
+        Control profil d'investissement
+      </h3>
+    </div>
+  </div>
+
+  <div class="card-body pt-2 d-flex flex-column">
+    
+
+    <!-- FILTRES -->
+     <form [formGroup]="form">
+    <div class="border rounded bg-light-primary p-3 mb-4">
+      <div class="row g-3 align-items-end">
+
+        <div class="col-12 col-md-3 col-lg-2">
+          <label for="dateDebut"
+                 class="form-label fw-semibold fs-7 mb-1">
+            Date début
+          </label>
+          <input
+            id="dateDebut"
+            type="text"
+            ngbDatepicker
+            #dateDebut="ngbDatepicker"
+            (click)="dateDebut.toggle()"
+            class="form-control form-control-sm"
+            formControlName="dateDebut">
+        </div>
+
+
+        <div class="col-12 col-md-6 col-lg-8">
+          <div class="d-flex flex-wrap gap-2">
+
+            <button type="button"
+                    class="btn btn-sm btn-primary"
+                    (click)="apercu()">
+              <i class="ki-duotone ki-check-circle fs-4 me-1">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              <ng-container *ngIf="downloading">
+                        <span class="indicator-progress" [style.display]="'block'">
+                          Patientez svp...
+                          <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="!downloading">
+                        <span class="indicator-label">Imprimer</span>
+            </ng-container>
+            </button>
+
+           
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+</form>  
+</div>
+</div>
