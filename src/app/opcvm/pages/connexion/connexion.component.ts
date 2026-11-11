@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core'
 import {NgbActiveModal, NgbDate} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {OpcvmService} from "../../services/opcvm.service";
-import {Subscription} from "rxjs";
+import {firstValueFrom, Subscription} from "rxjs";
 import $ from "jquery";
 import {AuthService} from "../../../core/modules/auth";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -10,6 +10,7 @@ import moment from "moment";
 import {Config} from "datatables.net";
 import {LocalService} from "../../../services/local.service";
 import { SeanceopcvmService } from '../../services/seanceopcvm.service';
+import { TaskNotificationService } from '../../../services/TaskNotificationService';
 
 @Component({
     selector: 'app-connexion',
@@ -31,6 +32,7 @@ export class ConnexionComponent implements OnInit, OnDestroy{
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+    private notificationService: TaskNotificationService,
     private opcvmService: OpcvmService,
     private seanceOpcvmService: SeanceopcvmService,
     public modal: NgbActiveModal,
@@ -131,31 +133,88 @@ export class ConnexionComponent implements OnInit, OnDestroy{
     this.afficherListe();
   }
 
-  selectOpcvm(n: any) {
-    this.authService.currentOpcvmSubject.next(n);
-    window.localStorage.setItem("opcvmIsConnected", "1");
-    // this.authService.LocalStorageManager.setValue("currentOpcvm", n);
-    this.localStore.saveData("currentOpcvm", n);
-    this.authService.currentSeance(n.idOpcvm).subscribe(seance => {
-      this.localStore.saveData("currentSeance", seance);
-    });
-    // this.localStore.saveData("opcvm", JSON.stringify(n));
+
+// selectOpcvm(n: any) {
+//   alert('SELECT OPCVM APPELÉ : ' + n.idOpcvm);
+//   this.notificationService.demanderAutorisationNotifications();
+
+//   this.authService.currentOpcvmSubject.next(n);
+//   window.localStorage.setItem('opcvmIsConnected', '1');
+//   this.localStore.saveData('currentOpcvm', n);
+
+//   console.log('1 - Sélection OPCVM :', n.idOpcvm);
+
+// this.authService.currentSeance(n.idOpcvm).subscribe({
+//   next: async (seance) => {
+//     console.log('2 - Séance chargée');
+
+//     this.localStore.saveData('currentSeance', seance);
+
+//     console.log('3 - Début activation abonnement Push');
+
+//     await this.notificationService.activerAbonnementPush(n.idOpcvm);
+
+//     console.log('4 - Fin activation abonnement Push');
+
+//     this.notificationService.activerNotifications();
+
+//     this.passEntry.emit(n);
+//     this.modal.dismiss();
+
+//     this.notificationService.testerNotificationPush(n.idOpcvm);
+
+//     this.router.navigate(['opcvm', 'dashboard']);
+//   },
+//   error: error => console.error('Erreur chargement séance :', error)
+// });
+
+//   return n;
+// }
+async selectOpcvm(n: any) {
+  //alert('SELECT OPCVM APPELÉ : ' + n.idOpcvm);
+
+  console.log('1 - Début sélection OPCVM :', n.idOpcvm);
+
+  this.notificationService.demanderAutorisationNotifications();
+
+  this.authService.currentOpcvmSubject.next(n);
+  window.localStorage.setItem('opcvmIsConnected', '1');
+  this.localStore.saveData('currentOpcvm', n);
+
+  try {
+    console.log('2 - Chargement séance');
+
+    const seance = await firstValueFrom(
+      this.authService.currentSeance(n.idOpcvm)
+    );
+
+    console.log('3 - Séance chargée :', seance);
+
+    this.localStore.saveData('currentSeance', seance);
+
+    console.log('4 - Activation abonnement Push');
+
+    await this.notificationService.activerAbonnementPush();
+
+    console.log('5 - Retour activation abonnement Push');
+
+    this.notificationService.activerNotifications();
+
+    //this.notificationService.testerNotificationPush(n.idOpcvm);
+
     this.passEntry.emit(n);
     this.modal.dismiss();
-    /*this.seanceOpcvmService.afficherSeanceEnCours(n).subscribe(
-      (data)=>{
-        this.authService.LocalStorageManager.setValue("currentSeance", data.data.idSeance);
-      }
-    )*/
-    /*alert('ok');
-    this.opcvmService.update({
-      ...n,
-      est
-    })*/
+
+    
+
     this.router.navigate(['opcvm', 'dashboard']);
-    return n;
+
+  } catch (error) {
+    console.error('ERREUR DANS SELECT OPCVM :', error);
   }
 
+  return n;
+}
   afficherListe() {
     const self = this;
     this.datatableConfig = {
@@ -201,10 +260,23 @@ export class ConnexionComponent implements OnInit, OnDestroy{
           }
         }
       ],
-      createdRow: function (row, data, dataIndex) {
-        // $(row).find('.btn').on('click', btncallback("Merde !!"));
-        $(row).find('.btn').on('click', () => self.selectOpcvm(data));
+     createdRow: function (row: Node, data: any, dataIndex: number) {
+        $(row).find('.deleteBtn')
+          .off('click')
+          .on('click', function (event) {
+            event.preventDefault();
+
+            console.log('Clic détecté sur OPCVM :', data.idOpcvm);
+
+            //alert('OPCVM sélectionné : ' + data.idOpcvm);
+
+            self.selectOpcvm(data);
+          });
       },
+      // createdRow: function (row, data, dataIndex) {
+      //   // $(row).find('.btn').on('click', btncallback("Merde !!"));
+      //   $(row).find('.btn').on('click', () => self.selectOpcvm(data));
+      // },
     };
     this.dtOptions = {
       ...this.dtOptions,

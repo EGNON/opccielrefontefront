@@ -23,6 +23,30 @@ export class LibraryService implements OnDestroy{
   routerUrls: { path: string; component: any }[] = [];
   allRoutes$: BehaviorSubject<{ path: string; component: any }[]> = new BehaviorSubject<{path: string; component: any}[]>([]);
 
+  actualiserAutorisationsMenus(): void {
+  const actualiser = (items: any[]) => {
+    if (!items) return;
+
+    items.forEach(menu => {
+
+      // Recalculer l'autorisation des menus ayant un rôle
+      if (menu.role && menu.allow !== undefined) {
+        menu.allow = this.authService.isGrantedRole(menu.role);
+      }
+
+      // Parcourir récursivement les sous-menus
+      if (menu.children && menu.children.length > 0) {
+        actualiser(menu.children);
+      }
+    });
+  };
+
+  actualiser(this.menus.items);
+  actualiser(this.opcvmMenus.items);
+
+  // Recalculer les autorisations des menus parents
+  this.recupererTousLesMenus();
+}
   constructor(
     private authService: AuthService,
     private injector: Injector,
@@ -4638,6 +4662,9 @@ export class LibraryService implements OnDestroy{
       ]
     }
     this.recupererTousLesMenus();
+        this.authService.currentUser$.subscribe(() => {
+      this.actualiserAutorisationsMenus();
+    });
   }
 
   findAllDescendants(parentTitle: string, nodes: any[]): any[] {

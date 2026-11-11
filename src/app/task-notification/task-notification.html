@@ -1,0 +1,99 @@
+<ng-container *ngIf="visible$ | async">
+
+    <div class="task-notification-container">
+
+        <div class="task-notification-header">
+
+            <div class="header-icon">
+                <i class="bi bi-bell-fill"></i>
+            </div>
+
+            <div class="header-content">
+
+                <h6>ATTENTION</h6>
+
+                <span>
+                    Vous avez des tâches à traiter.
+                </span>
+
+            </div>
+
+            <button
+                type="button"
+                class="close-button"
+                (click)="fermer()"
+                title="Fermer">
+
+                <i class="bi bi-x-lg"></i>
+
+            </button>
+
+        </div>
+
+        <div class="task-notification-body">
+
+            <ng-container
+                *ngFor="let notification of (notifications$ | async)">
+
+                <button
+                    type="button"
+                    class="task-notification-item"
+                    (click)="consulter(notification.type)">
+
+                    <div class="task-icon">
+
+                        <i [class]="notification.icon"></i>
+
+                    </div>
+
+                    <div class="task-content">
+
+                        <div class="task-title">
+
+                            {{ notification.titre }}
+
+                        </div>
+
+                        <div class="task-description">
+
+                            {{ notification.description }}
+
+                        </div>
+
+                    </div>
+
+                    <div class="task-count">
+
+                        {{ notification.nombre }}
+
+                    </div>
+
+                    <div class="task-arrow">
+
+                        <i class="bi bi-chevron-right"></i>
+
+                    </div>
+
+                </button>
+
+            </ng-container>
+
+        </div>
+
+        <div class="task-notification-footer">
+
+            <span>
+                <i class="bi bi-clock"></i>
+                Vérification automatique toutes les 30 secondes
+            </span>
+
+            <span class="total-task">
+                Total :
+                {{ total$ | async }}
+            </span>
+
+        </div>
+
+    </div>
+
+</ng-container>

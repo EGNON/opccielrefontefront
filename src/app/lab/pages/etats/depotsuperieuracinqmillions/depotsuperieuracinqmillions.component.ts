@@ -8,7 +8,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {DeletePaysModalComponent} from "../../pays/delete-pays-modal/delete-pays-modal.component";
 import {DepotRachatService} from "../../../services/depotrachat.service";
 import moment from "moment";
-import {hebrewNumerals} from "@ng-bootstrap/ng-bootstrap/datepicker/hebrew/hebrew";
+// import {hebrewNumerals} from "@ng-bootstrap/ng-bootstrap/datepicker/hebrew/hebrew";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import {PageInfoService} from "../../../../template/_metronic/layout";

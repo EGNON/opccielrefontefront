@@ -18,6 +18,9 @@ export class ModeleecriturenatureoperationService extends ResourceService<Modele
   afficherSelonId(codeModele:string,codeNature:string,codeTypeTitre:string){
     return this.http.get<any>(`${this.API_URL}/${codeModele}/${codeNature}/${codeTypeTitre}`)
   }
+  afficherModele(codeTypeTitre:string,codeNat:string){
+    return this.http.get<any>(`${this.API_URL}/${codeTypeTitre}/${codeNat}`)
+  }
   update2(codeModele:string,codeNature:string,codeTypeTitre:string,modeleNatureOperation:any){
     return this.http.put<any>(`${this.API_URL}/${codeModele}/${codeNature}/${codeTypeTitre}`,modeleNatureOperation)
   } 

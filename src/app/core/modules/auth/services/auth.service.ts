@@ -109,15 +109,44 @@ export class AuthService implements OnDestroy {
     );
   }
 
-  logout() {
-    this.currentUserValue = undefined;
-    this.currentUserTokenSubject.next(null);
-    localStorage.removeItem(this.authLocalStorageToken);
-    this.router.navigate(['/auth/login'], {
-      queryParams: {},
+  // logout() {
+  //   this.currentUserValue = undefined;
+  //   this.currentUserTokenSubject.next(null);
+  //   localStorage.removeItem(this.authLocalStorageToken);
+  //   this.router.navigate(['/auth/login'], {
+  //     queryParams: {},
+  //   });
+  // }
+logout(): void {
+
+  const auth = this.getAuthFromLocalStorage();
+
+  // Déconnexion locale immédiate dans ce navigateur.
+  this.currentUserValue = undefined;
+  this.currentUserTokenSubject.next(null);
+  // this.currentUserSubject.next(undefined);
+  // this.currentUserTokenSubject.next(null);
+  // this.currentOpcvmSubject.next(undefined);
+  // this.currentUserPermissionsSubject.next([]);
+
+  localStorage.removeItem(this.authLocalStorageToken);
+
+  //Révocation uniquement du token de ce navigateur.
+  if (auth?.authToken) {
+    this.authHttpService.logout(auth.authToken).subscribe({
+      next: () => {
+        console.log('Déconnexion effectuée avec succès');
+      },
+      error: (error) => {
+        console.error('Erreur lors de la révocation du token', error);
+      }
     });
   }
 
+  this.router.navigate(['/auth/login'], {
+    queryParams: {}
+  });
+}
   currentSeance(idOpcvm: any) {
     return this.http.post<any>(`${environment.apiUrl}/libraries/${idOpcvm}`, null);
   }
@@ -253,7 +282,7 @@ export class AuthService implements OnDestroy {
     {
       permissions = this.currentUserValue.permissions.filter(u => u.role.nom == this.currentRoleValue);
       this.currentUserPermissionsSubject.next(permissions);
-      this.currentUserPermissionsSubject.complete();
+      // this.currentUserPermissionsSubject.complete();
     }
 
     return permissions;

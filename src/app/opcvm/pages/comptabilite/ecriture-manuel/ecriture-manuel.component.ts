@@ -84,6 +84,7 @@ export class EcritureManuelComponent implements OnInit, OnDestroy {
   idOpcvm: any;
   actionnaire: boolean;
   banque: boolean;
+  codeBanque: string;
   encryptSecretKey:string="AAAAA";
   swalOptions: SweetAlertOptions = {};
   // columnTotals: number[] = [0, 0];
@@ -111,6 +112,7 @@ export class EcritureManuelComponent implements OnInit, OnDestroy {
     private formuleService: FormuleService,
     private modeleEcritureFormuleService: ModeleecritureformuleService,
     private modeleEcritureService: ModeleecritureService,
+    private modeleEcritureNatureOperationService: ModeleecriturenatureoperationService,
     private compteComptableService: ComptecomptableService,
     private typeOperationService: TypeoperationService,
     private typeTitreService: TypetitreService,
@@ -235,7 +237,7 @@ export class EcritureManuelComponent implements OnInit, OnDestroy {
     // this.afficherCompteComptable()
     this.afficherTypeOperation()
     this.afficherTypeTitre()
-    this.afficherModeleEcriture()
+    // this.afficherModeleEcriture()
     this.afficherBanque()
     this.afficherPersonne()
     this.titreSettings = {
@@ -299,10 +301,17 @@ export class EcritureManuelComponent implements OnInit, OnDestroy {
       }
     )
   }
+  afficherTitreETModele()
+  {
+    this.afficherTitre();
+    this.afficherModeleEcriture(this.entityForm.value.typeTitre.codeTypeTitre,
+      this.entityForm.value.natureOperation.codeNatureOperation
+    );
+  }
   get titres(): FormArray { return <FormArray>this.entityForm.get('titre')}
 
   loadValuesSelonModeleEcriture(){
-    this.codeModeleEcriture=this.entityForm.value.modeleEcriture.codeModeleEcriture
+    this.codeModeleEcriture=this.entityForm.value.modeleEcriture.modeleEcriture.codeModeleEcriture
     this.detailModele$=this.detailModeleService.afficherSelonModeleEcritureParProjection(this.codeModeleEcriture)
       .pipe(map(res => res.data));
 
@@ -400,11 +409,13 @@ export class EcritureManuelComponent implements OnInit, OnDestroy {
       }
     )
   }
-  afficherModeleEcriture(){
-    this.modeleEcritureService.afficherTous().subscribe(
+  afficherModeleEcriture(codeTypeTitre:any,codeNatureOperation:any){
+    this.modeleEcritureNatureOperationService.afficherModele(codeTypeTitre,
+      codeNatureOperation
+    ).subscribe(
       (data)=>{
         this.modeleEcriture$=data.data;
-        // console.log(this.modeleEcriture$)
+       console.log(this.modeleEcriture$)
       }
     )
   }
@@ -425,7 +436,7 @@ export class EcritureManuelComponent implements OnInit, OnDestroy {
     this.detailModeleTab=[]
     for (i === 1; i < this.nbreLigne; i++) {
       this.detailModele = new Detailmodele();
-      this.detailModele.modeleEcriture = this.entityForm.value.modeleEcriture;
+      this.detailModele.modeleEcriture = this.entityForm.value.modeleEcriture.modeleEcriture;
       // @ts-ignore
       if(document.getElementById("table_Compte").getElementsByTagName('tr')[i].cells[1].innerHTML!="") {// @ts-ignore
         this.detailModele.numCompteComptable = document.getElementById("table_Compte").getElementsByTagName('tr')[i].cells[1].innerHTML;
@@ -481,6 +492,7 @@ export class EcritureManuelComponent implements OnInit, OnDestroy {
       alert('le montant de l\'opération doit etre égale à celui des écritures ')
       return;
     }
+    this.submitting=true
     let codeNatureOperation =this.entityForm.value.natureOperation.codeNatureOperation;
     let dateOperation =new Date(this.localStore.getData("currentSeance").dateFermeture);
     let datePiece = dateOperation;
@@ -495,17 +507,18 @@ export class EcritureManuelComponent implements OnInit, OnDestroy {
 
     valeurCodeAnalytique = "OPC:" + this.idOpcvm.toString();
 
-    // if (ddl_CompteBancaire.Text != "")
-    // {
-    //   if (ddl_CompteBancaire.Text.Trim() == "COMPTE COURANT DEPOSITAIRE")
-    //   {
-    //     obj.ValeurCodeAnalytique = "OPC:" + obj.IdOpcvm.ToString();
-    //   }
-    //   else
-    //   {
-    //     obj.ValeurCodeAnalytique = "BQE:" + (((LGO.Business.Parametre.CompteBancaire)bds_CompteBancaire.Current).NumLigne).ToString();
-    //   }
-    // }
+    if (this.entityForm.value.banque)
+    {
+      this.codeBanque=this.entityForm.value.banque.codeBanque
+      if (this.entityForm.value.banque.nomBanque.toString().trim() === "COMPTE COURANT DEPOSITAIRE")
+      {
+        valeurCodeAnalytique = "OPC:" + this.idOpcvm.toString();
+      }
+      else
+      {
+        valeurCodeAnalytique = "BQE:" + this.entityForm.value.banque.idBanque.toString();
+      }
+    }
     let idActionnaire=0
     if(this.idPersonne!==0)
     {
@@ -557,6 +570,7 @@ export class EcritureManuelComponent implements OnInit, OnDestroy {
 
     this.entityService.creerTout(entity).subscribe(
       (data)=>{
+        this.submitting=false
         alert('L\'écriture a été passée avec succès')
       }
     )

@@ -8,6 +8,7 @@ import {ConnexionComponent} from "../../../../../../opcvm/pages/connexion/connex
 import {AuthService} from "../../../../../../core/modules/auth";
 import {Observable} from "rxjs";
 import {LocalService} from "../../../../../../services/local.service";
+import { TaskNotificationService } from '../../../../../../services/TaskNotificationService';
 declare var $:JQueryStatic;
 
 @Component({
@@ -27,6 +28,7 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private router: Router,
     private layout: LayoutService,
+    private notificationService: TaskNotificationService,
     private layoutInit: LayoutInitService,
     private modalService: NgbModal) {}
 
@@ -46,6 +48,7 @@ export class HeaderMenuComponent implements OnInit, AfterViewInit {
       // this.localStore.clearData();
       this.opcvmIsConnected = null;
       this.currentOpcvm = null;
+      this.notificationService.desactiverNotifications();
       this.authService.currentOpcvmSubject.next(null);
       this.router.navigate(['/'])
     }

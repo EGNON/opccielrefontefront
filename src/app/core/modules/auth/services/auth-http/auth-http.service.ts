@@ -24,7 +24,17 @@ export class AuthHTTPService {
       password,
     });
   }
+  logout(token: string): Observable<any> {
+  const httpHeaders = new HttpHeaders({
+    Authorization: `Bearer ${token}`
+  });
 
+  return this.http.post(
+    `${API_USERS_URL}/logout`,
+    {},
+    { headers: httpHeaders }
+  );
+}
   // CREATE =>  POST: add a new user to the server
   createUser(user: Utilisateur): Observable<Utilisateur> {
     return this.http.post<Utilisateur>(API_USERS_URL, user);

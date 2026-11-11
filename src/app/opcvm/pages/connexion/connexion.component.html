@@ -55,7 +55,12 @@
   <hr>-->
   <div class="card-body pt-0">
     <div class="table-responsive angular-bootstrap-table">
-      <table datatable [dtOptions]="dtOptions" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+     <table
+        id="tableOpcvm"
+        datatable
+        [dtOptions]="dtOptions"
+        class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+
         <thead>
           <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
             <ng-container *ngFor="let column of dtOptions.columns; let i=index">
@@ -63,6 +68,7 @@
             </ng-container>
           </tr>
         </thead>
+
         <tbody class="fw-semibold text-gray-600"></tbody>
       </table>
     </div>

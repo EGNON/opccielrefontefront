@@ -1,4 +1,4 @@
-import {NgModule, APP_INITIALIZER, LOCALE_ID} from '@angular/core';
+import {NgModule, APP_INITIALIZER, LOCALE_ID, isDevMode} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -22,6 +22,8 @@ import {DataTablesModule} from "angular-datatables";
 import { SpinnerComponent } from './spinner/spinner.component';
 import {LoadingInterceptor} from "./loading.interceptor";
 import { AccountModule } from './template/modules/account/account.module';
+import { TaskNotification } from './task-notification/task-notification';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -35,18 +37,23 @@ function appInitializer(authService: AuthService) {
 
 @NgModule({ declarations: [AppComponent, SpinnerComponent],
     bootstrap: [AppComponent], imports: [BrowserModule,
-        BrowserAnimationsModule,
-        TranslateModule.forRoot(),
-        ClipboardModule,
-        AppRoutingModule,
-        InlineSVGModule.forRoot(),
-        NgbModule,
-        SweetAlert2Module.forRoot(),
-        ReactiveFormsModule,
-        NgApexchartsModule,
-        DirectivesModule,
-        AccountModule,
-        DataTablesModule], providers: [
+    BrowserAnimationsModule,
+    TranslateModule.forRoot(),
+    ClipboardModule,
+    AppRoutingModule,
+    InlineSVGModule.forRoot(),
+    NgbModule,
+    SweetAlert2Module.forRoot(),
+    ReactiveFormsModule,
+    NgApexchartsModule,
+    DirectivesModule,
+    AccountModule,
+    DataTablesModule, TaskNotification, ServiceWorkerModule.register('ngsw-worker.js', {
+   enabled: !isDevMode(),
+  // Register the ServiceWorker as soon as the application is stable
+  // or after 30 seconds (whichever comes first).
+  registrationStrategy: 'registerWhenStable:30000'
+})], providers: [
         UniqueNumCpteDepositValidators,
         NgbActiveModal,
         {

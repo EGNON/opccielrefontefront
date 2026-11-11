@@ -3,6 +3,7 @@ export const environment = {
   // apiUrl: 'http://192.168.10.3:9090/opcciel/api',
   // apiUrl: 'http://192.168.10.3:9080/opcciel/api',
    apiUrl: 'http://localhost:9090/opcciel/api',
+   webPushPublicKey: 'BDKQOK_16zKC6u0nJFj9Bi5OjRlXvgJpoZlPxRvLEVl61uxD3TwJKewque-HNMeGIvEK6T-3PlQg_D7MjR4u5pM',
   appVersion: 'v2.0',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
